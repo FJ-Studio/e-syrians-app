@@ -38,5 +38,12 @@
     "hero": {
         "title": "Hûn bila bi guhdarîya me bimînin ku dixwazin bibînin",
         "description": "Ji kerema xwe li ser teşebbûsên me binêre, û ger we hevgirtinê bi me bikin, ji bo guhertinê piştgirî bidin."
+    },
+    "home": {
+        "about": {
+            "title": "Di nav de min",
+            "description": "Ez Feras, yek ji gelê Sûrî yên ku hêvî li ser ronahiyekî nû ji bo Sûrîya nû dikin. Ez ji sala 2010an ve wekî mühendîsê niştim. Herwiha ez di nav xwendekariya MSc ya Data Science de, û hevpeyvînê de, û hevalê min de, ez demên xwe yên bêkarî ji bo kodinga civakê ya Sûrîyî veşartîm 💚. Ger hûn dibînin ku karê min girîng û bi tesîr e, piştgirîya we dê min bibîne ku ez demek zêde ji bo afirandina û pêşveçûnên nû bidim.",
+            "esyrians": "Ez domêna e-syrians.com ji bo yekî din jî girtiye ku bi fikra din a ji bo ku ez dîsa li ser wê karê bikim. Dibe ku ez di demek nêz de li ser wê karê bikim."
+        }
     }
 }

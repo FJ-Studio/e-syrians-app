@@ -21,7 +21,7 @@ const Initiatives: FC = () => {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:gap-8 mt-8 flex-wrap">
       {initiatives.map((initiative, index) => (
-        <div className="w-full md:w-[calc(50%-16px)]" key={index}>
+        <div className="w-full sm:w-1/2 lg:w-[calc(50%-16px)]" key={index}>
           <Card className="p-6">
             <h3 className="text-pretty text-lg font-medium">{initiative.title}</h3>
             <p className="mt-4 text-gray-500">{initiative.description}</p>

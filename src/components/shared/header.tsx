@@ -17,11 +17,11 @@ const Header: FC = () => {
             width={70}
             height={56.8} />
             <div>
-              <p className="uppercase">{t('site.name')}</p>
-              <p className="text-xs text-black">{t('site.slogan')}</p>
+              <p className="uppercase leading-4">{t('site.name')}</p>
+              <p className="hidden sm:inline text-xs text-black leading-4">{t('site.slogan')}</p>
             </div>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <HeaderActions />
           <LanguageSwitcher />
         </div>

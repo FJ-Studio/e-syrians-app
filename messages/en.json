@@ -38,5 +38,12 @@
   "hero": {
     "title": "Let us be the change we want to see",
     "description": "We invite you to explore our initiatives and join us in making a difference if they resonate with you."
+  },
+  "home": {
+    "about": {
+      "title": "About me",
+      "description": "I’m Feras, a Syrian citizen with hope for a brighter future for the new Syria. I’ve been a software engineer since 2010. Despite having a full-time job, pursuing an MSc in Data Science, and having a girlfriend, I dedicate my spare moments to coding for the Syrian community 💚. If you believe my work is valuable and impactful, your support would allow me to invest more time in creating and enhancing features.",
+      "esyrians": "I have got the domain e-syrians.com for another idea which is different than what I have listed recently. Maybe I will work on it soon."
+    }
   }
 }
