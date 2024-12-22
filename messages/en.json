@@ -1,0 +1,42 @@
+{
+  "common": {
+    "search": "Search",
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "typeEmail": "Type your email",
+    "password": "Password",
+    "typePassword": "Type your password",
+    "rememberMe": "Remember me",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithPasskey": "Continue with Passkey",
+    "or": "or",
+    "read_more": "Learn more",
+    "preparing": "Getting ready soon"
+  },
+  "slogan": {
+    "text": "Every civilized person in this world has two homelands: their own and Syria",
+    "author": {
+      "name": "André Parrot",
+      "description": "French researcher and historian"
+    }
+  },
+  "site": {
+    "slogan": "For every Syrian on earth",
+    "name": "e-syrians"
+  },
+  "initiatives": {
+    "disarmament": {
+      "title": "Disarmament",
+      "description": "Civilians in possession of a weapon will be able to voluntarily report it in order to formally hand it over to the new military establishment."
+    },
+    "security_personnel_verification": {
+      "title": "Security Personnel Verification",
+      "description": "Each member of the public security forces will receive an ID with a QR code to prove his identity and powers when needed."
+    }
+  },
+  "hero": {
+    "title": "Let us be the change we want to see",
+    "description": "We invite you to explore our initiatives and join us in making a difference if they resonate with you."
+  }
+}
