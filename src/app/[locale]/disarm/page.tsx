@@ -9,6 +9,7 @@ const demodata: Array<DeliveryPoint> = [
             latitude: 36.2021,
             longitude: 37.1343,
         },
+        address: "Aleppo, Syria",
     },
     {
         id: 2,
@@ -17,6 +18,7 @@ const demodata: Array<DeliveryPoint> = [
             latitude: 35.1316,
             longitude: 36.7571,
         },
+        address: "Hama, Syria",
     }
 ]
 
