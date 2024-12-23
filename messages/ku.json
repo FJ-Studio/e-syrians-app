@@ -14,7 +14,8 @@
     "read_more": "Zêdetir bixwîne",
     "preparing": "Di demek nêz de amade dibe",
     "account": "Hesabê min",
-    "close": "Nêzîkî"
+    "close": "Nêzîkî",
+    "submit": "Agahdariyên xwe bidin"
   },
   "slogan": {
     "text": "Her mirovê pêşketîyî di vê dinyayê de du welatên xwe hene: welatê xwe û Sûrîye",
@@ -64,6 +65,31 @@
       "content1": "Naxşê nîşan dide xurtên teslimê ku lîyekên hukûmetê silahên ji şexsên şaristanê qebûl dikin.",
       "content2": "Bi klik kirina nîşaneyekê, agahdariya xurtê di kûçeya jêr-a çepê ya naxşê de dibe.",
       "content3": "Heke hertiştekên te heye, ji kerema xwe bi ser pêşûngoka kiryarê li navenda jêrê klik bike û dest pê bike bi têketina agahdariyên xwe."
+    },
+    "report": {
+      "name": {
+        "title": "Navê te",
+        "description": "Ji kerema xwe navê xwe binivîse"
+      },
+      "surname": {
+        "description": "Ji kerema xwe dawînava xwe binivîse",
+        "title": "Dawînava"
+      },
+      "national_id": {
+        "description": "Ji kerema xwe ID-ê Neteweyî binivîse",
+        "title": "ID-ê Neteweyî",
+        "explanation": "Ji bo nepeniya we em nasnameya weya neteweyî şîfre dikin, ji kerema xwe wê bi baldarî binivîsin."
+      },
+      "weapons_list": "Lîsteya Silahên"
+    },
+    "weapons": {
+      "pistol": "Çek",
+      "shotgun": "Tufek",
+      "sniper": "Snîper",
+      "machine_gun": "Tufekê Makînê",
+      "grenade": "Grenad",
+      "explosive": "Teqîn",
+      "other": "Yên din"
     }
   }
 }

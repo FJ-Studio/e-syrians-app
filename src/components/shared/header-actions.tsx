@@ -7,7 +7,6 @@ import { FC } from "react";
 
 const HeaderActions: FC = () => {
   const session = useSession();
-  console.log(session);
   const t = useTranslations();
   return (
     <>

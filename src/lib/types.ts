@@ -12,3 +12,11 @@ export type DeliveryPoint = {
   address: string;
   description?: string;
 }
+
+export type WeaponDeliveryForm = {
+  name: string;
+  surname: string;
+  national_id: string;
+  weapons: string;
+  notes: string;
+}

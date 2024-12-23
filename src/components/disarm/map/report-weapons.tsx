@@ -1,0 +1,208 @@
+"use client";
+import { WEAPONS } from "@/lib/constants";
+import { WeaponDeliveryForm } from "@/lib/types";
+import {
+  Button,
+  Divider,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+  useDisclosure,
+} from "@nextui-org/react";
+import { signIn, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { FC, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+
+const ReportWeapons: FC = () => {
+  const t = useTranslations();
+  const session = useSession();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const sp = useSearchParams();
+  useEffect(() => {
+    if (sp.get("report") === "1") {
+      onOpen();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sp]);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<WeaponDeliveryForm>({
+    defaultValues: {
+      name: "",
+      surname: "",
+      national_id: "",
+      weapons: "",
+      notes: "",
+    },
+  });
+  const onSubmit = (data: WeaponDeliveryForm) => {
+    console.log(data, errors);
+  };
+  return (
+    <>
+      <Button
+        variant="solid"
+        color="primary"
+        onPress={() => {
+          if (session.status === "authenticated") {
+            onOpen();
+          } else {
+            signIn("google", { callbackUrl: "/disarm?report=1" });
+          }
+        }}
+      >
+        {t("disarm.i_have_weapon")}
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isDismissable={false}
+        classNames={{
+          base: "data-[placement=right]:sm:m-2 data-[placement=left]:sm:m-2  rounded-medium",
+        }}
+      >
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>{t("disarm.i_have_weapon")}</DrawerHeader>
+              <DrawerBody>
+                <form
+                  onSubmit={handleSubmit((data) => console.log(data))}
+                  className="w-full flex flex-col gap-4"
+                >
+                  <Controller
+                    name="national_id"
+                    control={control}
+                    rules={{
+                      required: true,
+                      minLength: 11,
+                      maxLength: 11,
+                      pattern: /^[0-9]*$/,
+                    }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Input
+                        {...field}
+                        isInvalid={invalid}
+                        isRequired
+                        type="text"
+                        placeholder={t("disarm.report.national_id.description")}
+                        label={t("disarm.report.national_id.title")}
+                        errorMessage={error?.message}
+                        description={t("disarm.report.national_id.explanation")}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="name"
+                    control={control}
+                    rules={{ required: true, minLength: 2 }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Input
+                        {...field}
+                        isRequired
+                        type="text"
+                        isInvalid={invalid}
+                        errorMessage={error?.message}
+                        placeholder={t("disarm.report.name.description")}
+                        label={t("disarm.report.name.title")}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="surname"
+                    control={control}
+                    rules={{ required: true, minLength: 2 }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Input
+                        {...field}
+                        isRequired
+                        type="text"
+                        isInvalid={invalid}
+                        errorMessage={error?.message}
+                        placeholder={t("disarm.report.surname.description")}
+                        label={t("disarm.report.surname.title")}
+                      />
+                    )}
+                  />
+                  <div className="flex items-center gap-4 py-2 w-full ">
+                    <Divider className="flex-1 w-full" />
+                    <p className="shrink-0 text-default-500">
+                      {t("disarm.report.weapons_list")}
+                    </p>
+                    <Divider className="flex-1 w-full" />
+                  </div>
+                  <Controller
+                    name="weapons"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Select
+                        isRequired
+                        selectionMode="multiple"
+                        {...field}
+                        isInvalid={invalid}
+                        label={t("disarm.report.weapons_list")}
+                        errorMessage={error?.message}
+                        onSelectionChange={(e) => {
+                            console.log(e.valueOf())
+                        }}
+                      >
+                        {WEAPONS.map((weapon) => (
+                          <SelectItem key={weapon} value={weapon}>
+                            {t(`disarm.weapons.${weapon}`)}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                  <Controller
+                    name="notes"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Textarea
+                        {...field}
+                        isRequired
+                        isInvalid={invalid}
+                        errorMessage={error?.message}
+                        className="w-full"
+                        label="Description"
+                        placeholder="Enter your description"
+                      />
+                    )}
+                  />
+                </form>
+              </DrawerBody>
+              <DrawerFooter>
+                <Button color="danger" variant="solid" onPress={onClose}>
+                  {t("common.close")}
+                </Button>
+                <Button
+                  color="primary"
+                  variant="solid"
+                  disabled={isSubmitting}
+                  onPress={() => handleSubmit(onSubmit)()}
+                >
+                  {t("common.submit")}
+                </Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+};
+
+export default ReportWeapons;

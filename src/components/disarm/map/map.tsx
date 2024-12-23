@@ -7,18 +7,17 @@ import {
   Map,
   Pin,
 } from "@vis.gl/react-google-maps";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { FC, Suspense, useState } from "react";
 import SelectedPoint from "./selected-point";
-import { Button } from "@nextui-org/react";
 import InfoModal from "./info-modal";
+import ReportWeapons from "./report-weapons";
 
 type Props = {
   points: Array<DeliveryPoint>;
 };
 
 const DisarmMap: FC<Props> = ({ points }) => {
-  const t = useTranslations();
   const locale = useLocale();
   const [selectedPoint, setSelectedPoint] = useState<DeliveryPoint | null>(
     null
@@ -27,14 +26,7 @@ const DisarmMap: FC<Props> = ({ points }) => {
     <div className="relative h-[calc(100dvh)] w-full">
       {selectedPoint && <SelectedPoint point={selectedPoint} />}
       <div className="z-10 absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 items-center">
-        <Button
-          className=""
-          variant="solid"
-          color="primary"
-          onPress={() => setSelectedPoint(null)}
-        >
-          {t("disarm.i_have_weapon")}
-        </Button>
+        <ReportWeapons  />
         <InfoModal />
       </div>
       <APIProvider apiKey={MAP_KEY} language={locale} libraries={["places"]}>

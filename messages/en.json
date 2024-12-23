@@ -14,7 +14,8 @@
     "read_more": "Learn more",
     "preparing": "Getting ready soon",
     "account": "Account",
-    "close": "Close"
+    "close": "Close",
+    "submit": "Submit data"
   },
   "slogan": {
     "text": "Every civilized person in this world has two homelands: their own and Syria",
@@ -65,6 +66,31 @@
       "content1": "The map shows delivery points where government representatives are accepting weapons from citizens.",
       "content2": "Clicking on a marker will display the point information in the bottom-left corner of the map.",
       "content3": "If you have any weapon(s), please click the action button at the bottom center and begin entering your information."
+    },
+    "report": {
+      "name": {
+        "title": "Name",
+        "description": "please enter your name"
+      },
+      "surname": {
+        "description": "Please enter your surname",
+        "title": "Surname"
+      },
+      "national_id": {
+        "description": "Please enter your national id",
+        "title": "National ID",
+        "explanation": "For your privacy we encrypt your national id, please type it carefully."
+      },
+      "weapons_list": "Weapons List"
+    },
+    "weapons": {
+      "pistol": "Pistol",
+      "shotgun": "Shotgun",
+      "sniper": "Sniper",
+      "machine_gun": "Machine gun",
+      "grenade": "Gerenade",
+      "explosive": "Explosive",
+      "other": "Other"
     }
   }
 }
