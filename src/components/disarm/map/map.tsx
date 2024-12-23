@@ -21,7 +21,7 @@ const DisarmMap: FC<Props> = ({ points }) => {
     const locale = useLocale();
   const [selectedPoint, setSelectedPoint] = useState<DeliveryPoint | null>(null);
   return (
-    <div className="relative h-[calc(100vh)] w-full">
+    <div className="relative h-[calc(100dvh)] w-full">
         {selectedPoint && <SelectedPoint point={selectedPoint} />}
         <Button className="z-10 absolute bottom-2 left-1/2 -translate-x-1/2" variant="solid" color="primary" onPress={() => setSelectedPoint(null)}>
             {t('disarm.i_have_weapon')}
