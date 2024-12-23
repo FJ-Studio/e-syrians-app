@@ -48,5 +48,10 @@
     "support": {
       "copy_btc_address": "نسخ عنوان بيتكوين"
     }
+  },
+  "footer": {
+    "privacy_policy": "سياسة الخصوصية",
+    "terms": "الشروط",
+    "all_rights_reserved": "جميع الحقوق محفوظة"
   }
 }

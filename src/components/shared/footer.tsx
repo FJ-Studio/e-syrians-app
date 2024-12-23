@@ -7,7 +7,7 @@ const Footer: FC = () => {
   return (
     <footer className="bg-gray-100 text-white py-4">
       <div className="container mx-auto flex justify-between items-center max-w-7xl px-6 lg:px-8">
-        <p className="text-black text-sm">© 2021 All rights reserved</p>
+        <p className="text-black text-sm">© 2021 {t('footer.all_rights_reserved')}</p>
         <div className="flex items-center gap-3">
           <Link className="text-black text-sm" href="/privacy-policy" title={t('footer.privacy_policy')}>
           {t('footer.privacy_policy')}

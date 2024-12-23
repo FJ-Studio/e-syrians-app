@@ -1,52 +1,57 @@
 {
-    "common" : {
-        "search": "Lêgerîn",
-        "login": "Tîpa",
-        "logout": "Derkeve",
-        "email": "Ename",
-        "typeEmail": "Enameke xwe binivîse",
-        "password": "Şîfre",
-        "typePassword": "Şîfreke xwe binivîse",
-        "rememberMe": "Min bi xwe veşêre",
-        "continueWithGoogle": "Bi Google ve berdewam bike",
-        "continueWithPasskey": "Bi Pass key ve berdewam bike",
-        "or": "an",
-        "read_more": "Zêdetir bixwîne",
-        "preparing": "Di demek nêz de amade dibe"
-    },
-    "slogan": {
-        "text": "Her mirovê pêşketîyî di vê dinyayê de du welatên xwe hene: welatê xwe û Sûrîye",
-        "author": {
-            "name": "André Parrot",
-            "description": "Lêkolîner û dîrokzanê fransî"
-        }
-    },
-    "site": {
-        "name": "e-syrians",
-        "slogan": "Ji bo her Sûrîyî li ser erdê"
-    },
-    "initiatives": {
-        "disarmament": {
-            "title": "Nexşandina Silah",
-            "description": "Ciwanên ku silahên wan hene dikarin bi xwe re bibêjin ku wan bi rêveberiya nû ya leşkerî re bi rêve bibin."
-        },
-        "security_personnel_verification": {
-            "title": "Tespîtkirina Xebatkarên Ewlekariya Giştî",
-            "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
-        }
-    },
-    "hero": {
-        "title": "Hûn bila bi guhdarîya me bimînin ku dixwazin bibînin",
-        "description": "Ji kerema xwe li ser teşebbûsên me binêre, û ger we hevgirtinê bi me bikin, ji bo guhertinê piştgirî bidin."
-    },
-    "home": {
-        "about": {
-            "title": "Di nav de min",
-            "description": "Ez Feras, yek ji gelê Sûrî yên ku hêvî li ser ronahiyekî nû ji bo Sûrîya nû dikin. Ez ji sala 2010an ve wekî mühendîsê niştim. Herwiha ez di nav xwendekariya MSc ya Data Science de, û hevpeyvînê de, û hevalê min de, ez demên xwe yên bêkarî ji bo kodinga civakê ya Sûrîyî veşartîm 💚. Ger hûn dibînin ku karê min girîng û bi tesîr e, piştgirîya we dê min bibîne ku ez demek zêde ji bo afirandina û pêşveçûnên nû bidim.",
-            "esyrians": "Ez domêna e-syrians.com ji bo yekî din jî girtiye ku bi fikra din a ji bo ku ez dîsa li ser wê karê bikim. Dibe ku ez di demek nêz de li ser wê karê bikim."
-        },
-        "support": {
-            "copy_btc_address": "Nivîsîna BTC kopî bike"
-        }
+  "common": {
+    "search": "Lêgerîn",
+    "login": "Tîpa",
+    "logout": "Derkeve",
+    "email": "Ename",
+    "typeEmail": "Enameke xwe binivîse",
+    "password": "Şîfre",
+    "typePassword": "Şîfreke xwe binivîse",
+    "rememberMe": "Min bi xwe veşêre",
+    "continueWithGoogle": "Bi Google ve berdewam bike",
+    "continueWithPasskey": "Bi Pass key ve berdewam bike",
+    "or": "an",
+    "read_more": "Zêdetir bixwîne",
+    "preparing": "Di demek nêz de amade dibe"
+  },
+  "slogan": {
+    "text": "Her mirovê pêşketîyî di vê dinyayê de du welatên xwe hene: welatê xwe û Sûrîye",
+    "author": {
+      "name": "André Parrot",
+      "description": "Lêkolîner û dîrokzanê fransî"
     }
+  },
+  "site": {
+    "name": "e-syrians",
+    "slogan": "Ji bo her Sûrîyî li ser erdê"
+  },
+  "initiatives": {
+    "disarmament": {
+      "title": "Nexşandina Silah",
+      "description": "Ciwanên ku silahên wan hene dikarin bi xwe re bibêjin ku wan bi rêveberiya nû ya leşkerî re bi rêve bibin."
+    },
+    "security_personnel_verification": {
+      "title": "Tespîtkirina Xebatkarên Ewlekariya Giştî",
+      "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
+    }
+  },
+  "hero": {
+    "title": "Hûn bila bi guhdarîya me bimînin ku dixwazin bibînin",
+    "description": "Ji kerema xwe li ser teşebbûsên me binêre, û ger we hevgirtinê bi me bikin, ji bo guhertinê piştgirî bidin."
+  },
+  "home": {
+    "about": {
+      "title": "Di nav de min",
+      "description": "Ez Feras, yek ji gelê Sûrî yên ku hêvî li ser ronahiyekî nû ji bo Sûrîya nû dikin. Ez ji sala 2010an ve wekî mühendîsê niştim. Herwiha ez di nav xwendekariya MSc ya Data Science de, û hevpeyvînê de, û hevalê min de, ez demên xwe yên bêkarî ji bo kodinga civakê ya Sûrîyî veşartîm 💚. Ger hûn dibînin ku karê min girîng û bi tesîr e, piştgirîya we dê min bibîne ku ez demek zêde ji bo afirandina û pêşveçûnên nû bidim.",
+      "esyrians": "Ez domêna e-syrians.com ji bo yekî din jî girtiye ku bi fikra din a ji bo ku ez dîsa li ser wê karê bikim. Dibe ku ez di demek nêz de li ser wê karê bikim."
+    },
+    "support": {
+      "copy_btc_address": "Nivîsîna BTC kopî bike"
+    }
+  },
+  "footer": {
+    "privacy_policy": "Siyaseta Tenduristiyê",
+    "terms": "Şertên",
+    "all_rights_reserved": "Gelê hemû mafên parastin"
+  }
 }
