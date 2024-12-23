@@ -12,7 +12,9 @@
     "continueWithPasskey": "Continue with Passkey",
     "or": "or",
     "read_more": "Learn more",
-    "preparing": "Getting ready soon"
+    "preparing": "Getting ready soon",
+    "account": "Account",
+    "close": "Close"
   },
   "slogan": {
     "text": "Every civilized person in this world has two homelands: their own and Syria",
@@ -55,6 +57,12 @@
     "all_rights_reserved": "All rights reserved"
   },
   "disarm": {
-    "i_have_weapon": "I have weapons to handover"
+    "i_have_weapon": "I have weapons to handover",
+    "info_modal": {
+      "title": "How to use the map",
+      "content1": "The map shows delivery points where government representatives are accepting weapons from citizens.",
+      "content2": "Clicking on a marker will display the point information in the bottom-left corner of the map.",
+      "content3": "If you have any weapon(s), please click the action button at the bottom center and begin entering your information."
+    }
   }
 }

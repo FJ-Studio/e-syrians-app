@@ -12,7 +12,9 @@
     "continueWithPasskey": "Bi Pass key ve berdewam bike",
     "or": "an",
     "read_more": "Zêdetir bixwîne",
-    "preparing": "Di demek nêz de amade dibe"
+    "preparing": "Di demek nêz de amade dibe",
+    "account": "Hesabê min",
+    "close": "Nêzîkî"
   },
   "slogan": {
     "text": "Her mirovê pêşketîyî di vê dinyayê de du welatên xwe hene: welatê xwe û Sûrîye",
@@ -55,6 +57,11 @@
     "all_rights_reserved": "Gelê hemû mafên parastin"
   },
   "disarm": {
-    "i_have_weapon": "Çekên min hene ku radest bikim"
+    "i_have_weapon": "Çekên min hene ku radest bikim",
+    "info_modal": {
+      "content1": "Naxşê nîşan dide xurtên teslimê ku lîyekên hukûmetê silahên ji şexsên şaristanê qebûl dikin.",
+      "content2": "Bi klik kirina nîşaneyekê, agahdariya xurtê di kûçeya jêr-a çepê ya naxşê de dibe.",
+      "content3": "Heke hertiştekên te heye, ji kerema xwe bi ser pêşûngoka kiryarê li navenda jêrê klik bike û dest pê bike bi têketina agahdariyên xwe."
+    }
   }
 }
