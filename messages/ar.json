@@ -53,5 +53,8 @@
     "privacy_policy": "سياسة الخصوصية",
     "terms": "الشروط",
     "all_rights_reserved": "جميع الحقوق محفوظة"
+  },
+  "disarm": {
+    "i_have_weapon": "لدي سلاح أرغب بتسليمه"
   }
 }

@@ -9,4 +9,5 @@ export type DeliveryPoint = {
     latitude: number;
     longitude: number;
   };
+  address: string;
 }

@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/markerclusterer": "^2.5.3",
     "@iconify/react": "^5.1.0",
     "@nextui-org/react": "^2.6.8",
+    "@vis.gl/react-google-maps": "^1.4.2",
     "axios": "^1.7.9",
     "framer-motion": "^11.15.0",
     "next": "^15.1.2",

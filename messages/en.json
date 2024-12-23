@@ -53,5 +53,8 @@
     "privacy_policy": "Privacy Policy",
     "terms": "Terms",
     "all_rights_reserved": "All rights reserved"
+  },
+  "disarm": {
+    "i_have_weapon": "I have weapons to deliver"
   }
 }
