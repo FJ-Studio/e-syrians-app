@@ -9,6 +9,7 @@ import { getMessages } from "next-intl/server";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "../../../auth";
 import Header from "@/components/shared/header";
+import Footer from "@/components/shared/footer";
 
 const ibm = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -41,6 +42,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Header />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </SessionProvider>
       </body>
