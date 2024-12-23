@@ -56,7 +56,7 @@ const InfoModal: FC = () => {
                 ))}
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="ghost" onPress={onClose}>
+                <Button color="danger" variant="solid" onPress={onClose}>
                   {t('common.close')}
                 </Button>
               </ModalFooter>

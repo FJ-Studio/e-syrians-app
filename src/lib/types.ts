@@ -10,4 +10,5 @@ export type DeliveryPoint = {
     longitude: number;
   };
   address: string;
+  description?: string;
 }
