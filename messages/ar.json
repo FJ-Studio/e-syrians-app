@@ -54,7 +54,9 @@
   "footer": {
     "privacy_policy": "سياسة الخصوصية",
     "terms": "الشروط",
-    "all_rights_reserved": "جميع الحقوق محفوظة"
+    "all_rights_reserved": "جميع الحقوق محفوظة",
+    "initiatives": "المبادرات",
+    "links": "روابط"
   },
   "disarm": {
     "i_have_weapon": "لدي سلاح أرغب بتسليمه",
