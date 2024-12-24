@@ -80,7 +80,19 @@
         "title": "ID-ê Neteweyî",
         "explanation": "Ji bo nepeniya we em nasnameya weya neteweyî şîfre dikin, ji kerema xwe wê bi baldarî binivîsin."
       },
-      "weapons_list": "Lîsteya Silahên"
+      "weapons_list": "Lîsteya Silahên",
+      "notes": {
+        "title": "Notên te",
+        "description": "Ji kerema xwe notên xwe binivîse"
+      },
+      "weapons_list_description": "Ji kerema xwe lîsteya silahên ku hûn dixwazin radest bikin binivîsin",
+      "address" : {
+        "title": "Navnîşana te",
+        "description": "Ji kerema xwe navnîşana xwe binivîse"
+      },
+      "phone": {
+        "title": "Hejmara telefonê"
+      }
     },
     "weapons": {
       "pistol": "Çek",
