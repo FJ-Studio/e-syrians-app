@@ -15,6 +15,7 @@ import {
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
+import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -36,18 +37,29 @@ const ReportWeapons: FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<WeaponDeliveryForm>({
     defaultValues: {
-      name: "",
-      surname: "",
+      name: session.data?.user?.name || "",
+      surname: session.data?.user?.surname || "",
       national_id: "",
       weapons: "",
       notes: "",
+      address: "",
+      phone: "",
     },
   });
-  const onSubmit = (data: WeaponDeliveryForm) => {
-    console.log(data, errors);
+  const onSubmit = async (data: WeaponDeliveryForm) => {
+    try {
+      const res = await axios.post("/api/disarm/report", data);
+      if (res.status === 200) {
+        console.log(res.data);
+      } else {
+        console.error(res.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -78,7 +90,7 @@ const ReportWeapons: FC = () => {
               <DrawerHeader>{t("disarm.i_have_weapon")}</DrawerHeader>
               <DrawerBody>
                 <form
-                  onSubmit={handleSubmit((data) => console.log(data))}
+                  onSubmit={handleSubmit(onSubmit)}
                   className="w-full flex flex-col gap-4"
                 >
                   <Controller
@@ -96,7 +108,7 @@ const ReportWeapons: FC = () => {
                         isInvalid={invalid}
                         isRequired
                         type="text"
-                        placeholder={t("disarm.report.national_id.description")}
+                        // placeholder={t("disarm.report.national_id.description")}
                         label={t("disarm.report.national_id.title")}
                         errorMessage={error?.message}
                         description={t("disarm.report.national_id.explanation")}
@@ -114,7 +126,7 @@ const ReportWeapons: FC = () => {
                         type="text"
                         isInvalid={invalid}
                         errorMessage={error?.message}
-                        placeholder={t("disarm.report.name.description")}
+                        // placeholder={t("disarm.report.name.description")}
                         label={t("disarm.report.name.title")}
                       />
                     )}
@@ -130,8 +142,45 @@ const ReportWeapons: FC = () => {
                         type="text"
                         isInvalid={invalid}
                         errorMessage={error?.message}
-                        placeholder={t("disarm.report.surname.description")}
+                        // placeholder={t("disarm.report.surname.description")}
                         label={t("disarm.report.surname.title")}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="address"
+                    control={control}
+                    rules={{ required: true, minLength: 5 }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Input
+                        {...field}
+                        isRequired
+                        type="text"
+                        isInvalid={invalid}
+                        errorMessage={error?.message}
+                        // placeholder={t("disarm.report.address.description")}
+                        label={t("disarm.report.address.title")}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="phone"
+                    control={control}
+                    rules={{
+                      required: true,
+                      minLength: 10,
+                      maxLength: 15,
+                      pattern: /^[0-9]*$/,
+                    }}
+                    render={({ field, fieldState: { invalid, error } }) => (
+                      <Input
+                        {...field}
+                        isRequired
+                        type="text"
+                        isInvalid={invalid}
+                        errorMessage={error?.message}
+                        // placeholder={t("disarm.report.address.description")}
+                        label={t("disarm.report.phone.title")}
                       />
                     )}
                   />
@@ -154,9 +203,9 @@ const ReportWeapons: FC = () => {
                         isInvalid={invalid}
                         label={t("disarm.report.weapons_list")}
                         errorMessage={error?.message}
-                        onSelectionChange={(e) => {
-                            console.log(e.valueOf())
-                        }}
+                        description={t(
+                          "disarm.report.weapons_list_description"
+                        )}
                       >
                         {WEAPONS.map((weapon) => (
                           <SelectItem key={weapon} value={weapon}>
@@ -177,8 +226,8 @@ const ReportWeapons: FC = () => {
                         isInvalid={invalid}
                         errorMessage={error?.message}
                         className="w-full"
-                        label="Description"
-                        placeholder="Enter your description"
+                        label={t("disarm.report.notes.title")}
+                        placeholder={t("disarm.report.notes.description")}
                       />
                     )}
                   />

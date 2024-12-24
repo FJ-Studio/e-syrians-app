@@ -81,7 +81,18 @@
         "title": "National ID",
         "explanation": "For your privacy we encrypt your national id, please type it carefully."
       },
-      "weapons_list": "Weapons List"
+      "weapons_list": "Weapons List",
+      "notes": {
+        "title": "Additional notes",
+        "description": "Please add any further details here"
+      },
+      "weapons_list_description": "Please select all types you have",
+      "address": {
+        "title": "Address"
+      },
+      "phone": {
+        "title": "Phone number"
+      }
     },
     "weapons": {
       "pistol": "Pistol",
