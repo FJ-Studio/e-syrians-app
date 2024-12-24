@@ -51,7 +51,13 @@ const ReportWeapons: FC = () => {
   });
   const onSubmit = async (data: WeaponDeliveryForm) => {
     try {
-      const res = await axios.post("/api/disarm/report", data);
+      const res = await axios.post("/api/disarm/report", data, {
+        headers: {
+          Authorization: `Bearer ${session.data?.user?.accessToken}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
       if (res.status === 200) {
         console.log(res.data);
       } else {
