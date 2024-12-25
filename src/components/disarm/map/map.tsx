@@ -37,6 +37,23 @@ const DisarmMap: FC<Props> = ({ points }) => {
       minZoom: 6,
       boxZoom: true,
     });
+    map.addControl(
+      new mapboxgl.NavigationControl({
+        showZoom: true,
+        showCompass: false,
+      }),
+      "bottom-right"
+    );
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+        showUserHeading: true,
+      }),
+      "bottom-right"
+    );
     points.forEach((markerData) => {
       const marker = new mapboxgl.Marker({
         color: "#007A3D",
