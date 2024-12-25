@@ -18,7 +18,7 @@ export const LANGUAGES: Record<
 };
 
 export const MAP_KEY = process.env.NEXT_PUBLIC_MAP_KEY as string;
-export const MAP_ID = "8baf23c678a7fb8f";
+export const MAP_STYLE = "mapbox://styles/mapbox/light-v11";
 export const MAP_CENTER = { lat: 35.321, lng: 38.998 };
 
 export const DEFAULT_LOCALE = "ar";

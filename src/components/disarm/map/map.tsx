@@ -1,6 +1,6 @@
 "use client";
 import mapboxgl from "mapbox-gl";
-import { MAP_CENTER, MAP_KEY } from "@/lib/constants";
+import { MAP_CENTER, MAP_KEY, MAP_STYLE } from "@/lib/constants";
 import { DeliveryPoint } from "@/lib/types";
 import { useLocale } from "next-intl";
 import { FC, useEffect, useState } from "react";
@@ -9,6 +9,15 @@ import InfoModal from "./info-modal";
 import ReportWeapons from "./report-weapons";
 
 import "mapbox-gl/dist/mapbox-gl.css";
+
+if (typeof window !== "undefined") {
+  mapboxgl.accessToken = MAP_KEY;
+  mapboxgl.setRTLTextPlugin(
+    "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.3.0/mapbox-gl-rtl-text.js",
+    null,
+    true
+  );
+}
 
 type Props = {
   points: Array<DeliveryPoint>;
@@ -21,18 +30,11 @@ const DisarmMap: FC<Props> = ({ points }) => {
   );
 
   useEffect(() => {
-    mapboxgl.accessToken = MAP_KEY;
-    mapboxgl.setRTLTextPlugin(
-      "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.3.0/mapbox-gl-rtl-text.js",
-      null,
-      true
-    );
-
     const map = new mapboxgl.Map({
-      container: "map-container", // container ID
+      container: "map-container",
       center: [MAP_CENTER.lng, MAP_CENTER.lat],
       zoom: 6,
-      style: "mapbox://styles/mapbox/light-v11",
+      style: MAP_STYLE,
       language: locale,
       minZoom: 6,
       boxZoom: true,
