@@ -16,8 +16,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     async session({ session, token }) {
-      if (token.fhUser) {
-        session.user = token.fhUser as AdapterUser & ESUser;
+      if (token.esUser) {
+        session.user = token.esUser as AdapterUser & ESUser;
       }
       return session;
     },
@@ -26,43 +26,51 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (typeof token?.esUser === "object") {
         const esUser = token.esUser as ESUser;
         // request to /me
-        const response = await fetch(
-          `${process.env.API_URL}/users/me`,
-          {
+        try {
+          const response = await fetch(`${process.env.API_URL}/users/me`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${esUser.accessToken}`,
+              "Accept": "application/json",
+              Authorization: `Bearer ${esUser?.accessToken}`,
             },
+          });
+          const data = await response.json();
+          if (data?.data?.id) {
+            token.esUser = { ...data.data, accessToken: esUser?.accessToken };
+          } else {
+            token.esUser = null;
           }
-        );
-        const data = await response.json();
-        if (data.success) {
-          token.esUser = { ...data.data, accessToken: esUser.accessToken };
-        } else {
-          token.esUser = null;
+        } catch (error) {
+          console.error(error);
         }
       } else if (
         (account?.provider && providers.includes(account?.provider)) ||
         (token?.provider && providers.includes(token?.provider as string))
       ) {
         // request to /login/social
-        const response = await fetch(
-          `${process.env.API_URL}/users/login/social`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              provider: account?.provider ?? token?.provider,
-              token: account?.access_token,
-            }),
+        try {
+          const response = await fetch(
+            `${process.env.API_URL}/users/login/social`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+              },
+              body: JSON.stringify({
+                provider: account?.provider ?? token?.provider,
+                token: account?.access_token,
+              }),
+            }
+          );
+          const data = await response.json();
+          console.log('++++++++++ ', data);
+          if (data.token) {
+            token.esUser = { ...data.user, accessToken: data.token };
           }
-        );
-        const data = await response.json();
-        if (data.success) {
-          token.esUser = { ...data.data, accessToken: data.token };
+        } catch (error) {
+          console.error(error);
         }
       }
       if (account?.provider === "google") {
