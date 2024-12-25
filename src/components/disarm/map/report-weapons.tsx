@@ -28,7 +28,7 @@ const ReportWeapons: FC = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const sp = useSearchParams();
   useEffect(() => {
-    if (sp.get("report") === "1") {
+    if ( session.status === 'authenticated' && sp.get("report") === "1") {
       onOpen();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,6 +38,7 @@ const ReportWeapons: FC = () => {
     control,
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = useForm<WeaponDeliveryForm>({
     defaultValues: {
       name: session.data?.user?.name || "",
@@ -58,8 +59,8 @@ const ReportWeapons: FC = () => {
           "Content-Type": "application/json",
         },
       });
-      if (res.status === 200) {
-        console.log(res.data);
+      if (res.status === 201) {
+        reset();
       } else {
         console.error(res.data);
       }

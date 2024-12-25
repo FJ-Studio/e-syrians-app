@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@nextui-org/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC } from "react";
@@ -25,6 +25,7 @@ const HeaderActions: FC = () => {
           as={Link}
           href="/account"
           aria-label={t("common.account")}
+          onPress={() => signOut()}
         >
           {t("common.account")}
         </Button>
