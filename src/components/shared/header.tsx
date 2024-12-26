@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import LanguageSwitcher from "./language-switcher";
-import HeaderActions from "./header-actions";
+// import HeaderActions from "./header-actions";
 
 const Header: FC = () => {
   const t = useTranslations();
@@ -22,7 +22,7 @@ const Header: FC = () => {
             </div>
         </Link>
         <div className="flex items-center gap-3">
-          <HeaderActions />
+          {/* <HeaderActions /> */}
           <LanguageSwitcher />
         </div>
       </div>
