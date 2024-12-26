@@ -11,9 +11,7 @@ import {
   DrawerHeader,
   Input,
   Modal,
-  ModalBody,
   ModalContent,
-  ModalHeader,
   Select,
   SelectItem,
   Textarea,
@@ -34,7 +32,6 @@ const ReportWeapons: FC = () => {
   const {
     isOpen: isFeedbackOpen,
     onOpen: onFeedbackOpen,
-    onOpenChange: onFeedbackOpenChange,
     onClose: onFeedbackClose,
   } = useDisclosure();
   const sp = useSearchParams();
@@ -74,6 +71,7 @@ const ReportWeapons: FC = () => {
       if (res.status === 201) {
         reset();
         onClose();
+        onFeedbackOpen();
       } else {
         console.error(res.data);
       }
@@ -272,8 +270,10 @@ const ReportWeapons: FC = () => {
       </Drawer>
       <Modal isDismissable isOpen={isFeedbackOpen} onClose={onFeedbackClose}>
         <ModalContent>
-          <ModalHeader>{t('disarm.report.received.title')}</ModalHeader>
-          <ModalBody>{t('disarm.report.received.description')} 💚</ModalBody>
+          <div className="p-6">
+            <p className="mb-1 font-bold text-lg">{t('disarm.report.received.title')}</p>
+            <p>{t('disarm.report.received.description')} 💚</p>
+          </div>
         </ModalContent>
       </Modal>
     </>
