@@ -261,7 +261,7 @@ const ReportWeapons: FC = () => {
                   disabled={isSubmitting}
                   onPress={() => handleSubmit(onSubmit)()}
                 >
-                  {t("common.submit")}
+                  {isSubmitting ? t('common.sending_data') : t("common.submit")}
                 </Button>
               </DrawerFooter>
             </>
