@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
                 Authorization: headersList.get('authorization'),
                 Accept: "application/json",
                 "Content-Type": "application/json",
+                "Accept-Language": headersList.get('accept-language'),
             },
         });
         if (res.status === 201) {

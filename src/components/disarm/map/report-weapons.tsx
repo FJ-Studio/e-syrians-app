@@ -10,6 +10,10 @@ import {
   DrawerFooter,
   DrawerHeader,
   Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
   Select,
   SelectItem,
   Textarea,
@@ -17,18 +21,25 @@ import {
 } from "@nextui-org/react";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { FC, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const ReportWeapons: FC = () => {
+  const locale = useLocale();
   const t = useTranslations();
   const session = useSession();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const {
+    isOpen: isFeedbackOpen,
+    onOpen: onFeedbackOpen,
+    onOpenChange: onFeedbackOpenChange,
+    onClose: onFeedbackClose,
+  } = useDisclosure();
   const sp = useSearchParams();
   useEffect(() => {
-    if ( session.status === 'authenticated' && sp.get("report") === "1") {
+    if (session.status === "authenticated" && sp.get("report") === "1") {
       onOpen();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,10 +68,12 @@ const ReportWeapons: FC = () => {
           Authorization: `Bearer ${session.data?.user?.accessToken}`,
           Accept: "application/json",
           "Content-Type": "application/json",
+          "Accept-Language": locale,
         },
       });
       if (res.status === 201) {
         reset();
+        onClose();
       } else {
         console.error(res.data);
       }
@@ -257,6 +270,12 @@ const ReportWeapons: FC = () => {
           )}
         </DrawerContent>
       </Drawer>
+      <Modal isDismissable isOpen={isFeedbackOpen} onClose={onFeedbackClose}>
+        <ModalContent>
+          <ModalHeader>{t('disarm.report.received.title')}</ModalHeader>
+          <ModalBody>{t('disarm.report.received.description')} 💚</ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

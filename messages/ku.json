@@ -86,12 +86,16 @@
         "description": "Ji kerema xwe notên xwe binivîse"
       },
       "weapons_list_description": "Ji kerema xwe lîsteya silahên ku hûn dixwazin radest bikin binivîsin",
-      "address" : {
+      "address": {
         "title": "Navnîşana te",
         "description": "Ji kerema xwe navnîşana xwe binivîse"
       },
       "phone": {
         "title": "Hejmara telefonê"
+      },
+      "received": {
+        "description": "Spas ji dil.",
+        "title": "Daneyên bi serfirazî hatin şandin"
       }
     },
     "weapons": {

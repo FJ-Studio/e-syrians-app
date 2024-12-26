@@ -92,6 +92,10 @@
       },
       "phone": {
         "title": "رقم الهاتف"
+      },
+      "received": {
+        "description": "شكرا من القلب",
+        "title": "تم إرسال البيانات بنجاح"
       }
     },
     "weapons": {

@@ -92,6 +92,10 @@
       },
       "phone": {
         "title": "Phone number"
+      },
+      "received": {
+        "title": "Done!",
+        "description": "Thank you from the heart"
       }
     },
     "weapons": {
