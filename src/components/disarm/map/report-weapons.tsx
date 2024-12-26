@@ -118,7 +118,7 @@ const ReportWeapons: FC = () => {
                       required: true,
                       minLength: 11,
                       maxLength: 11,
-                      pattern: /^[0-9]*$/,
+                      pattern: /^[0-9\u0660-\u0669]+$/,
                     }}
                     render={({ field, fieldState: { invalid, error } }) => (
                       <Input
@@ -188,7 +188,7 @@ const ReportWeapons: FC = () => {
                       required: true,
                       minLength: 10,
                       maxLength: 15,
-                      pattern: /^[0-9]*$/,
+                      pattern: /^[0-9\u0660-\u0669]+$/,
                     }}
                     render={({ field, fieldState: { invalid, error } }) => (
                       <Input
