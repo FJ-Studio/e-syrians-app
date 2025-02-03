@@ -1,4 +1,4 @@
-import { DeliveryPoint } from "@/lib/types";
+import { DeliveryPoint } from "@/lib/types/weapon-delivery";
 import { FC } from "react";
 
 type Props = {
@@ -48,7 +48,7 @@ const SelectedPoint: FC<Props> = ({ point }) => {
           />
         </svg>
 
-        <span className="text-xs">{point?.description ?? 'N/A'}</span>
+        <span className="text-xs">{point?.description ?? "N/A"}</span>
       </p>
     </div>
   );

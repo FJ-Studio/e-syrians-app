@@ -1,4 +1,4 @@
-import { ESUser } from "@/lib/types";
+import { ESUser } from "@/lib/types/account";
 import NextAuth from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import Google from "next-auth/providers/google";
@@ -65,9 +65,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           );
           const data = await response.json();
-          console.log('++++++++++ ', data);
           if (data.token) {
             token.esUser = { ...data.user, accessToken: data.token };
+          } else {
+            console.error(data);
+            return null;
           }
         } catch (error) {
           console.error(error);

@@ -35,3 +35,16 @@ export const WEAPONS: Array<string> = [
   "explosive",
   "other",
 ];
+
+export const initiatives = [
+  {
+    title: "initiatives.census.title",
+    description: "initiatives.census.description",
+    link: "/census",
+  },
+  {
+    title: "initiatives.disarmament.title",
+    description: "initiatives.disarmament.description",
+    link: "/disarm",
+  },
+];

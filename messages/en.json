@@ -37,6 +37,10 @@
     "security_personnel_verification": {
       "title": "Security Personnel Verification",
       "description": "Each member of the public security forces will receive an ID with a QR code to prove his identity and powers when needed."
+    },
+    "census": {
+      "title": "National census",
+      "description": "A national census driven by the Syrian themselves, enabling self-registration and inclusive data collection."
     }
   },
   "hero": {

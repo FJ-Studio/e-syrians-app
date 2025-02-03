@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "../globals.css";
-import { Locale } from "@/lib/types";
+import { Locale } from "@/lib/types/locale";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
@@ -11,15 +10,12 @@ import { auth } from "../../../auth";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
-
-const ibm = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-});
+import { ibm } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: "E-SYRIANS Network",
-  description: "For every Syrian, creating a better homeland and a brighter future.",
+  description:
+    "For every Syrian, creating a better homeland and a brighter future.",
 };
 
 export default async function RootLayout({
@@ -40,13 +36,13 @@ export default async function RootLayout({
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <GoogleTagManager gtmId="G-ECLQC58Q2W" />
       <body className={`${ibm.className} antialiased`}>
-      <SessionProvider session={session}>
-        <NextIntlClientProvider messages={messages}>
-          <Header />
-          {children}
-          <Footer />
-        </NextIntlClientProvider>
-      </SessionProvider>
+        <SessionProvider session={session}>
+          <NextIntlClientProvider messages={messages}>
+            <Header />
+            {children}
+            <Footer />
+          </NextIntlClientProvider>
+        </SessionProvider>
       </body>
     </html>
   );

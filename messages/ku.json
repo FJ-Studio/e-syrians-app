@@ -37,6 +37,9 @@
     "security_personnel_verification": {
       "title": "Tespîtkirina Xebatkarên Ewlekariya Giştî",
       "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
+    },
+    "census": {
+      "description": "Tehlîlê neteweyî yên ku ji aliyê gelê Sûrî ve hatine pêşkêş kirin, ku dikare qeydê xwe ya xwe û berhevkirina daneyên giştî bike."
     }
   },
   "hero": {

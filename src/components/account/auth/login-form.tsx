@@ -1,16 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Button,
-  Input,
-  Checkbox,
-  Form,
-  Divider,
-} from "@nextui-org/react";
+import { Button, Input, Checkbox, Form, Divider } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { login } from "@/app/actions";
+import AuthLayout from "./layout";
+import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
   // const [loginError, setLoginError] = useState<string | null>(null);
@@ -32,24 +28,25 @@ export default function LoginForm() {
   // };
 
   return (
-    <div className="relative flex min-h-[calc(100dvh-80px)] h-full w-full">
+    <AuthLayout>
       {/* Sign Up Form */}
-      <div className="flex w-full items-center justify-center bg-background">
+      <div className="flex w-full items-center justify-center">
         <div className="flex w-full max-w-sm flex-col items-center gap-4 p-4">
-          <div className="w-full text-start">
-            {/* <p className="pb-2 text-xl font-semibold">{t("common.login")}</p> */}
-            {/* <p className="text-small text-default-500">{t("common.login")}</p> */}
-          </div>
-
           <div className="flex flex-col gap-2 w-full">
             <Button
               startContent={<Icon icon="flat-color-icons:google" width={24} />}
               variant="bordered"
               className="w-full"
+              onPress={() =>
+                signIn("google", {
+                  redirect: true,
+                  redirectTo: "/account",
+                })
+              }
             >
               {t("common.continueWithGoogle")}
             </Button>
-            <Button
+            {/* <Button
               startContent={
                 <Icon
                   className="text-default-500"
@@ -61,7 +58,7 @@ export default function LoginForm() {
               className="w-full"
             >
               {t("common.continueWithPasskey")}
-            </Button>
+            </Button> */}
           </div>
 
           <div className="flex items-center gap-4 py-2 w-full ">
@@ -76,7 +73,6 @@ export default function LoginForm() {
             className="flex w-full flex-col gap-3"
             // onSubmit={onSubmit}
             action={async (formData) => {
-              
               await login(formData);
             }}
           >
@@ -121,10 +117,9 @@ export default function LoginForm() {
             </Button>
           </Form>
         </div>
-      </div>
 
-      {/* Right side */}
-      {/* <div
+        {/* Right side */}
+        {/* <div
         className="relative hidden w-1/2 flex-col-reverse p-10 shadow-small lg:flex h-[calc(100dvh-120px)] m-10 rounded-xl"
         style={{
           backgroundImage:
@@ -171,6 +166,7 @@ export default function LoginForm() {
           </ul>
         </div>
       </div> */}
-    </div>
+      </div>
+    </AuthLayout>
   );
 }

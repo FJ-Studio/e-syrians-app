@@ -1,3 +1,4 @@
+import { initiatives } from "@/lib/constants";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC } from "react";
@@ -11,20 +12,16 @@ const Footer: FC = () => {
         <div className="flex items-start gap-3 md:gap-12">
           <div className="flex flex-col gap-2">
             <h4 className="text-lg font-semibold">{t("footer.initiatives")}</h4>
-            <Link
-              className="text-black text-sm"
-              href='/disarm'
-              title={t("initiatives.disarmament.title")}
-            >
-              {t("initiatives.disarmament.title")}
-            </Link>
-            <Link
-              className="text-black text-sm"
-              href="#"
-              title={t("initiatives.security_personnel_verification.title")}
-            >
-              {t("initiatives.security_personnel_verification.title")}
-            </Link>
+            {initiatives.map((initiative, index) => (
+              <Link
+                key={index}
+                className="text-black text-sm"
+                href={initiative.link}
+                title={t(initiative.title)}
+              >
+                {t(initiative.title)}
+              </Link>
+            ))}
           </div>
           <div className="flex flex-col gap-2">
             <h4 className="text-lg font-semibold">{t("footer.links")}</h4>

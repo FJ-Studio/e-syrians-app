@@ -4,10 +4,11 @@ import { FC } from "react";
 import Initiatives from "./initiatives";
 
 const Hero: FC = () => {
-    const t = useTranslations();
+  const t = useTranslations();
   return (
     <main className="isolate">
       <div className="relative isolate -z-10">
+        {/* The colors */}
         <svg
           className="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
           aria-hidden="true"
@@ -44,7 +45,8 @@ const Hero: FC = () => {
           <div
             className="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
             style={{
-                clipPath: "polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)",
+              clipPath:
+                "polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)",
             }}
           ></div>
         </div>
@@ -53,21 +55,21 @@ const Hero: FC = () => {
             <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
               <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
                 <h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl rtl:leading-tight">
-                  {t('hero.title')}
+                  {t("hero.title")}
                 </h1>
                 <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
-                  {t('hero.description')}
+                  {t("hero.description")}
                 </p>
                 <div>
-                    <Initiatives />
+                  <Initiatives />
                 </div>
               </div>
               <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
                 <div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
                   <div className="relative">
                     <Image
-                        width={176}
-                        height={264}
+                      width={176}
+                      height={264}
                       src="/images/mix.jpg"
                       alt=""
                       className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
@@ -78,8 +80,8 @@ const Hero: FC = () => {
                 <div className="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
                   <div className="relative">
                     <Image
-                        width={176}
-                        height={264}
+                      width={176}
+                      height={264}
                       src="/images/aleppo.jpg"
                       alt=""
                       className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
@@ -88,8 +90,8 @@ const Hero: FC = () => {
                   </div>
                   <div className="relative">
                     <Image
-                        width={176}
-                        height={264}
+                      width={176}
+                      height={264}
                       src="/images/hama.jpg"
                       alt=""
                       className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
@@ -100,8 +102,8 @@ const Hero: FC = () => {
                 <div className="w-44 flex-none space-y-8 pt-32 sm:pt-0">
                   <div className="relative">
                     <Image
-                        width={176}
-                        height={264}
+                      width={176}
+                      height={264}
                       src="/images/palmyra.jpg"
                       alt=""
                       className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
@@ -110,8 +112,8 @@ const Hero: FC = () => {
                   </div>
                   <div className="relative">
                     <Image
-                        width={176}
-                        height={264}
+                      width={176}
+                      height={264}
                       src="/images/damascus.jpg"
                       alt=""
                       className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"

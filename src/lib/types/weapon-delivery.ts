@@ -1,7 +1,3 @@
-import { LOCALES } from './constants';
-
-export type Locale = typeof LOCALES[number];
-
 export type DeliveryPoint = {
   id: number;
   name: string;
@@ -11,16 +7,6 @@ export type DeliveryPoint = {
   };
   address: string;
   description?: string;
-}
-
-export type ESUser = {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  accessToken: string;
-  permissions: Array<string>;
 }
 
 export type WeaponDeliveryForm = {

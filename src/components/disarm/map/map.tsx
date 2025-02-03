@@ -1,7 +1,6 @@
 "use client";
 import mapboxgl from "mapbox-gl";
 import { MAP_CENTER, MAP_KEY, MAP_STYLE } from "@/lib/constants";
-import { DeliveryPoint } from "@/lib/types";
 import { useLocale } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import SelectedPoint from "./selected-point";
@@ -9,6 +8,7 @@ import InfoModal from "./info-modal";
 import ReportWeapons from "./report-weapons";
 
 import "mapbox-gl/dist/mapbox-gl.css";
+import { DeliveryPoint } from "@/lib/types/weapon-delivery";
 
 if (typeof window !== "undefined") {
   mapboxgl.accessToken = MAP_KEY;
