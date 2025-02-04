@@ -1,6 +1,6 @@
 "use client";
 import mapboxgl from "mapbox-gl";
-import { MAP_CENTER, MAP_KEY, MAP_STYLE } from "@/lib/constants";
+import { MAP_CENTER, MAP_KEY, MAP_STYLE } from "@/lib/constants/misc";
 import { useLocale } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import SelectedPoint from "./selected-point";

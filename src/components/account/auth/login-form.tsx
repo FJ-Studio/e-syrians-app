@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Input, Checkbox, Form, Divider } from "@nextui-org/react";
+import { Button, Input, Checkbox, Form, Divider } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { login } from "@/app/actions";

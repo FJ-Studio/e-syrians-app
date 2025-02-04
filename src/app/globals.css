@@ -13,11 +13,14 @@
     --foreground: #ededed;
   }
 }
-
+.grecaptcha-badge {
+  visibility: hidden;
+}
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .ltr {

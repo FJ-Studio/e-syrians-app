@@ -1,5 +1,5 @@
 "use client";
-import { WEAPONS } from "@/lib/constants";
+import { WEAPONS } from "@/lib/constants/disarm";
 import { WeaponDeliveryForm } from "@/lib/types/weapon-delivery";
 import {
   Button,
@@ -16,7 +16,7 @@ import {
   SelectItem,
   Textarea,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";

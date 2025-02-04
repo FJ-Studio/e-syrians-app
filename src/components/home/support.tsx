@@ -1,6 +1,6 @@
 "use client";
 import { ibm } from "@/lib/fonts";
-import { Snippet } from "@nextui-org/react";
+import { Snippet } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { FC } from "react";

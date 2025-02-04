@@ -1,6 +1,6 @@
 "use client";
 
-import { LANGUAGES } from "@/lib/constants";
+import { LANGUAGES } from "@/lib/constants/misc";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -8,7 +8,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
 

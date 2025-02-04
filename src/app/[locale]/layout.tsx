@@ -11,6 +11,8 @@ import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { ibm } from "@/lib/fonts";
+import Providers from "@/components/shared/contexts/providers";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "E-SYRIANS Network",
@@ -35,12 +37,19 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <GoogleTagManager gtmId="G-ECLQC58Q2W" />
+      <Script
+        async
+        defer
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA}`}
+      ></Script>
       <body className={`${ibm.className} antialiased`}>
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>
-            <Header />
-            {children}
-            <Footer />
+            <Providers>
+              <Header />
+              {children}
+              <Footer />
+            </Providers>
           </NextIntlClientProvider>
         </SessionProvider>
       </body>

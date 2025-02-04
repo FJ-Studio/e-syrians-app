@@ -1,7 +1,3 @@
 export default function AccountPage() {
-    return (
-        <div>
-            Account Page
-        </div>
-    )
+  return <div className="min-h-64">Account Page</div>;
 }

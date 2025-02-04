@@ -1,6 +1,6 @@
 "use client";
 import { UserIcon } from "@heroicons/react/24/outline";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC } from "react";

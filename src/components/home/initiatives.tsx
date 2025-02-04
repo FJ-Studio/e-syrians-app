@@ -1,6 +1,6 @@
 "use client";
-import { initiatives } from "@/lib/constants";
-import { Button, Card } from "@nextui-org/react";
+import { INITIATIVES } from "@/lib/constants/misc";
+import { Button, Card } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC } from "react";
@@ -10,7 +10,7 @@ const Initiatives: FC = () => {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:gap-8 mt-8 flex-wrap">
-      {initiatives.map((initiative, index) => (
+      {INITIATIVES.map((initiative, index) => (
         <div className="w-full sm:w-1/2 lg:w-[calc(50%-16px)]" key={index}>
           <Card className="p-6">
             <h3 className="text-pretty text-lg font-medium">

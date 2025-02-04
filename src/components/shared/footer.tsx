@@ -1,4 +1,4 @@
-import { initiatives } from "@/lib/constants";
+import { INITIATIVES } from "@/lib/constants/misc";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC } from "react";
@@ -12,7 +12,7 @@ const Footer: FC = () => {
         <div className="flex items-start gap-3 md:gap-12">
           <div className="flex flex-col gap-2">
             <h4 className="text-lg font-semibold">{t("footer.initiatives")}</h4>
-            {initiatives.map((initiative, index) => (
+            {INITIATIVES.map((initiative, index) => (
               <Link
                 key={index}
                 className="text-black text-sm"
