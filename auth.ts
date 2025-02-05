@@ -30,7 +30,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const response = await fetch(`${process.env.API_URL}/users/me`, {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
               "Accept": "application/json",
               Authorization: `Bearer ${esUser?.accessToken}`,
             },
@@ -65,7 +64,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           );
           const data = await response.json();
-          if (data.token) {
+          if (data?.data?.token) {
             token.esUser = { ...data.user, accessToken: data.token };
           } else {
             console.error(data);

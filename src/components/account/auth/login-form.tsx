@@ -78,7 +78,7 @@ export default function LoginForm() {
           >
             <Input
               isRequired
-              label={t("common.email")}
+              label={t("auth.login.identifier")}
               name="email"
               // placeholder={t("common.typeEmail")}
               errorMessage={t("common.typeEmail")}

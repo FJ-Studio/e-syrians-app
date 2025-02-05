@@ -315,6 +315,12 @@
       "country": {
         "description": "Splitted based on verification status",
         "title": "Users by their current country"
+      },
+      "charts": {
+        "filter": {
+          "perday": "Per day",
+          "permonth": "Per month"
+        }
       }
     }
   },
@@ -660,5 +666,17 @@
     "good": "Good",
     "chronic-illness": "I have a chronic illness",
     "disabled-special-needs": "I have a disability"
+  },
+  "auth": {
+    "login": {
+      "identifier": "E-mail / Phone / National ID"
+    }
+  },
+  "account": {
+    "dashboard": {
+      "welcome": "Welcome {name}",
+      "settings": "Settings",
+      "polls": "Polls"
+    }
   }
 }

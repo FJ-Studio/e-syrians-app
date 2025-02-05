@@ -67,7 +67,7 @@ const BarChartCard = forwardRef<
       <Card
         ref={ref}
         className={cn(
-          "h-[300px] border border-transparent dark:border-default-100 shadow-none rounded-none",
+          "h-[300px] border border-gray-50 dark:border-default-100 shadow-sm p-3 rounded-none",
           className
         )}
         {...props}

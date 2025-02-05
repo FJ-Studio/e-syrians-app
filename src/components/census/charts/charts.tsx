@@ -11,6 +11,7 @@ import {
 } from "@/lib/types/census";
 import BarChartCard from "@/components/charts/bar-chart";
 import { useTranslations } from "next-intl";
+import { Select, SelectItem } from "@heroui/react";
 
 const CensusCharts: FC = () => {
   const t = useTranslations("census.charts");
@@ -38,7 +39,7 @@ const CensusCharts: FC = () => {
       <BarChartCard
         title={t("dailyRegistrations.title")}
         description={t("dailyRegistrations.description")}
-        color="secondary"
+        color="primary"
         categories={["registered", "verified"]}
         chartData={Object.entries(charts.daily_users ?? {}).map(
           ([month, value]) => {
@@ -50,28 +51,31 @@ const CensusCharts: FC = () => {
           }
         )}
         actions={
-          <></>
-          // <div className="flex items-center justify-end gap-x-2">
-          //   <Select
-          //     aria-label="group by"
-          //     classNames={{
-          //       trigger: "min-w-[100px] min-h-7 h-7",
-          //       value: "text-tiny !text-default-500",
-          //       selectorIcon: "text-default-500",
-          //       popoverContent: "min-w-[120px]",
-          //     }}
-          //     defaultSelectedKeys={["per-day"]}
-          //     listboxProps={{
-          //       itemClasses: {
-          //         title: "text-tiny",
-          //       },
-          //     }}
-          //     placeholder="Per Day"
-          //     size="sm"
-          //   >
-          //     <SelectItem key="per-day">Per Day</SelectItem>
-          //   </Select>
-          // </div>
+          <div className="flex items-center justify-end gap-x-2">
+            <Select
+              aria-label="group by"
+              classNames={{
+                trigger: "min-w-[100px] min-h-7 h-7",
+                value: "text-tiny !text-default-500",
+                selectorIcon: "text-default-500",
+                popoverContent: "min-w-[120px]",
+              }}
+              defaultSelectedKeys={["per-day"]}
+              listboxProps={{
+                itemClasses: {
+                  title: "text-tiny",
+                },
+              }}
+              placeholder="Per Day"
+              size="sm"
+              disabledKeys={["per-month"]}
+            >
+              <SelectItem key="per-day">{t("charts.filter.perday")}</SelectItem>
+              <SelectItem key="per-month">
+                {t("charts.filter.permonth")}
+              </SelectItem>
+            </Select>
+          </div>
         }
       />
       <BarChartCard
