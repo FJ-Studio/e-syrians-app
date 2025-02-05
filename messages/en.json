@@ -41,6 +41,10 @@
     "census": {
       "title": "National census",
       "description": "A national census driven by the Syrian themselves, enabling self-registration and inclusive data collection."
+    },
+    "polls": {
+      "title": "Polls",
+      "description": "A platform for conducting polls and surveys to gauge public opinion on various issues."
     }
   },
   "hero": {
@@ -256,8 +260,62 @@
     },
     "nav": {
       "stats": "Main",
-      "first100": "First 100",
+      "first_batch": "First Registrants",
       "fraudsters": "Fraudsters"
+    },
+    "first": {
+      "description": "This list includes the first {count} members who registered in the system without verification from others. Since no previous users existed to verify them, their participation is made public for transparency. We assure you that they are real people—you can visit their profiles and check their social media links for verification.",
+      "title": "First Registrants"
+    },
+    "fraudsters": {
+      "title": "Fraudulent Accounts",
+      "description": "This page lists accounts that have been identified as fraudulent based on technical evidence. To maintain trust and accuracy in the system, any account proven to be fake will be suspended along with its verifiers. Our commitment is to ensure a reliable and transparent registration process for everyone."
+    },
+    "charts": {
+      "dailyRegistrations": {
+        "title": "Daily user updates",
+        "description": "Number of accounts have been created/verified"
+      },
+      "categories": {
+        "registered": "Registered",
+        "verified": "Verified",
+        "1-10": "1-10",
+        "11-20": "11-20",
+        "21-30": "21-30",
+        "31-40": "31-40",
+        "41-50": "41-50",
+        "51-60": "51-60",
+        "61-70": "61-70",
+        "71-80": "71-80",
+        "81-90": "81-90",
+        "91-100": "91-100",
+        "71-100": "71-100"
+      },
+      "gender": {
+        "title": "Users by gender",
+        "description": "Splitted based on verification status"
+      },
+      "age": {
+        "title": "Users age groups",
+        "description": "Splitted based on verification status",
+        "unit": "years"
+      },
+      "ethnicity": {
+        "title": "Users by ethnicity",
+        "description": "Splitted based on the verification status"
+      },
+      "hometown": {
+        "title": "Users by hometown",
+        "description": "Splitted based on verification status"
+      },
+      "religion": {
+        "description": "Splitted based on verification status",
+        "title": "Users by religion affiliation"
+      },
+      "country": {
+        "description": "Splitted based on verification status",
+        "title": "Users by their current country"
+      }
     }
   },
   "gender": {

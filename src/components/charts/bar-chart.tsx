@@ -1,7 +1,7 @@
 "use client";
 
 import { BarChartProps } from "@/lib/types/charts";
-import { Card, CardProps, cn, Select, SelectItem } from "@heroui/react";
+import { Card, CardProps, cn } from "@heroui/react";
 import { forwardRef } from "react";
 import {
   Bar,
@@ -9,62 +9,77 @@ import {
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
+
+import useProvinces from "../hooks/localization/provinces";
+import useReligiousAffiliation from "../hooks/localization/religious_affiliation";
+import useEthnicity from "../hooks/localization/ethnicity";
+import useCountries from "../hooks/localization/country";
+import useGender from "../hooks/localization/gender";
+// import useEducationLevels from "../hooks/localization/education";
+// import useSpokenLanguages from "../hooks/localization/languages";
+// import useSourceOfIncome from "../hooks/localization/income";
+// import useHealthStatuses from "../hooks/localization/health";
 
 const BarChartCard = forwardRef<
   HTMLDivElement,
   Omit<CardProps, "children"> & BarChartProps
 >(
   (
-    { className, title, value, unit, categories, color, chartData, ...props },
+    {
+      className,
+      title,
+      description,
+      categories,
+      color,
+      chartData,
+      actions,
+      translateLabels,
+      ...props
+    },
     ref
   ) => {
+    const genderOptions = useGender();
+    const provinces = useProvinces();
+    const religions = useReligiousAffiliation();
+    const ethnicities = useEthnicity();
+    const countries = useCountries();
+    // const educationLevels = useEducationLevels();
+    // const spokenLanguages = useSpokenLanguages();
+    // const incomeSources = useSourceOfIncome();
+    // const HealthStatuses = useHealthStatuses();
+
+    const allTranslations = {
+      ...genderOptions,
+      ...provinces,
+      ...religions,
+      ...ethnicities,
+      ...countries,
+      // ...educationLevels,
+      // ...spokenLanguages,
+      // ...incomeSources,
+      // ...HealthStatuses,
+    };
+
     return (
       <Card
         ref={ref}
         className={cn(
-          "h-[300px] border border-transparent dark:border-default-100",
+          "h-[300px] border border-transparent dark:border-default-100 shadow-none rounded-none",
           className
         )}
         {...props}
       >
-        <div className="flex flex-col gap-y-2 px-4 pb-2 pt-4">
+        <div className="flex flex-col gap-y-2 mb-4">
           <div className="flex items-center justify-between gap-x-2">
             <dt>
-              <h3 className="text-small font-medium text-default-500">
-                {title}
-              </h3>
+              <h3 className="font-medium text-default-700">{title}</h3>
+              <p className="text-small text-default-500">{description}</p>
             </dt>
-            <div className="flex items-center justify-end gap-x-2">
-              <Select
-                aria-label="Time Range"
-                classNames={{
-                  trigger: "min-w-[100px] min-h-7 h-7",
-                  value: "text-tiny !text-default-500",
-                  selectorIcon: "text-default-500",
-                  popoverContent: "min-w-[120px]",
-                }}
-                defaultSelectedKeys={["per-day"]}
-                listboxProps={{
-                  itemClasses: {
-                    title: "text-tiny",
-                  },
-                }}
-                placeholder="Per Day"
-                size="sm"
-              >
-                <SelectItem key="per-day">Per Day</SelectItem>
-              </Select>
-            </div>
+            {actions}
           </div>
-          <dd className="flex items-baseline gap-x-1">
-            <span className="text-3xl font-semibold text-default-900">
-              {value}
-            </span>
-            <span className="text-medium font-medium text-default-500">
-              {unit}
-            </span>
-          </dd>
         </div>
         <ResponsiveContainer
           className="[&_.recharts-surface]:outline-none"
@@ -74,26 +89,30 @@ const BarChartCard = forwardRef<
           <BarChart
             accessibilityLayer
             data={chartData}
-            margin={{
-              top: 10,
-              right: 24,
-              left: 20,
-              bottom: 24,
-            }}
-            /**
-             * Determines how values are stacked:
-             *
-             * - `none` is the default, it adds values on top of each other. No smarts. Negative values will overlap.
-             * - `expand` make it so that the values always add up to 1 - so the chart will look like a rectangle.
-             * - `wiggle` and `silhouette` tries to keep the chart centered.
-             * - `sign` stacks positive values above zero and negative values below zero. Similar to `none` but handles negatives.
-             * - `positive` ignores all negative values, and then behaves like \`none\`.
-             *
-             * Also see https://d3js.org/d3-shape/stack#stack-offsets
-             * (note that the `diverging` offset in d3 is named `sign` in recharts)
-             */
             stackOffset="sign"
+            margin={{
+              bottom: 0,
+              left: 0,
+              right: 0,
+              top: 0,
+            }}
           >
+            <XAxis
+              dataKey="month"
+              strokeOpacity={0.25}
+              style={{ fontSize: "var(--heroui-font-size-tiny)", color: "red" }}
+              tickLine={false}
+              tickFormatter={(value) => {
+                return translateLabels
+                  ? allTranslations[value as keyof typeof allTranslations]
+                  : value;
+              }}
+            />
+            <YAxis
+              axisLine={false}
+              style={{ fontSize: "var(--heroui-font-size-tiny)" }}
+              tickLine={false}
+            />
             <Tooltip
               content={({ payload }) => {
                 const month = payload?.[0]?.payload?.month;
@@ -102,8 +121,11 @@ const BarChartCard = forwardRef<
                   <div className="flex h-auto min-w-[120px] items-center gap-x-2 rounded-medium bg-background p-2 text-tiny shadow-small">
                     <div className="flex w-full flex-col gap-y-1">
                       <span className="font-medium text-foreground">
-                        {/* {formatMonth(month)} */}
-                        {month}
+                        {translateLabels
+                          ? allTranslations[
+                              month as keyof typeof allTranslations
+                            ]
+                          : month}
                       </span>
                       {payload?.map((p, index) => {
                         const name = p.name;
@@ -178,7 +200,7 @@ const BarChartCard = forwardRef<
             ))}
           </BarChart>
         </ResponsiveContainer>
-
+        {/* 
         <div className="flex w-full justify-center gap-4 pb-4 text-tiny text-default-500">
           {categories.map((category, index) => (
             <div key={index} className="flex items-center gap-2">
@@ -194,10 +216,10 @@ const BarChartCard = forwardRef<
                   }))`,
                 }}
               />
-              <span className="capitalize">{category}</span>
+              <span className="capitalize">{t(category)}</span>
             </div>
           ))}
-        </div>
+        </div> */}
       </Card>
     );
   }

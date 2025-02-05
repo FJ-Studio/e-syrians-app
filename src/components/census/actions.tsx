@@ -10,7 +10,7 @@ const CensusActions: FC = () => {
   const t = useTranslations("census.actions");
   const esyrian = useEsyrian();
   return (
-    <div className="sticky bottom-4 flex items-center justify-center gap-2">
+    <div className="sticky bottom-4 z-20 flex items-center justify-center gap-2">
       <Button color="primary" onPress={() => esyrian.openCensusForm(true)}>
         {t("register")}
       </Button>

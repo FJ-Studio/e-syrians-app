@@ -33,6 +33,7 @@ import useSpokenLanguages from "../hooks/localization/languages";
 import useSourceOfIncome from "../hooks/localization/income";
 import useHealthStatuses from "../hooks/localization/health";
 import confetti from "canvas-confetti";
+import extractErrors from "@/lib/extract-errors";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
@@ -82,6 +83,16 @@ const CensusForm: FC = () => {
               formData.append(`${key}[]`, value);
             });
             break;
+          case "health_insurance":
+          case "easy_access_to_healthcare_services":
+          case "shelter":
+            formData.append(
+              key,
+              (registrationData[key as keyof RegistrationForm] as boolean)
+                ? "1"
+                : "0"
+            );
+            break;
           default:
             formData.append(
               key,
@@ -102,7 +113,7 @@ const CensusForm: FC = () => {
             .catch(reject);
         });
       });
-      formData.append("recaptcha", token);
+      formData.append("recaptcha_token", token);
       const res = await fetch("/api/census/register", {
         method: "POST",
         headers: {
@@ -129,8 +140,9 @@ const CensusForm: FC = () => {
           openCensusForm(false);
         }
       } else {
-        toast.error(json.messages[0]);
-        console.error(res);
+        toast.error(
+          extractErrors(json.messages).map((p) => <p key={p}>{p}</p>)
+        );
       }
     } catch (error) {
       toast.error(t("error"));

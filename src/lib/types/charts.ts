@@ -7,9 +7,11 @@ export type ChartData = {
 
 export type BarChartProps = {
   title: string;
-  value: string;
+  description: string;
   unit?: string;
+  translateLabels?: boolean;
   color: ButtonProps["color"];
   categories: Array<string>;
   chartData: Array<ChartData>;
+  actions?: React.ReactNode;
 };
