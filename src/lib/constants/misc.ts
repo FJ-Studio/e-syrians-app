@@ -28,6 +28,7 @@ export const DOMAIN_URL = process.env.NEXT_PUBLIC_DOMAIN_URL as string;
 
 export const X_URL = 'https://x.com/esyriansnetwork'
 export const INSTAGRAM_URL = 'https://instagram.com/esyriansnetwork'
+export const FACEBOOK_URL = 'https://www.facebook.com/esyriansnetwork'
 
 export const INITIATIVES = [
   {

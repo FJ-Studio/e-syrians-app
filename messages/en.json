@@ -675,8 +675,18 @@
   "account": {
     "dashboard": {
       "welcome": "Welcome {name}",
-      "settings": "Settings",
-      "polls": "Polls"
+      "nav": {
+        "polls": "Polls",
+        "verifications": "Verifications",
+        "settings": "Settings",
+        "donate": "Donate",
+        "signout": "Sign out"
+      },
+      "polls": {
+        "my_polls": "Polls",
+        "my_votes": "Answers",
+        "my_reactions": "Reactions"
+      }
     }
   }
 }
