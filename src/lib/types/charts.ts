@@ -12,6 +12,7 @@ export type BarChartProps = {
   translateLabels?: boolean;
   color: ButtonProps["color"];
   categories: Array<string>;
+  categoriesLabels?: Array<string>;
   chartData: Array<ChartData>;
   actions?: React.ReactNode;
 };

@@ -33,6 +33,7 @@ const BarChartCard = forwardRef<
       title,
       description,
       categories,
+      categoriesLabels,
       color,
       chartData,
       actions,
@@ -152,7 +153,9 @@ const BarChartCard = forwardRef<
                             />
                             <div className="flex w-full items-center justify-between gap-x-2 pr-1 text-xs text-default-700">
                               <span className="text-default-500">
-                                {category}
+                                {categoriesLabels
+                                  ? categoriesLabels[index]
+                                  : category}
                               </span>
                               <span className="font-mono font-medium text-default-700">
                                 {value}

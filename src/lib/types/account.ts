@@ -5,5 +5,7 @@ export type ESUser = {
   email: string;
   phone: string;
   accessToken: string;
+  verifiedAt: string;
+  roles: Array<string>;
   permissions: Array<string>;
 }

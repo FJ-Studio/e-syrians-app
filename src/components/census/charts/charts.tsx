@@ -41,12 +41,16 @@ const CensusCharts: FC = () => {
         description={t("dailyRegistrations.description")}
         color="primary"
         categories={["registered", "verified"]}
+        categoriesLabels={[
+          t("labels.registered.title"),
+          t("labels.verified.title"),
+        ]}
         chartData={Object.entries(charts.daily_users ?? {}).map(
           ([month, value]) => {
             return {
               month,
-              registered: value.registered + 2,
-              verified: value.verified + 2,
+              registered: value.registered,
+              verified: value.verified,
             };
           }
         )}
@@ -84,6 +88,10 @@ const CensusCharts: FC = () => {
         description={t("age.description")}
         color="primary"
         categories={["verified", "unverified"]}
+        categoriesLabels={[
+          t("labels.verified.title"),
+          t("labels.unverified.title"),
+        ]}
         chartData={Object.entries(charts.age ?? {}).map(([month, value]) => {
           return {
             month,
@@ -98,6 +106,10 @@ const CensusCharts: FC = () => {
         description={t("hometown.description")}
         color="primary"
         categories={["verified", "unverified"]}
+        categoriesLabels={[
+          t("labels.verified.title"),
+          t("labels.unverified.title"),
+        ]}
         chartData={Object.entries(charts.hometown ?? {}).map(
           ([month, value]) => {
             return {
@@ -114,6 +126,10 @@ const CensusCharts: FC = () => {
         description={t("religion.description")}
         color="primary"
         categories={["verified", "unverified"]}
+        categoriesLabels={[
+          t("labels.verified.title"),
+          t("labels.unverified.title"),
+        ]}
         chartData={Object.entries(charts.religion ?? {}).map(
           ([month, value]) => {
             return {
@@ -131,6 +147,10 @@ const CensusCharts: FC = () => {
         description={t("country.description")}
         color="primary"
         categories={["verified", "unverified"]}
+        categoriesLabels={[
+          t("labels.verified.title"),
+          t("labels.unverified.title"),
+        ]}
         chartData={Object.entries(charts.country ?? {}).map(
           ([month, value]) => {
             return {
@@ -148,6 +168,10 @@ const CensusCharts: FC = () => {
         description={t("ethnicity.description")}
         color="primary"
         categories={["verified", "unverified"]}
+        categoriesLabels={[
+          t("labels.verified.title"),
+          t("labels.unverified.title"),
+        ]}
         chartData={Object.entries(charts.ethnicity ?? {}).map(
           ([month, value]) => {
             return {

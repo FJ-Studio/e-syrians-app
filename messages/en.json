@@ -321,6 +321,17 @@
           "perday": "Per day",
           "permonth": "Per month"
         }
+      },
+      "labels": {
+        "registered": {
+          "title": "Registered"
+        },
+        "verified": {
+          "title": "Verified"
+        },
+        "unverified": {
+          "title": "Unverified"
+        }
       }
     }
   },
@@ -683,9 +694,110 @@
         "signout": "Sign out"
       },
       "polls": {
-        "my_polls": "Polls",
-        "my_votes": "Answers",
-        "my_reactions": "Reactions"
+        "my_polls": {
+          "title": "My Polls",
+          "description": "Here you can view the polls you have created",
+          "table": {
+            "question": {
+              "title": "Question"
+            },
+            "startDate": {
+              "title": "Start"
+            },
+            "endDate": {
+              "title": "End"
+            },
+            "status": {
+              "title": "Status"
+            },
+            "createdAt": {
+              "title": "Created at"
+            },
+            "actions": {
+              "title": "Actions"
+            }
+          },
+          "emptyContent": {
+            "title": "You have not added any poll yet",
+            "add": "Create one"
+          },
+          "search": {
+            "title": "Search by question"
+          }
+        },
+        "my_votes": {
+          "title": "My Votes",
+          "description": "Here you can view the polls you have voted in"
+        },
+        "my_reactions": {
+          "title": "My Reactions",
+          "description": "Here you can view the polls you have reacted to"
+        },
+        "create": {
+          "title": "Create a new poll",
+          "description": "When creating a poll, please use clear and respectful language. Be specific and make sure your question is well-structured, as edits won’t be possible after submission.",
+          "question": {
+            "label": "Question",
+            "placeholder": "Type your poll question here",
+            "error": "Please type more than 10 characters"
+          },
+          "accountUnverifiedAlert": "Your account is not verified yet! Kindly share your profile link with the community to get enough verifications",
+          "start_date": {
+            "label": "Start date",
+            "description": "On which date the poll will be published"
+          },
+          "duration": {
+            "label": "Duration (days)",
+            "placeholder": "For how many day(s) the audience will be able to vote",
+            "error": "Please use latin digits to specify days"
+          },
+          "submit": "Submit",
+          "max_selections": {
+            "label": "Maximum selections",
+            "description": "The maximum number of options a user can select when voting.",
+            "error": "Please use a digit between 1 and 10"
+          },
+          "audience_can_add_options": {
+            "no": {
+              "label": "No"
+            },
+            "yes": {
+              "label": "Yes (This feature is coming soon)"
+            },
+            "label": "Audience can add options"
+          },
+          "options": {
+            "title": "Poll options",
+            "label": "Option {index}",
+            "add": "Add option"
+          },
+          "audience": {
+            "title": "Poll audience"
+          },
+          "gender": {
+            "label": "Gender",
+            "description": "A blank value indicates that all genders are eligible to vote."
+          },
+          "hometown": {
+            "label": "Province",
+            "description": "A blank value indicates that users from all provinces are eligible to vote."
+          },
+          "ethnicity": {
+            "label": "Ethnicity",
+            "description": "A blank value indicates that all ethnicities are eligible to vote."
+          },
+          "country": {
+            "label": "Country",
+            "description": "A blank value indicates that users in all countries are eligible to vote."
+          },
+          "religious_affiliation": {
+            "label": "Religious affiliation",
+            "description": "A blank value indicates that users from all religious affiliations are eligible to vote."
+          },
+          "age_range": {
+            "label": "Age range"
+          }
+        }
       }
     }
   }

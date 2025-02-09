@@ -23,62 +23,46 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async jwt({ account, token }) {
       const providers = ["google"];
-      if (typeof token?.esUser === "object") {
-        const esUser = token.esUser as ESUser;
-        // request to /me
-        try {
-          const response = await fetch(`${process.env.API_URL}/users/me`, {
-            method: "GET",
-            headers: {
-              "Accept": "application/json",
-              Authorization: `Bearer ${esUser?.accessToken}`,
-            },
-          });
-          const data = await response.json();
-          if (data?.data?.id) {
-            token.esUser = { ...data.data, accessToken: esUser?.accessToken };
-          } else {
-            token.esUser = null;
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (
-        (account?.provider && providers.includes(account?.provider)) ||
-        (token?.provider && providers.includes(token?.provider as string))
-      ) {
-        // request to /login/social
-        try {
+
+      // Avoid repeated API calls by checking if esUser exists and is still valid
+      if (token.esUser && (token.esUser as ESUser).accessToken) {
+        return token;
+      }
+
+      try {
+        if (account?.provider && providers.includes(account.provider)) {
+          // Social login request
           const response = await fetch(
             `${process.env.API_URL}/users/login/social`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
+                Accept: "application/json",
               },
               body: JSON.stringify({
-                provider: account?.provider ?? token?.provider,
-                token: account?.access_token,
+                provider: account.provider,
+                token: account.access_token,
               }),
             }
           );
+
           const data = await response.json();
           if (data?.data?.token) {
-            token.esUser = { ...data.user, accessToken: data.token };
+            token.esUser = { ...data.user, accessToken: data.data.token };
           } else {
             console.error(data);
             return null;
           }
-        } catch (error) {
-          console.error(error);
         }
+      } catch (error) {
+        console.error("JWT callback error:", error);
       }
-      if (account?.provider === "google") {
-        token.accessToken = account.accessToken;
-        token.id = account.id;
-      }
+
       return token;
     },
+  },
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60,
   },
 });

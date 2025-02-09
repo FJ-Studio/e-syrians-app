@@ -61,7 +61,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       </div>
       <Container className="mt-4">
         <div className="flex items-start gap-x-4">
-          <div className="bg-gray-50 w-full max-w-16 md:max-w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+          <aside className="hidden md:flex bg-gray-50 w-full md:max-w-40 xl:max-w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
             <Listbox classNames={{}}>
               {links.map((link, index) => (
                 <ListboxItem
@@ -83,7 +83,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                 </ListboxItem>
               ))}
             </Listbox>
-          </div>
+          </aside>
           <div className="w-full">{children}</div>
         </div>
       </Container>
