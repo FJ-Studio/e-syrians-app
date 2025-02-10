@@ -13,7 +13,7 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
     <div className="min-h-[calc(100dvh-128px)] relative pt-20">
       <div className="bg-primary h-12 flex items-center justify-between">
         <div className="container mx-auto max-w-7xl px-6 lg:px-8 flex items-center justify-between">
-          <div className=" space-x-3">
+          <div className="text-sm md:text-base space-x-3">
             {CENSUS_NAV.map((nav, index) => (
               <Fragment key={nav.link}>
                 <Link
@@ -31,7 +31,7 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
           </div>
           <button
             onClick={() => openCensusForm(true)}
-            className="text-white bg-transparent border-0"
+            className="text-white bg-transparent border-0 hidden md:block"
           >
             {t("census.actions.register")}
           </button>
