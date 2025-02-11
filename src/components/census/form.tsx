@@ -171,7 +171,7 @@ const CensusForm: FC = () => {
         isDismissable={false}
         isKeyboardDismissDisabled={true}
         classNames={{
-          base: "data-[placement=right]:m-2 data-[placement=left]:m-2 max-w-[calc(100%-16px)] rounded-medium",
+          base: "data-[placement=right]:m-2 data-[placement=left]:m-2 max-w-[calc(100%-16px)] md:max-w-md rounded-medium",
         }}
         isOpen={censusFormIsOpened}
         onOpenChange={(open) => {

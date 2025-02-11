@@ -807,7 +807,8 @@
           },
           "age_range": {
             "label": "Age range"
-          }
+          },
+          "success": "Poll created successfully"
         }
       }
     },

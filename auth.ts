@@ -1,6 +1,7 @@
 import { ESUser } from "@/lib/types/account";
 import NextAuth from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
+import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
 declare module "next-auth" {
@@ -10,10 +11,43 @@ declare module "next-auth" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [Google],
+  providers: [
+    Google,
+    Credentials({
+      type: "credentials",
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async (credentials): Promise<ESUser | null> => {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Missing credentials.");
+        }
+        const req = await fetch(`${process.env.API_URL}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            identifier: credentials.email,
+            password: credentials.password,
+          }),
+        });
+        const data = await req.json();
+        if (data?.data?.token) {
+          return { ...data.user, accessToken: data.data.token };
+        } else {
+          return null;
+        }
+      },
+    }),
+  ],
   pages: {
     signIn: "/auth/signin",
   },
+
   callbacks: {
     async session({ session, token }) {
       if (token.esUser) {
@@ -62,6 +96,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   jwt: {
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 7 * 24 * 60 * 60,
   },
 });

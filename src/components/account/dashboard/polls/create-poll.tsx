@@ -23,6 +23,7 @@ import useProvinces from "@/components/hooks/localization/provinces";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useCountries from "@/components/hooks/localization/country";
+import { toast } from "sonner";
 
 const CreatePoll: FC = () => {
   const genderOptions = useGender();
@@ -113,11 +114,10 @@ const CreatePoll: FC = () => {
       formData.append("recaptcha_token", token);
       const response = await fetch("/api/account/polls", {
         method: "POST",
-        headers: {},
         body: formData,
       });
       if (response.ok) {
-        // Success
+        toast.success(t("success"));
       } else {
         // Error
       }
