@@ -51,7 +51,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (data?.data?.token) {
             token.esUser = { ...data.user, accessToken: data.data.token };
           } else {
-            console.error(data);
             return null;
           }
         }

@@ -11,9 +11,11 @@ import { Listbox, ListboxItem } from "@heroui/react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FC, PropsWithChildren } from "react";
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
+  const pathname = usePathname();
   const t = useTranslations("account.dashboard");
   const session = useSession();
   const links = [
@@ -30,7 +32,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
     },
     {
       title: t("nav.settings"),
-      link: "/account/settings",
+      link: "/account",
       icon: <Cog6ToothIcon className="size-6" />,
     },
     {
@@ -67,6 +69,16 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                 <ListboxItem
                   key={index}
                   startContent={link.icon}
+                  color={
+                    link.link && pathname.endsWith(link.link)
+                      ? "primary"
+                      : "default"
+                  }
+                  className={
+                    link.link && pathname.endsWith(link.link)
+                      ? "text-white bg-primary"
+                      : ""
+                  }
                   onPress={() => {
                     if (link?.onPress) {
                       link.onPress();
@@ -74,7 +86,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                   }}
                 >
                   {link.link ? (
-                    <Link className="w-full flex" href={link.link}>
+                    <Link className={`w-full flex`} href={link.link}>
                       <span className="">{link.title}</span>
                     </Link>
                   ) : (

@@ -1,5 +1,5 @@
 "use client";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { FC, useEffect } from "react";
 import { useEsyrian } from "../shared/contexts/es";
 import { Controller, useForm } from "react-hook-form";
@@ -34,6 +34,7 @@ import useSourceOfIncome from "../hooks/localization/income";
 import useHealthStatuses from "../hooks/localization/health";
 import confetti from "canvas-confetti";
 import extractErrors from "@/lib/extract-errors";
+import { sortObject } from "@/lib/sort-object";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
@@ -49,6 +50,7 @@ const CensusForm: FC = () => {
   const incomeSources = useSourceOfIncome();
   const HealthStatuses = useHealthStatuses();
   const t = useTranslations("census.form");
+
   const {
     handleSubmit,
     control,
@@ -56,6 +58,7 @@ const CensusForm: FC = () => {
     getValues,
     setValue,
     watch,
+    setError,
     formState: { isSubmitting },
   } = useForm<RegistrationForm>({
     defaultValues: async () => {
@@ -70,6 +73,14 @@ const CensusForm: FC = () => {
   }, [watchedValues]);
 
   const register = async (registrationData: RegistrationForm) => {
+    if (registrationData.password !== registrationData.password_confirmation) {
+      toast.error(t("passwordMismatch"));
+      setError("password_confirmation", {
+        type: "manual",
+        message: t("passwordMismatch"),
+      });
+      return;
+    }
     const formData = new FormData();
     Object.keys(registrationData).forEach((key) => {
       if (!!registrationData[key as keyof RegistrationForm]) {
@@ -160,7 +171,7 @@ const CensusForm: FC = () => {
         isDismissable={false}
         isKeyboardDismissDisabled={true}
         classNames={{
-          base: "data-[placement=right]:m-2 data-[placement=left]:m-2  rounded-medium",
+          base: "data-[placement=right]:m-2 data-[placement=left]:m-2 max-w-[calc(100%-16px)] rounded-medium",
         }}
         isOpen={censusFormIsOpened}
         onOpenChange={(open) => {
@@ -201,7 +212,10 @@ const CensusForm: FC = () => {
                   <Controller
                     name="password"
                     control={control}
-                    rules={{ required: true }}
+                    rules={{
+                      required: true,
+                      pattern: /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/,
+                    }}
                     render={({ field, fieldState: { error, invalid } }) => (
                       <Input
                         {...field}
@@ -209,6 +223,26 @@ const CensusForm: FC = () => {
                         type="password"
                         label={t("fields.password.label")}
                         placeholder={t("fields.password.placeholder")}
+                        description={t("fields.password.description")}
+                        errorMessage={error?.message}
+                        isInvalid={invalid}
+                      />
+                    )}
+                  />
+
+                  <Controller
+                    name="password_confirmation"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error, invalid } }) => (
+                      <Input
+                        {...field}
+                        isRequired
+                        type="password"
+                        label={t("fields.passwordConfirmation.label")}
+                        placeholder={t(
+                          "fields.passwordConfirmation.placeholder"
+                        )}
                         errorMessage={error?.message}
                         isInvalid={invalid}
                       />
@@ -220,21 +254,6 @@ const CensusForm: FC = () => {
                     </h3>
                     <p>{t("sections.peronalData.description")}</p>
                   </div>
-                  <Controller
-                    name="national_id"
-                    control={control}
-                    //   rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.national_id.label")}
-                        placeholder={t("fields.national_id.placeholder")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                        description={t("fields.national_id.description")}
-                      />
-                    )}
-                  />
                   <Controller
                     name="name"
                     control={control}
@@ -335,7 +354,7 @@ const CensusForm: FC = () => {
                         defaultSelectedKeys={[getValues("hometown")]}
                         description={t("fields.hometown.description")}
                       >
-                        {Object.keys(provinces).map((key) => (
+                        {Object.keys(sortObject(provinces)).map((key) => (
                           <SelectItem key={key} value={key}>
                             {provinces[key as keyof typeof provinces]}
                           </SelectItem>
@@ -356,7 +375,7 @@ const CensusForm: FC = () => {
                         errorMessage={error?.message}
                         defaultSelectedKeys={[getValues("ethnicity")]}
                       >
-                        {Object.keys(ethnicities).map((key) => (
+                        {Object.keys(sortObject(ethnicities)).map((key) => (
                           <SelectItem key={key} value={key}>
                             {ethnicities[key as keyof typeof ethnicities]}
                           </SelectItem>
@@ -388,6 +407,64 @@ const CensusForm: FC = () => {
                           </SelectItem>
                         ))}
                       </Select>
+                    )}
+                  />
+
+                  <Controller
+                    name="country"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error, invalid } }) => (
+                      <Select
+                        scrollShadowProps={{
+                          isEnabled: false,
+                        }}
+                        {...field}
+                        label={t("fields.country.label")}
+                        isRequired
+                        isInvalid={invalid}
+                        errorMessage={error?.message}
+                        defaultSelectedKeys={[getValues("country")]}
+                        description={t("fields.country.description")}
+                      >
+                        {Object.keys(countries).map((key) => (
+                          <SelectItem
+                            key={key}
+                            value={key}
+                            startContent={
+                              <Avatar
+                                src={`/flags/${key.toLowerCase()}.svg`}
+                                className="w-6 h-6"
+                                size="sm"
+                              />
+                            }
+                          >
+                            {countries[key as keyof typeof countries]}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+
+                  <div>
+                    <h3 className="font-semibold text-lg">
+                      3. {t("sections.censusData.title")}
+                    </h3>
+                    <p>{t("sections.censusData.description")}</p>
+                  </div>
+                  <Controller
+                    name="national_id"
+                    control={control}
+                    //   rules={{ required: true }}
+                    render={({ field, fieldState: { error, invalid } }) => (
+                      <Input
+                        {...field}
+                        label={t("fields.national_id.label")}
+                        placeholder={t("fields.national_id.placeholder")}
+                        errorMessage={error?.message}
+                        isInvalid={invalid}
+                        description={t("fields.national_id.description")}
+                      />
                     )}
                   />
                   <Controller
@@ -443,51 +520,19 @@ const CensusForm: FC = () => {
                   />
                   <div>
                     <h3 className="font-semibold text-lg">
-                      3. {t("sections.locationData.title")}
+                      4. {t("sections.locationData.title")}
                     </h3>
                     <p>{t("sections.locationData.description")}</p>
                   </div>
-
-                  <Controller
-                    name="country"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        scrollShadowProps={{
-                          isEnabled: false,
-                        }}
-                        {...field}
-                        label={t("fields.country.label")}
-                        isRequired
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[getValues("country")]}
-                        description={t("fields.country.description")}
-                      >
-                        {Object.keys(countries).map((key) => (
-                          <SelectItem
-                            key={key}
-                            value={key}
-                            startContent={
-                              <Avatar
-                                src={`/flags/${key.toLowerCase()}.svg`}
-                                className="w-6 h-6"
-                                size="sm"
-                              />
-                            }
-                          >
-                            {countries[key as keyof typeof countries]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
                   <Controller
                     name="city"
                     control={control}
                     render={({ field }) => (
-                      <Input {...field} label={t("fields.city.label")} />
+                      <Input
+                        {...field}
+                        label={t("fields.city.label")}
+                        description={t("fields.city.description")}
+                      />
                     )}
                   />
                   <Controller
@@ -648,43 +693,46 @@ const CensusForm: FC = () => {
                     )}
                   />
 
-                  <Controller
-                    name="health_insurance"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        {...field}
-                        value={`${field.value}`}
-                        isSelected={!!getValues("health_insurance")}
-                        onValueChange={(selected) =>
-                          setValue("health_insurance", selected)
-                        }
-                      >
-                        {t("fields.health_insurance.label")}
-                      </Checkbox>
-                    )}
-                  />
-                  <Controller
-                    name="easy_access_to_healthcare_services"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        {...field}
-                        value={`${field.value}`}
-                        isSelected={
-                          !!getValues("easy_access_to_healthcare_services")
-                        }
-                        onValueChange={(selected) =>
-                          setValue(
-                            "easy_access_to_healthcare_services",
-                            selected
-                          )
-                        }
-                      >
-                        {t("fields.easy_access_to_healthcare_services.label")}
-                      </Checkbox>
-                    )}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <Controller
+                      name="health_insurance"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          value={`${field.value}`}
+                          isSelected={!!getValues("health_insurance")}
+                          onValueChange={(selected) =>
+                            setValue("health_insurance", selected)
+                          }
+                        >
+                          {t("fields.health_insurance.label")}
+                        </Checkbox>
+                      )}
+                    />
+
+                    <Controller
+                      name="easy_access_to_healthcare_services"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          value={`${field.value}`}
+                          isSelected={
+                            !!getValues("easy_access_to_healthcare_services")
+                          }
+                          onValueChange={(selected) =>
+                            setValue(
+                              "easy_access_to_healthcare_services",
+                              selected
+                            )
+                          }
+                        >
+                          {t("fields.easy_access_to_healthcare_services.label")}
+                        </Checkbox>
+                      )}
+                    />
+                  </div>
 
                   <div>
                     <h3 className="font-semibold text-lg">
@@ -728,7 +776,6 @@ const CensusForm: FC = () => {
           )}
         </DrawerContent>
       </Drawer>
-      <Toaster position="bottom-left" richColors />
     </>
   );
 };

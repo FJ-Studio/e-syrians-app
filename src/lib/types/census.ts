@@ -70,6 +70,7 @@ export type RegistrationForm = {
   email: string;
   phone: string;
   password: string;
+  password_confirmation: string;
   // location
   country: CountryCode;
   city: string;

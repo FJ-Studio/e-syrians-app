@@ -1,3 +1,5 @@
+import AccountSettings from "@/components/account/dashboard/settings/account-settings";
+
 export default function AccountPage() {
-  return <div>Account Page</div>;
+  return <AccountSettings />;
 }

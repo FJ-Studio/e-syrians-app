@@ -148,6 +148,10 @@
         },
         "more_info": {
           "title": "Additional information"
+        },
+        "censusData": {
+          "title": "National census data",
+          "description": "This platform is not affiliated with or supported by the Syrian government at this time. Therefore, all fields related to personal civilian data are optional. However, if you choose to provide them, rest assured that your information will be stored securely and handled with the utmost confidentiality."
         }
       },
       "fields": {
@@ -162,7 +166,8 @@
         },
         "password": {
           "label": "Password",
-          "placeholder": "Please type your password"
+          "placeholder": "Please type your password",
+          "description": "Minimum 6 characters, including at least one letter and one digit."
         },
         "surname": {
           "label": "Surname",
@@ -200,11 +205,12 @@
         },
         "country": {
           "label": "Country",
-          "description": "Countries are ordered alphabetically"
+          "description": "Please select the country you currently live in."
         },
         "city": {
           "label": "City",
-          "placeholder": "Please enter your current city"
+          "placeholder": "Please enter your current city",
+          "description": "In which city do you live?"
         },
         "address": {
           "label": "Current detailed address",
@@ -247,16 +253,21 @@
         "other_nationalities": {
           "label": "Other nationalities",
           "description": "Other than the Syrian nationality"
+        },
+        "passwordConfirmation": {
+          "label": "Password confirmation",
+          "placeholder": "Please enter your password again"
         }
       },
       "actions": {
         "register": "Register",
         "cancel": "Cancel"
       },
-      "title": "National Census Form",
+      "title": "Registration Form",
       "description": "Only fields marked with a red asterisk (*) are required. However, all the information you provide will be securely stored.",
       "success": "We have received your application",
-      "error": "We could not handle your request. Please try later"
+      "error": "We could not handle your request. Please try later",
+      "passwordMismatch": "Please check your password confirmation"
     },
     "nav": {
       "stats": "Main",
@@ -799,6 +810,25 @@
           }
         }
       }
+    },
+    "settings": {
+      "tabs": {
+        "profile": {
+          "title": "Profile"
+        },
+        "security": {
+          "title": "Security"
+        }
+      },
+      "error": {
+        "tryAgain": "Try again!"
+      }
+    }
+  },
+  "header": {
+    "nav": {
+      "census": "Census",
+      "polls": "Polls"
     }
   }
 }

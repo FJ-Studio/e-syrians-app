@@ -25,13 +25,17 @@ const CensusCharts: FC = () => {
     gender?: GenderRegistrations;
   }>({});
 
-  useEffect(() => {
+  const getStates = async () => {
     fetch("/api/census/stats")
       .then((res) => res.json())
       .then((stats) => {
         setCharts(stats.data);
       })
       .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getStates();
   }, []);
 
   return (

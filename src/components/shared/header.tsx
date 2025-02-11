@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FC } from "react";
 import LanguageSwitcher from "./language-switcher";
 import HeaderActions from "./header-actions";
+import Nav from "./nav";
 
 const Header: FC = () => {
   const t = useTranslations();
@@ -20,6 +21,7 @@ const Header: FC = () => {
           </div>
         </Link>
         <div className="flex items-center gap-3">
+          <Nav />
           <HeaderActions />
           <LanguageSwitcher />
         </div>

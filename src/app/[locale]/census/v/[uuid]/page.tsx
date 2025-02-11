@@ -1,3 +1,3 @@
-export default async function FraudstersPage() {
+export default async function VerifyProfilePage() {
   return <div>Verify</div>;
 }
