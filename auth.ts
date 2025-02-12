@@ -37,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
         const data = await req.json();
         if (data?.data?.token) {
-          return { ...data.user, accessToken: data.data.token };
+          return { ...data.data.user, accessToken: data.data.token };
         } else {
           return null;
         }
@@ -83,7 +83,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           const data = await response.json();
           if (data?.data?.token) {
-            token.esUser = { ...data.user, accessToken: data.data.token };
+            token.esUser = { ...data.data.user, accessToken: data.data.token };
           } else {
             return null;
           }

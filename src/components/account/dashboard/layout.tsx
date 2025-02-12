@@ -20,6 +20,11 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const session = useSession();
   const links = [
     {
+      title: t("nav.settings"),
+      link: "/account",
+      icon: <Cog6ToothIcon className="size-6" />,
+    },
+    {
       title: t("nav.polls"),
       link: "/account/polls",
       icon: <ChartBarIcon className="size-6" />,
@@ -29,11 +34,6 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       title: t("nav.verifications"),
       link: "/account/verifications",
       icon: <ClipboardDocumentCheckIcon className="size-6" />,
-    },
-    {
-      title: t("nav.settings"),
-      link: "/account",
-      icon: <Cog6ToothIcon className="size-6" />,
     },
     {
       title: t("nav.donate"),
@@ -47,6 +47,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       onPress: () => signOut(),
     },
   ];
+  console.log(session.data);
   return (
     <div className="min-h-[calc(100dvh-128px)] relative pt-20">
       <div className="bg-primary h-12 flex items-center">
@@ -64,7 +65,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <Container className="mt-4">
         <div className="flex items-start gap-x-4">
           <aside className="hidden md:flex bg-gray-50 w-full md:max-w-40 xl:max-w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100 ">
-            <Listbox classNames={{}}>
+            <Listbox>
               {links.map((link, index) => (
                 <ListboxItem
                   key={index}
