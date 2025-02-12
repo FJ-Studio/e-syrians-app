@@ -1,11 +1,12 @@
+import { ESUser } from "@/lib/types/account";
 import { FC } from "react";
 
-const UpdateBasicProfileData: FC = () => {
-  return (
-    <form>
-      <h1>Update Basic Profile Data</h1>
-    </form>
-  );
+type UpdateBasicProfileDataProps = {
+  user: ESUser;
+};
+
+const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
+  return <form>{user.name}</form>;
 };
 
 export default UpdateBasicProfileData;

@@ -1,9 +1,10 @@
+import { sortObject } from "@/lib/sort-object";
 import { Province } from "@/lib/types/misc";
 import { useTranslations } from "next-intl";
 
 const useProvinces = (): Record<Province, string> => {
   const t = useTranslations();
-  return {
+  return sortObject({
     "deir-ezzor": t("province.deir-ezzor"),
     damascus: t("province.damascus"),
     hama: t("province.hama"),
@@ -18,7 +19,7 @@ const useProvinces = (): Record<Province, string> => {
     quneitra: t("province.quneitra"),
     raqqa: t("province.raqqa"),
     tartus: t("province.tartus"),
-  };
+  });
 };
 
 export default useProvinces;

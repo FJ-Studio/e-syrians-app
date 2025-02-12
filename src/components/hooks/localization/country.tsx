@@ -1,9 +1,10 @@
+import { sortObject } from "@/lib/sort-object";
 import { CountryCode } from "@/lib/types/misc";
 import { useTranslations } from "next-intl";
 
 const useCountries = (): Record<CountryCode, string> => {
   const t = useTranslations();
-  return {
+  return sortObject({
     AF: t("country.AF"),
     AX: t("country.AX"),
     AL: t("country.AL"),
@@ -254,7 +255,7 @@ const useCountries = (): Record<CountryCode, string> => {
     YE: t("country.YE"),
     ZM: t("country.ZM"),
     ZW: t("country.ZW"),
-  };
+  });
 };
 
 export default useCountries;

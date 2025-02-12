@@ -1,9 +1,10 @@
+import { sortObject } from "@/lib/sort-object";
 import { SpokenLanguage } from "@/lib/types/misc";
 import { useTranslations } from "next-intl";
 
 const useSpokenLanguages = (): Record<SpokenLanguage, string> => {
   const t = useTranslations();
-  return {
+  return sortObject({
     arabic: t("spoken-language.arabic"),
     kurdish: t("spoken-language.kurdish"),
     chinese: t("spoken-language.chinese"),
@@ -22,7 +23,7 @@ const useSpokenLanguages = (): Record<SpokenLanguage, string> => {
     spanish: t("spoken-language.spanish"),
     turkish: t("spoken-language.turkish"),
     urdu: t("spoken-language.urdu"),
-  };
+  });
 };
 
 export default useSpokenLanguages;

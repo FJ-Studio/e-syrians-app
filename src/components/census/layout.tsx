@@ -13,7 +13,7 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
     <div className="min-h-[calc(100dvh-128px)] relative pt-20">
       <div className="bg-primary h-12 flex items-center justify-between">
         <div className="container mx-auto max-w-7xl px-6 lg:px-8 flex items-center justify-between">
-          <div className="text-sm md:text-base space-x-3">
+          <div className="text-sm md:text-base">
             {CENSUS_NAV.map((nav, index) => (
               <Fragment key={nav.link}>
                 <Link

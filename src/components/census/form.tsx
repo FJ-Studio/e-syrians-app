@@ -34,7 +34,6 @@ import useSourceOfIncome from "../hooks/localization/income";
 import useHealthStatuses from "../hooks/localization/health";
 import confetti from "canvas-confetti";
 import extractErrors from "@/lib/extract-errors";
-import { sortObject } from "@/lib/sort-object";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
@@ -354,7 +353,7 @@ const CensusForm: FC = () => {
                         defaultSelectedKeys={[getValues("hometown")]}
                         description={t("fields.hometown.description")}
                       >
-                        {Object.keys(sortObject(provinces)).map((key) => (
+                        {Object.keys(provinces).map((key) => (
                           <SelectItem key={key} value={key}>
                             {provinces[key as keyof typeof provinces]}
                           </SelectItem>
@@ -375,7 +374,7 @@ const CensusForm: FC = () => {
                         errorMessage={error?.message}
                         defaultSelectedKeys={[getValues("ethnicity")]}
                       >
-                        {Object.keys(sortObject(ethnicities)).map((key) => (
+                        {Object.keys(ethnicities).map((key) => (
                           <SelectItem key={key} value={key}>
                             {ethnicities[key as keyof typeof ethnicities]}
                           </SelectItem>

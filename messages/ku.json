@@ -112,5 +112,33 @@
       "explosive": "Teqîn",
       "other": "Yên din"
     }
+  },
+  "religious_affiliation": {
+    "sunni": "Sunnî",
+    "shia": "Şîa",
+    "alawites": "Elawî",
+    "druze": "Dîrozî",
+    "ismailis": "Îsmailî",
+    "armenian-catholic": "Ermenî Katolîk",
+    "armenian-orthodox": "Ermenî Ortodoks",
+    "assyrian-chaldean-syriac": "Asûrî - Keldanî - Suryanî",
+    "greek-catholic": "Yewnanî Katolîk",
+    "greek-orthodox": "Yewnanî Ortodoks",
+    "protestant": "Protestan",
+    "syriac-catholic": "Suryanî Katolîk",
+    "syriac-orthodox": "Suryanî Ortodoks",
+    "maronites": "Maronî",
+    "yazidis": "Êzîdî",
+    "jews": "Yahûdî",
+    "non-religious": "Bêdîn",
+    "other": "Yekî din"
+  },
+  "education": {
+    "none": "Nehêvî",
+    "primary": "Dibistana Seretayî",
+    "high-school": "Lise",
+    "secondary": "Dibistana Navîn",
+    "university-degree": "Diploma Zankoyê",
+    "postgraduate": "Master an Jiyana Akademîk"
   }
 }

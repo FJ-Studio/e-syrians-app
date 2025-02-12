@@ -324,8 +324,10 @@ const MyPolls: FC = () => {
   return (
     <Card>
       <CardBody>
-        <h2 className="text-xl font-medium text-default-700">{t("title")}</h2>
-        <p className="text-default-500 mb-6">{t("description")}</p>
+        <h2 className="text-xl font-medium text-default-700 text-start">
+          {t("title")}
+        </h2>
+        <p className="text-default-500 mb-6 text-start">{t("description")}</p>
         <Table
           isHeaderSticky
           isStriped

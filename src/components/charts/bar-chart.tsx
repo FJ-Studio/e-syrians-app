@@ -19,10 +19,6 @@ import useReligiousAffiliation from "../hooks/localization/religious_affiliation
 import useEthnicity from "../hooks/localization/ethnicity";
 import useCountries from "../hooks/localization/country";
 import useGender from "../hooks/localization/gender";
-// import useEducationLevels from "../hooks/localization/education";
-// import useSpokenLanguages from "../hooks/localization/languages";
-// import useSourceOfIncome from "../hooks/localization/income";
-// import useHealthStatuses from "../hooks/localization/health";
 
 const BarChartCard = forwardRef<
   HTMLDivElement,
@@ -48,21 +44,12 @@ const BarChartCard = forwardRef<
     const religions = useReligiousAffiliation();
     const ethnicities = useEthnicity();
     const countries = useCountries();
-    // const educationLevels = useEducationLevels();
-    // const spokenLanguages = useSpokenLanguages();
-    // const incomeSources = useSourceOfIncome();
-    // const HealthStatuses = useHealthStatuses();
-
     const allTranslations = {
       ...genderOptions,
       ...provinces,
       ...religions,
       ...ethnicities,
       ...countries,
-      // ...educationLevels,
-      // ...spokenLanguages,
-      // ...incomeSources,
-      // ...HealthStatuses,
     };
 
     return (
@@ -83,7 +70,7 @@ const BarChartCard = forwardRef<
             {actions}
           </div>
         </div>
-        <div style={{ height: `${chartData.length * 50}px` }}>
+        <div style={{ height: `${chartData.length * 50}px`, direction: "ltr" }}>
           <ResponsiveContainer
             className="[&_.recharts-surface]:outline-none"
             height="100%"
@@ -112,7 +99,9 @@ const BarChartCard = forwardRef<
               <XAxis
                 type="number"
                 axisLine={false}
-                style={{ fontSize: "var(--heroui-font-size-tiny)" }}
+                style={{
+                  fontSize: "var(--heroui-font-size-tiny)",
+                }}
                 tickLine={false}
                 allowDecimals={false}
               />
@@ -207,7 +196,9 @@ const BarChartCard = forwardRef<
                     <LabelList
                       dataKey="month"
                       position="insideLeft"
-                      className="-translate-y-3 text-left text-xs absolute left-0"
+                      className={cn(
+                        `-translate-y-4 text-xs absolute text-nowrap min-w-24 inline-flex items-center left-0 text-left`
+                      )}
                       formatter={(value: string) => {
                         return translateLabels
                           ? allTranslations[
@@ -215,12 +206,11 @@ const BarChartCard = forwardRef<
                             ]
                           : value;
                       }}
-                      // style={{
-                      //   left: "200px",
-                      //   fontSize: "var(--heroui-font-size-tiny)",
-                      //   fill: "hsl(var(--heroui-foreground))",
-                      //   textAnchor: "end",
-                      // }}
+                      style={{
+                        textAnchor: "start",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                      }}
                     />
                   )}
                 </Bar>

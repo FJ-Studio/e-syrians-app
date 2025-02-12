@@ -47,7 +47,7 @@ const CensusCharts: FC = () => {
         categories={["registered", "verified"]}
         categoriesLabels={[
           t("labels.registered.title"),
-          t("labels.verified.title"),
+          t("labels.verification.title"),
         ]}
         chartData={Object.entries(charts.daily_users ?? {}).map(
           ([month, value]) => {

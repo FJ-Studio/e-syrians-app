@@ -4,7 +4,6 @@ import { auth } from "../../../../../auth";
 
 export async function POST(req: NextRequest) {
     const session = await auth()
-    console.log(session?.user)
     try {
         const body = await req.formData();
         const recaptcha = await recaptchaIsValid(body.get("recaptcha_token") as string);
