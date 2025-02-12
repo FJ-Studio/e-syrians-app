@@ -52,8 +52,8 @@ const MyPolls: FC = () => {
   ];
 
   const statusOptions = [
-    { name: "Active", uid: "active" },
-    { name: "Inactive", uid: "inactive" },
+    { name: t("table.status.active.title"), uid: "active" },
+    { name: t("table.status.inactive.title"), uid: "inactive" },
   ];
 
   const [deleting, setDeleting] = useState(false);
@@ -227,7 +227,7 @@ const MyPolls: FC = () => {
                   endContent={<ChevronDownIcon className="text-small size-4" />}
                   variant="flat"
                 >
-                  Status
+                  {t("table.status.title")}
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -253,7 +253,7 @@ const MyPolls: FC = () => {
                   }
                   variant="flat"
                 >
-                  Columns
+                  {t("table.columns.title")}
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -291,7 +291,6 @@ const MyPolls: FC = () => {
       <div className="py-2 px-2 flex justify-between items-center">
         <Pagination
           isCompact
-          showControls
           showShadow
           color="primary"
           page={page}
@@ -305,7 +304,7 @@ const MyPolls: FC = () => {
             variant="flat"
             onPress={onPreviousPage}
           >
-            Previous
+            {t("previous.title")}
           </Button>
           <Button
             isDisabled={pages === 1}
@@ -313,7 +312,7 @@ const MyPolls: FC = () => {
             variant="flat"
             onPress={onNextPage}
           >
-            Next
+            {t("next.title")}
           </Button>
         </div>
       </div>

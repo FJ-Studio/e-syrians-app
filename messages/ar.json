@@ -716,27 +716,42 @@
               "title": "السؤال"
             },
             "startDate": {
-              "title": "البداية"
+              "title": "تاريخ بدء التصويت"
             },
             "endDate": {
-              "title": "النهاية"
+              "title": "تاريخ انتهاء التصويت"
             },
             "status": {
-              "title": "الحالة"
+              "title": "الحالة",
+              "active": {
+                "title": "فعال"
+              },
+              "inactive": {
+                "title": "ملغي"
+              }
             },
             "createdAt": {
-              "title": "تم الإنشاء في"
+              "title": "تاريخ الإضافة"
             },
             "actions": {
-              "title": "الإجراءات"
+              "title": "خيارات"
+            },
+            "columns": {
+              "title": "عرض"
             }
           },
           "emptyContent": {
             "title": "لم تضف أي استطلاع بعد",
-            "add": "أنشئ واحدًا"
+            "add": "أنشئ استطلاعاً جديداً"
           },
           "search": {
             "title": "البحث حسب نص الاستطلاع"
+          },
+          "next": {
+            "title": "التالي"
+          },
+          "previous": {
+            "title": "السابق"
           }
         },
         "my_votes": {

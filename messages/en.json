@@ -722,13 +722,22 @@
               "title": "End"
             },
             "status": {
-              "title": "Status"
+              "title": "Status",
+              "inactive": {
+                "title": "Inactive"
+              },
+              "active": {
+                "title": "Active"
+              }
             },
             "createdAt": {
               "title": "Created at"
             },
             "actions": {
               "title": "Actions"
+            },
+            "columns": {
+              "title": "Columns"
             }
           },
           "emptyContent": {
@@ -737,6 +746,12 @@
           },
           "search": {
             "title": "Search by question"
+          },
+          "next": {
+            "title": "Next"
+          },
+          "previous": {
+            "title": "Previous"
           }
         },
         "my_votes": {
