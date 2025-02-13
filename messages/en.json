@@ -848,7 +848,10 @@
       "surname": {
         "label": "Surname"
       },
-      "basicData": "My profile",
+      "basicData": {
+        "title": "My profile",
+        "description": "You are allowed to update your data for one time. Please note that updating this information will cause you to lose all the verifications you have received."
+      },
       "profile": {
         "edit": "Edit",
         "save": "Save changes",
@@ -873,6 +876,49 @@
         "ethnicity": {
           "label": "Ethnicity"
         }
+      },
+      "update": {
+        "success": "Profile data updates successfully"
+      }
+    },
+    "socialLinks": {
+      "title": "My links",
+      "facebook_link": {
+        "label": "Facebook"
+      },
+      "twitter_link": {
+        "label": "Twitter"
+      },
+      "instagram_link": {
+        "label": "Instagram"
+      },
+      "linkedin_link": {
+        "label": "LinkedIn"
+      },
+      "github_link": {
+        "label": "GitHub"
+      },
+      "youtube_link": {
+        "label": "YouTube"
+      },
+      "tiktok_link": {
+        "label": "TikTok"
+      },
+      "snapchat_link": {
+        "label": "Snapchat"
+      },
+      "twitch_link": {
+        "label": "Twitch"
+      },
+      "pinterest_link": {
+        "label": "Pinterest"
+      },
+      "website": {
+        "label": "Website"
+      },
+      "save": "Save changes",
+      "update": {
+        "success": "Your links were updated successfully"
       }
     }
   },
@@ -881,5 +927,9 @@
       "census": "Census",
       "polls": "Polls"
     }
+  },
+  "server_errors": {
+    "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
+    "unknown_error": "Something happened on our side, please try again later"
   }
 }

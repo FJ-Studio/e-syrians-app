@@ -3,6 +3,7 @@ import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import UpdateBasicProfileData from "./update-basic";
+import AccountSocialLinks from "./social-links";
 
 const AccountProfile: FC = () => {
   const t = useTranslations("account.settings");
@@ -40,6 +41,7 @@ const AccountProfile: FC = () => {
 
       <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-4">
+          <AccountSocialLinks user={profile} />
           <UpdateBasicProfileData user={profile} />
         </div>
         <div>Another section</div>

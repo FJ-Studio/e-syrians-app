@@ -8,6 +8,7 @@ import {
   CardBody,
   CardHeader,
   Checkbox,
+  cn,
   DatePicker,
   Input,
   Select,
@@ -21,6 +22,8 @@ import { Controller, useForm } from "react-hook-form";
 import { parseDate } from "@internationalized/date";
 import useProvinces from "@/components/hooks/localization/provinces";
 import useEthnicity from "@/components/hooks/localization/ethnicity";
+import { toast } from "sonner";
+import useServerError from "@/components/hooks/localization/server-errors";
 
 type UpdateBasicProfileDataProps = {
   user?: ESUser;
@@ -36,28 +39,35 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
   const hometownOptions = useProvinces();
   const ethnicityOptions = useEthnicity();
   const t = useTranslations("account.settings");
-  const { handleSubmit, getValues, setValue, reset, control } =
-    useForm<BasicDataFields>({
-      defaultValues: user
-        ? {
-            name: user?.name ?? "",
-            surname: user?.surname ?? "",
-            email: user?.email ?? "",
-            phone: user?.phone ?? "",
-            gender: user?.gender ?? undefined,
-            birth_date: user?.birth_date ?? "",
-            hometown: user?.hometown ?? undefined,
-            ethnicity: user?.ethnicity ?? undefined,
-          }
-        : undefined,
-    });
+  const serverError = useServerError();
+  const {
+    handleSubmit,
+    getValues,
+    setValue,
+    reset,
+    control,
+    formState: { isSubmitting },
+  } = useForm<BasicDataFields>({
+    defaultValues: user
+      ? {
+          name: user?.name ?? "",
+          surname: user?.surname ?? "",
+          email: user?.email ?? "",
+          phone: user?.phone ?? "",
+          gender: user?.gender ?? undefined,
+          birth_date: user?.birth_date ?? "",
+          hometown: user?.hometown ?? undefined,
+          ethnicity: user?.ethnicity ?? undefined,
+        }
+      : undefined,
+  });
 
   useEffect(() => {
     if (user) {
       reset({
         name: user.name ?? "",
         surname: user.surname ?? "",
-        gender: user.gender ?? "f",
+        gender: user.gender ?? "",
         birth_date: user.birth_date ?? undefined,
         hometown: user.hometown ?? undefined,
         ethnicity: user.ethnicity ?? undefined,
@@ -67,28 +77,62 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
   }, [user]);
 
   const save = async (data: BasicDataFields) => {
-    console.log(data);
+    try {
+      const token = await new Promise<string>((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
+              action: "basic_profile_update",
+            })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+      const response = await fetch("/api/account/profile/update/basic", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...data, recaptcha_token: token }),
+      });
+      if (response.status === 200) {
+        setMode("view");
+        toast.success(t("update.success"));
+      } else {
+        const result = await response.json();
+        toast.error(serverError(result.messages?.[0] ?? ""));
+      }
+    } catch {
+      toast.error(t(serverError("unknown_error")));
+    }
   };
 
   return (
     <Card>
-      <CardHeader className="flex items-center justify-between">
-        <h3 className="text-lg text-default-700 font-bold">{t("basicData")}</h3>
-        {mode === "view" && (
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Button
-              onPress={() => setMode("edit")}
-              startContent={<PencilSquareIcon className="size-4" />}
-              size="sm"
-              variant="flat"
-            >
-              {t("profile.edit")}
-            </Button>
-          </Skeleton>
-        )}
+      <CardHeader className="flex flex-col gap-3">
+        <div className="flex w-full items-center justify-between">
+          <h3 className="text-lg text-default-700 font-bold">
+            {t("basicData.title")}
+          </h3>
+          {mode === "view" && (
+            <Skeleton isLoaded={!!user} className="rounded-lg">
+              <Button
+                onPress={() => setMode("edit")}
+                startContent={<PencilSquareIcon className="size-4" />}
+                size="sm"
+                className={cn(!user?.can_update_basic_info && "line-through")}
+                variant={user?.can_update_basic_info ? "flat" : "light"}
+                isDisabled={!user?.can_update_basic_info}
+              >
+                {t("profile.edit")}
+              </Button>
+            </Skeleton>
+          )}
+        </div>
+        <p>{t("basicData.description")}</p>
       </CardHeader>
       <CardBody>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(save)}>
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
               name="name"
@@ -236,22 +280,23 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               )}
             />
           </Skeleton>
-          <Controller
-            name="confirmation"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <Checkbox {...field} isRequired value={"1"}>
-                {t("profile.confirmation")}
-              </Checkbox>
-            )}
-          />
           {mode === "edit" && (
             <>
+              <Controller
+                name="confirmation"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Checkbox {...field} isRequired value={"1"}>
+                    {t("profile.confirmation")}
+                  </Checkbox>
+                )}
+              />
               <Button
                 color="primary"
-                type="button"
-                onPress={() => handleSubmit(save)()}
+                type="submit"
+                isDisabled={isSubmitting}
+                isLoading={isSubmitting}
               >
                 {t("profile.save")}
               </Button>

@@ -47,7 +47,6 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       onPress: () => signOut(),
     },
   ];
-  console.log(session.data);
   return (
     <div className="min-h-[calc(100dvh-128px)] relative pt-20">
       <div className="bg-primary h-12 flex items-center">
