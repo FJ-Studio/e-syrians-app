@@ -8,7 +8,6 @@ import {
   CardBody,
   CardHeader,
   Checkbox,
-  cn,
   DatePicker,
   Input,
   Select,
@@ -111,18 +110,16 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
     <Card>
       <CardHeader className="flex flex-col gap-3">
         <div className="flex w-full items-center justify-between">
-          <h3 className="text-lg text-default-700 font-bold">
+          <h3 className="text-lg text-default-700 font-medium">
             {t("basicData.title")}
           </h3>
-          {mode === "view" && (
+          {mode === "view" && (user?.basic_info_updates ?? 0) > 0 && (
             <Skeleton isLoaded={!!user} className="rounded-lg">
               <Button
                 onPress={() => setMode("edit")}
                 startContent={<PencilSquareIcon className="size-4" />}
                 size="sm"
-                className={cn(!user?.can_update_basic_info && "line-through")}
-                variant={user?.can_update_basic_info ? "flat" : "light"}
-                isDisabled={!user?.can_update_basic_info}
+                variant="flat"
               >
                 {t("profile.edit")}
               </Button>

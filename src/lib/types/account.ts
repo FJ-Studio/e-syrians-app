@@ -14,7 +14,8 @@ export type ESUser = {
   birth_date: string;
   hometown: Province;
   ethnicity: Ethnicity;
-  can_update_basic_info?: boolean;
+  basic_info_updates?: number;
+  avatar?: string;
 
   facebook_link: string;
   twitter_link: string;

@@ -107,7 +107,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-lg text-default-700 font-bold">{t("title")}</h3>
+        <h3 className="text-lg text-default-700 font-medium">{t("title")}</h3>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(save)} className="space-y-4">

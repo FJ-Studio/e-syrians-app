@@ -16,7 +16,8 @@
     "account": "Account",
     "close": "Close",
     "submit": "Submit data",
-    "sending_data": "Sending data ..."
+    "sending_data": "Sending data ...",
+    "selectImage": "Select images"
   },
   "slogan": {
     "text": "Every civilized person in this world has two homelands: their own and Syria",
@@ -879,6 +880,20 @@
       },
       "update": {
         "success": "Profile data updates successfully"
+      },
+      "avatar": {
+        "title": "Profile picture",
+        "upload": "Select new avatar",
+        "save": "Upload avatar",
+        "update": {
+          "success": "Avatar updated successfully"
+        },
+        "avatar": {
+          "title": "My avatar",
+          "upload": "Select new avatar",
+          "save": "Upload avatar",
+          "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+        }
       }
     },
     "socialLinks": {
