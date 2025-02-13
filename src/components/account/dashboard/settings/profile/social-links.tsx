@@ -1,5 +1,6 @@
 "use client";
 import useServerError from "@/components/hooks/localization/server-errors";
+import extractErrors from "@/lib/extract-errors";
 import { ESUser } from "@/lib/types/account";
 import {
   Button,
@@ -98,7 +99,11 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
         toast.success(t("update.success"));
       } else {
         const result = await response.json();
-        toast.error(serverError(result.messages?.[0] ?? ""));
+        toast.error(
+          result.messages?.[0]
+            ? serverError(result.messages[0])
+            : extractErrors(result.messages)[0]
+        );
       }
     } catch (error) {
       console.error(error);

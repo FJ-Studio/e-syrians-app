@@ -41,9 +41,9 @@ const CensusForm: FC = () => {
   const { censusFormIsOpened, openCensusForm } = useEsyrian();
   const genderOptions = useGender();
   const provinces = useProvinces();
-  const religions = useReligiousAffiliation();
   const ethnicities = useEthnicity();
   const countries = useCountries();
+  const religions = useReligiousAffiliation();
   const educationLevels = useEducationLevels();
   const spokenLanguages = useSpokenLanguages();
   const incomeSources = useSourceOfIncome();
@@ -408,7 +408,6 @@ const CensusForm: FC = () => {
                       </Select>
                     )}
                   />
-
                   <Controller
                     name="country"
                     control={control}
@@ -624,7 +623,6 @@ const CensusForm: FC = () => {
                       <Input {...field} label={t("fields.skills.label")} />
                     )}
                   />
-
                   <div>
                     <h3 className="font-semibold text-lg">
                       5. {t("sections.employment.title")}

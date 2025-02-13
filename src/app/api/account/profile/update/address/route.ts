@@ -11,11 +11,11 @@ export async function POST(req: NextRequest) {
         }, { status: 400 });
     }
     try {
-        const request = await fetch(`${process.env.API_URL}/users/update/social`, {
+        const request = await fetch(`${process.env.API_URL}/users/update/address`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "applicat ion/json",
+                "Accept": "application/json",
                 "Authorization": `Bearer ${session?.user.accessToken}`,
             },
             body: JSON.stringify(body),

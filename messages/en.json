@@ -894,6 +894,94 @@
           "save": "Upload avatar",
           "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
         }
+      },
+      "civilian": {
+        "national_id": {
+          "label": "National ID",
+          "description": "The national id will be encrypted"
+        },
+        "save": "Save changes",
+        "title": "Other civilian data",
+        "record_id": {
+          "label": "Record ID"
+        },
+        "update": {
+          "success": "Your civilian data were updated successfully"
+        }
+      },
+      "record_id": {
+        "label": "Record ID"
+      },
+      "national_id": {
+        "label": "National ID",
+        "description": "The national id will be encrypted"
+      },
+      "address": {
+        "fields": {
+          "country": {
+            "label": "Country",
+            "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+          }
+        },
+        "save": "Save changes",
+        "update": {
+          "success": "your data were updated successfully"
+        },
+        "title": "Country"
+      },
+      "census": {
+        "title": "National census",
+        "fields": {
+          "middlename": {
+            "label": "Middle name"
+          },
+          "religious_affiliation": {
+            "label": "Religious affiliation"
+          },
+          "other_nationalities": {
+            "label": "Other nationalities"
+          },
+          "city": {
+            "label": "City"
+          },
+          "address": {
+            "label": "Address"
+          },
+          "shelter": {
+            "label": "Check this if you live in a shelter"
+          },
+          "education_level": {
+            "label": "Education level"
+          },
+          "spoken_languages": {
+            "label": "Spoken languages"
+          },
+          "skills": {
+            "label": "Additional skills"
+          },
+          "source_of_income": {
+            "label": "Source of income"
+          },
+          "estimated_monthly_income": {
+            "label": "Estimated monthly income"
+          },
+          "number_of_dependents": {
+            "label": "Number of dependents"
+          },
+          "health_status": {
+            "label": "Health status"
+          },
+          "health_insurance": {
+            "label": "I have health insurance"
+          },
+          "easy_access_to_healthcare_services": {
+            "label": "I can easily access health services"
+          },
+          "more_info": {
+            "label": "Additional information"
+          }
+        },
+        "save": "Save changes"
       }
     },
     "socialLinks": {
@@ -945,6 +1033,8 @@
   },
   "server_errors": {
     "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
-    "unknown_error": "Something happened on our side, please try again later"
+    "unknown_error": "Something happened on our side, please try again later",
+    "unauthorized_action": "You are not allowed to perform this action",
+    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance."
   }
 }

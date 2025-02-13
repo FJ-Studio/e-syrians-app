@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Input, Checkbox, Form, Divider } from "@heroui/react";
+import { Button, Input, Checkbox, Divider } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { login } from "@/app/actions";
 import AuthLayout from "./layout";
 import { signIn } from "next-auth/react";
+import { Controller, useForm } from "react-hook-form";
 
 export default function LoginForm() {
   // const [loginError, setLoginError] = useState<string | null>(null);
@@ -17,15 +18,19 @@ export default function LoginForm() {
 
   const t = useTranslations();
 
-  // const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const data = Object.fromEntries(new FormData(e.currentTarget));
-  //   try {
-  //     // Your login logic here
-  //   } catch (error) {
-  //     setLoginError(error.message);
-  //   }
-  // };
+  const { handleSubmit, control } = useForm<{
+    email: string;
+    password: string;
+  }>();
+
+  const onSubmit = (data: { email: string; password: string }) => {
+    signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: true,
+      redirectTo: "/account",
+    });
+  };
 
   return (
     <AuthLayout>
@@ -68,46 +73,57 @@ export default function LoginForm() {
             </p>
             <Divider className="flex-1 w-full" />
           </div>
-          <Form
-            validationBehavior="native"
+          <form
             className="flex w-full flex-col gap-3"
-            // onSubmit={onSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             action={async (formData) => {
               await login(formData);
+              // signIn("credentials", {
+              //   email: formData.email,
+              //   password: formData.password,
+              //   redirect: false,
+              // });
             }}
           >
-            <Input
-              isRequired
-              label={t("auth.login.identifier")}
+            <Controller
               name="email"
-              // placeholder={t("common.typeEmail")}
-              errorMessage={t("common.typeEmail")}
-              type="email"
-              // variant="underlined"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  isRequired
+                  label={t("auth.login.identifier")}
+                />
+              )}
             />
-            <Input
-              isRequired
-              endContent={
-                <button type="button" onClick={toggleVisibility}>
-                  {isVisible ? (
-                    <Icon
-                      className="pointer-events-none text-2xl text-default-400"
-                      icon="solar:eye-closed-linear"
-                    />
-                  ) : (
-                    <Icon
-                      className="pointer-events-none text-2xl text-default-400"
-                      icon="solar:eye-bold"
-                    />
-                  )}
-                </button>
-              }
-              label={t("common.password")}
+            <Controller
               name="password"
-              // placeholder={t("common.typePassword")}
-              errorMessage={t("common.typePassword")}
-              type={isVisible ? "text" : "password"}
-              // variant="underlined"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  isRequired
+                  endContent={
+                    <button type="button" onClick={toggleVisibility}>
+                      {isVisible ? (
+                        <Icon
+                          className="pointer-events-none text-2xl text-default-400"
+                          icon="solar:eye-closed-linear"
+                        />
+                      ) : (
+                        <Icon
+                          className="pointer-events-none text-2xl text-default-400"
+                          icon="solar:eye-bold"
+                        />
+                      )}
+                    </button>
+                  }
+                  label={t("common.password")}
+                  name="password"
+                  errorMessage={t("common.typePassword")}
+                  type={isVisible ? "text" : "password"}
+                />
+              )}
             />
             <Checkbox className="py-4" size="sm">
               {t("common.rememberMe")}
@@ -115,7 +131,7 @@ export default function LoginForm() {
             <Button color="primary" type="submit">
               {t("common.login")}
             </Button>
-          </Form>
+          </form>
         </div>
 
         {/* Right side */}

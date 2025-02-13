@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
             method: "POST",
             headers: {
                 "Accept": "application/json",
+                "Accept-Language": req.headers.get("Accept-Language") as string,
                 "Authorization": `Bearer ${session?.user.accessToken}`,
             },
             body,

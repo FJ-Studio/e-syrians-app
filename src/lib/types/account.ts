@@ -1,4 +1,4 @@
-import { Ethnicity, Gender, Province } from "./misc";
+import { CountryCode, Ethnicity, Gender, Province, ReligiousAffiliation } from "./misc";
 
 export type ESUser = {
   id: string;
@@ -16,6 +16,27 @@ export type ESUser = {
   ethnicity: Ethnicity;
   basic_info_updates?: number;
   avatar?: string;
+  national_id?: string;
+  record_id?: string;
+  
+  country?: CountryCode;
+  middle_name?: string;
+  religious_affiliation?: ReligiousAffiliation;
+  other_nationalities?: string;
+  city?: string;
+  address?: string;
+  shelter?: string;
+  education_level?: string;
+  languages?: string;
+  skills?: string;
+  source_of_income?: string;
+  marital_status?: string;
+  estimated_monthly_income?: string;
+  number_of_dependents?: string;
+  health_status?: string;
+  health_insurance?: string;
+  easy_access_to_healthcare_services?: string;
+  more_info?: string;
 
   facebook_link: string;
   twitter_link: string;

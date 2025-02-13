@@ -57,6 +57,8 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
           birth_date: user?.birth_date ?? "",
           hometown: user?.hometown ?? undefined,
           ethnicity: user?.ethnicity ?? undefined,
+          national_id: user?.national_id ?? "",
+          record_id: user?.record_id ?? "",
         }
       : undefined,
   });
@@ -70,6 +72,8 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
         birth_date: user.birth_date ?? undefined,
         hometown: user.hometown ?? undefined,
         ethnicity: user.ethnicity ?? undefined,
+        national_id: user.national_id ?? "",
+        record_id: user.record_id ?? "",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -184,7 +188,6 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               )}
             />
           </Skeleton>
-
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
               name="gender"
@@ -215,7 +218,6 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               )}
             />
           </Skeleton>
-
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
               name="ethnicity"
@@ -246,7 +248,6 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               )}
             />
           </Skeleton>
-
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
               name="hometown"
@@ -274,6 +275,33 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                     </SelectItem>
                   ))}
                 </Select>
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="national_id"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  label={t("national_id.label")}
+                  description={t("national_id.description")}
+                  {...field}
+                  isReadOnly={mode === "view"}
+                />
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="record_id"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  label={t("record_id.label")}
+                  {...field}
+                  isReadOnly={mode === "view"}
+                />
               )}
             />
           </Skeleton>

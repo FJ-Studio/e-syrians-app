@@ -5,6 +5,8 @@ import { FC, useEffect, useState } from "react";
 import UpdateBasicProfileData from "./update-basic";
 import AccountSocialLinks from "./social-links";
 import AccountAvatar from "./avatar";
+import AccountAddress from "./country";
+import AccountCensus from "./census";
 
 const AccountProfile: FC = () => {
   const t = useTranslations("account.settings");
@@ -45,8 +47,10 @@ const AccountProfile: FC = () => {
           <AccountSocialLinks user={profile} />
           <UpdateBasicProfileData user={profile} />
         </div>
-        <div>
+        <div className="space-y-4">
           <AccountAvatar user={profile} />
+          <AccountAddress user={profile} />
+          <AccountCensus user={profile} />
         </div>
       </div>
     </>

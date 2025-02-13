@@ -55,7 +55,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return session;
     },
-    async jwt({ account, token }) {
+    async jwt({ account, token, user }) {
       const providers = ["google"];
 
       // Avoid repeated API calls by checking if esUser exists and is still valid
@@ -87,7 +87,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           } else {
             return null;
           }
-        }
+        } else if (account?.provider === 'credentials' && user) {
+          // Local login request
+          token.esUser = user;
+        } 
       } catch (error) {
         console.error("JWT callback error:", error);
       }

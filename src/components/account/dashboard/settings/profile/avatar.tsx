@@ -1,10 +1,18 @@
 "use client";
 import useServerError from "@/components/hooks/localization/server-errors";
 import ImagesPicker from "@/components/shared/images-picker";
+import extractErrors from "@/lib/extract-errors";
 import { ESUser } from "@/lib/types/account";
 import { UserIcon } from "@heroicons/react/24/outline";
-import { Button, Card, CardBody, CardHeader, Image } from "@heroui/react";
-import { useTranslations } from "next-intl";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Image,
+  Skeleton,
+} from "@heroui/react";
+import { useLocale, useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -19,6 +27,7 @@ interface AvatarFields {
 
 const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
   const [preview, setPreview] = useState<string | null>(null);
+  const locale = useLocale();
   const t = useTranslations("account.settings.avatar");
   const {
     handleSubmit,
@@ -46,32 +55,35 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
   }, [changes.avatar, user]);
 
   const save = async (data: AvatarFields) => {
-    try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "avatar_update",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
+    const token = await new Promise<string>((resolve, reject) => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
+            action: "avatar_update",
+          })
+          .then(resolve)
+          .catch(reject);
       });
-      const formData = new FormData();
-      formData.append("avatar", data.avatar as File);
-      formData.append("recaptcha_token", token);
-      const response = await fetch("/api/account/profile/update/avatar", {
-        method: "POST",
-        body: formData,
-      });
-      if (response.status === 200) {
-        toast.success(t("update.success"));
-      } else {
-        const result = await response.json();
-        toast.error(serverError(result.messages?.[0] ?? ""));
-      }
-    } catch (error) {
-      console.error(error);
+    });
+    const formData = new FormData();
+    formData.append("avatar", data.avatar as File);
+    formData.append("recaptcha_token", token);
+    const response = await fetch("/api/account/profile/update/avatar", {
+      method: "POST",
+      headers: {
+        "Accept-Language": locale,
+      },
+      body: formData,
+    });
+    if (response.status === 200) {
+      toast.success(t("update.success"));
+    } else {
+      const result = await response.json();
+      toast.error(
+        result.messages?.[0]
+          ? serverError(result.messages[0])
+          : extractErrors(result.messages)[0]
+      );
     }
   };
   return (
@@ -87,13 +99,19 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
           onSubmit={handleSubmit(save)}
           className="flex flex-col gap-4 items-center"
         >
-          <div className="border-2 border-gray-200 min-w-16 min-h-16 flex items-center justify-center rounded-full overflow-hidden p-0.5">
-            {preview ? (
-              <Image src={preview} alt="" className="w-16 h-16 rounded-full" />
-            ) : (
-              <UserIcon className="w-8 h-8 text-gray-700" />
-            )}
-          </div>
+          <Skeleton isLoaded={!!user} className="rounded-full">
+            <div className="border-2 border-gray-200 min-w-16 min-h-16 flex items-center justify-center rounded-full overflow-hidden p-0.5">
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt={user?.name}
+                  className="w-16 h-16 rounded-full overflow-hidden"
+                />
+              ) : (
+                <UserIcon className="w-8 h-8 text-gray-700" />
+              )}
+            </div>
+          </Skeleton>
 
           <div className="flex gap-2">
             <ImagesPicker
