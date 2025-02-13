@@ -35,7 +35,7 @@ const AccountProfile: FC = () => {
   return (
     <>
       {!loading && !profile && (
-        <Button onPress={() => getProfile()} color="danger">
+        <Button onPress={() => getProfile()} color="danger" className="mb-4">
           {t("error.tryAgain")}
         </Button>
       )}
@@ -46,7 +46,7 @@ const AccountProfile: FC = () => {
           <UpdateBasicProfileData user={profile} />
         </div>
         <div>
-          <AccountAvatar />
+          <AccountAvatar user={profile} />
         </div>
       </div>
     </>

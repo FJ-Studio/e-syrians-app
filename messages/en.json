@@ -841,7 +841,7 @@
         }
       },
       "error": {
-        "tryAgain": "Try again!"
+        "tryAgain": "Failed to load profile data, please try again later!"
       },
       "name": {
         "label": "First name"

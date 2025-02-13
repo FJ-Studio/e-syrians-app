@@ -2,14 +2,8 @@
 import useServerError from "@/components/hooks/localization/server-errors";
 import ImagesPicker from "@/components/shared/images-picker";
 import { ESUser } from "@/lib/types/account";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-} from "@heroui/react";
+import { UserIcon } from "@heroicons/react/24/outline";
+import { Button, Card, CardBody, CardHeader, Image } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -20,7 +14,7 @@ type UpdateAvatarProps = {
 };
 
 interface AvatarFields {
-  avatar: File | null;
+  avatar: File;
 }
 
 const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
@@ -33,7 +27,7 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
     formState: { isSubmitting },
   } = useForm<AvatarFields>({
     defaultValues: {
-      avatar: null,
+      avatar: undefined,
     },
   });
 
@@ -41,12 +35,15 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
   const serverError = useServerError();
 
   useEffect(() => {
+    if (user?.avatar) {
+      setPreview(user.avatar);
+    }
     if (changes.avatar instanceof File) {
       const objectUrl = URL.createObjectURL(changes.avatar);
       setPreview(objectUrl);
       return () => URL.revokeObjectURL(objectUrl);
     }
-  }, [changes.avatar]);
+  }, [changes.avatar, user]);
 
   const save = async (data: AvatarFields) => {
     try {
@@ -60,12 +57,12 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
             .catch(reject);
         });
       });
+      const formData = new FormData();
+      formData.append("avatar", data.avatar as File);
+      formData.append("recaptcha_token", token);
       const response = await fetch("/api/account/profile/update/avatar", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...data, recaptcha_token: token }),
+        body: formData,
       });
       if (response.status === 200) {
         toast.success(t("update.success"));
@@ -90,18 +87,14 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
           onSubmit={handleSubmit(save)}
           className="flex flex-col gap-4 items-center"
         >
-          {preview ? (
-            <div className="border-2 border-gray-200 rounded-full overflow-hidden p-0.5">
+          <div className="border-2 border-gray-200 min-w-16 min-h-16 flex items-center justify-center rounded-full overflow-hidden p-0.5">
+            {preview ? (
               <Image src={preview} alt="" className="w-16 h-16 rounded-full" />
-            </div>
-          ) : (
-            <Avatar
-              src={user?.avatar ?? undefined}
-              name={user?.name}
-              isBordered
-              size="lg"
-            />
-          )}
+            ) : (
+              <UserIcon className="w-8 h-8 text-gray-700" />
+            )}
+          </div>
+
           <div className="flex gap-2">
             <ImagesPicker
               setSelectedImages={(images) => setValue("avatar", images[0])}
