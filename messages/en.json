@@ -735,7 +735,9 @@
               "title": "Created at"
             },
             "actions": {
-              "title": "Actions"
+              "title": "Actions",
+              "delete": "Delete",
+              "visit": "Visit"
             },
             "columns": {
               "title": "Columns"
@@ -1062,6 +1064,7 @@
       "content1": "Ensure that this profile belongs to someone you personally know.",
       "content2": "Pay close attention to every detail provided by the person.",
       "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
-    }
+    },
+    "profileVerified": "Verification has been stored successfully"
   }
 }

@@ -2,6 +2,7 @@
 import capitalize from "@/lib/capitalize";
 import { Poll } from "@/lib/types/polls";
 import {
+  ArrowTopRightOnSquareIcon,
   ChevronDownIcon,
   EllipsisVerticalIcon,
   MagnifyingGlassIcon,
@@ -11,6 +12,7 @@ import {
   Button,
   Card,
   CardBody,
+  Chip,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -19,6 +21,7 @@ import {
   Pagination,
   Selection,
   SortDescriptor,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -40,6 +43,7 @@ import {
 
 const MyPolls: FC = () => {
   const [polls, setPolls] = useState<Array<Poll>>([]);
+
   const t = useTranslations("account.dashboard.polls.my_polls");
   const columns = [
     { name: t("table.question.title"), uid: "question", sortable: true },
@@ -57,18 +61,28 @@ const MyPolls: FC = () => {
   ];
 
   const [deleting, setDeleting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setDeleting(false);
-    return;
+  const getPolls = async () => {
+    setLoading(true);
     try {
-      fetch(`/api/brokers`)
-        .then((res) => res.json())
-        .then((data) => setPolls(data.data));
+      const req = await fetch(`/api/account/polls`);
+      const data = await req.json();
+      if (req.status === 200) {
+        setPolls(data.data);
+      }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    getPolls();
+    setDeleting(false);
   }, []);
+
   const [filterValue, setFilterValue] = useState("");
   const [visibleColumns, setVisibleColumns] = useState<Selection>(
     new Set(columns.map((column) => column.uid))
@@ -107,7 +121,7 @@ const MyPolls: FC = () => {
     ) {
       filtereItems = filtereItems.filter((poll) =>
         Array.from(statusFilter).includes(
-          poll.deletion_reason ? "active" : "inactive"
+          poll.deleted_at ? "inactive" : "active"
         )
       );
     }
@@ -146,20 +160,58 @@ const MyPolls: FC = () => {
           return <>{new Date(poll.start_date).toLocaleDateString()}</>;
         case "end_date":
           return <>{new Date(poll.end_date).toLocaleDateString()}</>;
-
+        case "created_at":
+          return (
+            <>
+              {new Date(poll.created_at).toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}
+            </>
+          );
         case "status":
-          return <>status</>;
+          return (
+            <Chip
+              variant="flat"
+              size="sm"
+              color={poll.deleted_at ? "danger" : "success"}
+            >
+              {poll.deleted_at
+                ? t("table.status.inactive.title")
+                : t("table.status.active.title")}
+            </Chip>
+          );
         case "actions":
+          if (poll.deleted_at) {
+            return <></>;
+          }
           return (
             <div className="relative flex justify-end items-center gap-2">
               <Dropdown>
                 <DropdownTrigger>
                   <Button isIconOnly size="sm" variant="light">
-                    <EllipsisVerticalIcon className="text-default-300" />
+                    <EllipsisVerticalIcon className="text-default-300 size-6" />
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu disabledKeys={deleting ? ["delete"] : []}>
-                  <DropdownItem key={"delete"}>Delete</DropdownItem>
+                  <DropdownItem
+                    key={"visit"}
+                    onPress={() => {
+                      window.open(`/polls/${poll.id}`, "_blank");
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span>{t("table.actions.visit")}</span>
+                      <ArrowTopRightOnSquareIcon className="size-4" />
+                    </div>
+                  </DropdownItem>
+                  <DropdownItem key={"delete"}>
+                    {t("table.actions.delete")}
+                  </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -365,6 +417,8 @@ const MyPolls: FC = () => {
               </div>
             }
             items={sortedItems}
+            loadingContent={<Spinner />}
+            isLoading={loading}
           >
             {(item) => (
               <TableRow key={item.id}>

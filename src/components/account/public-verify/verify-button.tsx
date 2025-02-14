@@ -1,4 +1,5 @@
 "use client";
+import useServerError from "@/components/hooks/localization/server-errors";
 import { ESUser } from "@/lib/types/account";
 import {
   Button,
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const VerifyButton: FC<Props> = ({ user }) => {
+  const serverErrors = useServerError();
   const locale = useLocale();
   const [counter, setCounter] = useState(10);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -54,7 +56,7 @@ const VerifyButton: FC<Props> = ({ user }) => {
         window.grecaptcha.ready(() => {
           window.grecaptcha
             .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "avatar_update",
+              action: "verify",
             })
             .then(resolve)
             .catch(reject);
@@ -71,14 +73,14 @@ const VerifyButton: FC<Props> = ({ user }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        toast.success(data.messages[0]);
+        toast.success(t("profileVerified"));
         onOpenChange();
       } else {
-        toast.error(data.messages[0]);
+        toast.error(serverErrors(data.messages[0]));
       }
     } catch (error) {
       console.error(error);
-      toast.error(t("errorOccurred"));
+      toast.error(serverErrors("error"));
     } finally {
       setLoading(false);
     }
