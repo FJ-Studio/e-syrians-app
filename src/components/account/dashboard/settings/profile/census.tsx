@@ -115,29 +115,32 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
   const save = async (data: CensusFields) => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      if (!!data[key as keyof CensusFields]) {
-        switch (key) {
-          case "other_nationalities":
-          case "languages":
-            const splitted = (
-              (data[key as keyof CensusFields] ?? "") as string
-            )?.split(",");
+      switch (key) {
+        case "other_nationalities":
+        case "languages":
+          const splitted = ((data[key as keyof CensusFields] ?? "") as string)
+            ?.split(",")
+            .filter((v) => v);
+          if (splitted.length > 0) {
             splitted.forEach((value: string) => {
               formData.append(`${key}[]`, value);
             });
-            break;
-          case "health_insurance":
-          case "easy_access_to_healthcare_services":
-          case "shelter":
-            formData.append(
-              key,
-              (data[key as keyof CensusFields] as boolean) ? "1" : "0"
-            );
-            break;
-          default:
-            formData.append(key, data[key as keyof CensusFields] as string);
-            break;
-        }
+          }
+          break;
+        case "health_insurance":
+        case "easy_access_to_healthcare_services":
+        case "shelter":
+          formData.append(
+            key,
+            (data[key as keyof CensusFields] as boolean) ? "1" : "0"
+          );
+          break;
+        default:
+          formData.append(
+            key,
+            (data[key as keyof CensusFields] as string) ?? ""
+          );
+          break;
       }
     });
     try {
@@ -145,14 +148,14 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
         window.grecaptcha.ready(() => {
           window.grecaptcha
             .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "census_register",
+              action: "census_update",
             })
             .then(resolve)
             .catch(reject);
         });
       });
       formData.append("recaptcha_token", token);
-      const response = await fetch("/api/account/profile/census", {
+      const response = await fetch("/api/account/profile/update/census", {
         method: "POST",
         body: formData,
       });
@@ -274,7 +277,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 {...field}
                 value={`${field.value}`}
                 isSelected={!!getValues("shelter")}
-                onValueChange={(selected) => setValue("shelter", selected)}
+                onValueChange={(selected) =>
+                  setValue("shelter", selected ? "1" : "0")
+                }
               >
                 {t("fields.shelter.label")}
               </Checkbox>
@@ -402,7 +407,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   value={`${field.value}`}
                   isSelected={!!getValues("health_insurance")}
                   onValueChange={(selected) =>
-                    setValue("health_insurance", selected)
+                    setValue("health_insurance", selected ? "1" : "0")
                   }
                 >
                   {t("fields.health_insurance.label")}
@@ -419,7 +424,10 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   value={`${field.value}`}
                   isSelected={!!getValues("easy_access_to_healthcare_services")}
                   onValueChange={(selected) =>
-                    setValue("easy_access_to_healthcare_services", selected)
+                    setValue(
+                      "easy_access_to_healthcare_services",
+                      selected ? "1" : "0"
+                    )
                   }
                 >
                   {t("fields.easy_access_to_healthcare_services.label")}

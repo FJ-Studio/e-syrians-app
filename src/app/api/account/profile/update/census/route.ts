@@ -4,8 +4,8 @@ import { auth } from "../../../../../../../auth";
 
 export async function POST(req: NextRequest) {
   const session = await auth();
-  const body = await req.json();
-  if (!recaptchaIsValid(body.recaptcha_token)) {
+  const body = await req.formData();
+  if (!recaptchaIsValid(body.get("recaptcha_token") as string)) {
     return NextResponse.json(
       {
         messages: ["Invalid recaptcha token"],
@@ -17,11 +17,10 @@ export async function POST(req: NextRequest) {
     const request = await fetch(`${process.env.API_URL}/users/update/census`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${session?.user.accessToken}`,
       },
-      body: JSON.stringify(body),
+      body: (body),
     });
     const response = await request.json();
     return NextResponse.json(response, { status: request.status });

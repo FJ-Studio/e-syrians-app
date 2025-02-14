@@ -981,7 +981,10 @@
             "label": "Additional information"
           }
         },
-        "save": "Save changes"
+        "save": "Save changes",
+        "update": {
+          "success": "Your data were updated successfully"
+        }
       }
     },
     "socialLinks": {
