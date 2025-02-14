@@ -1,6 +1,14 @@
 "use client";
 import { ESUser } from "@/lib/types/account";
-import { Button } from "@heroui/react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@heroui/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
@@ -11,6 +19,8 @@ type Props = {
 };
 
 const VerifyButton: FC<Props> = ({ user }) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [loading, setLoading] = useState(false);
   const session = useSession();
   const t = useTranslations("publicVerify");
@@ -28,9 +38,40 @@ const VerifyButton: FC<Props> = ({ user }) => {
   };
 
   return (
-    <Button color="primary" fullWidth onPress={verify} isLoading={loading}>
-      {t("verify")}
-    </Button>
+    <>
+      <Button color="primary" fullWidth onPress={onOpen} isLoading={loading}>
+        {t("verify")}
+      </Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                {t("verify")} {user.name} {user.surname}
+              </ModalHeader>
+              <ModalBody>
+                <p>{t("rules.content1")}</p>
+                <p>{t("rules.content2")}</p>
+                <p>{t("rules.content3")}</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" onPress={onClose} fullWidth>
+                  {t("cancel")}
+                </Button>
+                <Button
+                  color="primary"
+                  onPress={verify}
+                  isLoading={loading}
+                  fullWidth
+                >
+                  {t("verify")}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

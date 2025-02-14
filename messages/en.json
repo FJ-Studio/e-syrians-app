@@ -1049,6 +1049,12 @@
     "ethnicity": "Ethnicity",
     "country": "Lives in",
     "loginToVerify": "Guests cannot perform this action! It is limited to users that are already verified",
-    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile"
+    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile",
+    "cancel": "Cancel",
+    "rules": {
+      "content1": "Make sure that this profile belongs to a person you know personally.",
+      "content2": "Be aware of every single detail mentioned by the person",
+      "content3": "The platform is based on trust. The main focus of our algorithms and human reviewers is to detect fake profiles"
+    }
   }
 }
