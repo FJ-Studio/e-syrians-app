@@ -1039,5 +1039,16 @@
     "unknown_error": "Something happened on our side, please try again later",
     "unauthorized_action": "You are not allowed to perform this action",
     "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance."
+  },
+  "publicVerify": {
+    "title": "Verify user information",
+    "citizenFrom": "Syrian citizen from {hometown}",
+    "birthdate": "Birthdate",
+    "verify": "Verify",
+    "gender": "Gender",
+    "ethnicity": "Ethnicity",
+    "country": "Lives in",
+    "loginToVerify": "Guests cannot perform this action! It is limited to users that are already verified",
+    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile"
   }
 }

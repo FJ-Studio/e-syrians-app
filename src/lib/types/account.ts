@@ -2,12 +2,13 @@ import { CountryCode, Ethnicity, Gender, Province, ReligiousAffiliation } from "
 
 export type ESUser = {
   id: string;
+  uuid: string;
   name: string;
   surname: string;
   email: string;
   phone: string;
   accessToken: string;
-  verifiedAt: string;
+  verified_at: string;
   roles: Array<string>;
   permissions: Array<string>;
   gender: Gender;

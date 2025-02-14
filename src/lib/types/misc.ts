@@ -39,3 +39,9 @@ export type SourceOfIncome =
   | "aid-support"
   | "no-income"
   | "other";
+
+  export type ApiResponse<T> = {
+    success: boolean;
+    data: T;
+    messages: Array<string> | Record<string, Array<string>>;
+  }

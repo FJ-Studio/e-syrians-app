@@ -855,5 +855,10 @@
       "census": "الإحصاء الوطني",
       "polls": "الاستطلاعات"
     }
+  },
+  "publicVerify": {
+    "citizenFrom": "{gender, select, m {مواطن سوري} f {مواطنة سورية} other {مواطن/ة من سوريا}} من {hometown}",
+    "title": "تأكيد معلومات المستخدم",
+    "verify": "تأكيد"
   }
 }
