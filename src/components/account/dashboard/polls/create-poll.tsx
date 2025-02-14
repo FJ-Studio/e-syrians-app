@@ -68,7 +68,7 @@ const CreatePoll: FC = () => {
     setOptions((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const userIsNotVerified = !session.data?.user.verifiedAt && false;
+  const userIsNotVerified = !session.data?.user.verified_at && false;
 
   const store = async (data: CreatePollFields) => {
     const formData = new FormData();
