@@ -74,15 +74,13 @@ const PublicVerifyCardDropdown: FC<Props> = ({ user }) => {
       </DropdownTrigger>
       <DropdownMenu>
         {links.map((link) => (
-          <DropdownItem key={link.title}>
-            <a
-              href={link.link}
-              target="_blank"
-              rel="noreferrer"
-              className="flex w-full"
-            >
-              {link.title}
-            </a>
+          <DropdownItem
+            key={link.title}
+            onPress={() => {
+              window.open(link.link, "_blank");
+            }}
+          >
+            {link.title}
           </DropdownItem>
         ))}
       </DropdownMenu>
