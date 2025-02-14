@@ -5,7 +5,8 @@ import { auth } from "../../../../../../../auth";
 export async function POST(req: NextRequest) {
     const session = await auth();
     const body = await req.json();
-    if (!recaptchaIsValid(body.recaptcha_token)) {
+    const isHuman = await recaptchaIsValid(body.recaptcha_token);
+    if (!isHuman) {
         return NextResponse.json({
             messages: ["Invalid recaptcha token"],
         }, { status: 400 });

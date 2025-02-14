@@ -10,8 +10,8 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import { FC, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
@@ -19,11 +19,25 @@ type Props = {
 };
 
 const VerifyButton: FC<Props> = ({ user }) => {
+  const locale = useLocale();
+  const [counter, setCounter] = useState(10);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [loading, setLoading] = useState(false);
   const session = useSession();
   const t = useTranslations("publicVerify");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (counter > 0) {
+        setCounter((prev) => prev - 1);
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const verify = async () => {
     if (session.status !== "authenticated") {
@@ -35,19 +49,54 @@ const VerifyButton: FC<Props> = ({ user }) => {
       return;
     }
     setLoading(true);
+    try {
+      const token = await new Promise<string>((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
+              action: "avatar_update",
+            })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+      const response = await fetch("/api/account/profile/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Language": locale,
+        },
+        body: JSON.stringify({ uuid: user.uuid, recaptcha_token: token }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        toast.success(data.messages[0]);
+        onOpenChange();
+      } else {
+        toast.error(data.messages[0]);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(t("errorOccurred"));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <Button color="primary" fullWidth onPress={onOpen} isLoading={loading}>
-        {t("verify")}
+        {t("verify", { name: "" })}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {t("verify")} {user.name} {user.surname}
+                {t("verify", {
+                  name: `${user.name} ${user.surname}`,
+                })}
               </ModalHeader>
               <ModalBody>
                 <p>{t("rules.content1")}</p>
@@ -63,8 +112,11 @@ const VerifyButton: FC<Props> = ({ user }) => {
                   onPress={verify}
                   isLoading={loading}
                   fullWidth
+                  isDisabled={counter > 0 || loading}
                 >
-                  {t("verify")}
+                  {`${t("verify", { name: "" })}${
+                    counter > 0 ? ` (${counter})` : ""
+                  }`}
                 </Button>
               </ModalFooter>
             </>

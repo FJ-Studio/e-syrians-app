@@ -1038,13 +1038,20 @@
     "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
     "unknown_error": "Something happened on our side, please try again later",
     "unauthorized_action": "You are not allowed to perform this action",
-    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance."
+    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
+    "your_account_is_banned": "Your account is banned!",
+    "you_are_not_verified": "You cannot perform this action since your account is not verified",
+    "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
+    "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
+    "you_cannot_verify_yourself": "You cannot verify your own account",
+    "circular_verification_not_allowed": "Circular verification! You cannot verify an account that verified you",
+    "you_have_already_verified_this_user": "You have already verified this user"
   },
   "publicVerify": {
     "title": "Verify user information",
     "citizenFrom": "Syrian citizen from {hometown}",
     "birthdate": "Birthdate",
-    "verify": "Verify",
+    "verify": "Verify {name}",
     "gender": "Gender",
     "ethnicity": "Ethnicity",
     "country": "Lives in",
@@ -1052,9 +1059,9 @@
     "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile",
     "cancel": "Cancel",
     "rules": {
-      "content1": "Make sure that this profile belongs to a person you know personally.",
-      "content2": "Be aware of every single detail mentioned by the person",
-      "content3": "The platform is based on trust. The main focus of our algorithms and human reviewers is to detect fake profiles"
+      "content1": "Ensure that this profile belongs to someone you personally know.",
+      "content2": "Pay close attention to every detail provided by the person.",
+      "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
     }
   }
 }
