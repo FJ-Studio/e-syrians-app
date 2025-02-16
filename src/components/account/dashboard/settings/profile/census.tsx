@@ -19,6 +19,7 @@ import {
   Input,
   Select,
   SelectItem,
+  Skeleton,
   Textarea,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
@@ -80,9 +81,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       estimated_monthly_income: user?.estimated_monthly_income ?? undefined,
       number_of_dependents: user?.number_of_dependents ?? undefined,
       health_status: user?.health_status ?? undefined,
-      health_insurance: user?.health_insurance ?? false,
+      health_insurance: user?.health_insurance ?? undefined,
       easy_access_to_healthcare_services:
-        user?.easy_access_to_healthcare_services ?? false,
+        user?.easy_access_to_healthcare_services ?? undefined,
       more_info: user?.more_info ?? undefined,
     },
   });
@@ -90,23 +91,23 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
   useEffect(() => {
     if (user) {
       reset({
-        address: user.address,
-        city: user.city,
-        education_level: user.education_level,
-        estimated_monthly_income: user.estimated_monthly_income,
-        health_insurance: user.health_insurance,
-        health_status: user.health_status,
-        languages: user.languages,
-        middle_name: user.middle_name,
-        more_info: user.more_info,
-        number_of_dependents: user.number_of_dependents,
-        other_nationalities: user.other_nationalities,
-        religious_affiliation: user.religious_affiliation,
-        shelter: user.shelter,
-        skills: user.skills,
-        source_of_income: user.source_of_income,
+        address: user.address ?? undefined,
+        city: user.city ?? undefined,
+        education_level: user.education_level ?? undefined,
+        estimated_monthly_income: user.estimated_monthly_income ?? undefined,
+        health_insurance: user.health_insurance ?? undefined,
+        health_status: user.health_status ?? undefined,
+        languages: user.languages ?? undefined,
+        middle_name: user.middle_name ?? undefined,
+        more_info: user.more_info ?? undefined,
+        number_of_dependents: user.number_of_dependents ?? undefined,
+        other_nationalities: user.other_nationalities ?? undefined,
+        religious_affiliation: user.religious_affiliation ?? undefined,
+        shelter: user.shelter ?? undefined,
+        skills: user.skills ?? undefined,
+        source_of_income: user.source_of_income ?? undefined,
         easy_access_to_healthcare_services:
-          user.easy_access_to_healthcare_services,
+          user.easy_access_to_healthcare_services ?? undefined,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -181,272 +182,303 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       </CardHeader>
       <CardBody>
         <form className="space-y-4" onSubmit={handleSubmit(save)}>
-          <Controller
-            name="middle_name"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} label={t("fields.middlename.label")} />
-            )}
-          />
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="middle_name"
+              control={control}
+              render={({ field }) => (
+                <Input {...field} label={t("fields.middlename.label")} />
+              )}
+            />
+          </Skeleton>
 
-          <Controller
-            name="religious_affiliation"
-            control={control}
-            rules={{ required: true }}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Select
-                {...field}
-                label={t("fields.religious_affiliation.label")}
-                isRequired
-                isInvalid={invalid}
-                errorMessage={error?.message}
-                selectedKeys={[getValues("religious_affiliation")]}
-              >
-                {Object.keys(religions).map((key) => (
-                  <SelectItem key={key} value={key}>
-                    {religions[key as keyof typeof religions]}
-                  </SelectItem>
-                ))}
-              </Select>
-            )}
-          />
-
-          <Controller
-            name="other_nationalities"
-            control={control}
-            render={({ field }) => (
-              <Select
-                scrollShadowProps={{
-                  isEnabled: false,
-                }}
-                {...field}
-                label={t("fields.other_nationalities.label")}
-                selectedKeys={
-                  getValues("other_nationalities")
-                    ? getValues("other_nationalities").split(",")
-                    : undefined
-                }
-                onSelectionChange={(selected) => {
-                  setValue(
-                    "other_nationalities",
-                    Array.from(selected).join(",")
-                  );
-                }}
-                selectionMode="multiple"
-              >
-                {Object.keys(countries)
-                  .filter((c) => c !== "SY")
-                  .map((key) => (
-                    <SelectItem
-                      key={key}
-                      value={key}
-                      startContent={
-                        <Avatar
-                          src={`/flags/${key.toLowerCase()}.svg`}
-                          className="w-6 h-6"
-                          size="sm"
-                        />
-                      }
-                    >
-                      {countries[key as keyof typeof countries]}
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="religious_affiliation"
+              control={control}
+              rules={{ required: true }}
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Select
+                  {...field}
+                  label={t("fields.religious_affiliation.label")}
+                  isRequired
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                  selectedKeys={[getValues("religious_affiliation")]}
+                >
+                  {Object.keys(religions).map((key) => (
+                    <SelectItem key={key} value={key}>
+                      {religions[key as keyof typeof religions]}
                     </SelectItem>
                   ))}
-              </Select>
-            )}
-          />
-          <Controller
-            name="city"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} label={t("fields.city.label")} />
-            )}
-          />
-          <Controller
-            name="address"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} label={t("fields.address.label")} />
-            )}
-          />
-
-          <Controller
-            name="shelter"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                {...field}
-                value={`${field.value}`}
-                isSelected={!!getValues("shelter")}
-                onValueChange={(selected) =>
-                  setValue("shelter", selected ? "1" : "0")
-                }
-              >
-                {t("fields.shelter.label")}
-              </Checkbox>
-            )}
-          />
-          <Controller
-            name="education_level"
-            control={control}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Select
-                {...field}
-                label={t("fields.education_level.label")}
-                isInvalid={invalid}
-                errorMessage={error?.message}
-                selectedKeys={[getValues("education_level")]}
-              >
-                {Object.keys(educationLevels).map((key) => (
-                  <SelectItem key={key} value={key}>
-                    {educationLevels[key as keyof typeof educationLevels]}
-                  </SelectItem>
-                ))}
-              </Select>
-            )}
-          />
-          <Controller
-            name="languages"
-            control={control}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Select
-                {...field}
-                label={t("fields.spoken_languages.label")}
-                isInvalid={invalid}
-                errorMessage={error?.message}
-                selectionMode="multiple"
-                selectedKeys={
-                  getValues("languages")
-                    ? getValues("languages").split(",")
-                    : undefined
-                }
-                onSelectionChange={(selected) => {
-                  setValue("languages", Array.from(selected).join(","));
-                }}
-              >
-                {Object.keys(spokenLanguages).map((key) => (
-                  <SelectItem key={key} value={key}>
-                    {spokenLanguages[key as keyof typeof spokenLanguages]}
-                  </SelectItem>
-                ))}
-              </Select>
-            )}
-          />
-          <Controller
-            name="skills"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} label={t("fields.skills.label")} />
-            )}
-          />
-          <Controller
-            name="source_of_income"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                label={t("fields.source_of_income.label")}
-                selectedKeys={[getValues("source_of_income")]}
-              >
-                {Object.keys(incomeSources).map((key) => (
-                  <SelectItem key={key} value={key}>
-                    {incomeSources[key as keyof typeof incomeSources]}
-                  </SelectItem>
-                ))}
-              </Select>
-            )}
-          />
-          <Controller
-            name="estimated_monthly_income"
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                label={t("fields.estimated_monthly_income.label")}
-                startContent="$"
-              />
-            )}
-          />
-          <Controller
-            name="number_of_dependents"
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                label={t("fields.number_of_dependents.label")}
-              />
-            )}
-          />
-          <Controller
-            name="health_status"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                label={t("fields.health_status.label")}
-                selectedKeys={[getValues("health_status")]}
-                onSelectionChange={(selected) => {
-                  setValue("health_status", selected.anchorKey as HealthStatus);
-                }}
-              >
-                {Object.keys(HealthStatuses).map((key) => (
-                  <SelectItem key={key} value={key}>
-                    {HealthStatuses[key as keyof typeof HealthStatuses]}
-                  </SelectItem>
-                ))}
-              </Select>
-            )}
-          />
-
-          <div className="flex flex-col gap-2">
-            <Controller
-              name="health_insurance"
-              control={control}
-              render={({ field }) => (
-                <Checkbox
-                  {...field}
-                  value={`${field.value}`}
-                  isSelected={!!getValues("health_insurance")}
-                  onValueChange={(selected) =>
-                    setValue("health_insurance", selected ? "1" : "0")
-                  }
-                >
-                  {t("fields.health_insurance.label")}
-                </Checkbox>
+                </Select>
               )}
             />
+          </Skeleton>
 
+          <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
-              name="easy_access_to_healthcare_services"
+              name="other_nationalities"
               control={control}
               render={({ field }) => (
-                <Checkbox
+                <Select
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
                   {...field}
-                  value={`${field.value}`}
-                  isSelected={!!getValues("easy_access_to_healthcare_services")}
-                  onValueChange={(selected) =>
+                  label={t("fields.other_nationalities.label")}
+                  selectedKeys={
+                    getValues("other_nationalities")
+                      ? getValues("other_nationalities").split(",")
+                      : undefined
+                  }
+                  onSelectionChange={(selected) => {
                     setValue(
-                      "easy_access_to_healthcare_services",
-                      selected ? "1" : "0"
-                    )
+                      "other_nationalities",
+                      Array.from(selected).join(",")
+                    );
+                  }}
+                  selectionMode="multiple"
+                >
+                  {Object.keys(countries)
+                    .filter((c) => c !== "SY")
+                    .map((key) => (
+                      <SelectItem
+                        key={key}
+                        value={key}
+                        startContent={
+                          <Avatar
+                            src={`/flags/${key.toLowerCase()}.svg`}
+                            className="w-6 h-6"
+                            size="sm"
+                          />
+                        }
+                      >
+                        {countries[key as keyof typeof countries]}
+                      </SelectItem>
+                    ))}
+                </Select>
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="city"
+              control={control}
+              render={({ field }) => (
+                <Input {...field} label={t("fields.city.label")} />
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <Input {...field} label={t("fields.address.label")} />
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="shelter"
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  {...field}
+                  value={`${field.value}`}
+                  isSelected={!!getValues("shelter")}
+                  onValueChange={(selected) =>
+                    setValue("shelter", selected ? "1" : "0")
                   }
                 >
-                  {t("fields.easy_access_to_healthcare_services.label")}
+                  {t("fields.shelter.label")}
                 </Checkbox>
               )}
             />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
-              name="more_info"
+              name="education_level"
               control={control}
-              render={({ field }) => (
-                <Textarea {...field} label={t("fields.more_info.label")} />
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Select
+                  {...field}
+                  label={t("fields.education_level.label")}
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                  selectedKeys={[getValues("education_level")]}
+                >
+                  {Object.keys(educationLevels).map((key) => (
+                    <SelectItem key={key} value={key}>
+                      {educationLevels[key as keyof typeof educationLevels]}
+                    </SelectItem>
+                  ))}
+                </Select>
               )}
             />
-          </div>
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="languages"
+              control={control}
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Select
+                  {...field}
+                  label={t("fields.spoken_languages.label")}
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                  selectionMode="multiple"
+                  selectedKeys={
+                    getValues("languages")
+                      ? getValues("languages").split(",")
+                      : undefined
+                  }
+                  onSelectionChange={(selected) => {
+                    setValue("languages", Array.from(selected).join(","));
+                  }}
+                >
+                  {Object.keys(spokenLanguages).map((key) => (
+                    <SelectItem key={key} value={key}>
+                      {spokenLanguages[key as keyof typeof spokenLanguages]}
+                    </SelectItem>
+                  ))}
+                </Select>
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="skills"
+              control={control}
+              render={({ field }) => (
+                <Input {...field} label={t("fields.skills.label")} />
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="source_of_income"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  label={t("fields.source_of_income.label")}
+                  selectedKeys={[getValues("source_of_income")]}
+                >
+                  {Object.keys(incomeSources).map((key) => (
+                    <SelectItem key={key} value={key}>
+                      {incomeSources[key as keyof typeof incomeSources]}
+                    </SelectItem>
+                  ))}
+                </Select>
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="estimated_monthly_income"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  label={t("fields.estimated_monthly_income.label")}
+                  startContent="$"
+                />
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="number_of_dependents"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  label={t("fields.number_of_dependents.label")}
+                />
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="health_status"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  label={t("fields.health_status.label")}
+                  selectedKeys={[getValues("health_status")]}
+                  onSelectionChange={(selected) => {
+                    setValue(
+                      "health_status",
+                      selected.anchorKey as HealthStatus
+                    );
+                  }}
+                >
+                  {Object.keys(HealthStatuses).map((key) => (
+                    <SelectItem key={key} value={key}>
+                      {HealthStatuses[key as keyof typeof HealthStatuses]}
+                    </SelectItem>
+                  ))}
+                </Select>
+              )}
+            />
+          </Skeleton>
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <div className="flex flex-col gap-2">
+              <Controller
+                name="health_insurance"
+                control={control}
+                render={({ field }) => (
+                  <Checkbox
+                    {...field}
+                    value={`${field.value}`}
+                    isSelected={!!getValues("health_insurance")}
+                    onValueChange={(selected) =>
+                      setValue("health_insurance", selected ? "1" : "0")
+                    }
+                  >
+                    {t("fields.health_insurance.label")}
+                  </Checkbox>
+                )}
+              />
+
+              <Controller
+                name="easy_access_to_healthcare_services"
+                control={control}
+                render={({ field }) => (
+                  <Checkbox
+                    {...field}
+                    value={`${field.value}`}
+                    isSelected={
+                      !!getValues("easy_access_to_healthcare_services")
+                    }
+                    onValueChange={(selected) =>
+                      setValue(
+                        "easy_access_to_healthcare_services",
+                        selected ? "1" : "0"
+                      )
+                    }
+                  >
+                    {t("fields.easy_access_to_healthcare_services.label")}
+                  </Checkbox>
+                )}
+              />
+              <Controller
+                name="more_info"
+                control={control}
+                render={({ field }) => (
+                  <Textarea {...field} label={t("fields.more_info.label")} />
+                )}
+              />
+            </div>
+          </Skeleton>
           <Button
             type="submit"
             color="primary"
             isLoading={isSubmitting}
-            disabled={!isDirty || isSubmitting}
+            isDisabled={!isDirty || isSubmitting}
           >
             {t("save")}
           </Button>

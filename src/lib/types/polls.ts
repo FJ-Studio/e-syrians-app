@@ -28,6 +28,9 @@ export type Poll = {
     deletion_reason: string | null;
     created_at: string;
     deleted_at?: string;
+    votes_count: number;
+    ups_count: number;
+    downs_count: number;
 }
 
 export interface CreatePollFields {

@@ -741,6 +741,9 @@
             },
             "columns": {
               "title": "Columns"
+            },
+            "votes": {
+              "title": "Participants count"
             }
           },
           "emptyContent": {

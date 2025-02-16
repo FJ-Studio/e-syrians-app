@@ -11,6 +11,7 @@ import {
   CardHeader,
   Select,
   SelectItem,
+  Skeleton,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
@@ -88,44 +89,46 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(save)} className="space-y-4">
-          <Controller
-            name="country"
-            control={control}
-            rules={{ required: true }}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Select
-                scrollShadowProps={{
-                  isEnabled: false,
-                }}
-                {...field}
-                label={t("fields.country.label")}
-                isRequired
-                isInvalid={invalid}
-                errorMessage={error?.message}
-                selectedKeys={[getValues("country")]}
-                onSelectionChange={(selected) => {
-                  setValue("country", selected.anchorKey as CountryCode);
-                }}
-                description={t("fields.country.description")}
-              >
-                {Object.keys(countries).map((key) => (
-                  <SelectItem
-                    key={key}
-                    value={key}
-                    startContent={
-                      <Avatar
-                        src={`/flags/${key.toLowerCase()}.svg`}
-                        className="w-6 h-6"
-                        size="sm"
-                      />
-                    }
-                  >
-                    {countries[key as keyof typeof countries]}
-                  </SelectItem>
-                ))}
-              </Select>
-            )}
-          />
+          <Skeleton isLoaded={!!user} className="rounded-lg">
+            <Controller
+              name="country"
+              control={control}
+              rules={{ required: true }}
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Select
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
+                  {...field}
+                  label={t("fields.country.label")}
+                  isRequired
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                  selectedKeys={[getValues("country")]}
+                  onSelectionChange={(selected) => {
+                    setValue("country", selected.anchorKey as CountryCode);
+                  }}
+                  description={t("fields.country.description")}
+                >
+                  {Object.keys(countries).map((key) => (
+                    <SelectItem
+                      key={key}
+                      value={key}
+                      startContent={
+                        <Avatar
+                          src={`/flags/${key.toLowerCase()}.svg`}
+                          className="w-6 h-6"
+                          size="sm"
+                        />
+                      }
+                    >
+                      {countries[key as keyof typeof countries]}
+                    </SelectItem>
+                  ))}
+                </Select>
+              )}
+            />
+          </Skeleton>
           <Button
             color="primary"
             type="submit"

@@ -51,7 +51,9 @@ const MyPolls: FC = () => {
     { name: t("table.endDate.title"), uid: "end_date", sortable: true },
 
     { name: t("table.createdAt.title"), uid: "created_at", sortable: true },
+    { name: t("table.votes.title"), uid: "participants_count", sortable: true },
     { name: t("table.status.title"), uid: "status", sortable: false },
+
     { name: t("table.actions.title"), uid: "actions", sortable: false },
   ];
 
@@ -173,6 +175,8 @@ const MyPolls: FC = () => {
               })}
             </>
           );
+        case "participants_count":
+          return poll.votes_count;
         case "status":
           return (
             <Chip

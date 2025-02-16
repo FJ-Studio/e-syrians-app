@@ -70,7 +70,7 @@ const BarChartCard = forwardRef<
             {actions}
           </div>
         </div>
-        <div style={{ height: `${chartData.length * 50}px`, direction: "ltr" }}>
+        <div style={{ height: `${chartData.length * 75}px`, direction: "ltr" }}>
           <ResponsiveContainer
             className="[&_.recharts-surface]:outline-none"
             height="100%"
