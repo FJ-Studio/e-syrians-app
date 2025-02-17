@@ -19,7 +19,6 @@ export type ESUser = {
   avatar?: string;
   national_id?: string;
   record_id?: string;
-  
   country?: CountryCode;
   middle_name?: string;
   religious_affiliation?: ReligiousAffiliation;
@@ -51,4 +50,23 @@ export type ESUser = {
   snapchat_link: string;
   pinterest_link: string;
   
+}
+
+export type Verification = {
+  id: string;
+  created_at: string;
+  user: {
+    name: string;
+    surname: string;
+    avatar: string;
+  };
+  verifier: {
+    name: string;
+    surname: string;
+    avatar: string;
+  };
+  cancelled_at: string;
+  cancelation_payload?: {
+    reason?: string;
+  };
 }

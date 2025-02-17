@@ -167,7 +167,6 @@ const MyPolls: FC = () => {
   const renderCell = useCallback(
     (poll: Poll, columnKey: Key) => {
       const cellValue = poll[columnKey as keyof Poll];
-
       switch (columnKey) {
         case "question":
           return poll.question;
@@ -398,10 +397,23 @@ const MyPolls: FC = () => {
   return (
     <Card>
       <CardBody>
-        <h2 className="text-xl font-medium text-default-700 text-start">
-          {t("title")}
-        </h2>
-        <p className="text-default-500 mb-6 text-start">{t("description")}</p>
+        <div className="flex justify-between items-start flex-col sm:flex-row gap-4  mb-6">
+          <div>
+            <h2 className="text-xl font-medium text-default-700 text-start">
+              {t("title")}
+            </h2>
+            <p className="text-default-500 text-start">{t("description")}</p>
+          </div>
+          <Button
+            variant="solid"
+            color="primary"
+            as={Link}
+            href="/account/polls/create"
+            startContent={<PlusCircleIcon className="size-5" />}
+          >
+            {t("emptyContent.add")}
+          </Button>
+        </div>
         <Table
           isHeaderSticky
           isStriped
@@ -411,6 +423,7 @@ const MyPolls: FC = () => {
           topContent={topContent}
           topContentPlacement="outside"
           bottomContent={bottomContent}
+          sortDescriptor={sortDescriptor}
           onSortChange={setSortDescriptor}
         >
           <TableHeader columns={headerColumns}>

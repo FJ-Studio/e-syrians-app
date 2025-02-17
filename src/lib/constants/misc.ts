@@ -1,5 +1,5 @@
+export const APP_URL = 'https://e-syrians.com'
 export const LOCALES = ["ar", "en", "ku"] as const;
-
 export const LANGUAGES: Record<
   (typeof LOCALES)[number],
   {
