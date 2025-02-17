@@ -32,18 +32,12 @@ import {
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import {
-  ChangeEvent,
-  FC,
-  Key,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { FC, Key, useCallback, useEffect, useMemo, useState } from "react";
 
 const MyPolls: FC = () => {
   const [polls, setPolls] = useState<Array<Poll>>([]);
+  const [pages, setPages] = useState(1);
+  const [page, setPage] = useState(1);
 
   const t = useTranslations("account.dashboard.polls.my_polls");
   const columns = [
@@ -87,13 +81,14 @@ const MyPolls: FC = () => {
     }
   };
 
-  const getPolls = async () => {
+  const getPolls = async (page: number = 1) => {
     setLoading(true);
     try {
-      const req = await fetch(`/api/account/polls`);
+      const req = await fetch(`/api/account/polls?page=${page}`);
       const data = await req.json();
       if (req.status === 200) {
-        setPolls(data.data);
+        setPolls(data.data.polls);
+        setPages(data.data.last_page ?? 1);
       }
     } catch (error) {
       console.error(error);
@@ -103,21 +98,18 @@ const MyPolls: FC = () => {
   };
 
   useEffect(() => {
-    getPolls();
-  }, []);
+    getPolls(page);
+  }, [page]);
 
   const [filterValue, setFilterValue] = useState("");
   const [visibleColumns, setVisibleColumns] = useState<Selection>(
     new Set(columns.map((column) => column.uid))
   );
   const [statusFilter, setStatusFilter] = useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = useState(20);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "age",
     direction: "ascending",
   });
-
-  const [page, setPage] = useState(1);
 
   const hasSearchFilter = Boolean(filterValue);
 
@@ -153,14 +145,14 @@ const MyPolls: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [polls, filterValue, statusFilter]);
 
-  const pages = Math.ceil(filteredItems.length / rowsPerPage);
+  // const items = useMemo(() => {
+  //   const start = (page - 1) * rowsPerPage;
+  //   const end = start + rowsPerPage;
 
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
+  //   return filteredItems.slice(start, end);
+  // }, [page, filteredItems, rowsPerPage]);
 
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
+  const items = filteredItems;
 
   const sortedItems = useMemo(() => {
     return [...items].sort((a: Poll, b: Poll) => {
@@ -278,14 +270,6 @@ const MyPolls: FC = () => {
     }
   }, [page]);
 
-  const onRowsPerPageChange = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => {
-      setRowsPerPage(Number(e.target.value));
-      setPage(1);
-    },
-    []
-  );
-
   const onSearchChange = useCallback((value?: string) => {
     if (value) {
       setFilterValue(value);
@@ -373,7 +357,6 @@ const MyPolls: FC = () => {
     statusFilter,
     visibleColumns,
     onSearchChange,
-    onRowsPerPageChange,
     polls.length,
     hasSearchFilter,
   ]);

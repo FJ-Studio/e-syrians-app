@@ -5,12 +5,13 @@ import { FC } from "react";
 import LanguageSwitcher from "./language-switcher";
 import HeaderActions from "./header-actions";
 import Nav from "./nav";
+import Container from "./container";
 
 const Header: FC = () => {
   const t = useTranslations();
   return (
     <header className="shadow-sm flex justify-center items-center h-20 bg-white/90 backdrop-blur-sm text-primary font-semibold w-full fixed top-0 left-0 z-50">
-      <div className="container mx-auto flex justify-between items-center max-w-7xl px-6 lg:px-8">
+      <Container className="flex justify-between items-center w-full">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/icon.svg" alt="Logo" width={70} height={56.8} />
           <div>
@@ -25,7 +26,7 @@ const Header: FC = () => {
           <HeaderActions />
           <LanguageSwitcher />
         </div>
-      </div>
+      </Container>
     </header>
   );
 };

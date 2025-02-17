@@ -2,10 +2,14 @@ import recaptchaIsValid from "@/lib/recaptcha";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "../../../../../auth";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     const session = await auth()
+    if (!session) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const page = req.nextUrl.searchParams.get("page");
     try {
-        const request = await fetch(`${process.env.API_URL}/users/my-polls`, {
+        const request = await fetch(`${process.env.API_URL}/users/my-polls?page=${page}`, {
             headers: {
                 accept: "application/json",
                 authorization: `Bearer ${session?.user.accessToken}`,
