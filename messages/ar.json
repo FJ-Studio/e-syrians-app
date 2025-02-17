@@ -16,7 +16,8 @@
     "account": "حسابي",
     "close": "إغلاق",
     "submit": "إرسال البيانات",
-    "sending_data": "جار إرسال البيانات ..."
+    "sending_data": "جار إرسال البيانات ...",
+    "selectImage": "Select images"
   },
   "slogan": {
     "text": "لكل إنسان متحضر في هذا العالم وطنان؛ وطنه الأم وسوريا",
@@ -26,8 +27,8 @@
     }
   },
   "site": {
-    "name": "e-syrians",
-    "slogan": "من أجل كل سوري على وجه الأرض"
+    "slogan": "من أجل كل سوري على وجه الأرض",
+    "name": "e-syrians"
   },
   "initiatives": {
     "disarmament": {
@@ -103,8 +104,8 @@
         "title": "رقم الهاتف"
       },
       "received": {
-        "description": "شكرا من القلب",
-        "title": "تم إرسال البيانات بنجاح"
+        "title": "تم إرسال البيانات بنجاح",
+        "description": "شكرا من القلب"
       }
     },
     "weapons": {
@@ -388,25 +389,17 @@
     "ismailis": "الطائفة الاسماعيلية",
     "armenian-catholic": "الطائفة الأرمنية الكاثوليكية",
     "armenian-orthodox": "الطائفة الأرمنية الآرثوذكسية",
+    "assyrian-chaldean-syriac": "آشوري، كلداني، سيرياني",
     "greek-catholic": "الطائفة اليونيانية الكاثوليكية",
     "greek-orthodox": "الطائفة اليونانية الآرثوذكسية",
     "protestant": "الطائفة البروتستانتية",
     "syriac-catholic": "الطائفة السريانية الكاثوليكية",
     "syriac-orthodox": "الطائفة السريانية الآرثوذكسية",
-    "assyrian-chaldean-syriac": "آشوري، كلداني، سيرياني",
-    "maronites": "الطائفة المارونية",
-    "yazidis": "الطائفة اليزيدية",
     "jews": "اليهودية",
+    "yazidis": "الطائفة اليزيدية",
+    "maronites": "الطائفة المارونية",
     "non-religious": "غير متدين",
     "other": "خيار آخر"
-  },
-  "education": {
-    "none": "أمّيّ",
-    "primary": "تعليم ابتدائي",
-    "secondary": "تعليم إعدادي",
-    "high-school": "تعليم ثانوي",
-    "university-degree": "تعليم جامعي",
-    "postgraduate": "دراسات عليا"
   },
   "country": {
     "AF": "أفغانستان",
@@ -660,6 +653,14 @@
     "ZM": "زامبيا",
     "ZW": "زيمبابوي"
   },
+  "education": {
+    "none": "أمّيّ",
+    "primary": "تعليم ابتدائي",
+    "secondary": "تعليم إعدادي",
+    "high-school": "تعليم ثانوي",
+    "university-degree": "تعليم جامعي",
+    "postgraduate": "دراسات عليا"
+  },
   "spoken-language": {
     "arabic": "العربية",
     "chinese": "الصينية",
@@ -723,21 +724,26 @@
             },
             "status": {
               "title": "الحالة",
-              "active": {
-                "title": "فعال"
-              },
               "inactive": {
                 "title": "ملغي"
+              },
+              "active": {
+                "title": "فعال"
               }
             },
             "createdAt": {
               "title": "تاريخ الإضافة"
             },
             "actions": {
-              "title": "خيارات"
+              "title": "خيارات",
+              "delete": "Delete",
+              "visit": "Visit"
             },
             "columns": {
               "title": "عرض"
+            },
+            "votes": {
+              "title": "Participants count"
             }
           },
           "emptyContent": {
@@ -847,6 +853,183 @@
       },
       "surname": {
         "label": "اللقب (الكنية)"
+      },
+      "basicData": {
+        "title": "My profile",
+        "description": "You are allowed to update your data for one time. Please note that updating this information will cause you to lose all the verifications you have received."
+      },
+      "profile": {
+        "edit": "Edit",
+        "save": "Save changes",
+        "confirmation": "I understand that updating my basic information will cause me to lose all the verifications I have received."
+      },
+      "fields": {
+        "gender": {
+          "label": "Gender"
+        },
+        "surname": {
+          "label": "Surname"
+        },
+        "name": {
+          "label": "First name"
+        },
+        "birth_date": {
+          "label": "Birth date"
+        },
+        "hometown": {
+          "label": "Hometown"
+        },
+        "ethnicity": {
+          "label": "Ethnicity"
+        }
+      },
+      "update": {
+        "success": "Profile data updates successfully"
+      },
+      "avatar": {
+        "title": "Profile picture",
+        "upload": "Select new avatar",
+        "save": "Upload avatar",
+        "update": {
+          "success": "Avatar updated successfully"
+        },
+        "avatar": {
+          "title": "My avatar",
+          "upload": "Select new avatar",
+          "save": "Upload avatar",
+          "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+        }
+      },
+      "civilian": {
+        "national_id": {
+          "label": "National ID",
+          "description": "The national id will be encrypted"
+        },
+        "save": "Save changes",
+        "title": "Other civilian data",
+        "record_id": {
+          "label": "Record ID"
+        },
+        "update": {
+          "success": "Your civilian data were updated successfully"
+        }
+      },
+      "record_id": {
+        "label": "Record ID"
+      },
+      "national_id": {
+        "label": "National ID",
+        "description": "The national id will be encrypted"
+      },
+      "address": {
+        "fields": {
+          "country": {
+            "label": "Country",
+            "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+          }
+        },
+        "save": "Save changes",
+        "update": {
+          "success": "your data were updated successfully"
+        },
+        "title": "Country"
+      },
+      "census": {
+        "title": "National census",
+        "fields": {
+          "middlename": {
+            "label": "Middle name"
+          },
+          "religious_affiliation": {
+            "label": "Religious affiliation"
+          },
+          "other_nationalities": {
+            "label": "Other nationalities"
+          },
+          "city": {
+            "label": "City"
+          },
+          "address": {
+            "label": "Address"
+          },
+          "shelter": {
+            "label": "Check this if you live in a shelter"
+          },
+          "education_level": {
+            "label": "Education level"
+          },
+          "spoken_languages": {
+            "label": "Spoken languages"
+          },
+          "skills": {
+            "label": "Additional skills"
+          },
+          "source_of_income": {
+            "label": "Source of income"
+          },
+          "estimated_monthly_income": {
+            "label": "Estimated monthly income"
+          },
+          "number_of_dependents": {
+            "label": "Number of dependents"
+          },
+          "health_status": {
+            "label": "Health status"
+          },
+          "health_insurance": {
+            "label": "I have health insurance"
+          },
+          "easy_access_to_healthcare_services": {
+            "label": "I can easily access health services"
+          },
+          "more_info": {
+            "label": "Additional information"
+          }
+        },
+        "save": "Save changes",
+        "update": {
+          "success": "Your data were updated successfully"
+        }
+      }
+    },
+    "socialLinks": {
+      "title": "My links",
+      "facebook_link": {
+        "label": "Facebook"
+      },
+      "twitter_link": {
+        "label": "Twitter"
+      },
+      "instagram_link": {
+        "label": "Instagram"
+      },
+      "linkedin_link": {
+        "label": "LinkedIn"
+      },
+      "github_link": {
+        "label": "GitHub"
+      },
+      "youtube_link": {
+        "label": "YouTube"
+      },
+      "tiktok_link": {
+        "label": "TikTok"
+      },
+      "snapchat_link": {
+        "label": "Snapchat"
+      },
+      "twitch_link": {
+        "label": "Twitch"
+      },
+      "pinterest_link": {
+        "label": "Pinterest"
+      },
+      "website": {
+        "label": "Website"
+      },
+      "save": "Save changes",
+      "update": {
+        "success": "Your links were updated successfully"
       }
     }
   },
@@ -856,9 +1039,35 @@
       "polls": "الاستطلاعات"
     }
   },
+  "server_errors": {
+    "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
+    "unknown_error": "Something happened on our side, please try again later",
+    "unauthorized_action": "You are not allowed to perform this action",
+    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
+    "your_account_is_banned": "Your account is banned!",
+    "you_are_not_verified": "You cannot perform this action since your account is not verified",
+    "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
+    "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
+    "you_cannot_verify_yourself": "You cannot verify your own account",
+    "circular_verification_not_allowed": "Circular verification! You cannot verify an account that verified you",
+    "you_have_already_verified_this_user": "You have already verified this user"
+  },
   "publicVerify": {
-    "citizenFrom": "{gender, select, m {مواطن سوري} f {مواطنة سورية} other {مواطن/ة من سوريا}} من {hometown}",
     "title": "تأكيد معلومات المستخدم",
-    "verify": "تأكيد {name}"
+    "citizenFrom": "{gender, select, m {مواطن سوري} f {مواطنة سورية} other {مواطن/ة من سوريا}} من {hometown}",
+    "birthdate": "Birthdate",
+    "verify": "تأكيد {name}",
+    "gender": "Gender",
+    "ethnicity": "Ethnicity",
+    "country": "Lives in",
+    "loginToVerify": "Guests cannot perform this action! It is limited to users that are already verified",
+    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile",
+    "cancel": "Cancel",
+    "rules": {
+      "content1": "Ensure that this profile belongs to someone you personally know.",
+      "content2": "Pay close attention to every detail provided by the person.",
+      "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
+    },
+    "profileVerified": "Verification has been stored successfully"
   }
 }
