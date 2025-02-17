@@ -1,6 +1,7 @@
 "use client";
 import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
+import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import {
   Button,
@@ -78,16 +79,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
 
   const save = async (data: SocialFields) => {
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "social_links_update",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
+      const token = await generateToken("update_social_links");
       const response = await fetch("/api/account/profile/update/social", {
         method: "POST",
         headers: {

@@ -23,6 +23,7 @@ import useProvinces from "@/components/hooks/localization/provinces";
 import useEthnicity from "@/components/hooks/localization/ethnicity";
 import { toast } from "sonner";
 import useServerError from "@/components/hooks/localization/server-errors";
+import { generateToken } from "@/lib/recaptcha";
 
 type UpdateBasicProfileDataProps = {
   user?: ESUser;
@@ -81,16 +82,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
 
   const save = async (data: BasicDataFields) => {
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "basic_profile_update",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
+      const token = await generateToken("update_basic");
       const response = await fetch("/api/account/profile/update/basic", {
         method: "POST",
         headers: {

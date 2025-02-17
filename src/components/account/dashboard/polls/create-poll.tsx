@@ -24,6 +24,7 @@ import useReligiousAffiliation from "@/components/hooks/localization/religious_a
 import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useCountries from "@/components/hooks/localization/country";
 import { toast } from "sonner";
+import { generateToken } from "@/lib/recaptcha";
 
 const CreatePoll: FC = () => {
   const genderOptions = useGender();
@@ -101,16 +102,7 @@ const CreatePoll: FC = () => {
       }
     });
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "poll_store",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
+      const token = await generateToken("poll_store");
       formData.append("recaptcha_token", token);
       const response = await fetch("/api/account/polls", {
         method: "POST",

@@ -1,5 +1,6 @@
 "use client";
 import capitalize from "@/lib/capitalize";
+import { generateToken } from "@/lib/recaptcha";
 import { Poll } from "@/lib/types/polls";
 import {
   ArrowTopRightOnSquareIcon,
@@ -65,6 +66,27 @@ const MyPolls: FC = () => {
   const [deleting, setDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const switchPollStatus = async (pollId: string, status: "1" | "0") => {
+    setDeleting(true);
+    try {
+      const recaptcha_token = await generateToken("update_poll_status");
+      const req = await fetch(`/api/account/polls/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status, pollId, recaptcha_token }),
+      });
+      if (req.status === 200) {
+        getPolls();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   const getPolls = async () => {
     setLoading(true);
     try {
@@ -82,7 +104,6 @@ const MyPolls: FC = () => {
 
   useEffect(() => {
     getPolls();
-    setDeleting(false);
   }, []);
 
   const [filterValue, setFilterValue] = useState("");
@@ -190,9 +211,6 @@ const MyPolls: FC = () => {
             </Chip>
           );
         case "actions":
-          if (poll.deleted_at) {
-            return <></>;
-          }
           return (
             <div className="relative flex justify-end items-center gap-2">
               <Dropdown>
@@ -201,21 +219,39 @@ const MyPolls: FC = () => {
                     <EllipsisVerticalIcon className="text-default-300 size-6" />
                   </Button>
                 </DropdownTrigger>
-                <DropdownMenu disabledKeys={deleting ? ["delete"] : []}>
-                  <DropdownItem
-                    key={"visit"}
-                    onPress={() => {
-                      window.open(`/polls/${poll.id}`, "_blank");
-                    }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span>{t("table.actions.visit")}</span>
-                      <ArrowTopRightOnSquareIcon className="size-4" />
-                    </div>
-                  </DropdownItem>
-                  <DropdownItem key={"delete"}>
-                    {t("table.actions.delete")}
-                  </DropdownItem>
+                <DropdownMenu
+                  disabledKeys={deleting ? ["deactivate", "activate"] : []}
+                >
+                  {poll.deleted_at ? (
+                    <>
+                      <DropdownItem
+                        key={"activate"}
+                        onPress={() => switchPollStatus(poll.id, "1")}
+                      >
+                        {t("table.actions.activate")}
+                      </DropdownItem>
+                    </>
+                  ) : (
+                    <>
+                      <DropdownItem
+                        key={"visit"}
+                        onPress={() => {
+                          window.open(`/polls/${poll.id}`, "_blank");
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span>{t("table.actions.visit")}</span>
+                          <ArrowTopRightOnSquareIcon className="size-4" />
+                        </div>
+                      </DropdownItem>
+                      <DropdownItem
+                        key={"deactivate"}
+                        onPress={() => switchPollStatus(poll.id, "0")}
+                      >
+                        {t("table.actions.deactivate")}
+                      </DropdownItem>
+                    </>
+                  )}
                 </DropdownMenu>
               </Dropdown>
             </div>

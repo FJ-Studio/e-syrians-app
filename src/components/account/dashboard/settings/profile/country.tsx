@@ -1,6 +1,7 @@
 import useCountries from "@/components/hooks/localization/country";
 import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
+import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { CountryCode } from "@/lib/types/misc";
 import {
@@ -53,16 +54,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
   }, [user]);
 
   const save = async (data: AddressFields) => {
-    const token = await new Promise<string>((resolve, reject) => {
-      window.grecaptcha.ready(() => {
-        window.grecaptcha
-          .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-            action: "address_update",
-          })
-          .then(resolve)
-          .catch(reject);
-      });
-    });
+    const token = await generateToken("update_address");
     const response = await fetch("/api/account/profile/update/address", {
       method: "POST",
       headers: {

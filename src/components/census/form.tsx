@@ -34,6 +34,7 @@ import useSourceOfIncome from "../hooks/localization/income";
 import useHealthStatuses from "../hooks/localization/health";
 import confetti from "canvas-confetti";
 import extractErrors from "@/lib/extract-errors";
+import { generateToken } from "@/lib/recaptcha";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
@@ -113,16 +114,7 @@ const CensusForm: FC = () => {
       }
     });
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "census_register",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
+      const token = await generateToken("register_census");
       formData.append("recaptcha_token", token);
       const res = await fetch("/api/census/register", {
         method: "POST",

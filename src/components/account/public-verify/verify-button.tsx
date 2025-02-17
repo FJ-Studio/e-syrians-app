@@ -1,5 +1,6 @@
 "use client";
 import useServerError from "@/components/hooks/localization/server-errors";
+import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import {
   Button,
@@ -52,16 +53,7 @@ const VerifyButton: FC<Props> = ({ user }) => {
     }
     setLoading(true);
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "verify",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
+      const token = await generateToken("verify_profile");
       const response = await fetch("/api/account/profile/verify", {
         method: "POST",
         headers: {

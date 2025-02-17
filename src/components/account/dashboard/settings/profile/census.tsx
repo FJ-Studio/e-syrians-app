@@ -7,6 +7,7 @@ import useSpokenLanguages from "@/components/hooks/localization/languages";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
+import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { HealthStatus, ReligiousAffiliation } from "@/lib/types/misc";
 import {
@@ -145,16 +146,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       }
     });
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-              action: "census_update",
-            })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
+      const token = await generateToken("update_census");
       formData.append("recaptcha_token", token);
       const response = await fetch("/api/account/profile/update/census", {
         method: "POST",

@@ -2,6 +2,7 @@
 import useServerError from "@/components/hooks/localization/server-errors";
 import ImagesPicker from "@/components/shared/images-picker";
 import extractErrors from "@/lib/extract-errors";
+import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { UserIcon } from "@heroicons/react/24/outline";
 import {
@@ -55,16 +56,7 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
   }, [changes.avatar, user]);
 
   const save = async (data: AvatarFields) => {
-    const token = await new Promise<string>((resolve, reject) => {
-      window.grecaptcha.ready(() => {
-        window.grecaptcha
-          .execute(process.env.NEXT_PUBLIC_RECAPTCHA as string, {
-            action: "avatar_update",
-          })
-          .then(resolve)
-          .catch(reject);
-      });
-    });
+    const token = await generateToken("update_avatar");
     const formData = new FormData();
     formData.append("avatar", data.avatar as File);
     formData.append("recaptcha_token", token);

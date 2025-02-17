@@ -736,8 +736,10 @@
             },
             "actions": {
               "title": "Actions",
-              "delete": "Delete",
-              "visit": "Visit"
+              "delete": "Deactivate",
+              "visit": "Visit",
+              "activate": "Activate",
+              "deactivate": "Deactivate"
             },
             "columns": {
               "title": "Columns"

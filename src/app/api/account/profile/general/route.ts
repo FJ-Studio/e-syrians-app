@@ -3,13 +3,9 @@ import { auth } from "../../../../../../auth";
 
 export async function GET() {
   const session = await auth();
-  
   if (!session) {
-    return NextResponse.json(
-      { success: false, error: "Unauthorized" },
-      { status: 401 }
-    );
-  }
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
   try {
     const request = await fetch(`${process.env.API_URL}/users/me`, {
       headers: {
