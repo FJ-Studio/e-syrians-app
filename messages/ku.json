@@ -16,7 +16,8 @@
     "account": "Hesabê min",
     "close": "Nêzîkî",
     "submit": "Agahdariyên xwe bidin",
-    "sending_data": "Agahdariyên dixwazin ..."
+    "sending_data": "Agahdariyên dixwazin ...",
+    "selectImage": "Select images"
   },
   "slogan": {
     "text": "Her mirovê pêşketîyî di vê dinyayê de du welatên xwe hene: welatê xwe û Sûrîye",
@@ -26,8 +27,8 @@
     }
   },
   "site": {
-    "name": "e-syrians",
-    "slogan": "Ji bo her Sûrîyî li ser erdê"
+    "slogan": "Ji bo her Sûrîyî li ser erdê",
+    "name": "e-syrians"
   },
   "initiatives": {
     "disarmament": {
@@ -39,7 +40,12 @@
       "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
     },
     "census": {
+      "title": "National census",
       "description": "Tehlîlê neteweyî yên ku ji aliyê gelê Sûrî ve hatine pêşkêş kirin, ku dikare qeydê xwe ya xwe û berhevkirina daneyên giştî bike."
+    },
+    "polls": {
+      "title": "Polls",
+      "description": "A platform for conducting polls and surveys to gauge public opinion on various issues."
     }
   },
   "hero": {
@@ -66,10 +72,10 @@
   "disarm": {
     "i_have_weapon": "Çekên min hene ku radest bikim",
     "info_modal": {
+      "title": "Meriv çawa nexşeyê bikar tîne",
       "content1": "Naxşê nîşan dide xurtên teslimê ku lîyekên hukûmetê silahên ji şexsên şaristanê qebûl dikin.",
       "content2": "Bi klik kirina nîşaneyekê, agahdariya xurtê di kûçeya jêr-a çepê ya naxşê de dibe.",
-      "content3": "Heke hertiştekên te heye, ji kerema xwe bi ser pêşûngoka kiryarê li navenda jêrê klik bike û dest pê bike bi têketina agahdariyên xwe.",
-      "title": "Meriv çawa nexşeyê bikar tîne"
+      "content3": "Heke hertiştekên te heye, ji kerema xwe bi ser pêşûngoka kiryarê li navenda jêrê klik bike û dest pê bike bi têketina agahdariyên xwe."
     },
     "report": {
       "name": {
@@ -92,15 +98,14 @@
       },
       "weapons_list_description": "Ji kerema xwe lîsteya silahên ku hûn dixwazin radest bikin binivîsin",
       "address": {
-        "title": "Navnîşana te",
-        "description": "Ji kerema xwe navnîşana xwe binivîse"
+        "title": "Navnîşana te"
       },
       "phone": {
         "title": "Hejmara telefonê"
       },
       "received": {
-        "description": "Spas ji dil.",
-        "title": "Daneyên bi serfirazî hatin şandin"
+        "title": "Daneyên bi serfirazî hatin şandin",
+        "description": "Spas ji dil."
       }
     },
     "weapons": {
@@ -112,6 +117,269 @@
       "explosive": "Teqîn",
       "other": "Yên din"
     }
+  },
+  "census": {
+    "title": "Syrian National Census",
+    "description": "This initiative enables Syrians to register their data themselves. The goal is to create a safe, fast and efficient way to save ourselves and our country a lot of time and money, and to reach our citizens in areas outside government control.",
+    "actions": {
+      "register": "Register"
+    },
+    "form": {
+      "sections": {
+        "peronalData": {
+          "title": "Personal data",
+          "description": "Here, you can enter your basic information, which will be used for verification and statistics. Please ensure accuracy, as updating this information will require you to go through the verification process again."
+        },
+        "accountInfo": {
+          "title": "Account info",
+          "description": "Use this section to create your login credentials, which you will need to access the platform later."
+        },
+        "locationData": {
+          "title": "Current location",
+          "description": "Wherever you are, please fill your location data. You cannot update this data more than once in a month"
+        },
+        "education": {
+          "title": "Education"
+        },
+        "employment": {
+          "title": "Employment"
+        },
+        "health": {
+          "title": "Health"
+        },
+        "more_info": {
+          "title": "Additional information"
+        },
+        "censusData": {
+          "title": "National census data",
+          "description": "This platform is not affiliated with or supported by the Syrian government at this time. Therefore, all fields related to personal civilian data are optional. However, if you choose to provide them, rest assured that your information will be stored securely and handled with the utmost confidentiality."
+        }
+      },
+      "fields": {
+        "name": {
+          "placeholder": "Please enter your first name",
+          "label": "First name",
+          "required": "The first name is required"
+        },
+        "email": {
+          "label": "E-mail address",
+          "placeholder": "Please type your e-mail address"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Please type your password",
+          "description": "Minimum 6 characters, including at least one letter and one digit."
+        },
+        "surname": {
+          "label": "Surname",
+          "placeholder": "Please enter your surname/lastname"
+        },
+        "middlename": {
+          "label": "Middle name"
+        },
+        "national_id": {
+          "label": "National ID",
+          "placeholder": "Please enter your national id",
+          "description": "Your national id will be encrypted and no one will be able to see it"
+        },
+        "gender": {
+          "label": "Gender"
+        },
+        "birth_date": {
+          "label": "Birthdate"
+        },
+        "hometown": {
+          "label": "Hometown",
+          "description": "Choose your city of origin in Syria"
+        },
+        "ethnicity": {
+          "label": "Ethnicity"
+        },
+        "religious_affiliation": {
+          "label": "Religious affiliation",
+          "description": "Will not be visible on your profile"
+        },
+        "record_id": {
+          "label": "Record ID",
+          "placeholder": "please enter your record id",
+          "description": "Will not be visible on your profile"
+        },
+        "country": {
+          "label": "Country",
+          "description": "Please select the country you currently live in."
+        },
+        "city": {
+          "label": "City",
+          "placeholder": "Please enter your current city",
+          "description": "In which city do you live?"
+        },
+        "address": {
+          "label": "Current detailed address",
+          "description": "Your address will be encrypted"
+        },
+        "shelter": {
+          "label": "Check this if you live in a shelter"
+        },
+        "education_level": {
+          "label": "Education level"
+        },
+        "spoken_languages": {
+          "label": "Spoken languages"
+        },
+        "skills": {
+          "label": "Additional skills"
+        },
+        "source_of_income": {
+          "label": "Source of income"
+        },
+        "estimated_monthly_income": {
+          "label": "Estimated monthly income"
+        },
+        "number_of_dependents": {
+          "label": "Number of dependents"
+        },
+        "health_status": {
+          "label": "Health status"
+        },
+        "health_insurance": {
+          "label": "I have health insurance"
+        },
+        "easy_access_to_healthcare_services": {
+          "label": "I can easily access health services"
+        },
+        "more_info": {
+          "label": "Additional information",
+          "placeholder": "Please feel free to add any other info."
+        },
+        "other_nationalities": {
+          "label": "Other nationalities",
+          "description": "Other than the Syrian nationality"
+        },
+        "passwordConfirmation": {
+          "label": "Password confirmation",
+          "placeholder": "Please enter your password again"
+        }
+      },
+      "actions": {
+        "register": "Register",
+        "cancel": "Cancel"
+      },
+      "title": "Registration Form",
+      "description": "Only fields marked with a red asterisk (*) are required. However, all the information you provide will be securely stored.",
+      "success": "We have received your application",
+      "error": "We could not handle your request. Please try later",
+      "passwordMismatch": "Please check your password confirmation"
+    },
+    "nav": {
+      "stats": "Main",
+      "first_batch": "First Registrants",
+      "fraudsters": "Fraudsters"
+    },
+    "first": {
+      "description": "This list includes the first {count} members who registered in the system without verification from others. Since no previous users existed to verify them, their participation is made public for transparency. We assure you that they are real people—you can visit their profiles and check their social media links for verification.",
+      "title": "First Registrants"
+    },
+    "fraudsters": {
+      "title": "Fraudulent Accounts",
+      "description": "This page lists accounts that have been identified as fraudulent based on technical evidence. To maintain trust and accuracy in the system, any account proven to be fake will be suspended along with its verifiers. Our commitment is to ensure a reliable and transparent registration process for everyone."
+    },
+    "charts": {
+      "dailyRegistrations": {
+        "title": "Daily user updates",
+        "description": "Number of accounts have been created/verified"
+      },
+      "categories": {
+        "registered": "Registered",
+        "verified": "Verified",
+        "1-10": "1-10",
+        "11-20": "11-20",
+        "21-30": "21-30",
+        "31-40": "31-40",
+        "41-50": "41-50",
+        "51-60": "51-60",
+        "61-70": "61-70",
+        "71-80": "71-80",
+        "81-90": "81-90",
+        "91-100": "91-100",
+        "71-100": "71-100"
+      },
+      "gender": {
+        "title": "Users by gender",
+        "description": "Splitted based on verification status"
+      },
+      "age": {
+        "title": "Users age groups",
+        "description": "Splitted based on verification status",
+        "unit": "years"
+      },
+      "ethnicity": {
+        "title": "Users by ethnicity",
+        "description": "Splitted based on the verification status"
+      },
+      "hometown": {
+        "title": "Users by hometown",
+        "description": "Splitted based on verification status"
+      },
+      "religion": {
+        "description": "Splitted based on verification status",
+        "title": "Users by religion affiliation"
+      },
+      "country": {
+        "description": "Splitted based on verification status",
+        "title": "Users by their current country"
+      },
+      "charts": {
+        "filter": {
+          "perday": "Per day",
+          "permonth": "Per month"
+        }
+      },
+      "labels": {
+        "registered": {
+          "title": "Registration"
+        },
+        "verification": {
+          "title": "Verification"
+        },
+        "verified": {
+          "title": "Verified"
+        },
+        "unverified": {
+          "title": "Unverified"
+        }
+      }
+    }
+  },
+  "gender": {
+    "f": "Female",
+    "m": "Male"
+  },
+  "province": {
+    "deir-ezzor": "Deir-ezzor",
+    "damascus": "Damascus",
+    "hama": "Hama",
+    "homs": "Homs",
+    "idlib": "Idlib",
+    "latakia": "Latakia",
+    "aleppo": "Aleppo",
+    "suwayda": "Assuwayda",
+    "rif-dimashq": "Rif Dimashq",
+    "daraa": "Daraa",
+    "hasakah": "Hasakah",
+    "quneitra": "Quneitra",
+    "raqqa": "Raqqa",
+    "tartus": "Tartus"
+  },
+  "ethnicity": {
+    "arab": "Arab",
+    "kurd": "Kurd",
+    "turkmen": "Turkmen",
+    "armenian": "Armenian",
+    "greek": "Greek",
+    "assyrian": "Assyrian",
+    "chechen": "Chechen",
+    "circassian": "Circassian",
+    "other": "Other"
   },
   "religious_affiliation": {
     "sunni": "Sunnî",
@@ -127,18 +395,679 @@
     "protestant": "Protestan",
     "syriac-catholic": "Suryanî Katolîk",
     "syriac-orthodox": "Suryanî Ortodoks",
-    "maronites": "Maronî",
-    "yazidis": "Êzîdî",
     "jews": "Yahûdî",
+    "yazidis": "Êzîdî",
+    "maronites": "Maronî",
     "non-religious": "Bêdîn",
     "other": "Yekî din"
+  },
+  "country": {
+    "AF": "Afghanistan",
+    "AX": "Aland Islands",
+    "AL": "Albania",
+    "DZ": "Algeria",
+    "AS": "American Samoa",
+    "AD": "Andorra",
+    "AO": "Angola",
+    "AI": "Anguilla",
+    "AQ": "Antarctica",
+    "AG": "Antigua and Barbuda",
+    "AR": "Argentina",
+    "AM": "Armenia",
+    "AW": "Aruba",
+    "AU": "Australia",
+    "AT": "Austria",
+    "AZ": "Azerbaijan",
+    "BS": "Bahamas",
+    "BH": "Bahrain",
+    "BD": "Bangladesh",
+    "BB": "Barbados",
+    "BY": "Belarus",
+    "BE": "Belgium",
+    "BZ": "Belize",
+    "BJ": "Benin",
+    "BM": "Bermuda",
+    "BT": "Bhutan",
+    "BO": "Bolivia",
+    "BA": "Bosnia and Herzegovina",
+    "BW": "Botswana",
+    "BV": "Bouvet Island",
+    "BR": "Brazil",
+    "IO": "British Indian Ocean Territory",
+    "VG": "British Virgin Islands",
+    "BN": "Brunei",
+    "BG": "Bulgaria",
+    "BF": "Burkina Faso",
+    "BI": "Burundi",
+    "KH": "Cambodia",
+    "CM": "Cameroon",
+    "CA": "Canada",
+    "CV": "Cape Verde",
+    "BQ": "Caribbean Netherlands",
+    "KY": "Cayman Islands",
+    "CF": "Central African Republic",
+    "TD": "Chad",
+    "CL": "Chile",
+    "CN": "China",
+    "CX": "Christmas Island",
+    "CC": "Cocos (Keeling) Islands",
+    "CO": "Colombia",
+    "KM": "Comoros",
+    "CK": "Cook Islands",
+    "CR": "Costa Rica",
+    "HR": "Croatia",
+    "CU": "Cuba",
+    "CW": "Curacao",
+    "CY": "Cyprus",
+    "CZ": "Czechia",
+    "CD": "Democratic Republic of the Congo",
+    "DK": "Denmark",
+    "DJ": "Djibouti",
+    "DM": "Dominica",
+    "DO": "Dominican Republic",
+    "TL": "East Timor",
+    "EC": "Ecuador",
+    "EG": "Egypt",
+    "SV": "El Salvador",
+    "GQ": "Equatorial Guinea",
+    "ER": "Eritrea",
+    "EE": "Estonia",
+    "SZ": "Eswatini",
+    "ET": "Ethiopia",
+    "FK": "Falkland Islands",
+    "FO": "Faroe Islands",
+    "FM": "Federated States of Micronesia",
+    "FJ": "Fiji",
+    "FI": "Finland",
+    "FR": "France",
+    "GF": "French Guiana",
+    "PF": "French Polynesia",
+    "TF": "French Southern and Antarctic Lands",
+    "GA": "Gabon",
+    "GM": "Gambia",
+    "GE": "Georgia",
+    "DE": "Germany",
+    "GH": "Ghana",
+    "GI": "Gibraltar",
+    "GR": "Greece",
+    "GL": "Greenland",
+    "GD": "Grenada",
+    "GP": "Guadeloupe",
+    "GU": "Guam",
+    "GT": "Guatemala",
+    "GG": "Guernsey",
+    "GN": "Guinea",
+    "GW": "Guinea-Bissau",
+    "GY": "Guyana",
+    "HT": "Haiti",
+    "HM": "Heard Island and McDonald Islands",
+    "HN": "Honduras",
+    "HK": "Hong Kong",
+    "HU": "Hungary",
+    "IS": "Iceland",
+    "IN": "India",
+    "ID": "Indonesia",
+    "IR": "Iran",
+    "IQ": "Iraq",
+    "IE": "Ireland",
+    "IM": "Isle of Man",
+    "IL": "Israel",
+    "IT": "Italy",
+    "CI": "Ivory Coast",
+    "JM": "Jamaica",
+    "JP": "Japan",
+    "JE": "Jersey",
+    "JO": "Jordan",
+    "KZ": "Kazakhstan",
+    "KE": "Kenya",
+    "KI": "Kiribati",
+    "XK": "Kosovo",
+    "KW": "Kuwait",
+    "KG": "Kyrgyzstan",
+    "LA": "Laos",
+    "LV": "Latvia",
+    "LB": "Lebanon",
+    "LS": "Lesotho",
+    "LR": "Liberia",
+    "LY": "Libya",
+    "LI": "Liechtenstein",
+    "LT": "Lithuania",
+    "LU": "Luxembourg",
+    "MO": "Macao",
+    "MG": "Madagascar",
+    "MW": "Malawi",
+    "MY": "Malaysia",
+    "MV": "Maldives",
+    "ML": "Mali",
+    "MT": "Malta",
+    "MH": "Marshall Islands",
+    "MQ": "Martinique",
+    "MR": "Mauritania",
+    "MU": "Mauritius",
+    "YT": "Mayotte",
+    "MX": "Mexico",
+    "MD": "Moldova",
+    "MN": "Mongolia",
+    "ME": "Montenegro",
+    "MS": "Montserrat",
+    "MA": "Morocco",
+    "MZ": "Mozambique",
+    "MM": "Myanmar",
+    "NA": "Namibia",
+    "NR": "Nauru",
+    "NP": "Nepal",
+    "NL": "Netherlands",
+    "NC": "New Caledonia",
+    "NZ": "New Zealand",
+    "NI": "Nicaragua",
+    "NE": "Niger",
+    "NG": "Nigeria",
+    "NU": "Niue",
+    "NF": "Norfolk Island",
+    "KP": "North Korea",
+    "MK": "North Macedonia",
+    "MP": "Northern Mariana Islands",
+    "NO": "Norway",
+    "OM": "Oman",
+    "PK": "Pakistan",
+    "PW": "Palau",
+    "PS": "Palestine",
+    "PA": "Panama",
+    "PG": "Papua New Guinea",
+    "PY": "Paraguay",
+    "PE": "Peru",
+    "PH": "Philippines",
+    "PN": "Pitcairn Islands",
+    "PL": "Poland",
+    "PT": "Portugal",
+    "MC": "Principality of Monaco",
+    "PR": "Puerto Rico",
+    "QA": "Qatar",
+    "CG": "Republic of the Congo",
+    "RE": "Reunion",
+    "RO": "Romania",
+    "RU": "Russia",
+    "RW": "Rwanda",
+    "BL": "Saint Barthelemy",
+    "SH": "Saint Helena, Ascension and Tristan da Cunha",
+    "KN": "Saint Kitts and Nevis",
+    "LC": "Saint Lucia",
+    "MF": "Saint Martin",
+    "PM": "Saint Pierre and Miquelon",
+    "VC": "Saint Vincent and the Grenadines",
+    "WS": "Samoa",
+    "SM": "San Marino",
+    "ST": "Sao Tome and Principe",
+    "SA": "Saudi Arabia",
+    "SN": "Senegal",
+    "RS": "Serbia",
+    "SC": "Seychelles",
+    "SL": "Sierra Leone",
+    "SG": "Singapore",
+    "SX": "Sint Maarten",
+    "SK": "Slovakia",
+    "SI": "Slovenia",
+    "SB": "Solomon Islands",
+    "SO": "Somalia",
+    "ZA": "South Africa",
+    "GS": "South Georgia and South Sandwich Islands",
+    "KR": "South Korea",
+    "SS": "South Sudan",
+    "ES": "Spain",
+    "LK": "Sri Lanka",
+    "SD": "Sudan",
+    "SR": "Suriname",
+    "SJ": "Svalbard",
+    "SE": "Sweden",
+    "CH": "Switzerland",
+    "SY": "Syria",
+    "TW": "Taiwan",
+    "TJ": "Tajikistan",
+    "TZ": "Tanzania",
+    "TH": "Thailand",
+    "TG": "Togo",
+    "TK": "Tokelau",
+    "TO": "Tonga",
+    "TT": "Trinidad and Tobago",
+    "TN": "Tunisia",
+    "TR": "Turkey",
+    "TM": "Turkmenistan",
+    "TC": "Turks and Caicos Islands",
+    "TV": "Tuvalu",
+    "UG": "Uganda",
+    "UA": "Ukraine",
+    "AE": "United Arab Emirates",
+    "GB": "United Kingdom",
+    "UM": "United States Minor Outlying Islands",
+    "US": "United States of America",
+    "UY": "Uruguay",
+    "UZ": "Uzbekistan",
+    "VU": "Vanuatu",
+    "VA": "Vatican City",
+    "VE": "Venezuela",
+    "VN": "Vietnam",
+    "VI": "Virgin Islands",
+    "WF": "Wallis and Futuna",
+    "EH": "Western Sahara",
+    "YE": "Yemen",
+    "ZM": "Zambia",
+    "ZW": "Zimbabwe"
   },
   "education": {
     "none": "Nehêvî",
     "primary": "Dibistana Seretayî",
-    "high-school": "Lise",
     "secondary": "Dibistana Navîn",
+    "high-school": "Lise",
     "university-degree": "Diploma Zankoyê",
     "postgraduate": "Master an Jiyana Akademîk"
+  },
+  "spoken-language": {
+    "arabic": "Arabic",
+    "chinese": "Chinese",
+    "english": "English",
+    "french": "French",
+    "german": "German",
+    "kurdish": "Kurdish",
+    "hindi": "Hindi",
+    "italian": "Italian",
+    "dutch": "Dutch",
+    "japanese": "Japanese",
+    "korean": "Korean",
+    "other": "Other",
+    "persian": "Persian",
+    "portuguese": "Portuguese",
+    "russian": "Russian",
+    "spanish": "Spanish",
+    "turkish": "Turkish",
+    "urdu": "Urdu"
+  },
+  "source-of-income": {
+    "stable-job": "Stable job",
+    "freelance": "I am a freelancer",
+    "no-income": "No income",
+    "aid-support": "Aid support",
+    "other": "Other"
+  },
+  "health_status": {
+    "good": "Good",
+    "chronic-illness": "I have a chronic illness",
+    "disabled-special-needs": "I have a disability"
+  },
+  "auth": {
+    "login": {
+      "identifier": "E-mail / Phone / National ID"
+    }
+  },
+  "account": {
+    "dashboard": {
+      "welcome": "Welcome {name}",
+      "nav": {
+        "polls": "Polls",
+        "verifications": "Verifications",
+        "settings": "Settings",
+        "donate": "Donate",
+        "signout": "Sign out"
+      },
+      "polls": {
+        "my_polls": {
+          "title": "My Polls",
+          "description": "Here you can view the polls you have created",
+          "table": {
+            "question": {
+              "title": "Question"
+            },
+            "startDate": {
+              "title": "Start"
+            },
+            "endDate": {
+              "title": "End"
+            },
+            "status": {
+              "title": "Status",
+              "inactive": {
+                "title": "Inactive"
+              },
+              "active": {
+                "title": "Active"
+              }
+            },
+            "createdAt": {
+              "title": "Created at"
+            },
+            "actions": {
+              "title": "Actions",
+              "delete": "Delete",
+              "visit": "Visit"
+            },
+            "columns": {
+              "title": "Columns"
+            },
+            "votes": {
+              "title": "Participants count"
+            }
+          },
+          "emptyContent": {
+            "title": "You have not added any poll yet",
+            "add": "Create one"
+          },
+          "search": {
+            "title": "Search by question"
+          },
+          "next": {
+            "title": "Next"
+          },
+          "previous": {
+            "title": "Previous"
+          }
+        },
+        "my_votes": {
+          "title": "My Votes",
+          "description": "Here you can view the polls you have voted in"
+        },
+        "my_reactions": {
+          "title": "My Reactions",
+          "description": "Here you can view the polls you have reacted to"
+        },
+        "create": {
+          "title": "Create a new poll",
+          "description": "When creating a poll, please use clear and respectful language. Be specific and make sure your question is well-structured, as edits won’t be possible after submission.",
+          "question": {
+            "label": "Question",
+            "placeholder": "Type your poll question here",
+            "error": "Please type more than 10 characters"
+          },
+          "accountUnverifiedAlert": "Your account is not verified yet! Kindly share your profile link with the community to get enough verifications",
+          "start_date": {
+            "label": "Start date",
+            "description": "On which date the poll will be published"
+          },
+          "duration": {
+            "label": "Duration (days)",
+            "placeholder": "For how many day(s) the audience will be able to vote",
+            "error": "Please use latin digits to specify days"
+          },
+          "submit": "Submit",
+          "max_selections": {
+            "label": "Maximum selections",
+            "description": "The maximum number of options a user can select when voting.",
+            "error": "Please use a digit between 1 and 10"
+          },
+          "audience_can_add_options": {
+            "no": {
+              "label": "No"
+            },
+            "yes": {
+              "label": "Yes (This feature is coming soon)"
+            },
+            "label": "Audience can add options"
+          },
+          "options": {
+            "title": "Poll options",
+            "label": "Option {index}",
+            "add": "Add option"
+          },
+          "audience": {
+            "title": "Poll audience"
+          },
+          "gender": {
+            "label": "Gender",
+            "description": "A blank value indicates that all genders are eligible to vote."
+          },
+          "hometown": {
+            "label": "Province",
+            "description": "A blank value indicates that users from all provinces are eligible to vote."
+          },
+          "ethnicity": {
+            "label": "Ethnicity",
+            "description": "A blank value indicates that all ethnicities are eligible to vote."
+          },
+          "country": {
+            "label": "Country",
+            "description": "A blank value indicates that users in all countries are eligible to vote."
+          },
+          "religious_affiliation": {
+            "label": "Religious affiliation",
+            "description": "A blank value indicates that users from all religious affiliations are eligible to vote."
+          },
+          "age_range": {
+            "label": "Age range"
+          },
+          "success": "Poll created successfully"
+        }
+      }
+    },
+    "settings": {
+      "tabs": {
+        "profile": {
+          "title": "Profile"
+        },
+        "security": {
+          "title": "Security"
+        }
+      },
+      "error": {
+        "tryAgain": "Failed to load profile data, please try again later!"
+      },
+      "name": {
+        "label": "First name"
+      },
+      "surname": {
+        "label": "Surname"
+      },
+      "basicData": {
+        "title": "My profile",
+        "description": "You are allowed to update your data for one time. Please note that updating this information will cause you to lose all the verifications you have received."
+      },
+      "profile": {
+        "edit": "Edit",
+        "save": "Save changes",
+        "confirmation": "I understand that updating my basic information will cause me to lose all the verifications I have received."
+      },
+      "fields": {
+        "gender": {
+          "label": "Gender"
+        },
+        "surname": {
+          "label": "Surname"
+        },
+        "name": {
+          "label": "First name"
+        },
+        "birth_date": {
+          "label": "Birth date"
+        },
+        "hometown": {
+          "label": "Hometown"
+        },
+        "ethnicity": {
+          "label": "Ethnicity"
+        }
+      },
+      "update": {
+        "success": "Profile data updates successfully"
+      },
+      "avatar": {
+        "title": "Profile picture",
+        "upload": "Select new avatar",
+        "save": "Upload avatar",
+        "update": {
+          "success": "Avatar updated successfully"
+        },
+        "avatar": {
+          "title": "My avatar",
+          "upload": "Select new avatar",
+          "save": "Upload avatar",
+          "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+        }
+      },
+      "civilian": {
+        "national_id": {
+          "label": "National ID",
+          "description": "The national id will be encrypted"
+        },
+        "save": "Save changes",
+        "title": "Other civilian data",
+        "record_id": {
+          "label": "Record ID"
+        },
+        "update": {
+          "success": "Your civilian data were updated successfully"
+        }
+      },
+      "record_id": {
+        "label": "Record ID"
+      },
+      "national_id": {
+        "label": "National ID",
+        "description": "The national id will be encrypted"
+      },
+      "address": {
+        "fields": {
+          "country": {
+            "label": "Country",
+            "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+          }
+        },
+        "save": "Save changes",
+        "update": {
+          "success": "your data were updated successfully"
+        },
+        "title": "Country"
+      },
+      "census": {
+        "title": "National census",
+        "fields": {
+          "middlename": {
+            "label": "Middle name"
+          },
+          "religious_affiliation": {
+            "label": "Religious affiliation"
+          },
+          "other_nationalities": {
+            "label": "Other nationalities"
+          },
+          "city": {
+            "label": "City"
+          },
+          "address": {
+            "label": "Address"
+          },
+          "shelter": {
+            "label": "Check this if you live in a shelter"
+          },
+          "education_level": {
+            "label": "Education level"
+          },
+          "spoken_languages": {
+            "label": "Spoken languages"
+          },
+          "skills": {
+            "label": "Additional skills"
+          },
+          "source_of_income": {
+            "label": "Source of income"
+          },
+          "estimated_monthly_income": {
+            "label": "Estimated monthly income"
+          },
+          "number_of_dependents": {
+            "label": "Number of dependents"
+          },
+          "health_status": {
+            "label": "Health status"
+          },
+          "health_insurance": {
+            "label": "I have health insurance"
+          },
+          "easy_access_to_healthcare_services": {
+            "label": "I can easily access health services"
+          },
+          "more_info": {
+            "label": "Additional information"
+          }
+        },
+        "save": "Save changes",
+        "update": {
+          "success": "Your data were updated successfully"
+        }
+      }
+    },
+    "socialLinks": {
+      "title": "My links",
+      "facebook_link": {
+        "label": "Facebook"
+      },
+      "twitter_link": {
+        "label": "Twitter"
+      },
+      "instagram_link": {
+        "label": "Instagram"
+      },
+      "linkedin_link": {
+        "label": "LinkedIn"
+      },
+      "github_link": {
+        "label": "GitHub"
+      },
+      "youtube_link": {
+        "label": "YouTube"
+      },
+      "tiktok_link": {
+        "label": "TikTok"
+      },
+      "snapchat_link": {
+        "label": "Snapchat"
+      },
+      "twitch_link": {
+        "label": "Twitch"
+      },
+      "pinterest_link": {
+        "label": "Pinterest"
+      },
+      "website": {
+        "label": "Website"
+      },
+      "save": "Save changes",
+      "update": {
+        "success": "Your links were updated successfully"
+      }
+    }
+  },
+  "header": {
+    "nav": {
+      "census": "Census",
+      "polls": "Polls"
+    }
+  },
+  "server_errors": {
+    "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
+    "unknown_error": "Something happened on our side, please try again later",
+    "unauthorized_action": "You are not allowed to perform this action",
+    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
+    "your_account_is_banned": "Your account is banned!",
+    "you_are_not_verified": "You cannot perform this action since your account is not verified",
+    "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
+    "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
+    "you_cannot_verify_yourself": "You cannot verify your own account",
+    "circular_verification_not_allowed": "Circular verification! You cannot verify an account that verified you",
+    "you_have_already_verified_this_user": "You have already verified this user"
+  },
+  "publicVerify": {
+    "title": "Verify user information",
+    "citizenFrom": "Syrian citizen from {hometown}",
+    "birthdate": "Birthdate",
+    "verify": "Verify {name}",
+    "gender": "Gender",
+    "ethnicity": "Ethnicity",
+    "country": "Lives in",
+    "loginToVerify": "Guests cannot perform this action! It is limited to users that are already verified",
+    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile",
+    "cancel": "Cancel",
+    "rules": {
+      "content1": "Ensure that this profile belongs to someone you personally know.",
+      "content2": "Pay close attention to every detail provided by the person.",
+      "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
+    },
+    "profileVerified": "Verification has been stored successfully"
   }
 }
