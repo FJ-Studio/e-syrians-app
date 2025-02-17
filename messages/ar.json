@@ -17,7 +17,7 @@
     "close": "إغلاق",
     "submit": "إرسال البيانات",
     "sending_data": "جار إرسال البيانات ...",
-    "selectImage": "Select images"
+    "selectImage": "اختر صورة"
   },
   "slogan": {
     "text": "لكل إنسان متحضر في هذا العالم وطنان؛ وطنه الأم وسوريا",
@@ -45,7 +45,7 @@
     },
     "polls": {
       "title": "الاستطلاعات",
-      "description": "A platform for conducting polls and surveys to gauge public opinion on various issues."
+      "description": "منصة لإجراء استطلاعات الرأي لقياس الرأي العام بشأن مختلف القضايا."
     }
   },
   "hero": {
@@ -64,7 +64,7 @@
   },
   "footer": {
     "privacy_policy": "سياسة الخصوصية",
-    "terms": "الشروط",
+    "terms": "شروط الاستخدام",
     "all_rights_reserved": "جميع الحقوق محفوظة",
     "initiatives": "المبادرات",
     "links": "روابط"
@@ -736,14 +736,16 @@
             },
             "actions": {
               "title": "خيارات",
-              "delete": "Delete",
-              "visit": "Visit"
+              "delete": "Deactivate",
+              "visit": "زيارة",
+              "activate": "Activate",
+              "deactivate": "Deactivate"
             },
             "columns": {
               "title": "عرض"
             },
             "votes": {
-              "title": "Participants count"
+              "title": "عدد المشاركين"
             }
           },
           "emptyContent": {
@@ -855,181 +857,181 @@
         "label": "اللقب (الكنية)"
       },
       "basicData": {
-        "title": "My profile",
-        "description": "You are allowed to update your data for one time. Please note that updating this information will cause you to lose all the verifications you have received."
+        "title": "ملفي الشخصي",
+        "description": "إن تحديث معلوماتك الأساسية يعني خسارة كل التأكيدات التي حصلت عليها مقدّمًا، وبأية حال لا يمكنك تحديث المعلومات الشخصية إلا لمرات محدودة"
       },
       "profile": {
-        "edit": "Edit",
-        "save": "Save changes",
-        "confirmation": "I understand that updating my basic information will cause me to lose all the verifications I have received."
+        "edit": "تعديل",
+        "save": "حفظ التغييرات",
+        "confirmation": "أعلم أن تعديل معلوماتي الأساسية سيجعلني أفقد جميع عمليات التأكيد التي تلقيتها سابقا"
       },
       "fields": {
         "gender": {
-          "label": "Gender"
+          "label": "الجنس"
         },
         "surname": {
-          "label": "Surname"
+          "label": "اللقب (الكنية)"
         },
         "name": {
-          "label": "First name"
+          "label": "الاسم"
         },
         "birth_date": {
-          "label": "Birth date"
+          "label": "تاريخ الميلاد"
         },
         "hometown": {
-          "label": "Hometown"
+          "label": "المدينة الأم"
         },
         "ethnicity": {
-          "label": "Ethnicity"
+          "label": "العرق"
         }
       },
       "update": {
-        "success": "Profile data updates successfully"
+        "success": "تم تحديث بيانات الملف الشخصي بنجاح"
       },
       "avatar": {
-        "title": "Profile picture",
-        "upload": "Select new avatar",
-        "save": "Upload avatar",
+        "title": "صورة الملفّ الشخصي",
+        "upload": "اختر صورة جديدة",
+        "save": "تحميل الصورة",
         "update": {
-          "success": "Avatar updated successfully"
+          "success": "تم تعديل الصورة بنجاح!"
         },
         "avatar": {
-          "title": "My avatar",
-          "upload": "Select new avatar",
-          "save": "Upload avatar",
-          "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+          "title": "صورتي الشخصية",
+          "upload": "اختر صورة جديدة",
+          "save": "تحميل الصورة",
+          "instructions": "الرجاء تحديد صورة شخصية تقل عن 500 كيلو بايت في الحجم ولا تزيد على 800x800 بكسل"
         }
       },
       "civilian": {
         "national_id": {
-          "label": "National ID",
-          "description": "The national id will be encrypted"
+          "label": "الرقم الوطني",
+          "description": "سيتم تشفير الرقم الوطني"
         },
-        "save": "Save changes",
-        "title": "Other civilian data",
+        "save": "حفظ التغييرات",
+        "title": "معلومات الإحصاء",
         "record_id": {
-          "label": "Record ID"
+          "label": "رقم القيد"
         },
         "update": {
-          "success": "Your civilian data were updated successfully"
+          "success": "تم تحديث معلوماتك بنجاح"
         }
       },
       "record_id": {
-        "label": "Record ID"
+        "label": "رقم القيد"
       },
       "national_id": {
-        "label": "National ID",
-        "description": "The national id will be encrypted"
+        "label": "الرقم الوطني",
+        "description": "سيتم تشفير الرقم الوطني"
       },
       "address": {
         "fields": {
           "country": {
-            "label": "Country",
-            "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+            "label": "بلد الإقامة",
+            "description": "تغيير البلد يؤثر على استهداف الجمهور ضمن الاستطلاعات لذلك يمكن تغييره مرات محدودة في السنة"
           }
         },
-        "save": "Save changes",
+        "save": "حفظ التغييرات",
         "update": {
-          "success": "your data were updated successfully"
+          "success": "تم تحديث معلوماتك بنجاح"
         },
-        "title": "Country"
+        "title": "بلد الإقامة"
       },
       "census": {
-        "title": "National census",
+        "title": "التعداد الوطني",
         "fields": {
           "middlename": {
-            "label": "Middle name"
+            "label": "الاسم الأوسط"
           },
           "religious_affiliation": {
-            "label": "Religious affiliation"
+            "label": "الانتماء الديني"
           },
           "other_nationalities": {
-            "label": "Other nationalities"
+            "label": "جنسيات أخرى"
           },
           "city": {
-            "label": "City"
+            "label": "المدينة"
           },
           "address": {
-            "label": "Address"
+            "label": "العنوان"
           },
           "shelter": {
-            "label": "Check this if you live in a shelter"
+            "label": "حدد هذا الخيار إذا كنت تعيش في ملجأ"
           },
           "education_level": {
-            "label": "Education level"
+            "label": "المستوى التعليمي"
           },
           "spoken_languages": {
-            "label": "Spoken languages"
+            "label": "اللغات التي أتحدثها"
           },
           "skills": {
-            "label": "Additional skills"
+            "label": "مهارات إضافية"
           },
           "source_of_income": {
-            "label": "Source of income"
+            "label": "مصدر الدخل"
           },
           "estimated_monthly_income": {
-            "label": "Estimated monthly income"
+            "label": "الدخل الشهري التقديري"
           },
           "number_of_dependents": {
-            "label": "Number of dependents"
+            "label": "عدد الأشخاص الذين أعيلهم"
           },
           "health_status": {
-            "label": "Health status"
+            "label": "الحالة الصحية"
           },
           "health_insurance": {
-            "label": "I have health insurance"
+            "label": "لدي تأمين صحي"
           },
           "easy_access_to_healthcare_services": {
-            "label": "I can easily access health services"
+            "label": "يمكنني الوصول بسهولة إلى الخدمات الصحية"
           },
           "more_info": {
-            "label": "Additional information"
+            "label": "معلومات إضافية"
           }
         },
-        "save": "Save changes",
+        "save": "حفظ التغييرات",
         "update": {
-          "success": "Your data were updated successfully"
+          "success": "تم تحديث معلوماتك بنجاح"
         }
       }
     },
     "socialLinks": {
-      "title": "My links",
+      "title": "الروابط الخاصة بي",
       "facebook_link": {
-        "label": "Facebook"
+        "label": "صفحتي على فيسبوك"
       },
       "twitter_link": {
-        "label": "Twitter"
+        "label": "صفحتى على X"
       },
       "instagram_link": {
-        "label": "Instagram"
+        "label": "حسابي على انستغرام"
       },
       "linkedin_link": {
-        "label": "LinkedIn"
+        "label": "حسابي على Linkedin"
       },
       "github_link": {
-        "label": "GitHub"
+        "label": "حسابي على Github"
       },
       "youtube_link": {
-        "label": "YouTube"
+        "label": "قناتي على يوتيوب"
       },
       "tiktok_link": {
-        "label": "TikTok"
+        "label": "حسابي على تيك توك"
       },
       "snapchat_link": {
-        "label": "Snapchat"
+        "label": "حسابي على سنابشات"
       },
       "twitch_link": {
-        "label": "Twitch"
+        "label": "حسابي على Twitch"
       },
       "pinterest_link": {
-        "label": "Pinterest"
+        "label": "حسابي على Pinterest"
       },
       "website": {
-        "label": "Website"
+        "label": "موقعي الشخصي"
       },
-      "save": "Save changes",
+      "save": "حفظ التغييرات",
       "update": {
-        "success": "Your links were updated successfully"
+        "success": "تم تحديث الروابط الخاصة بك بنجاح"
       }
     }
   },
@@ -1040,34 +1042,34 @@
     }
   },
   "server_errors": {
-    "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
-    "unknown_error": "Something happened on our side, please try again later",
-    "unauthorized_action": "You are not allowed to perform this action",
-    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
-    "your_account_is_banned": "Your account is banned!",
-    "you_are_not_verified": "You cannot perform this action since your account is not verified",
-    "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
-    "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
-    "you_cannot_verify_yourself": "You cannot verify your own account",
-    "circular_verification_not_allowed": "Circular verification! You cannot verify an account that verified you",
-    "you_have_already_verified_this_user": "You have already verified this user"
+    "basic_info_updates_limit_reached": "تعديل المعلومات الأساسية محدود بمرات قليلة، في حال أردت التعديل مرة أخرى، يجب عليك مراسلة فريق الدعم",
+    "unknown_error": "حدث خطأ ما، الرجاء المحاولة لاحقا",
+    "unauthorized_action": "غير مسموح لك القيام بهذا الإجراء",
+    "country_updates_limit_reached": "تعديل العنوان محدود بمرات قليلة، في حال أردت التعديل مرة أخرى، يجب عليك مراسلة فريق الدعم",
+    "your_account_is_banned": "تم حظر الحساب الخاص بك!",
+    "you_are_not_verified": "لا يمكنك تنفيذ هذا الإجراء لأن حسابك لا يمتلك العدد الكافي من التأكيدات",
+    "you_do_not_have_enough_verifications": "لا يمكنك تنفيذ هذا الإجراء لأن حسابك لا يمتلك العدد الكافي من التأكيدات",
+    "you_have_reached_the_maximum_verifications": "لقد وصلت إلى الحد الأقصى للتأكيدات التي يمكنك القيام بها",
+    "you_cannot_verify_yourself": "لا يمكنك تأكيد حسابك الشخصي",
+    "circular_verification_not_allowed": "لا يمكنك تأكيد المعلومات لحساب قام مسبقا بتأكيد معلوماتك",
+    "you_have_already_verified_this_user": "لقد قمت مسبقا بتأكيد معلومات هذا المستخدم"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
     "citizenFrom": "{gender, select, m {مواطن سوري} f {مواطنة سورية} other {مواطن/ة من سوريا}} من {hometown}",
-    "birthdate": "Birthdate",
+    "birthdate": "تاريخ الميلاد",
     "verify": "تأكيد {name}",
-    "gender": "Gender",
-    "ethnicity": "Ethnicity",
-    "country": "Lives in",
-    "loginToVerify": "Guests cannot perform this action! It is limited to users that are already verified",
-    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile",
-    "cancel": "Cancel",
+    "gender": "الجنس",
+    "ethnicity": "العرق",
+    "country": "بلد الإقامة",
+    "loginToVerify": "فقط المستخدمين الذين تم تأكيد معلوماتهم يمكنهم القيام بهذا الإجراء",
+    "cannotVerifyOwnProfile": "لا يمكنك تأكيد معلوماتك الشخصية",
+    "cancel": "إلغاء",
     "rules": {
-      "content1": "Ensure that this profile belongs to someone you personally know.",
-      "content2": "Pay close attention to every detail provided by the person.",
-      "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
+      "content1": "تأكد من أن المعلومات الواردة هي لمستخدم تجمعكما معا معرفة شخصية.",
+      "content2": "يرجى الانتباه إلى كل معلومة واردة ضمن الملف الشخصي",
+      "content3": "المنصة قائمة بشكل أساسي على الثقة والتفاعل بين أشخاص حقيقيين. الحسابات المزيفة أو التي تتبع لأشخاص غير سوريين سوف يتم إيقافها وإدراجها ضمن صفحة \"المخالفين\" هي وكل من قام بتأكيد معلوماتها."
     },
-    "profileVerified": "Verification has been stored successfully"
+    "profileVerified": "تمت عملية التأكيد بنجاح"
   }
 }
