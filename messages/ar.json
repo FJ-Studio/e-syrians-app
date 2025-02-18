@@ -268,7 +268,12 @@
       "description": "فقط الحقول التي تحمل علامة النجمة الحمراء (*) مطلوبة. يتم تخزين جميع المعلومات التي تقدمها بأمان.",
       "success": "تم استلام طلبك بنجاح",
       "error": "تعذر معالجة طلبك. يرجى المحاولة لاحقًا",
-      "passwordMismatch": "يرجى التحقق من تأكيد كلمة المرور"
+      "passwordMismatch": "يرجى التحقق من تأكيد كلمة المرور",
+      "close": "Close",
+      "profile": {
+        "link": "Share your profile",
+        "copy": "Now, it is time to share your profile with the network to get verified"
+      }
     },
     "nav": {
       "stats": "الرئيسية",
@@ -1156,6 +1161,8 @@
       "year": {
         "title": "Select year"
       }
-    }
+    },
+    "title": "Polls",
+    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}"
   }
 }
