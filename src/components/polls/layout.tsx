@@ -21,7 +21,7 @@ const PollsLayout: FC<PropsWithChildren> = ({ children }) => {
   //   t("months.december"),
   // ]);
   return (
-    <div className="min-h-[calc(100dvh-128px)] relative pt-20">
+    <div className="min-h-[calc(100dvh-128px)] relative pt-20 space-y-8">
       <div className="bg-primary h-12 flex items-center justify-between">
         <Container className="flex items-center justify-between text-white"></Container>
       </div>

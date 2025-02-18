@@ -5,14 +5,15 @@ import { CENSUS_NAV } from "@/lib/constants/census";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEsyrian } from "../shared/contexts/es";
+import Container from "../shared/container";
 
 const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
   const t = useTranslations();
   const { openCensusForm } = useEsyrian();
   return (
     <div className="min-h-[calc(100dvh-128px)] relative pt-20">
-      <div className="bg-primary h-12 flex items-center justify-between">
-        <div className="container mx-auto max-w-7xl px-6 lg:px-8 flex items-center justify-between">
+      <div className="bg-primary h-12 flex items-center">
+        <Container className="mx-auto flex items-center justify-between">
           <div className="text-sm md:text-base">
             {CENSUS_NAV.map((nav, index) => (
               <Fragment key={nav.link}>
@@ -35,11 +36,10 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
           >
             {t("census.actions.register")}
           </button>
-        </div>
+        </Container>
       </div>
-      <div className="container mx-auto max-w-7xl px-3 lg:px-4 pt-8">
-        {children}
-      </div>
+      <Container className="pt-8">{children}</Container>
+
       <CensusForm />
     </div>
   );

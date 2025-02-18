@@ -1,6 +1,6 @@
 "use client";
 import { toast } from "sonner";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useEsyrian } from "../shared/contexts/es";
 import { Controller, useForm } from "react-hook-form";
 import { RegistrationForm } from "@/lib/types/census";
@@ -17,9 +17,16 @@ import {
   DrawerFooter,
   DrawerHeader,
   Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   Select,
   SelectItem,
+  Snippet,
   Textarea,
+  useDisclosure,
 } from "@heroui/react";
 import useGender from "../hooks/localization/gender";
 
@@ -35,10 +42,19 @@ import useHealthStatuses from "../hooks/localization/health";
 import confetti from "canvas-confetti";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
+import { getUrl } from "@/lib/user";
+import { ESUser } from "@/lib/types/account";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
 const CensusForm: FC = () => {
+  const [uuid, setUuid] = useState<string | null>(null);
+  const {
+    isOpen,
+    onOpen: onOpenLinkModal,
+    onOpenChange: onOpenLinkModalchange,
+  } = useDisclosure();
+
   const { censusFormIsOpened, openCensusForm } = useEsyrian();
   const genderOptions = useGender();
   const provinces = useProvinces();
@@ -126,12 +142,12 @@ const CensusForm: FC = () => {
       const json = await res.json();
       if (res.ok) {
         if (res.status === 201) {
+          setUuid(json.data.uuid);
           confetti({
             particleCount: 150,
             spread: 70,
             origin: { y: 0.6 }, // Confetti starts from the middle
           });
-          toast.success(t("success"));
           reset(
             Object.keys(watchedValues).reduce(
               (acc, key) => ({ ...acc, [key]: "" }),
@@ -140,6 +156,7 @@ const CensusForm: FC = () => {
           );
           localStorage.removeItem(LOCAL_STORAGE_KEY);
           openCensusForm(false);
+          onOpenLinkModal();
         }
       } else {
         toast.error(
@@ -765,6 +782,44 @@ const CensusForm: FC = () => {
           )}
         </DrawerContent>
       </Drawer>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenLinkModalchange}
+        isDismissable={false}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>{t("profile.link")}</ModalHeader>
+              <ModalBody>
+                <p>{t("profile.copy")} 🥳</p>
+                <Input
+                  value={getUrl({ uuid } as ESUser)}
+                  readOnly
+                  endContent={
+                    <Snippet
+                      hideSymbol
+                      codeString={getUrl({ uuid } as ESUser)}
+                      size="sm"
+                      variant="flat"
+                      className="translate-x-2"
+                      classNames={{
+                        base: "bg-transparent",
+                      }}
+                      disableTooltip
+                    />
+                  }
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button onPress={onClose} fullWidth color="danger">
+                  {t("close")}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 };

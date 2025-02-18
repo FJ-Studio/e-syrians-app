@@ -8,7 +8,7 @@ import VerifyButton from "./verify-button";
 import useGender from "@/components/hooks/localization/gender";
 import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useCountries from "@/components/hooks/localization/country";
-import PublicVerifyCardDropdown from "./dropdown-items";
+import UserCardLinksDropdown from "./dropdown-items";
 import { Card, CardBody } from "@heroui/react";
 
 type Props = {
@@ -27,11 +27,11 @@ const PublicVerify: FC<Props> = ({ user }) => {
         {t("title")}
       </h1>
       <Card className="max-w-md mx-auto">
-        <CardBody className="space-y-4  ">
+        <CardBody className="space-y-4 text-start ">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
               <UserAvatar user={user} />
-              <div>
+              <div className=" ">
                 <p>{`${user.name} ${user.surname}`}</p>
                 <p className="text-default-500 text-sm">
                   {t("citizenFrom", {
@@ -41,9 +41,8 @@ const PublicVerify: FC<Props> = ({ user }) => {
                 </p>
               </div>
             </div>
-            <PublicVerifyCardDropdown user={user} />
+            <UserCardLinksDropdown user={user} />
           </div>
-
           <div className="flex flex-wrap gap-y-2">
             <div className="flex flex-col  w-1/2 sm:w-1/4">
               <p>{t("birthdate")}</p>

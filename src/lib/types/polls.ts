@@ -15,13 +15,15 @@ export type PollReveal = 'before-voting' | 'after-voting' | 'after-expiration';
 export type PollOption = {
     id: string;
     option_text: string;
+    votes_count?: number;
+    percentage?: number;
 }
 export type Poll = {
     id: string;
     start_date: string;
     end_date: string;
     question: string;
-    options: Array<string>;
+    options: Array<PollOption>;
     audience: PollAudience;
     max_selections: number;
     audience_can_add_options: boolean;
@@ -31,6 +33,12 @@ export type Poll = {
     votes_count: number;
     ups_count: number;
     downs_count: number;
+    user: {
+        id: string;
+        name: string;
+        surname: string;
+        avatar: string;
+    }
 }
 
 export interface CreatePollFields {

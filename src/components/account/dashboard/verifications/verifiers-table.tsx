@@ -99,6 +99,7 @@ const VerifiersTable: FC = () => {
             <User
               avatarProps={{
                 src: item.verifier.avatar,
+                className: "min-w-10 min-h-10",
               }}
               name={`${item.verifier.name} ${item.verifier.surname}`}
             />
@@ -108,7 +109,9 @@ const VerifiersTable: FC = () => {
             return <></>;
           }
           return (
-            <>{cancellationReasons(item.cancelation_payload?.reason ?? "")}</>
+            <div className="min-w-36">
+              {cancellationReasons(item.cancelation_payload?.reason ?? "")}
+            </div>
           );
         case "status":
           return (

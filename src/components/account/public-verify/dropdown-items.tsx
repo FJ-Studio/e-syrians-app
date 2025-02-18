@@ -13,7 +13,7 @@ import { FC } from "react";
 type Props = {
   user: ESUser;
 };
-const PublicVerifyCardDropdown: FC<Props> = ({ user }) => {
+const UserCardLinksDropdown: FC<Props> = ({ user }) => {
   const links = [
     {
       title: "Facebook",
@@ -88,4 +88,4 @@ const PublicVerifyCardDropdown: FC<Props> = ({ user }) => {
   );
 };
 
-export default PublicVerifyCardDropdown;
+export default UserCardLinksDropdown;
