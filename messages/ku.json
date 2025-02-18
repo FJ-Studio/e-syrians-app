@@ -1163,6 +1163,7 @@
       }
     },
     "title": "Polls",
-    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}"
+    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}",
+    "vote": "Vote"
   }
 }
