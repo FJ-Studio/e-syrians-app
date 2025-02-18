@@ -268,7 +268,12 @@
       "description": "Only fields marked with a red asterisk (*) are required. However, all the information you provide will be securely stored.",
       "success": "We have received your application",
       "error": "We could not handle your request. Please try later",
-      "passwordMismatch": "Please check your password confirmation"
+      "passwordMismatch": "Please check your password confirmation",
+      "close": "Close",
+      "profile": {
+        "link": "Share your profile",
+        "copy": "Now, it is time to share your profile with the network to get verified"
+      }
     },
     "nav": {
       "stats": "Main",
@@ -750,7 +755,7 @@
           },
           "emptyContent": {
             "title": "You have not added any poll yet",
-            "add": "Create one"
+            "add": "Create poll"
           },
           "search": {
             "title": "Search by question"
@@ -835,6 +840,67 @@
             "label": "Age range"
           },
           "success": "Poll created successfully"
+        }
+      },
+      "verifications": {
+        "my-verifications": {
+          "title": "Verifications I made"
+        },
+        "my-verifiers": {
+          "title": "Verifications I received"
+        },
+        "verifiers-table": {
+          "title": "People who have verified my data",
+          "name": {
+            "title": "Name"
+          },
+          "date": {
+            "title": "Date"
+          },
+          "table": {
+            "status": {
+              "title": "Status"
+            },
+            "notes": {
+              "title": "Notes"
+            }
+          },
+          "status": {
+            "cancelled": {
+              "title": "Cancelled"
+            },
+            "active": {
+              "title": "Active"
+            }
+          },
+          "noVerifiers": "You have received 0 verifications. You can share your profile URL with your network",
+          "copyProfileUrl": "Copy profile URL"
+        },
+        "verifications-table": {
+          "name": {
+            "title": "Name"
+          },
+          "date": {
+            "title": "Date"
+          },
+          "table": {
+            "status": {
+              "title": "Status"
+            },
+            "notes": {
+              "title": "Notes"
+            }
+          },
+          "status": {
+            "cancelled": {
+              "title": "Cancelled"
+            },
+            "active": {
+              "title": "Active"
+            }
+          },
+          "title": "Verifications I sent",
+          "noVerifications": "You have made 0 verifications"
         }
       }
     },
@@ -1071,5 +1137,32 @@
       "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
     },
     "profileVerified": "Verification has been stored successfully"
+  },
+  "verificationCancelationReasons": {
+    "user_updated_basic_info": "User has updated his basic data",
+    "unknown_reason": "Unknown reason"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "Septemper",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "polls": {
+    "picker": {
+      "year": {
+        "title": "Select year"
+      }
+    },
+    "title": "Polls",
+    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}"
   }
 }
