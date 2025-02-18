@@ -268,7 +268,12 @@
       "description": "Only fields marked with a red asterisk (*) are required. However, all the information you provide will be securely stored.",
       "success": "We have received your application",
       "error": "We could not handle your request. Please try later",
-      "passwordMismatch": "Please check your password confirmation"
+      "passwordMismatch": "Please check your password confirmation",
+      "close": "Close",
+      "profile": {
+        "link": "Share your profile",
+        "copy": "Now, it is time to share your profile with the network to get verified"
+      }
     },
     "nav": {
       "stats": "Main",
@@ -1156,6 +1161,8 @@
       "year": {
         "title": "Select year"
       }
-    }
+    },
+    "title": "Polls",
+    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}"
   }
 }
