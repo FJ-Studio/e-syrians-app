@@ -269,10 +269,10 @@
       "success": "تم استلام طلبك بنجاح",
       "error": "تعذر معالجة طلبك. يرجى المحاولة لاحقًا",
       "passwordMismatch": "يرجى التحقق من تأكيد كلمة المرور",
-      "close": "Close",
+      "close": "إغلاق",
       "profile": {
-        "link": "Share your profile",
-        "copy": "Now, it is time to share your profile with the network to get verified"
+        "link": "شارك ملفك الشخصي",
+        "copy": "الآن، حان الوقت لمشاركة ملفك الشخصي مع معارفك وأصدقائك من أجل الحصول على تأكيدات"
       }
     },
     "nav": {
@@ -741,10 +741,10 @@
             },
             "actions": {
               "title": "خيارات",
-              "delete": "Deactivate",
+              "delete": "إلغاء",
               "visit": "زيارة",
-              "activate": "Activate",
-              "deactivate": "Deactivate"
+              "activate": "تفعيل",
+              "deactivate": "إلغاء"
             },
             "columns": {
               "title": "عرض"
@@ -755,7 +755,7 @@
           },
           "emptyContent": {
             "title": "لم تضف أي استطلاع بعد",
-            "add": "Create poll"
+            "add": "إنشاء استطلاع جديد"
           },
           "search": {
             "title": "البحث حسب نص الاستطلاع"
@@ -844,63 +844,63 @@
       },
       "verifications": {
         "my-verifications": {
-          "title": "Verifications I made"
+          "title": "التأكيدات التي قمت بإرسالها"
         },
         "my-verifiers": {
-          "title": "Verifications I received"
+          "title": "التأكيدات التي تلقيتها"
         },
         "verifiers-table": {
-          "title": "People who have verified my data",
+          "title": "الأشخاص الذين قاموا بتأكيد بياناتي",
           "name": {
-            "title": "Name"
+            "title": "الاسم"
           },
           "date": {
-            "title": "Date"
+            "title": "التاريخ"
           },
           "table": {
             "status": {
-              "title": "Status"
+              "title": "الحالة"
             },
             "notes": {
-              "title": "Notes"
+              "title": "ملاحظات"
             }
           },
           "status": {
             "cancelled": {
-              "title": "Cancelled"
+              "title": "ملغى"
             },
             "active": {
-              "title": "Active"
+              "title": "فعال"
             }
           },
-          "noVerifiers": "You have received 0 verifications. You can share your profile URL with your network",
-          "copyProfileUrl": "Copy profile URL"
+          "noVerifiers": "لم يقم أحد بتأكيد بياناتك إلى الآن. على أية حال بإمكانك مشاركة رابط ملفك مع معارفك",
+          "copyProfileUrl": "نسخ رابط الملف الشخصي"
         },
         "verifications-table": {
           "name": {
-            "title": "Name"
+            "title": "الاسم"
           },
           "date": {
-            "title": "Date"
+            "title": "التاريخ"
           },
           "table": {
             "status": {
-              "title": "Status"
+              "title": "الحالة"
             },
             "notes": {
-              "title": "Notes"
+              "title": "ملاحظات"
             }
           },
           "status": {
             "cancelled": {
-              "title": "Cancelled"
+              "title": "ملغى"
             },
             "active": {
-              "title": "Active"
+              "title": "فعال"
             }
           },
-          "title": "Verifications I sent",
-          "noVerifications": "You have made 0 verifications"
+          "title": "التأكيدات التي قمت بإرسالها",
+          "noVerifications": "لم تقم بعمل أي تأكيد إلى الآن"
         }
       }
     },
@@ -1139,30 +1139,30 @@
     "profileVerified": "تمت عملية التأكيد بنجاح"
   },
   "verificationCancelationReasons": {
-    "user_updated_basic_info": "User has updated his basic data",
-    "unknown_reason": "Unknown reason"
+    "user_updated_basic_info": "قام المستخدم بتحديث بياناته الأساسية",
+    "unknown_reason": "سبب آخر"
   },
   "months": {
-    "january": "January",
-    "february": "February",
-    "march": "March",
-    "april": "April",
-    "may": "May",
-    "june": "June",
-    "july": "July",
-    "august": "August",
-    "september": "Septemper",
-    "october": "October",
-    "november": "November",
-    "december": "December"
+    "january": "يناير",
+    "february": "فبراير",
+    "march": "مارس",
+    "april": "أبريل",
+    "may": "أيار",
+    "june": "حزيران",
+    "july": "تموز",
+    "august": "آب",
+    "september": "أيلول",
+    "october": "أوكتوبر",
+    "november": "نوفمبر",
+    "december": "ديسمبر"
   },
   "polls": {
     "picker": {
       "year": {
-        "title": "Select year"
+        "title": "اختر السنة"
       }
     },
-    "title": "Polls",
-    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}"
+    "title": "الاستطلاعات",
+    "postedBy": "تم نشره بواسطة {name} يوم {created_at} بحيث يمكن الإجابة بين {start_date} و {end_date}"
   }
 }
