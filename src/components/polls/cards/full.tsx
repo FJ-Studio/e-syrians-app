@@ -21,6 +21,8 @@ import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
 import PollOptionRow from "./poll-option-row";
 import Link from "next/link";
+import canAnswerPoll from "@/lib/can-answer-poll";
+import { useSession } from "next-auth/react";
 
 type Props = {
   poll: Poll;
@@ -31,6 +33,8 @@ const PollFullCard: FC<Props> = ({ poll }) => {
 
   const { user } = poll;
   const t = useTranslations("polls");
+  const session = useSession();
+  const canAnswer = canAnswerPoll(poll, session.data?.user);
   return (
     <Card>
       <CardHeader className="flex items-start gap-1.5">
@@ -47,7 +51,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           <PopoverTrigger>
             <InformationCircleIcon className="h-6 w-6 text-gray-700 cursor-pointer" />
           </PopoverTrigger>
-          <PopoverContent className="max-w-72">
+          <PopoverContent className="max-w-72 p-3">
             {t("postedBy", {
               name: `${user.name} ${user.surname}`,
               created_at: new Date(poll.created_at).toLocaleDateString(),
@@ -80,15 +84,22 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             size="sm"
             startContent={<HandThumbUpIcon className="w-6 h-6" />}
           >
-            {poll.ups_count ?? "0"}
+            {poll.ups_count}
           </Button>
           <Button
             size="sm"
             startContent={<HandThumbDownIcon className="w-6 h-6" />}
           >
-            {poll.downs_count ?? "0"}
+            {poll.downs_count}
           </Button>
         </div>
+        <Button
+          size="sm"
+          color="primary"
+          isDisabled={!selectedOptions.length || !canAnswer[0]}
+        >
+          {t("vote")}
+        </Button>
       </CardFooter>
     </Card>
   );

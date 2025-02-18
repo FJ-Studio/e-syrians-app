@@ -9,6 +9,7 @@ export type ESUser = {
   phone: string;
   accessToken: string;
   verified_at: string;
+  verification_reason: string;
   roles: Array<string>;
   permissions: Array<string>;
   gender: Gender;

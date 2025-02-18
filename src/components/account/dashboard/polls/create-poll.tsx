@@ -97,7 +97,7 @@ const CreatePoll: FC = () => {
           (data.audience[key as keyof PollAudience] as unknown as string) ?? ""
         ).split(",");
         opts.forEach((opt: string) => {
-          formData.append(`audience[${key}][]`, opt);
+          formData.append(`${key}[]`, opt);
         });
       }
     });
