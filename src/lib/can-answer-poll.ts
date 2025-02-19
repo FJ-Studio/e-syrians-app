@@ -1,3 +1,4 @@
+import { MAX_AUDIENCE_AGE } from "./constants/census";
 import { ESUser } from "./types/account";
 import { Poll } from "./types/polls";
 
@@ -20,20 +21,21 @@ function getAge(birthdate?: string | null): number {
   return age;
 }
 
-const canAnswerPoll = (poll: Poll, user?: ESUser | null): [boolean, Array<string>] => {
-    if (!user) {
-        return [false, ["unauthorized"]];
-    }
-  let allowed = true;
+const isInAudience = (
+  poll: Poll,
+  user?: ESUser | null
+): [boolean, Array<string>] => {
+  if (!user) {
+    return [false, ["unauthorized"]];
+  }
+
   const reasons: Array<string> = [];
   // country check
-  if ((poll?.audience?.country ?? "")?.length > 0) {
+  if ((poll?.audience?.country ?? [])?.length > 0) {
     if (!user.country) {
-      allowed = false;
       reasons.push("country");
     } else {
       if (poll.audience.country?.includes(user.country) === false) {
-        allowed = false;
         reasons.push("country");
       }
     }
@@ -41,71 +43,58 @@ const canAnswerPoll = (poll: Poll, user?: ESUser | null): [boolean, Array<string
   // age check
   if (poll?.audience?.age_range) {
     const age = getAge(user.birth_date);
+    const maxAllowed = parseInt(poll.audience.age_range.max);
     if (
       age < parseInt(poll.audience.age_range.min) ||
-      age > parseInt(poll.audience.age_range.max)
+      (age > maxAllowed && maxAllowed !== MAX_AUDIENCE_AGE)
     ) {
-      allowed = false;
       reasons.push("age");
     }
   }
   // gender check
-  if ((poll?.audience.gender ?? "")?.length > 0) {
+  if ((poll?.audience.gender ?? [])?.length > 0) {
     if (!user.gender) {
-      allowed = false;
       reasons.push("gender");
     } else {
-      const genders = poll.audience.gender;
-      if (genders?.includes(user.gender) === false) {
-        allowed = false;
+      if (poll.audience.gender?.includes(user.gender) === false) {
         reasons.push("gender");
       }
     }
   }
   // religious_affiliation check
-  if ((poll?.audience.religious_affiliation ?? "")?.length > 0) {
+  if ((poll?.audience.religious_affiliation ?? [])?.length > 0) {
     if (!user.religious_affiliation) {
-      allowed = false;
       reasons.push("religious_affiliation");
     } else {
-      const religious_affiliations =
-        poll.audience.religious_affiliation;
       if (
-        religious_affiliations?.includes(user.religious_affiliation) === false
+        poll.audience.religious_affiliation?.includes(
+          user.religious_affiliation
+        ) === false
       ) {
-        allowed = false;
         reasons.push("religious_affiliation");
       }
     }
   }
   // hometown check
-  if ((poll?.audience.hometown ?? "")?.length > 0) {
+  if ((poll?.audience.hometown ?? [])?.length > 0) {
     if (!user.hometown) {
-      allowed = false;
       reasons.push("hometown");
     } else {
-      if (
-        poll.audience.hometown?.includes(user.hometown) === false
-      ) {
-        allowed = false;
+      if (poll.audience.hometown?.includes(user.hometown) === false) {
         reasons.push("hometown");
       }
     }
   }
   // ethnicity check
-  if ((poll?.audience.ethnicity ?? "")?.length > 0) {
+  if ((poll?.audience.ethnicity ?? [])?.length > 0) {
     if (!user.ethnicity) {
-      allowed = false;
       reasons.push("ethnicity");
     } else {
-      if (
-        poll.audience.ethnicity?.includes(user.ethnicity) === false
-      ) {
-        allowed = false;
+      if (poll.audience.ethnicity?.includes(user.ethnicity) === false) {
         reasons.push("ethnicity");
       }
     }
   }
-  return [allowed, reasons];
+  return [reasons.length === 0, reasons];
 };
-export default canAnswerPoll;
+export default isInAudience;

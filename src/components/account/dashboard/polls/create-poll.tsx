@@ -25,6 +25,7 @@ import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useCountries from "@/components/hooks/localization/country";
 import { toast } from "sonner";
 import { generateToken } from "@/lib/recaptcha";
+import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 
 const CreatePoll: FC = () => {
   const genderOptions = useGender();
@@ -49,8 +50,8 @@ const CreatePoll: FC = () => {
       duration: "1",
       audience: {
         age_range: {
-          max: "100",
-          min: "13",
+          max: MAX_AUDIENCE_AGE.toString(),
+          min: MIN_AUDIENCE_AGE.toString(),
         },
         country: "",
         ethnicity: "",
@@ -409,18 +410,18 @@ const CreatePoll: FC = () => {
             )}
           />
           <Slider
-            defaultValue={[13, 100]}
+            defaultValue={[MIN_AUDIENCE_AGE, MAX_AUDIENCE_AGE]}
             getValue={(value) => {
               if (Array.isArray(value) && value.length === 2) {
-                if (value[1] === 100) {
+                if (value[1] === MAX_AUDIENCE_AGE) {
                   return [value[0].toString(), `${value[1]}+`].join(" - ");
                 }
                 return value.map((v) => v.toString()).join(" - ");
               }
               return value.toString();
             }}
-            maxValue={100}
-            minValue={13}
+            maxValue={MAX_AUDIENCE_AGE}
+            minValue={MIN_AUDIENCE_AGE}
             step={1}
             label={t("age_range.label")}
             onChange={(value: SliderValue) => {

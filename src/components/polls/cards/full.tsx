@@ -18,23 +18,60 @@ import {
   PopoverTrigger,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import PollOptionRow from "./poll-option-row";
 import Link from "next/link";
-import canAnswerPoll from "@/lib/can-answer-poll";
+import isInAudience from "@/lib/can-answer-poll";
 import { useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { generateToken } from "@/lib/recaptcha";
+import useServerError from "@/components/hooks/localization/server-errors";
 
 type Props = {
   poll: Poll;
 };
 
 const PollFullCard: FC<Props> = ({ poll }) => {
+  const serverErrors = useServerError();
   const [selectedOptions, setSelectedOptions] = useState<Array<string>>([]);
 
   const { user } = poll;
   const t = useTranslations("polls");
   const session = useSession();
-  const canAnswer = canAnswerPoll(poll, session.data?.user);
+  const canAnswer = isInAudience(poll, session.data?.user);
+
+  useEffect(() => {
+    // If the array exceeds the limit, remove the oldest selected option
+    if (selectedOptions.length > poll.max_selections) {
+      toast.warning(t("maxSelections", { max: poll.max_selections }));
+      setSelectedOptions((prevSelected) =>
+        prevSelected.slice(-poll.max_selections)
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOptions]);
+
+  const vote = async () => {
+    const token = await generateToken("poll_vote");
+    const req = await fetch(`/api/polls/vote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        poll_id: poll.id,
+        poll_option_id: selectedOptions,
+        recaptcha_token: token,
+      }),
+    });
+    if (req.ok) {
+      toast.success(t("voteSuccess"));
+    } else {
+      const data = await req.json();
+      toast.error(serverErrors(data?.messages?.[0] ?? "unknownError"));
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="flex items-start gap-1.5">
@@ -83,12 +120,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           <Button
             size="sm"
             startContent={<HandThumbUpIcon className="w-6 h-6" />}
+            isDisabled={session.status !== "authenticated"}
           >
             {poll.ups_count}
           </Button>
           <Button
             size="sm"
             startContent={<HandThumbDownIcon className="w-6 h-6" />}
+            isDisabled={session.status !== "authenticated"}
           >
             {poll.downs_count}
           </Button>
@@ -96,6 +135,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
         <Button
           size="sm"
           color="primary"
+          onPress={vote}
           isDisabled={!selectedOptions.length || !canAnswer[0]}
         >
           {t("vote")}

@@ -19,6 +19,14 @@ const useServerError = (): ((errorCode: string) => string) => {
       you_have_already_verified_this_user: t(
         "you_have_already_verified_this_user"
       ),
+      poll_has_expired: t("poll_has_expired"),
+      poll_has_not_started_yet: t("poll_has_not_started_yet"),
+      you_have_already_voted: t("you_have_already_voted"),
+      user_is_not_in_poll_audience: t("user_is_not_in_poll_audience"),
+      user_has_reached_the_max_selections: t(
+        "user_has_reached_the_max_selections"
+      ),
+      invalid_options: t("invalid_options"),
     };
     return errors[errorCode as keyof typeof errors] || t("unknown_error");
   };

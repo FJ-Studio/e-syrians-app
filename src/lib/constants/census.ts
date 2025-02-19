@@ -355,3 +355,6 @@ export const CENSUS_NAV = [
     link: "/census/fraudsters",
   },
 ];
+
+export const MIN_AUDIENCE_AGE = 13;
+export const MAX_AUDIENCE_AGE = 100;

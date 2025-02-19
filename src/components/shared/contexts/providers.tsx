@@ -3,12 +3,13 @@ import { FC, PropsWithChildren } from "react";
 import EsyrianProvider from "./es";
 import { HeroUIProvider } from "@heroui/react";
 import { Toaster } from "sonner";
+import { ibm } from "@/lib/fonts";
 
 const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (
     <HeroUIProvider>
       <EsyrianProvider>{children}</EsyrianProvider>
-      <Toaster position="bottom-left" richColors />
+      <Toaster position="bottom-left" richColors className={ibm.className} />
     </HeroUIProvider>
   );
 };
