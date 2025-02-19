@@ -1,6 +1,6 @@
 import { Poll } from "@/lib/types/polls";
 import { FC } from "react";
-import PollFullCard from "./cards/full";
+import PollFullCard from "./cards/poll-card";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -13,7 +13,7 @@ const Polls: FC<Props> = ({ polls }) => {
     <>
       <h1 className="font-bold text-3xl text-gray-700">{t("title")}</h1>
       <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-4 grid-flow-row dense	 my-4">
-        {polls.map((poll) => (
+        {(polls ?? []).map((poll) => (
           <PollFullCard key={poll.id} poll={poll} />
         ))}
       </div>

@@ -1,9 +1,11 @@
 "use client";
 
-import { Card, CardBody, Tab, Tabs } from "@heroui/react";
+import { Tab, Tabs } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import MyPolls from "./my-polls";
+import MyVoting from "./my-voting";
+import MyReactions from "./my-reactions";
 
 const Polls: FC = () => {
   const t = useTranslations("account.dashboard.polls");
@@ -12,16 +14,11 @@ const Polls: FC = () => {
       <Tab key="my-polls" title={t("my_polls.title")}>
         <MyPolls />
       </Tab>
-      <Tab key="my-answers" title={t("my_votes.title")}>
-        <Card>
-          <CardBody>{t("my_votes.description")}</CardBody>
-        </Card>
+      <Tab key="my-voting" title={t("my_votes.title")}>
+        <MyVoting />
       </Tab>
-
       <Tab key="my-reactions" title={t("my_reactions.title")}>
-        <Card>
-          <CardBody>{t("my_reactions.description")}</CardBody>
-        </Card>
+        <MyReactions />
       </Tab>
     </Tabs>
   );

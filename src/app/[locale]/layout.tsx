@@ -13,6 +13,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { ibm } from "@/lib/fonts";
 import Providers from "@/components/shared/contexts/providers";
 import Script from "next/script";
+import CensusForm from "@/components/census/form";
 
 export const metadata: Metadata = {
   title: "E-SYRIANS Network",
@@ -48,6 +49,7 @@ export default async function RootLayout({
             <Providers>
               <Header />
               {children}
+              <CensusForm />
               <Footer />
             </Providers>
           </NextIntlClientProvider>

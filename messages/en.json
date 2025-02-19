@@ -769,11 +769,53 @@
         },
         "my_votes": {
           "title": "My Votes",
-          "description": "Here you can view the polls you have voted in"
+          "description": "Here you can view the polls you have voted on",
+          "table": {
+            "question": {
+              "title": "Question"
+            },
+            "date": {
+              "title": "Date"
+            },
+            "answers": {
+              "title": "Answers"
+            }
+          },
+          "search": {
+            "title": "Search by question"
+          },
+          "previous": {
+            "title": "Previous"
+          },
+          "next": {
+            "title": "Next"
+          }
         },
         "my_reactions": {
           "title": "My Reactions",
-          "description": "Here you can view the polls you have reacted to"
+          "description": "Here you can view the polls you have reacted to",
+          "table": {
+            "question": {
+              "title": "Question"
+            },
+            "reaction": {
+              "title": "Reaction",
+              "up": "Up",
+              "down": "Down"
+            },
+            "date": {
+              "title": "Date"
+            }
+          },
+          "search": {
+            "title": "Search by question"
+          },
+          "previous": {
+            "title": "Previous"
+          },
+          "next": {
+            "title": "Next"
+          }
         },
         "create": {
           "title": "Create a new poll",
@@ -902,6 +944,10 @@
           "title": "Verifications I sent",
           "noVerifications": "You have made 0 verifications"
         }
+      },
+      "security": {
+        "title": "Security settings",
+        "description": "Here, you'll find options to enhance the security of your data. Currently, you can update your account password, with more advanced tools coming soon."
       }
     },
     "settings": {
@@ -1172,6 +1218,30 @@
     "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}",
     "vote": "Vote",
     "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} other {up to # options}}",
-    "voteSuccess": "Your vote got stored successfully"
+    "voteSuccess": "Your vote got stored successfully",
+    "actions": {
+      "register": "Register",
+      "author": "The author",
+      "timeline": "Poll Timeline",
+      "audience": "Poll Audience"
+    },
+    "cannotVote": "Sorry, you cannot submit your vote for the following reason(s):",
+    "alreadyReacted": "You have already reacted to this poll",
+    "reactSuccess": "Your reaction got stored successfully"
+  },
+  "actions": {
+    "register": "Register"
+  },
+  "cannot_vote_reasons": {
+    "age": "Your age is not within the age range of this poll audience",
+    "country": "the country you live in is not in the countries list of this poll audience",
+    "ethnicity": "the ethnicity you belong to in is not in the list of this poll audience",
+    "gender": "Your gender in is not in the list of this poll audience",
+    "hometown": "The hometown you belong to in is not in the list of this poll audience",
+    "religious_affiliation": "The sect you belong to in is not in the list of this poll audience",
+    "unauthorized": "You are not signed in",
+    "not_in_audience": "You are not in the targeted audience of this poll",
+    "has_voted": "You have already voted on this poll",
+    "poll_expired": "Poll is expired and no longer accepting new votes"
   }
 }

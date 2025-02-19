@@ -38,7 +38,14 @@ export type Poll = {
         name: string;
         surname: string;
         avatar: string;
-    }
+    },
+    reveal_results: PollReveal;
+    voters_are_visible: boolean;
+    has_voted?: boolean;
+    has_upvoted?: boolean;
+    has_downvoted?: boolean;
+    has_reacted?: boolean;
+    selected_options?: Array<string>;
 }
 
 export interface CreatePollFields {
@@ -51,4 +58,21 @@ export interface CreatePollFields {
     audience_can_add_options: "0" | "1";
     reveal_results: PollReveal;
     voters_are_visible: "0" | "1";
+}
+
+export type ReactionLog = {
+    id: string;
+    poll_id: string;
+    reaction: "up" | "down";
+    created_at: string;
+    poll: {
+        id: string;
+        question: string;
+    }
+}
+export type VoteLog = {
+    poll_id: string;
+    question: string;
+    selected_options: string[];
+    created_at: string;
 }

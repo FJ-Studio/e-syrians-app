@@ -1,6 +1,6 @@
 import { Poll } from "@/lib/types/polls";
 import { FC } from "react";
-import PollFullCard from "./cards/full";
+import PollFullCard from "./cards/poll-card";
 
 type Props = {
   poll: Poll;

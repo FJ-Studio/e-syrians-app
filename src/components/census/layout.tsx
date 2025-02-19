@@ -1,6 +1,5 @@
 "use client";
 import { FC, Fragment, PropsWithChildren } from "react";
-import CensusForm from "./form";
 import { CENSUS_NAV } from "@/lib/constants/census";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -39,8 +38,6 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
         </Container>
       </div>
       <Container className="pt-8">{children}</Container>
-
-      <CensusForm />
     </div>
   );
 };

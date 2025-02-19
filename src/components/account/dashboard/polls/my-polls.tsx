@@ -145,13 +145,6 @@ const MyPolls: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [polls, filterValue, statusFilter]);
 
-  // const items = useMemo(() => {
-  //   const start = (page - 1) * rowsPerPage;
-  //   const end = start + rowsPerPage;
-
-  //   return filteredItems.slice(start, end);
-  // }, [page, filteredItems, rowsPerPage]);
-
   const items = filteredItems;
 
   const sortedItems = useMemo(() => {
