@@ -1118,7 +1118,13 @@
     "you_have_reached_the_maximum_verifications": "لقد وصلت إلى الحد الأقصى للتأكيدات التي يمكنك القيام بها",
     "you_cannot_verify_yourself": "لا يمكنك تأكيد حسابك الشخصي",
     "circular_verification_not_allowed": "لا يمكنك تأكيد المعلومات لحساب قام مسبقا بتأكيد معلوماتك",
-    "you_have_already_verified_this_user": "لقد قمت مسبقا بتأكيد معلومات هذا المستخدم"
+    "you_have_already_verified_this_user": "لقد قمت مسبقا بتأكيد معلومات هذا المستخدم",
+    "poll_has_not_started_yet": "Poll has not started yet",
+    "poll_has_expired": "Poll has expired",
+    "you_have_already_voted": "You have already voted on this poll",
+    "user_is_not_in_poll_audience": "You are not in the poll audience",
+    "user_has_reached_the_max_selections": "You have exceeded the maximum allowed options",
+    "invalid_options": "Invalid options selected"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
@@ -1164,6 +1170,8 @@
     },
     "title": "الاستطلاعات",
     "postedBy": "تم نشره بواسطة {name} يوم {created_at} بحيث يمكن الإجابة بين {start_date} و {end_date}",
-    "vote": "Vote"
+    "vote": "Vote",
+    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} other {up to # options}}",
+    "voteSuccess": "Your vote got stored successfully"
   }
 }
