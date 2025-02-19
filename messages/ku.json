@@ -1118,7 +1118,13 @@
     "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
     "you_cannot_verify_yourself": "You cannot verify your own account",
     "circular_verification_not_allowed": "Circular verification! You cannot verify an account that verified you",
-    "you_have_already_verified_this_user": "You have already verified this user"
+    "you_have_already_verified_this_user": "You have already verified this user",
+    "poll_has_not_started_yet": "Poll has not started yet",
+    "poll_has_expired": "Poll has expired",
+    "you_have_already_voted": "You have already voted on this poll",
+    "user_is_not_in_poll_audience": "You are not in the poll audience",
+    "user_has_reached_the_max_selections": "You have exceeded the maximum allowed options",
+    "invalid_options": "Invalid options selected"
   },
   "publicVerify": {
     "title": "Verify user information",
@@ -1164,6 +1170,8 @@
     },
     "title": "Polls",
     "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}",
-    "vote": "Vote"
+    "vote": "Vote",
+    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} other {up to # options}}",
+    "voteSuccess": "Your vote got stored successfully"
   }
 }
