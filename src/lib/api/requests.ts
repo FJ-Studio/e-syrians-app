@@ -64,3 +64,19 @@ export const getUser = async (uuid: string): Promise<ApiResponse<ESUser>> => {
   });
   return req.json();
 };
+
+export const verifyEmail = async (
+  id: string,
+  expires: string | undefined,
+  hash: string | undefined,
+  signature: string | undefined
+): Promise<boolean> => {
+  const req = await fetch(`${process.env.API_URL}/verify-email?id=${id}&hash=${hash}&signature=${signature}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  return req.status === 200;
+}

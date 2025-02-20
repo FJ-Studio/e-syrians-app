@@ -41,9 +41,4 @@ export const INITIATIVES = [
     description: "initiatives.polls.description",
     link: "/polls",
   },
-  {
-    title: "initiatives.disarmament.title",
-    description: "initiatives.disarmament.description",
-    link: "/disarm",
-  },
 ];
