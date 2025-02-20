@@ -1232,7 +1232,7 @@
     "title": "Polls",
     "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}",
     "vote": "Vote",
-    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} other {up to # options}}",
+    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} =2 {two options only} other {up to # options}}",
     "voteSuccess": "Your vote got stored successfully",
     "actions": {
       "register": "Register",
