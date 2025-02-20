@@ -119,183 +119,186 @@
     }
   },
   "census": {
-    "title": "Syrian National Census",
-    "description": "This initiative enables Syrians to register their data themselves. The goal is to create a safe, fast and efficient way to save ourselves and our country a lot of time and money, and to reach our citizens in areas outside government control.",
+    "title": "Daneşîna Neteweyî ya Sûriyê",
+    "description": "Ev teşebbûs destnîşan dike ku Sûrî bi xwe bikar anîn û danezanê xwe bi xwe bikêşin. Armanca me ew e ku rêyek ewle, zû û bikêr hatiye çêkirin ku dem û pere ji bo gelê me bihêle, û bi şopandinê gelekî bibihêlin civakên derveyî kontrola hukûmeta an jî lî dijî.",
     "actions": {
-      "register": "Register"
+      "register": "Tomar kirin"
     },
     "form": {
       "sections": {
         "peronalData": {
-          "title": "Personal data",
-          "description": "Here, you can enter your basic information, which will be used for verification and statistics. Please ensure accuracy, as updating this information will require you to go through the verification process again."
+          "title": "Agahiyên Kesane",
+          "description": "Li vir dikarî agahiyên bingehînê xwe binivîsî, ku dê ji bo nasîn û beşdariyê di ankêtan de were bikaranîn. Ji kerema xwe agahiyên xwe bi rêzê rast nivîsî, çünki guherîna wan hewce dibe peşdebirînê nû."
         },
         "accountInfo": {
-          "title": "Account info",
-          "description": "Use this section to create your login credentials, which you will need to access the platform later."
+          "title": "Agahiyên Hesabê",
+          "description": "Agahiyên têketina xwe biafirînin ku dê ji bo gihiştinê platformê piştî de pêwîst bibe."
         },
         "locationData": {
-          "title": "Current location",
-          "description": "Wherever you are, please fill your location data. You cannot update this data more than once in a month"
+          "title": "Cihê Niha",
+          "description": "Li ku yî, ji kerema xwe agahiyên ciwan binivîsî. Ev agahî dikarî tenê carêk di meha de biguherînî."
         },
         "education": {
-          "title": "Education"
+          "title": "Perwerde"
         },
         "employment": {
-          "title": "Employment"
+          "title": "Kar"
         },
         "health": {
-          "title": "Health"
+          "title": "Tenduristî"
         },
         "more_info": {
-          "title": "Additional information"
+          "title": "Agahiyên Dî"
         },
         "censusData": {
-          "title": "National census data",
-          "description": "This platform is not affiliated with or supported by the Syrian government at this time. Therefore, all fields related to personal civilian data are optional. However, if you choose to provide them, rest assured that your information will be stored securely and handled with the utmost confidentiality."
+          "title": "Daneyanê Daneşîna Neteweyî",
+          "description": "Ev platforma niha ne bi hukûmeta Sûrî re girêdayî ne jî destnîşan dike. Ji ber vê yekê, hemû qadên bi danezanê neteweyî ye bijartî ne. Lê heke hûn bîxwazin wan bidin, bêhişt e ku agahiyên we dê bi ewlehî û veşartî bimînin."
         }
       },
       "fields": {
         "name": {
-          "placeholder": "Please enter your first name",
-          "label": "First name",
-          "required": "The first name is required"
+          "placeholder": "Ji kerema xwe navê xwe binivîsî",
+          "label": "Nav",
+          "required": "Nav pêwîst e"
         },
         "email": {
-          "label": "E-mail address",
-          "placeholder": "Please type your e-mail address"
+          "label": "E-name",
+          "placeholder": "Ji kerema xwe e-nameya xwe binivîsî"
         },
         "password": {
-          "label": "Password",
-          "placeholder": "Please type your password",
-          "description": "Minimum 6 characters, including at least one letter and one digit."
+          "label": "Şîfre",
+          "placeholder": "Ji kerema xwe şîfreya xwe binivîsî",
+          "description": "Divê herî kêm 6 tîp binivîsî û herî kêm yek tîp û yek hejmar hêbin."
         },
         "surname": {
-          "label": "Surname",
-          "placeholder": "Please enter your surname/lastname"
+          "label": "Paşnav (Nasname)",
+          "placeholder": "Ji kerema xwe paşnavê xwe binivîsî"
         },
         "middlename": {
-          "label": "Middle name"
+          "label": "Navê Navîn"
         },
         "national_id": {
-          "label": "National ID",
-          "placeholder": "Please enter your national id",
-          "description": "Your national id will be encrypted and no one will be able to see it"
+          "label": "Jimara Nasnameya Neteweyî",
+          "placeholder": "Ji kerema xwe nasnameya neteweyî binivîsî",
+          "description": "Jimara nasnameya we dê were şîfre kirin û nikare kes bibîne."
         },
         "gender": {
-          "label": "Gender"
+          "label": "Cins"
         },
         "birth_date": {
-          "label": "Birthdate"
+          "label": "Dîrokê Jidayîkbûnê"
         },
         "hometown": {
-          "label": "Hometown",
-          "description": "Choose your city of origin in Syria"
+          "label": "Bajarê Dayikbûnê",
+          "description": "Bajarê xwe yê orîjînal di Sûriyê de hilbijêrin"
         },
         "ethnicity": {
-          "label": "Ethnicity"
+          "label": "Netewetî"
         },
         "religious_affiliation": {
-          "label": "Religious affiliation",
-          "description": "Will not be visible on your profile"
+          "label": "Têkiliyê Dînî",
+          "description": "Dê di profîlê we de nayê xuyan"
         },
         "record_id": {
-          "label": "Record ID",
-          "placeholder": "please enter your record id",
-          "description": "Will not be visible on your profile"
+          "label": "Jimara Tomarê",
+          "placeholder": "Ji kerema xwe jimara tomarê xwe binivîsî",
+          "description": "Dê di profîlê we de nayê xuyan"
         },
         "country": {
-          "label": "Country",
-          "description": "Please select the country you currently live in."
+          "label": "Welat",
+          "description": "Ji kerema xwe welatê ku niha di de tê de hilbijêrin."
         },
         "city": {
-          "label": "City",
-          "placeholder": "Please enter your current city",
-          "description": "In which city do you live?"
+          "label": "Bajar",
+          "placeholder": "Ji kerema xwe bajarê we yê niha binivîsî",
+          "description": "Di kîjan bajarê de dijîn?"
         },
         "address": {
-          "label": "Current detailed address",
-          "description": "Your address will be encrypted"
+          "label": "Navnîşana Rastî ya Niha",
+          "description": "Navnîşana we dê were şîfre kirin"
         },
         "shelter": {
-          "label": "Check this if you live in a shelter"
+          "label": "Ev bijêrîn heke hûn di malê panahê de dijîn"
         },
         "education_level": {
-          "label": "Education level"
+          "label": "Asta Perwerdeyê"
         },
         "spoken_languages": {
-          "label": "Spoken languages"
+          "label": "Zimanên Ku Hûn Bizanin"
         },
         "skills": {
-          "label": "Additional skills"
+          "label": "Qebûliyên Dî"
         },
         "source_of_income": {
-          "label": "Source of income"
+          "label": "Çavkaniya Hatinê"
         },
         "estimated_monthly_income": {
-          "label": "Estimated monthly income"
+          "label": "Hatinê Meha Anî"
         },
         "number_of_dependents": {
-          "label": "Number of dependents"
+          "label": "Hejmara Kesan Ku Ji We Re Taybet Ne"
         },
         "health_status": {
-          "label": "Health status"
+          "label": "Rewşa Tenduristiyê"
         },
         "health_insurance": {
-          "label": "I have health insurance"
+          "label": "Ez xwedî sigorteya tenduristiyê me"
         },
         "easy_access_to_healthcare_services": {
-          "label": "I can easily access health services"
+          "label": "Ez dikarim bi hêsanî gihîştin servîsa tenduristiyê"
         },
         "more_info": {
-          "label": "Additional information",
-          "placeholder": "Please feel free to add any other info."
+          "label": "Agahiyên Dî",
+          "placeholder": "Hûn dikarin agahiyên dî zêde bikîn li vir."
         },
         "other_nationalities": {
-          "label": "Other nationalities",
-          "description": "Other than the Syrian nationality"
+          "label": "Netewetiyên Dî",
+          "description": "Ji nê netewetîya Sûrîyê ve"
         },
         "passwordConfirmation": {
-          "label": "Password confirmation",
-          "placeholder": "Please enter your password again"
+          "label": "Piştrastina Şîfreyê",
+          "placeholder": "Ji kerema xwe şîfreyê binivîsî dîsa"
         }
       },
       "actions": {
-        "register": "Register",
-        "cancel": "Cancel"
+        "register": "Tomar kirin",
+        "cancel": "Betal kirin"
       },
-      "title": "Registration Form",
-      "description": "Only fields marked with a red asterisk (*) are required. However, all the information you provide will be securely stored.",
-      "success": "We have received your application",
-      "error": "We could not handle your request. Please try later",
-      "passwordMismatch": "Please check your password confirmation",
-      "close": "Close",
+      "title": "Forma Tomarkirinê",
+      "description": "Tenê qadên ku bi astê sor ne, pêwîst in. Hemû agahiyên ku hûn bidin, bi ewlehî tên hilanîn.",
+      "success": "Daxwaza we bi serkeftî hate destnîşan",
+      "error": "Daxwaza we nehate pêk anîn. Ji kerema xwe dîsa biceribînin",
+      "passwordMismatch": "Ji kerema xwe piştrast bikînin şîfreyê rast e",
+      "close": "Girtin",
       "profile": {
-        "link": "Share your profile",
-        "copy": "Now, it is time to share your profile with the network to get verified"
-      }
+        "link": "Parvekirina profîla xwe",
+        "copy": "Niha, dem e ku profîla xwe bi hevalên xwe û dostên xwe parve bikî bo wergirtina pejirandinan"
+      },
+      "alreadySignedIn": "Tu berê têketî bûyî",
+      "signOut": "Derkeve",
+      "alreadySignedInDescription": "Niha hûn dikarin bi taybetmendiyên platformê veqetînin. Heke hûn amûrê giştîyê bikar tînin, bîra xwe bikin ku berî ku derkevin têketinê bixwazin."
     },
     "nav": {
-      "stats": "Main",
-      "first_batch": "First Registrants",
-      "fraudsters": "Fraudsters"
+      "stats": "Seretayî",
+      "first_batch": "Têkildarên Yên Yêkê",
+      "fraudsters": "Şexsên xelatê"
     },
     "first": {
-      "description": "This list includes the first {count} members who registered in the system without verification from others. Since no previous users existed to verify them, their participation is made public for transparency. We assure you that they are real people—you can visit their profiles and check their social media links for verification.",
-      "title": "First Registrants"
+      "description": "Ev liste di nav de têkildarên yên yekemîn  {count} kesan dikeve ku di pergala de qeyd bûn û ji hêla kesên din re were pejirandin. Ji ber ku ne heye têkildarên berê ku dikaribin pejirandin, parvekirina wan ji bo hemû kesan vekirîye da ku aştiyê berdewam bike. Em piştrast in ku wan kesên rast in—tu dikarî serhêlên wan bixwînî û girêdanên wan li ser medya sosialê kontrol bikî.",
+      "title": "Têkildarên Yên Yêkê"
     },
     "fraudsters": {
-      "title": "Fraudulent Accounts",
-      "description": "This page lists accounts that have been identified as fraudulent based on technical evidence. To maintain trust and accuracy in the system, any account proven to be fake will be suspended along with its verifiers. Our commitment is to ensure a reliable and transparent registration process for everyone."
+      "title": "Şexsên xelatê",
+      "description": "Ev rûpel têkildarên ku hûn pejirandina teknikî yên wan wekî xelat hatine hilbijartin. Dema ku têne piştrastkirin ku hesabê xelat e, hesabê dê ragihîne û her kes ku pejirandina wan kir."
     },
     "charts": {
       "dailyRegistrations": {
-        "title": "Daily user updates",
-        "description": "Number of accounts have been created/verified"
+        "title": "Nûvekirinên rojanî yên têkildarên",
+        "description": "Hejmara hesabên ku hatine afirandin/pejirandin"
       },
       "categories": {
-        "registered": "Registered",
-        "verified": "Verified",
+        "registered": "Têkildar",
+        "verified": "Pejirandin",
         "1-10": "1-10",
         "11-20": "11-20",
         "21-30": "21-30",
@@ -309,48 +312,48 @@
         "71-100": "71-100"
       },
       "gender": {
-        "title": "Users by gender",
-        "description": "Splitted based on verification status"
+        "title": "Têkildarên li gorî cinsiyet",
+        "description": "Ji bo herêmê ku pejirandin hene"
       },
       "age": {
-        "title": "Users age groups",
-        "description": "Splitted based on verification status",
-        "unit": "years"
+        "title": "Komên temenî yên têkildarên",
+        "description": "Ji bo herêmê ku pejirandin hene",
+        "unit": "Sal"
       },
       "ethnicity": {
-        "title": "Users by ethnicity",
-        "description": "Splitted based on the verification status"
+        "title": "Têkildarên li gorî taybetmendiyên neteweyî",
+        "description": "Ji bo herêmê ku pejirandin hene"
       },
       "hometown": {
-        "title": "Users by hometown",
-        "description": "Splitted based on verification status"
+        "title": "Têkildarên li gorî bajarê xwe",
+        "description": "Ji bo herêmê ku pejirandin hene"
       },
       "religion": {
-        "description": "Splitted based on verification status",
-        "title": "Users by religion affiliation"
+        "description": "Ji bo herêmê ku pejirandin hene",
+        "title": "Têkildarên li gorî dîn"
       },
       "country": {
-        "description": "Splitted based on verification status",
-        "title": "Users by their current country"
+        "description": "Ji bo herêmê ku pejirandin hene",
+        "title": "Têkildarên li gorî welatê niha"
       },
       "charts": {
         "filter": {
-          "perday": "Per day",
-          "permonth": "Per month"
+          "perday": "Rojane",
+          "permonth": "Her meh"
         }
       },
       "labels": {
         "registered": {
-          "title": "Registration"
+          "title": "Proseya Têkildarî"
         },
         "verification": {
-          "title": "Verification"
+          "title": "Proseya Pejirandina"
         },
         "verified": {
-          "title": "Verified"
+          "title": "Pejirandin"
         },
         "unverified": {
-          "title": "Unverified"
+          "title": "Nepejirandin"
         }
       }
     }
@@ -700,146 +703,206 @@
   },
   "auth": {
     "login": {
-      "identifier": "E-mail / Phone / National ID"
+      "identifier": "Bikarhênerî e-name, telefon, an nasnameya neteweyî bikar bînin",
+      "forgotPassword": "Şîfreya xwe wenda kirim"
+    },
+    "forgotPassword": {
+      "email": "E-name",
+      "sendLink": "Giştina girêdana veguhastinê",
+      "title": "Wergirtina girêdana veguhastina şîfreya",
+      "description": "Ji kerema xwe, navnîşana e-nameya xwe li jêr binivîse. Heke rast be, hûn dikarin e-nameyek bi şîfreya nû wergirtin bo çalakî kirina şîfreyê",
+      "backToLogin": "Vegere têketinê",
+      "success": "Serkeftin! Heke e-nameya ku hûn di daneyên me de têne, hûn ê ji platformê e-nameyek bi şîfreya nû wergirtin"
+    },
+    "resetPassword": {
+      "title": "Veguhastina Şîfreya Nû",
+      "description": "Ji kerema xwe, şîfreya nû li jêr binivîse",
+      "newPassword": "Şîfreya nû",
+      "newPasswordConfirmation": "Pêşniyara şîfreya nû",
+      "resetPassword": "Veguhastina şîfreya nû",
+      "email": "E-name",
+      "success": "Şîfreya we bi serfirazî veguhast"
     }
   },
   "account": {
     "dashboard": {
-      "welcome": "Welcome {name}",
+      "welcome": "Bi xêr hatî {name}",
       "nav": {
-        "polls": "Polls",
-        "verifications": "Verifications",
-        "settings": "Settings",
-        "donate": "Donate",
-        "signout": "Sign out"
+        "polls": "Anketên",
+        "verifications": "Pejirandin",
+        "settings": "Mîhengên",
+        "donate": "Bikarhêner",
+        "signout": "Derketin"
       },
       "polls": {
         "my_polls": {
-          "title": "My Polls",
-          "description": "Here you can view the polls you have created",
+          "title": "Anketên min",
+          "description": "Li vir hûn dikarin anketên ku hûn çêkirin bibînin",
           "table": {
             "question": {
-              "title": "Question"
+              "title": "Pirs"
             },
             "startDate": {
-              "title": "Start"
+              "title": "Dîroka destpêka dengdanê"
             },
             "endDate": {
-              "title": "End"
+              "title": "Dîroka dawî ya dengdanê"
             },
             "status": {
-              "title": "Status",
+              "title": "Rewşa",
               "inactive": {
-                "title": "Inactive"
+                "title": "Bişûndekirî"
               },
               "active": {
-                "title": "Active"
+                "title": "Aktîf"
               }
             },
             "createdAt": {
-              "title": "Created at"
+              "title": "Dîroka zêdekirinê"
             },
             "actions": {
-              "title": "Actions",
-              "delete": "Deactivate",
-              "visit": "Visit",
-              "activate": "Activate",
-              "deactivate": "Deactivate"
+              "title": "Vebijarkên",
+              "delete": "Jêbirin",
+              "visit": "Serdana",
+              "activate": "Aktîf kirin",
+              "deactivate": "Bişûndekirin"
             },
             "columns": {
-              "title": "Columns"
+              "title": "Nîşandan"
             },
             "votes": {
-              "title": "Participants count"
+              "title": "Hejmara beşdarên"
             }
           },
           "emptyContent": {
-            "title": "You have not added any poll yet",
-            "add": "Create poll"
+            "title": "Hûn ti anketek ne zêdekirî ne",
+            "add": "Ankete nû çêke"
           },
           "search": {
-            "title": "Search by question"
+            "title": "Lêgerîn bi nîvîsa anketê"
           },
           "next": {
-            "title": "Next"
+            "title": "Piştî"
           },
           "previous": {
-            "title": "Previous"
+            "title": "Pêşî"
           }
         },
         "my_votes": {
-          "title": "My Votes",
-          "description": "Here you can view the polls you have voted in"
+          "title": "Dengên min",
+          "description": "Li vir hûn dikarin anketên ku hûn beşdar bûn bibînin",
+          "table": {
+            "question": {
+              "title": "Nîvîsa anketê"
+            },
+            "date": {
+              "title": "Dîroka beşdariyê"
+            },
+            "answers": {
+              "title": "Bersivên"
+            }
+          },
+          "search": {
+            "title": "Lêgerîn bi nîvîsa anketê"
+          },
+          "previous": {
+            "title": "Pêşî"
+          },
+          "next": {
+            "title": "Piştî"
+          }
         },
         "my_reactions": {
-          "title": "My Reactions",
-          "description": "Here you can view the polls you have reacted to"
+          "title": "Tevgera min",
+          "description": "Li vir hûn dikarin anketên ku hûn bi wan re reaxî kirin bibînin",
+          "table": {
+            "question": {
+              "title": "Nîvîsa anketê"
+            },
+            "reaction": {
+              "title": "Tevgera",
+              "up": "Bi (Jor)",
+              "down": "Hêdî (Jêr)"
+            },
+            "date": {
+              "title": "Dîroka beşdariyê"
+            }
+          },
+          "search": {
+            "title": "Lêgerîn bi nîvîsa anketê"
+          },
+          "previous": {
+            "title": "Pêşî"
+          },
+          "next": {
+            "title": "Piştî"
+          }
         },
         "create": {
-          "title": "Create a new poll",
-          "description": "When creating a poll, please use clear and respectful language. Be specific and make sure your question is well-structured, as edits won’t be possible after submission.",
+          "title": "Ankete nû çêke",
+          "description": "Dema ku hûn anketek çêkin, ji kerema xwe bi zimanekî zelal û hêsan bikar bînin. Pirsê we divê ji hêlî ve herî baş be û pêwîst e ku pirsên we bi rêvebirîkê hatin saz kirin, çimkî piştî şandina wan nikaribin guhertin.",
           "question": {
-            "label": "Question",
-            "placeholder": "Type your poll question here",
-            "error": "Please type more than 10 characters"
+            "label": "Pirs",
+            "placeholder": "Pirsê xwe li vir binivîse",
+            "error": "Ji kerema xwe zêdetir ji 10 tîpan binivîse"
           },
-          "accountUnverifiedAlert": "Your account is not verified yet! Kindly share your profile link with the community to get enough verifications",
+          "accountUnverifiedAlert": "Hesabê te hinasî nehatî! Ji kerema xwe girêdana profîla xwe bi civakê re parve bikin da ku diçek hewceya pejirandinê were berdan",
           "start_date": {
-            "label": "Start date",
-            "description": "On which date the poll will be published"
+            "label": "Dîroka destpêkê",
+            "description": "Kîjan dîroka anketê tê belavkirin?"
           },
           "duration": {
-            "label": "Duration (days)",
-            "placeholder": "For how many day(s) the audience will be able to vote",
-            "error": "Please use latin digits to specify days"
+            "label": "Dema (bi rojên)",
+            "placeholder": "Bi çend rojan dibe ku civakê dikare deng bide?",
+            "error": "Ji kerema xwe hejmarên latînî bikar bînin da ku rojan nîşan bikin"
           },
-          "submit": "Submit",
+          "submit": "Şandin",
           "max_selections": {
-            "label": "Maximum selections",
-            "description": "The maximum number of options a user can select when voting.",
-            "error": "Please use a digit between 1 and 10"
+            "label": "Hewceyên hilbijartinê",
+            "description": "Hewceyên herî zêde yên ku bikarhêner dikare hilbijêre dema dengdanê.",
+            "error": "Ji kerema xwe hejmarek bi navbera 1 û 10 bikar bînin"
           },
           "audience_can_add_options": {
             "no": {
-              "label": "No"
+              "label": "Na"
             },
             "yes": {
-              "label": "Yes (This feature is coming soon)"
+              "label": "Erê (Ev taybetmendî dê nêzîkî zêde bike)"
             },
-            "label": "Audience can add options"
+            "label": "Civak dikare vebijarkên zêde bikin"
           },
           "options": {
-            "title": "Poll options",
-            "label": "Option {index}",
-            "add": "Add option"
+            "title": "Vebijarkên anketê",
+            "label": "Vebijarka {index}",
+            "add": "Vebijarka zêde bike"
           },
           "audience": {
-            "title": "Poll audience"
+            "title": "Civaka anketê"
           },
           "gender": {
-            "label": "Gender",
-            "description": "A blank value indicates that all genders are eligible to vote."
+            "label": "Cinsiyet",
+            "description": "Nivîsê vala nîşan dide ku hemû cinsiyetên cihê şayeste ne."
           },
           "hometown": {
-            "label": "Province",
-            "description": "A blank value indicates that users from all provinces are eligible to vote."
+            "label": "Herêmê Malbatê",
+            "description": "Nivîsê vala nîşan dide ku bikarhênerên ji hemû herêmên malbatê şayeste ne."
           },
           "ethnicity": {
-            "label": "Ethnicity",
-            "description": "A blank value indicates that all ethnicities are eligible to vote."
+            "label": "Etnîkî",
+            "description": "Nivîsê vala nîşan dide ku hemû etnîkên cihê şayeste ne."
           },
           "country": {
-            "label": "Country",
-            "description": "A blank value indicates that users in all countries are eligible to vote."
+            "label": "Welat",
+            "description": "Nivîsê vala nîşan dide ku bikarhênerên ji hemû welatan şayeste ne."
           },
           "religious_affiliation": {
-            "label": "Religious affiliation",
-            "description": "A blank value indicates that users from all religious affiliations are eligible to vote."
+            "label": "Têkiliyên Dînî",
+            "description": "Nivîsê vala nîşan dide ku bikarhênerên ji hemû têkiliyên dînî şayeste ne."
           },
           "age_range": {
-            "label": "Age range"
+            "label": "Kategorîya Temenê"
           },
-          "success": "Poll created successfully"
+          "success": "Anketê bi serfirazî hate çêkirin"
         }
       },
       "verifications": {
@@ -907,262 +970,323 @@
     "settings": {
       "tabs": {
         "profile": {
-          "title": "Profile"
+          "title": "Pêrofilek"
         },
         "security": {
-          "title": "Security"
+          "title": "Sazkirina ewlehî"
         }
       },
       "error": {
-        "tryAgain": "Failed to load profile data, please try again later!"
+        "tryAgain": "Dîsa hewl bidin!"
       },
       "name": {
-        "label": "First name"
+        "label": "Nav"
       },
       "surname": {
-        "label": "Surname"
+        "label": "Navê malbatê (kiniya)"
       },
       "basicData": {
-        "title": "My profile",
-        "description": "You are allowed to update your data for one time. Please note that updating this information will cause you to lose all the verifications you have received."
+        "title": "Pêrofilekê min",
+        "description": "Nûvekirina agahdariyên bingehîn ya te têgihiştina hemû pejirandinan ku berî ve hatine girtin, û her wateya ku tu nikarî agahdariyên xwe nûve bikin bêyî ku tenê di dema taybetî de dibe"
       },
       "profile": {
-        "edit": "Edit",
-        "save": "Save changes",
-        "confirmation": "I understand that updating my basic information will cause me to lose all the verifications I have received."
+        "edit": "Guhertin",
+        "save": "Guherandina guhertinên",
+        "confirmation": "Ez dizanim ku guhertina agahdariyên bingehîn a min ê mecbûr bike ku hemû pejirandinan ku berî ve girtibûm, jê bibim."
       },
       "fields": {
         "gender": {
-          "label": "Gender"
+          "label": "Cins"
         },
         "surname": {
-          "label": "Surname"
+          "label": "Navê malbatê (kiniya)"
         },
         "name": {
-          "label": "First name"
+          "label": "Nav"
         },
         "birth_date": {
-          "label": "Birth date"
+          "label": "Rojbûn"
         },
         "hometown": {
-          "label": "Hometown"
+          "label": "Bajarê dayikbûnê"
         },
         "ethnicity": {
-          "label": "Ethnicity"
+          "label": "Cîhê neteweyî"
         }
       },
       "update": {
-        "success": "Profile data updates successfully"
+        "success": "Agahdariyên pêrofilekê hatine nûve kirin bi serfirazî"
       },
       "avatar": {
-        "title": "Profile picture",
-        "upload": "Select new avatar",
-        "save": "Upload avatar",
+        "title": "Wêneya pêrofilekê",
+        "upload": "Wêneya nû hilbijêre",
+        "save": "Wêneya barkirin",
         "update": {
-          "success": "Avatar updated successfully"
+          "success": "Wêneyê guhertibû!"
         },
         "avatar": {
-          "title": "My avatar",
-          "upload": "Select new avatar",
-          "save": "Upload avatar",
-          "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+          "title": "Wêneyê xweşî",
+          "upload": "Wêneya nû hilbijêre",
+          "save": "Wêneya barkirin",
+          "instructions": "Ji kerema xwe wêneya xweşî hilbijêre ku mezinahiya wê kêmî 500 kilobayt be û bi piştgirî 800x800 pixel ne zêdetir"
         }
       },
       "civilian": {
         "national_id": {
-          "label": "National ID",
-          "description": "The national id will be encrypted"
+          "label": "Hejmara neteweyî",
+          "description": "Hejmara neteweyî dê bi şîfre were guhertin"
         },
-        "save": "Save changes",
-        "title": "Other civilian data",
+        "save": "Guherandina guhertinên",
+        "title": "Agahdariyên têkiliyê",
         "record_id": {
-          "label": "Record ID"
+          "label": "Hejmara kayıtê"
         },
         "update": {
-          "success": "Your civilian data were updated successfully"
+          "success": "Agahdariyên we bi serfirazî hatine nûve kirin"
         }
       },
       "record_id": {
-        "label": "Record ID"
+        "label": "Hejmara kayıtê"
       },
       "national_id": {
-        "label": "National ID",
-        "description": "The national id will be encrypted"
+        "label": "Hejmara neteweyî",
+        "description": "Hejmara neteweyî dê bi şîfre were guhertin"
       },
       "address": {
         "fields": {
           "country": {
-            "label": "Country",
-            "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+            "label": "Welatê radestkirinê",
+            "description": "Guhertina welatê destûrê li ser armancên xwe di anketan de dikare tenê hin caran di sala de were guhertin"
           }
         },
-        "save": "Save changes",
+        "save": "Guherandina guhertinên",
         "update": {
-          "success": "your data were updated successfully"
+          "success": "Agahdariyên we bi serfirazî hatine nûve kirin"
         },
-        "title": "Country"
+        "title": "Welatê radestkirinê"
       },
       "census": {
-        "title": "National census",
+        "title": "Têkiliyê giştî",
         "fields": {
           "middlename": {
-            "label": "Middle name"
+            "label": "Navê navenda"
           },
           "religious_affiliation": {
-            "label": "Religious affiliation"
+            "label": "Têkiliyê dînî"
           },
           "other_nationalities": {
-            "label": "Other nationalities"
+            "label": "Neteweyên din"
           },
           "city": {
-            "label": "City"
+            "label": "Bajar"
           },
           "address": {
-            "label": "Address"
+            "label": "Navnîşan"
           },
           "shelter": {
-            "label": "Check this if you live in a shelter"
+            "label": "Ev hilbijêre heke hûn di pêşkeftinê de li malekê ne"
           },
           "education_level": {
-            "label": "Education level"
+            "label": "Asta perwerdehiya"
           },
           "spoken_languages": {
-            "label": "Spoken languages"
+            "label": "Zimanên ku ez diaxivim"
           },
           "skills": {
-            "label": "Additional skills"
+            "label": "Têkiliyekên zêde"
           },
           "source_of_income": {
-            "label": "Source of income"
+            "label": "Çavkaniya hatinê"
           },
           "estimated_monthly_income": {
-            "label": "Estimated monthly income"
+            "label": "Çavkaniya mezinahî ya her mehî"
           },
           "number_of_dependents": {
-            "label": "Number of dependents"
+            "label": "Hejmara kesan ku hûn di derbarê wan de ye"
           },
           "health_status": {
-            "label": "Health status"
+            "label": "Rewşa tenduristiyê"
           },
           "health_insurance": {
-            "label": "I have health insurance"
+            "label": "Ez hewceyek tenduristiyê heye"
           },
           "easy_access_to_healthcare_services": {
-            "label": "I can easily access health services"
+            "label": "Ez dikarim bi asanî li ser xizmetên tenduristiyê girekê bimeşînim"
           },
           "more_info": {
-            "label": "Additional information"
+            "label": "Zêdetir agahdarî"
           }
         },
-        "save": "Save changes",
+        "save": "Guherandina guhertinên",
         "update": {
-          "success": "Your data were updated successfully"
+          "success": "Agahdariyên we bi serfirazî hatine nûve kirin"
         }
       }
     },
     "socialLinks": {
-      "title": "My links",
+      "title": "Girêdanên xwe",
       "facebook_link": {
-        "label": "Facebook"
+        "label": "Rûpela min li Facebook"
       },
       "twitter_link": {
-        "label": "Twitter"
+        "label": "Rûpela min li X"
       },
       "instagram_link": {
-        "label": "Instagram"
+        "label": "Hesaba min li Instagram"
       },
       "linkedin_link": {
-        "label": "LinkedIn"
+        "label": "Hesaba min li Linkedin"
       },
       "github_link": {
-        "label": "GitHub"
+        "label": "Hesaba min li Github"
       },
       "youtube_link": {
-        "label": "YouTube"
+        "label": "Kanala min li YouTube"
       },
       "tiktok_link": {
-        "label": "TikTok"
+        "label": "Hesaba min li TikTok"
       },
       "snapchat_link": {
-        "label": "Snapchat"
+        "label": "Hesaba min li Snapchat"
       },
       "twitch_link": {
-        "label": "Twitch"
+        "label": "Hesaba min li Twitch"
       },
       "pinterest_link": {
-        "label": "Pinterest"
+        "label": "Hesaba min li Pinterest"
       },
       "website": {
-        "label": "Website"
+        "label": "Malpera xwe"
       },
-      "save": "Save changes",
+      "save": "Guhertinên parastinê",
       "update": {
-        "success": "Your links were updated successfully"
+        "success": "Girêdanên te bi serfirazî nûve kirin"
       }
     }
   },
   "header": {
     "nav": {
-      "census": "Census",
-      "polls": "Polls"
+      "census": "Serbixwe",
+      "polls": "Lêkolîn"
     }
   },
   "server_errors": {
-    "basic_info_updates_limit_reached": "You have reached the limit of basic info updates. Please reach out to support for further assistance.",
-    "unknown_error": "Something happened on our side, please try again later",
-    "unauthorized_action": "You are not allowed to perform this action",
-    "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
-    "your_account_is_banned": "Your account is banned!",
-    "you_are_not_verified": "You cannot perform this action since your account is not verified",
-    "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
-    "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
-    "you_cannot_verify_yourself": "You cannot verify your own account",
-    "circular_verification_not_allowed": "Circular verification! You cannot verify an account that verified you",
-    "you_have_already_verified_this_user": "You have already verified this user"
+    "basic_info_updates_limit_reached": "Guhertina agahdariya bingehîn bi kêmtir carek tên destnîşan kirin, heke dixwazî dîsa biguherînî, divê tu bi tîma piştgiriya têkiliyê dayî",
+    "unknown_error": "Çewtiyek derket, ji kerema xwe paşê biceribîne",
+    "unauthorized_action": "Tu destnîşan nîkê bidê vê bikaranînê",
+    "country_updates_limit_reached": "Guhertina navnîşan bi kêmtir carek tên destnîşan kirin, heke dixwazî dîsa biguherînî, divê tu bi tîma piştgiriya têkiliyê dayî",
+    "your_account_is_banned": "Hesabê te hate qedexekirin!",
+    "you_are_not_verified": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",
+    "you_do_not_have_enough_verifications": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",
+    "you_have_reached_the_maximum_verifications": "Tu gihîşti herî zêde dîrokên ku dikarî bidê",
+    "you_cannot_verify_yourself": "Nikare hesabê xwe bixwîn",
+    "circular_verification_not_allowed": "Nikare agahdariya hesabê kesekî din piştrast bikî ku pêşî agahdariya te piştrast kir",
+    "you_have_already_verified_this_user": "Tu jixwe agahdariya vê bikarhênerî piştrast kirî",
+    "poll_has_not_started_yet": "Demê dengdanê di vê lêkolînekê de ne hat destnîşan kirin",
+    "poll_has_expired": "Demê dengdanê di vê lêkolînekê de qut bû",
+    "you_have_already_voted": "Tu jixwe di vê lêkolînekê de deng dayî",
+    "user_is_not_in_poll_audience": "Tu nikare beşdarî vê lêkolînekê bibî",
+    "user_has_reached_the_max_selections": "Tu herî zêde bijare hilbijartî",
+    "invalid_options": "Bijarên hilbijartî nederbasdar in",
+    "current_password_incorrect": "Şîfreya te çewt e",
+    "failed_to_reset_password": "Veguhertina şîfreyê serneketî bû",
+    "failed_to_send_password_reset_email": "Şîfreyê veguherandinê bi e-nameyê şandin serneketî bû"
   },
   "publicVerify": {
-    "title": "Verify user information",
-    "citizenFrom": "Syrian citizen from {hometown}",
-    "birthdate": "Birthdate",
-    "verify": "Verify {name}",
-    "gender": "Gender",
-    "ethnicity": "Ethnicity",
-    "country": "Lives in",
-    "loginToVerify": "Guests cannot perform this action! It is limited to users that are already verified",
-    "cannotVerifyOwnProfile": "Oops! You cannot verify your own profile",
-    "cancel": "Cancel",
+    "title": "Piştrastkirina Agahiyên Bikarhêner",
+    "citizenFrom": "{gender, select, m {Nîştegerîya Sûrî} f {Nîştegerîya Sûrî} other {Nîştegerîya Sûrî}} ji {hometown}",
+    "birthdate": "Dîroka jidayikbûnê",
+    "verify": "Piştrastkirina {name}",
+    "gender": "Cinsiyet",
+    "ethnicity": "Nasname",
+    "country": "Welatê nîştegerî",
+    "loginToVerify": "Tenê bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin vê xebatê bikînin",
+    "cannotVerifyOwnProfile": "Nikare agahiyên xwe piştrast bikî",
+    "cancel": "Betal kirin",
     "rules": {
-      "content1": "Ensure that this profile belongs to someone you personally know.",
-      "content2": "Pay close attention to every detail provided by the person.",
-      "content3": "Our platform is built on trust. Any fraudulent accounts will be listed on the Fraudsters page along with the verifiers who approved them."
+      "content1": "Bila te piştrast bikî ku agahiyên vê bikarhênerî ya ku tu nas dike",
+      "content2": "Ji kerema xwe her agahîyê di profîlê de bixwîne",
+      "content3": "Serlêdan serbixwe di bingeha baweriya nav gellek pîroz dike. Hesabên dîrok nîka an hesaban ku xwe bikaranînin bi nasnameya xerab an cîna xerîbiye hatin guhertin, ez dijî lêdana wan dikim û wan hesabên piştrastkirî tên rakirin."
     },
-    "profileVerified": "Verification has been stored successfully"
+    "profileVerified": "Piştrastkirinê bi serkeftî hat qedandin"
   },
   "verificationCancelationReasons": {
-    "user_updated_basic_info": "User has updated his basic data",
-    "unknown_reason": "Unknown reason"
-  },
-  "months": {
-    "january": "January",
-    "february": "February",
-    "march": "March",
-    "april": "April",
-    "may": "May",
-    "june": "June",
-    "july": "July",
-    "august": "August",
-    "september": "Septemper",
-    "october": "October",
-    "november": "November",
-    "december": "December"
+    "user_updated_basic_info": "Bikarhêner agahdariya bingehînê xwe guherand",
+    "unknown_reason": "Sedemeke din"
   },
   "polls": {
-    "picker": {
-      "year": {
-        "title": "Select year"
-      }
+    "title": "Lêkolîn",
+    "postedBy": "Ji hêla {name} ve hat blavkirin di {created_at} de û dikare bersiv bidê di navbera {start_date} û {end_date} de",
+    "vote": "Dengdan",
+    "maxSelections": "Di vê lêkolînekê de dikarî herî zêde {max, plural, =1 {yek bijare} =2 {du bijare} other {# bijare}} hilbijêrî",
+    "voteSuccess": "Dengê te bi serkeftî hat qeydkirin",
+    "actions": {
+      "register": "Qeydkirin",
+      "author": "Xwedî lêkolînekê",
+      "timeline": "Demjimêra lêkolînekê",
+      "audience": "Şandeya lêkolînekê"
     },
-    "title": "Polls",
-    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}"
+    "cannotVote": "Bibore, nikarî dengê xwe qeydkî bikî ji bo sedeman jêrîn:",
+    "alreadyReacted": "Tu jixwe di vê lêkolînekê de deng dayî",
+    "reactSuccess": "Bersivê te bi serkeftî hat qeydkirin",
+    "ageRange": "Rêza temenê",
+    "ageRangeBetween": "Ji {min} heta {max}",
+    "ageRangeNoMax": "Nenas",
+    "gender": "Cinsiyet",
+    "hometown": "Bajarê dayikbûnê",
+    "religinousAffiliation": "Têkiliyê dînî",
+    "ethnicity": "Nasname",
+    "country": "Welatê nîştegerî",
+    "noLimit": "Bê sînor",
+    "description": "Hemû bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin li vir beşdarî lêkolînên rayê bibin. Bi gelemperî, lêkolîn hatine rêz kirin di bingeha nivîsandina ku naveroka dengên 'Erê' û 'Na' di navber de çêtir e û her wisa bi sal û mehê zêde hatine rêvekirin.",
+    "filter": {
+      "description": "Nîşandana lêkolîn bi bingeha sal û mehê",
+      "months": {
+        "january": "Çile",
+        "february": "Reşemî",
+        "march": "Adar",
+        "april": "Nîsan",
+        "may": "Gulan",
+        "june": "Pûşper",
+        "july": "Tîrmeh",
+        "august": "Tebax",
+        "september": "Îlon",
+        "october": "Cotmeh",
+        "november": "Mijdar",
+        "december": "Berfanbar"
+      },
+      "selectYear": "Salê hilbijêre",
+      "apply": "Bikaranîn",
+      "cancel": "Betal kirin",
+      "title": "Parzûnê lêkolînê",
+      "selectMonth": "Mehê hilbijêre"
+    },
+    "noPolls": {
+      "title": "Lêkolînek tune ye",
+      "description": "Di demjimêra xwestî de lêkolînekê tune ye"
+    },
+    "categories": {
+      "all": "Hemû kategorî"
+    }
+  },
+  "actions": {
+    "register": "Qeydkirin"
+  },
+  "cannot_vote_reasons": {
+    "age": "Temê te di nav temenê rêzê vê lêkolînekê de nîne",
+    "country": "Welatê te di lîsteya welatan ê vê lêkolînekê de nîne",
+    "ethnicity": "Nasnameya te di lîsteya şandeya vê lêkolînekê de nîne",
+    "gender": "Rewşa cinsê te di lîsteya şandeya vê lêkolînekê de nîne",
+    "hometown": "Bajarê te di lîsteya şandeya vê lêkolînekê de nîne",
+    "religious_affiliation": "Dîtina dînê te di lîsteya şandeya vê lêkolînekê de nîne",
+    "unauthorized": "Tu têketîne ne kirî",
+    "not_in_audience": "Tu ne di şandeya armancê vê lêkolînekê de yî",
+    "has_voted": "Tu jixwe di vê lêkolînekê de deng dayî",
+    "poll_expired": "Dema vê lêkolînekê qediya û niha nikare beşdar bî"
+  },
+  "emailVerification": {
+    "title": "Piştrastkirina E-nameyê",
+    "error": "Em ne dikarin navnîşana e-nameya te piştrast bikînin 😔, ji kerema xwe têkeve û ji hesabê xwe girêdana nû daxwaz bike",
+    "success": "Navnîşana e-nameya te piştrast kirin. Spas! 🙂"
   }
 }
