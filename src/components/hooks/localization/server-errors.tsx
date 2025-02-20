@@ -27,6 +27,11 @@ const useServerError = (): ((errorCode: string) => string) => {
         "user_has_reached_the_max_selections"
       ),
       invalid_options: t("invalid_options"),
+      current_password_incorrect: t("current_password_incorrect"),
+      failed_to_reset_password: t("failed_to_reset_password"),
+      failed_to_send_password_reset_email: t(
+        "failed_to_send_password_reset_email"
+      ),
     };
     return errors[errorCode as keyof typeof errors] || t("unknown_error");
   };

@@ -44,11 +44,15 @@ import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { getUrl } from "@/lib/user";
 import { ESUser } from "@/lib/types/account";
+import { signOut, useSession } from "next-auth/react";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
 const CensusForm: FC = () => {
-  const [uuid, setUuid] = useState<string | null>(null);
+  const session = useSession();
+  const [uuid, setUuid] = useState<string | null>(
+    session.data?.user.uuid ?? null
+  );
   const {
     isOpen,
     onOpen: onOpenLinkModal,
@@ -193,590 +197,643 @@ const CensusForm: FC = () => {
             <>
               <DrawerHeader>{t("title")}</DrawerHeader>
               <DrawerBody>
-                <p>{t("description")}</p>
-                <Divider />
-                <form onSubmit={handleSubmit(register)} className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      1. {t("sections.accountInfo.title")}
-                    </h3>
-                    <p>{t("sections.accountInfo.description")}</p>
+                {session.status === "authenticated" ? (
+                  <div className="w-full">
+                    <p className="font-medium">{t("alreadySignedIn")}</p>
+                    <p>{t("alreadySignedInDescription")}</p>
                   </div>
-                  <Controller
-                    name="email"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { invalid, error } }) => (
-                      <Input
-                        {...field}
-                        isRequired
-                        label={t("fields.email.label")}
-                        placeholder={t("fields.email.placeholder")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="password"
-                    control={control}
-                    rules={{
-                      required: true,
-                      pattern: /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/,
-                    }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Input
-                        {...field}
-                        isRequired
-                        type="password"
-                        label={t("fields.password.label")}
-                        placeholder={t("fields.password.placeholder")}
-                        description={t("fields.password.description")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                      />
-                    )}
-                  />
-
-                  <Controller
-                    name="password_confirmation"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Input
-                        {...field}
-                        isRequired
-                        type="password"
-                        label={t("fields.passwordConfirmation.label")}
-                        placeholder={t(
-                          "fields.passwordConfirmation.placeholder"
+                ) : (
+                  <>
+                    <p>{t("description")}</p>
+                    <Divider />
+                    <form
+                      onSubmit={handleSubmit(register)}
+                      className="space-y-4"
+                    >
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          1. {t("sections.accountInfo.title")}
+                        </h3>
+                        <p>{t("sections.accountInfo.description")}</p>
+                      </div>
+                      <Controller
+                        name="email"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { invalid, error } }) => (
+                          <Input
+                            {...field}
+                            isRequired
+                            label={t("fields.email.label")}
+                            placeholder={t("fields.email.placeholder")}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                          />
                         )}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
                       />
-                    )}
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      2. {t("sections.peronalData.title")}
-                    </h3>
-                    <p>{t("sections.peronalData.description")}</p>
-                  </div>
-                  <Controller
-                    name="name"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Input
-                        {...field}
-                        isRequired
-                        label={t("fields.name.label")}
-                        placeholder={t("fields.name.placeholder")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="middle_name"
-                    control={control}
-                    render={({ field }) => (
-                      <Input {...field} label={t("fields.middlename.label")} />
-                    )}
-                  />
-                  <Controller
-                    name="surname"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Input
-                        {...field}
-                        isRequired
-                        label={t("fields.surname.label")}
-                        placeholder={t("fields.surname.placeholder")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="gender"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.gender.label")}
-                        isRequired
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[getValues("gender")]}
-                      >
-                        {Object.keys(genderOptions).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {genderOptions[key as keyof typeof genderOptions]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="birth_date"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ fieldState: { error, invalid } }) => (
-                      <DatePicker
-                        showMonthAndYearPickers
-                        inert={true}
-                        value={
-                          getValues("birth_date")
-                            ? parseDate(getValues("birth_date"))
-                            : null
-                        }
-                        defaultValue={
-                          getValues("birth_date")
-                            ? parseDate(getValues("birth_date"))
-                            : null
-                        }
-                        onChange={(date) =>
-                          date ? setValue("birth_date", date?.toString()) : null
-                        }
-                        isRequired
-                        label={t("fields.birth_date.label")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="hometown"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.hometown.label")}
-                        isRequired
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[getValues("hometown")]}
-                        description={t("fields.hometown.description")}
-                      >
-                        {Object.keys(provinces).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {provinces[key as keyof typeof provinces]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="ethnicity"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.ethnicity.label")}
-                        isRequired
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[getValues("ethnicity")]}
-                      >
-                        {Object.keys(ethnicities).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {ethnicities[key as keyof typeof ethnicities]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="religious_affiliation"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.religious_affiliation.label")}
-                        isRequired
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[
-                          getValues("religious_affiliation"),
-                        ]}
-                        description={t(
-                          "fields.religious_affiliation.description"
-                        )}
-                      >
-                        {Object.keys(religions).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {religions[key as keyof typeof religions]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="country"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        scrollShadowProps={{
-                          isEnabled: false,
+                      <Controller
+                        name="password"
+                        control={control}
+                        rules={{
+                          required: true,
+                          pattern: /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/,
                         }}
-                        {...field}
-                        label={t("fields.country.label")}
-                        isRequired
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[getValues("country")]}
-                        description={t("fields.country.description")}
-                      >
-                        {Object.keys(countries).map((key) => (
-                          <SelectItem
-                            key={key}
-                            value={key}
-                            startContent={
-                              <Avatar
-                                src={`/flags/${key.toLowerCase()}.svg`}
-                                className="w-6 h-6"
-                                size="sm"
-                              />
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Input
+                            {...field}
+                            isRequired
+                            type="password"
+                            label={t("fields.password.label")}
+                            placeholder={t("fields.password.placeholder")}
+                            description={t("fields.password.description")}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                          />
+                        )}
+                      />
+
+                      <Controller
+                        name="password_confirmation"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Input
+                            {...field}
+                            isRequired
+                            type="password"
+                            label={t("fields.passwordConfirmation.label")}
+                            placeholder={t(
+                              "fields.passwordConfirmation.placeholder"
+                            )}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                          />
+                        )}
+                      />
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          2. {t("sections.peronalData.title")}
+                        </h3>
+                        <p>{t("sections.peronalData.description")}</p>
+                      </div>
+                      <Controller
+                        name="name"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Input
+                            {...field}
+                            isRequired
+                            label={t("fields.name.label")}
+                            placeholder={t("fields.name.placeholder")}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="middle_name"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.middlename.label")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="surname"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Input
+                            {...field}
+                            isRequired
+                            label={t("fields.surname.label")}
+                            placeholder={t("fields.surname.placeholder")}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="gender"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.gender.label")}
+                            isRequired
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            defaultSelectedKeys={[getValues("gender")]}
+                          >
+                            {Object.keys(genderOptions).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {
+                                  genderOptions[
+                                    key as keyof typeof genderOptions
+                                  ]
+                                }
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="birth_date"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ fieldState: { error, invalid } }) => (
+                          <DatePicker
+                            showMonthAndYearPickers
+                            inert={true}
+                            value={
+                              getValues("birth_date")
+                                ? parseDate(getValues("birth_date"))
+                                : null
+                            }
+                            defaultValue={
+                              getValues("birth_date")
+                                ? parseDate(getValues("birth_date"))
+                                : null
+                            }
+                            onChange={(date) =>
+                              date
+                                ? setValue("birth_date", date?.toString())
+                                : null
+                            }
+                            isRequired
+                            label={t("fields.birth_date.label")}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="hometown"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.hometown.label")}
+                            isRequired
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            defaultSelectedKeys={[getValues("hometown")]}
+                            description={t("fields.hometown.description")}
+                          >
+                            {Object.keys(provinces).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {provinces[key as keyof typeof provinces]}
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="ethnicity"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.ethnicity.label")}
+                            isRequired
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            defaultSelectedKeys={[getValues("ethnicity")]}
+                          >
+                            {Object.keys(ethnicities).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {ethnicities[key as keyof typeof ethnicities]}
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="religious_affiliation"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.religious_affiliation.label")}
+                            isRequired
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            defaultSelectedKeys={[
+                              getValues("religious_affiliation"),
+                            ]}
+                            description={t(
+                              "fields.religious_affiliation.description"
+                            )}
+                          >
+                            {Object.keys(religions).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {religions[key as keyof typeof religions]}
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="country"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            scrollShadowProps={{
+                              isEnabled: false,
+                            }}
+                            {...field}
+                            label={t("fields.country.label")}
+                            isRequired
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            defaultSelectedKeys={[getValues("country")]}
+                            description={t("fields.country.description")}
+                          >
+                            {Object.keys(countries).map((key) => (
+                              <SelectItem
+                                key={key}
+                                value={key}
+                                startContent={
+                                  <Avatar
+                                    src={`/flags/${key.toLowerCase()}.svg`}
+                                    className="w-6 h-6"
+                                    size="sm"
+                                  />
+                                }
+                              >
+                                {countries[key as keyof typeof countries]}
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          3. {t("sections.censusData.title")}
+                        </h3>
+                        <p>{t("sections.censusData.description")}</p>
+                      </div>
+                      <Controller
+                        name="national_id"
+                        control={control}
+                        //   rules={{ required: true }}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.national_id.label")}
+                            placeholder={t("fields.national_id.placeholder")}
+                            errorMessage={error?.message}
+                            isInvalid={invalid}
+                            description={t("fields.national_id.description")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="record_id"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.record_id.label")}
+                            description={t("fields.record_id.description")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="other_nationalities"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            scrollShadowProps={{
+                              isEnabled: false,
+                            }}
+                            {...field}
+                            label={t("fields.other_nationalities.label")}
+                            defaultSelectedKeys={
+                              getValues("other_nationalities")
+                                ? getValues("other_nationalities").split(",")
+                                : undefined
+                            }
+                            selectionMode="multiple"
+                            description={t(
+                              "fields.other_nationalities.description"
+                            )}
+                          >
+                            {Object.keys(countries)
+                              .filter((c) => c !== "SY")
+                              .map((key) => (
+                                <SelectItem
+                                  key={key}
+                                  value={key}
+                                  startContent={
+                                    <Avatar
+                                      src={`/flags/${key.toLowerCase()}.svg`}
+                                      className="w-6 h-6"
+                                      size="sm"
+                                    />
+                                  }
+                                >
+                                  {countries[key as keyof typeof countries]}
+                                </SelectItem>
+                              ))}
+                          </Select>
+                        )}
+                      />
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          4. {t("sections.locationData.title")}
+                        </h3>
+                        <p>{t("sections.locationData.description")}</p>
+                      </div>
+                      <Controller
+                        name="city"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.city.label")}
+                            description={t("fields.city.description")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="address"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.address.label")}
+                            description={t("fields.address.description")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="shelter"
+                        control={control}
+                        render={({ field }) => (
+                          <Checkbox
+                            {...field}
+                            value={`${field.value}`}
+                            isSelected={!!getValues("shelter")}
+                            onValueChange={(selected) =>
+                              setValue("shelter", selected)
                             }
                           >
-                            {countries[key as keyof typeof countries]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      3. {t("sections.censusData.title")}
-                    </h3>
-                    <p>{t("sections.censusData.description")}</p>
-                  </div>
-                  <Controller
-                    name="national_id"
-                    control={control}
-                    //   rules={{ required: true }}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.national_id.label")}
-                        placeholder={t("fields.national_id.placeholder")}
-                        errorMessage={error?.message}
-                        isInvalid={invalid}
-                        description={t("fields.national_id.description")}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="record_id"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.record_id.label")}
-                        description={t("fields.record_id.description")}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="other_nationalities"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        scrollShadowProps={{
-                          isEnabled: false,
-                        }}
-                        {...field}
-                        label={t("fields.other_nationalities.label")}
-                        defaultSelectedKeys={
-                          getValues("other_nationalities")
-                            ? getValues("other_nationalities").split(",")
-                            : undefined
-                        }
-                        selectionMode="multiple"
-                        description={t(
-                          "fields.other_nationalities.description"
+                            {t("fields.shelter.label")}
+                          </Checkbox>
                         )}
-                      >
-                        {Object.keys(countries)
-                          .filter((c) => c !== "SY")
-                          .map((key) => (
-                            <SelectItem
-                              key={key}
-                              value={key}
-                              startContent={
-                                <Avatar
-                                  src={`/flags/${key.toLowerCase()}.svg`}
-                                  className="w-6 h-6"
-                                  size="sm"
-                                />
+                      />
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          4. {t("sections.education.title")}
+                        </h3>
+                      </div>
+                      <Controller
+                        name="education_level"
+                        control={control}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.education_level.label")}
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            defaultSelectedKeys={[getValues("education_level")]}
+                          >
+                            {Object.keys(educationLevels).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {
+                                  educationLevels[
+                                    key as keyof typeof educationLevels
+                                  ]
+                                }
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="languages"
+                        control={control}
+                        render={({ field, fieldState: { error, invalid } }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.spoken_languages.label")}
+                            isInvalid={invalid}
+                            errorMessage={error?.message}
+                            selectionMode="multiple"
+                            defaultSelectedKeys={
+                              getValues("languages")
+                                ? getValues("languages").split(",")
+                                : undefined
+                            }
+                          >
+                            {Object.keys(spokenLanguages).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {
+                                  spokenLanguages[
+                                    key as keyof typeof spokenLanguages
+                                  ]
+                                }
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="skills"
+                        control={control}
+                        render={({ field }) => (
+                          <Input {...field} label={t("fields.skills.label")} />
+                        )}
+                      />
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          5. {t("sections.employment.title")}
+                        </h3>
+                      </div>
+                      <Controller
+                        name="source_of_income"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.source_of_income.label")}
+                            defaultSelectedKeys={[
+                              getValues("source_of_income"),
+                            ]}
+                          >
+                            {Object.keys(incomeSources).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {
+                                  incomeSources[
+                                    key as keyof typeof incomeSources
+                                  ]
+                                }
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <Controller
+                        name="estimated_monthly_income"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.estimated_monthly_income.label")}
+                            startContent="$"
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="number_of_dependents"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            label={t("fields.number_of_dependents.label")}
+                          />
+                        )}
+                      />
+
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          6. {t("sections.health.title")}
+                        </h3>
+                      </div>
+                      <Controller
+                        name="health_status"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            label={t("fields.health_status.label")}
+                            defaultSelectedKeys={[getValues("health_status")]}
+                          >
+                            {Object.keys(HealthStatuses).map((key) => (
+                              <SelectItem key={key} value={key}>
+                                {
+                                  HealthStatuses[
+                                    key as keyof typeof HealthStatuses
+                                  ]
+                                }
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+
+                      <div className="flex flex-col gap-2">
+                        <Controller
+                          name="health_insurance"
+                          control={control}
+                          render={({ field }) => (
+                            <Checkbox
+                              {...field}
+                              value={`${field.value}`}
+                              isSelected={!!getValues("health_insurance")}
+                              onValueChange={(selected) =>
+                                setValue("health_insurance", selected)
                               }
                             >
-                              {countries[key as keyof typeof countries]}
-                            </SelectItem>
-                          ))}
-                      </Select>
-                    )}
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      4. {t("sections.locationData.title")}
-                    </h3>
-                    <p>{t("sections.locationData.description")}</p>
-                  </div>
-                  <Controller
-                    name="city"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.city.label")}
-                        description={t("fields.city.description")}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="address"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.address.label")}
-                        description={t("fields.address.description")}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="shelter"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        {...field}
-                        value={`${field.value}`}
-                        isSelected={!!getValues("shelter")}
-                        onValueChange={(selected) =>
-                          setValue("shelter", selected)
-                        }
-                      >
-                        {t("fields.shelter.label")}
-                      </Checkbox>
-                    )}
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      4. {t("sections.education.title")}
-                    </h3>
-                  </div>
-                  <Controller
-                    name="education_level"
-                    control={control}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.education_level.label")}
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        defaultSelectedKeys={[getValues("education_level")]}
-                      >
-                        {Object.keys(educationLevels).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {
-                              educationLevels[
-                                key as keyof typeof educationLevels
-                              ]
-                            }
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="languages"
-                    control={control}
-                    render={({ field, fieldState: { error, invalid } }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.spoken_languages.label")}
-                        isInvalid={invalid}
-                        errorMessage={error?.message}
-                        selectionMode="multiple"
-                        defaultSelectedKeys={
-                          getValues("languages")
-                            ? getValues("languages").split(",")
-                            : undefined
-                        }
-                      >
-                        {Object.keys(spokenLanguages).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {
-                              spokenLanguages[
-                                key as keyof typeof spokenLanguages
-                              ]
-                            }
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="skills"
-                    control={control}
-                    render={({ field }) => (
-                      <Input {...field} label={t("fields.skills.label")} />
-                    )}
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      5. {t("sections.employment.title")}
-                    </h3>
-                  </div>
-                  <Controller
-                    name="source_of_income"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.source_of_income.label")}
-                        defaultSelectedKeys={[getValues("source_of_income")]}
-                      >
-                        {Object.keys(incomeSources).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {incomeSources[key as keyof typeof incomeSources]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    name="estimated_monthly_income"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.estimated_monthly_income.label")}
-                        startContent="$"
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="number_of_dependents"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        label={t("fields.number_of_dependents.label")}
-                      />
-                    )}
-                  />
+                              {t("fields.health_insurance.label")}
+                            </Checkbox>
+                          )}
+                        />
 
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      6. {t("sections.health.title")}
-                    </h3>
-                  </div>
-                  <Controller
-                    name="health_status"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        label={t("fields.health_status.label")}
-                        defaultSelectedKeys={[getValues("health_status")]}
-                      >
-                        {Object.keys(HealthStatuses).map((key) => (
-                          <SelectItem key={key} value={key}>
-                            {HealthStatuses[key as keyof typeof HealthStatuses]}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
+                        <Controller
+                          name="easy_access_to_healthcare_services"
+                          control={control}
+                          render={({ field }) => (
+                            <Checkbox
+                              {...field}
+                              value={`${field.value}`}
+                              isSelected={
+                                !!getValues(
+                                  "easy_access_to_healthcare_services"
+                                )
+                              }
+                              onValueChange={(selected) =>
+                                setValue(
+                                  "easy_access_to_healthcare_services",
+                                  selected
+                                )
+                              }
+                            >
+                              {t(
+                                "fields.easy_access_to_healthcare_services.label"
+                              )}
+                            </Checkbox>
+                          )}
+                        />
+                      </div>
 
-                  <div className="flex flex-col gap-2">
-                    <Controller
-                      name="health_insurance"
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox
-                          {...field}
-                          value={`${field.value}`}
-                          isSelected={!!getValues("health_insurance")}
-                          onValueChange={(selected) =>
-                            setValue("health_insurance", selected)
-                          }
-                        >
-                          {t("fields.health_insurance.label")}
-                        </Checkbox>
-                      )}
-                    />
-
-                    <Controller
-                      name="easy_access_to_healthcare_services"
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox
-                          {...field}
-                          value={`${field.value}`}
-                          isSelected={
-                            !!getValues("easy_access_to_healthcare_services")
-                          }
-                          onValueChange={(selected) =>
-                            setValue(
-                              "easy_access_to_healthcare_services",
-                              selected
-                            )
-                          }
-                        >
-                          {t("fields.easy_access_to_healthcare_services.label")}
-                        </Checkbox>
-                      )}
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      7. {t("sections.more_info.title")}
-                    </h3>
-                  </div>
-                  <Controller
-                    name="more_info"
-                    control={control}
-                    render={({ field }) => (
-                      <Textarea
-                        {...field}
-                        label={t("fields.more_info.label")}
-                        placeholder={t("fields.more_info.placeholder")}
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          7. {t("sections.more_info.title")}
+                        </h3>
+                      </div>
+                      <Controller
+                        name="more_info"
+                        control={control}
+                        render={({ field }) => (
+                          <Textarea
+                            {...field}
+                            label={t("fields.more_info.label")}
+                            placeholder={t("fields.more_info.placeholder")}
+                          />
+                        )}
                       />
-                    )}
-                  />
-                </form>
+                    </form>
+                  </>
+                )}
               </DrawerBody>
               <DrawerFooter>
-                <Button
-                  fullWidth
-                  color="danger"
-                  variant="solid"
-                  onPress={onClose}
-                  isLoading={isSubmitting}
-                >
-                  {t("actions.cancel")}
-                </Button>
-                <Button
-                  fullWidth
-                  color="primary"
-                  variant="solid"
-                  onPress={() => handleSubmit(register)()}
-                  isLoading={isSubmitting}
-                >
-                  {t("actions.register")}
-                </Button>
+                {session.status === "authenticated" ? (
+                  <>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="solid"
+                      onPress={onOpenLinkModal}
+                    >
+                      {t("profile.link")}
+                    </Button>
+                    <Button color="danger" fullWidth onPress={() => signOut()}>
+                      {t("signOut")}
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      fullWidth
+                      color="danger"
+                      variant="solid"
+                      onPress={onClose}
+                      isLoading={isSubmitting}
+                    >
+                      {t("actions.cancel")}
+                    </Button>
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="solid"
+                      onPress={() => handleSubmit(register)()}
+                      isLoading={isSubmitting}
+                    >
+                      {t("actions.register")}
+                    </Button>
+                  </>
+                )}
               </DrawerFooter>
             </>
           )}

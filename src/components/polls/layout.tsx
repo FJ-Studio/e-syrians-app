@@ -31,7 +31,7 @@ const PollsLayout: FC<PropsWithChildren> = ({ children }) => {
           <div>All</div>
           <button
             onClick={() => openCensusForm(true)}
-            className="text-white bg-transparent border-0 hidden md:block"
+            className="text-white bg-transparent border-0 block"
           >
             {t("polls.actions.register")}
           </button>

@@ -19,12 +19,13 @@ export const getPoll = async (id: string): Promise<ApiResponse<Poll>> => {
 };
 
 export const getPolls = async (
-  year: string,
-  month: string
-): Promise<ApiResponse<Array<Poll>>> => {
+  page: string,
+  year: string = '',
+  month: string = ''
+): Promise<ApiResponse<{polls: Array<Poll>; current_page: number; last_page: number}>> => {
   const session = await auth();
   const req = await fetch(
-    `${process.env.API_URL}/polls?year=${year}&month=${month}`,
+    `${process.env.API_URL}/polls?page=${page}&year=${year}&month=${month}`,
     {
       headers: {
         Accept: "application/json",

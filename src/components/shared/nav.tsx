@@ -10,12 +10,12 @@ const Nav: FC = () => {
     { title: t("polls"), link: "/polls" },
   ];
   return (
-    <nav className="hidden sm:flex">
+    <nav className="flex">
       {links.map((link) => (
         <Link
           key={link.link}
           href={link.link}
-          className="text-gray-800 font-normal px-3 py-2 hover:text-primary"
+          className="text-gray-800 font-normal px-2 sm:px-3 py-2 hover:text-primary"
         >
           {link.title}
         </Link>

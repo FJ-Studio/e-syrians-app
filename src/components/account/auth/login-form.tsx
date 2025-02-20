@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import { Button, Input, Checkbox, Divider } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
-import { login } from "@/app/actions";
-import AuthLayout from "./layout";
 import { signIn } from "next-auth/react";
 import { Controller, useForm } from "react-hook-form";
+import Link from "next/link";
 
 export default function LoginForm() {
   // const [loginError, setLoginError] = useState<string | null>(null);
@@ -18,13 +17,17 @@ export default function LoginForm() {
 
   const t = useTranslations();
 
-  const { handleSubmit, control } = useForm<{
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting },
+  } = useForm<{
     email: string;
     password: string;
   }>();
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    signIn("credentials", {
+  const onSubmit = async (data: { email: string; password: string }) => {
+    await signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: true,
@@ -33,25 +36,23 @@ export default function LoginForm() {
   };
 
   return (
-    <AuthLayout>
-      {/* Sign Up Form */}
-      <div className="flex w-full items-center justify-center">
-        <div className="flex w-full max-w-sm flex-col items-center gap-4 p-4">
-          <div className="flex flex-col gap-2 w-full">
-            <Button
-              startContent={<Icon icon="flat-color-icons:google" width={24} />}
-              variant="bordered"
-              className="w-full"
-              onPress={() =>
-                signIn("google", {
-                  redirect: true,
-                  redirectTo: "/account",
-                })
-              }
-            >
-              {t("common.continueWithGoogle")}
-            </Button>
-            {/* <Button
+    <div className="flex w-full items-center justify-center">
+      <div className="flex w-full max-w-sm flex-col items-center gap-4 p-4">
+        <div className="flex flex-col gap-2 w-full">
+          <Button
+            startContent={<Icon icon="flat-color-icons:google" width={24} />}
+            variant="bordered"
+            className="w-full"
+            onPress={() =>
+              signIn("google", {
+                redirect: true,
+                redirectTo: "/account",
+              })
+            }
+          >
+            {t("common.continueWithGoogle")}
+          </Button>
+          {/* <Button
               startContent={
                 <Icon
                   className="text-default-500"
@@ -64,125 +65,80 @@ export default function LoginForm() {
             >
               {t("common.continueWithPasskey")}
             </Button> */}
-          </div>
+        </div>
 
-          <div className="flex items-center gap-4 py-2 w-full ">
-            <Divider className="flex-1 w-full" />
-            <p className="shrink-0 text-tiny text-default-500">
-              {t("common.or")}
-            </p>
-            <Divider className="flex-1 w-full" />
-          </div>
-          <form
-            className="flex w-full flex-col gap-3"
-            onSubmit={handleSubmit(onSubmit)}
-            action={async (formData) => {
-              await login(formData);
-              // signIn("credentials", {
-              //   email: formData.email,
-              //   password: formData.password,
-              //   redirect: false,
-              // });
-            }}
-          >
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  isRequired
-                  label={t("auth.login.identifier")}
-                />
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  isRequired
-                  endContent={
-                    <button type="button" onClick={toggleVisibility}>
-                      {isVisible ? (
-                        <Icon
-                          className="pointer-events-none text-2xl text-default-400"
-                          icon="solar:eye-closed-linear"
-                        />
-                      ) : (
-                        <Icon
-                          className="pointer-events-none text-2xl text-default-400"
-                          icon="solar:eye-bold"
-                        />
-                      )}
-                    </button>
-                  }
-                  label={t("common.password")}
-                  name="password"
-                  errorMessage={t("common.typePassword")}
-                  type={isVisible ? "text" : "password"}
-                />
-              )}
-            />
+        <div className="flex items-center gap-4 py-2 w-full ">
+          <Divider className="flex-1 w-full" />
+          <p className="shrink-0 text-tiny text-default-500">
+            {t("common.or")}
+          </p>
+          <Divider className="flex-1 w-full" />
+        </div>
+        <form
+          className="flex w-full flex-col gap-3"
+          onSubmit={handleSubmit(onSubmit)}
+          // action={async (formData) => {
+          // await login(formData);
+          // signIn("credentials", {
+          //   email: formData.email,
+          //   password: formData.password,
+          //   redirect: false,
+          // });
+          // }}
+        >
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} isRequired label={t("auth.login.identifier")} />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                isRequired
+                endContent={
+                  <button type="button" onClick={toggleVisibility}>
+                    {isVisible ? (
+                      <Icon
+                        className="pointer-events-none text-2xl text-default-400"
+                        icon="solar:eye-closed-linear"
+                      />
+                    ) : (
+                      <Icon
+                        className="pointer-events-none text-2xl text-default-400"
+                        icon="solar:eye-bold"
+                      />
+                    )}
+                  </button>
+                }
+                label={t("common.password")}
+                name="password"
+                errorMessage={t("common.typePassword")}
+                type={isVisible ? "text" : "password"}
+              />
+            )}
+          />
+          <div className="flex items-center justify-between">
             <Checkbox className="py-4" size="sm">
               {t("common.rememberMe")}
             </Checkbox>
-            <Button color="primary" type="submit">
-              {t("common.login")}
-            </Button>
-          </form>
-        </div>
-
-        {/* Right side */}
-        {/* <div
-        className="relative hidden w-1/2 flex-col-reverse p-10 shadow-small lg:flex h-[calc(100dvh-120px)] m-10 rounded-xl"
-        style={{
-          backgroundImage:
-            "url(/syria-1.jpeg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="flex flex-col items-start gap-4">
-          <div className="bg-gradient-to-b from-transparent to-black absolute top-0 left-0 h-full w-full"></div>
-
-          <User
-            avatarProps={{
-              src: "/andre-parrot.jpg",
-              alt: t("slogan.author.name"),
-              className: "border-2 border-white",
-            }}
-            classNames={{
-              base: "flex flex-row",
-              name: "w-full text-start text-white",
-              description: "text-white/80",
-            }}
-            className="z-10"
-            description={t("slogan.author.description")}
-            name={t("slogan.author.name")}
-          />
-          <p className="w-full text-start text-2xl text-white z-20">
-            <span className="font-medium">“</span>
-            <span className="font-normal italic">{t("slogan.text")}</span>
-            <span className="font-medium">”</span>
-          </p>
-          <ul className="flex gap-2 z-20 items-center justify-center w-full">
-            {Object.keys(LANGUAGES).map((lang) => (
-              <li key={lang}>
-                <a
-                  className="text-white text-sm underline underline-offset-3"
-                  href={`/${lang}`}
-                  title={LANGUAGES[lang as Locale].label}
-                >
-                  {LANGUAGES[lang as Locale].label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div> */}
+            <Link
+              href="/auth/forgot-password"
+              title={t("auth.login.forgotPassword")}
+              className="text-sm"
+            >
+              {t("auth.login.forgotPassword")}
+            </Link>
+          </div>
+          <Button color="primary" type="submit" isLoading={isSubmitting}>
+            {t("common.login")}
+          </Button>
+        </form>
       </div>
-    </AuthLayout>
+    </div>
   );
 }

@@ -241,6 +241,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             }}
             value={selectedOptions}
             onChange={setSelectedOptions}
+            isReadOnly={!canVote}
           >
             {localPoll.options.map((option) => (
               <PollOptionRow
