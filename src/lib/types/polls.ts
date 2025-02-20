@@ -1,3 +1,5 @@
+import { ESUser } from "./account";
+
 export type PollAudience = {
     gender: string | null;
     age_range: {
@@ -33,12 +35,7 @@ export type Poll = {
     votes_count: number;
     ups_count: number;
     downs_count: number;
-    user: {
-        id: string;
-        name: string;
-        surname: string;
-        avatar: string;
-    },
+    user: ESUser,
     reveal_results: PollReveal;
     voters_are_visible: boolean;
     has_voted?: boolean;
