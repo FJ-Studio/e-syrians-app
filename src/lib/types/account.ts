@@ -50,6 +50,9 @@ export type ESUser = {
   github_link: string;
   snapchat_link: string;
   pinterest_link: string;
+
+  email_verified_at?: string;
+  phone_verified_at?: string;
   
 }
 

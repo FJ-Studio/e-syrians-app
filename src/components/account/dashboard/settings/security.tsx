@@ -61,74 +61,76 @@ const AccountSecurity: FC = () => {
   }, [failedTries]);
 
   return (
-    <Card>
-      <CardHeader className="flex flex-col items-start">
-        <h2 className="text-xl font-medium text-default-700 text-start">
-          {t("title")}
-        </h2>
-        <p className="text-default-500 text-start">{t("description")}</p>
-      </CardHeader>
-      <CardBody>
-        <form onSubmit={handleSubmit(changePassword)} className="space-y-4">
-          <Controller
-            name="currentPassword"
-            control={control}
-            rules={{ required: true }}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Input
-                {...field}
-                type="password"
-                label={t("currentPassword")}
-                isRequired
-                isInvalid={invalid}
-                errorMessage={error?.message}
-              />
-            )}
-          />
-          <Controller
-            name="newPassword"
-            control={control}
-            rules={{
-              required: true,
-              minLength: 8,
-              pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-            }}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Input
-                {...field}
-                type="password"
-                label={t("newPassword")}
-                isRequired
-                isInvalid={invalid}
-                errorMessage={error?.message}
-              />
-            )}
-          />
-          <Controller
-            name="confirmPassword"
-            control={control}
-            render={({ field, fieldState: { error, invalid } }) => (
-              <Input
-                {...field}
-                type="password"
-                label={t("confirmPassword")}
-                isRequired
-                isInvalid={invalid}
-                errorMessage={error?.message}
-              />
-            )}
-          />
-          <Button
-            color="primary"
-            type="submit"
-            isLoading={isSubmitting}
-            // onPress={() => handleSubmit(changePassword)()}
-          >
-            {t("actions.changePassword")}
-          </Button>
-        </form>
-      </CardBody>
-    </Card>
+    <>
+      <Card>
+        <CardHeader className="flex flex-col items-start">
+          <h2 className="text-xl font-medium text-default-700 text-start">
+            {t("title")}
+          </h2>
+          <p className="text-default-500 text-start">{t("description")}</p>
+        </CardHeader>
+        <CardBody>
+          <form onSubmit={handleSubmit(changePassword)} className="space-y-4">
+            <Controller
+              name="currentPassword"
+              control={control}
+              rules={{ required: true }}
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Input
+                  {...field}
+                  type="password"
+                  label={t("currentPassword")}
+                  isRequired
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                />
+              )}
+            />
+            <Controller
+              name="newPassword"
+              control={control}
+              rules={{
+                required: true,
+                minLength: 8,
+                pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+              }}
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Input
+                  {...field}
+                  type="password"
+                  label={t("newPassword")}
+                  isRequired
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                />
+              )}
+            />
+            <Controller
+              name="confirmPassword"
+              control={control}
+              render={({ field, fieldState: { error, invalid } }) => (
+                <Input
+                  {...field}
+                  type="password"
+                  label={t("confirmPassword")}
+                  isRequired
+                  isInvalid={invalid}
+                  errorMessage={error?.message}
+                />
+              )}
+            />
+            <Button
+              color="primary"
+              type="submit"
+              isLoading={isSubmitting}
+              // onPress={() => handleSubmit(changePassword)()}
+            >
+              {t("actions.changePassword")}
+            </Button>
+          </form>
+        </CardBody>
+      </Card>
+    </>
   );
 };
 
