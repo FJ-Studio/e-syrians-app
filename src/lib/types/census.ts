@@ -93,3 +93,13 @@ export type RegistrationForm = {
   more_info: string;
   other_nationalities: string;
 };
+
+export type CensusStats = {
+    daily_users?: DailyRegistrations;
+    age?: AgeRegistrations;
+    hometown?: HometownRegistrations;
+    country?: CountryRegistrations;
+    ethnicity?: EthnicityRegistrations;
+    religion?: ReligionRegistrations;
+    gender?: GenderRegistrations;
+  }

@@ -59,7 +59,8 @@ const CensusForm: FC = () => {
     onOpenChange: onOpenLinkModalchange,
   } = useDisclosure();
 
-  const { censusFormIsOpened, openCensusForm } = useEsyrian();
+  const { censusFormIsOpened, openCensusForm, updateCensusStats } =
+    useEsyrian();
   const genderOptions = useGender();
   const provinces = useProvinces();
   const ethnicities = useEthnicity();
@@ -152,6 +153,7 @@ const CensusForm: FC = () => {
             spread: 70,
             origin: { y: 0.6 }, // Confetti starts from the middle
           });
+
           reset(
             Object.keys(watchedValues).reduce(
               (acc, key) => ({ ...acc, [key]: "" }),
@@ -161,6 +163,9 @@ const CensusForm: FC = () => {
           localStorage.removeItem(LOCAL_STORAGE_KEY);
           openCensusForm(false);
           onOpenLinkModal();
+          window.setTimeout(() => {
+            updateCensusStats();
+          }, 1000);
         }
       } else {
         toast.error(

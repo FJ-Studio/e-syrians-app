@@ -1,41 +1,17 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import {
-  AgeRegistrations,
-  CountryRegistrations,
-  DailyRegistrations as DailyRegistrationsType,
-  EthnicityRegistrations,
-  GenderRegistrations,
-  HometownRegistrations,
-  ReligionRegistrations,
-} from "@/lib/types/census";
+import { FC, useEffect } from "react";
 import BarChartCard from "@/components/charts/bar-chart";
 import { useTranslations } from "next-intl";
 import { Select, SelectItem } from "@heroui/react";
+import { useEsyrian } from "@/components/shared/contexts/es";
 
 const CensusCharts: FC = () => {
   const t = useTranslations("census.charts");
-  const [charts, setCharts] = useState<{
-    daily_users?: DailyRegistrationsType;
-    age?: AgeRegistrations;
-    hometown?: HometownRegistrations;
-    country?: CountryRegistrations;
-    ethnicity?: EthnicityRegistrations;
-    religion?: ReligionRegistrations;
-    gender?: GenderRegistrations;
-  }>({});
-
-  const getStates = async () => {
-    fetch("/api/census/stats")
-      .then((res) => res.json())
-      .then((stats) => {
-        setCharts(stats.data);
-      })
-      .catch((error) => console.error(error));
-  };
+  const { censusStats: charts, updateCensusStats } = useEsyrian();
 
   useEffect(() => {
-    getStates();
+    updateCensusStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -49,7 +25,7 @@ const CensusCharts: FC = () => {
           t("labels.registered.title"),
           t("labels.verification.title"),
         ]}
-        chartData={Object.entries(charts.daily_users ?? {}).map(
+        chartData={Object.entries(charts?.daily_users ?? {}).map(
           ([month, value]) => {
             return {
               month,
@@ -96,7 +72,7 @@ const CensusCharts: FC = () => {
           t("labels.verified.title"),
           t("labels.unverified.title"),
         ]}
-        chartData={Object.entries(charts.age ?? {}).map(([month, value]) => {
+        chartData={Object.entries(charts?.age ?? {}).map(([month, value]) => {
           return {
             month,
             unverified: value.unverified,
@@ -114,7 +90,7 @@ const CensusCharts: FC = () => {
           t("labels.verified.title"),
           t("labels.unverified.title"),
         ]}
-        chartData={Object.entries(charts.hometown ?? {}).map(
+        chartData={Object.entries(charts?.hometown ?? {}).map(
           ([month, value]) => {
             return {
               month,
@@ -134,7 +110,7 @@ const CensusCharts: FC = () => {
           t("labels.verified.title"),
           t("labels.unverified.title"),
         ]}
-        chartData={Object.entries(charts.religion ?? {}).map(
+        chartData={Object.entries(charts?.religion ?? {}).map(
           ([month, value]) => {
             return {
               month,
@@ -155,7 +131,7 @@ const CensusCharts: FC = () => {
           t("labels.verified.title"),
           t("labels.unverified.title"),
         ]}
-        chartData={Object.entries(charts.country ?? {}).map(
+        chartData={Object.entries(charts?.country ?? {}).map(
           ([month, value]) => {
             return {
               month,
@@ -176,7 +152,7 @@ const CensusCharts: FC = () => {
           t("labels.verified.title"),
           t("labels.unverified.title"),
         ]}
-        chartData={Object.entries(charts.ethnicity ?? {}).map(
+        chartData={Object.entries(charts?.ethnicity ?? {}).map(
           ([month, value]) => {
             return {
               month,
