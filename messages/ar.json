@@ -1232,7 +1232,7 @@
     "title": "الاستطلاعات",
     "postedBy": "تم نشره بواسطة {name} يوم {created_at} بحيث يمكن الإجابة بين {start_date} و {end_date}",
     "vote": "تصويت",
-    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} =2 {two options only} other {up to # options}}",
+    "maxSelections": "في هذا الاستطلاع بإمكانك تحديد {max, plural,  =1 {خيار واحد} =2 {خيارين} other {# خيارات}} كحد أقصى",
     "voteSuccess": "تم تسجيل تصويتك بنجاح",
     "actions": {
       "register": "تسجيل",
