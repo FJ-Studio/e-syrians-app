@@ -1227,7 +1227,16 @@
     },
     "cannotVote": "Sorry, you cannot submit your vote for the following reason(s):",
     "alreadyReacted": "You have already reacted to this poll",
-    "reactSuccess": "Your reaction got stored successfully"
+    "reactSuccess": "Your reaction got stored successfully",
+    "ageRange": "Age Range",
+    "ageRangeBetween": "From {min} to {max}",
+    "ageRangeNoMax": "Not limited",
+    "gender": "Gender",
+    "hometown": "Hometown",
+    "religinousAffiliation": "Religinous Affiliation",
+    "ethnicity": "Ethnicity",
+    "country": "Country of residence",
+    "noLimit": "Not limited"
   },
   "actions": {
     "register": "Register"
