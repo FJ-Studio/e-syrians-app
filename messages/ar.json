@@ -273,7 +273,10 @@
       "profile": {
         "link": "شارك ملفك الشخصي",
         "copy": "الآن، حان الوقت لمشاركة ملفك الشخصي مع معارفك وأصدقائك من أجل الحصول على تأكيدات"
-      }
+      },
+      "alreadySignedIn": "You are already signed in",
+      "signOut": "Sign out",
+      "alreadySignedInDescription": "You can now access the platform's features. If you are using a shared device, remember to sign out before you leave."
     },
     "nav": {
       "stats": "الرئيسية",
@@ -700,7 +703,25 @@
   },
   "auth": {
     "login": {
-      "identifier": "استخدم البريد الإلكتروني، الهاتف، أو الرقم الوطني"
+      "identifier": "استخدم البريد الإلكتروني، الهاتف، أو الرقم الوطني",
+      "forgotPassword": "Forgot password"
+    },
+    "forgotPassword": {
+      "email": "E-mail address",
+      "sendLink": "Send reset link",
+      "title": "Get a password reset link",
+      "description": "Please enter your email address below. if it is correct, you will receive a instructions email",
+      "backToLogin": "Back to login",
+      "success": "Done! If the email you entered is in our database, you will receive instructions soon"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Please type your new password in the fields below",
+      "newPassword": "New Password",
+      "newPasswordConfirmation": "New Password Confirmation",
+      "resetPassword": "Reset Password",
+      "email": "E-mail Address",
+      "success": "Password changed successfully"
     }
   },
   "account": {
@@ -947,7 +968,17 @@
       },
       "security": {
         "title": "Security settings",
-        "description": "Here, you'll find options to enhance the security of your data. Currently, you can update your account password, with more advanced tools coming soon."
+        "description": "Here, you'll find options to enhance the security of your data. Currently, you can update your account password, with more advanced tools coming soon.",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "New password confirmation",
+        "actions": {
+          "changePassword": "Change Password"
+        },
+        "errors": {
+          "passwordsDoNotMatch": "Passwords do not match"
+        },
+        "success": "Password changed successfully"
       }
     },
     "settings": {
@@ -1170,7 +1201,10 @@
     "you_have_already_voted": "You have already voted on this poll",
     "user_is_not_in_poll_audience": "You are not in the poll audience",
     "user_has_reached_the_max_selections": "You have exceeded the maximum allowed options",
-    "invalid_options": "Invalid options selected"
+    "invalid_options": "Invalid options selected",
+    "current_password_incorrect": "Your entered password is not correct",
+    "failed_to_reset_password": "Failed to reset password",
+    "failed_to_send_password_reset_email": "Failed to send password reset link"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
@@ -1194,26 +1228,7 @@
     "user_updated_basic_info": "قام المستخدم بتحديث بياناته الأساسية",
     "unknown_reason": "سبب آخر"
   },
-  "months": {
-    "january": "يناير",
-    "february": "فبراير",
-    "march": "مارس",
-    "april": "أبريل",
-    "may": "أيار",
-    "june": "حزيران",
-    "july": "تموز",
-    "august": "آب",
-    "september": "أيلول",
-    "october": "أوكتوبر",
-    "november": "نوفمبر",
-    "december": "ديسمبر"
-  },
   "polls": {
-    "picker": {
-      "year": {
-        "title": "اختر السنة"
-      }
-    },
     "title": "الاستطلاعات",
     "postedBy": "تم نشره بواسطة {name} يوم {created_at} بحيث يمكن الإجابة بين {start_date} و {end_date}",
     "vote": "Vote",
@@ -1236,7 +1251,34 @@
     "religinousAffiliation": "Religinous Affiliation",
     "ethnicity": "Ethnicity",
     "country": "Country of residence",
-    "noLimit": "Not limited"
+    "noLimit": "Not limited",
+    "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
+    "filter": {
+      "description": "Display polls by year and month",
+      "months": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "Septemper",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+      },
+      "selectYear": "Select Year",
+      "apply": "Apply",
+      "cancel": "Cancel",
+      "title": "Filter Polls",
+      "selectMonth": "Select Month"
+    },
+    "noPolls": {
+      "title": "No Polls",
+      "description": "No polls were created within the selected time frame"
+    }
   },
   "actions": {
     "register": "Register"
