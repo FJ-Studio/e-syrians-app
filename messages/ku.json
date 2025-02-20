@@ -965,6 +965,20 @@
           "title": "Verifications I sent",
           "noVerifications": "You have made 0 verifications"
         }
+      },
+      "security": {
+        "title": "Mîhengên ewlehiyê",
+        "description": "Li vir, hûn ê vebijarkan bibînin ku ewlehiya daneyên xwe zêde bikin. Heya nuha, hûn dikarin şîfreya hesabê xwe nûve bikin, digel amûrên pêşkeftî di demek nêzîk de.",
+        "currentPassword": "Şîfreya heyî",
+        "newPassword": "Şîfreya Nû",
+        "confirmPassword": "Pejirandina şîfreya nû",
+        "actions": {
+          "changePassword": "Şîfre biguherînin"
+        },
+        "errors": {
+          "passwordsDoNotMatch": "Şîfre li hev nayên"
+        },
+        "success": "Şîfre bi serkeftî guherî"
       }
     },
     "settings": {
