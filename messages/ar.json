@@ -274,9 +274,9 @@
         "link": "شارك ملفك الشخصي",
         "copy": "الآن، حان الوقت لمشاركة ملفك الشخصي مع معارفك وأصدقائك من أجل الحصول على تأكيدات"
       },
-      "alreadySignedIn": "You are already signed in",
-      "signOut": "Sign out",
-      "alreadySignedInDescription": "You can now access the platform's features. If you are using a shared device, remember to sign out before you leave."
+      "alreadySignedIn": "قمت بتسجيل الدخول مسبقا",
+      "signOut": "تسجيل خروج",
+      "alreadySignedInDescription": "يمكنك الآن الوصول إلى ميزات المنصة. إذا كنت تستخدم جهازا مشتركا، تذكر أن تقوم بتسجيل الخروج قبل مغادرتك."
     },
     "nav": {
       "stats": "الرئيسية",
@@ -704,24 +704,24 @@
   "auth": {
     "login": {
       "identifier": "استخدم البريد الإلكتروني، الهاتف، أو الرقم الوطني",
-      "forgotPassword": "Forgot password"
+      "forgotPassword": "نسيت كلمة المرور"
     },
     "forgotPassword": {
-      "email": "E-mail address",
-      "sendLink": "Send reset link",
-      "title": "Get a password reset link",
-      "description": "Please enter your email address below. if it is correct, you will receive a instructions email",
-      "backToLogin": "Back to login",
-      "success": "Done! If the email you entered is in our database, you will receive instructions soon"
+      "email": "البريد الإلكتروني",
+      "sendLink": "إرسال رابط إعادة تعيين",
+      "title": "الحصول على رابط إعادة تعيين كلمة المرور",
+      "description": "الرجاء إدخال عنوان البريد الإلكتروني الخاص بك أدناه. إذا كان صحيحاً، سوف تتلقى رسالة بريد إلكتروني لمتابعة عملية تغيير كلمة المرور",
+      "backToLogin": "عودة إلى تسجيل الدخول",
+      "success": "تم! إذا كان البريد الإلكتروني الذي أدخلته في قاعدة بياناتنا، سوف تتلقى بريدا الكترونيا من المنصة"
     },
     "resetPassword": {
-      "title": "Reset Password",
-      "description": "Please type your new password in the fields below",
-      "newPassword": "New Password",
-      "newPasswordConfirmation": "New Password Confirmation",
-      "resetPassword": "Reset Password",
-      "email": "E-mail Address",
-      "success": "Password changed successfully"
+      "title": "إعادة ضبط كلمة المرور",
+      "description": "الرجاء كتابة كلمة المرور الجديدة في الحقول أدناه",
+      "newPassword": "كلمة المرور الجديدة",
+      "newPasswordConfirmation": "تأكيد كلمة المرور الجديدة",
+      "resetPassword": "إعادة ضبط كلمة المرور",
+      "email": "البريد الاكتروني",
+      "success": "تم تغيير كلمة المرور بنجاح"
     }
   },
   "account": {
@@ -790,26 +790,26 @@
         },
         "my_votes": {
           "title": "أصواتي",
-          "description": "Here you can view the polls you have voted on",
+          "description": "هنا يمكنك عرض الاستطلاعات التي شاركت فيها",
           "table": {
             "question": {
-              "title": "Question"
+              "title": "نص الاستطلاع"
             },
             "date": {
-              "title": "Date"
+              "title": "تاريخ المشاركة"
             },
             "answers": {
-              "title": "Answers"
+              "title": "الإجابات"
             }
           },
           "search": {
-            "title": "Search by question"
+            "title": "البحث حسب نص الاستطلاع"
           },
           "previous": {
-            "title": "Previous"
+            "title": "السابق"
           },
           "next": {
-            "title": "Next"
+            "title": "التالي"
           }
         },
         "my_reactions": {
@@ -817,25 +817,25 @@
           "description": "هنا يمكنك عرض الاستطلاعات التي تفاعلت معها",
           "table": {
             "question": {
-              "title": "Question"
+              "title": "نص الاستطلاع"
             },
             "reaction": {
-              "title": "Reaction",
-              "up": "Up",
-              "down": "Down"
+              "title": "التفاعل",
+              "up": "مع (أعلى)",
+              "down": "ضد (أسفل)"
             },
             "date": {
-              "title": "Date"
+              "title": "تاريخ المشاركة"
             }
           },
           "search": {
-            "title": "Search by question"
+            "title": "البحث حسب نص الاستطلاع"
           },
           "previous": {
-            "title": "Previous"
+            "title": "السابق"
           },
           "next": {
-            "title": "Next"
+            "title": "التالي"
           }
         },
         "create": {
@@ -967,18 +967,18 @@
         }
       },
       "security": {
-        "title": "Security settings",
-        "description": "Here, you'll find options to enhance the security of your data. Currently, you can update your account password, with more advanced tools coming soon.",
-        "currentPassword": "Current Password",
-        "newPassword": "New Password",
-        "confirmPassword": "New password confirmation",
+        "title": "إعدادات الأمان",
+        "description": "هنا، ستجد خيارات لتعزيز أمن حسابك. حاليا، يمكنك تحديث كلمة مرور حسابك، لكننا نعمل من أجل تقديم المزيد من الأدوات قريبا.",
+        "currentPassword": "كلمة المرور الحالية",
+        "newPassword": "كلمة المرور الجديدة",
+        "confirmPassword": "تأكيد كلمة المرور الجديدة",
         "actions": {
-          "changePassword": "Change Password"
+          "changePassword": "تغيير كلمة المرور"
         },
         "errors": {
-          "passwordsDoNotMatch": "Passwords do not match"
+          "passwordsDoNotMatch": "كلمتا السر غير متطابقتين"
         },
-        "success": "Password changed successfully"
+        "success": "تم تغيير كلمة المرور بنجاح"
       }
     },
     "settings": {
@@ -1196,15 +1196,15 @@
     "you_cannot_verify_yourself": "لا يمكنك تأكيد حسابك الشخصي",
     "circular_verification_not_allowed": "لا يمكنك تأكيد المعلومات لحساب قام مسبقا بتأكيد معلوماتك",
     "you_have_already_verified_this_user": "لقد قمت مسبقا بتأكيد معلومات هذا المستخدم",
-    "poll_has_not_started_yet": "Poll has not started yet",
-    "poll_has_expired": "Poll has expired",
-    "you_have_already_voted": "You have already voted on this poll",
-    "user_is_not_in_poll_audience": "You are not in the poll audience",
-    "user_has_reached_the_max_selections": "You have exceeded the maximum allowed options",
-    "invalid_options": "Invalid options selected",
-    "current_password_incorrect": "Your entered password is not correct",
-    "failed_to_reset_password": "Failed to reset password",
-    "failed_to_send_password_reset_email": "Failed to send password reset link"
+    "poll_has_not_started_yet": "لم يحن وقت التصويت في هذا الاستطلاع بعد",
+    "poll_has_expired": "انتهى وقت التصويت في هذا الاستطلاع",
+    "you_have_already_voted": "لقد قمت بالتصويت على هذا الاستطلاع مِن قبل",
+    "user_is_not_in_poll_audience": "أنت لست من ضمن الجمهور المستهدف في هذا الاستطلاع",
+    "user_has_reached_the_max_selections": "لقد تجاوزت الحد الأقصى للخيارات المسموح بها",
+    "invalid_options": "الخيارات المحددة غير صالحة",
+    "current_password_incorrect": "كلمة المرور التي أدخلتها غير صحيحة",
+    "failed_to_reset_password": "فشلت عملية إعادة تعيين كلمة المرور",
+    "failed_to_send_password_reset_email": "فشل إرسال رابط إعادة تعيين كلمة المرور"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
@@ -1231,76 +1231,76 @@
   "polls": {
     "title": "الاستطلاعات",
     "postedBy": "تم نشره بواسطة {name} يوم {created_at} بحيث يمكن الإجابة بين {start_date} و {end_date}",
-    "vote": "Vote",
-    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} other {up to # options}}",
-    "voteSuccess": "Your vote got stored successfully",
+    "vote": "تصويت",
+    "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} =2 {two options only} other {up to # options}}",
+    "voteSuccess": "تم تسجيل تصويتك بنجاح",
     "actions": {
-      "register": "Register",
-      "author": "The author",
-      "timeline": "Poll Timeline",
-      "audience": "Poll Audience"
+      "register": "تسجيل",
+      "author": "صاحب الاستطلاع",
+      "timeline": "الجدول الزمني للاستطلاع",
+      "audience": "جمهور الاستطلاع"
     },
-    "cannotVote": "Sorry, you cannot submit your vote for the following reason(s):",
-    "alreadyReacted": "You have already reacted to this poll",
-    "reactSuccess": "Your reaction got stored successfully",
-    "ageRange": "Age Range",
-    "ageRangeBetween": "From {min} to {max}",
-    "ageRangeNoMax": "Not limited",
-    "gender": "Gender",
-    "hometown": "Hometown",
-    "religinousAffiliation": "Religinous Affiliation",
-    "ethnicity": "Ethnicity",
-    "country": "Country of residence",
-    "noLimit": "Not limited",
-    "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
+    "cannotVote": "عذراً، لا يمكنك تسجيل تصويتك للأسباب التالية:",
+    "alreadyReacted": "لقد قمت بالتصويت على هذا الاستطلاع مِن قبل",
+    "reactSuccess": "تم تسجيل تفاعلك بنجاح",
+    "ageRange": "الفئة العمرية",
+    "ageRangeBetween": "من {min} إلى {max}",
+    "ageRangeNoMax": "غير محدد",
+    "gender": "الجنس",
+    "hometown": "المدينة الأم",
+    "religinousAffiliation": "الانتماء الديني",
+    "ethnicity": "العرق",
+    "country": "بلد الإقامة",
+    "noLimit": "غير محدد",
+    "description": "يمكن لجميع المستخدمين الذين تم تأكيد معلوماتهم مشاركة الاستطلاعات هنا. بشكل افتراضي، يتم ترتيب ظهور استطلاعات الرأي تنازليا بناء على قيمة الفرق بين الأصوات \"مع\" و \"ضد\" ويتم تصنيفها حسب سنة و شهر الإضافة.",
     "filter": {
-      "description": "Display polls by year and month",
+      "description": "عرض الاستطلاعات حسب السنة والشهر",
       "months": {
-        "january": "January",
-        "february": "February",
-        "march": "March",
-        "april": "April",
-        "may": "May",
-        "june": "June",
-        "july": "July",
-        "august": "August",
-        "september": "Septemper",
-        "october": "October",
-        "november": "November",
-        "december": "December"
+        "january": "يناير",
+        "february": "فبراير",
+        "march": "مارس",
+        "april": "أبريل",
+        "may": "أيار",
+        "june": "حزيران",
+        "july": "تموز",
+        "august": "آب",
+        "september": "أيلول",
+        "october": "أوكتوبر",
+        "november": "نوفمبر",
+        "december": "ديسمبر"
       },
-      "selectYear": "Select Year",
-      "apply": "Apply",
-      "cancel": "Cancel",
-      "title": "Filter Polls",
-      "selectMonth": "Select Month"
+      "selectYear": "اختر السنة",
+      "apply": "تطبيق",
+      "cancel": "إلغاء",
+      "title": "تصفية الاستطلاعات",
+      "selectMonth": "اختر الشهر"
     },
     "noPolls": {
-      "title": "No Polls",
-      "description": "No polls were created within the selected time frame"
+      "title": "لا توجد استطلاعات",
+      "description": "لم يتم إنشاء أي استطلاعات للرأي في الإطار الزمني المحدد"
     },
     "categories": {
-      "all": "All Categories"
+      "all": "كل التصنيفات"
     }
   },
   "actions": {
-    "register": "Register"
+    "register": "تسجيل"
   },
   "cannot_vote_reasons": {
-    "age": "Your age is not within the age range of this poll audience",
-    "country": "the country you live in is not in the countries list of this poll audience",
-    "ethnicity": "the ethnicity you belong to in is not in the list of this poll audience",
-    "gender": "Your gender in is not in the list of this poll audience",
-    "hometown": "The hometown you belong to in is not in the list of this poll audience",
-    "religious_affiliation": "The sect you belong to in is not in the list of this poll audience",
-    "unauthorized": "You are not signed in",
-    "not_in_audience": "You are not in the targeted audience of this poll",
-    "has_voted": "You have already voted on this poll",
-    "poll_expired": "Poll is expired and no longer accepting new votes"
+    "age": "عمرك ليس ضمن النطاق العمري لجمهور هذا الاستطلاع",
+    "country": "الدولة التي تعيش فيها ليست في قائمة البلاد الخاصة بجمهور الاستطلاع",
+    "ethnicity": "الأصل العرقي الذي تنتمي إليه ليس في قائمة جمهور الاستطلاع",
+    "gender": "جنسك ليس في قائمة جمهور هذا الاستطلاع",
+    "hometown": "المدينة التي تنتمي إليها ليست في قائمة جمهور الاستطلاع",
+    "religious_affiliation": "الطائفة الدينية التي تنتمي إليها ليست في قائمة جمهور الاستطلاع",
+    "unauthorized": "لم تقم بتسجيل الدخول",
+    "not_in_audience": "أنت لست في الجمهور المستهدف لهذا الاستطلاع",
+    "has_voted": "لقد قمت بالتصويت على هذا الاستطلاع مِن قبل",
+    "poll_expired": "انتهت مدة التصويت لهذا الاستطلاع ولا يمكن المشاركة الآن"
   },
   "emailVerification": {
-    "title": "Email Verification",
-    "error": "We could not verify your email address 😔, please log in and request another link from your account",
-    "success": "We have verified your email address. Thank you! 🙂"
+    "title": "التحقق من البريد الإلكتروني",
+    "error": "لم نتمكن من التحقق من عنوان بريدك الإلكتروني 😔، يرجى تسجيل الدخول وطلب رابط آخر من حسابك",
+    "success": "لقد قمنا بالتحقق من عنوان بريدك الإلكتروني. شكراً! 🙂"
   }
 }
