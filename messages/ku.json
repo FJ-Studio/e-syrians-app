@@ -1278,6 +1278,9 @@
     "noPolls": {
       "title": "No Polls",
       "description": "No polls were created within the selected time frame"
+    },
+    "categories": {
+      "all": "All Categories"
     }
   },
   "actions": {
@@ -1294,5 +1297,10 @@
     "not_in_audience": "You are not in the targeted audience of this poll",
     "has_voted": "You have already voted on this poll",
     "poll_expired": "Poll is expired and no longer accepting new votes"
+  },
+  "emailVerification": {
+    "title": "Email Verification",
+    "error": "We could not verify your email address 😔, please log in and request another link from your account",
+    "success": "We have verified your email address. Thank you! 🙂"
   }
 }
