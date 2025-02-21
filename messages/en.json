@@ -988,12 +988,12 @@
           "change": "Change email",
           "email": "Email address",
           "emailVerificationStatus": "Your current email address is {status}",
-          "verified": "Verified",
+          "verified": "verified",
           "notVerified": "not verified",
           "resendVerification": "Verify now",
-          "sending": "sending ...",
+          "sending": "sending...",
           "verificationLinkSent": "Verification link sent",
-          "success": "E-mail address changed correctly",
+          "success": "E-mail address updated successfully",
           "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
         }
       },

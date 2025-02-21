@@ -984,7 +984,26 @@
           "title": "Şîfreya hesabê nûve bikin"
         },
         "email": {
-          "title": "Navnîşana e-nameya xwe nûve bikin"
+          "title": "Navnîşana e-nameya xwe nûve bikin",
+          "change": "E-nameyê biguherînin",
+          "email": "Navnîşana emailê",
+          "emailVerificationStatus": "Navnîşana e-nameya we ya niha {status} e",
+          "verified": "verified",
+          "notVerified": "not verified",
+          "resendVerification": "Naha verast bikin",
+          "sending": "şandin...",
+          "verificationLinkSent": "Girêdana verastkirinê şandin",
+          "success": "Navnîşana e-nameyê rast guhert",
+          "description": "Ji kerema xwe navnîşana e-nameya xwe ya nû bi baldarî binivîse, gava ku hûn e-nameya xwe nûve bikin, hûn ê ji nû ve têkevinê"
+        }
+      },
+      "settings": {
+        "notifications": {
+          "title": "Notifications",
+          "received_verification_email": "Dema ku kesek daneyên min piştrast dike ez dixwazim e-nameyek bistînim",
+          "account_verified_email": "Dema ku hesabê min were piştrast kirin ez dixwazim e-nameyek bistînim",
+          "update": "Mîhengên ragihandinê nûve bikin",
+          "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin"
         }
       }
     },
@@ -995,6 +1014,9 @@
         },
         "security": {
           "title": "Sazkirina ewlehî"
+        },
+        "notifications": {
+          "title": "Notifications"
         }
       },
       "error": {
@@ -1309,5 +1331,18 @@
     "title": "Piştrastkirina E-nameyê",
     "error": "Em ne dikarin navnîşana e-nameya te piştrast bikînin 😔, ji kerema xwe têkeve û ji hesabê xwe girêdana nû daxwaz bike",
     "success": "Navnîşana e-nameya te piştrast kirin. Spas! 🙂"
+  },
+  "socialLinks": {
+    "facebook": "Profîla Facebookê",
+    "twitter": "Hesabê X (Twitter).",
+    "instagram": "Hesabê Instagram",
+    "linkedin": "Profîla Linkedin",
+    "youtube": "Kanala YouTube",
+    "tiktok": "Hesabê TikTok",
+    "twitch": "Hesabê Twitch",
+    "snapchat": "Hesabê Snapchat",
+    "pinterest": "Hesabê Pinterest",
+    "github": "Hesabê Github",
+    "website": "Malpera Kesane"
   }
 }
