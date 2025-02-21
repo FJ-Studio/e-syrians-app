@@ -71,7 +71,7 @@ export const verifyEmail = async (
   hash: string | undefined,
   signature: string | undefined
 ): Promise<boolean> => {
-  const req = await fetch(`${process.env.API_URL}/verify-email?id=${id}&hash=${hash}&signature=${signature}`, {
+  const req = await fetch(`${process.env.API_URL}/verify-email?id=${id}&hash=${hash}&signature=${signature}&expires=${expires}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
