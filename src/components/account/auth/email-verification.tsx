@@ -16,7 +16,7 @@ const EmailVerification: FC<Props> = ({ success }) => {
         origin: { y: 0.6 }, // Confetti starts from the middle
       });
     }
-  }, []);
+  }, [success]);
   return (
     <AuthLayout>
       <div className="flex flex-col items-center justify-center text-center space-y-2">
