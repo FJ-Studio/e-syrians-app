@@ -3,7 +3,10 @@ import { HTMLProps, PropsWithChildren } from "react";
 type Props = HTMLProps<HTMLDivElement> & PropsWithChildren;
 export default function AuthLayout({ children, ...rest }: Props) {
   return (
-    <div className="flex min-h-full overflow-hidden pt-16 sm:py-20" {...rest}>
+    <div
+      className="flex min-h-[calc(100dvh-148px)] overflow-hidden pt-16 sm:py-20 items-center"
+      {...rest}
+    >
       <div className="mx-auto flex w-full max-w-2xl flex-col px-4 sm:px-6">
         <div className="relative mt-12 sm:mt-16">
           <svg

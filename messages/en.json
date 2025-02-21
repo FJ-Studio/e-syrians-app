@@ -976,9 +976,26 @@
           "changePassword": "Change Password"
         },
         "errors": {
-          "passwordsDoNotMatch": "Passwords do not match"
+          "passwordsDoNotMatch": "Passwords do not match",
+          "tooManyTries": "Too many attempts"
         },
-        "success": "Password changed successfully"
+        "success": "Password changed successfully",
+        "password": {
+          "title": "Update account password"
+        },
+        "email": {
+          "title": "Update your email address",
+          "change": "Change email",
+          "email": "Email address",
+          "emailVerificationStatus": "Your current email address is {status}",
+          "verified": "Verified",
+          "notVerified": "not verified",
+          "resendVerification": "Verify now",
+          "sending": "sending ...",
+          "verificationLinkSent": "Verification link sent",
+          "success": "E-mail address changed correctly",
+          "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
+        }
       }
     },
     "settings": {

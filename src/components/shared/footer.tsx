@@ -8,12 +8,13 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import Container from "./container";
 
 const Footer: FC = () => {
   const t = useTranslations();
   return (
     <footer className="bg-gray-100 text-black py-8">
-      <div className="container mx-auto flex gap-5 flex-col md:flex-row justify-between items-start max-w-7xl px-6 lg:px-8">
+      <Container className=" flex gap-5 flex-col sm:flex-row justify-between items-start">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3 text-gray-700 font-semibold">
             <Image src="/icon.svg" alt="Logo" width={40} height={32} />
@@ -35,7 +36,7 @@ const Footer: FC = () => {
           </div>
         </div>
         <div className="flex items-start gap-3 md:gap-12">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
             <h4 className="text-lg font-semibold">{t("footer.initiatives")}</h4>
             {INITIATIVES.map((initiative, index) => (
               <Link
@@ -48,7 +49,7 @@ const Footer: FC = () => {
               </Link>
             ))}
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
             <h4 className="text-lg font-semibold">{t("footer.links")}</h4>
             <Link
               className="text-black text-sm"
@@ -66,7 +67,7 @@ const Footer: FC = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

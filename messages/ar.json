@@ -976,9 +976,16 @@
           "changePassword": "تغيير كلمة المرور"
         },
         "errors": {
-          "passwordsDoNotMatch": "كلمتا السر غير متطابقتين"
+          "passwordsDoNotMatch": "كلمتا السر غير متطابقتين",
+          "tooManyTries": "لقد قمت بالكثير من المحاولات"
         },
-        "success": "تم تغيير كلمة المرور بنجاح"
+        "success": "تم تغيير كلمة المرور بنجاح",
+        "password": {
+          "title": "تغيير كلمة مرور الحساب"
+        },
+        "email": {
+          "title": "تحديث البريد الالكتروني"
+        }
       }
     },
     "settings": {

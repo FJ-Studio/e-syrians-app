@@ -976,9 +976,16 @@
           "changePassword": "Şîfre biguherînin"
         },
         "errors": {
-          "passwordsDoNotMatch": "Şîfre li hev nayên"
+          "passwordsDoNotMatch": "Şîfre li hev nayên",
+          "tooManyTries": "Gelek hewldan"
         },
-        "success": "Şîfre bi serkeftî guherî"
+        "success": "Şîfre bi serkeftî guherî",
+        "password": {
+          "title": "Şîfreya hesabê nûve bikin"
+        },
+        "email": {
+          "title": "Navnîşana e-nameya xwe nûve bikin"
+        }
       }
     },
     "settings": {

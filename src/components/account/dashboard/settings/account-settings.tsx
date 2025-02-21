@@ -4,7 +4,7 @@ import { Tab, Tabs } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import AccountProfile from "./profile/profile";
-import AccountSecurity from "./security";
+import AccountSecurity from "./security-settings";
 
 const AccountSettings: FC = () => {
   const t = useTranslations("account.settings");

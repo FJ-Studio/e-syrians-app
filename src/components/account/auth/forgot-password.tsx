@@ -57,8 +57,8 @@ const ForgotPassword: FC = () => {
           <Input {...field} isRequired label={t("email")} type="email" />
         )}
       />
-      <p className="flex items-center space-x-2">
-        <ArrowLongLeftIcon className="size-5" />
+      <p className="flex items-center gap-2">
+        <ArrowLongLeftIcon className="size-5 rtl:rotate-180" />
         <Link href="/auth/signin" title={t("backToLogin")} className="text-sm">
           {t("backToLogin")}
         </Link>

@@ -15,7 +15,7 @@ interface ChangePasswordForm {
   confirmPassword: string;
 }
 
-const AccountSecurity: FC = () => {
+const UpdatePassword: FC = () => {
   const [failedTries, setFailedTries] = useState<number>(0);
   const serverErrors = useServerError();
   const t = useTranslations("account.dashboard.security");
@@ -63,11 +63,8 @@ const AccountSecurity: FC = () => {
   return (
     <>
       <Card>
-        <CardHeader className="flex flex-col items-start">
-          <h2 className="text-xl font-medium text-default-700 text-start">
-            {t("title")}
-          </h2>
-          <p className="text-default-500 text-start">{t("description")}</p>
+        <CardHeader className="text-default-700 font-medium">
+          {t("password.title")}
         </CardHeader>
         <CardBody>
           <form onSubmit={handleSubmit(changePassword)} className="space-y-4">
@@ -134,4 +131,4 @@ const AccountSecurity: FC = () => {
   );
 };
 
-export default AccountSecurity;
+export default UpdatePassword;
