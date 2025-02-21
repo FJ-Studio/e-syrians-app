@@ -53,6 +53,10 @@ export type ESUser = {
 
   email_verified_at?: string;
   phone_verified_at?: string;
+
+  received_verification_email: boolean;
+  account_verified_email: boolean;
+
   
 }
 

@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from "react";
 import EsyrianProvider from "./es";
 import { HeroUIProvider } from "@heroui/react";
 import { Toaster } from "sonner";
-import { ibm } from "@/lib/fonts";
+import { ibm } from "@/lib/fonts/fonts";
 
 const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (

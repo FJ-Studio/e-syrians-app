@@ -10,9 +10,7 @@ export async function POST(req: NextRequest) {
     );
     if (!isHuman) {
       return NextResponse.json(
-        {
-          messages: ["Invalid recaptcha token"],
-        },
+        { messages: ["invalid_recaptcha_token"], success: false },
         { status: 400 }
       );
     }

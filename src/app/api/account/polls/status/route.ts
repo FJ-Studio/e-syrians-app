@@ -4,18 +4,16 @@ import { auth } from "../../../../../../auth";
 
 export async function PATCH(req: NextRequest) {
   const body = await req.json();
-  const session = await auth();
-  if (!session) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
   const isHuman = await recaptchaIsValid(body.recaptcha_token);
   if (!isHuman) {
     return NextResponse.json(
-      {
-        messages: ["Invalid recaptcha token"],
-      },
+      { messages: ["invalid_recaptcha_token"], success: false },
       { status: 400 }
     );
+  }
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ messages: ["Unauthorized"] }, { status: 401 });
   }
   const request = await fetch(
     `${process.env.API_URL}/polls/status/${body.pollId}`,

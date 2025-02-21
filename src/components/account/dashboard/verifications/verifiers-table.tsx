@@ -1,6 +1,6 @@
 "use client";
 import useVerificationCancelationReason from "@/components/hooks/localization/verification-cancelation-reason";
-import { ibm } from "@/lib/fonts";
+import { ibm } from "@/lib/fonts/fonts";
 import { ESUser, Verification } from "@/lib/types/account";
 import { getUrl } from "@/lib/user";
 import {

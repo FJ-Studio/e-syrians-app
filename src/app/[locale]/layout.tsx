@@ -10,7 +10,7 @@ import { auth } from "../../../auth";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
-import { ibm } from "@/lib/fonts";
+import { ibm } from "@/lib/fonts/fonts";
 import Providers from "@/components/shared/contexts/providers";
 import Script from "next/script";
 import CensusForm from "@/components/census/form";
