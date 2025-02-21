@@ -977,24 +977,24 @@
         },
         "errors": {
           "passwordsDoNotMatch": "Şîfre li hev nayên",
-          "tooManyTries": "Too many attempts"
+          "tooManyTries": "Gelek hewldan"
         },
         "success": "Şîfre bi serkeftî guherî",
         "password": {
-          "title": "Update account password"
+          "title": "Şîfreya hesabê nûve bikin"
         },
         "email": {
-          "title": "Update your email address",
-          "change": "Change email",
-          "email": "Email address",
-          "emailVerificationStatus": "Your current email address is {status}",
-          "verified": "Verified",
+          "title": "Navnîşana e-nameya xwe nûve bikin",
+          "change": "E-nameyê biguherînin",
+          "email": "Navnîşana emailê",
+          "emailVerificationStatus": "Navnîşana e-nameya we ya niha {status} e",
+          "verified": "verified",
           "notVerified": "not verified",
-          "resendVerification": "Verify now",
-          "sending": "sending ...",
-          "verificationLinkSent": "Verification link sent",
-          "success": "E-mail address changed correctly",
-          "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
+          "resendVerification": "Naha verast bikin",
+          "sending": "şandin...",
+          "verificationLinkSent": "Girêdana verastkirinê şandin",
+          "success": "Navnîşana e-nameyê rast guhert",
+          "description": "Ji kerema xwe navnîşana e-nameya xwe ya nû bi baldarî binivîse, gava ku hûn e-nameya xwe nûve bikin, hûn ê ji nû ve têkevinê"
         }
       }
     },
