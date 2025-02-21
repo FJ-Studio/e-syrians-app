@@ -977,14 +977,24 @@
         },
         "errors": {
           "passwordsDoNotMatch": "Şîfre li hev nayên",
-          "tooManyTries": "Gelek hewldan"
+          "tooManyTries": "Too many attempts"
         },
         "success": "Şîfre bi serkeftî guherî",
         "password": {
-          "title": "Şîfreya hesabê nûve bikin"
+          "title": "Update account password"
         },
         "email": {
-          "title": "Navnîşana e-nameya xwe nûve bikin"
+          "title": "Update your email address",
+          "change": "Change email",
+          "email": "Email address",
+          "emailVerificationStatus": "Your current email address is {status}",
+          "verified": "Verified",
+          "notVerified": "not verified",
+          "resendVerification": "Verify now",
+          "sending": "sending ...",
+          "verificationLinkSent": "Verification link sent",
+          "success": "E-mail address changed correctly",
+          "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
         }
       }
     },
@@ -995,6 +1005,9 @@
         },
         "security": {
           "title": "Sazkirina ewlehî"
+        },
+        "notifications": {
+          "title": "Notifications"
         }
       },
       "error": {
