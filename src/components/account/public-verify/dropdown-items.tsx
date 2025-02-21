@@ -8,55 +8,57 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
+import { useTranslations } from "next-intl";
 import { FC } from "react";
 
 type Props = {
   user: ESUser;
 };
 const UserCardLinksDropdown: FC<Props> = ({ user }) => {
+  const t = useTranslations("socialLinks");
   const links = [
     {
-      title: "Facebook",
+      title: t("facebook"),
       link: user.facebook_link,
     },
     {
-      title: "Twitter",
+      title: t("twitter"),
       link: user.twitter_link,
     },
     {
-      title: "Instagram",
+      title: t("instagram"),
       link: user.instagram_link,
     },
     {
-      title: "LinkedIn",
+      title: t("linkedin"),
       link: user.linkedin_link,
     },
     {
-      title: "YouTube",
+      title: t("youtube"),
       link: user.youtube_link,
     },
     {
-      title: "TikTok",
+      title: t("tiktok"),
       link: user.tiktok_link,
     },
     {
-      title: "Twitch",
+      title: t("twitch"),
       link: user.twitch_link,
     },
     {
-      title: "Snapchat",
+      title: t("snapchat"),
       link: user.snapchat_link,
     },
     {
-      title: "Pinterest",
+      title: t("pinterest"),
       link: user.pinterest_link,
     },
     {
-      title: "Github",
+      title: t("github"),
       link: user.github_link,
     },
     {
-      title: "Website",
+      title: t("website"),
       link: user.website,
     },
   ].filter((link) => link.link);

@@ -3,16 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "../../../../../../../auth";
 
 export async function POST(req: NextRequest) {
-    const session = await auth();
-    if (!session) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
     const body = await req.json();
     const isHuman = await recaptchaIsValid(body.recaptcha_token);
     if (!isHuman) {
-        return NextResponse.json({
-            messages: ["Invalid recaptcha token"],
-        }, { status: 400 });
+        return NextResponse.json({ messages: ["invalid_recaptcha_token"], success: false }, { status: 400 });
+    }
+    const session = await auth();
+    if (!session) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
         const request = await fetch(`${process.env.API_URL}/users/update/social`, {

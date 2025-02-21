@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { FC } from "react";
 import AccountProfile from "./profile/profile";
 import AccountSecurity from "./security-settings";
+import AccountNotification from "./notifications/notifications";
 
 const AccountSettings: FC = () => {
   const t = useTranslations("account.settings");
@@ -16,7 +17,9 @@ const AccountSettings: FC = () => {
       <Tab title={t("tabs.security.title")}>
         <AccountSecurity />
       </Tab>
-      <Tab title={t("tabs.notifications.title")}></Tab>
+      <Tab title={t("tabs.notifications.title")}>
+        <AccountNotification />
+      </Tab>
     </Tabs>
   );
 };

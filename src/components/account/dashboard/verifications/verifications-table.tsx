@@ -90,7 +90,7 @@ const VerificationsTable: FC = () => {
           return (
             <User
               avatarProps={{
-                src: item.user.avatar,
+                src: item.user?.avatar,
                 className: "min-w-10 min-h-10",
               }}
               name={`${item.user.name} ${item.user.surname}`}

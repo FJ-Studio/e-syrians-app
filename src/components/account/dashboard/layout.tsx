@@ -71,7 +71,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
               className="bg-transparent border-0"
               onClick={() => signOut()}
             >
-              <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-white" />
+              <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-white rtl:rotate-180" />
             </button>
           </Container>
         </div>

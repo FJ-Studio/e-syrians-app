@@ -1,5 +1,5 @@
 "use client";
-import { ibm } from "@/lib/fonts";
+import { ibm } from "@/lib/fonts/fonts";
 import { Snippet } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
