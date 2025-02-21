@@ -1005,6 +1005,9 @@
         },
         "security": {
           "title": "Security"
+        },
+        "notifications": {
+          "title": "Notifications"
         }
       },
       "error": {

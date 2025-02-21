@@ -16,6 +16,7 @@ const AccountSettings: FC = () => {
       <Tab title={t("tabs.security.title")}>
         <AccountSecurity />
       </Tab>
+      <Tab title={t("tabs.notifications.title")}></Tab>
     </Tabs>
   );
 };

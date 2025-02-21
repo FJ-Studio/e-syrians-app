@@ -3,11 +3,13 @@ import confetti from "canvas-confetti";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
 import AuthLayout from "./layout";
+import { useSession } from "next-auth/react";
 type Props = {
   success: boolean;
 };
 const EmailVerification: FC<Props> = ({ success }) => {
   const t = useTranslations("emailVerification");
+  const { status, update, data } = useSession();
   useEffect(() => {
     if (success) {
       confetti({
@@ -17,6 +19,19 @@ const EmailVerification: FC<Props> = ({ success }) => {
       });
     }
   }, [success]);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      update({
+        ...data,
+        user: {
+          ...data.user,
+          email_verified_at: new Date().toISOString(),
+        },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
   return (
     <AuthLayout>
       <div className="flex flex-col items-center justify-center text-center space-y-2">
