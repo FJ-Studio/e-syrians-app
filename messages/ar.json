@@ -977,24 +977,24 @@
         },
         "errors": {
           "passwordsDoNotMatch": "كلمتا السر غير متطابقتين",
-          "tooManyTries": "Too many attempts"
+          "tooManyTries": "قمت بالكثير من الطلبات، الرجاء الانتظار لبعض الوقت"
         },
         "success": "تم تغيير كلمة المرور بنجاح",
         "password": {
-          "title": "Update account password"
+          "title": "تحديث كلمة مرور الحساب"
         },
         "email": {
-          "title": "Update your email address",
-          "change": "Change email",
-          "email": "Email address",
-          "emailVerificationStatus": "Your current email address is {status}",
-          "verified": "Verified",
-          "notVerified": "not verified",
-          "resendVerification": "Verify now",
-          "sending": "sending ...",
-          "verificationLinkSent": "Verification link sent",
-          "success": "E-mail address changed correctly",
-          "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
+          "title": "تحديث عنوان بريدك الإلكتروني",
+          "change": "تغيير البريد الإلكتروني",
+          "email": "البريد الإلكتروني",
+          "emailVerificationStatus": "عنوان بريدك الإلكتروني الحالي {status}",
+          "verified": "تم تأكيده",
+          "notVerified": "غير مؤكد",
+          "resendVerification": "إرسال رابط تأكيد",
+          "sending": "يتم الإرسال...",
+          "verificationLinkSent": "تم إرسال رابط التأكيد",
+          "success": "تم تغيير عنوان البريد الإلكتروني بنجاح",
+          "description": "الرجاء كتابة عنوان بريدك الإلكتروني الجديد بشكل صحيح، عندما تقوم بتغيير بريدك الإلكتروني، يجب عليك تسجيل الدخول مرة أخرى"
         }
       }
     },
@@ -1007,7 +1007,7 @@
           "title": "إعدادان الأمان"
         },
         "notifications": {
-          "title": "Notifications"
+          "title": "الإشعارات"
         }
       },
       "error": {
