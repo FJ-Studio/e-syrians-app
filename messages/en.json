@@ -996,6 +996,15 @@
           "success": "E-mail address updated successfully",
           "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
         }
+      },
+      "settings": {
+        "notifications": {
+          "title": "Notifications",
+          "received_verification_email": "I want to receive an email when someone verifies my data",
+          "account_verified_email": "I want to receive an email when my account gets verified",
+          "update": "Update notifications settings",
+          "success": "Notifications settings updated successfully"
+        }
       }
     },
     "settings": {
@@ -1322,5 +1331,18 @@
     "title": "Email Verification",
     "error": "We could not verify your email address 😔, please log in and request another link from your account",
     "success": "We have verified your email address. Thank you! 🙂"
+  },
+  "socialLinks": {
+    "facebook": "Facebook Profile",
+    "twitter": "X (Twitter) account",
+    "instagram": "Instagram Account",
+    "linkedin": "Linkedin profile",
+    "youtube": "YouTube Channel",
+    "tiktok": "TikTok Account",
+    "twitch": "Twitch Account",
+    "snapchat": "Snapchat Account",
+    "pinterest": "Pinterest Account",
+    "github": "Github Account",
+    "website": "Personal Website"
   }
 }
