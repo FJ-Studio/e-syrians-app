@@ -1344,5 +1344,9 @@
     "pinterest": "Pinterest Account",
     "github": "Github Account",
     "website": "Personal Website"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "We value your privacy and are committed to protecting your personal information."
   }
 }
