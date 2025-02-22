@@ -37,20 +37,14 @@ const Footer: FC = () => {
         </div>
         <div className="flex items-start gap-3 md:gap-12">
           <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
-            <h4 className="text-lg font-semibold">{t("footer.initiatives")}</h4>
-            {INITIATIVES.map((initiative, index) => (
-              <Link
-                key={index}
-                className="text-black text-sm"
-                href={initiative.link}
-                title={t(initiative.title)}
-              >
-                {t(initiative.title)}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
             <h4 className="text-lg font-semibold">{t("footer.links")}</h4>
+            <Link
+              className="text-black text-sm"
+              href="/faq"
+              title={t("footer.faq")}
+            >
+              {t("footer.faq")}
+            </Link>
             <Link
               className="text-black text-sm"
               href="/privacy-policy"
@@ -65,6 +59,19 @@ const Footer: FC = () => {
             >
               {t("footer.terms")}
             </Link>
+          </div>
+          <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
+            <h4 className="text-lg font-semibold">{t("footer.initiatives")}</h4>
+            {INITIATIVES.map((initiative, index) => (
+              <Link
+                key={index}
+                className="text-black text-sm"
+                href={initiative.link}
+                title={t(initiative.title)}
+              >
+                {t(initiative.title)}
+              </Link>
+            ))}
           </div>
         </div>
       </Container>

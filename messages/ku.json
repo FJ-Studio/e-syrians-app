@@ -1349,7 +1349,7 @@
   },
   "privacyPolicy": {
     "title": "Siyaseta Kesayetî",
-    "intro": "Li e-Syrians de, em pêşî kesayetiyê te dikin û em têkildar in ku danegehên te ya kesayî biparêzin.",
+    "intro": "Li e-syrians de, em pêşî kesayetiyê te dikin û em têkildar in ku danegehên te ya kesayî biparêzin.",
     "dataCollection": {
       "title": "Berhevkirina Danegehê",
       "description": "Em guhertoyên jêr berhev dikin:",
@@ -1499,5 +1499,132 @@
     "lastUpdate": "Rojanekirina dawî"
   },
   "orRegister": "An jî hesabek çêbikin",
-  "loginToYourAccount": "Têkeve hesabê xwe"
+  "loginToYourAccount": "Têkeve hesabê xwe",
+  "faq": {
+    "title": "Pirsên Pirr Jêhatî",
+
+    "general": {
+      "title": "Pirsên Giştî",
+      "q1": {
+        "title": "Ev platforma çi ye?",
+        "description": "Ev platforma têne damezrandin da ku bi rêya perçeyên komelî amanca îtimadê bêtir bibe. Ew alîkarî dike ku kesên profilên xwe biafirînin, yekîyên xwe piştrast bikin, û di anket û censusa neteweyî de beşdar bûn."
+      },
+      "q2": {
+        "title": "Ev çawa dixebite?",
+        "description": "Bikarhêneran profilê çêdikin, ji hêla kesên ku wan nas dikin piştrast dibin, û bi platformê re têkiliya xwe diafirînin û anketan bersiv dikin."
+      },
+      "q3": {
+        "title": "Kî dikare ev platforma bikar bîne?",
+        "description": "Ev platforma tenê bo gelê Sûriyayê ye. Ev tenê şertê me ye."
+      },
+      "q4": {
+        "title": "Ma sepanekî mobîl heye?",
+        "description": "Na, hêj."
+      },
+      "q5": {
+        "title": "Ez çawa dikarim bi alîkarî têkiliyê bikim?",
+        "description": "Hûn dikarin bi tîmê alîkarî ya me bi info@e-syrians.com re têkilî bikin."
+      },
+      "q6": {
+        "title": "Kî di pêşî platforma e-syrians de ye?",
+        "description": "Feras Jobeir yekî yê tenê di pêşî platforma e-syrians de ye. Ew fikra platformê pêşve xistine, platforma çêkir, û alîkarî dikare da ku ew rûniştinê li ser vê platformê derbarê wê. Ew her wiha serveran, abonmanan, û hemû xercên têkildar di rêzefirînê de dike. Armanca wî ewle kirina platformeke piştrast bo Sûriyê, bi bingehînî li ser beşdariya komelê û piştrastkirina nasnameyê ye."
+      }
+    },
+    "account": {
+      "title": "Hesab & Piştrastkirin",
+      "q1": {
+        "title": "Ez çawa dikarim hesabek çêkim?",
+        "description": "Li ser ikonê bikarhênerê li ser sernavê tıklînin, hûn ê bi rûpela têkevin/têkiliyê were girtin. Li ser \"Hesab çêkirin\" tıklînin û formê qeydê veke."
+      },
+      "q2": {
+        "title": "Ez çawa dikarim hesabê xwe piştrast bikim?",
+        "description": "Piştî qeyd kirinê, hûnê girêdana profilê nû ya we were şandin, bi kesên ku hûn nas dikin di platformê de parve bikin da ku piştrast bibin û beşdarî bikin."
+      },
+      "q3": {
+        "title": "Ma em çi dikarin ger ez hesabê xwe piştrast nekirim?",
+        "description": "Zivistanê, tiştê tu nekin."
+      },
+      "q4": {
+        "title": "Ma ez dikarim agahdariya xwe nûve bikin piştrastkirinê?",
+        "description": "Erê, lê tenê hejmareke xwarin û û kirinê dê hemû piştrastkirinan we were winda kirin! Agahdariyên bingehîn, wek rojava salî û bajar, gelek hindek nûve nekin. Lê em fêm dikin ku xata dikarin bibe, an jî hûnê agahdariyên taybet, wek cinsiyet, nûve bikin. Ji ber vê yekê, em destûr didin ku daneyên bingehîn were nûve kirin, lê divê hûn qebûl bikin ku piştrastkirinan xwe winda bikin."
+      },
+      "q5": {
+        "title": "Çima piştrastkirinan min winda bûn piştî nûvekirina profilê min?",
+        "description": "Agahdariyên bingehîn gelek hindek têkildar nekin, çimkî ew bingehî ye bo hedefkirina audienceyên anketê. Ji ber ku pergala me li ser van daneyan hilkişî ye, guhertinên pir yên dîrokê dikarin nîşan bidin ku tu hewldan dikî ku encamên anketê guherînî bike. Ji bo ku îtimad û rastiyê were parastin, algoritmên me piştrastkirinan xwe otomatîkî were xistin dema ku bikarhêneran daneyên bingehîn xwe guhêrandin."
+      },
+      "q6": {
+        "title": "Ez çawa dikarim kesekî ku ez nas dikim piştrast bikim?",
+        "description": "Ji wan re da ku qeyd bikin û girêdana profilê xwe parve bikin."
+      },
+      "q7": {
+        "title": "Ma çi dibe ger ez profilê kêçikê piştrast bikim?",
+        "description": "Heke profilê herî dawî hatî deteckirin wekî kêçik, her du bikarhênerê şûnd û piştrastkarên wan ê di Rûpelê Fraudsters de were nîşandan da ku rûniştinê û rastiyê were parastin."
+      },
+      "q8": {
+        "title": "Ma \"piştrastkirin\" rastî çi manayê dide?",
+        "description": "Piştrastkirin li ser platforma me piştrast dike ku hûn Sûriyan in û agahdariya ku hûn parve kirî ye rast e. Heke platforma me tenê bo Sûriyan e, lê malperê xwe giştî ye û zimanên cîhanî tê de, ku her kes dikare têkevin û formê qeydê temam bikin. Piştî qeyd kirinê, hûnê girêdana profilê ku daneyên bingehîn we pêşnîyarkirin tê de parve dikin. Yên din dikarin profilê we bibînin û nasnameya we piştrast bikin da ku we rastî Sûriyan in û agahdariya ku hûn tê da bide rast e."
+      }
+    },
+    "security": {
+      "title": "Emanet û Taybetî",
+      "q1": {
+        "title": "Hûn çawa daneyên min parastin?",
+        "description": "Em bi dilsozî û karûbarên parastina ewlehiya nivîsandinê yên rêxistinê tevn dikin. Ev tê de, lê ne tenê, separasyona fîlanên daneyê ji serverên sepanê berbi kirin, guherandina şîfreya daneyan her ku dikare, û girtina herî baştirîn pratîkên parastina têkevinê û destûrê."
+      },
+      "q2": {
+        "title": "Ma bikarhênerên din dikarin agahdariya taybetî ya min bibînin?",
+        "description": "Erê û ne. Profilê giştî ya we tiştên taybetî nîşan dide, tê de nav, nasname, cinsiyet, bajar, welatê dijînê, etnîk, û her hûn linksên medyayê civakî yên ku hûn zêde kirine li hesabê xwe."
+      },
+      "q3": {
+        "title": "Ez çawa dikarim profilê kêçik an jî çalakiyên şikestî rapor bikin?",
+        "description": "Niha, hevsengî tiştê re reşînin li me da ku ev amancî bikin. Pêşkeftina vê taybetmendî û tevgera wê di algoritma naskirina profilên kêçik de di rêzikê me de ye."
+      },
+      "q4": {
+        "title": "Ma çi dibe li ser profîlên kêçik?",
+        "description": "Ew li ser rûpela \"fraudsters\" liste dikin. Di hin reşan de, em dikarin jî piştrastkarên wan lêkolîn bikin û hesabên wan jî pejirandin."
+      },
+      "q5": {
+        "title": "Ma rûpela Fraudsters çi ye?",
+        "description": "Rûpela Fraudsters listeya giştî ya profilên kêçik û -dema hinekê- bikarhênerên ku wan piştrast kirine, ku ev ji bo parastina rûniştinê û baweriyê tê bikar anîn."
+      }
+    },
+    "polls": {
+      "title": "Lêkolîn û Tevger",
+      "q1": {
+        "title": "Ez çawa dikarim lêkolîn çêkim?",
+        "description": "Bixe bo beşê Lêkolînê, li ser 'Lêkolînê çêke' bitikîne, pirs û vebijarkan xwe binivîse, û berî şandina vê pirsê hilbijartinên vote-yê hilbijêre."
+      },
+      "q2": {
+        "title": "Kî dikare di lêkolînên min de vote bike?",
+        "description": "Bi default, hemû bikarhênerên piştrast dikarin vote bikin. Lê belê, hûn dikarin audiencesê bi esasa cinsiyet, cîh, û kriterîyên din destnîşan bikin."
+      },
+      "q3": {
+        "title": "Ma ez dikarim lêkolînê piştî şandinê biguherînim?",
+        "description": "Na, ji bo parastina adalet û pêşîniyên şikestî, lêkolînê ne dikarin piştî ku wan li ser xetê şandî nehatin guherandin."
+      },
+      "q4": {
+        "title": "Ez çawa dikarim encamên lêkolînê bibînim?",
+        "description": "Hûn dikarin encamên lêkolînê li beşa 'My Polls' piştî ku vote hatî qedandin bibînin. Pergala me statistîkên hêsan li ser beşdariya lêkolînê pêşkêş dike."
+      },
+      "q5": {
+        "title": "Ma çi dibe heke lêkolîna min hate rapor kirin?",
+        "description": "Lêkolînên ku hatine rapor kirin, tîmê me wan kontrol dike. Heke ew neşkedar bin, dikarin ji ser platformê rakirin, û têkçûnên dawi dikarin xebata hesabê wan bigirin."
+      },
+      "q6": {
+        "title": "Ma em dikarin encamên lêkolînê ji bo nîşandana rûniştina Surîyê bawer bikin?",
+        "description": "Encamên lêkolînên li e-syrians, rûniştinên bikarhênerên ku hûn navnîşan kirin û piştrast kirin li ser platformê nîşan dikin. Heger em bi dilsozî hîn bikin ku ewlehiya lêkolînê ye, girîng e ku hûn fam bikin ku ew diyar dikin bazên piştrast kirin ên ji civatê Surîyê. Algoritm û prosesên piştrastkirinê me ji bo parastina encamên wan wekî herî rûmetdar û rastiyê hatine çêkirin. Di serdema destpêkê de, e-syrians wekî platformek li ser blockchain were xêlîn da ku ewlehiya û transparansî bikar bîne. Lê herweha, ji ber kêmkirina qanûnî û teknikî, vê taybetmendî niha ne heye bo Surîyên."
+      }
+    },
+    "donations": {
+      "title": "Daman û Piştgirî",
+      "q1": {
+        "title": "Ma ez çawa dikarim ji bo piştrastkirina platformê damanê bidim?",
+        "description": "Hûn dikarin li ser rûpela Damanê me damanê bidin, li wir em tranzaksiyonên bitcoinê qebûl dikin."
+      },
+      "q2": {
+        "title": "Damanê min di kîjan deran de digihîje?",
+        "description": "Damanê piştgirî dikin ji bo parastina platformê, pêşkeftina ewlehiya, û pêşveçûna taybetmendiyên nû. Ji kerema xwe agahdar be ku damanê kirin axa ku destûra xwe ya hesabê an jî gihîştina taybetmendiyên zêdetir yê platformê ne têkildar dike."
+      }
+    }
+  }
 }
