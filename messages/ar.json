@@ -67,7 +67,8 @@
     "terms": "شروط الاستخدام",
     "all_rights_reserved": "جميع الحقوق محفوظة",
     "initiatives": "المبادرات",
-    "links": "روابط"
+    "links": "روابط",
+    "faq": "FAQ"
   },
   "disarm": {
     "i_have_weapon": "لدي سلاح أرغب بتسليمه",
@@ -1349,7 +1350,7 @@
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
-    "intro": "At e-Syrians, we prioritize your privacy and are dedicated to safeguarding your personal data.",
+    "intro": "At e-syrians, we prioritize your privacy and are dedicated to safeguarding your personal data.",
     "dataCollection": {
       "title": "Data Collection",
       "description": "We gather the following types of information",
@@ -1499,5 +1500,131 @@
     "lastUpdate": "Latest update"
   },
   "loginToYourAccount": "Sign in to your account",
-  "orRegister": "Or create an account"
+  "orRegister": "Or create an account",
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "general": {
+      "title": "General Questions",
+      "q1": {
+        "title": "What is this platform about?",
+        "description": "This platform is designed to foster trust by verifying users through a community-based system. It allows people to create profiles, verify each other, and participate in polls and national census."
+      },
+      "q2": {
+        "title": "How does it work?",
+        "description": "Users create a profile, get verified by people they know, and engage with the platform through creating and answering polls."
+      },
+      "q3": {
+        "title": "Who can use this platform?",
+        "description": "The platform is for Syrian people only. This is the only condition we have"
+      },
+      "q4": {
+        "title": "Is there a mobile app available?",
+        "description": "No, not yet."
+      },
+      "q5": {
+        "title": "How can I contact support?",
+        "description": "You can reach our support team via info@e-syrians.com"
+      },
+      "q6": {
+        "title": "Who is behind the e-syrians platform?",
+        "description": "Feras Jobeir is the sole individual behind e-syrians. He conceived the idea, developed the platform, and is responsible for its ongoing maintenance. He also manages the servers, subscriptions, and all associated costs. His mission is to build a trusted platform for Syrians, focusing on community engagement and identity verification."
+      }
+    },
+    "account": {
+      "title": "Account & Verification",
+      "q1": {
+        "title": "How do I create an account?",
+        "description": "Click on the user icon in the header, you will get redirected to sign in/sign up page. Clicking \"Create Account\" will open the registration form."
+      },
+      "q2": {
+        "title": "How can I verify my account?",
+        "description": "After signing up, you will get a link for your newly created profile, share it with the people you know in the platform to get verified and start contribution"
+      },
+      "q3": {
+        "title": "What happens if I don’t verify my account?",
+        "description": "Shortly, nothing"
+      },
+      "q4": {
+        "title": "Can I update my information after verification?",
+        "description": "Yes, but only a limited number of times—and doing so will result in losing all your earned verifications! Basic information, such as birthdate or hometown, rarely changes. However, we understand that mistakes can happen, or certain details, like gender, may need to be updated. For this reason, we allow changes to basic data, but you must accept the consequence of losing your verifications."
+      },
+      "q5": {
+        "title": "Why did I lose my verifications after updating my profile?",
+        "description": "Basic information is rarely changed, as it serves as the foundation for targeting poll audiences. Since our system relies on this data, frequent changes may signal an attempt to manipulate poll results. To maintain trust and accuracy, our algorithms automatically revoke verifications when users modify their basic details."
+      },
+      "q6": {
+        "title": "How can I verify someone I know?",
+        "description": "Ask them to register and provide their profile link"
+      },
+      "q7": {
+        "title": "What happens if I verify a fake profile?",
+        "description": "If a profile is later detected as fake, both the fraudulent user and their verifiers will be listed on the Fraudsters Page for transparency."
+      },
+      "q8": {
+        "title": "What does \"verification\" actually mean",
+        "description": "Verification on our platform confirms that you are Syrian and that the information you provided is accurate. While the platform is intended exclusively for Syrians, the website itself is public and multilingual, allowing anyone to access and complete the registration form. After signing up, you will receive a profile link displaying your basic details. Others can view your profile and verify your identity to confirm that you are indeed Syrian and that the information you entered is correct."
+      }
+    },
+    "security": {
+      "title": "Security & Privacy",
+      "q1": {
+        "title": "How do you protect my data?",
+        "description": "We are committed to implementing industry-standard security practices. This includes, but is not limited to, isolating data storage from application servers, applying encryption whenever possible, and adhering to best practices for authentication and authorization."
+      },
+      "q2": {
+        "title": "Can other users see my personal information?",
+        "description": "Yes and no. Your public profile displays certain information, including your name, surname, gender, hometown, country of residence, ethnicity, and any social media links you have added to your account."
+      },
+      "q3": {
+        "title": "How can I report a fake profile or suspicious activity?",
+        "description": "Currently, feel free to contact us for that purpose. Developing this feature and integrating it in our fake profiles detection algorithm is in our roadmap."
+      },
+      "q4": {
+        "title": "What happens to fake profiles?",
+        "description": "They get listed on the \"fraudsters\" page. In some rare cases, we may also investigate behind their verifiers and suspend their accounts as well."
+      },
+      "q5": {
+        "title": "What is the Fraudsters Page?",
+        "description": "The Fraudsters Page is a public list of fake profiles and -sometimes- the users who verified them, helping maintain transparency and accountability."
+      }
+    },
+    "polls": {
+      "title": "Polls & Engagement",
+      "q1": {
+        "title": "How do I create a poll?",
+        "description": "Go to the Polls section, click Create Poll, enter your question and options, and select voting preferences before submitting."
+      },
+      "q2": {
+        "title": "Who can vote in my polls?",
+        "description": "By default, all verified users can vote. However, you can customize the audience based on gender, location, and other criteria."
+      },
+      "q3": {
+        "title": "Can I edit a poll after submitting it?",
+        "description": "No, to maintain fairness and prevent manipulation, polls cannot be edited once they are live."
+      },
+      "q4": {
+        "title": "How do I see the results of a poll?",
+        "description": "You can view results in the My Polls section after voting ends. The system provides detailed statistics on participation."
+      },
+      "q5": {
+        "title": "What happens if my poll gets reported?",
+        "description": "Reported polls are reviewed by our team. If found inappropriate, they may be removed, and repeated violations could lead to account suspension."
+      },
+      "q6": {
+        "description": "The poll results on e-syrians represent the opinions of users who have registered and verified their identity on the platform. While we work hard to ensure the integrity of our polls, it's essential to understand that they reflect the views of verified participants from the Syrian community. Our algorithms and verification processes are designed to ensure the results are as accurate and trustworthy as possible. Originally, e-syrians was envisioned as a blockchain-based platform to further enhance trust and transparency. However, due to legal and technical constraints, this feature is not currently feasible for Syrians.",
+        "title": "Can we trust the poll results to represent the Syrian point of view?"
+      }
+    },
+    "donations": {
+      "title": "Donations & Support",
+      "q1": {
+        "title": "How can I donate to support the platform?",
+        "description": "You can donate via our Donate page, where we accept bitcoin transactions."
+      },
+      "q2": {
+        "title": "Where does my donation go?",
+        "description": "Donations help cover platform maintenance, security improvements, and the development of new features. Please note that donation is a voluntary act and does not affect your account status or access to any extra platform features."
+      }
+    }
+  }
 }
