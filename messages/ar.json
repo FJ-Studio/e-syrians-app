@@ -1310,7 +1310,8 @@
     },
     "categories": {
       "all": "كل التصنيفات"
-    }
+    },
+    "voters_count": "عدد الأشخاص المشاركين في الاستطلاع: {count}"
   },
   "actions": {
     "register": "تسجيل"

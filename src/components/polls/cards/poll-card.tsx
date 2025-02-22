@@ -82,8 +82,8 @@ const PollFullCard: FC<Props> = ({ poll }) => {
 
   const { user } = localPoll;
   const t = useTranslations("polls");
-  const session = useSession();
-  const canAnswer = isInAudience(localPoll, session.data?.user);
+  const { data, status } = useSession();
+  const canAnswer = isInAudience(localPoll, data?.user);
 
   useEffect(() => {
     // If the array exceeds the limit, remove the oldest selected option
@@ -185,12 +185,12 @@ const PollFullCard: FC<Props> = ({ poll }) => {
 
   const canVote = useMemo(() => {
     return (
-      session.status === "authenticated" &&
+      status === "authenticated" &&
       !localPoll.has_voted &&
       canAnswer[0] &&
       !pollExpired
     );
-  }, [canAnswer, localPoll.has_voted, session.status, pollExpired]);
+  }, [canAnswer, localPoll.has_voted, status, pollExpired]);
 
   return (
     <>
@@ -252,13 +252,16 @@ const PollFullCard: FC<Props> = ({ poll }) => {
               />
             ))}
           </CheckboxGroup>
+          <p className="mt-2 text-default-500 text-sm">
+            {t("voters_count", { count: localPoll?.unique_voters_count ?? 0 })}
+          </p>
         </CardBody>
         <CardFooter className="flex items-center justify-between">
           <div className="flex items-center gap-1">
             <Button
               size="sm"
               startContent={<HandThumbUpIcon className="w-6 h-6" />}
-              isDisabled={session.status !== "authenticated" || loading}
+              isDisabled={status !== "authenticated" || loading}
               onPress={() => reactToPoll("up")}
               color={localPoll.has_upvoted ? "primary" : "default"}
             >
@@ -267,7 +270,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             <Button
               size="sm"
               startContent={<HandThumbDownIcon className="w-6 h-6" />}
-              isDisabled={session.status !== "authenticated" || loading}
+              isDisabled={status !== "authenticated" || loading}
               onPress={() => reactToPoll("down")}
               color={localPoll.has_downvoted ? "primary" : "default"}
             >
@@ -291,9 +294,16 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                   {t("vote")}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="p-3 text-start">
-                <span className="font-medium">{t("cannotVote")}</span>
-                {!canAnswer[0] && (
+              <PopoverContent className="p-3 text-start items-start">
+                <span className="font-medium text-start">
+                  {t("cannotVote")}
+                </span>
+                {status === "unauthenticated" && (
+                  <p className="w-full text-start">
+                    - {cannotVoteReasons.unauthorized}
+                  </p>
+                )}
+                {!canAnswer[0] && status === "authenticated" && (
                   <p className="w-full text-start">
                     - {cannotVoteReasons.not_in_audience}
                   </p>

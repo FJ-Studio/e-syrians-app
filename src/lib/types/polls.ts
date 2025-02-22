@@ -43,6 +43,7 @@ export type Poll = {
     has_downvoted?: boolean;
     has_reacted?: boolean;
     selected_options?: Array<string>;
+    unique_voters_count?: number;
 }
 
 export interface CreatePollFields {

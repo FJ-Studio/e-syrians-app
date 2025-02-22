@@ -23,7 +23,7 @@ const PollsFilter: FC = () => {
   const params = new URLSearchParams(sp.toString());
   const { push } = useRouter();
   const pathname = usePathname();
-  const times = getYearsMonths(2024, 1, [
+  const times = getYearsMonths(2025, 2, [
     t("months.january"),
     t("months.february"),
     t("months.march"),
@@ -41,7 +41,7 @@ const PollsFilter: FC = () => {
     sp.get("year") || Object.keys(times)[0]
   );
   const [selectedMonth, setSelectedMonth] = useState(
-    sp.get("month") || times[selectedYear][0].index
+    sp.get("month") || times[selectedYear]?.[0]?.index
   );
   return (
     <>
@@ -76,7 +76,7 @@ const PollsFilter: FC = () => {
                     setSelectedMonth(selection.anchorKey as string);
                   }}
                 >
-                  {times[selectedYear].map((month) => (
+                  {(times[selectedYear] ?? []).map((month) => (
                     <SelectItem key={month.index}>{month.name}</SelectItem>
                   ))}
                 </Select>

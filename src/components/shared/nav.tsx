@@ -15,7 +15,7 @@ const Nav: FC = () => {
         <Link
           key={link.link}
           href={link.link}
-          className="text-gray-800 font-normal px-2 sm:px-3 py-2 hover:text-primary"
+          className="text-sm sm:text-base text-gray-800 font-normal px-2 sm:px-3 py-2 hover:text-primary"
         >
           {link.title}
         </Link>

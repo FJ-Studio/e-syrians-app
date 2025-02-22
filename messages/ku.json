@@ -1310,7 +1310,8 @@
     },
     "categories": {
       "all": "Hemû kategorî"
-    }
+    },
+    "voters_count": "{count} kes di vê anketê de daxwaz kirin"
   },
   "actions": {
     "register": "Qeydkirin"
@@ -1429,5 +1430,71 @@
       "description": "Ji kerema xwe, ger tu hinek pirsan hebin, bi rêveberê platformê re li ser info@e-syrians.com têkilî bigehin."
     },
     "lastUpdate": "Nûvekirina Dawî"
+  },
+  "terms": {
+    "title": "Şertên bikaranînê",
+    "intro": "Bi bikaranîna vê xizmetê, hûn li gorê şert û mercên jêrîn razî dibin:",
+    "purpose": {
+      "title": "Armanc",
+      "description": "e-syrians ji bo pêşkêşkirina qedexeek dijîtal ji bo daxwînê, parvekirina agahiyê û beşdarîya civakî hate avakirin. Platforma me dikare bikaranêrîn bi vê şêweyan:",
+      "items": {
+        "item1": {
+          "title": "Beşdarî bûn di anketan û daxwînên di nav çend mijaran de."
+        },
+        "item2": {
+          "title": "Raye xwe parve bikin û daxwînên avahî bidin."
+        },
+        "item3": {
+          "title": "Beşdarî bûn di nûçeyê netewî de."
+        }
+      }
+    },
+    "eligibility": {
+      "title": "Guhinîya Bikarhêner û Tomarkirin",
+      "items": {
+        "item1": {
+          "title": "Divê hûn bi kêmtirîn 13 salî bin da ku e-syrians bikaranînin."
+        },
+        "item2": {
+          "title": "Hûn razî dibin ku agahiyên rast bidin dema ku tomar dibin û hesabê xwe ewle bikin."
+        }
+      }
+    },
+    "prohibited": {
+      "title": "Çalakiyên Qedexe",
+      "description": "Hûn razî dibin ku:",
+      "items": {
+        "item1": {
+          "title": "Platformê ji bo çalakiyên neqanûnî bikaranîn."
+        },
+        "item2": {
+          "title": "Şexsiyeta bikaranêrên din bihêz bikin."
+        },
+        "item3": {
+          "title": "Dixwazin bikaranîna platformê bi awayekê derbas bikînin, wekî hack kirin, bikaranîna skrîptên otomatîk, barkêşiya daneyê an jî çalakiyên din yên weku vê."
+        }
+      }
+    },
+    "dataUsage": {
+      "title": "Bikaranîna Daneyan",
+      "description": "Daneyên we bi gorê <privacy>politikaya taybetî</privacy> hatiye kov kirin û işlem kirin."
+    },
+    "liability": {
+      "title": "Mesûliyet",
+      "description": "Em mesûl nîn in ji bo:",
+      "items": {
+        "item1": {
+          "title": "Her têkçûnekê ku ji bikaranîna vê platformê derketiye."
+        },
+        "item2": {
+          "title": "Bikaranîna bêdestûr ya platformê bi sedema lêzayînê we."
+        }
+      }
+    },
+    "contact": {
+      "title": "Têkilî digerînin",
+      "description": "Ji kerema xwe bi rêveberê platformê têkilî bigirin li ser info@e-syrians.com."
+    },
+    "lastUpdate": "Rojanekirina dawî"
   }
 }
