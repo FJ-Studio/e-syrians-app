@@ -7,9 +7,11 @@ import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
 import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
+import { useEsyrian } from "@/components/shared/contexts/es";
 
 export default function LoginForm() {
   // const [loginError, setLoginError] = useState<string | null>(null);
+  const { openCensusForm } = useEsyrian();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -37,6 +39,7 @@ export default function LoginForm() {
 
   return (
     <div className="flex w-full flex-col items-center gap-4 p-4">
+      <p className="font-medium w-full">{t("loginToYourAccount")}</p>
       <div className="flex flex-col gap-2 w-full">
         <Button
           startContent={<Icon icon="flat-color-icons:google" width={24} />}
@@ -134,6 +137,16 @@ export default function LoginForm() {
         <Button color="primary" type="submit" isLoading={isSubmitting}>
           {t("common.login")}
         </Button>
+        <div className="flex items-center justify-center gap-2">
+          <Button
+            type="button"
+            variant="light"
+            color="primary"
+            onPress={() => openCensusForm(true)}
+          >
+            {t("orRegister")}
+          </Button>
+        </div>
       </form>
     </div>
   );

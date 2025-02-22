@@ -1497,5 +1497,7 @@
       "description": "Please feel free to contact the platform admin on info@e-syrians.com."
     },
     "lastUpdate": "Latest update"
-  }
+  },
+  "loginToYourAccount": "Sign in to your account",
+  "orRegister": "Or create an account"
 }
