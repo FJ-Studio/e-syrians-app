@@ -1310,7 +1310,8 @@
     },
     "categories": {
       "all": "Hemû kategorî"
-    }
+    },
+    "voters_count": "{count} people have voted on this poll"
   },
   "actions": {
     "register": "Qeydkirin"
