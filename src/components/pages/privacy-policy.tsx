@@ -10,58 +10,54 @@ const PrivacyPolicy: FC = () => {
         <h1 className="text-3xl font-bold text-gray-800 mb-4">{t("title")}</h1>
         <p>{t("intro")}</p>
         <h3 className="text-xl font-bold text-gray-800 mb-2">
-          1. Data Collection
+          1. {t("dataCollection.title")}
         </h3>
-        <p>We collect the following information:</p>
+        <p>{t("dataCollection.description")}:</p>
         <ul className="list-disc list-inside">
-          <li>Personal information</li>
-          <li>Weapons information</li>
-        </ul>
-        <h3 className="text-xl font-bold text-gray-800 mb-2">2. Data Usage</h3>
-        <p>The information you provide is used to:</p>
-        <ul className="list-disc list-inside">
-          <li>Facilitate the secure collection of weapons.</li>
-          <li>Improve our services</li>
-          <li>Ensure compliance with government regulations.</li>
+          <li>{t("dataCollection.items.item1.title")}</li>
+          <li>{t("dataCollection.items.item2.title")}</li>
         </ul>
         <h3 className="text-xl font-bold text-gray-800 mb-2">
-          3. Data Sharing
+          2. {t("dataUsage.title")}
         </h3>
-        <p>We do not share your information with third parties except:.</p>
+        <p>{t("dataUsage.description")}</p>
         <ul className="list-disc list-inside">
-          <li>Government agencies</li>
-          <li>Law enforcement</li>
+          <li>{t("dataUsage.items.item1.title")}</li>
+          <li>{t("dataUsage.items.item2.title")}</li>
+          <li>{t("dataUsage.items.item3.title")}</li>
+          <li>{t("dataUsage.items.item4.title")}</li>
+          <li>{t("dataUsage.items.item5.title")}</li>
+          <li>{t("dataUsage.items.item6.title")}</li>
         </ul>
         <h3 className="text-xl font-bold text-gray-800 mb-2">
-          4. Data Protection
+          3. {t("dataSharing.title")}
         </h3>
-        <p>
-          We implement encryption and secure storage to protect your data from
-          unauthorized access. Especially the national id is stored in two
-          forms:
-        </p>
+        <p>{t("dataSharing.description")}</p>
         <ul className="list-disc list-inside">
-          <li>
-            Encrypted: to decrypt it when needed by authorized government
-            personnel.
-          </li>
-          <li>Hashed: to calculate the id hash when needed to query it.</li>
+          <li>{t("dataSharing.items.item1.title")}</li>
+          <li>{t("dataSharing.items.item2.title")}</li>
+          <li>{t("dataSharing.items.item3.title")}</li>
         </ul>
         <h3 className="text-xl font-bold text-gray-800 mb-2">
-          5. Data Retention
+          4. {t("dataProtection.title")}
         </h3>
+        <p>{t("dataProtection.description")}</p>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">
+          5. {t("dataProtectionRight.title")}
+        </h3>
+        <ul className="list-disc list-inside">
+          <li>{t("dataProtection.items.item1.title")}</li>
+          <li>{t("dataProtection.items.item2.title")}</li>
+          <li>{t("dataProtection.items.item3.title")}</li>
+          <li>{t("dataProtection.items.item4.title")}</li>
+        </ul>
+        <p>{t("dataProtectionRight.description")}</p>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">
+          6. {t("contact.title")}
+        </h3>
+        <p>{t("contact.description")}</p>
         <p>
-          Your data will be retained only as long as necessary for the purpose
-          of the initiative or as required by law. Storing citizens data on this
-          platform is templorarily until the government decide to migrate it or
-          destroy it.
-        </p>
-        <h3 className="text-xl font-bold text-gray-800 mb-2">6. Contact Us</h3>
-        <p>
-          Please feel free to contact the platform admin on info@e-syrians.com.
-        </p>
-        <p>
-          Latest update: <u>2024-12-23</u>
+          {t("lastUpdate")}: <u>2025-02-21</u>
         </p>
       </div>
     </Container>

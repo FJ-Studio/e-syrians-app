@@ -1344,5 +1344,90 @@
     "pinterest": "Hesabê Pinterest",
     "github": "Hesabê Github",
     "website": "Malpera Kesane"
+  },
+  "privacyPolicy": {
+    "title": "Siyaseta Kesayetî",
+    "intro": "Li e-Syrians de, em pêşî kesayetiyê te dikin û em têkildar in ku danegehên te ya kesayî biparêzin.",
+    "dataCollection": {
+      "title": "Berhevkirina Danegehê",
+      "description": "Em guhertoyên jêr berhev dikin:",
+      "items": {
+        "item1": {
+          "title": "Agahdariya Kesayî: Ev tê de agahdariya kesayî ye ku tu di dema qeydkirinê de bidî."
+        },
+        "item2": {
+          "title": "Tomara Çalakiyan: Dema tu malpera me bikar tînin, em hinek agahiyan dihînin ku ji bo nirxandinê ya tecrûbeya bikaranîna bikar bînin, ewlehîya malperê bihêlin, û ewlehîya hesabê te biparêzin. Em hemû çalakiyan ku bikarhênerên malperê dikin, wekî afirandina, guherandina, an nûkirina çavkaniyan, bişopînin. Ji bo her çalakî, em derbarê demê, amûrê, û navnîşana IP ya daxwaza kirî têne tomarkirin. Ev dikare û daxwaza serneketî jî bibe, ku em dikarin bifikirin ku bikarhêneran qewet dike yan jî guherînan bibînin."
+        }
+      }
+    },
+    "dataUsage": {
+      "title": "Bikaranîna Danegehê",
+      "description": "Agahiyên ku tu bidî, bi van armancan têne bikaranîn:",
+      "items": {
+        "item1": {
+          "title": "Ji bo pêşkêşkî kirina û parastina xizmetên me"
+        },
+        "item2": {
+          "title": "Ji bo şandina daxwaza te, ji afirandina hesabê te heta beşdarîbûna te di anketan de û xizmetên ku em pêşkêş dikin."
+        },
+        "item3": {
+          "title": "Ji bo têkilî girtinê bi te derbarê hesabê te an gotinên ku li ser xizmetên me têkilî dihêlin."
+        },
+        "item4": {
+          "title": "Ji bo baştirkirina û taybetkirina tecrûbeya te li ser malperê"
+        },
+        "item5": {
+          "title": "Ji bo analizkirina rêçê bikaranîna malperê û xebatên wê"
+        },
+        "item6": {
+          "title": "Ji bo bihevgirtina daxwaza qanûnî yan biqedandinê şertên xizmetê"
+        }
+      }
+    },
+    "dataSharing": {
+      "title": "Parvekirina Danegehê",
+      "description": "Em nikarin danegehên te ya kesayî bi kesên din biguherînin, biguherînin an bixwînin. Lê em dikarin hinek danegehê te di van rewşan de parve bikin:",
+      "items": {
+        "item1": {
+          "title": "Bi pêşkêşkarên xizmetê ku emê alîkarî bide kar kirina malperê me, rêveberiya karê me, an pêşkêşkî kirina xizmetên me (wekî pêşkêşkarên dayîna dravê, pêşkêşkarên hostingê)."
+        },
+        "item2": {
+          "title": "Ji bo sedeman qanûnî, ger emê hejmar bibin bi daxwaza qanûnî, ewlehîya mafên me biparêzin, an daxwaza qanûnî biqedînin."
+        },
+        "item3": {
+          "title": "Parvekirina daneyan yên girêdayî çalakiyê platformê: Ev di nav rê de daxwaza te, bersîvanên te, û agahiyên bingehîn yên te de tê parvekirin, bi taybetî heke tu wekî şexsê qebûlkirî ya qebûlker yê nezanîn."
+        }
+      }
+    },
+    "dataProtection": {
+      "title": "Parastina Danegehê",
+      "description": "Em bawer dikin ku emê bi rêzê şopandina teknîkî û rêveberiyê danegehê biparêzin. Lê, ji kerema xwe, bibore ku tu bi zanîn ku ti metodê şandina danegehê bi ser torê an guhertina elektroniqê ne %100 ewleh e. Danegehên te yên nexweş, wekî nasnameya neteweyî û navnîşana te ya wîrakî, têne şîfrekirin û nikarin rawestan wekî nûçe tekstî her derê.",
+      "items": {
+        "item1": {
+          "title": "Mafê te ya ku tu dikarî danegehên xwe bibînî û kopiya wan bixwazî"
+        },
+        "item2": {
+          "title": "Mafê guherandina hûnerekî an danegehên xerab"
+        },
+        "item3": {
+          "title": "Mafê daxwaza jêbirina danegehên xwe, bi hêsanî de bi piranî."
+        },
+        "item4": {
+          "title": "Mafê te ya ku tu dikarî li şopandin û bikaranîna danegehên xwe biqarêzî."
+        }
+      }
+    },
+    "dataRetention": {
+      "title": "Hilanîna Danegehê"
+    },
+    "dataProtectionRight": {
+      "title": "Mafên Parastina Danegehê",
+      "description": "Ji bo bikaranîna her yekê ji van mafan, ji kerema xwe, bi me re têkilî bigehin."
+    },
+    "contact": {
+      "title": "Têkilî Bigire",
+      "description": "Ji kerema xwe, ger tu hinek pirsan hebin, bi rêveberê platformê re li ser info@e-syrians.com têkilî bigehin."
+    },
+    "lastUpdate": "Nûvekirina Dawî"
   }
 }
