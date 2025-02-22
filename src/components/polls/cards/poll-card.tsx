@@ -194,16 +194,22 @@ const PollFullCard: FC<Props> = ({ poll }) => {
 
   return (
     <>
-      <Card>
-        <CardHeader className="flex items-start gap-1.5">
+      <Card className="p-3">
+        <CardHeader className="flex items-center justify-beteen gap-2">
           <Avatar
             src={user.avatar}
             className="min-h-10 min-w-10"
             alt={`${user.name} ${user.surname}`}
             title={`${user.name} ${user.surname}`}
           />
-          <Link className="font-medium w-full" href={`/polls/${localPoll.id}`}>
-            {localPoll.question}
+          <Link
+            className="w-full flex flex-col"
+            href={`/polls/${localPoll.id}`}
+          >
+            <span className="text-default-500 font-normal text-tiny">
+              {new Date(localPoll.created_at).toLocaleDateString()}
+            </span>
+            <p className="font-medium">{`${localPoll.user.name} ${localPoll.user.surname}`}</p>
           </Link>
           <Dropdown>
             <DropdownTrigger>
@@ -234,7 +240,9 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             </DropdownMenu>
           </Dropdown>
         </CardHeader>
-        <CardBody className="space-y-2">
+        <CardBody className="space-y-2 items-start text-start">
+          <p>{localPoll.question}</p>
+
           <CheckboxGroup
             classNames={{
               base: "w-full",
@@ -284,6 +292,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
               onPress={vote}
               isDisabled={loading}
               isLoading={loading}
+              className="px-8 text-sm bg-[#50c0a9]"
             >
               {t("vote")}
             </Button>
@@ -421,7 +430,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 )}
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>Close</Button>
+                <Button onPress={onClose}>{t("close")}</Button>
               </ModalFooter>
             </>
           )}
