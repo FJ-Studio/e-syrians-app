@@ -1311,7 +1311,8 @@
     "categories": {
       "all": "كل التصنيفات"
     },
-    "voters_count": "عدد الأشخاص المشاركين في الاستطلاع: {count}"
+    "voters_count": "عدد الأشخاص المشاركين في الاستطلاع: {count}",
+    "close": "إغلاق"
   },
   "actions": {
     "register": "تسجيل"

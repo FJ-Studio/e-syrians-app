@@ -1311,7 +1311,8 @@
     "categories": {
       "all": "Hemû kategorî"
     },
-    "voters_count": "{count} kes di vê anketê de daxwaz kirin"
+    "voters_count": "{count} kes di vê anketê de daxwaz kirin",
+    "close": "Nêzîkî"
   },
   "actions": {
     "register": "Qeydkirin"
