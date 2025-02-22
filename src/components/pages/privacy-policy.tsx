@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useTranslations } from "next-intl";
-import Container from "../shared/container";
+import PageLayout from "./layout";
 
 const PrivacyPolicy: FC = () => {
   const t = useTranslations("privacyPolicy");
   return (
-    <Container className="py-28 text-start">
+    <PageLayout>
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">{t("title")}</h1>
         <p>{t("intro")}</p>
@@ -60,7 +60,7 @@ const PrivacyPolicy: FC = () => {
           {t("lastUpdate")}: <u>2025-02-21</u>
         </p>
       </div>
-    </Container>
+    </PageLayout>
   );
 };
 
