@@ -1310,7 +1310,8 @@
     },
     "categories": {
       "all": "كل التصنيفات"
-    }
+    },
+    "voters_count": "{count} people have voted on this poll"
   },
   "actions": {
     "register": "تسجيل"
