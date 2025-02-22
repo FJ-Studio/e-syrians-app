@@ -988,12 +988,12 @@
           "change": "تغيير البريد الإلكتروني",
           "email": "البريد الإلكتروني",
           "emailVerificationStatus": "عنوان بريدك الإلكتروني الحالي {status}",
-          "verified": "تم تأكيده",
+          "verified": "verified",
           "notVerified": "غير مؤكد",
           "resendVerification": "إرسال رابط تأكيد",
-          "sending": "يتم الإرسال...",
+          "sending": "sending...",
           "verificationLinkSent": "تم إرسال رابط التأكيد",
-          "success": "تم تغيير عنوان البريد الإلكتروني بنجاح",
+          "success": "E-mail address updated successfully",
           "description": "الرجاء كتابة عنوان بريدك الإلكتروني الجديد بشكل صحيح، عندما تقوم بتغيير بريدك الإلكتروني، يجب عليك تسجيل الدخول مرة أخرى"
         }
       },
@@ -1344,5 +1344,9 @@
     "pinterest": "حساب Pinterest",
     "github": "حساب Github",
     "website": "الموقع الشخصي"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "We value your privacy and are committed to protecting your personal information."
   }
 }
