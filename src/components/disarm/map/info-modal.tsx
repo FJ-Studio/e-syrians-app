@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { FC, ReactNode } from "react";
 import {
   Modal,
@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-} from "@nextui-org/modal";
+} from "@heroui/modal";
 import { useTranslations } from "next-intl";
 
 const InfoModal: FC = () => {

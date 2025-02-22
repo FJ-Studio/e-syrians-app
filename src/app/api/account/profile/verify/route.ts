@@ -1,0 +1,41 @@
+import recaptchaIsValid from "@/lib/recaptcha";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "../../../../../../auth";
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const isHuman = await recaptchaIsValid(body.recaptcha_token);
+  if (!isHuman) {
+    return NextResponse.json(
+      { messages: ["invalid_recaptcha_token"], success: false },
+      { status: 400 }
+    );
+  }
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  try {
+    const request = await fetch(`${process.env.API_URL}/users/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": req.headers.get("accept-language") as string,
+        Authorization: `Bearer ${session?.user.accessToken}`,
+        "User-Agent": req.headers.get("user-agent") as string,
+      },
+      body: JSON.stringify(body),
+    });
+    const response = await request.json();
+    return NextResponse.json(response, { status: request.status });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        messages: ["An error occurred"],
+      },
+      { status: 500 }
+    );
+  }
+}

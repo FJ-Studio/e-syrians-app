@@ -1,6 +1,6 @@
 "use client";
-import { WEAPONS } from "@/lib/constants";
-import { WeaponDeliveryForm } from "@/lib/types";
+import { WEAPONS } from "@/lib/constants/disarm";
+import { WeaponDeliveryForm } from "@/lib/types/weapon-delivery";
 import {
   Button,
   Divider,
@@ -16,7 +16,7 @@ import {
   SelectItem,
   Textarea,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
@@ -261,7 +261,7 @@ const ReportWeapons: FC = () => {
                   disabled={isSubmitting}
                   onPress={() => handleSubmit(onSubmit)()}
                 >
-                  {isSubmitting ? t('common.sending_data') : t("common.submit")}
+                  {isSubmitting ? t("common.sending_data") : t("common.submit")}
                 </Button>
               </DrawerFooter>
             </>
@@ -271,8 +271,10 @@ const ReportWeapons: FC = () => {
       <Modal isDismissable isOpen={isFeedbackOpen} onClose={onFeedbackClose}>
         <ModalContent>
           <div className="p-6">
-            <p className="mb-1 font-bold text-lg">{t('disarm.report.received.title')}</p>
-            <p>{t('disarm.report.received.description')} 💚</p>
+            <p className="mb-1 font-bold text-lg">
+              {t("disarm.report.received.title")}
+            </p>
+            <p>{t("disarm.report.received.description")} 💚</p>
           </div>
         </ModalContent>
       </Modal>

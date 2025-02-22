@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 
 export async function POST(request: NextRequest) {
     const session = await auth();
-    if (!session?.user) {
+    if (!session) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const reqJson = await request.json();

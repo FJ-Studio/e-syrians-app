@@ -1,5 +1,6 @@
 "use client";
-import { Snippet } from "@nextui-org/react";
+import { ibm } from "@/lib/fonts/fonts";
+import { Snippet } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { FC } from "react";
@@ -14,9 +15,12 @@ const SupportMe: FC = () => {
       <Snippet
         hideSymbol
         variant="bordered"
+        classNames={{
+          pre: `${ibm.className}`,
+        }}
         codeString="bc1qvdncnznvrj0s5v48j3uje0x0dhd6qr4audrlztudnwvtlrg4uc7qa7czxs"
       >
-        {t('home.support.copy_btc_address')}
+        {t("home.support.copy_btc_address")}
       </Snippet>
     </div>
   );

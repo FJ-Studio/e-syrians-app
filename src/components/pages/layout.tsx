@@ -1,11 +1,8 @@
 import { FC, PropsWithChildren } from "react";
+import Container from "../shared/container";
 
 const PageLayout: FC<PropsWithChildren> = ({ children }) => {
-    return (
-        <div className="container mx-auto max-w-7xl px-6 lg:px-8 mt-24 mb-8 ltr">
-            {children}
-        </div>
-    )
+  return <Container className="py-28 text-start">{children}</Container>;
 };
 
 export default PageLayout;

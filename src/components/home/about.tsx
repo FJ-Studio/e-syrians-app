@@ -14,10 +14,9 @@ const AboutMe: FC = () => {
           <p className="text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
             {t("home.about.description")}
           </p>
-          <div className="flex justify-center"><SupportMe /></div>
-          <p className="text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-          {t("home.about.esyrians")}
-          </p>
+          <div className="flex justify-center">
+            <SupportMe />
+          </div>
         </div>
       </div>
     </div>
