@@ -1401,7 +1401,7 @@
     },
     "dataProtection": {
       "title": "Data Protection",
-      "description": "We promise implementing appropriate technical and organizational measures to protect the  information we collect. However, please note that no method of transmission over the internet or method of electronic storage is 100% secure. Your sensitive data like national id and detailed address are encrypted and never stored as plain text anywhere.",
+      "description": "We promise implementing appropriate technical and organizational measures to protect the  information we collect. However, please note that no method of transmission over the internet or method of electronic storage is 100% secure. Your sensitive data like national id, password and detailed address are encrypted and never stored as plain text anywhere.",
       "items": {
         "item1": {
           "title": "The right to access and request a copy of your personal data"
@@ -1423,6 +1423,72 @@
     "dataProtectionRight": {
       "title": "Data Protection Right",
       "description": "To exercise any of these rights, please contact us."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Please feel free to contact the platform admin on info@e-syrians.com."
+    },
+    "lastUpdate": "Latest update"
+  },
+  "terms": {
+    "title": "Terms of use",
+    "intro": "By using this service, you agree to the following terms and conditions:",
+    "purpose": {
+      "title": "Purpose",
+      "description": "e-syrians is designed to provide a digital space for discussions, information sharing, and community engagement. Our platform enables users to:",
+      "items": {
+        "item1": {
+          "title": "Participate in polls and discussions on various topics."
+        },
+        "item2": {
+          "title": "Share opinions and engage in constructive debates."
+        },
+        "item3": {
+          "title": "Participate in the national census."
+        }
+      }
+    },
+    "eligibility": {
+      "title": "User Eligibility & Registration",
+      "items": {
+        "item1": {
+          "title": "You must be at least 13 years old to use e-syrians."
+        },
+        "item2": {
+          "title": "You agree to provide accurate information when registering and keep your account secure."
+        }
+      }
+    },
+    "prohibited": {
+      "title": "Prohibited Activities",
+      "description": "You agree not to:",
+      "items": {
+        "item1": {
+          "title": "Use the platform for any illegal activities."
+        },
+        "item2": {
+          "title": "Violate the privacy of other users."
+        },
+        "item3": {
+          "title": "Attempt to disrupt the platform’s functionality through hacking, automated scripts, data scraping or similar actions."
+        }
+      }
+    },
+    "dataUsage": {
+      "title": "Data usage",
+      "description": "Your data is collected and processed in accordance with our <privacy>privacy policy</privacy>"
+    },
+    "liability": {
+      "title": "Liability",
+      "description": "We are not liable for:",
+      "items": {
+        "item1": {
+          "title": "Any damages caused by the use of this platform."
+        },
+        "item2": {
+          "title": "Unauthorized use of the platform due to your negligence."
+        }
+      }
     },
     "contact": {
       "title": "Contact Us",
