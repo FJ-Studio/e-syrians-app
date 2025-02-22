@@ -1347,6 +1347,87 @@
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
-    "intro": "We value your privacy and are committed to protecting your personal information."
+    "intro": "At e-Syrians, we prioritize your privacy and are dedicated to safeguarding your personal data.",
+    "dataCollection": {
+      "title": "Data Collection",
+      "description": "We gather the following types of information",
+      "items": {
+        "item1": {
+          "title": "Personal Information: This includes the personal details you provide during registration."
+        },
+        "item2": {
+          "title": "Activity Log: As you use our website, we collect information to help us evaluate user experience, enhance website security, and protect your account. We track all activities performed by users on the site, such as creating, modifying, or updating resources. For each action, we store details such as the time, device, and IP address from which the request originated. This also includes failed attempts, which assist us in identifying potential user difficulties or detecting fraudulent activity."
+        }
+      }
+    },
+    "dataUsage": {
+      "title": "Data Usage",
+      "description": "The information you provide is used to:",
+      "items": {
+        "item1": {
+          "title": "To provide and maintain our services"
+        },
+        "item2": {
+          "title": "To process your requests, from account creation to participating in polls and other services provided by us."
+        },
+        "item3": {
+          "title": "To communicate with you regarding your account or other matters related to our services"
+        },
+        "item4": {
+          "title": "To improve and personalize your experience on the site"
+        },
+        "item5": {
+          "title": "To analyze usage trends and website performance"
+        },
+        "item6": {
+          "title": "To comply with legal obligations or enforce our terms of service"
+        }
+      }
+    },
+    "dataSharing": {
+      "title": "Data Sharing",
+      "description": "We will not sell, trade, or rent your personal information to third parties. However, we may share some of your information in the following cases:",
+      "items": {
+        "item1": {
+          "title": "With service providers that help us operate our website, conduct business, or provide services to you (e.g., payment processors, hosting providers)."
+        },
+        "item2": {
+          "title": "For legal reasons, if we are required to do so by law, to protect our rights, or to comply with legal obligations."
+        },
+        "item3": {
+          "title": "Platform-related data sharing: This includes sharing polls you participated in, the answers you provided, and your basic information if you have been identified as a fraudulent user."
+        }
+      }
+    },
+    "dataProtection": {
+      "title": "Data Protection",
+      "description": "We promise implementing appropriate technical and organizational measures to protect the  information we collect. However, please note that no method of transmission over the internet or method of electronic storage is 100% secure. Your sensitive data like national id and detailed address are encrypted and never stored as plain text anywhere.",
+      "items": {
+        "item1": {
+          "title": "The right to access and request a copy of your personal data"
+        },
+        "item2": {
+          "title": "The right to rectify any incorrect or incomplete information"
+        },
+        "item3": {
+          "title": "The right to request deletion of your personal data, subject to certain exceptions"
+        },
+        "item4": {
+          "title": "The right to object to or restrict the processing of your personal data"
+        }
+      }
+    },
+    "dataRetention": {
+      "title": "Data Retention"
+    },
+    "dataProtectionRight": {
+      "title": "Data Protection Right",
+      "description": "To exercise any of these rights, please contact us."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Please feel free to contact the platform admin on info@e-syrians.com."
+    },
+    "lastUpdate": "Latest update"
   }
 }
