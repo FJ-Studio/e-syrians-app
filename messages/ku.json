@@ -991,9 +991,9 @@
           "verified": "verified",
           "notVerified": "not verified",
           "resendVerification": "Naha verast bikin",
-          "sending": "şandin...",
+          "sending": "sending...",
           "verificationLinkSent": "Girêdana verastkirinê şandin",
-          "success": "Navnîşana e-nameyê rast guhert",
+          "success": "E-mail address updated successfully",
           "description": "Ji kerema xwe navnîşana e-nameya xwe ya nû bi baldarî binivîse, gava ku hûn e-nameya xwe nûve bikin, hûn ê ji nû ve têkevinê"
         }
       },
@@ -1344,5 +1344,9 @@
     "pinterest": "Hesabê Pinterest",
     "github": "Hesabê Github",
     "website": "Malpera Kesane"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "We value your privacy and are committed to protecting your personal information."
   }
 }
