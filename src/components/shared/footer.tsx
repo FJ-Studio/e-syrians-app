@@ -59,6 +59,13 @@ const Footer: FC = () => {
             >
               {t("footer.terms")}
             </Link>
+            <Link
+              className="text-black text-sm"
+              href="mailto:info@e-syrians.com"
+              title={t("footer.contact")}
+            >
+              {t("footer.contact")}
+            </Link>
           </div>
           <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
             <h4 className="text-lg font-semibold">{t("footer.initiatives")}</h4>

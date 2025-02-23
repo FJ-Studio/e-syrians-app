@@ -19,6 +19,19 @@ export const metadata: Metadata = {
   title: "E-SYRIANS Network",
   description:
     "For every Syrian, creating a better homeland and a brighter future.",
+  openGraph: {
+    title: "E-SYRIANS Network",
+    description:
+      "For every Syrian, creating a better homeland and a brighter future.",
+    images: [
+      {
+        url: "https://e-syrians.com/e-syrians.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "E-SYRIANS Network",
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
