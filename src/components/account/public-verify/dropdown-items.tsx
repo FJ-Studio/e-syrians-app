@@ -64,7 +64,7 @@ const UserCardLinksDropdown: FC<Props> = ({ user }) => {
   ].filter((link) => link.link);
 
   if (links.length === 0) {
-    return null;
+    return <div className="min-w-8"></div>;
   }
 
   return (
