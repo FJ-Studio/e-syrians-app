@@ -30,11 +30,9 @@ const isInAudience = (
   }
 
   // temporarily accept all users for testing
-  // if (poll.id !== '0') {
-  //   return [true, ['']];
-  // }
-
-  
+  if (poll.id !== '0') {
+    return [true, ['']];
+  }
 
   const reasons: Array<string> = [];
   // country check
