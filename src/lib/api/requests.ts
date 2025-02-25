@@ -10,10 +10,10 @@ export const getPoll = async (id: string): Promise<ApiResponse<Poll>> => {
       Accept: "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
     },
-    next: {
-      revalidate: 120,
-    },
-    cache: "force-cache",
+    // next: {
+    //   revalidate: 120,
+    // },
+    cache: "no-cache",
   });
   return req.json();
 };
@@ -31,10 +31,10 @@ export const getPolls = async (
         Accept: "application/json",
         Authorization: `Bearer ${session?.user.accessToken}`,
       },
-      next: {
-        revalidate: 120,
-      },
-      cache: "force-cache",
+      // next: {
+      //   revalidate: 120,
+      // },
+      cache: "no-cache",
     }
   );
   return req.json();
