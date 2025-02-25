@@ -8,20 +8,42 @@ import {
   CardHeader,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 
-const Faq: FC = () => {
+const MainTag: FC<PropsWithChildren<{ home?: boolean }>> = ({
+  children,
+  home,
+}) => {
+  if (home) {
+    return (
+      <h2 className="text-3xl font-semibold text-default-700">{children}</h2>
+    );
+  }
+  return (
+    <h1 className="text-3xl font-semibold text-default-700">{children}</h1>
+  );
+};
+
+const FaqTag: FC<PropsWithChildren<{ home?: boolean }>> = ({
+  children,
+  home,
+}) => {
+  if (home) {
+    return <h3 className="text-lg font-medium text-default-800">{children}</h3>;
+  }
+  return <h2 className="text-lg font-medium text-default-800">{children}</h2>;
+};
+
+const Faq: FC<{ home?: boolean }> = ({ home = false }) => {
   const t = useTranslations("faq");
   return (
     <Container className="py-28 text-start">
-      <h1 className="text-3xl font-semibold text-default-700">{t("title")}</h1>
+      <MainTag home={home}>{t("title")}</MainTag>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
         <div className="space-y-4">
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-medium text-default-800">
-                {t("general.title")}
-              </h2>
+              <FaqTag>{t("general.title")}</FaqTag>
             </CardHeader>
             <CardBody>
               <Accordion variant="light">
@@ -66,9 +88,7 @@ const Faq: FC = () => {
           </Card>
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-medium text-default-800">
-                {t("account.title")}
-              </h2>
+              <FaqTag>{t("account.title")}</FaqTag>
             </CardHeader>
             <CardBody>
               <Accordion variant="light">
@@ -127,9 +147,7 @@ const Faq: FC = () => {
         <div className="space-y-4">
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-medium text-default-800">
-                {t("security.title")}
-              </h2>
+              <FaqTag>{t("security.title")}</FaqTag>
             </CardHeader>
             <CardBody>
               <Accordion variant="light">
@@ -169,9 +187,7 @@ const Faq: FC = () => {
 
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-medium text-default-800">
-                {t("polls.title")}
-              </h2>
+              <FaqTag>{t("polls.title")}</FaqTag>
             </CardHeader>
             <CardBody>
               <Accordion variant="light">
@@ -216,9 +232,7 @@ const Faq: FC = () => {
           </Card>
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-medium text-default-800">
-                {t("donations.title")}
-              </h2>
+              <FaqTag>{t("donations.title")}</FaqTag>
             </CardHeader>
             <CardBody>
               <Accordion variant="light">
