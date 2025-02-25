@@ -30,7 +30,7 @@ const isInAudience = (
   }
 
   // temporarily accept all users for testing
-  if (poll.id !== '1') {
+  if (poll.id !== '0') {
     return [true, ['']];
   }
 
