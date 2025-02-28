@@ -50,7 +50,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <GoogleTagManager gtmId="G-ECLQC58Q2W" />
+      <GoogleTagManager gtmId="GTM-MSXHDMVL" />
       <Script
         async
         defer
