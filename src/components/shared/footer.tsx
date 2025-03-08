@@ -35,7 +35,7 @@ const Footer: FC = () => {
             </a>
           </div>
         </div>
-        <div className="flex items-start gap-3 md:gap-12">
+        <div className="flex items-start gap-3 sm:gap-8 md:gap-12">
           <div className="flex flex-col gap-2 min-w-44 sm:min-w-fit">
             <h4 className="text-lg font-semibold">{t("footer.links")}</h4>
             <Link
@@ -81,6 +81,20 @@ const Footer: FC = () => {
             ))}
           </div>
         </div>
+      </Container>
+      <Container>
+        <div className="my-8 h-px bg-gray-200" />
+      </Container>
+      <Container className="flex items-start justify-between md:items-center text-sm">
+        <p>&copy; {t("footer.copy_right")}</p>
+        <a
+          href="https://fj.studio"
+          title="BY FJ SOFTWARE STUDIO"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          BY FJ SOFTWARE STUDIO
+        </a>
       </Container>
     </footer>
   );
