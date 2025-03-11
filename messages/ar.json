@@ -46,6 +46,10 @@
     "polls": {
       "title": "الاستطلاعات",
       "description": "منصة لإجراء استطلاعات الرأي لقياس الرأي العام بشأن مختلف القضايا."
+    },
+    "violations": {
+      "title": "Violations",
+      "description": "A community-driven board for reporting and documenting violations against Syrian citizens."
     }
   },
   "hero": {
@@ -735,7 +739,8 @@
         "verifications": "التحقق",
         "settings": "الإعدادات",
         "donate": "تبرع",
-        "signout": "تسجيل الخروج"
+        "signout": "تسجيل الخروج",
+        "violations": "Violations"
       },
       "polls": {
         "my_polls": {
