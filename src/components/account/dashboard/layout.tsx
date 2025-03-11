@@ -7,6 +7,7 @@ import {
   ClipboardDocumentCheckIcon,
   Cog6ToothIcon,
   CurrencyDollarIcon,
+  ScaleIcon,
 } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -38,6 +39,12 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       title: t("nav.polls"),
       link: "/account/polls",
       icon: <ChartBarIcon className="size-6" />,
+      onPress: undefined,
+    },
+    {
+      title: t("nav.violations"),
+      link: "/account/violations",
+      icon: <ScaleIcon className="size-6" />,
       onPress: undefined,
     },
     {

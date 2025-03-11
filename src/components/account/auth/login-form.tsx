@@ -41,7 +41,7 @@ export default function LoginForm() {
     <div className="flex w-full flex-col items-center gap-4 p-4">
       <p className="font-medium w-full">{t("loginToYourAccount")}</p>
       <div className="flex flex-col gap-2 w-full">
-        {/* <Button
+        <Button
           startContent={<Icon icon="flat-color-icons:google" width={24} />}
           variant="bordered"
           className="w-full"
@@ -53,7 +53,7 @@ export default function LoginForm() {
           }
         >
           {t("common.continueWithGoogle")}
-        </Button> */}
+        </Button>
         {/* <Button
               startContent={
                 <Icon

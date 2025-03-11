@@ -272,22 +272,24 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             />
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="shelter"
-              control={control}
-              render={({ field }) => (
-                <Checkbox
-                  {...field}
-                  value={`${field.value}`}
-                  isSelected={!!getValues("shelter")}
-                  onValueChange={(selected) =>
-                    setValue("shelter", selected ? "1" : "0")
-                  }
-                >
-                  {t("fields.shelter.label")}
-                </Checkbox>
-              )}
-            />
+            <div className="flex flex-col gap-2 ">
+              <Controller
+                name="shelter"
+                control={control}
+                render={({ field }) => (
+                  <Checkbox
+                    {...field}
+                    value={`${field.value}`}
+                    isSelected={!!getValues("shelter")}
+                    onValueChange={(selected) =>
+                      setValue("shelter", selected ? "1" : "0")
+                    }
+                  >
+                    {t("fields.shelter.label")}
+                  </Checkbox>
+                )}
+              />
+            </div>
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller

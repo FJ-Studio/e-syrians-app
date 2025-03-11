@@ -1,17 +1,14 @@
-import {
-  FACEBOOK_URL,
-  INITIATIVES,
-  INSTAGRAM_URL,
-  X_URL,
-} from "@/lib/constants/misc";
+import { FACEBOOK_URL, INSTAGRAM_URL, X_URL } from "@/lib/constants/misc";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import Container from "./container";
+import useInitiatives from "../hooks/localization/initiatives";
 
 const Footer: FC = () => {
   const t = useTranslations();
+  const INITIATIVES = useInitiatives();
   return (
     <footer className="bg-gray-100 text-black py-8">
       <Container className=" flex gap-5 flex-col sm:flex-row justify-between items-start">
@@ -74,9 +71,9 @@ const Footer: FC = () => {
                 key={index}
                 className="text-black text-sm"
                 href={initiative.link}
-                title={t(initiative.title)}
+                title={initiative.title}
               >
-                {t(initiative.title)}
+                {initiative.title}
               </Link>
             ))}
           </div>
