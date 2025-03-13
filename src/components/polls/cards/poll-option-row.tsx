@@ -23,11 +23,12 @@ const PollOptionRow: FC<Props> = ({ option, percentage, value }) => {
         value={value}
       >
         <div
-          className="h-[calc(100%+16px)] bg-blue-100 absolute -top-2 left-0 -z-10"
+          className="h-[calc(100%+16px)] bg-blue-100 absolute -top-2 end-0 -z-10"
           style={{
             width: `${percentage ?? 0}%`,
           }}
         ></div>
+        {percentage && percentage > 0 ? <div className="absolute text-xs end-2 top-1/2 -translate-y-1/2">{percentage}%</div> : ''}
         <div
           className="w-full flex justify-between relative z-20 line-clamp-2"
           title={option}
