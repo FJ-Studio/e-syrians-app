@@ -1275,7 +1275,8 @@
       "register": "تسجيل",
       "author": "صاحب الاستطلاع",
       "timeline": "الجدول الزمني للاستطلاع",
-      "audience": "جمهور الاستطلاع"
+      "audience": "جمهور الاستطلاع",
+      "share": "Share poll"
     },
     "cannotVote": "عذراً، لا يمكنك تسجيل تصويتك للأسباب التالية:",
     "alreadyReacted": "لقد قمت بالتصويت على هذا الاستطلاع مِن قبل",
@@ -1320,7 +1321,15 @@
       "all": "كل التصنيفات"
     },
     "voters_count": "{count} people have voted on this poll",
-    "close": "Close"
+    "close": "Close",
+    "share": {
+      "x": "Share on X (Twitter)",
+      "facebook": "Share on Facebook",
+      "whatsapp": "Share on WhatsApp",
+      "linkedin": "Share on Linkedin",
+      "mail": "Send by Email",
+      "copy": "Copy URL"
+    }
   },
   "actions": {
     "register": "تسجيل"
