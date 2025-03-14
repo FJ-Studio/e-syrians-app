@@ -69,7 +69,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   >(null);
 
   const pollUrl = useMemo(() => {
-    return `${window.location.origin}/polls/${poll.id}`;
+    return `${process.env.NEXT_PUBLIC_DOMAIN_URL}/polls/${poll.id}`;
   }, [poll]);
 
   useEffect(() => {
