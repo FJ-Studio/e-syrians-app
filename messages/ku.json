@@ -1275,7 +1275,8 @@
       "register": "Qeydkirin",
       "author": "Xwedî lêkolînekê",
       "timeline": "Demjimêra lêkolînekê",
-      "audience": "Şandeya lêkolînekê"
+      "audience": "Şandeya lêkolînekê",
+      "share": "Share poll"
     },
     "cannotVote": "Bibore, nikarî dengê xwe qeydkî bikî ji bo sedeman jêrîn:",
     "alreadyReacted": "Tu jixwe di vê lêkolînekê de deng dayî",
@@ -1320,7 +1321,15 @@
       "all": "Hemû kategorî"
     },
     "voters_count": "{count} people have voted on this poll",
-    "close": "Close"
+    "close": "Close",
+    "share": {
+      "x": "Share on X (Twitter)",
+      "facebook": "Share on Facebook",
+      "whatsapp": "Share on WhatsApp",
+      "linkedin": "Share on Linkedin",
+      "mail": "Send by Email",
+      "copy": "Copy URL"
+    }
   },
   "actions": {
     "register": "Qeydkirin"
