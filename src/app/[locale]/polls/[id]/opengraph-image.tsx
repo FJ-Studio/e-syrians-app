@@ -40,8 +40,9 @@ export default async function Image({ params }: Props) {
           justifyContent: "center",
           textAlign: "center",
           fontFamily: "IBMPlexSansArabic-SemiBold",
-          backgroundImage: 'linear-gradient(180deg, rgba(191,171,219,1) 0%, rgba(217,212,231,1) 68%);',
-            color: '#333',
+          backgroundColor: '#393d98',
+          backgroundImage: 'linear-gradient(180deg, rgba(191,171,219,0.95) 0%, rgba(217,212,231,0.5) 88%);',
+            color: '#FFF',
         }}
       >
         <div style={{ padding: 20, display: "flex", flexDirection: "column" }}>
@@ -50,11 +51,11 @@ export default async function Image({ params }: Props) {
             <div
               key={index}
               style={{
-                border: "1px solid #999",
+                border: "2px solid #eee",
                 borderRadius: "4px",
                 marginBottom: "10px",
                 padding: "6px 10px",
-                color: "#333",
+                color: "#FFF",
                 fontSize: "20px",
               }}
             >
