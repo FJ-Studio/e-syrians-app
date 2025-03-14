@@ -41,7 +41,7 @@ const PollsFilter: FC = () => {
     sp.get("year") || Object.keys(times)[0]
   );
   const [selectedMonth, setSelectedMonth] = useState(
-    sp.get("month") || times[selectedYear]?.[0]?.index
+    sp.get("month") || times[selectedYear]?.[times[selectedYear].length - 1]?.index
   );
   return (
     <>

@@ -1274,7 +1274,8 @@
       "register": "Qeydkirin",
       "author": "Xwedî lêkolînekê",
       "timeline": "Demjimêra lêkolînekê",
-      "audience": "Şandeya lêkolînekê"
+      "audience": "Şandeya lêkolînekê",
+      "share": "Anketê parve bikin"
     },
     "cannotVote": "Bibore, nikarî dengê xwe qeydkî bikî ji bo sedeman jêrîn:",
     "alreadyReacted": "Tu jixwe di vê lêkolînekê de deng dayî",
@@ -1319,7 +1320,15 @@
       "all": "Hemû kategorî"
     },
     "voters_count": "{count} kes di vê anketê de daxwaz kirin",
-    "close": "Nêzîkî"
+    "close": "Nêzîkî",
+    "share": {
+      "x": "Parve bikin li ser X (Twitter)",
+      "facebook": "Parve bikin li ser Facebook",
+      "whatsapp": "Parve bikin li ser WhatsApp",
+      "linkedin": "Parve bikin li ser LinkedIn",
+      "mail": "Bi e-nameyê bişînin",
+      "copy": "URLê kopî bikin"
+    }
   },
   "actions": {
     "register": "Qeydkirin"

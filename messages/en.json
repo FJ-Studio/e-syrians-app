@@ -1275,7 +1275,8 @@
       "register": "Register",
       "author": "The author",
       "timeline": "Poll Timeline",
-      "audience": "Poll Audience"
+      "audience": "Poll Audience",
+      "share": "Share poll"
     },
     "cannotVote": "Sorry, you cannot submit your vote for the following reason(s):",
     "alreadyReacted": "You have already reacted to this poll",
@@ -1320,7 +1321,15 @@
       "all": "All Categories"
     },
     "voters_count": "{count} people have voted on this poll",
-    "close": "Close"
+    "close": "Close",
+    "share": {
+      "x": "Share on X (Twitter)",
+      "facebook": "Share on Facebook",
+      "whatsapp": "Share on WhatsApp",
+      "linkedin": "Share on Linkedin",
+      "mail": "Send by Email",
+      "copy": "Copy URL"
+    }
   },
   "actions": {
     "register": "Register"
