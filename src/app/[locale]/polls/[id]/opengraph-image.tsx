@@ -1,15 +1,14 @@
 import { getPoll } from '@/lib/api/requests';
 import { Locale } from '@/lib/types/locale';
 import { ImageResponse } from 'next/og'
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+// import { readFile } from 'node:fs/promises'
+// import { join } from 'node:path'
 
 type Props = {
   params: Promise<{ locale: Locale; id: string }>;
 };
  
 // Image metadata
-export const alt = 'About Acme'
 export const size = {
   width: 1200,
   height: 630,
@@ -22,9 +21,6 @@ export default async function Image({ params }: Props) {
   // Font loading, process.cwd() is Next.js project directory
   const { id } = await params;
     const poll = await getPoll(id);
-  const interSemiBold = await readFile(
-    join(process.cwd(), 'assets/Inter-SemiBold.ttf')
-  )
  
   return new ImageResponse(
     (
@@ -48,14 +44,6 @@ export default async function Image({ params }: Props) {
       // For convenience, we can re-use the exported opengraph-image
       // size config to also set the ImageResponse's width and height.
       ...size,
-      fonts: [
-        {
-          name: 'Inter',
-          data: interSemiBold,
-          style: 'normal',
-          weight: 400,
-        },
-      ],
     }
   )
 }
