@@ -32,7 +32,6 @@ export default async function Image({ params }: Props) {
       <div
         style={{
           fontSize: 30,
-          background: "white",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -40,13 +39,25 @@ export default async function Image({ params }: Props) {
           justifyContent: "center",
           textAlign: "center",
           fontFamily: "IBMPlexSansArabic-SemiBold",
-          backgroundColor: '#393d98',
-          backgroundImage: 'linear-gradient(180deg, rgba(191,171,219,0.95) 0%, rgba(217,212,231,0.5) 88%);',
-            color: '#FFF',
+          backgroundColor: "#393d98",
+          backgroundImage:
+            "linear-gradient(180deg, rgba(191,171,219,0.95) 0%, rgba(217,212,231,0.5) 88%);",
+          color: "#FFF",
+          direction: "rtl",
         }}
       >
-        <div style={{ padding: 20, display: "flex", flexDirection: "column" }}>
-          <p>{poll.data.question.substring(0, 100)}</p>
+        <div
+          style={{
+            padding: 20,
+            display: "flex",
+            flexDirection: "column",
+            direction: "rtl",
+            textAlign: "right",
+          }}
+        >
+          <p style={{ textAlign: "right", direction: "rtl" }}>
+            {poll.data.question.substring(0, 100)}
+          </p>
           {poll.data.options.slice(0, 5).map((option, index) => (
             <div
               key={index}
@@ -75,7 +86,8 @@ export default async function Image({ params }: Props) {
           name: "IBMPlexSansArabic-SemiBold",
           data: font,
           style: "normal",
-          weight: 600,
+          weight: 400,
+          lang: "ar-AR",
         },
       ],
     }
