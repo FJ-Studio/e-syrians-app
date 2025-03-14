@@ -5,6 +5,7 @@ import {
   EllipsisVerticalIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
+  ShareIcon,
   UserGroupIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
@@ -28,6 +29,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Snippet,
   useDisclosure,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
@@ -48,6 +50,7 @@ import useProvinces from "@/components/hooks/localization/provinces";
 import useCountries from "@/components/hooks/localization/country";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import strToArray from "@/lib/str-array";
+import { ibm } from "@/lib/fonts/fonts";
 
 type Props = {
   poll: Poll;
@@ -62,8 +65,12 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   const religinousAffiliations = useReligiousAffiliation();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [modalSection, setModalSection] = useState<
-    "author" | "timeline" | "audience" | null
+    "author" | "timeline" | "audience" | "share" | null
   >(null);
+
+  const pollUrl = useMemo(() => {
+    return `${process.env.NEXT_PUBLIC_DOMAIN_URL}/polls/${poll.id}`;
+  }, [poll]);
 
   useEffect(() => {
     if (modalSection) {
@@ -237,6 +244,13 @@ const PollFullCard: FC<Props> = ({ poll }) => {
               >
                 {t("actions.audience")}
               </DropdownItem>
+              <DropdownItem
+                key="share"
+                startContent={<ShareIcon className="size-5" />}
+                onPress={() => setModalSection("share")}
+              >
+                {t("actions.share")}
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </CardHeader>
@@ -348,7 +362,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     ? t("actions.timeline")
                     : modalSection === "audience"
                     ? t("actions.audience")
-                    : ""}
+                    : modalSection === 'share' ? t('actions.share') : ''}
                 </h3>
               </ModalHeader>
               <ModalBody>
@@ -427,6 +441,18 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                       );
                     })}
                   </>
+                )}
+                {modalSection === "share" && (
+                <div className="grid grid-cols-2 gap-4 flex-wrap">
+                  <Button className="bg-blue-600 text-white" as={Link} target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${pollUrl}`}>{t('share.facebook')}</Button>
+                  <Button className="bg-black text-white" as={Link} target="_blank" href={`https://twitter.com/intent/tweet?url=${pollUrl}`}>{t('share.x')}</Button>
+                  <Button className="bg-[#25d366] text-white" as={Link} target="_blank" href={`https://wa.me/?text=${pollUrl}`}>{t('share.whatsapp')}</Button>
+                  <Button className="bg-[#0a66c2] text-white" as={Link} target="_blank" href={`https://www.linkedin.com/sharing/share-offsite/?url=${pollUrl}`}>{t('share.linkedin')}</Button>
+                  <Button className="bg-[#DB4437] text-white" as={Link} href={`mailto:?subject=E-SYRIANS&body=${pollUrl}`}>{t('share.mail')}</Button>
+                  <Snippet variant="flat" classNames={{
+                    pre: `${ibm.className}`
+                  }} hideSymbol codeString={pollUrl} color="warning">{t('share.copy')}</Snippet>
+                </div>
                 )}
               </ModalBody>
               <ModalFooter>

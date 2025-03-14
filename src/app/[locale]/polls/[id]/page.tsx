@@ -8,6 +8,6 @@ type Props = {
 
 export default async function SinglePollsPage({ params }: Props) {
   const { id } = await params;
-  const polls = await getPoll(id);
-  return <SinglePoll poll={polls.data} />;
+  const poll = await getPoll(id);
+  return <SinglePoll poll={poll.data} />;
 }
