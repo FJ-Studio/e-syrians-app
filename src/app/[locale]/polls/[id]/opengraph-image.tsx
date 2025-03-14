@@ -40,8 +40,7 @@ export default async function Image({ params }: Props) {
           justifyContent: "center",
           textAlign: "center",
           fontFamily: "IBMPlexSansArabic-SemiBold",
-          backgroundColor: '#DFDBE5',
-          backgroundImage: 'linear-gradient(315deg, #DFDBE5 0%, #E7E4EE 74%)',
+          backgroundImage: 'linear-gradient(180deg, rgba(191,171,219,1) 0%, rgba(217,212,231,1) 68%);',
             color: '#333',
         }}
       >
@@ -54,8 +53,9 @@ export default async function Image({ params }: Props) {
                 border: "1px solid #999",
                 borderRadius: "4px",
                 marginBottom: "10px",
-                padding: "2px 6px",
+                padding: "6px 10px",
                 color: "#333",
+                fontSize: "20px",
               }}
             >
               {option.option_text}
