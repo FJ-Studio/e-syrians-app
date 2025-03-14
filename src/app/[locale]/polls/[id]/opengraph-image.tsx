@@ -24,7 +24,6 @@ export default async function Image({ params }: Props) {
   const font = await readFile(
     join(process.cwd(), "src/lib/fonts/IBMPlexSansArabic-SemiBold.ttf")
   );
-  //
 
   return new ImageResponse(
     (
@@ -43,7 +42,6 @@ export default async function Image({ params }: Props) {
           backgroundImage:
             "linear-gradient(180deg, rgba(191,171,219,0.95) 0%, rgba(217,212,231,0.5) 88%);",
           color: "#FFF",
-          direction: "rtl",
         }}
       >
         <div
@@ -51,12 +49,10 @@ export default async function Image({ params }: Props) {
             padding: 20,
             display: "flex",
             flexDirection: "column",
-            direction: "rtl",
-            textAlign: "right",
           }}
         >
-          <p style={{ textAlign: "right", direction: "rtl" }}>
-            {poll.data.question.substring(0, 100)}
+          <p>
+            {poll.data.question.substring(0, 191)}
           </p>
           {poll.data.options.slice(0, 5).map((option, index) => (
             <div
@@ -81,12 +77,14 @@ export default async function Image({ params }: Props) {
       // For convenience, we can re-use the exported opengraph-image
       // size config to also set the ImageResponse's width and height.
       ...size,
+      emoji: 'blobmoji',
+
       fonts: [
         {
           name: "IBMPlexSansArabic-SemiBold",
           data: font,
           style: "normal",
-          weight: 400,
+          weight: 600,
           lang: "ar-AR",
         },
       ],
