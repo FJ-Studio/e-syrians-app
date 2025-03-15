@@ -481,6 +481,41 @@ const CensusForm: FC = () => {
                         )}
                       />
 
+                      {getValues("country") === "SY" && (
+                        <Controller
+                          name="city_inside_syria"
+                          control={control}
+                          rules={{ required: true }}
+                          render={({
+                            field,
+                            fieldState: { error, invalid },
+                          }) => (
+                            <Select
+                              {...field}
+                              label={t("fields.city_inside_syria.label")}
+                              isRequired
+                              isInvalid={invalid}
+                              errorMessage={error?.message}
+                              defaultSelectedKeys={[getValues("city_inside_syria")]}
+                              onSelectionChange={(selected) =>
+                                setValue(
+                                  "city",
+                                  provinces[
+                                    selected.anchorKey as keyof typeof provinces
+                                  ]
+                                )
+                              }
+                            >
+                              {Object.keys(provinces).map((key) => (
+                                <SelectItem key={key} value={key}>
+                                  {provinces[key as keyof typeof provinces]}
+                                </SelectItem>
+                              ))}
+                            </Select>
+                          )}
+                        />
+                      )}
+
                       <div>
                         <h3 className="font-semibold text-lg">
                           3. {t("sections.censusData.title")}

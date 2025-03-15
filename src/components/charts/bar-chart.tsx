@@ -50,6 +50,7 @@ const BarChartCard = forwardRef<
       ...religions,
       ...ethnicities,
       ...countries,
+      'unknown': 'N/A',
     };
 
     return (

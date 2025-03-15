@@ -87,10 +87,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           } else {
             return null;
           }
-        } else if (account?.provider === 'credentials' && user) {
+        } else if (account?.provider === "credentials" && user) {
           // Local login request
           token.esUser = user;
-        } 
+        }
       } catch (error) {
         console.error("JWT callback error:", error);
       }
