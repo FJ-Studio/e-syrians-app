@@ -20,9 +20,11 @@ export const getPoll = async (id: string): Promise<ApiResponse<Poll>> => {
 
 export const getPolls = async (
   page: string,
-  year: string = '',
-  month: string = ''
-): Promise<ApiResponse<{polls: Array<Poll>; current_page: number; last_page: number}>> => {
+  year: string = "",
+  month: string = ""
+): Promise<
+  ApiResponse<{ polls: Array<Poll>; current_page: number; last_page: number }>
+> => {
   const session = await auth();
   const req = await fetch(
     `${process.env.API_URL}/polls?page=${page}&year=${year}&month=${month}`,
@@ -71,12 +73,15 @@ export const verifyEmail = async (
   hash: string | undefined,
   signature: string | undefined
 ): Promise<boolean> => {
-  const req = await fetch(`${process.env.API_URL}/verify-email?id=${id}&hash=${hash}&signature=${signature}&expires=${expires}&lang=en`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  });
+  const req = await fetch(
+    `${process.env.API_URL}/verify-email?expires=${expires}&hash=${hash}&id=${id}&lang=en&signature=${signature}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }
+  );
   return req.status === 200;
-}
+};

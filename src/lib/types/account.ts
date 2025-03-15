@@ -1,21 +1,27 @@
-import { CountryCode, Ethnicity, Gender, Province, ReligiousAffiliation } from "./misc";
+import {
+  CountryCode,
+  Ethnicity,
+  Gender,
+  Province,
+  ReligiousAffiliation,
+} from "./misc";
 
 export type ESUser = {
   id: string;
   uuid: string;
-  name: string;
-  surname: string;
+  name?: string;
+  surname?: string;
   email: string;
-  phone: string;
+  phone?: string;
   accessToken: string;
   verified_at: string;
   verification_reason: string;
   roles: Array<string>;
   permissions: Array<string>;
-  gender: Gender;
-  birth_date: string;
-  hometown: Province;
-  ethnicity: Ethnicity;
+  gender?: Gender;
+  birth_date?: string;
+  hometown?: Province;
+  ethnicity?: Ethnicity;
   basic_info_updates?: number;
   avatar?: string;
   national_id?: string;
@@ -39,17 +45,17 @@ export type ESUser = {
   easy_access_to_healthcare_services?: string;
   more_info?: string;
 
-  facebook_link: string;
-  twitter_link: string;
-  instagram_link: string;
-  linkedin_link: string;
-  youtube_link: string;
-  twitch_link: string;
-  tiktok_link: string;
-  website: string;
-  github_link: string;
-  snapchat_link: string;
-  pinterest_link: string;
+  facebook_link?: string;
+  twitter_link?: string;
+  instagram_link?: string;
+  linkedin_link?: string;
+  youtube_link?: string;
+  twitch_link?: string;
+  tiktok_link?: string;
+  website?: string;
+  github_link?: string;
+  snapchat_link?: string;
+  pinterest_link?: string;
 
   email_verified_at?: string;
   phone_verified_at?: string;
@@ -57,8 +63,9 @@ export type ESUser = {
   received_verification_email: boolean;
   account_verified_email: boolean;
 
-  
-}
+  language: string;
+  city_inside_syria: string;
+};
 
 export type Verification = {
   id: string;
@@ -77,4 +84,4 @@ export type Verification = {
   cancelation_payload?: {
     reason?: string;
   };
-}
+};

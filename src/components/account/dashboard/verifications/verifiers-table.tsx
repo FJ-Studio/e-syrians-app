@@ -34,10 +34,6 @@ const VerifiersTable: FC = () => {
     direction: "descending",
   });
 
-  useEffect(() => {
-    console.log("sortDescriptor", sortDescriptor);
-  }, [sortDescriptor]);
-
   const columns = [
     { name: t("name.title"), uid: "name", sortable: true },
     { name: t("date.title"), uid: "date", sortable: true },
@@ -141,6 +137,18 @@ const VerifiersTable: FC = () => {
         <h3 className="text-lg text-default-700 font-medium">{t("title")}</h3>
       </CardHeader>
       <CardBody>
+        <div className="mb-6">
+          {t("description")}{" "}
+          <Snippet
+            hideSymbol
+            classNames={{
+              pre: `${ibm.className} whitespace-normal`,
+            }}
+            codeString={getUrl(session.data?.user as ESUser)}
+          >
+            {getUrl(session.data?.user as ESUser)}
+          </Snippet>
+        </div>
         <Table
           isHeaderSticky
           isStriped

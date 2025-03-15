@@ -67,14 +67,14 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
   useEffect(() => {
     if (user) {
       reset({
-        name: user.name ?? "",
-        surname: user.surname ?? "",
-        gender: user.gender ?? "",
-        birth_date: user.birth_date ?? undefined,
-        hometown: user.hometown ?? undefined,
-        ethnicity: user.ethnicity ?? undefined,
-        national_id: user.national_id ?? "",
-        record_id: user.record_id ?? "",
+        name: user?.name ?? "",
+        surname: user?.surname ?? "",
+        gender: user?.gender ?? undefined,
+        birth_date: user?.birth_date ?? undefined,
+        hometown: user?.hometown ?? undefined,
+        ethnicity: user?.ethnicity ?? undefined,
+        national_id: user?.national_id ?? "",
+        record_id: user?.record_id ?? "",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -163,12 +163,12 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   {...field}
                   value={
                     getValues("birth_date")
-                      ? parseDate(getValues("birth_date"))
+                      ? parseDate(getValues("birth_date") as string)
                       : null
                   }
                   defaultValue={
                     getValues("birth_date")
-                      ? parseDate(getValues("birth_date"))
+                      ? parseDate(getValues("birth_date") as string)
                       : null
                   }
                   onChange={(date) =>
@@ -192,7 +192,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("gender")]}
+                  selectedKeys={getValues("gender") ? [getValues("gender") as string] : []}
                   onSelectionChange={(selectedKeys: SharedSelection) => {
                     setValue(
                       "gender",
@@ -222,7 +222,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("ethnicity")]}
+                  selectedKeys={getValues("ethnicity") ? [getValues("ethnicity") as string] : []}
                   onSelectionChange={(selectedKeys: SharedSelection) => {
                     setValue(
                       "ethnicity",
@@ -252,7 +252,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("hometown")]}
+                  selectedKeys={getValues("hometown") ? [getValues("hometown") as string] : []}
                   onSelectionChange={(selectedKeys: SharedSelection) => {
                     setValue(
                       "hometown",

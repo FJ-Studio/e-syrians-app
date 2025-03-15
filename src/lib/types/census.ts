@@ -15,42 +15,42 @@ export type CountryRegistrations = {
   [key in CountryCode]: {
     unverified: number;
     verified: number;
-  }
+  };
 };
 
 export type HometownRegistrations = {
   [key in Province]: {
     unverified: number;
     verified: number;
-  }
+  };
 };
 
 export type GenderRegistrations = {
   [key in Gender]: {
     unverified: number;
     verified: number;
-  }
+  };
 };
 
 export type AgeRegistrations = {
   [key in string]: {
     unverified: number;
     verified: number;
-  }
+  };
 };
 
 export type EthnicityRegistrations = {
   [key in Ethnicity]: {
     unverified: number;
     verified: number;
-  }
+  };
 };
 
 export type ReligionRegistrations = {
   [key in ReligiousAffiliation]: {
     unverified: number;
     verified: number;
-  }
+  };
 };
 
 export type RegistrationForm = {
@@ -76,6 +76,7 @@ export type RegistrationForm = {
   city: string;
   address: string;
   shelter: boolean;
+  city_inside_syria: string;
   // education
   education_level: string;
   skills: string;
@@ -95,11 +96,11 @@ export type RegistrationForm = {
 };
 
 export type CensusStats = {
-    daily_users?: DailyRegistrations;
-    age?: AgeRegistrations;
-    hometown?: HometownRegistrations;
-    country?: CountryRegistrations;
-    ethnicity?: EthnicityRegistrations;
-    religion?: ReligionRegistrations;
-    gender?: GenderRegistrations;
-  }
+  daily_users?: DailyRegistrations;
+  age?: AgeRegistrations;
+  hometown?: HometownRegistrations;
+  country?: CountryRegistrations;
+  ethnicity?: EthnicityRegistrations;
+  religion?: ReligionRegistrations;
+  gender?: GenderRegistrations;
+};

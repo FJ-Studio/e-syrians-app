@@ -26,7 +26,7 @@ const ShortUserSummary: FC<Props> = ({ user }) => {
         <p className="mt-2">{`${user.name} ${user.surname}`}</p>
         <p className="text-default-500 text-sm">
           {t("publicVerify.citizenFrom", {
-            hometown: provinces[user.hometown],
+            hometown: user?.hometown ? provinces[user.hometown] : "-",
             gender: user.gender,
           })}
         </p>

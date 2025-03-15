@@ -32,10 +32,10 @@ const PublicVerify: FC<Props> = ({ user }) => {
             <div className="flex items-center gap-3">
               <UserAvatar user={user} />
               <div className=" ">
-                <p>{`${user.name} ${user.surname}`}</p>
+                <p>{`${user?.name} ${user?.surname}`}</p>
                 <p className="text-default-500 text-sm">
                   {t("citizenFrom", {
-                    hometown: provinces[user.hometown],
+                    hometown: user?.hometown ? provinces[user?.hometown] : "-",
                     gender: user.gender,
                   })}
                 </p>
@@ -50,12 +50,12 @@ const PublicVerify: FC<Props> = ({ user }) => {
             </div>
             <div className="flex flex-col w-1/2 sm:w-1/4">
               <p>{t("gender")}</p>
-              <p className="text-default-500 text-sm">{genders[user.gender]}</p>
+              <p className="text-default-500 text-sm">{user?.gender ? genders[user.gender] : '-'}</p>
             </div>
             <div className="flex flex-col  w-1/2 sm:w-1/4">
               <p>{t("ethnicity")}</p>
               <p className="text-default-500 text-sm">
-                {ethnicities[user.ethnicity]}
+                {user.ethnicity ? ethnicities[user.ethnicity] : "-"}
               </p>
             </div>
             <div className="flex flex-col  w-1/2 sm:w-1/4">

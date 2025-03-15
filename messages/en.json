@@ -265,6 +265,9 @@
         "passwordConfirmation": {
           "label": "Password confirmation",
           "placeholder": "Please enter your password again"
+        },
+        "city_inside_syria": {
+          "label": "Where do you live in Syria"
         }
       },
       "actions": {
@@ -945,7 +948,8 @@
             }
           },
           "noVerifiers": "You have received 0 verifications. You can share your profile URL with your network",
-          "copyProfileUrl": "Copy profile URL"
+          "copyProfileUrl": "Copy profile URL",
+          "description": "Your profile URL:"
         },
         "verifications-table": {
           "name": {
@@ -1108,6 +1112,9 @@
           "country": {
             "label": "Country",
             "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+          },
+          "city_inside_syria": {
+            "label": "Where do you live in Syria"
           }
         },
         "save": "Save changes",
@@ -1241,7 +1248,10 @@
     "invalid_options": "Invalid options selected",
     "current_password_incorrect": "Your entered password is not correct",
     "failed_to_reset_password": "Failed to reset password",
-    "failed_to_send_password_reset_email": "Failed to send password reset link"
+    "failed_to_send_password_reset_email": "Failed to send password reset link",
+    "invalid_verification_signature": "Invalid signature, please try again later",
+    "verification_signature_expired": "Expired link, please try again later",
+    "invalid_verification_link": "Invalid verification link"
   },
   "publicVerify": {
     "title": "Verify user information",
