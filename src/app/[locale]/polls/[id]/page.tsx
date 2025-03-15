@@ -6,6 +6,16 @@ type Props = {
   params: Promise<{ locale: Locale; id: string }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+  const poll = await getPoll(id);
+  return {
+    title: poll.data.question,
+    
+  }
+}
+
+
 export default async function SinglePollsPage({ params }: Props) {
   const { id } = await params;
   const poll = await getPoll(id);
