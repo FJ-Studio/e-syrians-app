@@ -1236,7 +1236,10 @@
     "invalid_options": "الخيارات المحددة غير صالحة",
     "current_password_incorrect": "كلمة المرور التي أدخلتها غير صحيحة",
     "failed_to_reset_password": "فشلت عملية إعادة تعيين كلمة المرور",
-    "failed_to_send_password_reset_email": "فشل إرسال رابط إعادة تعيين كلمة المرور"
+    "failed_to_send_password_reset_email": "فشل إرسال رابط إعادة تعيين كلمة المرور",
+    "invalid_verification_link": "رابط تأكيد البريد الالكتروني لم يعد صالحا",
+    "verification_signature_expired": "رابط تأكيد البريد الالكتروني لم يعد صالحا",
+    "invalid_verification_signature": "رابط تأكيد البريد الالكتروني غير صالح"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",

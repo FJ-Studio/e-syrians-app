@@ -32,6 +32,9 @@ const useServerError = (): ((errorCode: string) => string) => {
       failed_to_send_password_reset_email: t(
         "failed_to_send_password_reset_email"
       ),
+      invalid_verification_signature: t("invalid_verification_signature"),
+      verification_signature_expired: t("verification_signature_expired"),
+      invalid_verification_link: t("invalid_verification_link"),
     };
     return errors[errorCode as keyof typeof errors] || t("unknown_error");
   };
