@@ -260,6 +260,9 @@
         "passwordConfirmation": {
           "label": "Piştrastina Şîfreyê",
           "placeholder": "Ji kerema xwe şîfreyê binivîsî dîsa"
+        },
+        "city_inside_syria": {
+          "label": "Bajarê li Sûriyê"
         }
       },
       "actions": {
@@ -1102,6 +1105,9 @@
           "country": {
             "label": "Welatê radestkirinê",
             "description": "Guhertina welatê destûrê li ser armancên xwe di anketan de dikare tenê hin caran di sala de were guhertin"
+          },
+          "city_inside_syria": {
+            "label": "Bajar li Sûriyê"
           }
         },
         "save": "Guherandina guhertinên",

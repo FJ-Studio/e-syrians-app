@@ -1,10 +1,13 @@
 import useCountries from "@/components/hooks/localization/country";
+import useProvinces from "@/components/hooks/localization/provinces";
 import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { CountryCode } from "@/lib/types/misc";
 import {
+  // Autocomplete,
+  // AutocompleteItem,
   Avatar,
   Button,
   Card,
@@ -25,10 +28,12 @@ type UpdateAddressProps = {
 
 interface AddressFields {
   country: CountryCode;
+  city_inside_syria: string;
 }
 
 const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
   const t = useTranslations("account.settings.address");
+  const provinces = useProvinces();
   const serverError = useServerError();
   const countries = useCountries();
   const {
@@ -118,8 +123,65 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                     </SelectItem>
                   ))}
                 </Select>
+                // <Autocomplete
+                //   {...field}
+                //   label={t("fields.country.label")}
+                //   isRequired
+                //   classNames={{
+                //     clearButton: "hidden",
+                //   }}
+                //   scrollShadowProps={{
+                //     isEnabled: false,
+                //   }}
+                //   isInvalid={invalid}
+                //   errorMessage={error?.message}
+                //   selectedKey={getValues("country")}
+                //   onSelectionChange={(selected) => {
+                //     setValue("country", selected?.toString() as CountryCode);
+                //   }}
+                //   description={t("fields.country.description")}
+                // >
+                //   {Object.keys(countries).map((country) => (
+                //     <AutocompleteItem
+                //       key={country}
+                //       value={country}
+                //       startContent={
+                //         <Avatar
+                //           src={`/flags/${country.toLowerCase()}.svg`}
+                //           className="w-6 h-6"
+                //           size="sm"
+                //         />
+                //       }
+                //     >
+                //       {countries[country as keyof typeof countries]}
+                //     </AutocompleteItem>
+                //   ))}
+                // </Autocomplete>
               )}
             />
+            {getValues("country") === "SY" && (
+              <Controller
+                name="city_inside_syria"
+                control={control}
+                rules={{ required: true }}
+                render={({ field, fieldState: { error, invalid } }) => (
+                  <Select
+                    {...field}
+                    label={t("fields.city_inside_syria.label")}
+                    isRequired
+                    isInvalid={invalid}
+                    errorMessage={error?.message}
+                    defaultSelectedKeys={[getValues("city_inside_syria")]}
+                  >
+                    {Object.keys(provinces).map((key) => (
+                      <SelectItem key={key} value={key}>
+                        {provinces[key as keyof typeof provinces]}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            )}
           </Skeleton>
           <Button
             color="primary"

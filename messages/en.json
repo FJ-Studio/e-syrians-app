@@ -261,6 +261,9 @@
         "passwordConfirmation": {
           "label": "Password confirmation",
           "placeholder": "Please enter your password again"
+        },
+        "city_inside_syria": {
+          "label": "Where do you live in Syria"
         }
       },
       "actions": {
@@ -1103,6 +1106,9 @@
           "country": {
             "label": "Country",
             "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
+          },
+          "city_inside_syria": {
+            "label": "Where do you live in Syria"
           }
         },
         "save": "Save changes",
