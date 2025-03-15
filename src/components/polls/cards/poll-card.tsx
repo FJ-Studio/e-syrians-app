@@ -455,7 +455,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 </div>
                 )}
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="flex justify-start">
                 <Button onPress={onClose}>{t("close")}</Button>
               </ModalFooter>
             </>
