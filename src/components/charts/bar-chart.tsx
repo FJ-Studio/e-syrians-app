@@ -19,7 +19,6 @@ import useReligiousAffiliation from "../hooks/localization/religious_affiliation
 import useEthnicity from "../hooks/localization/ethnicity";
 import useCountries from "../hooks/localization/country";
 import useGender from "../hooks/localization/gender";
-import { useTranslations } from "next-intl";
 
 const BarChartCard = forwardRef<
   HTMLDivElement,
@@ -40,7 +39,6 @@ const BarChartCard = forwardRef<
     },
     ref
   ) => {
-    const t = useTranslations("common");
     const genderOptions = useGender();
     const provinces = useProvinces();
     const religions = useReligiousAffiliation();
