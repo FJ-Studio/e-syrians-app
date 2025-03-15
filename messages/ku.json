@@ -942,7 +942,8 @@
             }
           },
           "noVerifiers": "You have received 0 verifications. You can share your profile URL with your network",
-          "copyProfileUrl": "Copy profile URL"
+          "copyProfileUrl": "Copy profile URL",
+          "description": "url profîla te"
         },
         "verifications-table": {
           "name": {

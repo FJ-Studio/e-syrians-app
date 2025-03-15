@@ -162,6 +162,28 @@ const CensusCharts: FC = () => {
           }
         )}
       />
+      <div className="col-span-1">
+      <BarChartCard
+        translateLabels
+        title={t("gender.title")}
+        description={t("gender.description")}
+        color="primary"
+        categories={["verified", "unverified"]}
+        categoriesLabels={[
+          t("labels.verified.title"),
+          t("labels.unverified.title"),
+        ]}
+        chartData={Object.entries(charts?.gender ?? {}).map(
+          ([month, value]) => {
+            return {
+              month,
+              unverified: value.unverified,
+              verified: value.verified,
+            };
+          }
+        )}
+      />
+      </div>
     </div>
   );
 };

@@ -32,7 +32,7 @@ const PublicVerify: FC<Props> = ({ user }) => {
             <div className="flex items-center gap-3">
               <UserAvatar user={user} />
               <div className=" ">
-                <p>{`${user.name} ${user.surname}`}</p>
+                <p>{`${user?.name} ${user?.surname}`}</p>
                 <p className="text-default-500 text-sm">
                   {t("citizenFrom", {
                     hometown: user?.hometown ? provinces[user?.hometown] : "-",
