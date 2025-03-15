@@ -1236,7 +1236,10 @@
     "invalid_options": "Invalid options selected",
     "current_password_incorrect": "Your entered password is not correct",
     "failed_to_reset_password": "Failed to reset password",
-    "failed_to_send_password_reset_email": "Failed to send password reset link"
+    "failed_to_send_password_reset_email": "Failed to send password reset link",
+    "invalid_verification_signature": "Invalid signature, please try again later",
+    "verification_signature_expired": "Expired link, please try again later",
+    "invalid_verification_link": "Invalid verification link"
   },
   "publicVerify": {
     "title": "Verify user information",
