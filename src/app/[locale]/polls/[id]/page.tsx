@@ -11,7 +11,9 @@ export async function generateMetadata({ params }: Props) {
   const poll = await getPoll(id);
   return {
     title: poll.data.question,
-    
+    openGraph: {
+      title: poll.data.question,
+    }
   }
 }
 

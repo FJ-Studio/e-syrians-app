@@ -77,7 +77,7 @@ const UpdateEmailAddress: FC = () => {
       </CardHeader>
       <CardBody>
         <form className="space-y-4" onSubmit={handleSubmit(updateEmailAddress)}>
-          <p className="text-sm">{t("description")}</p>
+          <p className="text-sm text-start">{t("description")}</p>
           <Controller
             name="email"
             control={control}
