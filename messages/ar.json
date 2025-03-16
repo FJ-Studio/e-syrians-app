@@ -265,6 +265,9 @@
         "passwordConfirmation": {
           "label": "تأكيد كلمة المرور",
           "placeholder": "يرجى إعادة إدخال كلمة المرور"
+        },
+        "city_inside_syria": {
+          "label": "Where do you live in Syria"
         }
       },
       "actions": {
@@ -945,7 +948,8 @@
             }
           },
           "noVerifiers": "لم يقم أحد بتأكيد بياناتك إلى الآن. على أية حال بإمكانك مشاركة رابط ملفك مع معارفك",
-          "copyProfileUrl": "نسخ رابط الملف الشخصي"
+          "copyProfileUrl": "نسخ رابط الملف الشخصي",
+          "description": "Your profile URL:"
         },
         "verifications-table": {
           "name": {
@@ -1108,6 +1112,9 @@
           "country": {
             "label": "بلد الإقامة",
             "description": "تغيير البلد يؤثر على استهداف الجمهور ضمن الاستطلاعات لذلك يمكن تغييره مرات محدودة في السنة"
+          },
+          "city_inside_syria": {
+            "label": "Where do you live in Syria"
           }
         },
         "save": "حفظ التغييرات",
@@ -1241,7 +1248,10 @@
     "invalid_options": "الخيارات المحددة غير صالحة",
     "current_password_incorrect": "كلمة المرور التي أدخلتها غير صحيحة",
     "failed_to_reset_password": "فشلت عملية إعادة تعيين كلمة المرور",
-    "failed_to_send_password_reset_email": "فشل إرسال رابط إعادة تعيين كلمة المرور"
+    "failed_to_send_password_reset_email": "فشل إرسال رابط إعادة تعيين كلمة المرور",
+    "invalid_verification_signature": "Invalid signature, please try again later",
+    "verification_signature_expired": "Expired link, please try again later",
+    "invalid_verification_link": "Invalid verification link"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
