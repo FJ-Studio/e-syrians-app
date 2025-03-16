@@ -272,6 +272,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             />
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
+
             <div className="flex justify-start"><Controller
               name="shelter"
               control={control}
@@ -288,6 +289,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 </Checkbox>
               )}
             /></div>
+
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller

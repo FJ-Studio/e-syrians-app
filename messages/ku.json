@@ -40,12 +40,16 @@
       "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
     },
     "census": {
-      "title": "National census",
+      "title": "Serjimariya neteweyî",
       "description": "Tehlîlê neteweyî yên ku ji aliyê gelê Sûrî ve hatine pêşkêş kirin, ku dikare qeydê xwe ya xwe û berhevkirina daneyên giştî bike."
     },
     "polls": {
       "title": "Polls",
-      "description": "A platform for conducting polls and surveys to gauge public opinion on various issues."
+      "description": "Platformek ji bo pêkanîna anket û anketan ji bo nirxandina raya giştî li ser mijarên cûda."
+    },
+    "violations": {
+      "description": "Lêpirsînek civakî ji bo binêre û belgekirina têkoşînên li dijî ciwanên Sûrî.",
+      "title": "Tewandînan"
     }
   },
   "hero": {
@@ -737,7 +741,8 @@
         "verifications": "Pejirandin",
         "settings": "Mîhengên",
         "donate": "Bikarhêner",
-        "signout": "Derketin"
+        "signout": "Derketin",
+        "violations": "Tewandînan"
       },
       "polls": {
         "my_polls": {

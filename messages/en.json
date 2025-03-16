@@ -46,6 +46,10 @@
     "polls": {
       "title": "Polls",
       "description": "A platform for conducting polls and surveys to gauge public opinion on various issues."
+    },
+    "violations": {
+      "title": "Violations",
+      "description": "A community-driven board for reporting and documenting violations against Syrian citizens."
     }
   },
   "hero": {
@@ -738,7 +742,8 @@
         "verifications": "Verifications",
         "settings": "Settings",
         "donate": "Donate",
-        "signout": "Sign out"
+        "signout": "Sign out",
+        "violations": "Violations"
       },
       "polls": {
         "my_polls": {
