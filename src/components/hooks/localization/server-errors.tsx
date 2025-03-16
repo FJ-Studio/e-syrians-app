@@ -35,6 +35,7 @@ const useServerError = (): ((errorCode: string) => string) => {
       invalid_verification_signature: t("invalid_verification_signature"),
       verification_signature_expired: t("verification_signature_expired"),
       invalid_verification_link: t("invalid_verification_link"),
+      target_user_data_not_filled: t("target_user_data_not_filled"),
     };
     return errors[errorCode as keyof typeof errors] || t("unknown_error");
   };
