@@ -1251,7 +1251,8 @@
     "failed_to_send_password_reset_email": "Failed to send password reset link",
     "invalid_verification_signature": "Invalid signature, please try again later",
     "verification_signature_expired": "Expired link, please try again later",
-    "invalid_verification_link": "Invalid verification link"
+    "invalid_verification_link": "Invalid verification link",
+    "target_user_data_not_filled": "The user should have his basic data filled in order to be verified"
   },
   "publicVerify": {
     "title": "Verify user information",
@@ -1277,7 +1278,7 @@
   },
   "polls": {
     "title": "Polls",
-    "postedBy": "Posted by {name} on {created_at} to be answered between {start_date} and {end_date}",
+    "postedBy": "between {start_date} and {end_date}",
     "vote": "Vote",
     "maxSelections": "For this poll, you can choose {max, plural,  =1 {one option only} =2 {two options only} other {up to # options}}",
     "voteSuccess": "Your vote got stored successfully",
@@ -1339,7 +1340,9 @@
       "linkedin": "Share on Linkedin",
       "mail": "Send by Email",
       "copy": "Copy URL"
-    }
+    },
+    "publishDate": "Publish date",
+    "votingPeriod": "Voting period"
   },
   "actions": {
     "register": "Register"
