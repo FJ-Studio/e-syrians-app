@@ -1245,7 +1245,8 @@
     "failed_to_send_password_reset_email": "Şîfreyê veguherandinê bi e-nameyê şandin serneketî bû",
     "invalid_verification_signature": "Nasnameya piştrastkirinê ne rast e",
     "verification_signature_expired": "Nasnameya piştrastkirinê qut bû",
-    "invalid_verification_link": "Girêdana piştrastkirinê ne rast e"
+    "invalid_verification_link": "Girêdana piştrastkirinê ne rast e",
+    "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1271,7 +1272,7 @@
   },
   "polls": {
     "title": "Lêkolîn",
-    "postedBy": "Ji hêla {name} ve hat blavkirin di {created_at} de û dikare bersiv bidê di navbera {start_date} û {end_date} de",
+    "postedBy": "di navbera {start_date} û {end_date} de",
     "vote": "Dengdan",
     "maxSelections": "Di vê lêkolînekê de dikarî herî zêde {max, plural, =1 {yek bijare} =2 {du bijare} other {# bijare}} hilbijêrî",
     "voteSuccess": "Dengê te bi serkeftî hat qeydkirin",
@@ -1333,7 +1334,8 @@
       "linkedin": "Parve bikin li ser LinkedIn",
       "mail": "Bi e-nameyê bişînin",
       "copy": "URLê kopî bikin"
-    }
+    },
+    "publishDate": "Roja weşandinê"
   },
   "actions": {
     "register": "Qeydkirin"

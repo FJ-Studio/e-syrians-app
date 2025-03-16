@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import useProvinces from "@/components/hooks/localization/provinces";
 import VerifyButton from "./verify-button";
 import useGender from "@/components/hooks/localization/gender";
-import useEthnicity from "@/components/hooks/localization/ethnicity";
+// import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useCountries from "@/components/hooks/localization/country";
 import UserCardLinksDropdown from "./dropdown-items";
 import { Card, CardBody } from "@heroui/react";
@@ -18,7 +18,7 @@ type Props = {
 const PublicVerify: FC<Props> = ({ user }) => {
   const t = useTranslations("publicVerify");
   const genders = useGender();
-  const ethnicities = useEthnicity();
+  // const ethnicities = useEthnicity();
   const provinces = useProvinces();
   const countries = useCountries();
   return (
@@ -44,7 +44,7 @@ const PublicVerify: FC<Props> = ({ user }) => {
             <UserCardLinksDropdown user={user} />
           </div>
           <div className="flex flex-wrap gap-y-2">
-            <div className="flex flex-col  w-1/2 sm:w-1/4">
+            <div className="flex flex-col  w-1/2 sm:w-1/3">
               <p>{t("birthdate")}</p>
               <p className="text-default-500 text-sm">{user.birth_date}</p>
             </div>
@@ -52,12 +52,12 @@ const PublicVerify: FC<Props> = ({ user }) => {
               <p>{t("gender")}</p>
               <p className="text-default-500 text-sm">{user?.gender ? genders[user.gender] : '-'}</p>
             </div>
-            <div className="flex flex-col  w-1/2 sm:w-1/4">
+            {/* <div className="flex flex-col  w-1/2 sm:w-1/4">
               <p>{t("ethnicity")}</p>
               <p className="text-default-500 text-sm">
                 {user.ethnicity ? ethnicities[user.ethnicity] : "-"}
               </p>
-            </div>
+            </div> */}
             <div className="flex flex-col  w-1/2 sm:w-1/4">
               <p>{t("country")}</p>
               <p className="text-default-500 text-sm">

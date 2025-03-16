@@ -1119,7 +1119,7 @@
         "title": "بلد الإقامة"
       },
       "census": {
-        "title": "التعداد الوطني",
+        "title": "الإحصاء الوطني",
         "fields": {
           "middlename": {
             "label": "الاسم الأوسط"
@@ -1246,7 +1246,8 @@
     "failed_to_send_password_reset_email": "فشل إرسال رابط إعادة تعيين كلمة المرور",
     "invalid_verification_link": "رابط تأكيد البريد الالكتروني لم يعد صالحا",
     "verification_signature_expired": "رابط تأكيد البريد الالكتروني لم يعد صالحا",
-    "invalid_verification_signature": "رابط تأكيد البريد الالكتروني غير صالح"
+    "invalid_verification_signature": "رابط تأكيد البريد الالكتروني غير صالح",
+    "target_user_data_not_filled": "يجب أن يقوم المستخدم بملء بياناته الأساسية حتى يمكن تأكيد حسابه"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
@@ -1272,7 +1273,7 @@
   },
   "polls": {
     "title": "الاستطلاعات",
-    "postedBy": "تم نشره بواسطة {name} يوم {created_at} بحيث يمكن الإجابة بين {start_date} و {end_date}",
+    "postedBy": "بين {start_date} و {end_date}",
     "vote": "تصويت",
     "maxSelections": "في هذا الاستطلاع بإمكانك تحديد {max, plural,  =1 {خيار واحد} =2 {خيارين} other {# خيارات}} كحد أقصى",
     "voteSuccess": "تم تسجيل تصويتك بنجاح",
@@ -1334,7 +1335,9 @@
       "whatsapp": "أرسل عبر واتساب",
       "linkedin": "شارك على LinkedIn",
       "mail": "أرسل عبر الإيميل"
-    }
+    },
+    "publishDate": "تاريخ النشر",
+    "votingPeriod": "فترة التصويت"
   },
   "actions": {
     "register": "تسجيل"

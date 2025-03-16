@@ -326,7 +326,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     - {cannotVoteReasons.unauthorized}
                   </p>
                 )}
-                {!canAnswer[0] && status === "authenticated" && (
+                {canAnswer[0] === false && status === "authenticated" && (
                   <p className="w-full text-start">
                     - {cannotVoteReasons.not_in_audience}
                   </p>
@@ -362,20 +362,34 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     ? t("actions.timeline")
                     : modalSection === "audience"
                     ? t("actions.audience")
-                    : modalSection === 'share' ? t('actions.share') : ''}
+                    : modalSection === "share"
+                    ? t("actions.share")
+                    : ""}
                 </h3>
               </ModalHeader>
               <ModalBody>
                 {modalSection === "author" && (
                   <ShortUserSummary user={localPoll.user} />
                 )}
-                {modalSection === "timeline" &&
-                  t.rich("postedBy", {
-                    name: `${user.name} ${user.surname}`,
-                    created_at: new Date(poll.created_at).toLocaleDateString(),
-                    start_date: new Date(poll.start_date).toLocaleDateString(),
-                    end_date: new Date(poll.end_date).toLocaleDateString(),
-                  })}
+                {modalSection === "timeline" && (
+                  <>
+                    <p>
+                      <span className="font-medium">{t("publishDate")}</span>:{" "}
+                      {new Date(localPoll.created_at).toLocaleDateString()}
+                    </p>
+                    <p>
+                      <span className="font-medium">{t("votingPeriod")}</span>:{" "}
+                      {t.rich("postedBy", {
+                        start_date: new Date(
+                          localPoll.start_date
+                        ).toLocaleDateString(),
+                        end_date: new Date(
+                          localPoll.end_date
+                        ).toLocaleDateString(),
+                      })}
+                    </p>
+                  </>
+                )}
                 {modalSection === "audience" && (
                   <>
                     <p>
@@ -443,20 +457,62 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                   </>
                 )}
                 {modalSection === "share" && (
-                <div className="grid grid-cols-2 gap-4 flex-wrap">
-                  <Button className="bg-blue-600 text-white" as={Link} target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${pollUrl}`}>{t('share.facebook')}</Button>
-                  <Button className="bg-black text-white" as={Link} target="_blank" href={`https://twitter.com/intent/tweet?url=${pollUrl}`}>{t('share.x')}</Button>
-                  <Button className="bg-[#25d366] text-white" as={Link} target="_blank" href={`https://wa.me/?text=${pollUrl}`}>{t('share.whatsapp')}</Button>
-                  <Button className="bg-[#0a66c2] text-white" as={Link} target="_blank" href={`https://www.linkedin.com/sharing/share-offsite/?url=${pollUrl}`}>{t('share.linkedin')}</Button>
-                  <Button className="bg-[#DB4437] text-white" as={Link} href={`mailto:?subject=E-SYRIANS&body=${pollUrl}`}>{t('share.mail')}</Button>
-                  <Snippet variant="flat" classNames={{
-                    pre: `${ibm.className}`
-                  }} hideSymbol codeString={pollUrl} color="warning">{t('share.copy')}</Snippet>
-                </div>
+                  <div className="grid grid-cols-2 gap-4 flex-wrap">
+                    <Button
+                      // className="bg-blue-600 text-white"
+                      as={Link}
+                      target="_blank"
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${pollUrl}`}
+                    >
+                      {t("share.facebook")}
+                    </Button>
+                    <Button
+                      // className="bg-black text-white"
+                      as={Link}
+                      target="_blank"
+                      href={`https://twitter.com/intent/tweet?url=${pollUrl}`}
+                    >
+                      {t("share.x")}
+                    </Button>
+                    <Button
+                      // className="bg-[#25d366] text-white"
+                      as={Link}
+                      target="_blank"
+                      href={`https://wa.me/?text=${pollUrl}`}
+                    >
+                      {t("share.whatsapp")}
+                    </Button>
+                    <Button
+                      // className="bg-[#0a66c2] text-white"
+                      as={Link}
+                      target="_blank"
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${pollUrl}`}
+                    >
+                      {t("share.linkedin")}
+                    </Button>
+                    {/* <Button
+                      // className="bg-[#DB4437] text-white"
+                      as={Link}
+                      href={`mailto:?subject=E-SYRIANS&body=${pollUrl}`}
+                    >
+                      {t("share.mail")}
+                    </Button> */}
+                    <Snippet
+                      className="col-span-2"
+                      classNames={{
+                        pre: `${ibm.className}`,
+                      }}
+                      hideSymbol
+                      codeString={pollUrl}
+                    >
+                      {/* {t("share.copy")} */}
+                      {pollUrl}
+                    </Snippet>
+                  </div>
                 )}
               </ModalBody>
               <ModalFooter className="flex justify-start">
-                <Button onPress={onClose}>{t("close")}</Button>
+                <Button onPress={onClose} color="danger">{t("close")}</Button>
               </ModalFooter>
             </>
           )}

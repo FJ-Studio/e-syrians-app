@@ -1,4 +1,4 @@
-import { MAX_AUDIENCE_AGE } from "./constants/census";
+import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "./constants/census";
 import { ESUser } from "./types/account";
 import { Poll } from "./types/polls";
 
@@ -30,76 +30,57 @@ const isInAudience = (
   }
 
   // temporarily accept all users for testing
-  if (poll.id !== '0') {
-    return [true, ['']];
-  }
+  // if (poll.id !== '0') {
+  //   return [true, ['']];
+  // }
 
   const reasons: Array<string> = [];
-  // country check
-  if ((poll?.audience?.country ?? [])?.length > 0) {
-    if (!user.country) {
-      reasons.push("country");
-    } else {
-      if (poll.audience.country?.includes(user.country) === false) {
-        reasons.push("country");
-      }
-    }
-  }
   // age check
   if (poll?.audience?.age_range) {
-    const age = getAge(user.birth_date);
-    const maxAllowed = parseInt(poll.audience.age_range.max);
-    if (
-      age < parseInt(poll.audience.age_range.min) ||
-      (age > maxAllowed && maxAllowed !== MAX_AUDIENCE_AGE)
-    ) {
-      reasons.push("age");
-    }
-  }
-  // gender check
-  if ((poll?.audience.gender ?? [])?.length > 0) {
-    if (!user.gender) {
-      reasons.push("gender");
-    } else {
-      if (poll.audience.gender?.includes(user.gender) === false) {
-        reasons.push("gender");
+    const pollMinAge = parseInt(poll.audience.age_range.min);
+    const pollMaxAge = parseInt(poll.audience.age_range.max);
+    if (pollMinAge !== MIN_AUDIENCE_AGE || pollMaxAge !== MAX_AUDIENCE_AGE) {
+      // this means that the poll author is targeting a specific age range. Do a check
+      if (!user.birth_date) {
+        // if the user doesn't have a birth date, they are not in the audience
+        reasons.push("age");
+      } else {
+        // if the user has a birth date, calculate their age and check if they are in the audience
+        const age = getAge(user.birth_date);
+        if (age < pollMinAge || age > pollMaxAge) {
+          reasons.push("age");
+        }
       }
     }
   }
-  // religious_affiliation check
-  if ((poll?.audience.religious_affiliation ?? [])?.length > 0) {
-    if (!user.religious_affiliation) {
-      reasons.push("religious_affiliation");
-    } else {
+
+  type AudienceCriteria =
+    | "country"
+    | "gender"
+    | "religious_affiliation"
+    | "hometown"
+    | "ethnicity";
+  (
+    [
+      "country",
+      "gender",
+      "religious_affiliation",
+      "hometown",
+      "ethnicity",
+    ] as AudienceCriteria[]
+  ).forEach((criteria) => {
+    // if this criteria is in the audience and has specific values
+    if (poll?.audience[criteria] && poll?.audience[criteria].length > 0) {
       if (
-        poll.audience.religious_affiliation?.includes(
-          user.religious_affiliation
-        ) === false
+        // if the user doesn't have this criteria or the user's value is not in the allowed values
+        !user[criteria] ||
+        poll.audience[criteria].includes(user[criteria]) === false
       ) {
-        reasons.push("religious_affiliation");
+        reasons.push(criteria);
       }
     }
-  }
-  // hometown check
-  if ((poll?.audience.hometown ?? [])?.length > 0) {
-    if (!user.hometown) {
-      reasons.push("hometown");
-    } else {
-      if (poll.audience.hometown?.includes(user.hometown) === false) {
-        reasons.push("hometown");
-      }
-    }
-  }
-  // ethnicity check
-  if ((poll?.audience.ethnicity ?? [])?.length > 0) {
-    if (!user.ethnicity) {
-      reasons.push("ethnicity");
-    } else {
-      if (poll.audience.ethnicity?.includes(user.ethnicity) === false) {
-        reasons.push("ethnicity");
-      }
-    }
-  }
+  });
+
   return [reasons.length === 0, reasons];
 };
 export default isInAudience;
