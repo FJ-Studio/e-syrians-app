@@ -265,6 +265,9 @@
         "passwordConfirmation": {
           "label": "Piştrastina Şîfreyê",
           "placeholder": "Ji kerema xwe şîfreyê binivîsî dîsa"
+        },
+        "city_inside_syria": {
+          "label": "Where do you live in Syria"
         }
       },
       "actions": {
@@ -945,7 +948,8 @@
             }
           },
           "noVerifiers": "You have received 0 verifications. You can share your profile URL with your network",
-          "copyProfileUrl": "Copy profile URL"
+          "copyProfileUrl": "Copy profile URL",
+          "description": "Your profile URL:"
         },
         "verifications-table": {
           "name": {
@@ -1108,6 +1112,9 @@
           "country": {
             "label": "Welatê radestkirinê",
             "description": "Guhertina welatê destûrê li ser armancên xwe di anketan de dikare tenê hin caran di sala de were guhertin"
+          },
+          "city_inside_syria": {
+            "label": "Where do you live in Syria"
           }
         },
         "save": "Guherandina guhertinên",
@@ -1241,7 +1248,10 @@
     "invalid_options": "Bijarên hilbijartî nederbasdar in",
     "current_password_incorrect": "Şîfreya te çewt e",
     "failed_to_reset_password": "Veguhertina şîfreyê serneketî bû",
-    "failed_to_send_password_reset_email": "Şîfreyê veguherandinê bi e-nameyê şandin serneketî bû"
+    "failed_to_send_password_reset_email": "Şîfreyê veguherandinê bi e-nameyê şandin serneketî bû",
+    "invalid_verification_signature": "Invalid signature, please try again later",
+    "verification_signature_expired": "Expired link, please try again later",
+    "invalid_verification_link": "Invalid verification link"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
