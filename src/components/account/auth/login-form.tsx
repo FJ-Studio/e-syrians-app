@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Input, Checkbox } from "@heroui/react";
+import { Button, Input, Checkbox, Divider } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
@@ -68,12 +68,12 @@ export default function LoginForm() {
               {t("common.continueWithPasskey")}
             </Button> */}
       </div>
-      {/* 
+      
       <div className="flex items-center gap-4 py-2 w-full ">
         <Divider className="flex-1 w-full" />
         <p className="shrink-0 text-tiny text-default-500">{t("common.or")}</p>
         <Divider className="flex-1 w-full" />
-      </div> */}
+      </div>
       <form
         className="flex w-full flex-col gap-3"
         onSubmit={handleSubmit(onSubmit)}
