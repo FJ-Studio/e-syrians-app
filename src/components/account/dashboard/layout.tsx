@@ -8,6 +8,7 @@ import {
   Cog6ToothIcon,
   CurrencyDollarIcon,
   ScaleIcon,
+  WalletIcon,
 } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -56,6 +57,11 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       title: t("nav.donate"),
       link: "/account/donate",
       icon: <CurrencyDollarIcon className="size-6" />,
+    },
+    {
+      title: t("nav.wallet"),
+      link: "/account/wallet",
+      icon: <WalletIcon className="size-6" />,
     },
     {
       title: t("nav.signout"),

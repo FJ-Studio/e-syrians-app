@@ -17,7 +17,8 @@
     "close": "إغلاق",
     "submit": "إرسال البيانات",
     "sending_data": "جار إرسال البيانات ...",
-    "selectImage": "اختر صورة"
+    "selectImage": "اختر صورة",
+    "comingSoon": "نعمل بجد لتتوفر هذه الميزة قريبا"
   },
   "slogan": {
     "text": "لكل إنسان متحضر في هذا العالم وطنان؛ وطنه الأم وسوريا",
@@ -743,7 +744,8 @@
         "settings": "الإعدادات",
         "donate": "تبرع",
         "signout": "تسجيل الخروج",
-        "violations": "الانتهاكات"
+        "violations": "الانتهاكات",
+        "wallet": "المحفظة"
       },
       "polls": {
         "my_polls": {
@@ -1017,6 +1019,14 @@
           "update": "تحديث إعدادات الإشعارات",
           "success": "تم تحديث إعدادات الإشعارات بنجاح"
         }
+      },
+      "wallet": {
+        "description": "نحن ملتزمون بأن نكون مزودًا موثوقًا به لخدمات الاستبيانات على مستوى سوريا. ستكون خدمة الاستبيانات مدفوعة ومتاحة للأفراد والمؤسسات المهتمة بجمع آراء الشارع السوري. سيحصل المشاركون في كل استبيان على تعويض مالي يُحسب بناءً على مستوى مشاركتهم. سيتم الإعلان قريبًا عن طرق الدفع المتوفرة.",
+        "title": "المحفظة"
+      },
+      "violations": {
+        "title": "الانتهاكات",
+        "description": "يمكنك هنا الإبلاغ عن أنواع مختلفة من المحتوى على الإنترنت، سواء كان خطاب كراهية أو أخبارًا كاذبة أو عنفًا أو فسادًا أو غير ذلك. سيتم توثيق جميع البلاغات وأرشفتها."
       }
     },
     "settings": {
@@ -1462,6 +1472,72 @@
     },
     "lastUpdate": "أحدث تحديث"
   },
+  "terms": {
+    "title": "Terms of use",
+    "intro": "By using this service, you agree to the following terms and conditions:",
+    "purpose": {
+      "title": "Purpose",
+      "description": "e-syrians is designed to provide a digital space for discussions, information sharing, and community engagement. Our platform enables users to:",
+      "items": {
+        "item1": {
+          "title": "Participate in polls and discussions on various topics."
+        },
+        "item2": {
+          "title": "Share opinions and engage in constructive debates."
+        },
+        "item3": {
+          "title": "Participate in the national census."
+        }
+      }
+    },
+    "eligibility": {
+      "title": "User Eligibility & Registration",
+      "items": {
+        "item1": {
+          "title": "You must be at least 13 years old to use e-syrians."
+        },
+        "item2": {
+          "title": "You agree to provide accurate information when registering and keep your account secure."
+        }
+      }
+    },
+    "prohibited": {
+      "title": "Prohibited Activities",
+      "description": "You agree not to:",
+      "items": {
+        "item1": {
+          "title": "Use the platform for any illegal activities."
+        },
+        "item2": {
+          "title": "Violate the privacy of other users."
+        },
+        "item3": {
+          "title": "Attempt to disrupt the platform’s functionality through hacking, automated scripts, data scraping or similar actions."
+        }
+      }
+    },
+    "dataUsage": {
+      "title": "Data usage",
+      "description": "Your data is collected and processed in accordance with our <privacy>privacy policy</privacy>"
+    },
+    "liability": {
+      "title": "Liability",
+      "description": "We are not liable for:",
+      "items": {
+        "item1": {
+          "title": "Any damages caused by the use of this platform."
+        },
+        "item2": {
+          "title": "Unauthorized use of the platform due to your negligence."
+        }
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Please feel free to contact the platform admin on info@e-syrians.com."
+    },
+    "lastUpdate": "Latest update"
+  },
   "loginToYourAccount": "تسجيل الدخول إلى حسابك",
   "orRegister": "أو قم بإنشاء حساب",
   "faq": {
@@ -1588,6 +1664,11 @@
         "title": "فيم يتم استخدام التبرعات",
         "description": "تساعد التبرعات في تغطية النفقات الخاصة بالمنصة، تحسين المزايا الحالية، تطوير ميزات جديدة والاستثمار بشكل أكبر فيها. يرجى الملاحظة أن التبرع هو عمل تطوعي بالكامل ولا يترتب عليه أي تغيير في حالة حسابك (أو حسابات أخرى) ولا يمنحك وصولا لأية مزايا مختلفة لها علاقة بالمنصة."
       }
+    }
+  },
+  "violations": {
+    "categories": {
+      "all": "كل التصنيفات"
     }
   }
 }
