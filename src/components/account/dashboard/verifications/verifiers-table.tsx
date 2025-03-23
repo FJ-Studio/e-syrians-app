@@ -137,7 +137,7 @@ const VerifiersTable: FC = () => {
         <h3 className="text-lg text-default-700 font-medium">{t("title")}</h3>
       </CardHeader>
       <CardBody>
-        <div className="mb-6">
+        <div className="mb-6 flex-col items-start flex lg:flex-row lg:justify-start lg:items-center gap-4">
           {t("description")}{" "}
           <Snippet
             hideSymbol

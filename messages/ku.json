@@ -17,7 +17,8 @@
     "close": "Nêzîkî",
     "submit": "Agahdariyên xwe bidin",
     "sending_data": "Agahdariyên dixwazin ...",
-    "selectImage": "Select images"
+    "selectImage": "Select images",
+    "comingSoon": "Em bi dijwarî dixebitin ku di demek nêzîk de vê taybetmendiyê bînin"
   },
   "slogan": {
     "text": "Her mirovê pêşketîyî di vê dinyayê de du welatên xwe hene: welatê xwe û Sûrîye",
@@ -72,6 +73,7 @@
     "all_rights_reserved": "Gelê hemû mafên parastin",
     "initiatives": "Teşebbûs",
     "links": "Lêgerîn",
+    "faq": "FAQ",
     "contact": "Paqij bûn",
     "copy_right": "Hemû maf parastî ne"
   },
@@ -742,7 +744,8 @@
         "settings": "Mîhengên",
         "donate": "Bikarhêner",
         "signout": "Derketin",
-        "violations": "Tewandînan"
+        "violations": "Tewandînan",
+        "wallet": "Qezenc"
       },
       "polls": {
         "my_polls": {
@@ -1016,6 +1019,14 @@
           "update": "Mîhengên ragihandinê nûve bikin",
           "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin"
         }
+      },
+      "wallet": {
+        "description": "Em xwe diparêzin ku bibe çavkaniyekê ya piştrast a xizmetên lêkolînê li hember hemû Sûriyê. Xizmeta lêkolînê dê bi pere be û ji bo kes û rêvebirên ku dixwazin raye gelê Sûrî bistînin, amade be. Her beşdarê ku di lêkolînekê de beş digire, dê li gorî astê beşdariya xwe xelatê qedexe werbigire. Şêwazên dayînê ê di demek nêzîk de were ragihandin.",
+        "title": "Qezenc"
+      },
+      "violations": {
+        "description": "Li vir dikarî li ser cûrekî zêde yên naveroka torê rapor bidî — wek axaftina dijî hev, xeberên fêkî, tundîtî, rüşwet û hwd. Hemû rapor dê bêne tomar kirin û arşîv kirin.",
+        "title": "Binpêkirinên"
       }
     },
     "settings": {
@@ -1340,7 +1351,8 @@
       "mail": "Bi e-nameyê bişînin",
       "copy": "URLê kopî bikin"
     },
-    "publishDate": "Roja weşandinê"
+    "publishDate": "Roja weşandinê",
+    "votingPeriod": "Dema dengdanê"
   },
   "actions": {
     "register": "Qeydkirin"
@@ -1652,6 +1664,11 @@
         "title": "Damanê min di kîjan deran de digihîje?",
         "description": "Damanê piştgirî dikin ji bo parastina platformê, pêşkeftina ewlehiya, û pêşveçûna taybetmendiyên nû. Ji kerema xwe agahdar be ku damanê kirin axa ku destûra xwe ya hesabê an jî gihîştina taybetmendiyên zêdetir yê platformê ne têkildar dike."
       }
+    }
+  },
+  "violations": {
+    "categories": {
+      "all": "Hemû kategorî"
     }
   }
 }
