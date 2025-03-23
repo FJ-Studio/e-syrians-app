@@ -17,7 +17,8 @@
     "close": "Close",
     "submit": "Submit data",
     "sending_data": "Sending data ...",
-    "selectImage": "Select images"
+    "selectImage": "Select images",
+    "comingSoon": "We are working hardly to bring this feature soon"
   },
   "slogan": {
     "text": "Every civilized person in this world has two homelands: their own and Syria",
@@ -743,7 +744,8 @@
         "settings": "Settings",
         "donate": "Donate",
         "signout": "Sign out",
-        "violations": "Violations"
+        "violations": "Violations",
+        "wallet": "Wallet"
       },
       "polls": {
         "my_polls": {
@@ -1017,6 +1019,14 @@
           "update": "Update notifications settings",
           "success": "Notifications settings updated successfully"
         }
+      },
+      "wallet": {
+        "title": "Wallet",
+        "description": "We are committed to becoming a trusted provider of survey services across Syria. This will be a paid service available to individuals and organizations interested in gathering public opinion from the Syrian community. Participants in each survey will receive financial compensation calculated based on their level of participation. Available payment methods will be announced soon."
+      },
+      "violations": {
+        "title": "Violations",
+        "description": "Here, you can report various types of online content — including hate speech, fake news, violence, corruption, and more. All reports will be documented and archived."
       }
     },
     "settings": {
@@ -1654,6 +1664,11 @@
         "title": "Where does my donation go?",
         "description": "Donations help cover platform maintenance, security improvements, and the development of new features. Please note that donation is a voluntary act and does not affect your account status or access to any extra platform features."
       }
+    }
+  },
+  "violations": {
+    "categories": {
+      "all": "All Categories"
     }
   }
 }
