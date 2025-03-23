@@ -1472,71 +1472,72 @@
     },
     "lastUpdate": "أحدث تحديث"
   },
+
   "terms": {
-    "title": "Terms of use",
-    "intro": "By using this service, you agree to the following terms and conditions:",
+    "title": "شروط الاستخدام",
+    "intro": "باستخدامك لهذه الخدمة، فإنك توافق على الشروط والأحكام التالية:",
     "purpose": {
-      "title": "Purpose",
-      "description": "e-syrians is designed to provide a digital space for discussions, information sharing, and community engagement. Our platform enables users to:",
+      "title": "الغرض",
+      "description": "تم تصميم e-syrians لتوفير مساحة رقمية للنقاشات، ومشاركة المعلومات، والتفاعل المجتمعي. تتيح منصتنا للمستخدمين ما يلي:",
       "items": {
         "item1": {
-          "title": "Participate in polls and discussions on various topics."
+          "title": "المشاركة في الاستطلاعات والنقاشات حول مواضيع متنوعة."
         },
         "item2": {
-          "title": "Share opinions and engage in constructive debates."
+          "title": "مشاركة الآراء والمساهمة في نقاشات بنّاءة."
         },
         "item3": {
-          "title": "Participate in the national census."
+          "title": "المشاركة في التعداد السكاني الوطني."
         }
       }
     },
     "eligibility": {
-      "title": "User Eligibility & Registration",
+      "title": "أهلية المستخدم والتسجيل",
       "items": {
         "item1": {
-          "title": "You must be at least 13 years old to use e-syrians."
+          "title": "يجب أن يكون عمرك 13 عامًا على الأقل لاستخدام e-syrians."
         },
         "item2": {
-          "title": "You agree to provide accurate information when registering and keep your account secure."
+          "title": "توافق على تقديم معلومات دقيقة عند التسجيل والحفاظ على أمان حسابك."
         }
       }
     },
     "prohibited": {
-      "title": "Prohibited Activities",
-      "description": "You agree not to:",
+      "title": "الأنشطة المحظورة",
+      "description": "أنت توافق على عدم:",
       "items": {
         "item1": {
-          "title": "Use the platform for any illegal activities."
+          "title": "استخدام المنصة لأي أنشطة غير قانونية."
         },
         "item2": {
-          "title": "Violate the privacy of other users."
+          "title": "انتهاك خصوصية المستخدمين الآخرين."
         },
         "item3": {
-          "title": "Attempt to disrupt the platform’s functionality through hacking, automated scripts, data scraping or similar actions."
+          "title": "محاولة تعطيل وظائف المنصة من خلال القرصنة أو السكربتات الآلية أو استخراج البيانات أو أفعال مشابهة."
         }
       }
     },
     "dataUsage": {
-      "title": "Data usage",
-      "description": "Your data is collected and processed in accordance with our <privacy>privacy policy</privacy>"
+      "title": "استخدام البيانات",
+      "description": "يتم جمع بياناتك ومعالجتها وفقًا لـ <privacy>سياسة الخصوصية</privacy> الخاصة بنا."
     },
     "liability": {
-      "title": "Liability",
-      "description": "We are not liable for:",
+      "title": "المسؤولية",
+      "description": "نحن غير مسؤولين عن:",
       "items": {
         "item1": {
-          "title": "Any damages caused by the use of this platform."
+          "title": "أي أضرار ناجمة عن استخدام هذه المنصة."
         },
         "item2": {
-          "title": "Unauthorized use of the platform due to your negligence."
+          "title": "الاستخدام غير المصرح به للمنصة بسبب إهمالك."
         }
       }
     },
     "contact": {
-      "title": "Contact Us",
-      "description": "Please feel free to contact the platform admin on info@e-syrians.com."
+      "title": "اتصل بنا",
+      "description": "لا تتردد في التواصل مع مسؤول المنصة عبر info@e-syrians.com."
     },
-    "lastUpdate": "Latest update"
+    "lastUpdate": "آخر تحديث"
   },
   "loginToYourAccount": "تسجيل الدخول إلى حسابك",
   "orRegister": "أو قم بإنشاء حساب",
