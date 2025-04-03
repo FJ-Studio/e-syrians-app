@@ -1,6 +1,7 @@
 import recaptchaIsValid from "@/lib/recaptcha";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "../../../../../../../auth";
+import revalidateLocalePath from "@/lib/revalidate";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -30,6 +31,7 @@ export async function POST(req: NextRequest) {
     );
     const response = await request.json();
     if (response.success) {
+      revalidateLocalePath(`/census/v/${session?.user.uuid}`);
       return NextResponse.json({}, { status: 200 });
     } else {
       return NextResponse.json(response, { status: request.status });
