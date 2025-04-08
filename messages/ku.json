@@ -1275,7 +1275,9 @@
     "invalid_verification_signature": "Invalid signature, please try again later",
     "verification_signature_expired": "Expired link, please try again later",
     "invalid_verification_link": "Invalid verification link",
-    "target_user_data_not_filled": "The user should have his basic data filled in order to be verified"
+    "target_user_data_not_filled": "The user should have his basic data filled in order to be verified",
+    "unauthorized": "You are not authorized to perform this action",
+    "unauthenticated": "You are not authenticated, please log in first"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1365,7 +1367,8 @@
       "copy": "Copy URL"
     },
     "publishDate": "Publish date",
-    "votingPeriod": "Voting period"
+    "votingPeriod": "Voting period",
+    "noOptionSelected": "Please select an option"
   },
   "actions": {
     "register": "Qeydkirin"
