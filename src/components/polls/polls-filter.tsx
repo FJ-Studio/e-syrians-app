@@ -64,7 +64,7 @@ const PollsFilter: FC = () => {
                   }}
                 >
                   {Object.keys(times).map((year) => (
-                    <SelectItem key={year} value={year}>
+                    <SelectItem key={year} >
                       {year}
                     </SelectItem>
                   ))}

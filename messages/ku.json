@@ -915,7 +915,20 @@
           "age_range": {
             "label": "Kategorîya Temenê"
           },
-          "success": "Anketê bi serfirazî hate çêkirin"
+          "success": "Anketê bi serfirazî hate çêkirin",
+          "reveal_results": {
+            "label": "Dîtina encamê",
+            "description": "Bijêre li gorî hessasiyeta lêkolîna te û armanca te ya kêmtir kirina xebatên xweşbirinê an manipulasyonê."
+          },
+          "voters_are_visible": {
+            "label": "Dîtina beşdarên dengdanê",
+            "no": {
+              "label": "Taybet"
+            },
+            "yes": {
+              "label": "Giştî, beşdarên lêkolînê xuya ne"
+            }
+          }
         }
       },
       "verifications": {
@@ -1262,7 +1275,9 @@
     "invalid_verification_signature": "Nasnameya piştrastkirinê ne rast e",
     "verification_signature_expired": "Nasnameya piştrastkirinê qut bû",
     "invalid_verification_link": "Girêdana piştrastkirinê ne rast e",
-    "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin"
+    "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin",
+    "unauthorized": "Hûn ne destûr in ku hûn vê çalakiyê bikin",
+    "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1352,7 +1367,8 @@
       "copy": "URLê kopî bikin"
     },
     "publishDate": "Roja weşandinê",
-    "votingPeriod": "Dema dengdanê"
+    "votingPeriod": "Dema dengdanê",
+    "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre"
   },
   "actions": {
     "register": "Qeydkirin"
@@ -1669,6 +1685,20 @@
   "violations": {
     "categories": {
       "all": "Hemû kategorî"
+    }
+  },
+  "poll-results-reveal": {
+    "after-expiration": {
+      "title": "Piştî qedandina demê",
+      "description": "Encamên tenê piştî qediya lêkolînê têne nîşandan, ji bo kêmtir kirina xebatên xwedi-manipulasyonê hatiye saz kirin"
+    },
+    "after-voting": {
+      "title": "Piştî dengdanê dîtî tibe",
+      "description": "Bikarhêner divê berê vê encamê bidin ku encamên bibînin, herî baş e ji bo pirsên hessas yên girêdayî ramanê"
+    },
+    "before-voting": {
+      "title": "Herdem dîtî tibe",
+      "description": "Encamên herdem xuya ne, herî baş e ji bo lêkolînên ne fermî"
     }
   }
 }

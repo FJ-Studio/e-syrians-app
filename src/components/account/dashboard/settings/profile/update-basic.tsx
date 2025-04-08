@@ -202,7 +202,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isDisabled={mode === "view"}
                 >
                   {Object.keys(genderOptions).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key} >
                       {genderOptions[key as keyof typeof genderOptions]}
                     </SelectItem>
                   ))}
@@ -232,7 +232,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isDisabled={mode === "view"}
                 >
                   {Object.keys(ethnicityOptions).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key} >
                       {ethnicityOptions[key as keyof typeof ethnicityOptions]}
                     </SelectItem>
                   ))}
@@ -262,7 +262,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isDisabled={mode === "view"}
                 >
                   {Object.keys(hometownOptions).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key} >
                       {hometownOptions[key as keyof typeof hometownOptions]}
                     </SelectItem>
                   ))}

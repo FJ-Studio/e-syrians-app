@@ -335,7 +335,7 @@ const CensusForm: FC = () => {
                             defaultSelectedKeys={[getValues("gender")]}
                           >
                             {Object.keys(genderOptions).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {
                                   genderOptions[
                                     key as keyof typeof genderOptions
@@ -391,7 +391,7 @@ const CensusForm: FC = () => {
                             description={t("fields.hometown.description")}
                           >
                             {Object.keys(provinces).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {provinces[key as keyof typeof provinces]}
                               </SelectItem>
                             ))}
@@ -412,7 +412,7 @@ const CensusForm: FC = () => {
                             defaultSelectedKeys={[getValues("ethnicity")]}
                           >
                             {Object.keys(ethnicities).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {ethnicities[key as keyof typeof ethnicities]}
                               </SelectItem>
                             ))}
@@ -438,7 +438,7 @@ const CensusForm: FC = () => {
                             )}
                           >
                             {Object.keys(religions).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {religions[key as keyof typeof religions]}
                               </SelectItem>
                             ))}
@@ -465,7 +465,7 @@ const CensusForm: FC = () => {
                             {Object.keys(countries).map((key) => (
                               <SelectItem
                                 key={key}
-                                value={key}
+                                
                                 startContent={
                                   <Avatar
                                     src={`/flags/${key.toLowerCase()}.svg`}
@@ -507,7 +507,7 @@ const CensusForm: FC = () => {
                               }
                             >
                               {Object.keys(provinces).map((key) => (
-                                <SelectItem key={key} value={key}>
+                                <SelectItem key={key} >
                                   {provinces[key as keyof typeof provinces]}
                                 </SelectItem>
                               ))}
@@ -573,7 +573,7 @@ const CensusForm: FC = () => {
                               .map((key) => (
                                 <SelectItem
                                   key={key}
-                                  value={key}
+                                  
                                   startContent={
                                     <Avatar
                                       src={`/flags/${key.toLowerCase()}.svg`}
@@ -649,7 +649,7 @@ const CensusForm: FC = () => {
                             defaultSelectedKeys={[getValues("education_level")]}
                           >
                             {Object.keys(educationLevels).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {
                                   educationLevels[
                                     key as keyof typeof educationLevels
@@ -677,7 +677,7 @@ const CensusForm: FC = () => {
                             }
                           >
                             {Object.keys(spokenLanguages).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {
                                   spokenLanguages[
                                     key as keyof typeof spokenLanguages
@@ -712,7 +712,7 @@ const CensusForm: FC = () => {
                             ]}
                           >
                             {Object.keys(incomeSources).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {
                                   incomeSources[
                                     key as keyof typeof incomeSources
@@ -760,7 +760,7 @@ const CensusForm: FC = () => {
                             defaultSelectedKeys={[getValues("health_status")]}
                           >
                             {Object.keys(HealthStatuses).map((key) => (
-                              <SelectItem key={key} value={key}>
+                              <SelectItem key={key} >
                                 {
                                   HealthStatuses[
                                     key as keyof typeof HealthStatuses
