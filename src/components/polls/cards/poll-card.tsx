@@ -104,6 +104,10 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   }, [selectedOptions]);
 
   const vote = async () => {
+    if (selectedOptions.length === 0) {
+      toast.warning(t("noOptionSelected"));
+      return
+    }
     setLoading(true);
     const token = await generateToken("poll_vote");
     const req = await fetch(`/api/polls/vote`, {
