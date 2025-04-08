@@ -6,6 +6,7 @@ import {
   Button,
   DatePicker,
   Input,
+  NumberInput,
   Select,
   SelectItem,
   Slider,
@@ -26,6 +27,7 @@ import useCountries from "@/components/hooks/localization/country";
 import { toast } from "sonner";
 import { generateToken } from "@/lib/recaptcha";
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
+import usePollResultsReveal from "@/components/hooks/localization/poll-results-reveal";
 
 const CreatePoll: FC = () => {
   const genderOptions = useGender();
@@ -33,6 +35,7 @@ const CreatePoll: FC = () => {
   const religions = useReligiousAffiliation();
   const ethnicities = useEthnicity();
   const countries = useCountries();
+  const revealResultsOptions = usePollResultsReveal();
   const [options, setOptions] = useState<string[]>(["", ""]);
   const session = useSession();
   const t = useTranslations("account.dashboard.polls.create");
@@ -80,7 +83,7 @@ const CreatePoll: FC = () => {
     formData.append("max_selections", data.max_selections);
     formData.append("audience_can_add_options", "0");
     formData.append("reveal_results", data.reveal_results);
-    formData.append("voters_are_visible", "0");
+    formData.append("voters_are_visible", data.voters_are_visible);
     options.forEach((option) => {
       formData.append("options[]", option);
     });
@@ -185,18 +188,19 @@ const CreatePoll: FC = () => {
             rules={{
               required: t("duration.error"),
               pattern: /^[0-9]+$/,
-              min: 1,
-              max: 365,
             }}
             render={({ field, fieldState: { error, invalid } }) => (
-              <Input
+              <NumberInput
                 {...field}
+                value={parseInt(getValues("duration"))}
                 isRequired
                 label={t("duration.label")}
                 description={t("duration.placeholder")}
                 errorMessage={error?.message}
                 isInvalid={invalid}
                 isDisabled={userIsNotVerified}
+                minValue={1}
+                maxValue={366}
               />
             )}
           />
@@ -207,20 +211,20 @@ const CreatePoll: FC = () => {
             control={control}
             rules={{
               required: t("max_selections.error"),
-              pattern: /^[0-9]+$/,
-              min: 1,
-              max: 10,
             }}
             render={({ field, fieldState: { error, invalid } }) => (
-              <Input
+              <NumberInput
                 {...field}
+                value={parseInt(getValues("max_selections"))}
                 isRequired
                 label={t("max_selections.label")}
                 description={t("max_selections.description")}
                 errorMessage={error?.message}
                 isInvalid={invalid}
                 isDisabled={userIsNotVerified}
-                defaultValue="1"
+                defaultValue={1}
+                minValue={1}
+                maxValue={10}
               />
             )}
           />
@@ -240,6 +244,52 @@ const CreatePoll: FC = () => {
                 </SelectItem>
                 <SelectItem key={"1"}>
                   {t("audience_can_add_options.yes.label")}
+                </SelectItem>
+              </Select>
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Controller
+            name="reveal_results"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                label={t("reveal_results.label")}
+                description={t("reveal_results.description")}
+                defaultSelectedKeys={["before-voting"]}
+                isDisabled={userIsNotVerified}
+              >
+                {Object.keys(revealResultsOptions).map((key) => (
+                  <SelectItem key={key} textValue={revealResultsOptions[key as keyof typeof revealResultsOptions]
+                    .title}>
+                    <div className="">
+                      <p>{revealResultsOptions[key as keyof typeof revealResultsOptions]
+                      .title}</p>
+                      <p className="text-tiny text-default-500">{revealResultsOptions[key as keyof typeof revealResultsOptions]
+                      .description}</p>
+                    </div>
+                  </SelectItem>
+                ))}
+              </Select>
+            )}
+          />
+          <Controller
+            name="voters_are_visible"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                label={t("voters_are_visible.label")}
+                isDisabled={userIsNotVerified}
+                defaultSelectedKeys={["0"]}
+              >
+                <SelectItem key={"0"}>
+                  {t("voters_are_visible.no.label")}
+                </SelectItem>
+                <SelectItem key={"1"}>
+                  {t("voters_are_visible.yes.label")}
                 </SelectItem>
               </Select>
             )}
@@ -307,7 +357,7 @@ const CreatePoll: FC = () => {
                 value={field.value || []}
               >
                 {Object.keys(genderOptions).map((key) => (
-                  <SelectItem key={key} value={key}>
+                  <SelectItem key={key}>
                     {genderOptions[key as keyof typeof genderOptions]}
                   </SelectItem>
                 ))}
@@ -328,7 +378,7 @@ const CreatePoll: FC = () => {
                 value={field.value || []}
               >
                 {Object.keys(provinces).map((key) => (
-                  <SelectItem key={key} value={key}>
+                  <SelectItem key={key}>
                     {provinces[key as keyof typeof provinces]}
                   </SelectItem>
                 ))}
@@ -349,7 +399,7 @@ const CreatePoll: FC = () => {
                 value={field.value || []}
               >
                 {Object.keys(ethnicities).map((key) => (
-                  <SelectItem key={key} value={key}>
+                  <SelectItem key={key}>
                     {ethnicities[key as keyof typeof ethnicities]}
                   </SelectItem>
                 ))}
@@ -373,7 +423,6 @@ const CreatePoll: FC = () => {
                 {Object.keys(countries).map((key) => (
                   <SelectItem
                     key={key}
-                    value={key}
                     startContent={
                       <Avatar
                         src={`/flags/${key.toLowerCase()}.svg`}
@@ -402,7 +451,7 @@ const CreatePoll: FC = () => {
                 value={field.value || []}
               >
                 {Object.keys(religions).map((key) => (
-                  <SelectItem key={key} value={key}>
+                  <SelectItem key={key}>
                     {religions[key as keyof typeof religions]}
                   </SelectItem>
                 ))}

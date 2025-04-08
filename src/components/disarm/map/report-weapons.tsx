@@ -226,7 +226,7 @@ const ReportWeapons: FC = () => {
                         )}
                       >
                         {WEAPONS.map((weapon) => (
-                          <SelectItem key={weapon} value={weapon}>
+                          <SelectItem key={weapon} >
                             {t(`disarm.weapons.${weapon}`)}
                           </SelectItem>
                         ))}

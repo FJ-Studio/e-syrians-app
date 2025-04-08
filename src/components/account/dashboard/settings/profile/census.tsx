@@ -199,7 +199,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   selectedKeys={[getValues("religious_affiliation")]}
                 >
                   {Object.keys(religions).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key}>
                       {religions[key as keyof typeof religions]}
                     </SelectItem>
                   ))}
@@ -237,7 +237,6 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                     .map((key) => (
                       <SelectItem
                         key={key}
-                        value={key}
                         startContent={
                           <Avatar
                             src={`/flags/${key.toLowerCase()}.svg`}
@@ -304,7 +303,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   selectedKeys={[getValues("education_level")]}
                 >
                   {Object.keys(educationLevels).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key}>
                       {educationLevels[key as keyof typeof educationLevels]}
                     </SelectItem>
                   ))}
@@ -333,7 +332,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   }}
                 >
                   {Object.keys(spokenLanguages).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key}>
                       {spokenLanguages[key as keyof typeof spokenLanguages]}
                     </SelectItem>
                   ))}
@@ -361,7 +360,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   selectedKeys={[getValues("source_of_income")]}
                 >
                   {Object.keys(incomeSources).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key}>
                       {incomeSources[key as keyof typeof incomeSources]}
                     </SelectItem>
                   ))}
@@ -411,7 +410,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   }}
                 >
                   {Object.keys(HealthStatuses).map((key) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key} >
                       {HealthStatuses[key as keyof typeof HealthStatuses]}
                     </SelectItem>
                   ))}

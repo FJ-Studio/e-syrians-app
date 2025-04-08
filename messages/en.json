@@ -915,7 +915,20 @@
           "age_range": {
             "label": "Age range"
           },
-          "success": "Poll created successfully"
+          "success": "Poll created successfully",
+          "reveal_results": {
+            "label": "Results visibility",
+            "description": "Choose according to your poll's sensitivity and your goal to reduce bias or manipulation."
+          },
+          "voters_are_visible": {
+            "label": "Participants visibility",
+            "no": {
+              "label": "Private"
+            },
+            "yes": {
+              "label": "Public, poll participants are visible"
+            }
+          }
         }
       },
       "verifications": {
@@ -1669,6 +1682,20 @@
   "violations": {
     "categories": {
       "all": "All Categories"
+    }
+  },
+  "poll-results-reveal": {
+    "after-expiration": {
+      "title": "After expiration",
+      "description": "Results only revealed after poll ends, designed to reduce manipulation"
+    },
+    "after-voting": {
+      "title": "Visible after voting",
+      "description": "Users must vote before seeing results, best for opinion-sensitive polls"
+    },
+    "before-voting": {
+      "description": "Results are always visible, best for informal polls",
+      "title": "Always visible"
     }
   }
 }

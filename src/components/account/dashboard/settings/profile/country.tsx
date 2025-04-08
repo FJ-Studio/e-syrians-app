@@ -110,7 +110,6 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                   {Object.keys(countries).map((key) => (
                     <SelectItem
                       key={key}
-                      value={key}
                       startContent={
                         <Avatar
                           src={`/flags/${key.toLowerCase()}.svg`}
@@ -174,7 +173,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                     defaultSelectedKeys={[getValues("city_inside_syria")]}
                   >
                     {Object.keys(provinces).map((key) => (
-                      <SelectItem key={key} value={key}>
+                      <SelectItem key={key} >
                         {provinces[key as keyof typeof provinces]}
                       </SelectItem>
                     ))}
