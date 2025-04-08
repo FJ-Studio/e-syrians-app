@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import useProvinces from "@/components/hooks/localization/provinces";
 import VerifyButton from "./verify-button";
 import useGender from "@/components/hooks/localization/gender";
-// import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useCountries from "@/components/hooks/localization/country";
 import UserCardLinksDropdown from "./dropdown-items";
 import { Card, CardBody } from "@heroui/react";
