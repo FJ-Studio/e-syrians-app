@@ -1275,7 +1275,9 @@
     "invalid_verification_link": "رابط تأكيد البريد الالكتروني لم يعد صالحا",
     "verification_signature_expired": "رابط تأكيد البريد الالكتروني لم يعد صالحا",
     "invalid_verification_signature": "رابط تأكيد البريد الالكتروني غير صالح",
-    "target_user_data_not_filled": "يجب أن يقوم المستخدم بملء بياناته الأساسية حتى يمكن تأكيد حسابه"
+    "target_user_data_not_filled": "يجب أن يقوم المستخدم بملء بياناته الأساسية حتى يمكن تأكيد حسابه",
+    "unauthorized": "غير مسموح لك بالقيام بهذا الإجراء حاليا",
+    "unauthenticated": "يرجى القيام بتسجيل الدخول أولا"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",
@@ -1365,7 +1367,8 @@
       "mail": "أرسل عبر الإيميل"
     },
     "publishDate": "تاريخ النشر",
-    "votingPeriod": "فترة التصويت"
+    "votingPeriod": "فترة التصويت",
+    "noOptionSelected": "الرجاء تحديد الخيار المطلوب التصويت له"
   },
   "actions": {
     "register": "تسجيل"

@@ -1275,7 +1275,9 @@
     "invalid_verification_signature": "Nasnameya piştrastkirinê ne rast e",
     "verification_signature_expired": "Nasnameya piştrastkirinê qut bû",
     "invalid_verification_link": "Girêdana piştrastkirinê ne rast e",
-    "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin"
+    "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin",
+    "unauthorized": "Hûn ne destûr in ku hûn vê çalakiyê bikin",
+    "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1365,7 +1367,8 @@
       "copy": "URLê kopî bikin"
     },
     "publishDate": "Roja weşandinê",
-    "votingPeriod": "Dema dengdanê"
+    "votingPeriod": "Dema dengdanê",
+    "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre"
   },
   "actions": {
     "register": "Qeydkirin"
