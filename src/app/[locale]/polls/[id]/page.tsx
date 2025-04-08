@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: Props) {
     title: poll.data.question,
     openGraph: {
       title: poll.data.question,
+      images: [
+        {
+          url: "https://e-syrians.com/e-syrians.jpeg",
+          width: 1200,
+          height: 630,
+          alt: "E-SYRIANS Network",
+        },
+      ],
     }
   }
 }
