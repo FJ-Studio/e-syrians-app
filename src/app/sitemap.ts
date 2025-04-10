@@ -46,5 +46,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://www.e-syrians.com/auth/signin",
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          ar: "https://www.e-syrians.com/ar/auth/signin",
+          en: "https://www.e-syrians.com/en/auth/signin",
+          ku: "https://www.e-syrians.com/ku/auth/signin",
+        },
+      },
+    },
+    {
+      url: "https://www.e-syrians.com/terms",
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          ar: "https://www.e-syrians.com/ar/terms",
+          en: "https://www.e-syrians.com/en/terms",
+          ku: "https://www.e-syrians.com/ku/terms",
+        },
+      },
+    },
+    {
+      url: "https://www.e-syrians.com/privacy-policy",
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          ar: "https://www.e-syrians.com/ar/privacy-policy",
+          en: "https://www.e-syrians.com/en/privacy-policy",
+          ku: "https://www.e-syrians.com/ku/privacy-policy",
+        },
+      },
+    },
   ];
 }
