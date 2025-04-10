@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
       title: poll.data.question,
       images: [
         {
-          url: "https://e-syrians.com/e-syrians.jpeg",
+          url: "https://www.e-syrians.com/e-syrians-polls-og.png",
           width: 1200,
           height: 630,
           alt: "E-SYRIANS Network",

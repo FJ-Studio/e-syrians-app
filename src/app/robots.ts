@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://e-syrians.com/sitemap.xml",
+    sitemap: "https://www.e-syrians.com/sitemap.xml",
   };
 }

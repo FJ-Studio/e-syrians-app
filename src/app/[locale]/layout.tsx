@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "For every Syrian, creating a better homeland and a brighter future.",
     images: [
       {
-        url: "https://e-syrians.com/e-syrians.jpeg",
+        url: "https://www.e-syrians.com/e-syrians.jpeg",
         width: 1200,
         height: 630,
         alt: "E-SYRIANS Network",
