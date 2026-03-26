@@ -17,11 +17,6 @@
     "axios": "^1.7.9",
     "canvas-confetti": "^1.9.3",
     "framer-motion": "^11.15.0",
-<<<<<<< HEAD
-    "install": "^0.13.0",
-    "mapbox-gl": "^3.9.1",
-=======
->>>>>>> aeef186 (refactor: improve performance and follow solid principales)
     "next": "^15.5.14",
     "next-auth": "^5.0.0-beta.25",
     "next-intl": "^3.26.2",
