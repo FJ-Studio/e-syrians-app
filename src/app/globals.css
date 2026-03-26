@@ -1,6 +1,15 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@plugin '../../hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
 
-@config '../../tailwind.config.ts';
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #393d98;
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+}
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
