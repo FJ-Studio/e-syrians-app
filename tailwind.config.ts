@@ -22,5 +22,6 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [heroui()],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  plugins: [heroui() as any],
 } satisfies Config;
