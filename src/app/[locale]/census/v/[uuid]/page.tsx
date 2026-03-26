@@ -10,7 +10,7 @@ type Props = {
 export default async function VerifyProfilePage({ params }: Props) {
   const { uuid } = await params;
   const user = await getUser(uuid);
-  if (!user.data) {
+  if (!user?.data) {
     notFound();
   }
   return <PublicVerify user={user.data} />;

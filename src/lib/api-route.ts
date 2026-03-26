@@ -107,7 +107,7 @@ export function withFormDataApiRoute(
 
       if (requireRecaptcha) {
         const isHuman = await recaptchaIsValid(
-          body.get("recaptcha_token") as string
+          (body.get("recaptcha_token") as string) ?? ""
         );
         if (!isHuman) {
           return NextResponse.json(
@@ -213,6 +213,55 @@ export function proxyJsonPost(options: ProxyJsonPostOptions) {
       return NextResponse.json(response, { status: request.status });
     },
     { requireAuth: true, requireRecaptcha, errorMessage }
+  );
+}
+
+interface ProxyPublicJsonPostOptions {
+  /** Backend endpoint path, e.g. "/users/forgot-password" */
+  endpoint: string;
+  /** Zod-like schema to validate the incoming body (must have a .safeParse method) */
+  bodySchema?: { safeParse: (data: unknown) => { success: boolean; error?: { issues: Array<{ message: string }> } } };
+  errorMessage?: string;
+}
+
+/**
+ * Creates a POST route for public (unauthenticated) endpoints.
+ * Handles recaptcha, optional body validation, and error wrapping.
+ *
+ * Usage:
+ *   export const POST = proxyPublicJsonPost({ endpoint: "/users/forgot-password", bodySchema: ForgotPasswordSchema });
+ */
+export function proxyPublicJsonPost(options: ProxyPublicJsonPostOptions) {
+  const {
+    endpoint,
+    bodySchema,
+    errorMessage = "An error occurred",
+  } = options;
+
+  return withApiRoute(
+    async ({ body }) => {
+      if (bodySchema) {
+        const result = bodySchema.safeParse(body);
+        if (!result.success) {
+          return NextResponse.json(
+            { success: false, messages: result.error!.issues.map((i) => i.message) },
+            { status: 400 }
+          );
+        }
+      }
+
+      const request = await fetch(`${process.env.API_URL}${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const response = await request.json();
+      return NextResponse.json(response, { status: request.status });
+    },
+    { requireAuth: false, requireRecaptcha: true, errorMessage }
   );
 }
 

@@ -692,7 +692,8 @@
         "donate": "Donate",
         "signout": "Sign out",
         "violations": "Violations",
-        "wallet": "Wallet"
+        "wallet": "Wallet",
+        "more": "More"
       },
       "polls": {
         "my_polls": {
@@ -1647,5 +1648,10 @@
       "description": "Results are always visible, best for informal polls",
       "title": "Always visible"
     }
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "retry": "Try again"
   }
 }

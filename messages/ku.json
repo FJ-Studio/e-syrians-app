@@ -692,7 +692,8 @@
         "donate": "Bikarhêner",
         "signout": "Derketin",
         "violations": "Tewandînan",
-        "wallet": "Qezenc"
+        "wallet": "Qezenc",
+        "more": "Zêdetir"
       },
       "polls": {
         "my_polls": {
@@ -1647,5 +1648,10 @@
       "title": "Herdem dîtî tibe",
       "description": "Encamên herdem xuya ne, herî baş e ji bo lêkolînên ne fermî"
     }
+  },
+  "error": {
+    "title": "Tiştek çewt derket",
+    "description": "Çewtiyeke nediyar çêbû. Ji kerema xwe dîsa biceribîne.",
+    "retry": "Dîsa biceribîne"
   }
 }

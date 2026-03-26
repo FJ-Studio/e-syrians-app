@@ -1,6 +1,7 @@
 import SinglePoll from "@/components/polls/single-poll";
 import { getPoll } from "@/lib/api/requests";
 import { Locale } from "@/lib/types/locale";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ locale: Locale; id: string }>;
@@ -9,6 +10,9 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const poll = await getPoll(id);
+  if (!poll?.data) {
+    return { title: "Poll not found" };
+  }
   return {
     title: poll.data.question,
     openGraph: {
@@ -21,13 +25,15 @@ export async function generateMetadata({ params }: Props) {
           alt: "E-SYRIANS Network",
         },
       ],
-    }
-  }
+    },
+  };
 }
-
 
 export default async function SinglePollsPage({ params }: Props) {
   const { id } = await params;
   const poll = await getPoll(id);
+  if (!poll?.data) {
+    notFound();
+  }
   return <SinglePoll poll={poll.data} />;
 }

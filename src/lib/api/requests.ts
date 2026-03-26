@@ -3,43 +3,66 @@ import { ESUser } from "../types/account";
 import { ApiResponse } from "../types/misc";
 import { Poll } from "../types/polls";
 
-export const getPoll = async (id: string): Promise<ApiResponse<Poll>> => {
+const API_URL = process.env.API_URL;
+
+/**
+ * Wraps a server-side fetch in try-catch with consistent error shape.
+ * Returns null on network/parse errors so callers can handle gracefully.
+ */
+async function safeFetch<T>(
+  url: string,
+  options?: RequestInit
+): Promise<ApiResponse<T> | null> {
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok && res.status >= 500) {
+      console.warn(`Backend error: ${res.status} for ${url}`);
+      return null;
+    }
+    return await res.json();
+  } catch (error) {
+    console.warn(`Fetch failed for ${url}:`, error);
+    return null;
+  }
+}
+
+export const getPoll = async (
+  id: string
+): Promise<ApiResponse<Poll> | null> => {
   const session = await auth();
-  const req = await fetch(`${process.env.API_URL}/polls/${id}`, {
+  return safeFetch<Poll>(`${API_URL}/polls/${id}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
     },
     cache: "no-cache",
   });
-  return req.json();
 };
 
 export const getPolls = async (
   page: string,
   year: string = "",
   month: string = ""
-): Promise<
-  ApiResponse<{ polls: Array<Poll>; current_page: number; last_page: number }>
-> => {
+): Promise<ApiResponse<{
+  polls: Array<Poll>;
+  current_page: number;
+  last_page: number;
+}> | null> => {
   const session = await auth();
-  const req = await fetch(
-    `${process.env.API_URL}/polls?page=${page}&year=${year}&month=${month}`,
-    {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${session?.user.accessToken}`,
-      },
-      cache: "no-cache",
-    }
-  );
-  return req.json();
+  const params = new URLSearchParams({ page, year, month });
+  return safeFetch(`${API_URL}/polls?${params.toString()}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+    cache: "no-cache",
+  });
 };
 
-export const getFirstRegistrants = async (): Promise<
-  ApiResponse<Array<ESUser>>
-> => {
-  const req = await fetch(`${process.env.API_URL}/users/first`, {
+export const getFirstRegistrants = async (): Promise<ApiResponse<
+  Array<ESUser>
+> | null> => {
+  return safeFetch<Array<ESUser>>(`${API_URL}/users/first`, {
     headers: {
       Accept: "application/json",
     },
@@ -48,17 +71,17 @@ export const getFirstRegistrants = async (): Promise<
     },
     cache: "force-cache",
   });
-  return req.json();
 };
 
-export const getUser = async (uuid: string): Promise<ApiResponse<ESUser>> => {
-  const req = await fetch(`${process.env.API_URL}/users/verify/${uuid}`, {
+export const getUser = async (
+  uuid: string
+): Promise<ApiResponse<ESUser> | null> => {
+  return safeFetch<ESUser>(`${API_URL}/users/verify/${uuid}`, {
     next: {
       revalidate: 3600,
     },
     cache: "force-cache",
   });
-  return req.json();
 };
 
 export const verifyEmail = async (
@@ -67,15 +90,26 @@ export const verifyEmail = async (
   hash: string | undefined,
   signature: string | undefined
 ): Promise<boolean> => {
-  const req = await fetch(
-    `${process.env.API_URL}/verify-email?expires=${expires}&hash=${hash}&id=${id}&lang=en&signature=${signature}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }
-  );
-  return req.status === 200;
+  const params = new URLSearchParams();
+  if (expires) params.set("expires", expires);
+  if (hash) params.set("hash", hash);
+  params.set("id", id);
+  params.set("lang", "en");
+  if (signature) params.set("signature", signature);
+
+  try {
+    const res = await fetch(
+      `${API_URL}/verify-email?${params.toString()}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    return res.status === 200;
+  } catch {
+    return false;
+  }
 };

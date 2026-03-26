@@ -8,9 +8,9 @@ export const POST = withApiRoute(
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Accept-Language": req.headers.get("accept-language") as string,
+        "Accept-Language": req.headers.get("accept-language") ?? "en",
         Authorization: `Bearer ${session!.user.accessToken}`,
-        "User-Agent": req.headers.get("user-agent") as string,
+        "User-Agent": req.headers.get("user-agent") ?? "",
       },
       body: JSON.stringify(body),
     });

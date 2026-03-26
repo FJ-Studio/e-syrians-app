@@ -8,5 +8,5 @@ export const GET = withAuthGet(async ({ session }) => {
     },
   });
   const data = await request.json();
-  return NextResponse.json(data, { status: data.status });
+  return NextResponse.json(data, { status: request.status });
 }, "genericError");
