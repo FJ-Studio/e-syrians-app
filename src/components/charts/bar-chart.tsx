@@ -177,7 +177,6 @@ const BarChartCard = forwardRef<
                   animationEasing="ease"
                   barSize={8}
                   dataKey={category}
-                  layout="vertical"
                   fill={
                     index === 0
                       ? cn({
@@ -200,12 +199,13 @@ const BarChartCard = forwardRef<
                       className={cn(
                         `-translate-y-4 text-xs absolute text-nowrap min-w-24 inline-flex items-center left-0 text-left`
                       )}
-                      formatter={(value: string) => {
+                      formatter={(value: unknown) => {
+                        const label = String(value ?? "");
                         return translateLabels
                           ? allTranslations[
-                              value as keyof typeof allTranslations
+                              label as keyof typeof allTranslations
                             ]
-                          : value;
+                          : label;
                       }}
                       style={{
                         textAnchor: "start",
