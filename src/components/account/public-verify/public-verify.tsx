@@ -17,7 +17,6 @@ type Props = {
 const PublicVerify: FC<Props> = ({ user }) => {
   const t = useTranslations("publicVerify");
   const genders = useGender();
-  // const ethnicities = useEthnicity();
   const provinces = useProvinces();
   const countries = useCountries();
   return (

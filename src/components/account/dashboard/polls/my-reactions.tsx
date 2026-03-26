@@ -9,7 +9,6 @@ import {
   Chip,
   Input,
   Pagination,
-  SortDescriptor,
   Spinner,
   Table,
   TableBody,
@@ -20,82 +19,40 @@ import {
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FC, Key, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, Key, useCallback, useMemo } from "react";
+import usePollTable from "@/components/hooks/use-poll-table";
 
 const MyReactions: FC = () => {
   const t = useTranslations("account.dashboard.polls.my_reactions");
-  const [reactions, setReactions] = useState<Array<ReactionLog>>([]);
-  const [pages, setPages] = useState(1);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
   const columns = [
     { name: t("table.question.title"), uid: "question", sortable: true },
     { name: t("table.reaction.title"), uid: "reaction", sortable: false },
     { name: t("table.date.title"), uid: "date", sortable: true },
   ];
 
-  const getMyVoting = async (page: number = 1) => {
-    setLoading(true);
-    try {
-      const req = await fetch(`/api/polls/react?page=${page}`);
-      const data = await req.json();
-      if (req.status === 200) {
-        setReactions(data.data.reactions);
-        setPages(data.data.last_page ?? 1);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getMyVoting(page);
-  }, [page]);
-
-  const [filterValue, setFilterValue] = useState("");
-
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: "created_at",
-    direction: "descending",
+  const {
+    items,
+    loading,
+    page,
+    pages,
+    setPage,
+    filterValue,
+    hasSearchFilter,
+    sortDescriptor,
+    setSortDescriptor,
+    onNextPage,
+    onPreviousPage,
+    onSearchChange,
+    onClear,
+  } = usePollTable<ReactionLog>({
+    fetchUrl: "/api/polls/react",
+    dataExtractor: (data) =>
+      (data as { data: { reactions: ReactionLog[] } }).data.reactions,
+    lastPageExtractor: (data) =>
+      (data as { data: { last_page: number } }).data.last_page ?? 1,
+    searchField: (item) => item.poll?.question ?? "",
+    sortableColumns: ["created_at", "question"],
   });
-
-  const hasSearchFilter = Boolean(filterValue);
-
-  const filteredItems = useMemo(() => {
-    let filtereItems = [...reactions];
-
-    if (hasSearchFilter) {
-      filtereItems = filtereItems.filter((react) =>
-        react.poll.question.toLowerCase().includes(filterValue.toLowerCase())
-      );
-    }
-
-    return filtereItems;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reactions, filterValue]);
-  const items = filteredItems;
-
-  const sortedItems = useMemo(() => {
-    return [...items].sort((a: ReactionLog, b: ReactionLog) => {
-      if (
-        sortDescriptor.column !== "created_at" &&
-        sortDescriptor.column !== "question"
-      ) {
-        return 0;
-      }
-      const first = a[
-        sortDescriptor.column as keyof ReactionLog
-      ] as unknown as number;
-      const second = b[
-        sortDescriptor.column as keyof ReactionLog
-      ] as unknown as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
 
   const renderCell = useCallback(
     (reaction: ReactionLog, columnKey: Key) => {
@@ -142,34 +99,9 @@ const MyReactions: FC = () => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [reactions]
+    [items]
   );
 
-  const onNextPage = useCallback(() => {
-    if (page < pages) {
-      setPage(page + 1);
-    }
-  }, [page, pages]);
-
-  const onPreviousPage = useCallback(() => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  }, [page]);
-
-  const onSearchChange = useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue("");
-    }
-  }, []);
-
-  const onClear = useCallback(() => {
-    setFilterValue("");
-    setPage(1);
-  }, []);
   const topContent = useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
@@ -187,7 +119,7 @@ const MyReactions: FC = () => {
       </div>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterValue, onSearchChange, reactions.length, hasSearchFilter]);
+  }, [filterValue, onSearchChange, items.length, hasSearchFilter]);
 
   const bottomContent = useMemo(() => {
     return (
@@ -259,7 +191,7 @@ const MyReactions: FC = () => {
             emptyContent={
               <div className="flex flex-col items-center gap-3"></div>
             }
-            items={sortedItems}
+            items={items}
             loadingContent={<Spinner />}
             isLoading={loading}
           >

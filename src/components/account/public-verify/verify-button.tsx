@@ -70,8 +70,7 @@ const VerifyButton: FC<Props> = ({ user }) => {
       } else {
         toast.error(serverErrors(data.messages[0]));
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
       toast.error(serverErrors("error"));
     } finally {
       setLoading(false);

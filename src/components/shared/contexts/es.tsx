@@ -60,13 +60,13 @@ const EsyrianProvider = ({ children }: { children: ReactNode }) => {
     fetch("/api/census/stats")
       .then((res) => res.json())
       .then((stats) => {
-        if (!stats.success) {
-          console.error(stats.messages);
-          return;
+        if (stats.success) {
+          setCensusStats(stats.data);
         }
-        setCensusStats(stats.data);
       })
-      .catch((error) => console.error(error));
+      .catch(() => {
+        // Network error — stats update failed silently
+      });
   };
 
   const esyrian: ESContextType = useMemo(

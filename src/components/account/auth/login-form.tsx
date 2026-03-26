@@ -77,14 +77,6 @@ export default function LoginForm() {
       <form
         className="flex w-full flex-col gap-3"
         onSubmit={handleSubmit(onSubmit)}
-        // action={async (formData) => {
-        // await login(formData);
-        // signIn("credentials", {
-        //   email: formData.email,
-        //   password: formData.password,
-        //   redirect: false,
-        // });
-        // }}
       >
         <Controller
           name="email"

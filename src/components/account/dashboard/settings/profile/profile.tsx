@@ -20,11 +20,9 @@ const AccountProfile: FC = () => {
       if (response.ok) {
         const data = await response.json();
         if (data?.success) setProfile(data?.data);
-      } else {
-        console.error("Failed to fetch profile data");
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Error handled by loading/profile state — retry button shown
     } finally {
       setLoading(false);
     }

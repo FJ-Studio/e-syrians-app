@@ -32,10 +32,6 @@
     "name": "e-syrians"
   },
   "initiatives": {
-    "disarmament": {
-      "title": "Nexşandina Silah",
-      "description": "Ciwanên ku silahên wan hene dikarin bi xwe re bibêjin ku wan bi rêveberiya nû ya leşkerî re bi rêve bibin."
-    },
     "security_personnel_verification": {
       "title": "Tespîtkirina Xebatkarên Ewlekariya Giştî",
       "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
@@ -76,55 +72,6 @@
     "faq": "FAQ",
     "contact": "Paqij bûn",
     "copy_right": "Hemû maf parastî ne"
-  },
-  "disarm": {
-    "i_have_weapon": "Çekên min hene ku radest bikim",
-    "info_modal": {
-      "title": "Meriv çawa nexşeyê bikar tîne",
-      "content1": "Naxşê nîşan dide xurtên teslimê ku lîyekên hukûmetê silahên ji şexsên şaristanê qebûl dikin.",
-      "content2": "Bi klik kirina nîşaneyekê, agahdariya xurtê di kûçeya jêr-a çepê ya naxşê de dibe.",
-      "content3": "Heke hertiştekên te heye, ji kerema xwe bi ser pêşûngoka kiryarê li navenda jêrê klik bike û dest pê bike bi têketina agahdariyên xwe."
-    },
-    "report": {
-      "name": {
-        "title": "Navê te",
-        "description": "Ji kerema xwe navê xwe binivîse"
-      },
-      "surname": {
-        "description": "Ji kerema xwe dawînava xwe binivîse",
-        "title": "Dawînava"
-      },
-      "national_id": {
-        "description": "Ji kerema xwe ID-ê Neteweyî binivîse",
-        "title": "ID-ê Neteweyî",
-        "explanation": "Ji bo nepeniya we em nasnameya weya neteweyî şîfre dikin, ji kerema xwe wê bi baldarî binivîsin."
-      },
-      "weapons_list": "Lîsteya Silahên",
-      "notes": {
-        "title": "Notên te",
-        "description": "Ji kerema xwe notên xwe binivîse"
-      },
-      "weapons_list_description": "Ji kerema xwe lîsteya silahên ku hûn dixwazin radest bikin binivîsin",
-      "address": {
-        "title": "Navnîşana te"
-      },
-      "phone": {
-        "title": "Hejmara telefonê"
-      },
-      "received": {
-        "title": "Daneyên bi serfirazî hatin şandin",
-        "description": "Spas ji dil."
-      }
-    },
-    "weapons": {
-      "pistol": "Çek",
-      "shotgun": "Tufek",
-      "sniper": "Snîper",
-      "machine_gun": "Tufekê Makînê",
-      "grenade": "Grenad",
-      "explosive": "Teqîn",
-      "other": "Yên din"
-    }
   },
   "census": {
     "title": "Daneşîna Neteweyî ya Sûriyê",

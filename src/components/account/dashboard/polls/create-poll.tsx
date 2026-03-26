@@ -1,5 +1,4 @@
 "use client";
-// import { CreatePollFields } from "@/lib/types/polls";
 import {
   Alert,
   Avatar,
@@ -97,8 +96,8 @@ const CreatePoll: FC = () => {
       "ethnicity",
     ].forEach((key) => {
       if (data.audience[key as keyof PollAudience]) {
-        const opts = (
-          (data.audience[key as keyof PollAudience] as unknown as string) ?? ""
+        const opts = String(
+          data.audience[key as keyof PollAudience] ?? ""
         ).split(",");
         opts.forEach((opt: string) => {
           formData.append(`${key}[]`, opt);
@@ -117,8 +116,8 @@ const CreatePoll: FC = () => {
       } else {
         // Error
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Network error — form submission failed silently
     }
   };
   return (

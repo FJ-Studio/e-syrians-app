@@ -52,14 +52,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       if (token.esUser) {
         session.user = token.esUser as AdapterUser & ESUser;
+      } else {
+        // Token expired or missing — invalidate session
+        session.user = undefined as unknown as AdapterUser & ESUser;
       }
       return session;
     },
     async jwt({ account, token, user }) {
       const providers = ["google"];
 
-      // Avoid repeated API calls by checking if esUser exists and is still valid
+      // Check if token has expired (7-day maxAge)
       if (token.esUser && (token.esUser as ESUser).accessToken) {
+        const tokenIssuedAt = (token.iat as number) ?? 0;
+        const maxAge = 7 * 24 * 60 * 60; // 7 days in seconds
+        const now = Math.floor(Date.now() / 1000);
+        if (now - tokenIssuedAt > maxAge) {
+          // Token expired — clear session to force re-login
+          return { ...token, esUser: undefined };
+        }
         return token;
       }
 

@@ -172,9 +172,8 @@ const CensusForm: FC = () => {
           extractErrors(json.messages).map((p) => <p key={p}>{p}</p>)
         );
       }
-    } catch (error) {
+    } catch {
       toast.error(t("error"));
-      console.error(error);
     }
   };
 
@@ -525,7 +524,6 @@ const CensusForm: FC = () => {
                       <Controller
                         name="national_id"
                         control={control}
-                        //   rules={{ required: true }}
                         render={({ field, fieldState: { error, invalid } }) => (
                           <Input
                             {...field}
