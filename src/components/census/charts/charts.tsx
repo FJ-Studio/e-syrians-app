@@ -40,7 +40,7 @@ const CensusCharts: FC = () => {
               aria-label="group by"
               classNames={{
                 trigger: "min-w-[100px] min-h-7 h-7",
-                value: "text-tiny !text-default-500",
+                value: "text-tiny text-default-500!",
                 selectorIcon: "text-default-500",
                 popoverContent: "min-w-[120px]",
               }}

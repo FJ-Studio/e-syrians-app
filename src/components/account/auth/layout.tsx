@@ -16,7 +16,7 @@ export default function AuthLayout({ children, ...rest }: Props) {
             preserveAspectRatio="none"
             width="1090"
             height="1090"
-            className="absolute -top-7 left-1/2 -z-10 h-[788px] -translate-x-1/2 stroke-gray-300/30 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:-top-9 sm:h-auto"
+            className="absolute -top-7 left-1/2 -z-10 h-[788px] -translate-x-1/2 stroke-gray-300/30 mask-[linear-gradient(to_bottom,white_20%,transparent_75%)] sm:-top-9 sm:h-auto"
           >
             <circle cx={545} cy={545} r="544.5" />
             <circle cx={545} cy={545} r="480.5" />

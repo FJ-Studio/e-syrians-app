@@ -10,7 +10,7 @@ import Container from "./container";
 const Header: FC = () => {
   const t = useTranslations();
   return (
-    <header className="shadow-sm flex justify-center items-center h-20 bg-white/90 backdrop-blur-sm text-primary font-semibold w-full fixed top-0 left-0 z-50">
+    <header className="shadow-xs flex justify-center items-center h-20 bg-white/90 backdrop-blur-xs text-primary font-semibold w-full fixed top-0 left-0 z-50">
       <Container className="flex justify-between items-center w-full">
         <Link href="/" className="flex items-center gap-3">
           <Image
