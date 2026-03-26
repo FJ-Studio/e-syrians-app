@@ -27,7 +27,7 @@ const ShortUserSummary: FC<Props> = ({ user }) => {
         <p className="text-default-500 text-sm">
           {t("publicVerify.citizenFrom", {
             hometown: user?.hometown ? provinces[user.hometown] : "-",
-            gender: user.gender,
+            gender: user.gender ?? "",
           })}
         </p>
       </CardBody>

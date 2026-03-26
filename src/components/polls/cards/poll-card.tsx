@@ -399,7 +399,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     <p>
                       <span className="font-medium">{t("ageRange")}</span>:{" "}
                       {t("ageRangeBetween", {
-                        min: localPoll.audience.age_range?.min,
+                        min: localPoll.audience.age_range?.min ?? "",
                         max:
                           localPoll.audience.age_range?.max ===
                           String(MAX_AUDIENCE_AGE)

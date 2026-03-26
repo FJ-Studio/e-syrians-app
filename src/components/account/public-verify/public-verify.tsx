@@ -34,7 +34,7 @@ const PublicVerify: FC<Props> = ({ user }) => {
                 <p className="text-default-500 text-sm">
                   {t("citizenFrom", {
                     hometown: user?.hometown ? provinces[user?.hometown] : "-",
-                    gender: user.gender,
+                    gender: user.gender ?? "",
                   })}
                 </p>
               </div>
