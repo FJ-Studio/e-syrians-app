@@ -24,6 +24,7 @@ export type PollOption = {
   option_text: string;
   votes_count?: number;
   percentage?: number;
+  voters_preview?: PollVoter[];
 };
 export type Poll = {
   id: string;
@@ -62,6 +63,23 @@ export interface CreatePollFields {
   reveal_results: PollReveal;
   voters_are_visible: "0" | "1";
 }
+
+export type PollVoter = {
+  id: string;
+  name: string;
+  surname: string;
+  avatar?: string;
+};
+
+export type PollVotersResponse = {
+  success: boolean;
+  data: {
+    data: PollVoter[];
+    current_page: number;
+    last_page: number;
+    total: number;
+  };
+};
 
 export type ReactionLog = {
   id: string;

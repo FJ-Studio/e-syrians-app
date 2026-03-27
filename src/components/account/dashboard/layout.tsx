@@ -7,6 +7,7 @@ import {
   Cog6ToothIcon,
   CurrencyDollarIcon,
   EllipsisHorizontalIcon,
+  HomeIcon,
   ScaleIcon,
   WalletIcon,
 } from "@heroicons/react/24/outline";
@@ -35,7 +36,7 @@ type NavLink = {
 };
 
 /** Keys shown as individual tabs in the mobile bottom nav */
-const PRIMARY_KEYS = ["settings", "polls", "violations", "verifications"];
+const PRIMARY_KEYS = ["overview", "polls", "settings", "verifications"];
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const { push } = useRouter();
@@ -46,10 +47,10 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const links: NavLink[] = useMemo(
     () => [
       {
-        key: "settings",
-        title: t("nav.settings"),
+        key: "overview",
+        title: t("nav.overview"),
         link: "/account",
-        icon: <Cog6ToothIcon className="size-5" />,
+        icon: <HomeIcon className="size-5" />,
       },
       {
         key: "polls",
@@ -58,16 +59,22 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         icon: <ChartBarIcon className="size-5" />,
       },
       {
-        key: "violations",
-        title: t("nav.violations"),
-        link: "/account/violations",
-        icon: <ScaleIcon className="size-5" />,
+        key: "settings",
+        title: t("nav.settings"),
+        link: "/account/settings",
+        icon: <Cog6ToothIcon className="size-5" />,
       },
       {
         key: "verifications",
         title: t("nav.verifications"),
         link: "/account/verifications",
         icon: <ClipboardDocumentCheckIcon className="size-5" />,
+      },
+      {
+        key: "violations",
+        title: t("nav.violations"),
+        link: "/account/violations",
+        icon: <ScaleIcon className="size-5" />,
       },
       {
         key: "donate",
@@ -95,6 +102,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const isActive = useCallback(
     (href: string | undefined) => {
       if (!href) return false;
+      // Exact match for the overview page
       if (href === "/account") {
         return pathname.endsWith("/account");
       }
@@ -125,7 +133,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         <Container className="flex items-center text-white justify-between">
           <span>
             {t("welcome", {
-              name: session.data?.user.name ?? "",
+              name: session.data?.user?.name ?? "",
             })}
           </span>
           <button

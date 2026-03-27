@@ -693,7 +693,8 @@
         "signout": "Derketin",
         "violations": "Tewandînan",
         "wallet": "Qezenc",
-        "more": "Zêdetir"
+        "more": "Zêdetir",
+        "overview": "پوختە"
       },
       "polls": {
         "my_polls": {
@@ -988,6 +989,39 @@
       "violations": {
         "description": "Li vir dikarî li ser cûrekî zêde yên naveroka torê rapor bidî — wek axaftina dijî hev, xeberên fêkî, tundîtî, rüşwet û hwd. Hemû rapor dê bêne tomar kirin û arşîv kirin.",
         "title": "Binpêkirinên"
+      },
+      "overview": {
+        "error": "بارکردنی پوختە سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە.",
+        "retry": "دووبارە هەوڵ بدەوە",
+        "verified": "پشتڕاستکراوەتەوە",
+        "unverified": "پشتڕاست نەکراوەتەوە",
+        "profileComplete": "تەواوبوونی پڕۆفایل",
+        "editProfile": "دەستکاری پڕۆفایل",
+        "stats": {
+          "polls": "ڕاپرسییە دروستکراوەکان",
+          "verificationsReceived": "پشتڕاستکردنەوەی وەرگیراو",
+          "verificationsGiven": "پشتڕاستکردنەوەی پێشکەشکراو",
+          "createPoll": "دروستکردنی ڕاپرسی"
+        },
+        "recentPolls": {
+          "title": "دوایین ڕاپرسییەکان",
+          "viewAll": "بینینی هەموو",
+          "empty": "تا ئێستا هیچ ڕاپرسییەکت دروست نەکردووە.",
+          "create": "یەکەم ڕاپرسییەکەت دروست بکە",
+          "active": "چالاک",
+          "inactive": "ناچالاک",
+          "votes": "دەنگ"
+        },
+        "comingSoon": {
+          "violations": {
+            "title": "سەرپێچییەکان",
+            "description": "ڕاپۆرتی قسەی ڕقانە، هەواڵی درۆ، توندوتیژی، گەندەڵی و هتد بکە."
+          },
+          "wallet": {
+            "title": "جزدان",
+            "description": "پاداشت بەدەست بهێنە بۆ بەشداریکردن لە ڕاپرسییەکان. ڕێگاکانی پارەدان بەم زووانە."
+          }
+        }
       }
     },
     "settings": {
@@ -1048,7 +1082,8 @@
         "upload": "Wêneya nû hilbijêre",
         "save": "Wêneya barkirin",
         "update": {
-          "success": "Wêneyê guhertibû!"
+          "success": "Wêneyê guhertibû!",
+          "error": "نوێکردنەوەی وێنەی پڕۆفایل سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە."
         },
         "avatar": {
           "title": "Wêneyê xweşî",
@@ -1316,7 +1351,13 @@
     },
     "publishDate": "Roja weşandinê",
     "votingPeriod": "Dema dengdanê",
-    "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre"
+    "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre",
+    "voters": {
+      "title": "دەنگدەران",
+      "total": "{count} دەنگدەر",
+      "noVoters": "هێشتا دەنگدەرێک نییە",
+      "loadMore": "زیاتر ببینە"
+    }
   },
   "actions": {
     "register": "Qeydkirin"

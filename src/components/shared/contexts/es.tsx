@@ -40,7 +40,7 @@ const EsyrianProvider = ({ children }: { children: ReactNode }) => {
   // Update user language preference on language change
   useEffect(() => {
     const updateLanguage = async () => {
-      if (status !== 'authenticated' || locale === session?.user.language) {
+      if (status !== 'authenticated' || locale === session?.user?.language) {
         return;
       }
       fetch(`/api/account/profile/update/language`, {

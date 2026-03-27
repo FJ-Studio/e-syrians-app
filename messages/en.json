@@ -693,7 +693,8 @@
         "signout": "Sign out",
         "violations": "Violations",
         "wallet": "Wallet",
-        "more": "More"
+        "more": "More",
+        "overview": "Overview"
       },
       "polls": {
         "my_polls": {
@@ -988,6 +989,39 @@
       "violations": {
         "title": "Violations",
         "description": "Here, you can report various types of online content — including hate speech, fake news, violence, corruption, and more. All reports will be documented and archived."
+      },
+      "overview": {
+        "error": "Failed to load overview. Please try again.",
+        "retry": "Try again",
+        "verified": "Verified",
+        "unverified": "Not verified",
+        "profileComplete": "Profile complete",
+        "editProfile": "Edit profile",
+        "stats": {
+          "polls": "Polls created",
+          "verificationsReceived": "Verifications received",
+          "verificationsGiven": "Verifications given",
+          "createPoll": "Create poll"
+        },
+        "recentPolls": {
+          "title": "Recent polls",
+          "viewAll": "View all",
+          "empty": "You haven't created any polls yet.",
+          "create": "Create your first poll",
+          "active": "Active",
+          "inactive": "Inactive",
+          "votes": "votes"
+        },
+        "comingSoon": {
+          "violations": {
+            "title": "Violations",
+            "description": "Report hate speech, fake news, violence, corruption, and more."
+          },
+          "wallet": {
+            "title": "Wallet",
+            "description": "Earn rewards for participating in surveys. Payment methods coming soon."
+          }
+        }
       }
     },
     "settings": {
@@ -1048,7 +1082,8 @@
         "upload": "Select new avatar",
         "save": "Upload avatar",
         "update": {
-          "success": "Avatar updated successfully"
+          "success": "Avatar updated successfully",
+          "error": "Failed to update avatar. Please try again."
         },
         "avatar": {
           "title": "My avatar",
@@ -1316,7 +1351,13 @@
     },
     "publishDate": "Publish date",
     "votingPeriod": "Voting period",
-    "noOptionSelected": "Please select an option"
+    "noOptionSelected": "Please select an option",
+    "voters": {
+      "title": "Voters",
+      "total": "{count} voters",
+      "noVoters": "No voters yet",
+      "loadMore": "Load more"
+    }
   },
   "actions": {
     "register": "Register"

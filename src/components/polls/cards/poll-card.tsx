@@ -35,6 +35,7 @@ import {
 import { useTranslations } from "next-intl";
 import { FC, useEffect, useMemo, useState } from "react";
 import PollOptionRow from "./poll-option-row";
+import VotersModal from "./voters-modal";
 import Link from "next/link";
 import isInAudience from "@/lib/in-audience";
 import { useSession } from "next-auth/react";
@@ -64,9 +65,16 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   const countries = useCountries();
   const religinousAffiliations = useReligiousAffiliation();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isVotersOpen,
+    onOpen: onVotersOpen,
+    onOpenChange: onVotersOpenChange,
+  } = useDisclosure();
   const [modalSection, setModalSection] = useState<
     "author" | "timeline" | "audience" | "share" | null
   >(null);
+  const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
+  const [selectedOptionText, setSelectedOptionText] = useState("");
 
   const pollUrl = useMemo(() => {
     return `${process.env.NEXT_PUBLIC_DOMAIN_URL}/polls/${poll.id}`;
@@ -275,6 +283,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 option={option.option_text}
                 value={option.id}
                 percentage={option.percentage ?? 0}
+                votersPreview={option.voters_preview}
+                votersAreVisible={localPoll.voters_are_visible}
+                votesCount={option.votes_count}
+                onShowVoters={() => {
+                  setSelectedOptionId(option.id);
+                  setSelectedOptionText(option.option_text);
+                  onVotersOpen();
+                }}
               />
             ))}
           </CheckboxGroup>
@@ -522,6 +538,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           )}
         </ModalContent>
       </Modal>
+      {localPoll.voters_are_visible && (
+        <VotersModal
+          isOpen={isVotersOpen}
+          onOpenChange={onVotersOpenChange}
+          optionId={selectedOptionId}
+          optionText={selectedOptionText}
+        />
+      )}
     </>
   );
 };

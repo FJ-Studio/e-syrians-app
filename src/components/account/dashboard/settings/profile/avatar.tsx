@@ -20,13 +20,14 @@ import { toast } from "sonner";
 
 type UpdateAvatarProps = {
   user?: ESUser;
+  onUpdated?: () => void;
 };
 
 interface AvatarFields {
   avatar: File;
 }
 
-const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
+const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
   const [preview, setPreview] = useState<string | null>(null);
   const locale = useLocale();
   const t = useTranslations("account.settings.avatar");
@@ -67,17 +68,31 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user }) => {
       },
       body: formData,
     });
-    if (response.status === 200) {
+
+    if (response.ok) {
       toast.success(t("update.success"));
+      // Refetch profile so the new server-side avatar URL propagates everywhere
+      onUpdated?.();
     } else {
-      const result = await response.json();
-      toast.error(
-        result.messages?.[0]
-          ? serverError(result.messages[0])
-          : extractErrors(result.messages)[0]
-      );
+      try {
+        const result = await response.json();
+        const messages = result.messages;
+        if (messages) {
+          // messages can be string[] or Record<string, string[]>
+          const errors = Array.isArray(messages)
+            ? messages
+            : extractErrors(messages);
+          const translated = errors.map((msg: string) => serverError(msg));
+          toast.error(translated.join(". "));
+        } else {
+          toast.error(t("update.error"));
+        }
+      } catch {
+        toast.error(t("update.error"));
+      }
     }
   };
+
   return (
     <Card>
       <CardHeader className="flex flex-col gap-2 items-start">

@@ -1,5 +1,5 @@
-import VerificationsTabs from "@/components/account/dashboard/verifications/verifications-tabs";
+import VerifiersTable from "@/components/account/dashboard/verifications/verifiers-table";
 
-export default async function AccountVerificationsPage() {
-  return <VerificationsTabs />;
+export default function VerificationsReceivedPage() {
+  return <VerifiersTable />;
 }

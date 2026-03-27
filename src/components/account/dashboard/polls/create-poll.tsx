@@ -72,7 +72,7 @@ const CreatePoll: FC = () => {
     setOptions((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const userIsNotVerified = !session.data?.user.verified_at;
+  const userIsNotVerified = !session.data?.user?.verified_at;
 
   const store = async (data: CreatePollFields) => {
     const formData = new FormData();
@@ -191,7 +191,7 @@ const CreatePoll: FC = () => {
             render={({ field, fieldState: { error, invalid } }) => (
               <NumberInput
                 {...field}
-                value={parseInt(getValues("duration"))}
+                value={parseInt(field.value) || undefined}
                 isRequired
                 label={t("duration.label")}
                 description={t("duration.placeholder")}
@@ -214,7 +214,7 @@ const CreatePoll: FC = () => {
             render={({ field, fieldState: { error, invalid } }) => (
               <NumberInput
                 {...field}
-                value={parseInt(getValues("max_selections"))}
+                value={parseInt(field.value) || 1}
                 isRequired
                 label={t("max_selections.label")}
                 description={t("max_selections.description")}
