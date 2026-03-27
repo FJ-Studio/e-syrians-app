@@ -1,7 +1,5 @@
 import { Locale } from '@/lib/types/locale';
 import { ImageResponse } from 'next/og'
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 
 type Props = {
   params: Promise<{ locale: Locale; id: string }>;
@@ -20,7 +18,6 @@ export const contentType = 'image/png'
 
 // Image generation
 export default async function Image({ params }: Props) {
-  // Font loading, process.cwd() is Next.js project directory
   const { id } = await params;
 
   let question = 'E-SYRIANS Poll';
@@ -36,13 +33,15 @@ export default async function Image({ params }: Props) {
   } catch {
     // Fall back to default question text
   }
-  const ibmSemiBold = await readFile(
-    join(process.cwd(), 'src/lib/fonts/IBMPlexSansArabic-SemiBold.ttf')
-  )
- 
+
+  // Fetch font from Google Fonts CDN (reliable in serverless environments)
+  const fontResponse = await fetch(
+    'https://fonts.gstatic.com/s/ibmplexsansarabic/v12/Qw3MZRtWPQCuHme67tEYUIx3Kh0PHR9N6YNe3PC5eMlAMg0.ttf'
+  );
+  const ibmSemiBold = await fontResponse.arrayBuffer();
+
   return new ImageResponse(
     (
-      // ImageResponse JSX element
       <div
         style={{
           fontSize: 48,
@@ -52,15 +51,14 @@ export default async function Image({ params }: Props) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: '40px',
+          textAlign: 'center',
         }}
       >
         {question}
       </div>
     ),
-    // ImageResponse options
     {
-      // For convenience, we can re-use the exported opengraph-image
-      // size config to also set the ImageResponse's width and height.
       ...size,
       fonts: [
         {
