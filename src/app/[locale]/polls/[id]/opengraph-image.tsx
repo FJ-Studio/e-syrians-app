@@ -7,6 +7,8 @@ import { join } from 'node:path'
 type Props = {
   params: Promise<{ locale: Locale; id: string }>;
 };
+
+export const runtime = 'nodejs'
  
 // Image metadata
 export const alt = 'E-SYRIANS Poll'
@@ -22,6 +24,7 @@ export default async function Image({ params }: Props) {
   // Font loading, process.cwd() is Next.js project directory
   const { id } = await params;
   const poll = await getPoll(id);
+  const question = poll?.data?.question || 'E-SYRIANS Poll'
   const ibmSemiBold = await readFile(
     join(process.cwd(), 'src/lib/fonts/IBMPlexSansArabic-SemiBold.ttf')
   )
@@ -40,7 +43,7 @@ export default async function Image({ params }: Props) {
           justifyContent: 'center',
         }}
       >
-        {poll.data.question}
+        {question}
       </div>
     ),
     // ImageResponse options
