@@ -9,7 +9,7 @@ type Props = {
 };
  
 // Image metadata
-export const alt = 'About Acme'
+export const alt = 'E-SYRIANS Poll'
 export const size = {
   width: 1200,
   height: 630,
@@ -21,9 +21,9 @@ export const contentType = 'image/png'
 export default async function Image({ params }: Props) {
   // Font loading, process.cwd() is Next.js project directory
   const { id } = await params;
-    const poll = await getPoll(id);
-  const interSemiBold = await readFile(
-    join(process.cwd(), 'assets/Inter-SemiBold.ttf')
+  const poll = await getPoll(id);
+  const ibmSemiBold = await readFile(
+    join(process.cwd(), 'src/lib/fonts/IBMPlexSansArabic-SemiBold.ttf')
   )
  
   return new ImageResponse(
@@ -50,10 +50,10 @@ export default async function Image({ params }: Props) {
       ...size,
       fonts: [
         {
-          name: 'Inter',
-          data: interSemiBold,
+          name: 'IBM Plex Sans Arabic',
+          data: ibmSemiBold,
           style: 'normal',
-          weight: 400,
+          weight: 600,
         },
       ],
     }
