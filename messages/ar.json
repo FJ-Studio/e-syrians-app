@@ -877,7 +877,8 @@
             "yes": {
               "label": "نعم، يمكن رؤية قائمة بالمشاركين في الاستطلاع"
             }
-          }
+          },
+          "error": "حدث خطأ أثناء إنشاء الاستطلاع"
         }
       },
       "verifications": {
@@ -1260,7 +1261,26 @@
     "invalid_verification_signature": "رابط تأكيد البريد الالكتروني غير صالح",
     "target_user_data_not_filled": "يجب أن يقوم المستخدم بملء بياناته الأساسية حتى يمكن تأكيد حسابه",
     "unauthorized": "غير مسموح لك بالقيام بهذا الإجراء حاليا",
-    "unauthenticated": "يرجى القيام بتسجيل الدخول أولا"
+    "unauthenticated": "يرجى القيام بتسجيل الدخول أولا",
+    "logged_out": "تم تسجيل الخروج بنجاح",
+    "user_already_verified": "بريدك الإلكتروني مُفعّل بالفعل",
+    "verification_email_sent": "تم إرسال رسالة التحقق",
+    "email_verified": "تم التحقق من البريد الإلكتروني بنجاح",
+    "password_updated": "تم تحديث كلمة المرور بنجاح",
+    "reset_link_sent": "تم إرسال رابط إعادة تعيين كلمة المرور",
+    "password_reset_successfully": "تم إعادة تعيين كلمة المرور بنجاح",
+    "email_changed": "تم تغيير البريد الإلكتروني بنجاح",
+    "notifications_changed": "تم تحديث تفضيلات الإشعارات",
+    "language_updated": "تم تحديث اللغة بنجاح",
+    "invalid_file_type": "نوع الملف غير صالح",
+    "user_not_found": "المستخدم غير موجود",
+    "target_user_not_found": "المستخدم المستهدف غير موجود",
+    "user_is_banned": "هذا المستخدم محظور",
+    "you_have_made_a_lot_of_verifications": "لقد أجريت عدداً كبيراً من التحققات",
+    "not_implemented": "هذه الميزة غير متاحة بعد",
+    "recaptcha_token_required": "التحقق الأمني مطلوب",
+    "recaptcha_verification_failed": "فشل التحقق الأمني، يرجى المحاولة مرة أخرى",
+    "voters_not_visible": "المصوتون غير مرئيين لهذا الاستطلاع"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",

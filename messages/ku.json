@@ -877,7 +877,8 @@
             "yes": {
               "label": "Giştî, beşdarên lêkolînê xuya ne"
             }
-          }
+          },
+          "error": "هەڵەیەک ڕوویدا لە کاتی دروستکردنی ڕاپرسییەکە"
         }
       },
       "verifications": {
@@ -1260,7 +1261,26 @@
     "invalid_verification_link": "Girêdana piştrastkirinê ne rast e",
     "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin",
     "unauthorized": "Hûn ne destûr in ku hûn vê çalakiyê bikin",
-    "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê"
+    "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê",
+    "logged_out": "بە سەرکەوتوویی چوویتە دەرەوە",
+    "user_already_verified": "ئیمەیڵەکەت پێشتر پشتڕاست کراوەتەوە",
+    "verification_email_sent": "نامەی پشتڕاستکردنەوە نێردرا",
+    "email_verified": "ئیمەیڵ بە سەرکەوتوویی پشتڕاست کرایەوە",
+    "password_updated": "وشەی نهێنی بە سەرکەوتوویی نوێ کرایەوە",
+    "reset_link_sent": "لینکی ڕیسێتکردنی وشەی نهێنی نێردرا",
+    "password_reset_successfully": "وشەی نهێنی بە سەرکەوتوویی ڕیسێت کرا",
+    "email_changed": "ئیمەیڵ بە سەرکەوتوویی گۆڕدرا",
+    "notifications_changed": "ڕێکخستنەکانی ئاگادارکردنەوە نوێ کرایەوە",
+    "language_updated": "زمان بە سەرکەوتوویی نوێ کرایەوە",
+    "invalid_file_type": "جۆری فایل نادروستە",
+    "user_not_found": "بەکارهێنەر نەدۆزرایەوە",
+    "target_user_not_found": "بەکارهێنەری ئامانج نەدۆزرایەوە",
+    "user_is_banned": "ئەم بەکارهێنەرە قەدەغەکراوە",
+    "you_have_made_a_lot_of_verifications": "ژمارەیەکی زۆر پشتڕاستکردنەوەت ئەنجام داوە",
+    "not_implemented": "ئەم تایبەتمەندییە هێشتا بەردەست نییە",
+    "recaptcha_token_required": "پشتڕاستکردنەوەی ئەمنی پێویستە",
+    "recaptcha_verification_failed": "پشتڕاستکردنەوەی ئەمنی سەرنەکەوت، تکایە دووبارە هەوڵبدەرەوە",
+    "voters_not_visible": "دەنگدەران بۆ ئەم ڕاپرسییە نابینرێن"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",

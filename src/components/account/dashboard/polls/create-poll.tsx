@@ -13,6 +13,7 @@ import {
 } from "@heroui/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { parseDate } from "@internationalized/date";
@@ -37,6 +38,7 @@ const CreatePoll: FC = () => {
   const revealResultsOptions = usePollResultsReveal();
   const [options, setOptions] = useState<string[]>(["", ""]);
   const session = useSession();
+  const router = useRouter();
   const t = useTranslations("account.dashboard.polls.create");
   const {
     handleSubmit,
@@ -113,8 +115,15 @@ const CreatePoll: FC = () => {
       });
       if (response.ok) {
         toast.success(t("success"));
+        router.push("/account/polls");
       } else {
-        // Error
+        const errorData = await response.json();
+        const msg = errorData?.messages?.[0];
+        if (msg) {
+          toast.error(msg);
+        } else {
+          toast.error(t("error"));
+        }
       }
     } catch {
       // Network error — form submission failed silently

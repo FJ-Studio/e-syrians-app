@@ -877,7 +877,8 @@
             "yes": {
               "label": "Public, poll participants are visible"
             }
-          }
+          },
+          "error": "An error occurred while creating the poll"
         }
       },
       "verifications": {
@@ -1260,7 +1261,26 @@
     "invalid_verification_link": "Invalid verification link",
     "target_user_data_not_filled": "The user should have his basic data filled in order to be verified",
     "unauthorized": "You are not authorized to perform this action",
-    "unauthenticated": "You are not authenticated, please log in first"
+    "unauthenticated": "You are not authenticated, please log in first",
+    "logged_out": "Logged out successfully",
+    "user_already_verified": "Your email is already verified",
+    "verification_email_sent": "Verification email sent",
+    "email_verified": "Email verified successfully",
+    "password_updated": "Password updated successfully",
+    "reset_link_sent": "Password reset link sent to your email",
+    "password_reset_successfully": "Password reset successfully",
+    "email_changed": "Email changed successfully",
+    "notifications_changed": "Notification preferences updated",
+    "language_updated": "Language updated successfully",
+    "invalid_file_type": "Invalid file type",
+    "user_not_found": "User not found",
+    "target_user_not_found": "Target user not found",
+    "user_is_banned": "This user is banned",
+    "you_have_made_a_lot_of_verifications": "You have made too many verifications",
+    "not_implemented": "This feature is not implemented yet",
+    "recaptcha_token_required": "Security verification is required",
+    "recaptcha_verification_failed": "Security verification failed, please try again",
+    "voters_not_visible": "Voters are not visible for this poll"
   },
   "publicVerify": {
     "title": "Verify user information",

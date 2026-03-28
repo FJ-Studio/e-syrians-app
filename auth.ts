@@ -71,7 +71,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return session;
     },
-    async jwt({ account, token, user }) {
+    async jwt({ account, token, user, trigger, session: updateData }) {
+      // Handle session update from client (e.g. after verification status changes)
+      if (trigger === "update" && updateData && token.esUser) {
+        token.esUser = { ...(token.esUser as ESUser), ...updateData };
+        return token;
+      }
+
       const providers = ["google"];
 
       // Check if token has expired (7-day maxAge)

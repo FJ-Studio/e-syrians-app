@@ -23,6 +23,7 @@ import {
   WalletIcon,
 } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 
@@ -56,6 +57,7 @@ interface OverviewData {
 
 const AccountOverview: FC = () => {
   const t = useTranslations("account.dashboard.overview");
+  const { data: session, update: updateSession } = useSession();
   const [data, setData] = useState<OverviewData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -65,7 +67,21 @@ const AccountOverview: FC = () => {
         const res = await fetch("/api/account/overview");
         if (res.ok) {
           const json = await res.json();
-          if (json?.success) setData(json.data);
+          if (json?.success) {
+            setData(json.data);
+
+            // Sync session if verification status changed on the backend
+            const backendProfile = json.data?.profile;
+            if (backendProfile && session?.user) {
+              const sessionVerified = session.user.verified_at;
+              const backendVerified = backendProfile.verified_at;
+              if (sessionVerified !== backendVerified) {
+                await updateSession({
+                  verified_at: backendVerified,
+                });
+              }
+            }
+          }
         }
       } catch {
         // Handled via empty state
@@ -74,6 +90,7 @@ const AccountOverview: FC = () => {
       }
     };
     load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
