@@ -64,8 +64,8 @@ const UpdateEmailAddress: FC = () => {
       } else {
         toast.error(serverErrors(extractErrors(response.messages)[0]));
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Network error — handled by loading state
     } finally {
       setLoading(false);
     }

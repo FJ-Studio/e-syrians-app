@@ -1,6 +1,4 @@
 "use client";
-// import getYearsMonths from "@/lib/years-months";
-// import { useTranslations } from "next-intl";
 import { FC, PropsWithChildren } from "react";
 import Container from "../shared/container";
 import { useEsyrian } from "../shared/contexts/es";

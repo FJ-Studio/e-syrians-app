@@ -1,48 +1,11 @@
-import recaptchaIsValid from "@/lib/recaptcha";
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "../../../../../../../auth";
+import { NextResponse } from "next/server";
+import { proxyJsonPost } from "@/lib/api-route";
 import revalidateLocalePath from "@/lib/revalidate";
 
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const isHuman = await recaptchaIsValid(body.recaptcha_token);
-  if (!isHuman) {
-    return NextResponse.json(
-      { messages: ["invalid_recaptcha_token"], success: false },
-      { status: 400 }
-    );
-  }
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  try {
-    const request = await fetch(
-      `${process.env.API_URL}/users/update/basic-info`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "applicat ion/json",
-          Authorization: `Bearer ${session?.user.accessToken}`,
-        },
-        body: JSON.stringify(body),
-      }
-    );
-    const response = await request.json();
-    if (response.success) {
-      revalidateLocalePath(`/census/v/${session?.user.uuid}`);
-      return NextResponse.json({}, { status: 200 });
-    } else {
-      return NextResponse.json(response, { status: request.status });
-    }
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      {
-        messages: ["An error occurred"],
-      },
-      { status: 500 }
-    );
-  }
-}
+export const POST = proxyJsonPost({
+  endpoint: "/users/update/basic-info",
+  onSuccess: async (_response, session) => {
+    revalidateLocalePath(`/census/v/${session.user.uuid}`);
+    return NextResponse.json({}, { status: 200 });
+  },
+});

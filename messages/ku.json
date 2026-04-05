@@ -32,10 +32,6 @@
     "name": "e-syrians"
   },
   "initiatives": {
-    "disarmament": {
-      "title": "Nexşandina Silah",
-      "description": "Ciwanên ku silahên wan hene dikarin bi xwe re bibêjin ku wan bi rêveberiya nû ya leşkerî re bi rêve bibin."
-    },
     "security_personnel_verification": {
       "title": "Tespîtkirina Xebatkarên Ewlekariya Giştî",
       "description": "Her endamê hêzên ewlekariya giştî dê card ID bi koda QR bistîne ji bo pîşesazî û hêzên xwe nîşan bide hewceyî."
@@ -76,55 +72,6 @@
     "faq": "FAQ",
     "contact": "Paqij bûn",
     "copy_right": "Hemû maf parastî ne"
-  },
-  "disarm": {
-    "i_have_weapon": "Çekên min hene ku radest bikim",
-    "info_modal": {
-      "title": "Meriv çawa nexşeyê bikar tîne",
-      "content1": "Naxşê nîşan dide xurtên teslimê ku lîyekên hukûmetê silahên ji şexsên şaristanê qebûl dikin.",
-      "content2": "Bi klik kirina nîşaneyekê, agahdariya xurtê di kûçeya jêr-a çepê ya naxşê de dibe.",
-      "content3": "Heke hertiştekên te heye, ji kerema xwe bi ser pêşûngoka kiryarê li navenda jêrê klik bike û dest pê bike bi têketina agahdariyên xwe."
-    },
-    "report": {
-      "name": {
-        "title": "Navê te",
-        "description": "Ji kerema xwe navê xwe binivîse"
-      },
-      "surname": {
-        "description": "Ji kerema xwe dawînava xwe binivîse",
-        "title": "Dawînava"
-      },
-      "national_id": {
-        "description": "Ji kerema xwe ID-ê Neteweyî binivîse",
-        "title": "ID-ê Neteweyî",
-        "explanation": "Ji bo nepeniya we em nasnameya weya neteweyî şîfre dikin, ji kerema xwe wê bi baldarî binivîsin."
-      },
-      "weapons_list": "Lîsteya Silahên",
-      "notes": {
-        "title": "Notên te",
-        "description": "Ji kerema xwe notên xwe binivîse"
-      },
-      "weapons_list_description": "Ji kerema xwe lîsteya silahên ku hûn dixwazin radest bikin binivîsin",
-      "address": {
-        "title": "Navnîşana te"
-      },
-      "phone": {
-        "title": "Hejmara telefonê"
-      },
-      "received": {
-        "title": "Daneyên bi serfirazî hatin şandin",
-        "description": "Spas ji dil."
-      }
-    },
-    "weapons": {
-      "pistol": "Çek",
-      "shotgun": "Tufek",
-      "sniper": "Snîper",
-      "machine_gun": "Tufekê Makînê",
-      "grenade": "Grenad",
-      "explosive": "Teqîn",
-      "other": "Yên din"
-    }
   },
   "census": {
     "title": "Daneşîna Neteweyî ya Sûriyê",
@@ -745,7 +692,9 @@
         "donate": "Bikarhêner",
         "signout": "Derketin",
         "violations": "Tewandînan",
-        "wallet": "Qezenc"
+        "wallet": "Qezenc",
+        "more": "Zêdetir",
+        "overview": "پوختە"
       },
       "polls": {
         "my_polls": {
@@ -928,7 +877,8 @@
             "yes": {
               "label": "Giştî, beşdarên lêkolînê xuya ne"
             }
-          }
+          },
+          "error": "هەڵەیەک ڕوویدا لە کاتی دروستکردنی ڕاپرسییەکە"
         }
       },
       "verifications": {
@@ -1040,6 +990,39 @@
       "violations": {
         "description": "Li vir dikarî li ser cûrekî zêde yên naveroka torê rapor bidî — wek axaftina dijî hev, xeberên fêkî, tundîtî, rüşwet û hwd. Hemû rapor dê bêne tomar kirin û arşîv kirin.",
         "title": "Binpêkirinên"
+      },
+      "overview": {
+        "error": "بارکردنی پوختە سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە.",
+        "retry": "دووبارە هەوڵ بدەوە",
+        "verified": "پشتڕاستکراوەتەوە",
+        "unverified": "پشتڕاست نەکراوەتەوە",
+        "profileComplete": "تەواوبوونی پڕۆفایل",
+        "editProfile": "دەستکاری پڕۆفایل",
+        "stats": {
+          "polls": "ڕاپرسییە دروستکراوەکان",
+          "verificationsReceived": "پشتڕاستکردنەوەی وەرگیراو",
+          "verificationsGiven": "پشتڕاستکردنەوەی پێشکەشکراو",
+          "createPoll": "دروستکردنی ڕاپرسی"
+        },
+        "recentPolls": {
+          "title": "دوایین ڕاپرسییەکان",
+          "viewAll": "بینینی هەموو",
+          "empty": "تا ئێستا هیچ ڕاپرسییەکت دروست نەکردووە.",
+          "create": "یەکەم ڕاپرسییەکەت دروست بکە",
+          "active": "چالاک",
+          "inactive": "ناچالاک",
+          "votes": "دەنگ"
+        },
+        "comingSoon": {
+          "violations": {
+            "title": "سەرپێچییەکان",
+            "description": "ڕاپۆرتی قسەی ڕقانە، هەواڵی درۆ، توندوتیژی، گەندەڵی و هتد بکە."
+          },
+          "wallet": {
+            "title": "جزدان",
+            "description": "پاداشت بەدەست بهێنە بۆ بەشداریکردن لە ڕاپرسییەکان. ڕێگاکانی پارەدان بەم زووانە."
+          }
+        }
       }
     },
     "settings": {
@@ -1100,7 +1083,8 @@
         "upload": "Wêneya nû hilbijêre",
         "save": "Wêneya barkirin",
         "update": {
-          "success": "Wêneyê guhertibû!"
+          "success": "Wêneyê guhertibû!",
+          "error": "نوێکردنەوەی وێنەی پڕۆفایل سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە."
         },
         "avatar": {
           "title": "Wêneyê xweşî",
@@ -1277,7 +1261,39 @@
     "invalid_verification_link": "Girêdana piştrastkirinê ne rast e",
     "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin",
     "unauthorized": "Hûn ne destûr in ku hûn vê çalakiyê bikin",
-    "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê"
+    "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê",
+    "logged_out": "بە سەرکەوتوویی چوویتە دەرەوە",
+    "user_already_verified": "ئیمەیڵەکەت پێشتر پشتڕاست کراوەتەوە",
+    "verification_email_sent": "نامەی پشتڕاستکردنەوە نێردرا",
+    "email_verified": "ئیمەیڵ بە سەرکەوتوویی پشتڕاست کرایەوە",
+    "password_updated": "وشەی نهێنی بە سەرکەوتوویی نوێ کرایەوە",
+    "reset_link_sent": "لینکی ڕیسێتکردنی وشەی نهێنی نێردرا",
+    "password_reset_successfully": "وشەی نهێنی بە سەرکەوتوویی ڕیسێت کرا",
+    "email_changed": "ئیمەیڵ بە سەرکەوتوویی گۆڕدرا",
+    "notifications_changed": "ڕێکخستنەکانی ئاگادارکردنەوە نوێ کرایەوە",
+    "language_updated": "زمان بە سەرکەوتوویی نوێ کرایەوە",
+    "invalid_file_type": "جۆری فایل نادروستە",
+    "user_not_found": "بەکارهێنەر نەدۆزرایەوە",
+    "target_user_not_found": "بەکارهێنەری ئامانج نەدۆزرایەوە",
+    "user_is_banned": "ئەم بەکارهێنەرە قەدەغەکراوە",
+    "you_have_made_a_lot_of_verifications": "ژمارەیەکی زۆر پشتڕاستکردنەوەت ئەنجام داوە",
+    "not_implemented": "ئەم تایبەتمەندییە هێشتا بەردەست نییە",
+    "recaptcha_token_required": "پشتڕاستکردنەوەی ئەمنی پێویستە",
+    "recaptcha_verification_failed": "پشتڕاستکردنەوەی ئەمنی سەرنەکەوت، تکایە دووبارە هەوڵبدەرەوە",
+    "voters_not_visible": "دەنگدەران بۆ ئەم ڕاپرسییە نابینرێن",
+    "audience_birth_date_missing": "Dîroka jidayikbûna te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_age_min": "Temenê te ji bo vê lêkolînê piçûk e",
+    "audience_age_max": "Temenê te ji bo vê lêkolînê mezin e",
+    "audience_country_missing": "Welatê te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_country": "Welatê te bi temaşevanên lêkolînê re nagunce",
+    "audience_religious_affiliation_missing": "Girêdana olî ya te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_religious_affiliation": "Girêdana olî ya te bi temaşevanên lêkolînê re nagunce",
+    "audience_hometown_missing": "Bajarê te yê eslî ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_hometown": "Bajarê te yê eslî bi temaşevanên lêkolînê re nagunce",
+    "audience_gender_missing": "Zayenda te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_gender": "Zayenda te bi temaşevanên lêkolînê re nagunce",
+    "audience_ethnicity_missing": "Etnîsîteya te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_ethnicity": "Etnîsîteya te bi temaşevanên lêkolînê re nagunce"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1368,7 +1384,13 @@
     },
     "publishDate": "Roja weşandinê",
     "votingPeriod": "Dema dengdanê",
-    "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre"
+    "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre",
+    "voters": {
+      "title": "دەنگدەران",
+      "total": "{count} دەنگدەر",
+      "noVoters": "هێشتا دەنگدەرێک نییە",
+      "loadMore": "زیاتر ببینە"
+    }
   },
   "actions": {
     "register": "Qeydkirin"
@@ -1700,5 +1722,10 @@
       "title": "Herdem dîtî tibe",
       "description": "Encamên herdem xuya ne, herî baş e ji bo lêkolînên ne fermî"
     }
+  },
+  "error": {
+    "title": "Tiştek çewt derket",
+    "description": "Çewtiyeke nediyar çêbû. Ji kerema xwe dîsa biceribîne.",
+    "retry": "Dîsa biceribîne"
   }
 }

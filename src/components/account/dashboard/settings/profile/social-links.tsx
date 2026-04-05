@@ -97,8 +97,8 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
             : extractErrors(result.messages)[0]
         );
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Network error — handled by UI state
     }
   };
   return (

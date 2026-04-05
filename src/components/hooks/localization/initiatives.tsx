@@ -13,11 +13,6 @@ const useInitiatives = () => {
       description: t("polls.description"),
       link: "/polls",
     },
-    // {
-    //   title: t("violations.title"),
-    //   description: t("violations.description"),
-    //   link: "/violations",
-    // },
   ];
 };
 

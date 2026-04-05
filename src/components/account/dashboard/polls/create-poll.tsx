@@ -1,5 +1,4 @@
 "use client";
-// import { CreatePollFields } from "@/lib/types/polls";
 import {
   Alert,
   Avatar,
@@ -14,6 +13,7 @@ import {
 } from "@heroui/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { parseDate } from "@internationalized/date";
@@ -38,6 +38,7 @@ const CreatePoll: FC = () => {
   const revealResultsOptions = usePollResultsReveal();
   const [options, setOptions] = useState<string[]>(["", ""]);
   const session = useSession();
+  const router = useRouter();
   const t = useTranslations("account.dashboard.polls.create");
   const {
     handleSubmit,
@@ -73,7 +74,7 @@ const CreatePoll: FC = () => {
     setOptions((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const userIsNotVerified = !session.data?.user.verified_at;
+  const userIsNotVerified = !session.data?.user?.verified_at;
 
   const store = async (data: CreatePollFields) => {
     const formData = new FormData();
@@ -97,8 +98,8 @@ const CreatePoll: FC = () => {
       "ethnicity",
     ].forEach((key) => {
       if (data.audience[key as keyof PollAudience]) {
-        const opts = (
-          (data.audience[key as keyof PollAudience] as unknown as string) ?? ""
+        const opts = String(
+          data.audience[key as keyof PollAudience] ?? ""
         ).split(",");
         opts.forEach((opt: string) => {
           formData.append(`${key}[]`, opt);
@@ -114,11 +115,18 @@ const CreatePoll: FC = () => {
       });
       if (response.ok) {
         toast.success(t("success"));
+        router.push("/account/polls");
       } else {
-        // Error
+        const errorData = await response.json();
+        const msg = errorData?.messages?.[0];
+        if (msg) {
+          toast.error(msg);
+        } else {
+          toast.error(t("error"));
+        }
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Network error — form submission failed silently
     }
   };
   return (
@@ -192,7 +200,7 @@ const CreatePoll: FC = () => {
             render={({ field, fieldState: { error, invalid } }) => (
               <NumberInput
                 {...field}
-                value={parseInt(getValues("duration"))}
+                value={parseInt(field.value) || undefined}
                 isRequired
                 label={t("duration.label")}
                 description={t("duration.placeholder")}
@@ -215,7 +223,7 @@ const CreatePoll: FC = () => {
             render={({ field, fieldState: { error, invalid } }) => (
               <NumberInput
                 {...field}
-                value={parseInt(getValues("max_selections"))}
+                value={parseInt(field.value) || 1}
                 isRequired
                 label={t("max_selections.label")}
                 description={t("max_selections.description")}

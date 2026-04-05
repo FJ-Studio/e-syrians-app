@@ -17,7 +17,6 @@ type Props = {
 const PublicVerify: FC<Props> = ({ user }) => {
   const t = useTranslations("publicVerify");
   const genders = useGender();
-  // const ethnicities = useEthnicity();
   const provinces = useProvinces();
   const countries = useCountries();
   return (
@@ -35,7 +34,7 @@ const PublicVerify: FC<Props> = ({ user }) => {
                 <p className="text-default-500 text-sm">
                   {t("citizenFrom", {
                     hometown: user?.hometown ? provinces[user?.hometown] : "-",
-                    gender: user.gender,
+                    gender: user.gender ?? "",
                   })}
                 </p>
               </div>

@@ -40,7 +40,7 @@ const EsyrianProvider = ({ children }: { children: ReactNode }) => {
   // Update user language preference on language change
   useEffect(() => {
     const updateLanguage = async () => {
-      if (status !== 'authenticated' || locale === session?.user.language) {
+      if (status !== 'authenticated' || locale === session?.user?.language) {
         return;
       }
       fetch(`/api/account/profile/update/language`, {
@@ -60,13 +60,13 @@ const EsyrianProvider = ({ children }: { children: ReactNode }) => {
     fetch("/api/census/stats")
       .then((res) => res.json())
       .then((stats) => {
-        if (!stats.success) {
-          console.error(stats.messages);
-          return;
+        if (stats.success) {
+          setCensusStats(stats.data);
         }
-        setCensusStats(stats.data);
       })
-      .catch((error) => console.error(error));
+      .catch(() => {
+        // Network error — stats update failed silently
+      });
   };
 
   const esyrian: ESContextType = useMemo(

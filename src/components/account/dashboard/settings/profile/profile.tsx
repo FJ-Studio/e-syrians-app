@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import UpdateBasicProfileData from "./update-basic";
 import AccountSocialLinks from "./social-links";
 import AccountAvatar from "./avatar";
@@ -13,26 +13,24 @@ const AccountProfile: FC = () => {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState();
 
-  const getProfile = async () => {
+  const getProfile = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch("/api/account/profile/general");
       if (response.ok) {
         const data = await response.json();
         if (data?.success) setProfile(data?.data);
-      } else {
-        console.error("Failed to fetch profile data");
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Error handled by loading/profile state — retry button shown
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   return (
     <>
@@ -48,7 +46,7 @@ const AccountProfile: FC = () => {
           <UpdateBasicProfileData user={profile} />
         </div>
         <div className="space-y-4">
-          <AccountAvatar user={profile} />
+          <AccountAvatar user={profile} onUpdated={getProfile} />
           <AccountAddress user={profile} />
           <AccountCensus user={profile} />
         </div>

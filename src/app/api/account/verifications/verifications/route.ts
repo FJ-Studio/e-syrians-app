@@ -1,23 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "../../../../../../auth";
+import { proxyGet } from "@/lib/api-route";
 
-export async function GET(req: NextRequest) {
-const session = await auth()
-    if (!session) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    const page = req.nextUrl.searchParams.get("page");
-    try {
-        const request = await fetch(`${process.env.API_URL}/users/my-verifications?page=${page}`, {
-            headers: {
-                accept: "application/json",
-                authorization: `Bearer ${session?.user.accessToken}`,
-            },
-        });
-        const response = await request.json();
-        return NextResponse.json(response, { status: request.status });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ success: false }, { status: 500 });
-    }
-}
+export const GET = proxyGet({
+  endpoint: "/users/my-verifications",
+  forwardParams: ["page"],
+});

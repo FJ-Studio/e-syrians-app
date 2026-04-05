@@ -10,6 +10,8 @@ declare module "next-auth" {
   }
 }
 
+const MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Google,
@@ -24,23 +26,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Missing credentials.");
         }
-        const req = await fetch(`${process.env.API_URL}/users/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            identifier: credentials.email,
-            password: credentials.password,
-          }),
-        });
+
+        let req: Response;
+        try {
+          req = await fetch(`${process.env.API_URL}/users/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              identifier: credentials.email,
+              password: credentials.password,
+            }),
+          });
+        } catch {
+          throw new Error("Unable to reach authentication server.");
+        }
+
+        if (!req.ok) {
+          return null;
+        }
+
         const data = await req.json();
         if (data?.data?.token) {
           return { ...data.data.user, accessToken: data.data.token };
-        } else {
-          return null;
         }
+
+        return null;
       },
     }),
   ],
@@ -52,14 +65,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       if (token.esUser) {
         session.user = token.esUser as AdapterUser & ESUser;
+      } else {
+        // Token expired or missing — invalidate session
+        session.user = undefined as unknown as AdapterUser & ESUser;
       }
       return session;
     },
-    async jwt({ account, token, user }) {
+    async jwt({ account, token, user, trigger, session: updateData }) {
+      // Handle session update from client (e.g. after verification status changes)
+      if (trigger === "update" && updateData && token.esUser) {
+        token.esUser = { ...(token.esUser as ESUser), ...updateData };
+        return token;
+      }
+
       const providers = ["google"];
 
-      // Avoid repeated API calls by checking if esUser exists and is still valid
+      // Check if token has expired (7-day maxAge)
       if (token.esUser && (token.esUser as ESUser).accessToken) {
+        const tokenIssuedAt = (token.iat as number) ?? 0;
+        const now = Math.floor(Date.now() / 1000);
+        if (now - tokenIssuedAt > MAX_AGE) {
+          // Token expired — clear session to force re-login
+          return { ...token, esUser: undefined };
+        }
         return token;
       }
 
@@ -81,24 +109,33 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           );
 
+          if (!response.ok) {
+            // Social login failed — force re-authentication
+            return { ...token, esUser: undefined };
+          }
+
           const data = await response.json();
           if (data?.data?.token) {
-            token.esUser = { ...data.data.user, accessToken: data.data.token };
+            token.esUser = {
+              ...data.data.user,
+              accessToken: data.data.token,
+            };
           } else {
-            return null;
+            return { ...token, esUser: undefined };
           }
         } else if (account?.provider === "credentials" && user) {
           // Local login request
           token.esUser = user;
         }
-      } catch (error) {
-        console.error("JWT callback error:", error);
+      } catch {
+        // Network or parsing error — clear session to force re-login
+        return { ...token, esUser: undefined };
       }
 
       return token;
     },
   },
   jwt: {
-    maxAge: 7 * 24 * 60 * 60,
+    maxAge: MAX_AGE,
   },
 });

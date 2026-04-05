@@ -1,5 +1,5 @@
-import AccountSettings from "@/components/account/dashboard/settings/account-settings";
+import AccountOverview from "@/components/account/dashboard/overview/overview";
 
 export default function AccountPage() {
-  return <AccountSettings />;
+  return <AccountOverview />;
 }

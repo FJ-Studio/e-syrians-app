@@ -1,5 +1,5 @@
-import Polls from "@/components/account/dashboard/polls/polls";
+import MyPolls from "@/components/account/dashboard/polls/my-polls";
 
-export default async function AccountPollsPage() {
-  return <Polls />;
+export default function AccountPollsPage() {
+  return <MyPolls />;
 }

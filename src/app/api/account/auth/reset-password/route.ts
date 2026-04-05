@@ -1,20 +1,14 @@
-import recaptchaIsValid from "@/lib/recaptcha";
-import { NextRequest, NextResponse } from "next/server";
+import { proxyPublicJsonPost } from "@/lib/api-route";
+import { z } from "zod";
 
-export async function POST(req: NextRequest) {
-    const body = await req.json();
-    const isHuman = await recaptchaIsValid(body.recaptcha_token);
-    if (!isHuman) {
-        return NextResponse.json({ messages: ["invalid_recaptcha_token"], success: false }, { status: 400 });
-    }
-    const request = await fetch(`${process.env.API_URL}/users/reset-password`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
-        body: JSON.stringify(body),
-    });
-    const response = await request.json();
-    return NextResponse.json(response, { status: request.status });
-}
+const ResetPasswordSchema = z.object({
+  token: z.string().min(1, "Token is required"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  password_confirmation: z.string().min(1, "Password confirmation is required"),
+});
+
+export const POST = proxyPublicJsonPost({
+  endpoint: "/users/reset-password",
+  bodySchema: ResetPasswordSchema,
+});

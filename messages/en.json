@@ -32,10 +32,6 @@
     "name": "e-syrians"
   },
   "initiatives": {
-    "disarmament": {
-      "title": "Disarmament",
-      "description": "Civilians in possession of a weapon will be able to voluntarily report it in order to formally hand it over to the new military establishment."
-    },
     "security_personnel_verification": {
       "title": "Security Personnel Verification",
       "description": "Each member of the public security forces will receive an ID with a QR code to prove his identity and powers when needed."
@@ -76,55 +72,6 @@
     "faq": "FAQ",
     "contact": "Contact us",
     "copy_right": "All rights reserved"
-  },
-  "disarm": {
-    "i_have_weapon": "I have weapons to handover",
-    "info_modal": {
-      "title": "How to use the map",
-      "content1": "The map shows delivery points where government representatives are accepting weapons from citizens.",
-      "content2": "Clicking on a marker will display the point information in the bottom-left corner of the map.",
-      "content3": "If you have any weapon(s), please click the action button at the bottom center and begin entering your information."
-    },
-    "report": {
-      "name": {
-        "title": "Name",
-        "description": "please enter your name"
-      },
-      "surname": {
-        "description": "Please enter your surname",
-        "title": "Surname"
-      },
-      "national_id": {
-        "description": "Please enter your national id",
-        "title": "National ID",
-        "explanation": "For your privacy we encrypt your national id, please type it carefully."
-      },
-      "weapons_list": "Weapons List",
-      "notes": {
-        "title": "Additional notes",
-        "description": "Please add any further details here"
-      },
-      "weapons_list_description": "Please select all types you have",
-      "address": {
-        "title": "Address"
-      },
-      "phone": {
-        "title": "Phone number"
-      },
-      "received": {
-        "title": "Done!",
-        "description": "Thank you from the heart"
-      }
-    },
-    "weapons": {
-      "pistol": "Pistol",
-      "shotgun": "Shotgun",
-      "sniper": "Sniper",
-      "machine_gun": "Machine gun",
-      "grenade": "Gerenade",
-      "explosive": "Explosive",
-      "other": "Other"
-    }
   },
   "census": {
     "title": "Syrian National Census",
@@ -745,7 +692,9 @@
         "donate": "Donate",
         "signout": "Sign out",
         "violations": "Violations",
-        "wallet": "Wallet"
+        "wallet": "Wallet",
+        "more": "More",
+        "overview": "Overview"
       },
       "polls": {
         "my_polls": {
@@ -928,7 +877,8 @@
             "yes": {
               "label": "Public, poll participants are visible"
             }
-          }
+          },
+          "error": "An error occurred while creating the poll"
         }
       },
       "verifications": {
@@ -1040,6 +990,39 @@
       "violations": {
         "title": "Violations",
         "description": "Here, you can report various types of online content — including hate speech, fake news, violence, corruption, and more. All reports will be documented and archived."
+      },
+      "overview": {
+        "error": "Failed to load overview. Please try again.",
+        "retry": "Try again",
+        "verified": "Verified",
+        "unverified": "Not verified",
+        "profileComplete": "Profile complete",
+        "editProfile": "Edit profile",
+        "stats": {
+          "polls": "Polls created",
+          "verificationsReceived": "Verifications received",
+          "verificationsGiven": "Verifications given",
+          "createPoll": "Create poll"
+        },
+        "recentPolls": {
+          "title": "Recent polls",
+          "viewAll": "View all",
+          "empty": "You haven't created any polls yet.",
+          "create": "Create your first poll",
+          "active": "Active",
+          "inactive": "Inactive",
+          "votes": "votes"
+        },
+        "comingSoon": {
+          "violations": {
+            "title": "Violations",
+            "description": "Report hate speech, fake news, violence, corruption, and more."
+          },
+          "wallet": {
+            "title": "Wallet",
+            "description": "Earn rewards for participating in surveys. Payment methods coming soon."
+          }
+        }
       }
     },
     "settings": {
@@ -1100,7 +1083,8 @@
         "upload": "Select new avatar",
         "save": "Upload avatar",
         "update": {
-          "success": "Avatar updated successfully"
+          "success": "Avatar updated successfully",
+          "error": "Failed to update avatar. Please try again."
         },
         "avatar": {
           "title": "My avatar",
@@ -1277,7 +1261,39 @@
     "invalid_verification_link": "Invalid verification link",
     "target_user_data_not_filled": "The user should have his basic data filled in order to be verified",
     "unauthorized": "You are not authorized to perform this action",
-    "unauthenticated": "You are not authenticated, please log in first"
+    "unauthenticated": "You are not authenticated, please log in first",
+    "logged_out": "Logged out successfully",
+    "user_already_verified": "Your email is already verified",
+    "verification_email_sent": "Verification email sent",
+    "email_verified": "Email verified successfully",
+    "password_updated": "Password updated successfully",
+    "reset_link_sent": "Password reset link sent to your email",
+    "password_reset_successfully": "Password reset successfully",
+    "email_changed": "Email changed successfully",
+    "notifications_changed": "Notification preferences updated",
+    "language_updated": "Language updated successfully",
+    "invalid_file_type": "Invalid file type",
+    "user_not_found": "User not found",
+    "target_user_not_found": "Target user not found",
+    "user_is_banned": "This user is banned",
+    "you_have_made_a_lot_of_verifications": "You have made too many verifications",
+    "not_implemented": "This feature is not implemented yet",
+    "recaptcha_token_required": "Security verification is required",
+    "recaptcha_verification_failed": "Security verification failed, please try again",
+    "voters_not_visible": "Voters are not visible for this poll",
+    "audience_birth_date_missing": "Your birth date is required to participate in this poll",
+    "audience_age_min": "You are below the minimum age for this poll",
+    "audience_age_max": "You are above the maximum age for this poll",
+    "audience_country_missing": "Your country is required to participate in this poll",
+    "audience_country": "Your country does not match the poll audience",
+    "audience_religious_affiliation_missing": "Your religious affiliation is required to participate in this poll",
+    "audience_religious_affiliation": "Your religious affiliation does not match the poll audience",
+    "audience_hometown_missing": "Your hometown is required to participate in this poll",
+    "audience_hometown": "Your hometown does not match the poll audience",
+    "audience_gender_missing": "Your gender is required to participate in this poll",
+    "audience_gender": "Your gender does not match the poll audience",
+    "audience_ethnicity_missing": "Your ethnicity is required to participate in this poll",
+    "audience_ethnicity": "Your ethnicity does not match the poll audience"
   },
   "publicVerify": {
     "title": "Verify user information",
@@ -1368,7 +1384,13 @@
     },
     "publishDate": "Publish date",
     "votingPeriod": "Voting period",
-    "noOptionSelected": "Please select an option"
+    "noOptionSelected": "Please select an option",
+    "voters": {
+      "title": "Voters",
+      "total": "{count} voters",
+      "noVoters": "No voters yet",
+      "loadMore": "Load more"
+    }
   },
   "actions": {
     "register": "Register"
@@ -1700,5 +1722,10 @@
       "description": "Results are always visible, best for informal polls",
       "title": "Always visible"
     }
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "retry": "Try again"
   }
 }

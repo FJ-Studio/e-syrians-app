@@ -57,7 +57,7 @@ const BarChartCard = forwardRef<
       <Card
         ref={ref}
         className={cn(
-          "border border-gray-50 dark:border-default-100 shadow-sm p-3 rounded-none",
+          "border border-gray-50 dark:border-default-100 shadow-xs p-3 rounded-none",
           className
         )}
         {...props}
@@ -73,7 +73,7 @@ const BarChartCard = forwardRef<
         </div>
         <div style={{ height: `${chartData.length * 75}px`, direction: "ltr" }}>
           <ResponsiveContainer
-            className="[&_.recharts-surface]:outline-none"
+            className="[&_.recharts-surface]:outline-hidden"
             height="100%"
             width="100%"
           >
@@ -177,7 +177,6 @@ const BarChartCard = forwardRef<
                   animationEasing="ease"
                   barSize={8}
                   dataKey={category}
-                  layout="vertical"
                   fill={
                     index === 0
                       ? cn({
@@ -200,12 +199,13 @@ const BarChartCard = forwardRef<
                       className={cn(
                         `-translate-y-4 text-xs absolute text-nowrap min-w-24 inline-flex items-center left-0 text-left`
                       )}
-                      formatter={(value: string) => {
+                      formatter={(value: unknown) => {
+                        const label = String(value ?? "");
                         return translateLabels
                           ? allTranslations[
-                              value as keyof typeof allTranslations
+                              label as keyof typeof allTranslations
                             ]
-                          : value;
+                          : label;
                       }}
                       style={{
                         textAnchor: "start",

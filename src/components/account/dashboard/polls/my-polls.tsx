@@ -21,7 +21,6 @@ import {
   Input,
   Pagination,
   Selection,
-  SortDescriptor,
   Spinner,
   Table,
   TableBody,
@@ -32,23 +31,18 @@ import {
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FC, Key, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, Key, useCallback, useMemo, useState } from "react";
+import usePollTable from "@/components/hooks/use-poll-table";
 
 const MyPolls: FC = () => {
-  const [polls, setPolls] = useState<Array<Poll>>([]);
-  const [pages, setPages] = useState(1);
-  const [page, setPage] = useState(1);
-
   const t = useTranslations("account.dashboard.polls.my_polls");
   const columns = [
     { name: t("table.question.title"), uid: "question", sortable: true },
     { name: t("table.startDate.title"), uid: "start_date", sortable: true },
     { name: t("table.endDate.title"), uid: "end_date", sortable: true },
-
     { name: t("table.createdAt.title"), uid: "created_at", sortable: true },
     { name: t("table.votes.title"), uid: "participants_count", sortable: true },
     { name: t("table.status.title"), uid: "status", sortable: false },
-
     { name: t("table.actions.title"), uid: "actions", sortable: false },
   ];
 
@@ -58,7 +52,53 @@ const MyPolls: FC = () => {
   ];
 
   const [deleting, setDeleting] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [visibleColumns, setVisibleColumns] = useState<Selection>(
+    new Set(columns.map((column) => column.uid))
+  );
+  const [statusFilter, setStatusFilter] = useState<Selection>("all");
+
+  const {
+    items: sortedItems,
+    loading,
+    page,
+    pages,
+    setPage,
+    filterValue,
+    hasSearchFilter,
+    sortDescriptor,
+    setSortDescriptor,
+    onNextPage,
+    onPreviousPage,
+    onSearchChange,
+    onClear,
+    refetch,
+  } = usePollTable<Poll>({
+    fetchUrl: "/api/account/polls",
+    dataExtractor: (data) =>
+      (data as { data: { polls: Poll[] } }).data.polls,
+    lastPageExtractor: (data) =>
+      (data as { data: { last_page: number } }).data.last_page ?? 1,
+    searchField: (item) => item.question,
+    sortableColumns: ["question", "start_date", "end_date", "created_at", "participants_count"],
+    defaultSortColumn: "age",
+    defaultSortDirection: "ascending",
+  });
+
+  // Apply status filter on top of hook results
+  const filteredByStatus = useMemo(() => {
+    if (
+      statusFilter === "all" ||
+      Array.from(statusFilter).length === statusOptions.length
+    ) {
+      return sortedItems;
+    }
+    return sortedItems.filter((poll) =>
+      Array.from(statusFilter).includes(
+        poll.deleted_at ? "inactive" : "active"
+      )
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortedItems, statusFilter]);
 
   const switchPollStatus = async (pollId: string, status: "1" | "0") => {
     setDeleting(true);
@@ -72,90 +112,22 @@ const MyPolls: FC = () => {
         body: JSON.stringify({ status, pollId, recaptcha_token }),
       });
       if (req.status === 200) {
-        getPolls();
+        refetch();
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // Error handled by loading state
     } finally {
       setDeleting(false);
     }
   };
 
-  const getPolls = async (page: number = 1) => {
-    setLoading(true);
-    try {
-      const req = await fetch(`/api/account/polls?page=${page}`);
-      const data = await req.json();
-      if (req.status === 200) {
-        setPolls(data.data.polls);
-        setPages(data.data.last_page ?? 1);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getPolls(page);
-  }, [page]);
-
-  const [filterValue, setFilterValue] = useState("");
-  const [visibleColumns, setVisibleColumns] = useState<Selection>(
-    new Set(columns.map((column) => column.uid))
-  );
-  const [statusFilter, setStatusFilter] = useState<Selection>("all");
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: "age",
-    direction: "ascending",
-  });
-
-  const hasSearchFilter = Boolean(filterValue);
-
   const headerColumns = useMemo(() => {
     if (visibleColumns === "all") return columns;
-
     return columns.filter((column) =>
       Array.from(visibleColumns).includes(column.uid)
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visibleColumns]);
-
-  const filteredItems = useMemo(() => {
-    let filtereItems = [...polls];
-
-    if (hasSearchFilter) {
-      filtereItems = filtereItems.filter((poll) =>
-        poll.question.toLowerCase().includes(filterValue.toLowerCase())
-      );
-    }
-    if (
-      statusFilter !== "all" &&
-      Array.from(statusFilter).length !== statusOptions.length
-    ) {
-      filtereItems = filtereItems.filter((poll) =>
-        Array.from(statusFilter).includes(
-          poll.deleted_at ? "inactive" : "active"
-        )
-      );
-    }
-
-    return filtereItems;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [polls, filterValue, statusFilter]);
-
-  const items = filteredItems;
-
-  const sortedItems = useMemo(() => {
-    return [...items].sort((a: Poll, b: Poll) => {
-      const first = a[sortDescriptor.column as keyof Poll] as number;
-      const second = b[sortDescriptor.column as keyof Poll] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
 
   const renderCell = useCallback(
     (poll: Poll, columnKey: Key) => {
@@ -247,34 +219,9 @@ const MyPolls: FC = () => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [polls]
+    [filteredByStatus]
   );
 
-  const onNextPage = useCallback(() => {
-    if (page < pages) {
-      setPage(page + 1);
-    }
-  }, [page, pages]);
-
-  const onPreviousPage = useCallback(() => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  }, [page]);
-
-  const onSearchChange = useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue("");
-    }
-  }, []);
-
-  const onClear = useCallback(() => {
-    setFilterValue("");
-    setPage(1);
-  }, []);
   const topContent = useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
@@ -349,7 +296,7 @@ const MyPolls: FC = () => {
     statusFilter,
     visibleColumns,
     onSearchChange,
-    polls.length,
+    filteredByStatus.length,
     hasSearchFilter,
   ]);
 
@@ -385,7 +332,7 @@ const MyPolls: FC = () => {
       </div>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items.length, page, pages, hasSearchFilter]);
+  }, [filteredByStatus.length, page, pages, hasSearchFilter]);
 
   return (
     <Card>
@@ -445,7 +392,7 @@ const MyPolls: FC = () => {
                 </Button>
               </div>
             }
-            items={sortedItems}
+            items={filteredByStatus}
             loadingContent={<Spinner />}
             isLoading={loading}
           >
