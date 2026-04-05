@@ -72,6 +72,21 @@ const useServerError = (): ((errorCode: string) => string) => {
       recaptcha_token_required: t("recaptcha_token_required"),
       recaptcha_verification_failed: t("recaptcha_verification_failed"),
 
+      // Audience eligibility
+      birth_date_missing: t("audience_birth_date_missing"),
+      age_min: t("audience_age_min"),
+      age_max: t("audience_age_max"),
+      country_missing: t("audience_country_missing"),
+      country: t("audience_country"),
+      religious_affiliation_missing: t("audience_religious_affiliation_missing"),
+      religious_affiliation: t("audience_religious_affiliation"),
+      hometown_missing: t("audience_hometown_missing"),
+      hometown: t("audience_hometown"),
+      gender_missing: t("audience_gender_missing"),
+      gender: t("audience_gender"),
+      ethnicity_missing: t("audience_ethnicity_missing"),
+      ethnicity: t("audience_ethnicity"),
+
       // Misc
       not_implemented: t("not_implemented"),
     };

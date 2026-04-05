@@ -1280,7 +1280,20 @@
     "not_implemented": "This feature is not implemented yet",
     "recaptcha_token_required": "Security verification is required",
     "recaptcha_verification_failed": "Security verification failed, please try again",
-    "voters_not_visible": "Voters are not visible for this poll"
+    "voters_not_visible": "Voters are not visible for this poll",
+    "audience_birth_date_missing": "Your birth date is required to participate in this poll",
+    "audience_age_min": "You are below the minimum age for this poll",
+    "audience_age_max": "You are above the maximum age for this poll",
+    "audience_country_missing": "Your country is required to participate in this poll",
+    "audience_country": "Your country does not match the poll audience",
+    "audience_religious_affiliation_missing": "Your religious affiliation is required to participate in this poll",
+    "audience_religious_affiliation": "Your religious affiliation does not match the poll audience",
+    "audience_hometown_missing": "Your hometown is required to participate in this poll",
+    "audience_hometown": "Your hometown does not match the poll audience",
+    "audience_gender_missing": "Your gender is required to participate in this poll",
+    "audience_gender": "Your gender does not match the poll audience",
+    "audience_ethnicity_missing": "Your ethnicity is required to participate in this poll",
+    "audience_ethnicity": "Your ethnicity does not match the poll audience"
   },
   "publicVerify": {
     "title": "Verify user information",

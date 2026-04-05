@@ -1280,7 +1280,20 @@
     "not_implemented": "هذه الميزة غير متاحة بعد",
     "recaptcha_token_required": "التحقق الأمني مطلوب",
     "recaptcha_verification_failed": "فشل التحقق الأمني، يرجى المحاولة مرة أخرى",
-    "voters_not_visible": "المصوتون غير مرئيين لهذا الاستطلاع"
+    "voters_not_visible": "المصوتون غير مرئيين لهذا الاستطلاع",
+    "audience_birth_date_missing": "تاريخ ميلادك مطلوب للمشاركة في هذا الاستطلاع",
+    "audience_age_min": "عمرك أقل من الحد الأدنى المطلوب لهذا الاستطلاع",
+    "audience_age_max": "عمرك أكبر من الحد الأقصى المطلوب لهذا الاستطلاع",
+    "audience_country_missing": "بلد إقامتك مطلوب للمشاركة في هذا الاستطلاع",
+    "audience_country": "بلد إقامتك لا يتطابق مع الجمهور المستهدف",
+    "audience_religious_affiliation_missing": "انتماؤك الديني مطلوب للمشاركة في هذا الاستطلاع",
+    "audience_religious_affiliation": "انتماؤك الديني لا يتطابق مع الجمهور المستهدف",
+    "audience_hometown_missing": "مسقط رأسك مطلوب للمشاركة في هذا الاستطلاع",
+    "audience_hometown": "مسقط رأسك لا يتطابق مع الجمهور المستهدف",
+    "audience_gender_missing": "جنسك مطلوب للمشاركة في هذا الاستطلاع",
+    "audience_gender": "جنسك لا يتطابق مع الجمهور المستهدف",
+    "audience_ethnicity_missing": "عرقك مطلوب للمشاركة في هذا الاستطلاع",
+    "audience_ethnicity": "عرقك لا يتطابق مع الجمهور المستهدف"
   },
   "publicVerify": {
     "title": "تأكيد معلومات المستخدم",

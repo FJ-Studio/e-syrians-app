@@ -1280,7 +1280,20 @@
     "not_implemented": "ئەم تایبەتمەندییە هێشتا بەردەست نییە",
     "recaptcha_token_required": "پشتڕاستکردنەوەی ئەمنی پێویستە",
     "recaptcha_verification_failed": "پشتڕاستکردنەوەی ئەمنی سەرنەکەوت، تکایە دووبارە هەوڵبدەرەوە",
-    "voters_not_visible": "دەنگدەران بۆ ئەم ڕاپرسییە نابینرێن"
+    "voters_not_visible": "دەنگدەران بۆ ئەم ڕاپرسییە نابینرێن",
+    "audience_birth_date_missing": "Dîroka jidayikbûna te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_age_min": "Temenê te ji bo vê lêkolînê piçûk e",
+    "audience_age_max": "Temenê te ji bo vê lêkolînê mezin e",
+    "audience_country_missing": "Welatê te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_country": "Welatê te bi temaşevanên lêkolînê re nagunce",
+    "audience_religious_affiliation_missing": "Girêdana olî ya te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_religious_affiliation": "Girêdana olî ya te bi temaşevanên lêkolînê re nagunce",
+    "audience_hometown_missing": "Bajarê te yê eslî ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_hometown": "Bajarê te yê eslî bi temaşevanên lêkolînê re nagunce",
+    "audience_gender_missing": "Zayenda te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_gender": "Zayenda te bi temaşevanên lêkolînê re nagunce",
+    "audience_ethnicity_missing": "Etnîsîteya te ji bo beşdarîbûna vê lêkolînê pêwîst e",
+    "audience_ethnicity": "Etnîsîteya te bi temaşevanên lêkolînê re nagunce"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",

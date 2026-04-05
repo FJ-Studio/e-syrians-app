@@ -138,7 +138,9 @@ const PollFullCard: FC<Props> = ({ poll }) => {
       }));
     } else {
       const data = await req.json();
-      toast.error(serverErrors(data?.messages?.[0] ?? "unknownError"));
+      const messages: string[] = data?.messages ?? [];
+      const localized = messages.map((msg: string) => serverErrors(msg));
+      toast.error(localized.join("\n") || t("error"));
     }
     setLoading(false);
   };
