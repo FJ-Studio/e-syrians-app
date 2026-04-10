@@ -2,14 +2,13 @@
 import Container from "@/components/shared/container";
 import {
   ArrowRightStartOnRectangleIcon,
+  BellIcon,
   ChartBarIcon,
   ClipboardDocumentCheckIcon,
   Cog6ToothIcon,
   CurrencyDollarIcon,
   EllipsisHorizontalIcon,
   HomeIcon,
-  ScaleIcon,
-  WalletIcon,
 } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -36,7 +35,7 @@ type NavLink = {
 };
 
 /** Keys shown as individual tabs in the mobile bottom nav */
-const PRIMARY_KEYS = ["overview", "polls", "settings", "verifications"];
+const PRIMARY_KEYS = ["overview", "polls", "notifications", "settings"];
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const { push } = useRouter();
@@ -65,28 +64,22 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         icon: <Cog6ToothIcon className="size-5" />,
       },
       {
+        key: "notifications",
+        title: t("nav.notifications"),
+        link: "/account/notifications",
+        icon: <BellIcon className="size-5" />,
+      },
+      {
         key: "verifications",
         title: t("nav.verifications"),
         link: "/account/verifications",
         icon: <ClipboardDocumentCheckIcon className="size-5" />,
       },
       {
-        key: "violations",
-        title: t("nav.violations"),
-        link: "/account/violations",
-        icon: <ScaleIcon className="size-5" />,
-      },
-      {
         key: "donate",
         title: t("nav.donate"),
         link: "/account/donate",
         icon: <CurrencyDollarIcon className="size-5" />,
-      },
-      {
-        key: "wallet",
-        title: t("nav.wallet"),
-        link: "/account/wallet",
-        icon: <WalletIcon className="size-5" />,
       },
       {
         key: "signout",

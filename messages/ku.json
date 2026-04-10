@@ -691,8 +691,7 @@
         "settings": "Mîhengên",
         "donate": "Bikarhêner",
         "signout": "Derketin",
-        "violations": "Tewandînan",
-        "wallet": "Qezenc",
+        "notifications": "ئاگاداریەکان",
         "more": "Zêdetir",
         "overview": "پوختە"
       },
@@ -974,22 +973,27 @@
           "description": "Ji kerema xwe navnîşana e-nameya xwe ya nû bi baldarî binivîse, gava ku hûn e-nameya xwe nûve bikin, hûn ê ji nû ve têkevinê"
         }
       },
-      "settings": {
-        "notifications": {
-          "title": "Notifications",
+      "notifications": {
+        "tabs": {
+          "history": "مێژوو",
+          "settings": "ڕێکخستنەکان"
+        },
+        "history": {
+          "title": "مێژووی ئاگاداریەکان",
+          "empty": "هێشتا هیچ ئاگادارییەکت نییە."
+        },
+        "preferences": {
+          "title": "ئاگاداریەکان",
           "received_verification_email": "Dema ku kesek daneyên min piştrast dike ez dixwazim e-nameyek bistînim",
           "account_verified_email": "Dema ku hesabê min were piştrast kirin ez dixwazim e-nameyek bistînim",
           "update": "Mîhengên ragihandinê nûve bikin",
           "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin"
         }
       },
-      "wallet": {
-        "description": "Em xwe diparêzin ku bibe çavkaniyekê ya piştrast a xizmetên lêkolînê li hember hemû Sûriyê. Xizmeta lêkolînê dê bi pere be û ji bo kes û rêvebirên ku dixwazin raye gelê Sûrî bistînin, amade be. Her beşdarê ku di lêkolînekê de beş digire, dê li gorî astê beşdariya xwe xelatê qedexe werbigire. Şêwazên dayînê ê di demek nêzîk de were ragihandin.",
-        "title": "Qezenc"
-      },
-      "violations": {
-        "description": "Li vir dikarî li ser cûrekî zêde yên naveroka torê rapor bidî — wek axaftina dijî hev, xeberên fêkî, tundîtî, rüşwet û hwd. Hemû rapor dê bêne tomar kirin û arşîv kirin.",
-        "title": "Binpêkirinên"
+      "privacy": {
+        "title": "تایبەتمەندی",
+        "description": "ڕێکخستنەکانی تایبەتمەندی و چۆنیەتی بەکارهێنانی داتاکانت بەڕێوە ببە.",
+        "comingSoon": "ڕێکخستنەکانی تایبەتمەندی بەم زووانە دێت."
       },
       "overview": {
         "error": "بارکردنی پوختە سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە.",
@@ -1014,14 +1018,6 @@
           "votes": "دەنگ"
         },
         "comingSoon": {
-          "violations": {
-            "title": "سەرپێچییەکان",
-            "description": "ڕاپۆرتی قسەی ڕقانە، هەواڵی درۆ، توندوتیژی، گەندەڵی و هتد بکە."
-          },
-          "wallet": {
-            "title": "جزدان",
-            "description": "پاداشت بەدەست بهێنە بۆ بەشداریکردن لە ڕاپرسییەکان. ڕێگاکانی پارەدان بەم زووانە."
-          }
         }
       }
     },
@@ -1033,8 +1029,8 @@
         "security": {
           "title": "Sazkirina ewlehî"
         },
-        "notifications": {
-          "title": "Notifications"
+        "privacy": {
+          "title": "تایبەتمەندی"
         }
       },
       "error": {
