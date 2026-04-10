@@ -19,8 +19,6 @@ import {
   ClipboardDocumentCheckIcon,
   Cog6ToothIcon,
   PlusCircleIcon,
-  ScaleIcon,
-  WalletIcon,
 } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
@@ -284,19 +282,7 @@ const AccountOverview: FC = () => {
         </CardBody>
       </Card>
 
-      {/* ---- Coming soon features ---- */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <ComingSoonCard
-          icon={<ScaleIcon className="size-6 text-danger" />}
-          title={t("comingSoon.violations.title")}
-          description={t("comingSoon.violations.description")}
-        />
-        <ComingSoonCard
-          icon={<WalletIcon className="size-6 text-warning" />}
-          title={t("comingSoon.wallet.title")}
-          description={t("comingSoon.wallet.description")}
-        />
-      </div>
+      {/* Coming soon features can be added here later */}
     </div>
   );
 };
@@ -328,33 +314,6 @@ function StatCard({
         <div>
           <p className="text-2xl font-bold">{value}</p>
           <p className="text-xs text-default-500">{label}</p>
-        </div>
-      </CardBody>
-    </Card>
-  );
-}
-
-function ComingSoonCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <Card className="border-dashed border-2 border-default-200 bg-default-50">
-      <CardBody className="flex flex-row items-start gap-3 p-4">
-        {icon}
-        <div>
-          <div className="flex items-center gap-2">
-            <p className="font-medium">{title}</p>
-            <Chip size="sm" variant="flat" color="default">
-              Coming soon
-            </Chip>
-          </div>
-          <p className="text-xs text-default-400 mt-1">{description}</p>
         </div>
       </CardBody>
     </Card>

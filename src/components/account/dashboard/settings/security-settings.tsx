@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { FC } from "react";
 import UpdatePassword from "./security/update-password";
 import UpdateEmailAddress from "./security/update-email";
+import TwoFactorAuth from "./security/two-factor-auth";
 
 const AccountSecurity: FC = () => {
   const t = useTranslations("account.dashboard.security");
@@ -18,6 +19,9 @@ const AccountSecurity: FC = () => {
         </div>
         <div>
           <UpdateEmailAddress />
+        </div>
+        <div className="lg:col-span-2">
+          <TwoFactorAuth />
         </div>
       </div>
     </>

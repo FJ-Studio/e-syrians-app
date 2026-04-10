@@ -8,12 +8,16 @@ import { signIn } from "next-auth/react";
 import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
 import { useEsyrian } from "@/components/shared/contexts/es";
+import TwoFactorVerify from "./two-factor-verify";
 
 export default function LoginForm() {
-  // const [loginError, setLoginError] = useState<string | null>(null);
   const { openCensusForm } = useEsyrian();
 
   const [isVisible, setIsVisible] = useState(false);
+  const [twoFactorChallenge, setTwoFactorChallenge] = useState<{
+    challengeToken: string;
+    expiresAt: string;
+  } | null>(null);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -29,13 +33,53 @@ export default function LoginForm() {
   }>();
 
   const onSubmit = async (data: { email: string; password: string }) => {
-    await signIn("credentials", {
+    const result = await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirect: true,
-      redirectTo: "/account",
+      redirect: false,
     });
+
+    if (result?.error) {
+      // Check if this is a 2FA challenge
+      const errorUrl = result.error;
+      // NextAuth encodes the error — check for our 2FA marker
+      if (errorUrl.includes("2FA_REQUIRED")) {
+        // Extract challenge data from the error message
+        // The error comes through as a URL-encoded string
+        const match = errorUrl.match(
+          /2FA_REQUIRED:([^:]+):(.+)/,
+        );
+        if (match) {
+          setTwoFactorChallenge({
+            challengeToken: match[1],
+            expiresAt: match[2],
+          });
+          return;
+        }
+      }
+      // Other login errors — let NextAuth handle redirect
+      await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: true,
+        redirectTo: "/account",
+      });
+    } else if (result?.ok) {
+      // Successful login without 2FA
+      window.location.href = "/account";
+    }
   };
+
+  // Show 2FA verification form if challenge is active
+  if (twoFactorChallenge) {
+    return (
+      <TwoFactorVerify
+        challengeToken={twoFactorChallenge.challengeToken}
+        expiresAt={twoFactorChallenge.expiresAt}
+        onBack={() => setTwoFactorChallenge(null)}
+      />
+    );
+  }
 
   return (
     <div className="flex w-full flex-col items-center gap-4 p-4">
@@ -54,21 +98,8 @@ export default function LoginForm() {
         >
           {t("common.continueWithGoogle")}
         </Button>
-        {/* <Button
-              startContent={
-                <Icon
-                  className="text-default-500"
-                  icon="heroicons:finger-print-solid"
-                  width={24}
-                />
-              }
-              variant="bordered"
-              className="w-full"
-            >
-              {t("common.continueWithPasskey")}
-            </Button> */}
       </div>
-      
+
       <div className="flex items-center gap-4 py-2 w-full ">
         <Divider className="flex-1 w-full" />
         <p className="shrink-0 text-tiny text-default-500">{t("common.or")}</p>
