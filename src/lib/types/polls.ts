@@ -10,6 +10,8 @@ export type PollAudience = {
   religious_affiliation: string | null;
   hometown: string | null;
   ethnicity: string | null;
+  city_inside_syria: string | null;
+  allowed_voters: string | null;
 };
 
 export const pollResultsReveal = [

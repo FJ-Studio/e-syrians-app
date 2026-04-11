@@ -10,6 +10,7 @@ import {
   SelectItem,
   Slider,
   SliderValue,
+  Textarea,
 } from "@heroui/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -45,6 +46,7 @@ const CreatePoll: FC = () => {
     control,
     getValues,
     setValue,
+    watch,
     register,
     formState: { isSubmitting },
   } = useForm<CreatePollFields>({
@@ -62,6 +64,8 @@ const CreatePoll: FC = () => {
         gender: "",
         hometown: "",
         religious_affiliation: "",
+        city_inside_syria: "",
+        allowed_voters: "",
       },
       max_selections: "1",
       audience_can_add_options: "0",
@@ -88,24 +92,37 @@ const CreatePoll: FC = () => {
     options.forEach((option) => {
       formData.append("options[]", option);
     });
-    formData.append("min_age", data.audience.age_range?.min ?? "");
-    formData.append("max_age", data.audience.age_range?.max ?? "");
-    [
-      "gender",
-      "hometown",
-      "country",
-      "religious_affiliation",
-      "ethnicity",
-    ].forEach((key) => {
-      if (data.audience[key as keyof PollAudience]) {
-        const opts = String(
-          data.audience[key as keyof PollAudience] ?? ""
-        ).split(",");
-        opts.forEach((opt: string) => {
-          formData.append(`${key}[]`, opt);
-        });
-      }
-    });
+    // If allowed_voters is specified, send that and skip criteria
+    const allowedVotersRaw = (data.audience.allowed_voters ?? "").trim();
+    if (allowedVotersRaw) {
+      const voters = allowedVotersRaw
+        .split("\n")
+        .map((v) => v.trim())
+        .filter((v) => v.length > 0);
+      voters.forEach((voter) => {
+        formData.append("allowed_voters[]", voter);
+      });
+    } else {
+      formData.append("min_age", data.audience.age_range?.min ?? "");
+      formData.append("max_age", data.audience.age_range?.max ?? "");
+      [
+        "gender",
+        "hometown",
+        "country",
+        "religious_affiliation",
+        "ethnicity",
+        "city_inside_syria",
+      ].forEach((key) => {
+        if (data.audience[key as keyof PollAudience]) {
+          const opts = String(
+            data.audience[key as keyof PollAudience] ?? ""
+          ).split(",");
+          opts.forEach((opt: string) => {
+            formData.append(`${key}[]`, opt);
+          });
+        }
+      });
+    }
     try {
       const token = await generateToken("poll_store");
       formData.append("recaptcha_token", token);
@@ -350,7 +367,33 @@ const CreatePoll: FC = () => {
         <h3 className="font-semibold text-lg text-default-700">
           {t("audience.title")}
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Controller
+          name="audience.allowed_voters"
+          control={control}
+          render={({ field }) => (
+            <Textarea
+              {...field}
+              label={t("allowed_voters.label")}
+              placeholder={t("allowed_voters.placeholder")}
+              description={t("allowed_voters.description")}
+              value={field.value ?? ""}
+              onValueChange={(value) => {
+                field.onChange(value);
+                if (value.trim().length > 0) {
+                  setValue("audience.gender", "");
+                  setValue("audience.hometown", "");
+                  setValue("audience.country", "");
+                  setValue("audience.religious_affiliation", "");
+                  setValue("audience.ethnicity", "");
+                  setValue("audience.city_inside_syria", "");
+                  setValue("audience.age_range.min", MIN_AUDIENCE_AGE.toString());
+                  setValue("audience.age_range.max", MAX_AUDIENCE_AGE.toString());
+                }
+              }}
+            />
+          )}
+        />
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ${(watch("audience.allowed_voters") ?? "").trim().length > 0 ? "opacity-50 pointer-events-none" : ""}`}>
           <Controller
             name="audience.gender"
             control={control}
@@ -466,6 +509,27 @@ const CreatePoll: FC = () => {
               </Select>
             )}
           />
+          {watch("audience.country") === "SY" && (
+            <Controller
+              name="audience.city_inside_syria"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  label={t("city_inside_syria.label")}
+                  description={t("city_inside_syria.description")}
+                  selectionMode="multiple"
+                  value={field.value || []}
+                >
+                  {Object.keys(provinces).map((key) => (
+                    <SelectItem key={key}>
+                      {provinces[key as keyof typeof provinces]}
+                    </SelectItem>
+                  ))}
+                </Select>
+              )}
+            />
+          )}
           <Slider
             defaultValue={[MIN_AUDIENCE_AGE, MAX_AUDIENCE_AGE]}
             getValue={(value) => {

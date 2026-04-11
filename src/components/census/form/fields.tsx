@@ -2,6 +2,8 @@
 
 import { Controller, Control, FieldPath, FieldValues } from "react-hook-form";
 import {
+  Autocomplete,
+  AutocompleteItem,
   Checkbox,
   DatePicker,
   Input,
@@ -128,6 +130,69 @@ export function FormSelect<T extends FieldValues>({
             )
           )}
         </Select>
+      )}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+// FormAutocomplete
+// ---------------------------------------------------------------------------
+
+interface FormAutocompleteProps<T extends FieldValues> extends BaseFieldProps<T> {
+  options: Record<string, string>;
+  isRequired?: boolean;
+  description?: string;
+  defaultSelectedKey?: string;
+  scrollShadowProps?: Record<string, unknown>;
+  renderItem?: (key: string, label: string) => ReactElement;
+  onSelectionChange?: (key: string | null) => void;
+}
+
+export function FormAutocomplete<T extends FieldValues>({
+  name,
+  control,
+  label,
+  options,
+  isRequired,
+  description,
+  defaultSelectedKey,
+  scrollShadowProps,
+  renderItem,
+  onSelectionChange,
+  rules,
+}: FormAutocompleteProps<T>) {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field, fieldState: { error, invalid } }) => (
+        <Autocomplete
+          scrollShadowProps={scrollShadowProps}
+          {...field}
+          label={label}
+          isRequired={isRequired}
+          isInvalid={invalid}
+          errorMessage={error?.message}
+          description={description}
+          defaultSelectedKey={defaultSelectedKey}
+          selectedKey={field.value}
+          onSelectionChange={(key) => {
+            const val = key?.toString() ?? null;
+            field.onChange(val);
+            onSelectionChange?.(val);
+          }}
+          classNames={{ clearButton: "hidden" }}
+        >
+          {Object.keys(options).map((key) =>
+            renderItem ? (
+              renderItem(key, options[key])
+            ) : (
+              <AutocompleteItem key={key}>{options[key]}</AutocompleteItem>
+            )
+          )}
+        </Autocomplete>
       )}
     />
   );

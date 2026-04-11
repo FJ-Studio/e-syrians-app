@@ -35,6 +35,30 @@ const isInAudience = (
   // }
 
   const reasons: Array<string> = [];
+
+  // Allowed voters check — if specified, only match by email or national_id
+  if (
+    poll?.audience?.allowed_voters &&
+    poll.audience.allowed_voters.length > 0
+  ) {
+    const allowed = Array.isArray(poll.audience.allowed_voters)
+      ? poll.audience.allowed_voters.map((v: string) => v.toLowerCase())
+      : poll.audience.allowed_voters
+          .split("\n")
+          .map((v: string) => v.trim().toLowerCase())
+          .filter((v: string) => v.length > 0);
+
+    const emailMatch =
+      user.email && allowed.includes(user.email.toLowerCase());
+    const nationalIdMatch =
+      user.national_id && allowed.includes(user.national_id.toLowerCase());
+
+    if (!emailMatch && !nationalIdMatch) {
+      return [false, ["not_in_allowed_voters"]];
+    }
+    return [true, []];
+  }
+
   // age check
   if (poll?.audience?.age_range) {
     const pollMinAge = parseInt(poll.audience.age_range.min);
@@ -80,6 +104,19 @@ const isInAudience = (
       }
     }
   });
+
+  // City inside Syria check
+  if (
+    poll?.audience?.city_inside_syria &&
+    poll.audience.city_inside_syria.length > 0
+  ) {
+    if (
+      !user.city_inside_syria ||
+      poll.audience.city_inside_syria.includes(user.city_inside_syria) === false
+    ) {
+      reasons.push("city_inside_syria");
+    }
+  }
 
   return [reasons.length === 0, reasons];
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionProps } from "../types";
-import { FormInput, FormSelect, SectionHeader } from "../fields";
+import { FormInput, FormAutocomplete, SectionHeader } from "../fields";
 import useSourceOfIncome from "@/components/hooks/localization/income";
 
 export default function EmploymentSection({
@@ -14,12 +14,12 @@ export default function EmploymentSection({
   return (
     <>
       <SectionHeader number={5} title={t("sections.employment.title")} />
-      <FormSelect
+      <FormAutocomplete
         name="source_of_income"
         control={control}
         label={t("fields.source_of_income.label")}
         options={incomeSources}
-        defaultSelectedKeys={[getValues("source_of_income")]}
+        defaultSelectedKey={getValues("source_of_income")}
       />
       <FormInput
         name="estimated_monthly_income"

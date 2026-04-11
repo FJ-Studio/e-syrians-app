@@ -860,6 +860,15 @@
             "label": "Têkiliyên Dînî",
             "description": "Nivîsê vala nîşan dide ku bikarhênerên ji hemû têkiliyên dînî şayeste ne."
           },
+          "city_inside_syria": {
+            "label": "Bajarê li Sûriyê",
+            "description": "Tenê dema ku welat tenê Sûriye be tê nîşandan. Nivîsê vala nîşan dide ku bikarhênerên ji hemû bajarên li Sûriyê şayeste ne."
+          },
+          "allowed_voters": {
+            "label": "Dengdêrên taybet (bijarte)",
+            "placeholder": "Li her rêzekê e-nameyekê an nasnameya niştimanî binivîse",
+            "description": "Heke hatibe diyarkirin, tenê ev kesên taybet dikarin deng bidin. Ev hemû pîvanên din ên şandeya dengdanê paş dixe."
+          },
           "age_range": {
             "label": "Kategorîya Temenê"
           },
@@ -1337,6 +1346,9 @@
     "religinousAffiliation": "Têkiliyê dînî",
     "ethnicity": "Nasname",
     "country": "Welatê nîştegerî",
+    "cityInsideSyria": "Bajarê li Sûriyê",
+    "allowedVoters": "Dengdêrên taybet",
+    "allowedVotersDescription": "Ev lêkolîn tenê ji bo {count} kesên taybet e",
     "noLimit": "Bê sînor",
     "description": "Hemû bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin li vir beşdarî lêkolînên rayê bibin. Bi gelemperî, lêkolîn hatine rêz kirin di bingeha nivîsandina ku naveroka dengên 'Erê' û 'Na' di navber de çêtir e û her wisa bi sal û mehê zêde hatine rêvekirin.",
     "filter": {
@@ -1397,6 +1409,8 @@
     "ethnicity": "Nasnameya te di lîsteya şandeya vê lêkolînekê de nîne",
     "gender": "Rewşa cinsê te di lîsteya şandeya vê lêkolînekê de nîne",
     "hometown": "Bajarê te di lîsteya şandeya vê lêkolînekê de nîne",
+    "city_inside_syria": "Bajarê ku tu tê de dijî li Sûriyê di lîsteya şandeya vê lêkolînekê de nîne",
+    "not_in_allowed_voters": "Tu ne di lîsteya kesên ku destûr heye deng bidin vê lêkolînekê de yî",
     "religious_affiliation": "Dîtina dînê te di lîsteya şandeya vê lêkolînekê de nîne",
     "unauthorized": "Tu têketîne ne kirî",
     "not_in_audience": "Tu ne di şandeya armancê vê lêkolînekê de yî",

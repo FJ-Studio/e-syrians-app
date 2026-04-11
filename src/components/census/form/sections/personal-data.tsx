@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionProps } from "../types";
-import { FormInput, FormSelect, FormDatePicker, SectionHeader } from "../fields";
+import { FormInput, FormSelect, FormAutocomplete, FormDatePicker, SectionHeader } from "../fields";
 import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
 import useEthnicity from "@/components/hooks/localization/ethnicity";
@@ -64,7 +64,7 @@ export default function PersonalDataSection({
         getValues={getValues}
         setValue={setValue}
       />
-      <FormSelect
+      <FormAutocomplete
         name="hometown"
         control={control}
         rules={{ required: true }}
@@ -72,18 +72,18 @@ export default function PersonalDataSection({
         label={t("fields.hometown.label")}
         description={t("fields.hometown.description")}
         options={provinces}
-        defaultSelectedKeys={[getValues("hometown")]}
+        defaultSelectedKey={getValues("hometown")}
       />
-      <FormSelect
+      <FormAutocomplete
         name="ethnicity"
         control={control}
         rules={{ required: true }}
         isRequired
         label={t("fields.ethnicity.label")}
         options={ethnicities}
-        defaultSelectedKeys={[getValues("ethnicity")]}
+        defaultSelectedKey={getValues("ethnicity")}
       />
-      <FormSelect
+      <FormAutocomplete
         name="religious_affiliation"
         control={control}
         rules={{ required: true }}
@@ -91,7 +91,7 @@ export default function PersonalDataSection({
         label={t("fields.religious_affiliation.label")}
         description={t("fields.religious_affiliation.description")}
         options={religions}
-        defaultSelectedKeys={[getValues("religious_affiliation")]}
+        defaultSelectedKey={getValues("religious_affiliation")}
       />
     </>
   );

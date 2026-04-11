@@ -11,6 +11,8 @@ import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { HealthStatus, ReligiousAffiliation } from "@/lib/types/misc";
 import {
+  Autocomplete,
+  AutocompleteItem,
   Avatar,
   Button,
   Card,
@@ -190,20 +192,24 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               control={control}
               rules={{ required: true }}
               render={({ field, fieldState: { error, invalid } }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.religious_affiliation.label")}
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("religious_affiliation")]}
+                  selectedKey={getValues("religious_affiliation")}
+                  onSelectionChange={(selected) => {
+                    setValue("religious_affiliation", selected?.toString() as ReligiousAffiliation);
+                  }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(religions).map((key) => (
-                    <SelectItem key={key}>
+                    <AutocompleteItem key={key}>
                       {religions[key as keyof typeof religions]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -295,19 +301,23 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               name="education_level"
               control={control}
               render={({ field, fieldState: { error, invalid } }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.education_level.label")}
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("education_level")]}
+                  selectedKey={getValues("education_level")}
+                  onSelectionChange={(selected) => {
+                    setValue("education_level", selected?.toString() ?? "");
+                  }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(educationLevels).map((key) => (
-                    <SelectItem key={key}>
+                    <AutocompleteItem key={key}>
                       {educationLevels[key as keyof typeof educationLevels]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -354,17 +364,21 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               name="source_of_income"
               control={control}
               render={({ field }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.source_of_income.label")}
-                  selectedKeys={[getValues("source_of_income")]}
+                  selectedKey={getValues("source_of_income")}
+                  onSelectionChange={(selected) => {
+                    setValue("source_of_income", selected?.toString() ?? "");
+                  }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(incomeSources).map((key) => (
-                    <SelectItem key={key}>
+                    <AutocompleteItem key={key}>
                       {incomeSources[key as keyof typeof incomeSources]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -398,23 +412,24 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               name="health_status"
               control={control}
               render={({ field }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.health_status.label")}
-                  selectedKeys={[getValues("health_status")]}
+                  selectedKey={getValues("health_status")}
                   onSelectionChange={(selected) => {
                     setValue(
                       "health_status",
-                      selected.anchorKey as HealthStatus
+                      selected?.toString() as HealthStatus
                     );
                   }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(HealthStatuses).map((key) => (
-                    <SelectItem key={key} >
+                    <AutocompleteItem key={key}>
                       {HealthStatuses[key as keyof typeof HealthStatuses]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
