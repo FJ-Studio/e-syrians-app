@@ -3,6 +3,8 @@ import useGender from "@/components/hooks/localization/gender";
 import { ESUser } from "@/lib/types/account";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import {
+  Autocomplete,
+  AutocompleteItem,
   Button,
   Card,
   CardBody,
@@ -216,27 +218,28 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               control={control}
               rules={{ required: true }}
               render={({ field, fieldState: { error, invalid } }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.ethnicity.label")}
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={getValues("ethnicity") ? [getValues("ethnicity") as string] : []}
-                  onSelectionChange={(selectedKeys: SharedSelection) => {
+                  selectedKey={getValues("ethnicity") as string ?? ""}
+                  onSelectionChange={(selected) => {
                     setValue(
                       "ethnicity",
-                      selectedKeys.anchorKey as keyof typeof ethnicityOptions
+                      selected?.toString() as keyof typeof ethnicityOptions
                     );
                   }}
                   isDisabled={mode === "view"}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(ethnicityOptions).map((key) => (
-                    <SelectItem key={key} >
+                    <AutocompleteItem key={key}>
                       {ethnicityOptions[key as keyof typeof ethnicityOptions]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -246,27 +249,28 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               control={control}
               rules={{ required: true }}
               render={({ field, fieldState: { error, invalid } }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.hometown.label")}
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={getValues("hometown") ? [getValues("hometown") as string] : []}
-                  onSelectionChange={(selectedKeys: SharedSelection) => {
+                  selectedKey={getValues("hometown") as string ?? ""}
+                  onSelectionChange={(selected) => {
                     setValue(
                       "hometown",
-                      selectedKeys.anchorKey as keyof typeof hometownOptions
+                      selected?.toString() as keyof typeof hometownOptions
                     );
                   }}
                   isDisabled={mode === "view"}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(hometownOptions).map((key) => (
-                    <SelectItem key={key} >
+                    <AutocompleteItem key={key}>
                       {hometownOptions[key as keyof typeof hometownOptions]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>

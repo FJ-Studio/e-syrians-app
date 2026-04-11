@@ -41,23 +41,16 @@ const PollOptionRow: FC<Props> = ({
             width: `${percentage ?? 0}%`,
           }}
         ></div>
-        {percentage && percentage > 0 ? (
-          <div className="absolute text-xs inset-e-2 top-1/2 -translate-y-1/2">
-            {percentage}%
-          </div>
-        ) : (
-          ""
-        )}
-        <div className="w-full flex flex-col gap-1 relative z-20">
+        <div className="w-full flex flex-row items-center gap-2 relative z-20 pe-10">
           <div
-            className="w-full flex justify-between line-clamp-2"
+            className="flex-1 min-w-0 line-clamp-2"
             title={option}
           >
             {option}
           </div>
           {votersAreVisible && votersPreview && votersPreview.length > 0 && (
             <div
-              className="flex items-center gap-1 cursor-pointer"
+              className="flex items-center gap-1 cursor-pointer shrink-0"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -88,6 +81,13 @@ const PollOptionRow: FC<Props> = ({
             </div>
           )}
         </div>
+        {percentage && percentage > 0 ? (
+          <div className="absolute text-xs inset-e-2 top-1/2 -translate-y-1/2 z-30">
+            {percentage}%
+          </div>
+        ) : (
+          ""
+        )}
       </Checkbox>
     </>
   );

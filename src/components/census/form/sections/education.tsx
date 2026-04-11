@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionProps } from "../types";
-import { FormInput, FormSelect, SectionHeader } from "../fields";
+import { FormInput, FormSelect, FormAutocomplete, SectionHeader } from "../fields";
 import useEducationLevels from "@/components/hooks/localization/education";
 import useSpokenLanguages from "@/components/hooks/localization/languages";
 
@@ -16,12 +16,12 @@ export default function EducationSection({
   return (
     <>
       <SectionHeader number={4} title={t("sections.education.title")} />
-      <FormSelect
+      <FormAutocomplete
         name="education_level"
         control={control}
         label={t("fields.education_level.label")}
         options={educationLevels}
-        defaultSelectedKeys={[getValues("education_level")]}
+        defaultSelectedKey={getValues("education_level")}
       />
       <FormSelect
         name="languages"

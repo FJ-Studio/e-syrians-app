@@ -871,6 +871,15 @@
             "label": "Religious affiliation",
             "description": "A blank value indicates that users from all religious affiliations are eligible to vote."
           },
+          "city_inside_syria": {
+            "label": "City in Syria",
+            "description": "Only shown when country is set to Syria only. A blank value indicates that users from all cities in Syria are eligible to vote."
+          },
+          "allowed_voters": {
+            "label": "Specific voters (optional)",
+            "placeholder": "Enter one email or national ID per line",
+            "description": "If provided, only these specific people will be able to vote. This overrides all other audience criteria above."
+          },
           "age_range": {
             "label": "Age range"
           },
@@ -1393,6 +1402,9 @@
     "religinousAffiliation": "Religinous Affiliation",
     "ethnicity": "Ethnicity",
     "country": "Country of residence",
+    "cityInsideSyria": "City in Syria",
+    "allowedVoters": "Specific voters",
+    "allowedVotersDescription": "This poll is restricted to {count} specific people",
     "noLimit": "Not limited",
     "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
     "filter": {
@@ -1453,6 +1465,8 @@
     "ethnicity": "the ethnicity you belong to in is not in the list of this poll audience",
     "gender": "Your gender in is not in the list of this poll audience",
     "hometown": "The hometown you belong to in is not in the list of this poll audience",
+    "city_inside_syria": "The city you live in within Syria is not in the list of this poll audience",
+    "not_in_allowed_voters": "You are not in the list of people allowed to vote on this poll",
     "religious_affiliation": "The sect you belong to in is not in the list of this poll audience",
     "unauthorized": "You are not signed in",
     "not_in_audience": "You are not in the targeted audience of this poll",

@@ -414,68 +414,112 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 )}
                 {modalSection === "audience" && (
                   <>
-                    <p>
-                      <span className="font-medium">{t("ageRange")}</span>:{" "}
-                      {t("ageRangeBetween", {
-                        min: localPoll.audience.age_range?.min ?? "",
-                        max:
-                          localPoll.audience.age_range?.max ===
-                          String(MAX_AUDIENCE_AGE)
-                            ? t("ageRangeNoMax")
-                            : localPoll.audience.age_range?.max ?? "",
-                      })}
-                    </p>
-                    {[
-                      {
-                        label: t("gender"),
-                        options: genders,
-                        aud: strToArray(localPoll.audience.gender ?? "") ?? [],
-                      },
-                      {
-                        label: t("hometown"),
-                        options: provinces,
-                        aud: strToArray(localPoll.audience.hometown ?? ""),
-                      },
-                      {
-                        label: t("religinousAffiliation"),
-                        options: religinousAffiliations,
-                        aud: strToArray(
-                          localPoll.audience.religious_affiliation ?? ""
-                        ),
-                      },
-                      {
-                        label: t("ethnicity"),
-                        options: ethnicities,
-                        aud: strToArray(localPoll.audience.ethnicity ?? ""),
-                      },
-                      {
-                        label: t("country"),
-                        options: countries,
-                        aud: strToArray(localPoll.audience.country ?? ""),
-                      },
-                    ].map((audience, i) => {
-                      return (
-                        <p key={i}>
+                    {localPoll.audience.allowed_voters &&
+                    (Array.isArray(localPoll.audience.allowed_voters)
+                      ? localPoll.audience.allowed_voters.length > 0
+                      : localPoll.audience.allowed_voters.length > 0) ? (
+                      <p>
+                        <span className="font-medium">
+                          {t("allowedVoters")}:{" "}
+                        </span>
+                        {t("allowedVotersDescription", {
+                          count: Array.isArray(
+                            localPoll.audience.allowed_voters
+                          )
+                            ? localPoll.audience.allowed_voters.length
+                            : localPoll.audience.allowed_voters
+                                .split("\n")
+                                .filter((v: string) => v.trim()).length,
+                        })}
+                      </p>
+                    ) : (
+                      <>
+                        <p>
                           <span className="font-medium">
-                            {audience.label}:{" "}
+                            {t("ageRange")}
                           </span>
-                          {(audience.aud ?? "")?.length === 0 ? (
-                            t("noLimit")
-                          ) : (
-                            <>
-                              {audience.aud
-                                .map(
-                                  (item) =>
-                                    audience.options[
-                                      item as keyof typeof audience.options
-                                    ]
-                                )
-                                .join(", ")}
-                            </>
-                          )}
+                          :{" "}
+                          {t("ageRangeBetween", {
+                            min:
+                              localPoll.audience.age_range?.min ?? "",
+                            max:
+                              localPoll.audience.age_range?.max ===
+                              String(MAX_AUDIENCE_AGE)
+                                ? t("ageRangeNoMax")
+                                : localPoll.audience.age_range?.max ??
+                                  "",
+                          })}
                         </p>
-                      );
-                    })}
+                        {[
+                          {
+                            label: t("gender"),
+                            options: genders,
+                            aud:
+                              strToArray(
+                                localPoll.audience.gender ?? ""
+                              ) ?? [],
+                          },
+                          {
+                            label: t("hometown"),
+                            options: provinces,
+                            aud: strToArray(
+                              localPoll.audience.hometown ?? ""
+                            ),
+                          },
+                          {
+                            label: t("religinousAffiliation"),
+                            options: religinousAffiliations,
+                            aud: strToArray(
+                              localPoll.audience.religious_affiliation ??
+                                ""
+                            ),
+                          },
+                          {
+                            label: t("ethnicity"),
+                            options: ethnicities,
+                            aud: strToArray(
+                              localPoll.audience.ethnicity ?? ""
+                            ),
+                          },
+                          {
+                            label: t("country"),
+                            options: countries,
+                            aud: strToArray(
+                              localPoll.audience.country ?? ""
+                            ),
+                          },
+                          {
+                            label: t("cityInsideSyria"),
+                            options: provinces,
+                            aud: strToArray(
+                              localPoll.audience.city_inside_syria ?? ""
+                            ),
+                          },
+                        ].map((audience, i) => {
+                          return (
+                            <p key={i}>
+                              <span className="font-medium">
+                                {audience.label}:{" "}
+                              </span>
+                              {(audience.aud ?? "")?.length === 0 ? (
+                                t("noLimit")
+                              ) : (
+                                <>
+                                  {audience.aud
+                                    .map(
+                                      (item) =>
+                                        audience.options[
+                                          item as keyof typeof audience.options
+                                        ]
+                                    )
+                                    .join(", ")}
+                                </>
+                              )}
+                            </p>
+                          );
+                        })}
+                      </>
+                    )}
                   </>
                 )}
                 {modalSection === "share" && (

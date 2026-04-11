@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionProps } from "../types";
-import { FormSelect, FormCheckbox, SectionHeader } from "../fields";
+import { FormAutocomplete, FormCheckbox, SectionHeader } from "../fields";
 import useHealthStatuses from "@/components/hooks/localization/health";
 
 export default function HealthSection({
@@ -15,12 +15,12 @@ export default function HealthSection({
   return (
     <>
       <SectionHeader number={6} title={t("sections.health.title")} />
-      <FormSelect
+      <FormAutocomplete
         name="health_status"
         control={control}
         label={t("fields.health_status.label")}
         options={healthStatuses}
-        defaultSelectedKeys={[getValues("health_status")]}
+        defaultSelectedKey={getValues("health_status")}
       />
       <div className="flex flex-col gap-2">
         <FormCheckbox
