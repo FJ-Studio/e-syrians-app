@@ -243,8 +243,10 @@ const TwoFactorAuth: FC = () => {
                 <li>{t("setup.step3")}</li>
               </ol>
 
-              {/* QR Code */}
+              {/* QR Code — the backend returns a data URL, so next/image's
+                  optimization pipeline doesn't apply. Plain <img> is correct. */}
               <div className="flex justify-center rounded-lg bg-white p-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={setupData.qr_code} alt="2FA QR Code" className="h-48 w-48" />
               </div>
 

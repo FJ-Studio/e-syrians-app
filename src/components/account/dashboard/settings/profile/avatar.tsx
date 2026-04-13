@@ -8,7 +8,7 @@ import { UserIcon } from "@heroicons/react/24/outline";
 import { Button, Card, CardBody, CardHeader, Image, Skeleton } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
 type UpdateAvatarProps = {
@@ -21,13 +21,13 @@ interface AvatarFields {
 }
 
 const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
-  const [preview, setPreview] = useState<string | null>(null);
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const locale = useLocale();
   const t = useTranslations("account.settings.avatar");
   const {
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { isSubmitting },
   } = useForm<AvatarFields>({
     defaultValues: {
@@ -35,19 +35,31 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
     },
   });
 
-  const changes = watch();
+  // Use `useWatch` instead of the form's `watch()` so the subscription plays
+  // nicely with React Compiler memoization.
+  const avatar = useWatch({ control, name: "avatar" });
   const serverError = useServerError();
 
+  /* eslint-disable react-hooks/set-state-in-effect --
+   * Manage the lifetime of the object URL for the picked File. This is the
+   * canonical `URL.createObjectURL` + cleanup pattern — it genuinely needs
+   * state tied to an effect because the URL is an imperative resource that
+   * must be revoked. React Compiler's rule doesn't cover this case cleanly.
+   */
   useEffect(() => {
-    if (user?.avatar) {
-      setPreview(user.avatar);
-    }
-    if (changes.avatar instanceof File) {
-      const objectUrl = URL.createObjectURL(changes.avatar);
-      setPreview(objectUrl);
-      return () => URL.revokeObjectURL(objectUrl);
-    }
-  }, [changes.avatar, user]);
+    if (!(avatar instanceof File)) return;
+    const objectUrl = URL.createObjectURL(avatar);
+    setBlobUrl(objectUrl);
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+      setBlobUrl(null);
+    };
+  }, [avatar]);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  // Preview is derived during render: the blob URL takes precedence when a
+  // new file is picked, otherwise fall back to the user's saved avatar.
+  const preview = blobUrl ?? user?.avatar ?? null;
 
   const save = async (data: AvatarFields) => {
     const token = await generateToken("update_avatar");
@@ -109,7 +121,7 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
               buttonText={t("avatar.upload")}
               preview={false}
             />
-            <Button color="primary" type="submit" isDisabled={isSubmitting || !changes.avatar} isLoading={isSubmitting}>
+            <Button color="primary" type="submit" isDisabled={isSubmitting || !avatar} isLoading={isSubmitting}>
               {t("avatar.save")}
             </Button>
           </div>

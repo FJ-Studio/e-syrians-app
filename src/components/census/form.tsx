@@ -26,7 +26,7 @@ import confetti from "canvas-confetti";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import { useEsyrian } from "../shared/contexts/es";
 
@@ -82,7 +82,6 @@ const CensusForm: FC = () => {
     reset,
     getValues,
     setValue,
-    watch,
     setError,
     formState: { isSubmitting },
   } = useForm<RegistrationForm>({
@@ -92,8 +91,9 @@ const CensusForm: FC = () => {
     },
   });
 
-  // Persist form data to localStorage
-  const watchedValues = watch();
+  // Persist form data to localStorage. `useWatch` is the subscription-based
+  // hook that's compatible with React Compiler memoization.
+  const watchedValues = useWatch({ control });
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(watchedValues));
   }, [watchedValues]);
