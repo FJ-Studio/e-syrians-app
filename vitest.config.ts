@@ -10,6 +10,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    // Don't fail CI when no test files exist yet — lets the test job stay
+    // green while the suite is being built out. Remove once the first real
+    // test is in place if you want "no tests" to be treated as a failure.
+    passWithNoTests: true,
     coverage: {
       provider: "v8",
       reporter: ["text", "html", "lcov"],
