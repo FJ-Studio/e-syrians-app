@@ -1,35 +1,28 @@
 "use client";
 
-import { SectionProps } from "../types";
-import {
-  FormInput,
-  FormSelect,
-  FormCheckbox,
-  SectionHeader,
-} from "../fields";
 import useCountries from "@/components/hooks/localization/country";
 import useProvinces from "@/components/hooks/localization/provinces";
-import { Avatar, SelectItem } from "@heroui/react";
+import { AutocompleteItem, Avatar, SelectItem } from "@heroui/react";
+import { FormAutocomplete, FormCheckbox, FormInput, FormSelect, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function CountryLocationSection({
-  control,
-  getValues,
-  setValue,
-  t,
-}: SectionProps) {
+export default function CountryLocationSection({ control, getValues, setValue, t }: SectionProps) {
   const countries = useCountries();
   const provinces = useProvinces();
 
-  const countryRenderItem = (key: string, label: string) => (
+  const countryAutocompleteRenderItem = (key: string, label: string) => (
+    <AutocompleteItem
+      key={key}
+      startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
+    >
+      {label}
+    </AutocompleteItem>
+  );
+
+  const countrySelectRenderItem = (key: string, label: string) => (
     <SelectItem
       key={key}
-      startContent={
-        <Avatar
-          src={`/flags/${key.toLowerCase()}.svg`}
-          className="w-6 h-6"
-          size="sm"
-        />
-      }
+      startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
     >
       {label}
     </SelectItem>
@@ -38,7 +31,7 @@ export default function CountryLocationSection({
   return (
     <>
       {/* Country of residence (part of personal data flow) */}
-      <FormSelect
+      <FormAutocomplete
         name="country"
         control={control}
         rules={{ required: true }}
@@ -46,26 +39,25 @@ export default function CountryLocationSection({
         label={t("fields.country.label")}
         description={t("fields.country.description")}
         options={countries}
-        defaultSelectedKeys={[getValues("country")]}
+        defaultSelectedKey={getValues("country")}
         scrollShadowProps={{ isEnabled: false }}
-        renderItem={countryRenderItem}
+        renderItem={countryAutocompleteRenderItem}
       />
 
       {getValues("country") === "SY" && (
-        <FormSelect
+        <FormAutocomplete
           name="city_inside_syria"
           control={control}
           rules={{ required: true }}
           isRequired
           label={t("fields.city_inside_syria.label")}
           options={provinces}
-          defaultSelectedKeys={[getValues("city_inside_syria")]}
-          onSelectionChange={(selected) =>
-            setValue(
-              "city",
-              provinces[selected.anchorKey as keyof typeof provinces]
-            )
-          }
+          defaultSelectedKey={getValues("city_inside_syria")}
+          onSelectionChange={(key) => {
+            if (key) {
+              setValue("city", provinces[key as keyof typeof provinces]);
+            }
+          }}
         />
       )}
 
@@ -94,16 +86,10 @@ export default function CountryLocationSection({
         label={t("fields.other_nationalities.label")}
         description={t("fields.other_nationalities.description")}
         selectionMode="multiple"
-        options={Object.fromEntries(
-          Object.entries(countries).filter(([c]) => c !== "SY")
-        )}
-        defaultSelectedKeys={
-          getValues("other_nationalities")
-            ? getValues("other_nationalities").split(",")
-            : undefined
-        }
+        options={Object.fromEntries(Object.entries(countries).filter(([c]) => c !== "SY"))}
+        defaultSelectedKeys={getValues("other_nationalities") ? getValues("other_nationalities").split(",") : undefined}
         scrollShadowProps={{ isEnabled: false }}
-        renderItem={countryRenderItem}
+        renderItem={countrySelectRenderItem}
       />
 
       {/* Section 4: Location Data */}

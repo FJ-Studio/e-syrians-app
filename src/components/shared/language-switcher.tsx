@@ -2,13 +2,7 @@
 
 import { LANGUAGES } from "@/lib/constants/misc";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@heroui/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
 

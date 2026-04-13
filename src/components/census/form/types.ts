@@ -1,5 +1,5 @@
-import { Control, UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { RegistrationForm } from "@/lib/types/census";
+import { Control, UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 export interface SectionProps {
   control: Control<RegistrationForm>;

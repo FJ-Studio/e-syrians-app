@@ -664,6 +664,17 @@
       "identifier": "E-mail / Phone / National ID",
       "forgotPassword": "Forgot password"
     },
+    "twoFactor": {
+      "title": "Two-factor authentication",
+      "description": "Enter the 6-digit code from your authenticator app to continue signing in.",
+      "code": "Verification code",
+      "verify": "Verify",
+      "useRecoveryCode": "Use a recovery code",
+      "useAuthenticatorCode": "Use authenticator code",
+      "invalidCode": "Invalid code, please try again",
+      "challengeExpired": "Session expired, please sign in again",
+      "backToLogin": "Back to login"
+    },
     "forgotPassword": {
       "email": "E-mail address",
       "sendLink": "Send reset link",
@@ -688,11 +699,10 @@
       "nav": {
         "polls": "Polls",
         "verifications": "Verifications",
+        "notifications": "Notifications",
         "settings": "Settings",
         "donate": "Donate",
         "signout": "Sign out",
-        "violations": "Violations",
-        "wallet": "Wallet",
         "more": "More",
         "overview": "Overview"
       },
@@ -861,6 +871,15 @@
             "label": "Religious affiliation",
             "description": "A blank value indicates that users from all religious affiliations are eligible to vote."
           },
+          "city_inside_syria": {
+            "label": "City in Syria",
+            "description": "Only shown when country is set to Syria only. A blank value indicates that users from all cities in Syria are eligible to vote."
+          },
+          "allowed_voters": {
+            "label": "Specific voters (optional)",
+            "placeholder": "Enter one email or national ID per line",
+            "description": "If provided, only these specific people will be able to vote. This overrides all other audience criteria above."
+          },
           "age_range": {
             "label": "Age range"
           },
@@ -945,7 +964,7 @@
       },
       "security": {
         "title": "Security settings",
-        "description": "Here, you'll find options to enhance the security of your data. Currently, you can update your account password, with more advanced tools coming soon.",
+        "description": "Here, you'll find options to enhance the security of your data.",
         "currentPassword": "Current Password",
         "newPassword": "New Password",
         "confirmPassword": "New password confirmation",
@@ -972,24 +991,74 @@
           "verificationLinkSent": "Verification link sent",
           "success": "E-mail address updated successfully",
           "description": "Please type your new e-mail address carefully, when you update your e-mail, you will have to log in again"
+        },
+        "twoFactor": {
+          "title": "Two-Factor Authentication",
+          "description": "Add an extra layer of security to your account by requiring a verification code from an authenticator app when you sign in.",
+          "enabled": "Two-factor authentication is enabled",
+          "disabled": "Two-factor authentication is not enabled",
+          "enable": "Enable 2FA",
+          "disable": "Disable 2FA",
+          "setup": {
+            "title": "Set up two-factor authentication",
+            "step1": "Install an authenticator app like Google Authenticator or Authy on your phone.",
+            "step2": "Scan the QR code below with your authenticator app.",
+            "step3": "Enter the 6-digit verification code from the app to confirm setup.",
+            "secretKey": "Or enter this secret key manually:",
+            "verificationCode": "Verification code",
+            "confirm": "Confirm & Enable",
+            "cancel": "Cancel"
+          },
+          "disableModal": {
+            "title": "Disable two-factor authentication",
+            "description": "Enter your authenticator code or a recovery code to disable 2FA.",
+            "code": "Code",
+            "useRecoveryCode": "Use a recovery code instead",
+            "useAuthenticatorCode": "Use authenticator code instead",
+            "confirm": "Disable 2FA"
+          },
+          "recoveryCodes": {
+            "title": "Recovery Codes",
+            "description": "Save these recovery codes in a safe place. You can use them to access your account if you lose your authenticator device.",
+            "regenerate": "Regenerate codes",
+            "regenerateConfirm": "Are you sure? This will invalidate your existing recovery codes.",
+            "copied": "Recovery codes copied to clipboard",
+            "copy": "Copy codes",
+            "close": "Close"
+          },
+          "errors": {
+            "setupFailed": "Failed to set up 2FA",
+            "confirmFailed": "Invalid verification code",
+            "disableFailed": "Failed to disable 2FA",
+            "invalidCode": "Invalid code"
+          },
+          "success": {
+            "enabled": "Two-factor authentication has been enabled",
+            "disabled": "Two-factor authentication has been disabled"
+          }
         }
       },
-      "settings": {
-        "notifications": {
-          "title": "Notifications",
+      "notifications": {
+        "tabs": {
+          "history": "History",
+          "settings": "Settings"
+        },
+        "history": {
+          "title": "Notification history",
+          "empty": "You have no notifications yet."
+        },
+        "preferences": {
+          "title": "Notification preferences",
           "received_verification_email": "I want to receive an email when someone verifies my data",
           "account_verified_email": "I want to receive an email when my account gets verified",
           "update": "Update notifications settings",
           "success": "Notifications settings updated successfully"
         }
       },
-      "wallet": {
-        "title": "Wallet",
-        "description": "We are committed to becoming a trusted provider of survey services across Syria. This will be a paid service available to individuals and organizations interested in gathering public opinion from the Syrian community. Participants in each survey will receive financial compensation calculated based on their level of participation. Available payment methods will be announced soon."
-      },
-      "violations": {
-        "title": "Violations",
-        "description": "Here, you can report various types of online content — including hate speech, fake news, violence, corruption, and more. All reports will be documented and archived."
+      "privacy": {
+        "title": "Privacy",
+        "description": "Control your privacy settings and manage how your data is used.",
+        "comingSoon": "Privacy settings are coming soon. Stay tuned!"
       },
       "overview": {
         "error": "Failed to load overview. Please try again.",
@@ -1013,16 +1082,7 @@
           "inactive": "Inactive",
           "votes": "votes"
         },
-        "comingSoon": {
-          "violations": {
-            "title": "Violations",
-            "description": "Report hate speech, fake news, violence, corruption, and more."
-          },
-          "wallet": {
-            "title": "Wallet",
-            "description": "Earn rewards for participating in surveys. Payment methods coming soon."
-          }
-        }
+        "comingSoon": {}
       }
     },
     "settings": {
@@ -1033,8 +1093,8 @@
         "security": {
           "title": "Security"
         },
-        "notifications": {
-          "title": "Notifications"
+        "privacy": {
+          "title": "Privacy"
         }
       },
       "error": {
@@ -1341,6 +1401,9 @@
     "religinousAffiliation": "Religinous Affiliation",
     "ethnicity": "Ethnicity",
     "country": "Country of residence",
+    "cityInsideSyria": "City in Syria",
+    "allowedVoters": "Specific voters",
+    "allowedVotersDescription": "This poll is restricted to {count} specific people",
     "noLimit": "Not limited",
     "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
     "filter": {
@@ -1401,6 +1464,8 @@
     "ethnicity": "the ethnicity you belong to in is not in the list of this poll audience",
     "gender": "Your gender in is not in the list of this poll audience",
     "hometown": "The hometown you belong to in is not in the list of this poll audience",
+    "city_inside_syria": "The city you live in within Syria is not in the list of this poll audience",
+    "not_in_allowed_voters": "You are not in the list of people allowed to vote on this poll",
     "religious_affiliation": "The sect you belong to in is not in the list of this poll audience",
     "unauthorized": "You are not signed in",
     "not_in_audience": "You are not in the targeted audience of this poll",

@@ -1,12 +1,16 @@
 "use client";
-import { Poll } from "@/lib/types/polls";
+import ShortUserSummary from "@/components/census/cards/short-summary";
+import useCannotVoteReasons from "@/components/hooks/localization/cannot-vote";
+import useServerError from "@/components/hooks/localization/server-errors";
+import { ibm } from "@/lib/fonts/fonts";
+import { generateToken } from "@/lib/recaptcha";
+import { AudienceFailure, Poll } from "@/lib/types/polls";
 import {
   CalendarDaysIcon,
   EllipsisVerticalIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
   ShareIcon,
-  UserGroupIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 import {
@@ -32,47 +36,57 @@ import {
   Snippet,
   useDisclosure,
 } from "@heroui/react";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { FC, useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 import PollOptionRow from "./poll-option-row";
 import VotersModal from "./voters-modal";
-import Link from "next/link";
-import isInAudience from "@/lib/in-audience";
-import { useSession } from "next-auth/react";
-import { toast } from "sonner";
-import { generateToken } from "@/lib/recaptcha";
-import useServerError from "@/components/hooks/localization/server-errors";
-import useCannotVoteReasons from "@/components/hooks/localization/cannot-vote";
-import ShortUserSummary from "@/components/census/cards/short-summary";
-import { MAX_AUDIENCE_AGE } from "@/lib/constants/census";
-import useGender from "@/components/hooks/localization/gender";
-import useEthnicity from "@/components/hooks/localization/ethnicity";
-import useProvinces from "@/components/hooks/localization/provinces";
-import useCountries from "@/components/hooks/localization/country";
-import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
-import strToArray from "@/lib/str-array";
-import { ibm } from "@/lib/fonts/fonts";
 
 type Props = {
   poll: Poll;
   mode?: "full" | "compact";
 };
 
+/**
+ * Map a per-criterion audience failure to the cannot-vote reason key
+ * used by the localization hook. `unauthenticated` is handled separately
+ * via the auth status check.
+ */
+const failureToReasonKey: Record<
+  Exclude<AudienceFailure, "unauthenticated">,
+  | "age"
+  | "gender"
+  | "country"
+  | "hometown"
+  | "religious_affiliation"
+  | "ethnicity"
+  | "city_inside_syria"
+  | "not_in_allowed_voters"
+> = {
+  not_in_allowed_voters: "not_in_allowed_voters",
+  birth_date_missing: "age",
+  age_min: "age",
+  age_max: "age",
+  gender: "gender",
+  gender_missing: "gender",
+  country: "country",
+  country_missing: "country",
+  hometown: "hometown",
+  hometown_missing: "hometown",
+  religious_affiliation: "religious_affiliation",
+  religious_affiliation_missing: "religious_affiliation",
+  ethnicity: "ethnicity",
+  ethnicity_missing: "ethnicity",
+  city_inside_syria: "city_inside_syria",
+  city_inside_syria_missing: "city_inside_syria",
+};
+
 const PollFullCard: FC<Props> = ({ poll }) => {
-  const genders = useGender();
-  const ethnicities = useEthnicity();
-  const provinces = useProvinces();
-  const countries = useCountries();
-  const religinousAffiliations = useReligiousAffiliation();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const {
-    isOpen: isVotersOpen,
-    onOpen: onVotersOpen,
-    onOpenChange: onVotersOpenChange,
-  } = useDisclosure();
-  const [modalSection, setModalSection] = useState<
-    "author" | "timeline" | "audience" | "share" | null
-  >(null);
+  const { isOpen: isVotersOpen, onOpen: onVotersOpen, onOpenChange: onVotersOpenChange } = useDisclosure();
+  const [modalSection, setModalSection] = useState<"author" | "timeline" | "share" | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [selectedOptionText, setSelectedOptionText] = useState("");
 
@@ -91,22 +105,17 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   const cannotVoteReasons = useCannotVoteReasons();
   const [loading, setLoading] = useState(false);
   const serverErrors = useServerError();
-  const [selectedOptions, setSelectedOptions] = useState<Array<string>>(
-    localPoll.selected_options ?? []
-  );
+  const [selectedOptions, setSelectedOptions] = useState<Array<string>>(localPoll.selected_options ?? []);
 
   const { user } = localPoll;
   const t = useTranslations("polls");
-  const { data, status } = useSession();
-  const canAnswer = isInAudience(localPoll, data?.user);
+  const { status } = useSession();
 
   useEffect(() => {
     // If the array exceeds the limit, remove the oldest selected option
     if (selectedOptions.length > localPoll.max_selections) {
       toast.warning(t("maxSelections", { max: localPoll.max_selections }));
-      setSelectedOptions((prevSelected) =>
-        prevSelected.slice(-localPoll.max_selections)
-      );
+      setSelectedOptions((prevSelected) => prevSelected.slice(-localPoll.max_selections));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOptions]);
@@ -114,7 +123,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   const vote = async () => {
     if (selectedOptions.length === 0) {
       toast.warning(t("noOptionSelected"));
-      return
+      return;
     }
     setLoading(true);
     const token = await generateToken("poll_vote");
@@ -146,10 +155,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   };
 
   const reactToPoll = async (reaction: "up" | "down") => {
-    if (
-      (localPoll.has_downvoted && reaction === "down") ||
-      (localPoll.has_upvoted && reaction === "up")
-    ) {
+    if ((localPoll.has_downvoted && reaction === "down") || (localPoll.has_upvoted && reaction === "up")) {
       toast.warning(t("alreadyReacted"));
       return;
     }
@@ -205,36 +211,28 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   }, [localPoll.end_date]);
 
   const canVote = useMemo(() => {
-    return (
-      status === "authenticated" &&
-      !localPoll.has_voted &&
-      canAnswer[0] &&
-      !pollExpired
-    );
-  }, [canAnswer, localPoll.has_voted, status, pollExpired]);
+    return status === "authenticated" && !localPoll.has_voted && localPoll.is_in_audience && !pollExpired;
+  }, [localPoll.is_in_audience, localPoll.has_voted, status, pollExpired]);
 
   return (
     <>
       <Card className="p-3">
-        <CardHeader className="flex items-center justify-beteen gap-2">
+        <CardHeader className="justify-beteen flex items-center gap-2">
           <Avatar
             src={user.avatar}
             className="min-h-10 min-w-10"
             alt={`${user.name} ${user.surname}`}
             title={`${user.name} ${user.surname}`}
           />
-          <Link
-            className="w-full flex flex-col"
-            href={`/polls/${localPoll.id}`}
-          >
-            <span className="text-default-500 font-normal text-tiny">
+          <Link className="flex w-full flex-col" href={`/polls/${localPoll.id}`}>
+            <span className="text-default-500 text-tiny font-normal">
               {new Date(localPoll.created_at).toLocaleDateString()}
             </span>
             <p className="font-medium">{`${localPoll.user.name} ${localPoll.user.surname}`}</p>
           </Link>
           <Dropdown>
             <DropdownTrigger>
-              <EllipsisVerticalIcon className="h-6 w-6 text-gray-700 cursor-pointer" />
+              <EllipsisVerticalIcon className="h-6 w-6 cursor-pointer text-gray-700" />
             </DropdownTrigger>
             <DropdownMenu>
               <DropdownItem
@@ -252,13 +250,6 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 {t("actions.timeline")}
               </DropdownItem>
               <DropdownItem
-                key="audience"
-                startContent={<UserGroupIcon className="size-5" />}
-                onPress={() => setModalSection("audience")}
-              >
-                {t("actions.audience")}
-              </DropdownItem>
-              <DropdownItem
                 key="share"
                 startContent={<ShareIcon className="size-5" />}
                 onPress={() => setModalSection("share")}
@@ -268,7 +259,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             </DropdownMenu>
           </Dropdown>
         </CardHeader>
-        <CardBody className="space-y-2 items-start text-start">
+        <CardBody className="items-start space-y-2 text-start">
           <p>{localPoll.question}</p>
 
           <CheckboxGroup
@@ -296,7 +287,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
               />
             ))}
           </CheckboxGroup>
-          <p className="mt-2 text-default-500 text-sm">
+          <p className="text-default-500 mt-2 text-sm">
             {t("voters_count", { count: localPoll?.unique_voters_count ?? 0 })}
           </p>
         </CardBody>
@@ -304,7 +295,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           <div className="flex items-center gap-1">
             <Button
               size="sm"
-              startContent={<HandThumbUpIcon className="w-6 h-6" />}
+              startContent={<HandThumbUpIcon className="h-6 w-6" />}
               isDisabled={status !== "authenticated" || loading}
               onPress={() => reactToPoll("up")}
               color={localPoll.has_upvoted ? "primary" : "default"}
@@ -313,7 +304,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             </Button>
             <Button
               size="sm"
-              startContent={<HandThumbDownIcon className="w-6 h-6" />}
+              startContent={<HandThumbDownIcon className="h-6 w-6" />}
               isDisabled={status !== "authenticated" || loading}
               onPress={() => reactToPoll("down")}
               color={localPoll.has_downvoted ? "primary" : "default"}
@@ -328,7 +319,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
               onPress={vote}
               isDisabled={loading}
               isLoading={loading}
-              className="px-8 text-sm bg-[#50c0a9]"
+              className="bg-[#50c0a9] px-8 text-sm"
             >
               {t("vote")}
             </Button>
@@ -339,40 +330,35 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                   {t("vote")}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="p-3 text-start items-start">
-                <span className="font-medium text-start">
-                  {t("cannotVote")}
-                </span>
+              <PopoverContent className="items-start p-3 text-start">
+                <span className="text-start font-medium">{t("cannotVote")}</span>
                 {status === "unauthenticated" && (
-                  <p className="w-full text-start">
-                    - {cannotVoteReasons.unauthorized}
-                  </p>
+                  <p className="w-full text-start">- {cannotVoteReasons.unauthorized}</p>
                 )}
-                {canAnswer[0] === false && status === "authenticated" && (
-                  <p className="w-full text-start">
-                    - {cannotVoteReasons.not_in_audience}
-                  </p>
-                )}
-                {localPoll.has_voted && (
-                  <p className="w-full text-start">
-                    - {cannotVoteReasons.has_voted}
-                  </p>
-                )}
-                {pollExpired && (
-                  <p className="w-full text-start">
-                    - {cannotVoteReasons.poll_expired}
-                  </p>
-                )}
+                {localPoll.is_in_audience === false &&
+                  status === "authenticated" &&
+                  (() => {
+                    const specificFailures = localPoll.audience_failures.filter(
+                      (f): f is Exclude<AudienceFailure, "unauthenticated"> => f !== "unauthenticated",
+                    );
+                    const reasonKeys = Array.from(new Set(specificFailures.map((f) => failureToReasonKey[f])));
+                    if (reasonKeys.length === 0) {
+                      return <p className="w-full text-start">- {cannotVoteReasons.not_in_audience}</p>;
+                    }
+                    return reasonKeys.map((key) => (
+                      <p key={key} className="w-full text-start">
+                        - {cannotVoteReasons[key]}
+                      </p>
+                    ));
+                  })()}
+                {localPoll.has_voted && <p className="w-full text-start">- {cannotVoteReasons.has_voted}</p>}
+                {pollExpired && <p className="w-full text-start">- {cannotVoteReasons.poll_expired}</p>}
               </PopoverContent>
             </Popover>
           )}
         </CardFooter>
       </Card>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        onClose={() => setModalSection(null)}
-      >
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={() => setModalSection(null)}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -381,18 +367,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                   {modalSection === "author"
                     ? t("actions.author")
                     : modalSection === "timeline"
-                    ? t("actions.timeline")
-                    : modalSection === "audience"
-                    ? t("actions.audience")
-                    : modalSection === "share"
-                    ? t("actions.share")
-                    : ""}
+                      ? t("actions.timeline")
+                      : modalSection === "share"
+                        ? t("actions.share")
+                        : ""}
                 </h3>
               </ModalHeader>
               <ModalBody>
-                {modalSection === "author" && (
-                  <ShortUserSummary user={localPoll.user} />
-                )}
+                {modalSection === "author" && <ShortUserSummary user={localPoll.user} />}
                 {modalSection === "timeline" && (
                   <>
                     <p>
@@ -402,84 +384,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     <p>
                       <span className="font-medium">{t("votingPeriod")}</span>:{" "}
                       {t.rich("postedBy", {
-                        start_date: new Date(
-                          localPoll.start_date
-                        ).toLocaleDateString(),
-                        end_date: new Date(
-                          localPoll.end_date
-                        ).toLocaleDateString(),
+                        start_date: new Date(localPoll.start_date).toLocaleDateString(),
+                        end_date: new Date(localPoll.end_date).toLocaleDateString(),
                       })}
                     </p>
-                  </>
-                )}
-                {modalSection === "audience" && (
-                  <>
-                    <p>
-                      <span className="font-medium">{t("ageRange")}</span>:{" "}
-                      {t("ageRangeBetween", {
-                        min: localPoll.audience.age_range?.min ?? "",
-                        max:
-                          localPoll.audience.age_range?.max ===
-                          String(MAX_AUDIENCE_AGE)
-                            ? t("ageRangeNoMax")
-                            : localPoll.audience.age_range?.max ?? "",
-                      })}
-                    </p>
-                    {[
-                      {
-                        label: t("gender"),
-                        options: genders,
-                        aud: strToArray(localPoll.audience.gender ?? "") ?? [],
-                      },
-                      {
-                        label: t("hometown"),
-                        options: provinces,
-                        aud: strToArray(localPoll.audience.hometown ?? ""),
-                      },
-                      {
-                        label: t("religinousAffiliation"),
-                        options: religinousAffiliations,
-                        aud: strToArray(
-                          localPoll.audience.religious_affiliation ?? ""
-                        ),
-                      },
-                      {
-                        label: t("ethnicity"),
-                        options: ethnicities,
-                        aud: strToArray(localPoll.audience.ethnicity ?? ""),
-                      },
-                      {
-                        label: t("country"),
-                        options: countries,
-                        aud: strToArray(localPoll.audience.country ?? ""),
-                      },
-                    ].map((audience, i) => {
-                      return (
-                        <p key={i}>
-                          <span className="font-medium">
-                            {audience.label}:{" "}
-                          </span>
-                          {(audience.aud ?? "")?.length === 0 ? (
-                            t("noLimit")
-                          ) : (
-                            <>
-                              {audience.aud
-                                .map(
-                                  (item) =>
-                                    audience.options[
-                                      item as keyof typeof audience.options
-                                    ]
-                                )
-                                .join(", ")}
-                            </>
-                          )}
-                        </p>
-                      );
-                    })}
                   </>
                 )}
                 {modalSection === "share" && (
-                  <div className="grid grid-cols-2 gap-4 flex-wrap">
+                  <div className="grid grid-cols-2 flex-wrap gap-4">
                     <Button
                       // className="bg-blue-600 text-white"
                       as={Link}
@@ -534,7 +446,9 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 )}
               </ModalBody>
               <ModalFooter className="flex justify-start">
-                <Button onPress={onClose} color="danger">{t("close")}</Button>
+                <Button onPress={onClose} color="danger">
+                  {t("close")}
+                </Button>
               </ModalFooter>
             </>
           )}

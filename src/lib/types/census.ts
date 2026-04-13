@@ -1,15 +1,6 @@
-import {
-  CountryCode,
-  Ethnicity,
-  Gender,
-  Province,
-  ReligiousAffiliation,
-} from "./misc";
+import { CountryCode, Ethnicity, Gender, Province, ReligiousAffiliation } from "./misc";
 
-export type DailyRegistrations = Record<
-  string,
-  { registered: number; verified: number }
->;
+export type DailyRegistrations = Record<string, { registered: number; verified: number }>;
 
 export type CountryRegistrations = {
   [key in CountryCode]: {

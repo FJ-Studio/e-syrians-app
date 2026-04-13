@@ -1,7 +1,8 @@
 "use client";
 
-import { Controller, Control, FieldPath, FieldValues } from "react-hook-form";
 import {
+  Autocomplete,
+  AutocompleteItem,
   Checkbox,
   DatePicker,
   Input,
@@ -11,6 +12,7 @@ import {
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { ReactElement, ReactNode } from "react";
+import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 // ---------------------------------------------------------------------------
 // Shared props
@@ -121,13 +123,68 @@ export function FormSelect<T extends FieldValues>({
           onSelectionChange={onSelectionChange}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? (
-              renderItem(key, options[key])
-            ) : (
-              <SelectItem key={key}>{options[key]}</SelectItem>
-            )
+            renderItem ? renderItem(key, options[key]) : <SelectItem key={key}>{options[key]}</SelectItem>,
           )}
         </Select>
+      )}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+// FormAutocomplete
+// ---------------------------------------------------------------------------
+
+interface FormAutocompleteProps<T extends FieldValues> extends BaseFieldProps<T> {
+  options: Record<string, string>;
+  isRequired?: boolean;
+  description?: string;
+  defaultSelectedKey?: string;
+  scrollShadowProps?: Record<string, unknown>;
+  renderItem?: (key: string, label: string) => ReactElement;
+  onSelectionChange?: (key: string | null) => void;
+}
+
+export function FormAutocomplete<T extends FieldValues>({
+  name,
+  control,
+  label,
+  options,
+  isRequired,
+  description,
+  defaultSelectedKey,
+  scrollShadowProps,
+  renderItem,
+  onSelectionChange,
+  rules,
+}: FormAutocompleteProps<T>) {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field, fieldState: { error, invalid } }) => (
+        <Autocomplete
+          scrollShadowProps={scrollShadowProps}
+          {...field}
+          label={label}
+          isRequired={isRequired}
+          isInvalid={invalid}
+          errorMessage={error?.message}
+          description={description}
+          defaultSelectedKey={defaultSelectedKey}
+          selectedKey={field.value}
+          onSelectionChange={(key) => {
+            const val = key?.toString() ?? null;
+            field.onChange(val);
+            onSelectionChange?.(val);
+          }}
+          classNames={{ clearButton: "hidden" }}
+        >
+          {Object.keys(options).map((key) =>
+            renderItem ? renderItem(key, options[key]) : <AutocompleteItem key={key}>{options[key]}</AutocompleteItem>,
+          )}
+        </Autocomplete>
       )}
     />
   );
@@ -198,9 +255,7 @@ export function FormDatePicker<T extends FieldValues>({
           inert={true}
           value={currentValue ? parseDate(currentValue) : null}
           defaultValue={currentValue ? parseDate(currentValue) : null}
-          onChange={(date) =>
-            date ? setValue(name, date.toString()) : null
-          }
+          onChange={(date) => (date ? setValue(name, date.toString()) : null)}
           isRequired={isRequired}
           label={label}
           errorMessage={error?.message}
@@ -219,19 +274,12 @@ interface FormTextareaProps<T extends FieldValues> extends BaseFieldProps<T> {
   placeholder?: string;
 }
 
-export function FormTextarea<T extends FieldValues>({
-  name,
-  control,
-  label,
-  placeholder,
-}: FormTextareaProps<T>) {
+export function FormTextarea<T extends FieldValues>({ name, control, label, placeholder }: FormTextareaProps<T>) {
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
-        <Textarea {...field} label={label} placeholder={placeholder} />
-      )}
+      render={({ field }) => <Textarea {...field} label={label} placeholder={placeholder} />}
     />
   );
 }
@@ -240,18 +288,10 @@ export function FormTextarea<T extends FieldValues>({
 // SectionHeader
 // ---------------------------------------------------------------------------
 
-export function SectionHeader({
-  number,
-  title,
-  description,
-}: {
-  number: number;
-  title: string;
-  description?: string;
-}) {
+export function SectionHeader({ number, title, description }: { number: number; title: string; description?: string }) {
   return (
     <div>
-      <h3 className="font-semibold text-lg">
+      <h3 className="text-lg font-semibold">
         {number}. {title}
       </h3>
       {description && <p>{description}</p>}

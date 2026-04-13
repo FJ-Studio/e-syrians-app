@@ -1,9 +1,9 @@
 "use client";
-import { FC, PropsWithChildren } from "react";
-import EsyrianProvider from "./es";
-import { HeroUIProvider } from "@heroui/react";
-import { Toaster } from "sonner";
 import { ibm } from "@/lib/fonts/fonts";
+import { HeroUIProvider } from "@heroui/react";
+import { FC, PropsWithChildren } from "react";
+import { Toaster } from "sonner";
+import EsyrianProvider from "./es";
 
 const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (

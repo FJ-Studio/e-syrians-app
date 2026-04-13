@@ -680,6 +680,17 @@
       "resetPassword": "Veguhastina şîfreya nû",
       "email": "E-name",
       "success": "Şîfreya we bi serfirazî veguhast"
+    },
+    "twoFactor": {
+      "title": "Piştrastkirina du-qonaxî",
+      "description": "Koda 6-reqemî ya ji bernameya piştrastkirinê binivîse ji bo berdewamî li ketinê.",
+      "code": "Koda piştrastkirinê",
+      "verify": "Piştrast bike",
+      "useRecoveryCode": "Koda vegerandinê bi kar bîne",
+      "useAuthenticatorCode": "Koda piştrastkirinê bi kar bîne",
+      "invalidCode": "Koda nederbasdar e, ji kerema xwe dîsa biceribîne",
+      "challengeExpired": "Rûniştin biqediya, ji kerema xwe dîsa têkeve",
+      "backToLogin": "Vegere ketinê"
     }
   },
   "account": {
@@ -691,8 +702,7 @@
         "settings": "Mîhengên",
         "donate": "Bikarhêner",
         "signout": "Derketin",
-        "violations": "Tewandînan",
-        "wallet": "Qezenc",
+        "notifications": "ئاگاداریەکان",
         "more": "Zêdetir",
         "overview": "پوختە"
       },
@@ -861,6 +871,15 @@
             "label": "Têkiliyên Dînî",
             "description": "Nivîsê vala nîşan dide ku bikarhênerên ji hemû têkiliyên dînî şayeste ne."
           },
+          "city_inside_syria": {
+            "label": "Bajarê li Sûriyê",
+            "description": "Tenê dema ku welat tenê Sûriye be tê nîşandan. Nivîsê vala nîşan dide ku bikarhênerên ji hemû bajarên li Sûriyê şayeste ne."
+          },
+          "allowed_voters": {
+            "label": "Dengdêrên taybet (bijarte)",
+            "placeholder": "Li her rêzekê e-nameyekê an nasnameya niştimanî binivîse",
+            "description": "Heke hatibe diyarkirin, tenê ev kesên taybet dikarin deng bidin. Ev hemû pîvanên din ên şandeya dengdanê paş dixe."
+          },
           "age_range": {
             "label": "Kategorîya Temenê"
           },
@@ -972,24 +991,74 @@
           "verificationLinkSent": "Girêdana verastkirinê şandin",
           "success": "Navnîşana e-nameyê rast guhert",
           "description": "Ji kerema xwe navnîşana e-nameya xwe ya nû bi baldarî binivîse, gava ku hûn e-nameya xwe nûve bikin, hûn ê ji nû ve têkevinê"
+        },
+        "twoFactor": {
+          "title": "Piştrastkirina du-qonaxî",
+          "description": "Tebeqeyeke ewlehiyê ya zêde li hesabê xwe zêde bike, bi xwestina koda piştrastkirinê ji bernameyeke piştrastkirinê dema tu têkevî.",
+          "enabled": "Piştrastkirina du-qonaxî çalak e",
+          "disabled": "Piştrastkirina du-qonaxî ne çalak e",
+          "enable": "Piştrastkirina du-qonaxî çalak bike",
+          "disable": "Piştrastkirina du-qonaxî neçalak bike",
+          "setup": {
+            "title": "Piştrastkirina du-qonaxî saz bike",
+            "step1": "Bernameyeke piştrastkirinê wek Google Authenticator an Authy li ser telefona xwe saz bike.",
+            "step2": "Koda QR ya li jêr bi bernameya piştrastkirinê veke.",
+            "step3": "Koda 6-reqemî ya piştrastkirinê ji bernameyê binivîse ji bo pejirandina sazkirinê.",
+            "secretKey": "An jî vê kilîta veşartî bi destan binivîse:",
+            "verificationCode": "Koda piştrastkirinê",
+            "confirm": "Pejirîne û çalak bike",
+            "cancel": "Betal bike"
+          },
+          "disableModal": {
+            "title": "Piştrastkirina du-qonaxî neçalak bike",
+            "description": "Koda piştrastkirinê an koda vegerandinê binivîse ji bo neçalakirina piştrastkirina du-qonaxî.",
+            "code": "Kod",
+            "useRecoveryCode": "Li şûna wê koda vegerandinê bi kar bîne",
+            "useAuthenticatorCode": "Li şûna wê koda piştrastkirinê bi kar bîne",
+            "confirm": "Piştrastkirina du-qonaxî neçalak bike"
+          },
+          "recoveryCodes": {
+            "title": "Kodên vegerandinê",
+            "description": "Van kodên vegerandinê li ciyekî ewle veşêre. Tu dikarî wan bi kar bînî ji bo gihîştina hesabê xwe heke tu amûra piştrastkirinê winda bikî.",
+            "regenerate": "Kodan ji nû ve çêbike",
+            "regenerateConfirm": "Tu piştrast î? Ev ê kodên vegerandinê yên heyî betal bike.",
+            "copied": "Kodên vegerandinê li panoyê hatin kopîkirin",
+            "copy": "Kodan kopî bike",
+            "close": "Bigire"
+          },
+          "errors": {
+            "setupFailed": "Sazkirina piştrastkirina du-qonaxî têk çû",
+            "confirmFailed": "Koda piştrastkirinê nederbasdar e",
+            "disableFailed": "Neçalakirina piştrastkirina du-qonaxî têk çû",
+            "invalidCode": "Koda nederbasdar"
+          },
+          "success": {
+            "enabled": "Piştrastkirina du-qonaxî hatî çalakkirin",
+            "disabled": "Piştrastkirina du-qonaxî hatî neçalakkirin"
+          }
         }
       },
-      "settings": {
-        "notifications": {
-          "title": "Notifications",
+      "notifications": {
+        "tabs": {
+          "history": "مێژوو",
+          "settings": "ڕێکخستنەکان"
+        },
+        "history": {
+          "title": "مێژووی ئاگاداریەکان",
+          "empty": "هێشتا هیچ ئاگادارییەکت نییە."
+        },
+        "preferences": {
+          "title": "ئاگاداریەکان",
           "received_verification_email": "Dema ku kesek daneyên min piştrast dike ez dixwazim e-nameyek bistînim",
           "account_verified_email": "Dema ku hesabê min were piştrast kirin ez dixwazim e-nameyek bistînim",
           "update": "Mîhengên ragihandinê nûve bikin",
           "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin"
         }
       },
-      "wallet": {
-        "description": "Em xwe diparêzin ku bibe çavkaniyekê ya piştrast a xizmetên lêkolînê li hember hemû Sûriyê. Xizmeta lêkolînê dê bi pere be û ji bo kes û rêvebirên ku dixwazin raye gelê Sûrî bistînin, amade be. Her beşdarê ku di lêkolînekê de beş digire, dê li gorî astê beşdariya xwe xelatê qedexe werbigire. Şêwazên dayînê ê di demek nêzîk de were ragihandin.",
-        "title": "Qezenc"
-      },
-      "violations": {
-        "description": "Li vir dikarî li ser cûrekî zêde yên naveroka torê rapor bidî — wek axaftina dijî hev, xeberên fêkî, tundîtî, rüşwet û hwd. Hemû rapor dê bêne tomar kirin û arşîv kirin.",
-        "title": "Binpêkirinên"
+      "privacy": {
+        "title": "تایبەتمەندی",
+        "description": "ڕێکخستنەکانی تایبەتمەندی و چۆنیەتی بەکارهێنانی داتاکانت بەڕێوە ببە.",
+        "comingSoon": "ڕێکخستنەکانی تایبەتمەندی بەم زووانە دێت."
       },
       "overview": {
         "error": "بارکردنی پوختە سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە.",
@@ -1013,16 +1082,7 @@
           "inactive": "ناچالاک",
           "votes": "دەنگ"
         },
-        "comingSoon": {
-          "violations": {
-            "title": "سەرپێچییەکان",
-            "description": "ڕاپۆرتی قسەی ڕقانە، هەواڵی درۆ، توندوتیژی، گەندەڵی و هتد بکە."
-          },
-          "wallet": {
-            "title": "جزدان",
-            "description": "پاداشت بەدەست بهێنە بۆ بەشداریکردن لە ڕاپرسییەکان. ڕێگاکانی پارەدان بەم زووانە."
-          }
-        }
+        "comingSoon": {}
       }
     },
     "settings": {
@@ -1033,8 +1093,8 @@
         "security": {
           "title": "Sazkirina ewlehî"
         },
-        "notifications": {
-          "title": "Notifications"
+        "privacy": {
+          "title": "تایبەتمەندی"
         }
       },
       "error": {
@@ -1341,6 +1401,9 @@
     "religinousAffiliation": "Têkiliyê dînî",
     "ethnicity": "Nasname",
     "country": "Welatê nîştegerî",
+    "cityInsideSyria": "Bajarê li Sûriyê",
+    "allowedVoters": "Dengdêrên taybet",
+    "allowedVotersDescription": "Ev lêkolîn tenê ji bo {count} kesên taybet e",
     "noLimit": "Bê sînor",
     "description": "Hemû bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin li vir beşdarî lêkolînên rayê bibin. Bi gelemperî, lêkolîn hatine rêz kirin di bingeha nivîsandina ku naveroka dengên 'Erê' û 'Na' di navber de çêtir e û her wisa bi sal û mehê zêde hatine rêvekirin.",
     "filter": {
@@ -1401,6 +1464,8 @@
     "ethnicity": "Nasnameya te di lîsteya şandeya vê lêkolînekê de nîne",
     "gender": "Rewşa cinsê te di lîsteya şandeya vê lêkolînekê de nîne",
     "hometown": "Bajarê te di lîsteya şandeya vê lêkolînekê de nîne",
+    "city_inside_syria": "Bajarê ku tu tê de dijî li Sûriyê di lîsteya şandeya vê lêkolînekê de nîne",
+    "not_in_allowed_voters": "Tu ne di lîsteya kesên ku destûr heye deng bidin vê lêkolînekê de yî",
     "religious_affiliation": "Dîtina dînê te di lîsteya şandeya vê lêkolînekê de nîne",
     "unauthorized": "Tu têketîne ne kirî",
     "not_in_audience": "Tu ne di şandeya armancê vê lêkolînekê de yî",

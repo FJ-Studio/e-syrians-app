@@ -26,9 +26,7 @@ const RouteTabs: FC<RouteTabsProps> = ({ tabs, children, ariaLabel }) => {
   const { push } = useRouter();
 
   // Find the active tab by matching the end of the pathname
-  const activeKey =
-    tabs.find((t) => pathname.endsWith(t.href) || pathname.endsWith(t.href + "/"))?.key ??
-    tabs[0]?.key;
+  const activeKey = tabs.find((t) => pathname.endsWith(t.href) || pathname.endsWith(t.href + "/"))?.key ?? tabs[0]?.key;
 
   const handleSelectionChange = (key: Key) => {
     const tab = tabs.find((t) => t.key === String(key));
@@ -37,11 +35,7 @@ const RouteTabs: FC<RouteTabsProps> = ({ tabs, children, ariaLabel }) => {
 
   return (
     <>
-      <Tabs
-        aria-label={ariaLabel}
-        selectedKey={activeKey}
-        onSelectionChange={handleSelectionChange}
-      >
+      <Tabs aria-label={ariaLabel} selectedKey={activeKey} onSelectionChange={handleSelectionChange}>
         {tabs.map((tab) => (
           <Tab key={tab.key} title={tab.title} />
         ))}

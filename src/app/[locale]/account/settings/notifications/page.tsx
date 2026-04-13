@@ -1,5 +1,5 @@
-import AccountNotification from "@/components/account/dashboard/settings/notifications/notifications";
+import { redirect } from "next/navigation";
 
-export default function SettingsNotificationsPage() {
-  return <AccountNotification />;
+export default function SettingsNotificationsRedirect() {
+  redirect("/account/notifications/settings");
 }

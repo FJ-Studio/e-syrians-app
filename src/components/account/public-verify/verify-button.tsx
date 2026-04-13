@@ -2,15 +2,7 @@
 import useServerError from "@/components/hooks/localization/server-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@heroui/react";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/react";
 import { useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
@@ -107,9 +99,7 @@ const VerifyButton: FC<Props> = ({ user }) => {
                   fullWidth
                   isDisabled={counter > 0 || loading}
                 >
-                  {`${t("verify", { name: "" })}${
-                    counter > 0 ? ` (${counter})` : ""
-                  }`}
+                  {`${t("verify", { name: "" })}${counter > 0 ? ` (${counter})` : ""}`}
                 </Button>
               </ModalFooter>
             </>

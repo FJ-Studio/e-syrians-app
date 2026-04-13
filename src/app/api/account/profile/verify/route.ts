@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { withApiRoute } from "@/lib/api-route";
+import { NextResponse } from "next/server";
 
 export const POST = withApiRoute(
   async ({ req, body, session }) => {
@@ -17,5 +17,5 @@ export const POST = withApiRoute(
     const response = await request.json();
     return NextResponse.json(response, { status: request.status });
   },
-  { requireAuth: true, requireRecaptcha: true }
+  { requireAuth: true, requireRecaptcha: true },
 );

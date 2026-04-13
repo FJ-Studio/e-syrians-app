@@ -21,8 +21,43 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
+        challenge_token: { label: "Challenge Token", type: "text" },
+        twofa_code: { label: "2FA Code", type: "text" },
+        is_recovery_code: { label: "Is Recovery Code", type: "text" },
       },
       authorize: async (credentials): Promise<ESUser | null> => {
+        // Handle 2FA verification (second step of login)
+        if (credentials?.challenge_token && credentials?.twofa_code) {
+          let req: Response;
+          try {
+            req = await fetch(`${process.env.API_URL}/users/2fa/verify`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                challenge_token: credentials.challenge_token,
+                code: credentials.twofa_code,
+                is_recovery_code: credentials.is_recovery_code === "true",
+              }),
+            });
+          } catch {
+            throw new Error("Unable to reach authentication server.");
+          }
+
+          if (!req.ok) {
+            throw new Error("INVALID_2FA_CODE");
+          }
+
+          const data = await req.json();
+          if (data?.data?.token) {
+            return { ...data.data.user, accessToken: data.data.token };
+          }
+          return null;
+        }
+
+        // Normal credentials login (first step)
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Missing credentials.");
         }
@@ -49,6 +84,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const data = await req.json();
+
+        // If 2FA is required, throw a special error with the challenge token
+        if (data?.data?.requires_2fa) {
+          throw new Error(`2FA_REQUIRED:${data.data.challenge_token}:${data.data.expires_at}`);
+        }
+
         if (data?.data?.token) {
           return { ...data.data.user, accessToken: data.data.token };
         }
@@ -94,20 +135,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       try {
         if (account?.provider && providers.includes(account.provider)) {
           // Social login request
-          const response = await fetch(
-            `${process.env.API_URL}/users/login/social`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify({
-                provider: account.provider,
-                token: account.access_token,
-              }),
-            }
-          );
+          const response = await fetch(`${process.env.API_URL}/users/login/social`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              provider: account.provider,
+              token: account.access_token,
+            }),
+          });
 
           if (!response.ok) {
             // Social login failed — force re-authentication

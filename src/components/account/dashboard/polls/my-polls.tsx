@@ -1,4 +1,5 @@
 "use client";
+import usePollTable from "@/components/hooks/use-poll-table";
 import capitalize from "@/lib/capitalize";
 import { generateToken } from "@/lib/recaptcha";
 import { Poll } from "@/lib/types/polls";
@@ -32,7 +33,6 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, Key, useCallback, useMemo, useState } from "react";
-import usePollTable from "@/components/hooks/use-poll-table";
 
 const MyPolls: FC = () => {
   const t = useTranslations("account.dashboard.polls.my_polls");
@@ -52,9 +52,7 @@ const MyPolls: FC = () => {
   ];
 
   const [deleting, setDeleting] = useState(false);
-  const [visibleColumns, setVisibleColumns] = useState<Selection>(
-    new Set(columns.map((column) => column.uid))
-  );
+  const [visibleColumns, setVisibleColumns] = useState<Selection>(new Set(columns.map((column) => column.uid)));
   const [statusFilter, setStatusFilter] = useState<Selection>("all");
 
   const {
@@ -74,10 +72,8 @@ const MyPolls: FC = () => {
     refetch,
   } = usePollTable<Poll>({
     fetchUrl: "/api/account/polls",
-    dataExtractor: (data) =>
-      (data as { data: { polls: Poll[] } }).data.polls,
-    lastPageExtractor: (data) =>
-      (data as { data: { last_page: number } }).data.last_page ?? 1,
+    dataExtractor: (data) => (data as { data: { polls: Poll[] } }).data.polls,
+    lastPageExtractor: (data) => (data as { data: { last_page: number } }).data.last_page ?? 1,
     searchField: (item) => item.question,
     sortableColumns: ["question", "start_date", "end_date", "created_at", "participants_count"],
     defaultSortColumn: "age",
@@ -86,17 +82,10 @@ const MyPolls: FC = () => {
 
   // Apply status filter on top of hook results
   const filteredByStatus = useMemo(() => {
-    if (
-      statusFilter === "all" ||
-      Array.from(statusFilter).length === statusOptions.length
-    ) {
+    if (statusFilter === "all" || Array.from(statusFilter).length === statusOptions.length) {
       return sortedItems;
     }
-    return sortedItems.filter((poll) =>
-      Array.from(statusFilter).includes(
-        poll.deleted_at ? "inactive" : "active"
-      )
-    );
+    return sortedItems.filter((poll) => Array.from(statusFilter).includes(poll.deleted_at ? "inactive" : "active"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortedItems, statusFilter]);
 
@@ -123,9 +112,7 @@ const MyPolls: FC = () => {
 
   const headerColumns = useMemo(() => {
     if (visibleColumns === "all") return columns;
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.uid)
-    );
+    return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visibleColumns]);
 
@@ -156,34 +143,23 @@ const MyPolls: FC = () => {
           return poll.votes_count;
         case "status":
           return (
-            <Chip
-              variant="flat"
-              size="sm"
-              color={poll.deleted_at ? "danger" : "success"}
-            >
-              {poll.deleted_at
-                ? t("table.status.inactive.title")
-                : t("table.status.active.title")}
+            <Chip variant="flat" size="sm" color={poll.deleted_at ? "danger" : "success"}>
+              {poll.deleted_at ? t("table.status.inactive.title") : t("table.status.active.title")}
             </Chip>
           );
         case "actions":
           return (
-            <div className="relative flex justify-end items-center gap-2">
+            <div className="relative flex items-center justify-end gap-2">
               <Dropdown>
                 <DropdownTrigger>
                   <Button isIconOnly size="sm" variant="light">
                     <EllipsisVerticalIcon className="text-default-300 size-6" />
                   </Button>
                 </DropdownTrigger>
-                <DropdownMenu
-                  disabledKeys={deleting ? ["deactivate", "activate"] : []}
-                >
+                <DropdownMenu disabledKeys={deleting ? ["deactivate", "activate"] : []}>
                   {poll.deleted_at ? (
                     <>
-                      <DropdownItem
-                        key={"activate"}
-                        onPress={() => switchPollStatus(poll.id, "1")}
-                      >
+                      <DropdownItem key={"activate"} onPress={() => switchPollStatus(poll.id, "1")}>
                         {t("table.actions.activate")}
                       </DropdownItem>
                     </>
@@ -200,10 +176,7 @@ const MyPolls: FC = () => {
                           <ArrowTopRightOnSquareIcon className="size-4" />
                         </div>
                       </DropdownItem>
-                      <DropdownItem
-                        key={"deactivate"}
-                        onPress={() => switchPollStatus(poll.id, "0")}
-                      >
+                      <DropdownItem key={"deactivate"} onPress={() => switchPollStatus(poll.id, "0")}>
                         {t("table.actions.deactivate")}
                       </DropdownItem>
                     </>
@@ -213,19 +186,17 @@ const MyPolls: FC = () => {
             </div>
           );
         default:
-          return cellValue !== undefined && typeof cellValue !== "object"
-            ? cellValue
-            : String(cellValue);
+          return cellValue !== undefined && typeof cellValue !== "object" ? cellValue : String(cellValue);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filteredByStatus]
+    [filteredByStatus],
   );
 
   const topContent = useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
+        <div className="flex items-end justify-between gap-3">
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
@@ -238,10 +209,7 @@ const MyPolls: FC = () => {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDownIcon className="text-small size-4" />}
-                  variant="flat"
-                >
+                <Button endContent={<ChevronDownIcon className="text-small size-4" />} variant="flat">
                   {t("table.status.title")}
                 </Button>
               </DropdownTrigger>
@@ -262,12 +230,7 @@ const MyPolls: FC = () => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={
-                    <ChevronDownIcon className="text-small  size-4" />
-                  }
-                  variant="flat"
-                >
+                <Button endContent={<ChevronDownIcon className="text-small size-4" />} variant="flat">
                   {t("table.columns.title")}
                 </Button>
               </DropdownTrigger>
@@ -291,41 +254,17 @@ const MyPolls: FC = () => {
       </div>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    filterValue,
-    statusFilter,
-    visibleColumns,
-    onSearchChange,
-    filteredByStatus.length,
-    hasSearchFilter,
-  ]);
+  }, [filterValue, statusFilter, visibleColumns, onSearchChange, filteredByStatus.length, hasSearchFilter]);
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <Pagination
-          isCompact
-          showShadow
-          color="primary"
-          page={page}
-          total={pages}
-          onChange={setPage}
-        />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onPreviousPage}
-          >
+      <div className="flex items-center justify-between px-2 py-2">
+        <Pagination isCompact showShadow color="primary" page={page} total={pages} onChange={setPage} />
+        <div className="hidden w-[30%] justify-end gap-2 sm:flex">
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
             {t("previous.title")}
           </Button>
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onNextPage}
-          >
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
             {t("next.title")}
           </Button>
         </div>
@@ -337,11 +276,9 @@ const MyPolls: FC = () => {
   return (
     <Card>
       <CardBody>
-        <div className="flex justify-between items-start flex-col sm:flex-row gap-4  mb-6">
+        <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row">
           <div>
-            <h2 className="text-xl font-medium text-default-700 text-start">
-              {t("title")}
-            </h2>
+            <h2 className="text-default-700 text-start text-xl font-medium">{t("title")}</h2>
             <p className="text-default-500 text-start">{t("description")}</p>
           </div>
           <Button
@@ -397,11 +334,7 @@ const MyPolls: FC = () => {
             isLoading={loading}
           >
             {(item) => (
-              <TableRow key={item.id}>
-                {(columnKey) => (
-                  <TableCell>{renderCell(item, columnKey)}</TableCell>
-                )}
-              </TableRow>
+              <TableRow key={item.id}>{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
             )}
           </TableBody>
         </Table>

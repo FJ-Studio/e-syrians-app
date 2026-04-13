@@ -16,12 +16,9 @@ function required(name: string): string {
 // ---------------------------------------------------------------------------
 // Client-side (NEXT_PUBLIC_) — available in both server and client bundles
 // ---------------------------------------------------------------------------
-export const NEXT_PUBLIC_RECAPTCHA =
-  process.env.NEXT_PUBLIC_RECAPTCHA ?? "";
-export const NEXT_PUBLIC_DOMAIN_NAME =
-  process.env.NEXT_PUBLIC_DOMAIN_NAME ?? "";
-export const NEXT_PUBLIC_DOMAIN_URL =
-  process.env.NEXT_PUBLIC_DOMAIN_URL ?? "";
+export const NEXT_PUBLIC_RECAPTCHA = process.env.NEXT_PUBLIC_RECAPTCHA ?? "";
+export const NEXT_PUBLIC_DOMAIN_NAME = process.env.NEXT_PUBLIC_DOMAIN_NAME ?? "";
+export const NEXT_PUBLIC_DOMAIN_URL = process.env.NEXT_PUBLIC_DOMAIN_URL ?? "";
 
 // ---------------------------------------------------------------------------
 // Server-only — lazily validated so client bundles don't crash

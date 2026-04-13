@@ -15,10 +15,10 @@ const ShortUserSummary: FC<Props> = ({ user }) => {
   const provinces = useProvinces();
   return (
     <Card>
-      <CardBody className=" text-center">
+      <CardBody className="text-center">
         <div className="flex items-start justify-between">
           <div className="w-10"></div>
-          <div className="w-full flex items-center justify-center pt-4">
+          <div className="flex w-full items-center justify-center pt-4">
             <Avatar src={user.avatar} size="lg" />
           </div>
           <UserCardLinksDropdown user={user} />

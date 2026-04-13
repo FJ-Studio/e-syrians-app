@@ -1,28 +1,26 @@
-import type { Metadata } from "next";
-import "../globals.css";
-import { Locale } from "@/lib/types/locale";
+import CensusForm from "@/components/census/form";
+import Providers from "@/components/shared/contexts/providers";
+import Footer from "@/components/shared/footer";
+import Header from "@/components/shared/header";
 import { routing } from "@/i18n/routing";
-import { notFound } from "next/navigation";
+import { ibm } from "@/lib/fonts/fonts";
+import { Locale } from "@/lib/types/locale";
+import { GoogleTagManager } from "@next/third-parties/google";
+import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "../../../auth";
-import Header from "@/components/shared/header";
-import Footer from "@/components/shared/footer";
-import { GoogleTagManager } from "@next/third-parties/google";
-import { ibm } from "@/lib/fonts/fonts";
-import Providers from "@/components/shared/contexts/providers";
+import { notFound } from "next/navigation";
 import Script from "next/script";
-import CensusForm from "@/components/census/form";
+import { auth } from "../../../auth";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "E-SYRIANS Network",
-  description:
-    "For every Syrian, creating a better homeland and a brighter future.",
+  description: "For every Syrian, creating a better homeland and a brighter future.",
   openGraph: {
     title: "E-SYRIANS Network",
-    description:
-      "For every Syrian, creating a better homeland and a brighter future.",
+    description: "For every Syrian, creating a better homeland and a brighter future.",
     images: [
       {
         url: "https://www.e-syrians.com/e-syrians.jpeg",

@@ -1,10 +1,10 @@
 import { Poll } from "@/lib/types/polls";
-import { FC } from "react";
-import { useTranslations } from "next-intl";
-import PollPagination from "./polls-pagination";
 import { Spacer } from "@heroui/react";
-import PollsFilter from "./polls-filter";
+import { useTranslations } from "next-intl";
+import { FC } from "react";
 import PollFullCard from "./cards/poll-card";
+import PollsFilter from "./polls-filter";
+import PollPagination from "./polls-pagination";
 
 type Props = {
   polls: Array<Poll>;
@@ -16,12 +16,12 @@ const Polls: FC<Props> = ({ current_page, last_page, polls }) => {
   const t = useTranslations("polls");
   return (
     <>
-      <div className="flex justify-between items-center mb-3">
-        <h1 className="font-bold text-3xl text-gray-700">{t("title")}</h1>
+      <div className="mb-3 flex items-center justify-between">
+        <h1 className="text-3xl font-bold text-gray-700">{t("title")}</h1>
         <PollsFilter />
       </div>
       <p className="mb-4">{t("description")}</p>
-      <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+      <div className="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {(polls ?? []).map((poll) => (
           <PollFullCard key={poll.id} poll={poll} />
         ))}
@@ -30,8 +30,8 @@ const Polls: FC<Props> = ({ current_page, last_page, polls }) => {
       {polls.length > 0 ? (
         <PollPagination page={current_page} last_page={last_page} />
       ) : (
-        <div className="justify-center text-center my-10">
-          <p className="font-medium text-lg">{t("noPolls.title")}</p>
+        <div className="my-10 justify-center text-center">
+          <p className="text-lg font-medium">{t("noPolls.title")}</p>
           <p>{t("noPolls.description")}</p>
         </div>
       )}

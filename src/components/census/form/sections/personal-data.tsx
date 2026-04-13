@@ -1,18 +1,13 @@
 "use client";
 
-import { SectionProps } from "../types";
-import { FormInput, FormSelect, FormDatePicker, SectionHeader } from "../fields";
+import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
-import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
+import { FormAutocomplete, FormDatePicker, FormInput, FormSelect, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function PersonalDataSection({
-  control,
-  getValues,
-  setValue,
-  t,
-}: SectionProps) {
+export default function PersonalDataSection({ control, getValues, setValue, t }: SectionProps) {
   const genderOptions = useGender();
   const provinces = useProvinces();
   const ethnicities = useEthnicity();
@@ -33,11 +28,7 @@ export default function PersonalDataSection({
         label={t("fields.name.label")}
         placeholder={t("fields.name.placeholder")}
       />
-      <FormInput
-        name="middle_name"
-        control={control}
-        label={t("fields.middlename.label")}
-      />
+      <FormInput name="middle_name" control={control} label={t("fields.middlename.label")} />
       <FormInput
         name="surname"
         control={control}
@@ -64,7 +55,7 @@ export default function PersonalDataSection({
         getValues={getValues}
         setValue={setValue}
       />
-      <FormSelect
+      <FormAutocomplete
         name="hometown"
         control={control}
         rules={{ required: true }}
@@ -72,18 +63,18 @@ export default function PersonalDataSection({
         label={t("fields.hometown.label")}
         description={t("fields.hometown.description")}
         options={provinces}
-        defaultSelectedKeys={[getValues("hometown")]}
+        defaultSelectedKey={getValues("hometown")}
       />
-      <FormSelect
+      <FormAutocomplete
         name="ethnicity"
         control={control}
         rules={{ required: true }}
         isRequired
         label={t("fields.ethnicity.label")}
         options={ethnicities}
-        defaultSelectedKeys={[getValues("ethnicity")]}
+        defaultSelectedKey={getValues("ethnicity")}
       />
-      <FormSelect
+      <FormAutocomplete
         name="religious_affiliation"
         control={control}
         rules={{ required: true }}
@@ -91,7 +82,7 @@ export default function PersonalDataSection({
         label={t("fields.religious_affiliation.label")}
         description={t("fields.religious_affiliation.description")}
         options={religions}
-        defaultSelectedKeys={[getValues("religious_affiliation")]}
+        defaultSelectedKey={getValues("religious_affiliation")}
       />
     </>
   );

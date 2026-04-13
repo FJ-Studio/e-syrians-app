@@ -19,9 +19,9 @@ const SettingsTabs: FC<{ children: ReactNode }> = ({ children }) => {
       href: "/account/settings/security",
     },
     {
-      key: "notifications",
-      title: t("tabs.notifications.title"),
-      href: "/account/settings/notifications",
+      key: "privacy",
+      title: t("tabs.privacy.title"),
+      href: "/account/settings/privacy",
     },
   ];
 

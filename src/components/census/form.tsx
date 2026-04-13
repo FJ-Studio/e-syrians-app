@@ -1,11 +1,10 @@
 "use client";
 
-import { toast } from "sonner";
-import { FC, useEffect, useState } from "react";
-import { useEsyrian } from "../shared/contexts/es";
-import { useForm } from "react-hook-form";
+import extractErrors from "@/lib/extract-errors";
+import { generateToken } from "@/lib/recaptcha";
+import { ESUser } from "@/lib/types/account";
 import { RegistrationForm } from "@/lib/types/census";
-import { useTranslations } from "next-intl";
+import { getUrl } from "@/lib/user";
 import {
   Button,
   Divider,
@@ -24,19 +23,20 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import confetti from "canvas-confetti";
-import extractErrors from "@/lib/extract-errors";
-import { generateToken } from "@/lib/recaptcha";
-import { getUrl } from "@/lib/user";
-import { ESUser } from "@/lib/types/account";
 import { signOut, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import { FC, useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { toast } from "sonner";
+import { useEsyrian } from "../shared/contexts/es";
 
 import AccountInfoSection from "./form/sections/account-info";
-import PersonalDataSection from "./form/sections/personal-data";
 import CountryLocationSection from "./form/sections/country-location";
 import EducationSection from "./form/sections/education";
 import EmploymentSection from "./form/sections/employment";
 import HealthSection from "./form/sections/health";
 import MoreInfoSection from "./form/sections/more-info";
+import PersonalDataSection from "./form/sections/personal-data";
 
 const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 
@@ -47,11 +47,7 @@ const LOCAL_STORAGE_KEY = "CENSUS_FORM_DATA";
 function buildFormData(data: RegistrationForm): FormData {
   const formData = new FormData();
   const arrayFields = new Set(["other_nationalities", "languages"]);
-  const booleanFields = new Set([
-    "health_insurance",
-    "easy_access_to_healthcare_services",
-    "shelter",
-  ]);
+  const booleanFields = new Set(["health_insurance", "easy_access_to_healthcare_services", "shelter"]);
 
   for (const key of Object.keys(data) as (keyof RegistrationForm)[]) {
     if (!data[key]) continue;
@@ -74,17 +70,10 @@ function buildFormData(data: RegistrationForm): FormData {
 
 const CensusForm: FC = () => {
   const session = useSession();
-  const [uuid, setUuid] = useState<string | null>(
-    session.data?.user?.uuid ?? null
-  );
-  const {
-    isOpen,
-    onOpen: onOpenLinkModal,
-    onOpenChange: onOpenLinkModalchange,
-  } = useDisclosure();
+  const [uuid, setUuid] = useState<string | null>(session.data?.user?.uuid ?? null);
+  const { isOpen, onOpen: onOpenLinkModal, onOpenChange: onOpenLinkModalchange } = useDisclosure();
 
-  const { censusFormIsOpened, openCensusForm, updateCensusStats } =
-    useEsyrian();
+  const { censusFormIsOpened, openCensusForm, updateCensusStats } = useEsyrian();
   const t = useTranslations("census.form");
 
   const {
@@ -93,7 +82,6 @@ const CensusForm: FC = () => {
     reset,
     getValues,
     setValue,
-    watch,
     setError,
     formState: { isSubmitting },
   } = useForm<RegistrationForm>({
@@ -103,8 +91,9 @@ const CensusForm: FC = () => {
     },
   });
 
-  // Persist form data to localStorage
-  const watchedValues = watch();
+  // Persist form data to localStorage. `useWatch` is the subscription-based
+  // hook that's compatible with React Compiler memoization.
+  const watchedValues = useWatch({ control });
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(watchedValues));
   }, [watchedValues]);
@@ -144,20 +133,13 @@ const CensusForm: FC = () => {
           origin: { y: 0.6 },
         });
 
-        reset(
-          Object.keys(watchedValues).reduce(
-            (acc, key) => ({ ...acc, [key]: "" }),
-            {}
-          )
-        );
+        reset(Object.keys(watchedValues).reduce((acc, key) => ({ ...acc, [key]: "" }), {}));
         localStorage.removeItem(LOCAL_STORAGE_KEY);
         openCensusForm(false);
         onOpenLinkModal();
         window.setTimeout(() => updateCensusStats(), 1000);
       } else {
-        toast.error(
-          extractErrors(json.messages).map((p) => <p key={p}>{p}</p>)
-        );
+        toast.error(extractErrors(json.messages).map((p) => <p key={p}>{p}</p>));
       }
     } catch {
       toast.error(t("error"));
@@ -197,39 +179,13 @@ const CensusForm: FC = () => {
                   <>
                     <p>{t("description")}</p>
                     <Divider />
-                    <form
-                      onSubmit={handleSubmit(register)}
-                      className="space-y-4"
-                    >
+                    <form onSubmit={handleSubmit(register)} className="space-y-4">
                       <AccountInfoSection control={control} t={t} />
-                      <PersonalDataSection
-                        control={control}
-                        getValues={getValues}
-                        setValue={setValue}
-                        t={t}
-                      />
-                      <CountryLocationSection
-                        control={control}
-                        getValues={getValues}
-                        setValue={setValue}
-                        t={t}
-                      />
-                      <EducationSection
-                        control={control}
-                        getValues={getValues}
-                        t={t}
-                      />
-                      <EmploymentSection
-                        control={control}
-                        getValues={getValues}
-                        t={t}
-                      />
-                      <HealthSection
-                        control={control}
-                        getValues={getValues}
-                        setValue={setValue}
-                        t={t}
-                      />
+                      <PersonalDataSection control={control} getValues={getValues} setValue={setValue} t={t} />
+                      <CountryLocationSection control={control} getValues={getValues} setValue={setValue} t={t} />
+                      <EducationSection control={control} getValues={getValues} t={t} />
+                      <EmploymentSection control={control} getValues={getValues} t={t} />
+                      <HealthSection control={control} getValues={getValues} setValue={setValue} t={t} />
                       <MoreInfoSection control={control} t={t} />
                     </form>
                   </>
@@ -238,12 +194,7 @@ const CensusForm: FC = () => {
               <DrawerFooter>
                 {session.status === "authenticated" ? (
                   <>
-                    <Button
-                      fullWidth
-                      color="primary"
-                      variant="solid"
-                      onPress={onOpenLinkModal}
-                    >
+                    <Button fullWidth color="primary" variant="solid" onPress={onOpenLinkModal}>
                       {t("profile.link")}
                     </Button>
                     <Button color="danger" fullWidth onPress={() => signOut()}>
@@ -252,13 +203,7 @@ const CensusForm: FC = () => {
                   </>
                 ) : (
                   <>
-                    <Button
-                      fullWidth
-                      color="danger"
-                      variant="solid"
-                      onPress={onClose}
-                      isLoading={isSubmitting}
-                    >
+                    <Button fullWidth color="danger" variant="solid" onPress={onClose} isLoading={isSubmitting}>
                       {t("actions.cancel")}
                     </Button>
                     <Button
@@ -279,11 +224,7 @@ const CensusForm: FC = () => {
       </Drawer>
 
       {/* Success modal with profile link */}
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenLinkModalchange}
-        isDismissable={false}
-      >
+      <Modal isOpen={isOpen} onOpenChange={onOpenLinkModalchange} isDismissable={false}>
         <ModalContent>
           {(onClose) => (
             <>

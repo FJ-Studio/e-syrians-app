@@ -11,6 +11,8 @@ import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { HealthStatus, ReligiousAffiliation } from "@/lib/types/misc";
 import {
+  Autocomplete,
+  AutocompleteItem,
   Avatar,
   Button,
   Card,
@@ -83,8 +85,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       number_of_dependents: user?.number_of_dependents ?? undefined,
       health_status: user?.health_status ?? undefined,
       health_insurance: user?.health_insurance ?? undefined,
-      easy_access_to_healthcare_services:
-        user?.easy_access_to_healthcare_services ?? undefined,
+      easy_access_to_healthcare_services: user?.easy_access_to_healthcare_services ?? undefined,
       more_info: user?.more_info ?? undefined,
     },
   });
@@ -107,8 +108,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
         shelter: user.shelter ?? undefined,
         skills: user.skills ?? undefined,
         source_of_income: user.source_of_income ?? undefined,
-        easy_access_to_healthcare_services:
-          user.easy_access_to_healthcare_services ?? undefined,
+        easy_access_to_healthcare_services: user.easy_access_to_healthcare_services ?? undefined,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,9 +120,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       switch (key) {
         case "other_nationalities":
         case "languages":
-          const splitted = ((data[key as keyof CensusFields] ?? "") as string)
-            ?.split(",")
-            .filter((v) => v);
+          const splitted = ((data[key as keyof CensusFields] ?? "") as string)?.split(",").filter((v) => v);
           if (splitted.length > 0) {
             splitted.forEach((value: string) => {
               formData.append(`${key}[]`, value);
@@ -132,16 +130,10 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
         case "health_insurance":
         case "easy_access_to_healthcare_services":
         case "shelter":
-          formData.append(
-            key,
-            (data[key as keyof CensusFields] as boolean) ? "1" : "0"
-          );
+          formData.append(key, (data[key as keyof CensusFields] as boolean) ? "1" : "0");
           break;
         default:
-          formData.append(
-            key,
-            (data[key as keyof CensusFields] as string) ?? ""
-          );
+          formData.append(key, (data[key as keyof CensusFields] as string) ?? "");
           break;
       }
     });
@@ -156,11 +148,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       if (response.status === 200) {
         toast.success(t("update.success"));
       } else {
-        toast.error(
-          result.messages?.[0]
-            ? serverError(result.messages[0])
-            : extractErrors(result.messages)[0]
-        );
+        toast.error(result.messages?.[0] ? serverError(result.messages[0]) : extractErrors(result.messages)[0]);
       }
     } catch {
       // Network error — handled by UI state
@@ -178,9 +166,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             <Controller
               name="middle_name"
               control={control}
-              render={({ field }) => (
-                <Input {...field} label={t("fields.middlename.label")} />
-              )}
+              render={({ field }) => <Input {...field} label={t("fields.middlename.label")} />}
             />
           </Skeleton>
 
@@ -190,20 +176,22 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               control={control}
               rules={{ required: true }}
               render={({ field, fieldState: { error, invalid } }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.religious_affiliation.label")}
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("religious_affiliation")]}
+                  selectedKey={getValues("religious_affiliation")}
+                  onSelectionChange={(selected) => {
+                    setValue("religious_affiliation", selected?.toString() as ReligiousAffiliation);
+                  }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(religions).map((key) => (
-                    <SelectItem key={key}>
-                      {religions[key as keyof typeof religions]}
-                    </SelectItem>
+                    <AutocompleteItem key={key}>{religions[key as keyof typeof religions]}</AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -220,15 +208,10 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   {...field}
                   label={t("fields.other_nationalities.label")}
                   selectedKeys={
-                    getValues("other_nationalities")
-                      ? getValues("other_nationalities").split(",")
-                      : undefined
+                    getValues("other_nationalities") ? getValues("other_nationalities").split(",") : undefined
                   }
                   onSelectionChange={(selected) => {
-                    setValue(
-                      "other_nationalities",
-                      Array.from(selected).join(",")
-                    );
+                    setValue("other_nationalities", Array.from(selected).join(","));
                   }}
                   selectionMode="multiple"
                 >
@@ -237,13 +220,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                     .map((key) => (
                       <SelectItem
                         key={key}
-                        startContent={
-                          <Avatar
-                            src={`/flags/${key.toLowerCase()}.svg`}
-                            className="w-6 h-6"
-                            size="sm"
-                          />
-                        }
+                        startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
                       >
                         {countries[key as keyof typeof countries]}
                       </SelectItem>
@@ -256,58 +233,56 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             <Controller
               name="city"
               control={control}
-              render={({ field }) => (
-                <Input {...field} label={t("fields.city.label")} />
-              )}
+              render={({ field }) => <Input {...field} label={t("fields.city.label")} />}
             />
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
               name="address"
               control={control}
-              render={({ field }) => (
-                <Input {...field} label={t("fields.address.label")} />
-              )}
+              render={({ field }) => <Input {...field} label={t("fields.address.label")} />}
             />
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
-
-            <div className="flex justify-start"><Controller
-              name="shelter"
-              control={control}
-              render={({ field }) => (
-                <Checkbox
-                  {...field}
-                  value={`${field.value}`}
-                  isSelected={!!getValues("shelter")}
-                  onValueChange={(selected) =>
-                    setValue("shelter", selected ? "1" : "0")
-                  }
-                >
-                  {t("fields.shelter.label")}
-                </Checkbox>
-              )}
-            /></div>
-
+            <div className="flex justify-start">
+              <Controller
+                name="shelter"
+                control={control}
+                render={({ field }) => (
+                  <Checkbox
+                    {...field}
+                    value={`${field.value}`}
+                    isSelected={!!getValues("shelter")}
+                    onValueChange={(selected) => setValue("shelter", selected ? "1" : "0")}
+                  >
+                    {t("fields.shelter.label")}
+                  </Checkbox>
+                )}
+              />
+            </div>
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
             <Controller
               name="education_level"
               control={control}
               render={({ field, fieldState: { error, invalid } }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.education_level.label")}
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKeys={[getValues("education_level")]}
+                  selectedKey={getValues("education_level")}
+                  onSelectionChange={(selected) => {
+                    setValue("education_level", selected?.toString() ?? "");
+                  }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(educationLevels).map((key) => (
-                    <SelectItem key={key}>
+                    <AutocompleteItem key={key}>
                       {educationLevels[key as keyof typeof educationLevels]}
-                    </SelectItem>
+                    </AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -322,19 +297,13 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   isInvalid={invalid}
                   errorMessage={error?.message}
                   selectionMode="multiple"
-                  selectedKeys={
-                    getValues("languages")
-                      ? getValues("languages").split(",")
-                      : undefined
-                  }
+                  selectedKeys={getValues("languages") ? getValues("languages").split(",") : undefined}
                   onSelectionChange={(selected) => {
                     setValue("languages", Array.from(selected).join(","));
                   }}
                 >
                   {Object.keys(spokenLanguages).map((key) => (
-                    <SelectItem key={key}>
-                      {spokenLanguages[key as keyof typeof spokenLanguages]}
-                    </SelectItem>
+                    <SelectItem key={key}>{spokenLanguages[key as keyof typeof spokenLanguages]}</SelectItem>
                   ))}
                 </Select>
               )}
@@ -344,9 +313,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             <Controller
               name="skills"
               control={control}
-              render={({ field }) => (
-                <Input {...field} label={t("fields.skills.label")} />
-              )}
+              render={({ field }) => <Input {...field} label={t("fields.skills.label")} />}
             />
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
@@ -354,17 +321,19 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               name="source_of_income"
               control={control}
               render={({ field }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.source_of_income.label")}
-                  selectedKeys={[getValues("source_of_income")]}
+                  selectedKey={getValues("source_of_income")}
+                  onSelectionChange={(selected) => {
+                    setValue("source_of_income", selected?.toString() ?? "");
+                  }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(incomeSources).map((key) => (
-                    <SelectItem key={key}>
-                      {incomeSources[key as keyof typeof incomeSources]}
-                    </SelectItem>
+                    <AutocompleteItem key={key}>{incomeSources[key as keyof typeof incomeSources]}</AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -373,11 +342,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               name="estimated_monthly_income"
               control={control}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  label={t("fields.estimated_monthly_income.label")}
-                  startContent="$"
-                />
+                <Input {...field} label={t("fields.estimated_monthly_income.label")} startContent="$" />
               )}
             />
           </Skeleton>
@@ -385,12 +350,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             <Controller
               name="number_of_dependents"
               control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  label={t("fields.number_of_dependents.label")}
-                />
-              )}
+              render={({ field }) => <Input {...field} label={t("fields.number_of_dependents.label")} />}
             />
           </Skeleton>
           <Skeleton isLoaded={!!user} className="rounded-lg">
@@ -398,23 +358,19 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               name="health_status"
               control={control}
               render={({ field }) => (
-                <Select
+                <Autocomplete
                   {...field}
                   label={t("fields.health_status.label")}
-                  selectedKeys={[getValues("health_status")]}
+                  selectedKey={getValues("health_status")}
                   onSelectionChange={(selected) => {
-                    setValue(
-                      "health_status",
-                      selected.anchorKey as HealthStatus
-                    );
+                    setValue("health_status", selected?.toString() as HealthStatus);
                   }}
+                  classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(HealthStatuses).map((key) => (
-                    <SelectItem key={key} >
-                      {HealthStatuses[key as keyof typeof HealthStatuses]}
-                    </SelectItem>
+                    <AutocompleteItem key={key}>{HealthStatuses[key as keyof typeof HealthStatuses]}</AutocompleteItem>
                   ))}
-                </Select>
+                </Autocomplete>
               )}
             />
           </Skeleton>
@@ -428,9 +384,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                     {...field}
                     value={`${field.value}`}
                     isSelected={!!getValues("health_insurance")}
-                    onValueChange={(selected) =>
-                      setValue("health_insurance", selected ? "1" : "0")
-                    }
+                    onValueChange={(selected) => setValue("health_insurance", selected ? "1" : "0")}
                   >
                     {t("fields.health_insurance.label")}
                   </Checkbox>
@@ -444,15 +398,8 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   <Checkbox
                     {...field}
                     value={`${field.value}`}
-                    isSelected={
-                      !!getValues("easy_access_to_healthcare_services")
-                    }
-                    onValueChange={(selected) =>
-                      setValue(
-                        "easy_access_to_healthcare_services",
-                        selected ? "1" : "0"
-                      )
-                    }
+                    isSelected={!!getValues("easy_access_to_healthcare_services")}
+                    onValueChange={(selected) => setValue("easy_access_to_healthcare_services", selected ? "1" : "0")}
                   >
                     {t("fields.easy_access_to_healthcare_services.label")}
                   </Checkbox>
@@ -461,18 +408,11 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
               <Controller
                 name="more_info"
                 control={control}
-                render={({ field }) => (
-                  <Textarea {...field} label={t("fields.more_info.label")} />
-                )}
+                render={({ field }) => <Textarea {...field} label={t("fields.more_info.label")} />}
               />
             </div>
           </Skeleton>
-          <Button
-            type="submit"
-            color="primary"
-            isLoading={isSubmitting}
-            isDisabled={!isDirty || isSubmitting}
-          >
+          <Button type="submit" color="primary" isLoading={isSubmitting} isDisabled={!isDirty || isSubmitting}>
             {t("save")}
           </Button>
         </form>

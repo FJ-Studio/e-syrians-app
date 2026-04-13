@@ -11,9 +11,6 @@ export async function GET() {
     const response = await request.json();
     return NextResponse.json(response, { status: request.status });
   } catch {
-    return NextResponse.json(
-      { success: false, messages: ["Failed to fetch stats"] },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, messages: ["Failed to fetch stats"] }, { status: 500 });
   }
 }

@@ -1,0 +1,21 @@
+# Default reviewer for every PR.
+*   @fjobeir
+
+# Anything touching auth flows or session handling gets reviewed extra carefully.
+/auth.ts                            @fjobeir
+/src/app/api/auth/                  @fjobeir
+/src/components/auth/               @fjobeir
+
+# Translation files can be reviewed by anyone on the i18n team, but default
+# to the project owner until that team exists.
+/messages/                          @fjobeir
+
+# CI, hooks, and tooling configuration — keep these guarded.
+/.github/                           @fjobeir
+/.husky/                            @fjobeir
+/scripts/                           @fjobeir
+/commitlint.config.js               @fjobeir
+/eslint.config.mjs                  @fjobeir
+/next.config.ts                     @fjobeir
+/package.json                       @fjobeir
+/tsconfig.json                      @fjobeir

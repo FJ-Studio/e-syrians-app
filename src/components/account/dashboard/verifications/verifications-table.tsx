@@ -22,9 +22,7 @@ import { FC, Key, useCallback, useEffect, useMemo, useState } from "react";
 const VerificationsTable: FC = () => {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState<Verification[]>([]);
-  const t = useTranslations(
-    "account.dashboard.verifications.verifications-table"
-  );
+  const t = useTranslations("account.dashboard.verifications.verifications-table");
   const cancellationReasons = useVerificationCancelationReason();
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "date",
@@ -100,37 +98,25 @@ const VerificationsTable: FC = () => {
           if (!item.cancelled_at) {
             return <></>;
           }
-          return (
-            <div className="min-w-36">
-              {cancellationReasons(item.cancelation_payload?.reason ?? "")}
-            </div>
-          );
+          return <div className="min-w-36">{cancellationReasons(item.cancelation_payload?.reason ?? "")}</div>;
         case "status":
           return (
-            <Chip
-              variant="flat"
-              size="sm"
-              color={item.cancelled_at ? "danger" : "success"}
-            >
-              {item.cancelled_at
-                ? t("status.cancelled.title")
-                : t("status.active.title")}
+            <Chip variant="flat" size="sm" color={item.cancelled_at ? "danger" : "success"}>
+              {item.cancelled_at ? t("status.cancelled.title") : t("status.active.title")}
             </Chip>
           );
         default:
-          return cellValue !== undefined && typeof cellValue !== "object"
-            ? cellValue
-            : String(cellValue);
+          return cellValue !== undefined && typeof cellValue !== "object" ? cellValue : String(cellValue);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items]
+    [items],
   );
 
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-lg text-default-700 font-medium">{t("title")}</h3>
+        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
       </CardHeader>
       <CardBody>
         <Table
@@ -159,17 +145,13 @@ const VerificationsTable: FC = () => {
             isLoading={loading}
             loadingContent={<Spinner />}
             emptyContent={
-              <div className="py-12 px-2 flex items-center justify-center flex-col gap-4">
+              <div className="flex flex-col items-center justify-center gap-4 px-2 py-12">
                 <p>{t("noVerifications")}</p>
               </div>
             }
           >
             {(item) => (
-              <TableRow key={item.id}>
-                {(columnKey) => (
-                  <TableCell>{renderCell(item, columnKey)}</TableCell>
-                )}
-              </TableRow>
+              <TableRow key={item.id}>{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
             )}
           </TableBody>
         </Table>

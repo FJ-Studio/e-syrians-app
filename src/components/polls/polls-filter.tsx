@@ -37,11 +37,9 @@ const PollsFilter: FC = () => {
     t("months.november"),
     t("months.december"),
   ]);
-  const [selectedYear, setSelectedYear] = useState(
-    sp.get("year") || Object.keys(times)[0]
-  );
+  const [selectedYear, setSelectedYear] = useState(sp.get("year") || Object.keys(times)[0]);
   const [selectedMonth, setSelectedMonth] = useState(
-    sp.get("month") || times[selectedYear]?.[times[selectedYear].length - 1]?.index
+    sp.get("month") || times[selectedYear]?.[times[selectedYear].length - 1]?.index,
   );
   return (
     <>
@@ -64,9 +62,7 @@ const PollsFilter: FC = () => {
                   }}
                 >
                   {Object.keys(times).map((year) => (
-                    <SelectItem key={year} >
-                      {year}
-                    </SelectItem>
+                    <SelectItem key={year}>{year}</SelectItem>
                   ))}
                 </Select>
                 <Select

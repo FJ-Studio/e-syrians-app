@@ -27,11 +27,7 @@ const UpdatePassword: FC = () => {
   } = useForm<ChangePasswordForm>();
   const changePassword = async (data: ChangePasswordForm) => {
     if (data.newPassword !== data.confirmPassword) {
-      setError(
-        "confirmPassword",
-        { message: t("errors.passwordsDoNotMatch") },
-        { shouldFocus: true }
-      );
+      setError("confirmPassword", { message: t("errors.passwordsDoNotMatch") }, { shouldFocus: true });
       return;
     }
     const token = await generateToken("reset_password");
@@ -63,9 +59,7 @@ const UpdatePassword: FC = () => {
   return (
     <>
       <Card>
-        <CardHeader className="text-default-700 font-medium">
-          {t("password.title")}
-        </CardHeader>
+        <CardHeader className="text-default-700 font-medium">{t("password.title")}</CardHeader>
         <CardBody>
           <form onSubmit={handleSubmit(changePassword)} className="space-y-4">
             <Controller

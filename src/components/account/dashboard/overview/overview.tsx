@@ -2,6 +2,13 @@
 
 import { ESUser } from "@/lib/types/account";
 import {
+  ChartBarIcon,
+  CheckBadgeIcon,
+  ClipboardDocumentCheckIcon,
+  Cog6ToothIcon,
+  PlusCircleIcon,
+} from "@heroicons/react/24/outline";
+import {
   Avatar,
   Button,
   Card,
@@ -13,17 +20,8 @@ import {
   Divider,
   Spinner,
 } from "@heroui/react";
-import {
-  ChartBarIcon,
-  CheckBadgeIcon,
-  ClipboardDocumentCheckIcon,
-  Cog6ToothIcon,
-  PlusCircleIcon,
-  ScaleIcon,
-  WalletIcon,
-} from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 
@@ -106,10 +104,7 @@ const AccountOverview: FC = () => {
       <Card>
         <CardBody className="py-10 text-center">
           <p className="text-default-500 mb-4">{t("error")}</p>
-          <Button
-            color="primary"
-            onPress={() => window.location.reload()}
-          >
+          <Button color="primary" onPress={() => window.location.reload()}>
             {t("retry")}
           </Button>
         </CardBody>
@@ -125,31 +120,24 @@ const AccountOverview: FC = () => {
       {/* ---- Profile card ---- */}
       <Card>
         <CardBody>
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
             {/* Avatar + name */}
             <Avatar
               src={profile?.avatar || undefined}
               name={`${profile?.name?.[0] ?? ""} ${profile?.surname?.[0] ?? ""}`}
-              className="w-16 h-16 text-xl"
+              className="h-16 w-16 text-xl"
               isBordered
               color={isVerified ? "success" : "default"}
             />
             <div className="flex-1 text-center sm:text-start">
-              <div className="flex items-center justify-center sm:justify-start gap-2">
+              <div className="flex items-center justify-center gap-2 sm:justify-start">
                 <h2 className="text-xl font-semibold">
                   {profile?.name} {profile?.surname}
                 </h2>
-                {isVerified && (
-                  <CheckBadgeIcon className="size-5 text-success" />
-                )}
+                {isVerified && <CheckBadgeIcon className="text-success size-5" />}
               </div>
               <p className="text-default-500 text-sm">{profile?.email}</p>
-              <Chip
-                size="sm"
-                variant="flat"
-                color={isVerified ? "success" : "warning"}
-                className="mt-1"
-              >
+              <Chip size="sm" variant="flat" color={isVerified ? "success" : "warning"} className="mt-1">
                 {isVerified ? t("verified") : t("unverified")}
               </Chip>
             </div>
@@ -171,14 +159,12 @@ const AccountOverview: FC = () => {
                   value: "text-xs font-semibold",
                 }}
               />
-              <span className="text-xs text-default-500">
-                {t("profileComplete")}
-              </span>
+              <span className="text-default-500 text-xs">{t("profileComplete")}</span>
             </div>
           </div>
         </CardBody>
         <Divider />
-        <CardFooter className="gap-2 justify-center sm:justify-start">
+        <CardFooter className="justify-center gap-2 sm:justify-start">
           <Button
             as={Link}
             href="/account/settings"
@@ -192,27 +178,27 @@ const AccountOverview: FC = () => {
       </Card>
 
       {/* ---- Quick stats ---- */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatCard
-          icon={<ChartBarIcon className="size-5 text-primary" />}
+          icon={<ChartBarIcon className="text-primary size-5" />}
           label={t("stats.polls")}
           value={polls.total}
           href="/account/polls"
         />
         <StatCard
-          icon={<ClipboardDocumentCheckIcon className="size-5 text-success" />}
+          icon={<ClipboardDocumentCheckIcon className="text-success size-5" />}
           label={t("stats.verificationsReceived")}
           value={verifications.received}
           href="/account/verifications"
         />
         <StatCard
-          icon={<CheckBadgeIcon className="size-5 text-secondary" />}
+          icon={<CheckBadgeIcon className="text-secondary size-5" />}
           label={t("stats.verificationsGiven")}
           value={verifications.given}
           href="/account/verifications"
         />
         <StatCard
-          icon={<PlusCircleIcon className="size-5 text-warning" />}
+          icon={<PlusCircleIcon className="text-warning size-5" />}
           label={t("stats.createPoll")}
           value="+"
           href="/account/polls/create"
@@ -221,22 +207,16 @@ const AccountOverview: FC = () => {
 
       {/* ---- Recent polls ---- */}
       <Card>
-        <CardHeader className="flex justify-between items-center">
+        <CardHeader className="flex items-center justify-between">
           <h3 className="text-lg font-medium">{t("recentPolls.title")}</h3>
-          <Button
-            as={Link}
-            href="/account/polls"
-            size="sm"
-            variant="light"
-            color="primary"
-          >
+          <Button as={Link} href="/account/polls" size="sm" variant="light" color="primary">
             {t("recentPolls.viewAll")}
           </Button>
         </CardHeader>
         <Divider />
         <CardBody>
           {polls.recent.length === 0 ? (
-            <div className="text-center py-6 space-y-3">
+            <div className="space-y-3 py-6 text-center">
               <p className="text-default-400">{t("recentPolls.empty")}</p>
               <Button
                 as={Link}
@@ -254,26 +234,19 @@ const AccountOverview: FC = () => {
                 <Link
                   key={poll.id}
                   href={`/polls/${poll.id}`}
-                  className="flex items-center justify-between p-3 rounded-medium hover:bg-default-100 transition-colors"
+                  className="rounded-medium hover:bg-default-100 flex items-center justify-between p-3 transition-colors"
                 >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium truncate">{poll.question}</p>
-                    <p className="text-xs text-default-400">
-                      {new Date(poll.start_date).toLocaleDateString()} –{" "}
-                      {new Date(poll.end_date).toLocaleDateString()}
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-medium">{poll.question}</p>
+                    <p className="text-default-400 text-xs">
+                      {new Date(poll.start_date).toLocaleDateString()} – {new Date(poll.end_date).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0 ms-3">
-                    <Chip
-                      size="sm"
-                      variant="flat"
-                      color={poll.active ? "success" : "default"}
-                    >
-                      {poll.active
-                        ? t("recentPolls.active")
-                        : t("recentPolls.inactive")}
+                  <div className="ms-3 flex shrink-0 items-center gap-2">
+                    <Chip size="sm" variant="flat" color={poll.active ? "success" : "default"}>
+                      {poll.active ? t("recentPolls.active") : t("recentPolls.inactive")}
                     </Chip>
-                    <span className="text-sm text-default-500">
+                    <span className="text-default-500 text-sm">
                       {poll.votes_count} {t("recentPolls.votes")}
                     </span>
                   </div>
@@ -284,19 +257,7 @@ const AccountOverview: FC = () => {
         </CardBody>
       </Card>
 
-      {/* ---- Coming soon features ---- */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <ComingSoonCard
-          icon={<ScaleIcon className="size-6 text-danger" />}
-          title={t("comingSoon.violations.title")}
-          description={t("comingSoon.violations.description")}
-        />
-        <ComingSoonCard
-          icon={<WalletIcon className="size-6 text-warning" />}
-          title={t("comingSoon.wallet.title")}
-          description={t("comingSoon.wallet.description")}
-        />
-      </div>
+      {/* Coming soon features can be added here later */}
     </div>
   );
 };
@@ -317,44 +278,12 @@ function StatCard({
   href: string;
 }) {
   return (
-    <Card
-      as={Link}
-      href={href}
-      isPressable
-      className="hover:scale-[1.02] transition-transform"
-    >
+    <Card as={Link} href={href} isPressable className="transition-transform hover:scale-[1.02]">
       <CardBody className="flex flex-row items-center gap-3 p-4">
         {icon}
         <div>
           <p className="text-2xl font-bold">{value}</p>
-          <p className="text-xs text-default-500">{label}</p>
-        </div>
-      </CardBody>
-    </Card>
-  );
-}
-
-function ComingSoonCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <Card className="border-dashed border-2 border-default-200 bg-default-50">
-      <CardBody className="flex flex-row items-start gap-3 p-4">
-        {icon}
-        <div>
-          <div className="flex items-center gap-2">
-            <p className="font-medium">{title}</p>
-            <Chip size="sm" variant="flat" color="default">
-              Coming soon
-            </Chip>
-          </div>
-          <p className="text-xs text-default-400 mt-1">{description}</p>
+          <p className="text-default-500 text-xs">{label}</p>
         </div>
       </CardBody>
     </Card>

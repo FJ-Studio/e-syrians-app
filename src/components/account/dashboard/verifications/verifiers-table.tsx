@@ -104,40 +104,28 @@ const VerifiersTable: FC = () => {
           if (!item.cancelled_at) {
             return <></>;
           }
-          return (
-            <div className="min-w-36">
-              {cancellationReasons(item.cancelation_payload?.reason ?? "")}
-            </div>
-          );
+          return <div className="min-w-36">{cancellationReasons(item.cancelation_payload?.reason ?? "")}</div>;
         case "status":
           return (
-            <Chip
-              variant="flat"
-              size="sm"
-              color={item.cancelled_at ? "danger" : "success"}
-            >
-              {item.cancelled_at
-                ? t("status.cancelled.title")
-                : t("status.active.title")}
+            <Chip variant="flat" size="sm" color={item.cancelled_at ? "danger" : "success"}>
+              {item.cancelled_at ? t("status.cancelled.title") : t("status.active.title")}
             </Chip>
           );
         default:
-          return cellValue !== undefined && typeof cellValue !== "object"
-            ? cellValue
-            : String(cellValue);
+          return cellValue !== undefined && typeof cellValue !== "object" ? cellValue : String(cellValue);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items]
+    [items],
   );
 
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-lg text-default-700 font-medium">{t("title")}</h3>
+        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
       </CardHeader>
       <CardBody>
-        <div className="mb-6 flex-col items-start flex lg:flex-row lg:justify-start lg:items-center gap-4">
+        <div className="mb-6 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-start">
           {t("description")}{" "}
           <Snippet
             hideSymbol
@@ -175,7 +163,7 @@ const VerifiersTable: FC = () => {
             isLoading={loading}
             loadingContent={<Spinner />}
             emptyContent={
-              <div className="py-12 px-2 flex items-center justify-center flex-col gap-4">
+              <div className="flex flex-col items-center justify-center gap-4 px-2 py-12">
                 <p>{t("noVerifiers")}</p>
                 <Snippet
                   hideSymbol
@@ -190,11 +178,7 @@ const VerifiersTable: FC = () => {
             }
           >
             {(item) => (
-              <TableRow key={item.id}>
-                {(columnKey) => (
-                  <TableCell>{renderCell(item, columnKey)}</TableCell>
-                )}
-              </TableRow>
+              <TableRow key={item.id}>{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
             )}
           </TableBody>
         </Table>
