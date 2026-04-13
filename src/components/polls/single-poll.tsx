@@ -7,7 +7,7 @@ type Props = {
 };
 const SinglePoll: FC<Props> = ({ poll }) => {
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="mx-auto max-w-lg">
       <PollFullCard poll={poll} />
     </div>
   );

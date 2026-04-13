@@ -4,8 +4,8 @@ import { Tab, Tabs } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import MyPolls from "./my-polls";
-import MyVoting from "./my-voting";
 import MyReactions from "./my-reactions";
+import MyVoting from "./my-voting";
 
 const Polls: FC = () => {
   const t = useTranslations("account.dashboard.polls");

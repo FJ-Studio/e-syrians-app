@@ -1,13 +1,7 @@
 "use client";
 import { ESUser } from "@/lib/types/account";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@heroui/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 

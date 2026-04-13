@@ -5,13 +5,13 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Chip,
   Input,
   Modal,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
-  Chip,
+  ModalHeader,
   Snippet,
   useDisclosure,
 } from "@heroui/react";
@@ -164,14 +164,11 @@ const TwoFactorAuth: FC = () => {
     if (!confirm(t("recoveryCodes.regenerateConfirm"))) return;
     setRegenerateLoading(true);
     try {
-      const res = await fetch(
-        "/api/account/security/recovery-codes/regenerate",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({}),
-        },
-      );
+      const res = await fetch("/api/account/security/recovery-codes/regenerate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
       const data = await res.json();
       if (data?.success) {
         setRecoveryCodes(data.data.recovery_codes || []);
@@ -192,11 +189,9 @@ const TwoFactorAuth: FC = () => {
   if (loading) {
     return (
       <Card>
-        <CardHeader className="text-default-700 font-medium">
-          {t("title")}
-        </CardHeader>
+        <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
         <CardBody>
-          <div className="animate-pulse h-20 bg-default-100 rounded-lg" />
+          <div className="bg-default-100 h-20 animate-pulse rounded-lg" />
         </CardBody>
       </Card>
     );
@@ -205,11 +200,9 @@ const TwoFactorAuth: FC = () => {
   return (
     <>
       <Card>
-        <CardHeader className="text-default-700 font-medium">
-          {t("title")}
-        </CardHeader>
+        <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
         <CardBody className="space-y-4">
-          <p className="text-sm text-default-500">{t("description")}</p>
+          <p className="text-default-500 text-sm">{t("description")}</p>
 
           {/* Status indicator */}
           <div className="flex items-center gap-2">
@@ -218,11 +211,7 @@ const TwoFactorAuth: FC = () => {
               variant="flat"
               startContent={
                 <Icon
-                  icon={
-                    status?.enabled
-                      ? "solar:shield-check-bold"
-                      : "solar:shield-minimalistic-bold"
-                  }
+                  icon={status?.enabled ? "solar:shield-check-bold" : "solar:shield-minimalistic-bold"}
                   width={16}
                 />
               }
@@ -238,11 +227,7 @@ const TwoFactorAuth: FC = () => {
               variant="flat"
               onPress={handleSetup}
               isLoading={setupLoading}
-              startContent={
-                !setupLoading && (
-                  <Icon icon="solar:shield-plus-bold" width={18} />
-                )
-              }
+              startContent={!setupLoading && <Icon icon="solar:shield-plus-bold" width={18} />}
             >
               {t("enable")}
             </Button>
@@ -250,34 +235,23 @@ const TwoFactorAuth: FC = () => {
 
           {/* QR Code and confirmation */}
           {!status?.enabled && setupData && (
-            <div className="space-y-4 p-4 bg-default-50 rounded-lg border border-default-200">
+            <div className="bg-default-50 border-default-200 space-y-4 rounded-lg border p-4">
               <p className="text-sm font-medium">{t("setup.title")}</p>
-              <ol className="text-sm text-default-600 space-y-1 list-decimal list-inside">
+              <ol className="text-default-600 list-inside list-decimal space-y-1 text-sm">
                 <li>{t("setup.step1")}</li>
                 <li>{t("setup.step2")}</li>
                 <li>{t("setup.step3")}</li>
               </ol>
 
               {/* QR Code */}
-              <div className="flex justify-center p-4 bg-white rounded-lg">
-                <img
-                  src={setupData.qr_code}
-                  alt="2FA QR Code"
-                  className="w-48 h-48"
-                />
+              <div className="flex justify-center rounded-lg bg-white p-4">
+                <img src={setupData.qr_code} alt="2FA QR Code" className="h-48 w-48" />
               </div>
 
               {/* Secret key */}
               <div>
-                <p className="text-xs text-default-500 mb-1">
-                  {t("setup.secretKey")}
-                </p>
-                <Snippet
-                  symbol=""
-                  variant="flat"
-                  size="sm"
-                  className="w-full"
-                >
+                <p className="text-default-500 mb-1 text-xs">{t("setup.secretKey")}</p>
+                <Snippet symbol="" variant="flat" size="sm" className="w-full">
                   {setupData.secret}
                 </Snippet>
               </div>
@@ -323,9 +297,7 @@ const TwoFactorAuth: FC = () => {
                 variant="flat"
                 size="sm"
                 onPress={handleViewRecoveryCodes}
-                startContent={
-                  <Icon icon="solar:key-minimalistic-bold" width={16} />
-                }
+                startContent={<Icon icon="solar:key-minimalistic-bold" width={16} />}
               >
                 {t("recoveryCodes.title")}
               </Button>
@@ -334,9 +306,7 @@ const TwoFactorAuth: FC = () => {
                 variant="flat"
                 size="sm"
                 onPress={disableModal.onOpen}
-                startContent={
-                  <Icon icon="solar:shield-cross-bold" width={16} />
-                }
+                startContent={<Icon icon="solar:shield-cross-bold" width={16} />}
               >
                 {t("disable")}
               </Button>
@@ -350,9 +320,7 @@ const TwoFactorAuth: FC = () => {
         <ModalContent>
           <ModalHeader>{t("disableModal.title")}</ModalHeader>
           <ModalBody>
-            <p className="text-sm text-default-500">
-              {t("disableModal.description")}
-            </p>
+            <p className="text-default-500 text-sm">{t("disableModal.description")}</p>
             <Input
               value={disableCode}
               onValueChange={setDisableCode}
@@ -367,21 +335,14 @@ const TwoFactorAuth: FC = () => {
                 setDisableCode("");
               }}
             >
-              {disableIsRecovery
-                ? t("disableModal.useAuthenticatorCode")
-                : t("disableModal.useRecoveryCode")}
+              {disableIsRecovery ? t("disableModal.useAuthenticatorCode") : t("disableModal.useRecoveryCode")}
             </Button>
           </ModalBody>
           <ModalFooter>
             <Button variant="light" onPress={disableModal.onClose}>
               {t("setup.cancel")}
             </Button>
-            <Button
-              color="danger"
-              onPress={handleDisable}
-              isLoading={disableLoading}
-              isDisabled={!disableCode}
-            >
+            <Button color="danger" onPress={handleDisable} isLoading={disableLoading} isDisabled={!disableCode}>
               {t("disableModal.confirm")}
             </Button>
           </ModalFooter>
@@ -389,20 +350,14 @@ const TwoFactorAuth: FC = () => {
       </Modal>
 
       {/* Recovery Codes Modal */}
-      <Modal
-        isOpen={recoveryModal.isOpen}
-        onClose={recoveryModal.onClose}
-        size="lg"
-      >
+      <Modal isOpen={recoveryModal.isOpen} onClose={recoveryModal.onClose} size="lg">
         <ModalContent>
           <ModalHeader>{t("recoveryCodes.title")}</ModalHeader>
           <ModalBody>
-            <p className="text-sm text-default-500">
-              {t("recoveryCodes.description")}
-            </p>
-            <div className="grid grid-cols-2 gap-2 p-4 bg-default-50 rounded-lg font-mono text-sm">
+            <p className="text-default-500 text-sm">{t("recoveryCodes.description")}</p>
+            <div className="bg-default-50 grid grid-cols-2 gap-2 rounded-lg p-4 font-mono text-sm">
               {recoveryCodes.map((code, i) => (
-                <div key={i} className="text-center py-1">
+                <div key={i} className="py-1 text-center">
                   {code}
                 </div>
               ))}
@@ -423,11 +378,7 @@ const TwoFactorAuth: FC = () => {
               color="warning"
               onPress={handleRegenerateCodes}
               isLoading={regenerateLoading}
-              startContent={
-                !regenerateLoading && (
-                  <Icon icon="solar:refresh-bold" width={16} />
-                )
-              }
+              startContent={!regenerateLoading && <Icon icon="solar:refresh-bold" width={16} />}
             >
               {t("recoveryCodes.regenerate")}
             </Button>

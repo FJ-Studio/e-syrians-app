@@ -1,18 +1,13 @@
 "use client";
 
-import { SectionProps } from "../types";
-import { FormInput, FormSelect, FormAutocomplete, FormDatePicker, SectionHeader } from "../fields";
+import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
-import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
+import { FormAutocomplete, FormDatePicker, FormInput, FormSelect, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function PersonalDataSection({
-  control,
-  getValues,
-  setValue,
-  t,
-}: SectionProps) {
+export default function PersonalDataSection({ control, getValues, setValue, t }: SectionProps) {
   const genderOptions = useGender();
   const provinces = useProvinces();
   const ethnicities = useEthnicity();
@@ -33,11 +28,7 @@ export default function PersonalDataSection({
         label={t("fields.name.label")}
         placeholder={t("fields.name.placeholder")}
       />
-      <FormInput
-        name="middle_name"
-        control={control}
-        label={t("fields.middlename.label")}
-      />
+      <FormInput name="middle_name" control={control} label={t("fields.middlename.label")} />
       <FormInput
         name="surname"
         control={control}

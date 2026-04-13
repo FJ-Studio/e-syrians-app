@@ -11,7 +11,5 @@ export default async function PollsPage(props: { searchParams: SearchParams }) {
   const page = searchParams.page || "1";
   const result = await getPolls(page as string, year as string, month as string);
   const { polls = [], current_page = 1, last_page = 1 } = result?.data ?? {};
-  return (
-    <Polls polls={polls} current_page={current_page} last_page={last_page} />
-  );
+  return <Polls polls={polls} current_page={current_page} last_page={last_page} />;
 }

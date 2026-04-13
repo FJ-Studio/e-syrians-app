@@ -1,14 +1,10 @@
 "use client";
 
-import { SectionProps } from "../types";
-import { FormInput, FormAutocomplete, SectionHeader } from "../fields";
 import useSourceOfIncome from "@/components/hooks/localization/income";
+import { FormAutocomplete, FormInput, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function EmploymentSection({
-  control,
-  getValues,
-  t,
-}: Omit<SectionProps, "setValue">) {
+export default function EmploymentSection({ control, getValues, t }: Omit<SectionProps, "setValue">) {
   const incomeSources = useSourceOfIncome();
 
   return (
@@ -27,11 +23,7 @@ export default function EmploymentSection({
         label={t("fields.estimated_monthly_income.label")}
         startContent="$"
       />
-      <FormInput
-        name="number_of_dependents"
-        control={control}
-        label={t("fields.number_of_dependents.label")}
-      />
+      <FormInput name="number_of_dependents" control={control} label={t("fields.number_of_dependents.label")} />
     </>
   );
 }

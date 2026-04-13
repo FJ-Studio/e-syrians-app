@@ -1,3 +1,3 @@
-import { LOCALES } from '../constants/misc';
+import { LOCALES } from "../constants/misc";
 
-export type Locale = typeof LOCALES[number];
+export type Locale = (typeof LOCALES)[number];

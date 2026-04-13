@@ -2,8 +2,8 @@
 import { Tab, Tabs } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
-import VerifiersTable from "./verifiers-table";
 import VerificationsTable from "./verifications-table";
+import VerifiersTable from "./verifiers-table";
 
 const VerificationsTabs: FC = () => {
   const t = useTranslations("account.dashboard.verifications");

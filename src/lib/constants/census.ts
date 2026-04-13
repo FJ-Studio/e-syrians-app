@@ -265,11 +265,7 @@ export const ETHNICITIES = [
 
 export const GENDERS = ["f", "m"] as const;
 
-export const HEALTH_STATUSES = [
-  "good",
-  "chronic-illness",
-  "disabled-special-needs",
-] as const;
+export const HEALTH_STATUSES = ["good", "chronic-illness", "disabled-special-needs"] as const;
 
 export const SPOKEN_LANGUAGES = [
   "arabic",

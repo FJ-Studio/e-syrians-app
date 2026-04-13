@@ -11,7 +11,6 @@ import {
   HomeIcon,
 } from "@heroicons/react/24/outline";
 import {
-  Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -89,7 +88,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         onPress: () => signOut(),
       },
     ],
-    [t]
+    [t],
   );
 
   const isActive = useCallback(
@@ -101,38 +100,26 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       }
       return pathname.includes(href);
     },
-    [pathname]
+    [pathname],
   );
 
-  const primaryItems = useMemo(
-    () => links.filter((item) => PRIMARY_KEYS.includes(item.key)),
-    [links]
-  );
+  const primaryItems = useMemo(() => links.filter((item) => PRIMARY_KEYS.includes(item.key)), [links]);
 
-  const moreItems = useMemo(
-    () => links.filter((item) => !PRIMARY_KEYS.includes(item.key)),
-    [links]
-  );
+  const moreItems = useMemo(() => links.filter((item) => !PRIMARY_KEYS.includes(item.key)), [links]);
 
-  const isMoreActive = useMemo(
-    () => moreItems.some((item) => isActive(item.link)),
-    [moreItems, isActive]
-  );
+  const isMoreActive = useMemo(() => moreItems.some((item) => isActive(item.link)), [moreItems, isActive]);
 
   return (
-    <div className="flex min-h-dvh flex-col relative pt-20">
+    <div className="relative flex min-h-dvh flex-col pt-20">
       {/* Welcome bar — desktop only */}
-      <div className="hidden xl:flex bg-primary h-12 items-center">
-        <Container className="flex items-center text-white justify-between">
+      <div className="bg-primary hidden h-12 items-center xl:flex">
+        <Container className="flex items-center justify-between text-white">
           <span>
             {t("welcome", {
               name: session.data?.user?.name ?? "",
             })}
           </span>
-          <button
-            className="bg-transparent border-0 cursor-pointer"
-            onClick={() => signOut()}
-          >
+          <button className="cursor-pointer border-0 bg-transparent" onClick={() => signOut()}>
             <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-white rtl:rotate-180" />
           </button>
         </Container>
@@ -141,20 +128,14 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <Container className="mt-4 mb-6">
         <div className="flex items-start gap-x-4">
           {/* Desktop sidebar — visible at xl and above */}
-          <aside className="sticky top-32 hidden xl:flex bg-gray-50 w-full xl:max-w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+          <aside className="border-small rounded-small border-default-200 dark:border-default-100 sticky top-32 hidden w-full bg-gray-50 px-1 py-2 xl:flex xl:max-w-[260px]">
             <Listbox aria-label="Account navigation">
               {links.map((link) => (
                 <ListboxItem
                   key={link.key}
                   startContent={link.icon}
-                  color={
-                    link.link && isActive(link.link) ? "primary" : "default"
-                  }
-                  className={
-                    link.link && isActive(link.link)
-                      ? "text-white bg-primary"
-                      : ""
-                  }
+                  color={link.link && isActive(link.link) ? "primary" : "default"}
+                  className={link.link && isActive(link.link) ? "bg-primary text-white" : ""}
                   onPress={() => {
                     if (link?.onPress) {
                       link.onPress();
@@ -164,11 +145,11 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                   }}
                 >
                   {link.link ? (
-                    <Link className="w-full flex" href={link.link}>
+                    <Link className="flex w-full" href={link.link}>
                       <span>{link.title}</span>
                     </Link>
                   ) : (
-                    <span className="w-full flex">{link.title}</span>
+                    <span className="flex w-full">{link.title}</span>
                   )}
                 </ListboxItem>
               ))}
@@ -181,7 +162,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       </Container>
 
       {/* Mobile bottom tab bar — visible below xl */}
-      <nav className="xl:hidden fixed bottom-0 inset-x-0 z-50 bg-white dark:bg-black border-t border-default-200 safe-area-bottom">
+      <nav className="border-default-200 safe-area-bottom fixed inset-x-0 bottom-0 z-50 border-t bg-white xl:hidden dark:bg-black">
         <div className="flex items-center justify-around">
           {primaryItems.map((link) => {
             const active = link.link ? isActive(link.link) : false;
@@ -189,17 +170,13 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
               <Link
                 key={link.key}
                 href={link.link!}
-                className={`flex-1 flex justify-center py-2 transition-colors ${
-                  active
-                    ? "text-primary font-semibold"
-                    : "text-default-500"
+                className={`flex flex-1 justify-center py-2 transition-colors ${
+                  active ? "text-primary font-semibold" : "text-default-500"
                 }`}
               >
                 <span className="flex flex-col items-center gap-0.5">
                   {link.icon}
-                  <span className="text-[10px] leading-tight">
-                    {link.title}
-                  </span>
+                  <span className="text-[10px] leading-tight">{link.title}</span>
                 </span>
               </Link>
             );
@@ -209,17 +186,13 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
           <Dropdown placement="top-end">
             <DropdownTrigger>
               <button
-                className={`flex-1 flex justify-center py-2 bg-transparent border-0 cursor-pointer transition-colors ${
-                  isMoreActive
-                    ? "text-primary font-semibold"
-                    : "text-default-500"
+                className={`flex flex-1 cursor-pointer justify-center border-0 bg-transparent py-2 transition-colors ${
+                  isMoreActive ? "text-primary font-semibold" : "text-default-500"
                 }`}
               >
                 <span className="flex flex-col items-center gap-0.5">
                   <EllipsisHorizontalIcon className="size-5" />
-                  <span className="text-[10px] leading-tight">
-                    {t("nav.more")}
-                  </span>
+                  <span className="text-[10px] leading-tight">{t("nav.more")}</span>
                 </span>
               </button>
             </DropdownTrigger>
@@ -241,11 +214,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                     <DropdownItem
                       key={link.key}
                       startContent={link.icon}
-                      className={
-                        isActive(link.link)
-                          ? "text-primary font-semibold"
-                          : ""
-                      }
+                      className={isActive(link.link) ? "text-primary font-semibold" : ""}
                     >
                       {link.title}
                     </DropdownItem>
@@ -256,9 +225,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                   key="signout"
                   color="danger"
                   className="text-danger"
-                  startContent={
-                    <ArrowRightStartOnRectangleIcon className="size-5" />
-                  }
+                  startContent={<ArrowRightStartOnRectangleIcon className="size-5" />}
                 >
                   {t("nav.signout")}
                 </DropdownItem>

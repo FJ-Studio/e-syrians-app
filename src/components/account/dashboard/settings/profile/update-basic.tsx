@@ -1,5 +1,9 @@
 "use client";
+import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useGender from "@/components/hooks/localization/gender";
+import useProvinces from "@/components/hooks/localization/provinces";
+import useServerError from "@/components/hooks/localization/server-errors";
+import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import {
@@ -17,15 +21,11 @@ import {
   SharedSelection,
   Skeleton,
 } from "@heroui/react";
+import { parseDate } from "@internationalized/date";
 import { useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { parseDate } from "@internationalized/date";
-import useProvinces from "@/components/hooks/localization/provinces";
-import useEthnicity from "@/components/hooks/localization/ethnicity";
 import { toast } from "sonner";
-import useServerError from "@/components/hooks/localization/server-errors";
-import { generateToken } from "@/lib/recaptcha";
 
 type UpdateBasicProfileDataProps = {
   user?: ESUser;
@@ -108,9 +108,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
     <Card>
       <CardHeader className="flex flex-col gap-3">
         <div className="flex w-full items-center justify-between">
-          <h3 className="text-lg text-default-700 font-medium">
-            {t("basicData.title")}
-          </h3>
+          <h3 className="text-default-700 text-lg font-medium">{t("basicData.title")}</h3>
           {mode === "view" && (user?.basic_info_updates ?? 0) > 0 && (
             <Skeleton isLoaded={!!user} className="rounded-lg">
               <Button
@@ -133,12 +131,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               name="name"
               control={control}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  type="text"
-                  label={t("fields.name.label")}
-                  isReadOnly={mode === "view"}
-                />
+                <Input {...field} type="text" label={t("fields.name.label")} isReadOnly={mode === "view"} />
               )}
             />
           </Skeleton>
@@ -147,12 +140,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               name="surname"
               control={control}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  type="text"
-                  label={t("fields.surname.label")}
-                  isReadOnly={mode === "view"}
-                />
+                <Input {...field} type="text" label={t("fields.surname.label")} isReadOnly={mode === "view"} />
               )}
             />
           </Skeleton>
@@ -163,19 +151,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
               render={({ field }) => (
                 <DatePicker
                   {...field}
-                  value={
-                    getValues("birth_date")
-                      ? parseDate(getValues("birth_date") as string)
-                      : null
-                  }
-                  defaultValue={
-                    getValues("birth_date")
-                      ? parseDate(getValues("birth_date") as string)
-                      : null
-                  }
-                  onChange={(date) =>
-                    date ? setValue("birth_date", date?.toString()) : null
-                  }
+                  value={getValues("birth_date") ? parseDate(getValues("birth_date") as string) : null}
+                  defaultValue={getValues("birth_date") ? parseDate(getValues("birth_date") as string) : null}
+                  onChange={(date) => (date ? setValue("birth_date", date?.toString()) : null)}
                   label={t("fields.birth_date.label")}
                   isReadOnly={mode === "view"}
                 />
@@ -196,17 +174,12 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   errorMessage={error?.message}
                   selectedKeys={getValues("gender") ? [getValues("gender") as string] : []}
                   onSelectionChange={(selectedKeys: SharedSelection) => {
-                    setValue(
-                      "gender",
-                      selectedKeys.anchorKey as keyof typeof genderOptions
-                    );
+                    setValue("gender", selectedKeys.anchorKey as keyof typeof genderOptions);
                   }}
                   isDisabled={mode === "view"}
                 >
                   {Object.keys(genderOptions).map((key) => (
-                    <SelectItem key={key} >
-                      {genderOptions[key as keyof typeof genderOptions]}
-                    </SelectItem>
+                    <SelectItem key={key}>{genderOptions[key as keyof typeof genderOptions]}</SelectItem>
                   ))}
                 </Select>
               )}
@@ -224,12 +197,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKey={getValues("ethnicity") as string ?? ""}
+                  selectedKey={(getValues("ethnicity") as string) ?? ""}
                   onSelectionChange={(selected) => {
-                    setValue(
-                      "ethnicity",
-                      selected?.toString() as keyof typeof ethnicityOptions
-                    );
+                    setValue("ethnicity", selected?.toString() as keyof typeof ethnicityOptions);
                   }}
                   isDisabled={mode === "view"}
                   classNames={{ clearButton: "hidden" }}
@@ -255,12 +225,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKey={getValues("hometown") as string ?? ""}
+                  selectedKey={(getValues("hometown") as string) ?? ""}
                   onSelectionChange={(selected) => {
-                    setValue(
-                      "hometown",
-                      selected?.toString() as keyof typeof hometownOptions
-                    );
+                    setValue("hometown", selected?.toString() as keyof typeof hometownOptions);
                   }}
                   isDisabled={mode === "view"}
                   classNames={{ clearButton: "hidden" }}
@@ -292,13 +259,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
             <Controller
               name="record_id"
               control={control}
-              render={({ field }) => (
-                <Input
-                  label={t("record_id.label")}
-                  {...field}
-                  isReadOnly={mode === "view"}
-                />
-              )}
+              render={({ field }) => <Input label={t("record_id.label")} {...field} isReadOnly={mode === "view"} />}
             />
           </Skeleton>
           {mode === "edit" && (
@@ -313,12 +274,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                   </Checkbox>
                 )}
               />
-              <Button
-                color="primary"
-                type="submit"
-                isDisabled={isSubmitting}
-                isLoading={isSubmitting}
-              >
+              <Button color="primary" type="submit" isDisabled={isSubmitting} isLoading={isSubmitting}>
                 {t("profile.save")}
               </Button>
             </>

@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { withAuthGet } from "@/lib/api-route";
+import { NextResponse } from "next/server";
 
 /**
  * GET /api/account/overview
@@ -16,20 +16,17 @@ export const GET = withAuthGet(async ({ session }) => {
   };
 
   // Fan out requests in parallel
-  const [profileRes, pollsRes, verificationsRes, verifiersRes] =
-    await Promise.allSettled([
-      fetch(`${process.env.API_URL}/users/me`, { headers }),
-      fetch(`${process.env.API_URL}/users/my-polls?page=1`, { headers }),
-      fetch(`${process.env.API_URL}/users/my-verifications?page=1`, {
-        headers,
-      }),
-      fetch(`${process.env.API_URL}/users/my-verifiers?page=1`, { headers }),
-    ]);
+  const [profileRes, pollsRes, verificationsRes, verifiersRes] = await Promise.allSettled([
+    fetch(`${process.env.API_URL}/users/me`, { headers }),
+    fetch(`${process.env.API_URL}/users/my-polls?page=1`, { headers }),
+    fetch(`${process.env.API_URL}/users/my-verifications?page=1`, {
+      headers,
+    }),
+    fetch(`${process.env.API_URL}/users/my-verifiers?page=1`, { headers }),
+  ]);
 
   // Helper: safely extract JSON from a settled fetch result
-  const extract = async (
-    result: PromiseSettledResult<Response>
-  ): Promise<Record<string, unknown> | null> => {
+  const extract = async (result: PromiseSettledResult<Response>): Promise<Record<string, unknown> | null> => {
     if (result.status === "rejected") return null;
     try {
       if (!result.value.ok) return null;
@@ -39,18 +36,15 @@ export const GET = withAuthGet(async ({ session }) => {
     }
   };
 
-  const [profileJson, pollsJson, verificationsJson, verifiersJson] =
-    await Promise.all([
-      extract(profileRes),
-      extract(pollsRes),
-      extract(verificationsRes),
-      extract(verifiersRes),
-    ]);
+  const [profileJson, pollsJson, verificationsJson, verifiersJson] = await Promise.all([
+    extract(profileRes),
+    extract(pollsRes),
+    extract(verificationsRes),
+    extract(verifiersRes),
+  ]);
 
   // --- Profile ---
-  const profile = profileJson?.success
-    ? (profileJson.data as Record<string, unknown>)
-    : null;
+  const profile = profileJson?.success ? (profileJson.data as Record<string, unknown>) : null;
 
   // --- Polls summary ---
   type PollEntry = {
@@ -63,9 +57,7 @@ export const GET = withAuthGet(async ({ session }) => {
     created_at: string;
   };
 
-  const pollsData = pollsJson?.success
-    ? (pollsJson.data as { polls: PollEntry[]; total: number })
-    : null;
+  const pollsData = pollsJson?.success ? (pollsJson.data as { polls: PollEntry[]; total: number }) : null;
 
   const polls = {
     total: pollsData?.total ?? 0,

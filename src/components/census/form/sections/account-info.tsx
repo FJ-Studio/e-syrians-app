@@ -9,10 +9,7 @@ interface AccountInfoSectionProps {
   t: (key: string) => string;
 }
 
-export default function AccountInfoSection({
-  control,
-  t,
-}: AccountInfoSectionProps) {
+export default function AccountInfoSection({ control, t }: AccountInfoSectionProps) {
   return (
     <>
       <SectionHeader

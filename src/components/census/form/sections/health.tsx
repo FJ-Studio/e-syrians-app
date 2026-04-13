@@ -1,15 +1,10 @@
 "use client";
 
-import { SectionProps } from "../types";
-import { FormAutocomplete, FormCheckbox, SectionHeader } from "../fields";
 import useHealthStatuses from "@/components/hooks/localization/health";
+import { FormAutocomplete, FormCheckbox, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function HealthSection({
-  control,
-  getValues,
-  setValue,
-  t,
-}: SectionProps) {
+export default function HealthSection({ control, getValues, setValue, t }: SectionProps) {
   const healthStatuses = useHealthStatuses();
 
   return (

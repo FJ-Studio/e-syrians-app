@@ -1,4 +1,5 @@
 "use client";
+import usePollTable from "@/components/hooks/use-poll-table";
 import { ReactionLog } from "@/lib/types/polls";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
@@ -20,7 +21,6 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, Key, useCallback, useMemo } from "react";
-import usePollTable from "@/components/hooks/use-poll-table";
 
 const MyReactions: FC = () => {
   const t = useTranslations("account.dashboard.polls.my_reactions");
@@ -46,10 +46,8 @@ const MyReactions: FC = () => {
     onClear,
   } = usePollTable<ReactionLog>({
     fetchUrl: "/api/polls/react",
-    dataExtractor: (data) =>
-      (data as { data: { reactions: ReactionLog[] } }).data.reactions,
-    lastPageExtractor: (data) =>
-      (data as { data: { last_page: number } }).data.last_page ?? 1,
+    dataExtractor: (data) => (data as { data: { reactions: ReactionLog[] } }).data.reactions,
+    lastPageExtractor: (data) => (data as { data: { last_page: number } }).data.last_page ?? 1,
     searchField: (item) => item.poll?.question ?? "",
     sortableColumns: ["created_at", "question"],
   });
@@ -60,11 +58,7 @@ const MyReactions: FC = () => {
       switch (columnKey) {
         case "question":
           return (
-            <Link
-              title={reaction.poll.question}
-              href={`/polls/${reaction.poll_id}`}
-              target="_blank"
-            >
+            <Link title={reaction.poll.question} href={`/polls/${reaction.poll_id}`} target="_blank">
               {reaction.poll.question}
             </Link>
           );
@@ -83,29 +77,22 @@ const MyReactions: FC = () => {
           );
         case "reaction":
           return (
-            <Chip
-              variant="flat"
-              color={reaction.reaction === "down" ? "danger" : "success"}
-            >
-              {reaction.reaction === "up"
-                ? t("table.reaction.up")
-                : t("table.reaction.down")}
+            <Chip variant="flat" color={reaction.reaction === "down" ? "danger" : "success"}>
+              {reaction.reaction === "up" ? t("table.reaction.up") : t("table.reaction.down")}
             </Chip>
           );
         default:
-          return cellValue !== undefined && typeof cellValue !== "object"
-            ? cellValue
-            : String(cellValue);
+          return cellValue !== undefined && typeof cellValue !== "object" ? cellValue : String(cellValue);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items]
+    [items],
   );
 
   const topContent = useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
+        <div className="flex items-end justify-between gap-3">
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
@@ -123,30 +110,13 @@ const MyReactions: FC = () => {
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <Pagination
-          isCompact
-          showShadow
-          color="primary"
-          page={page}
-          total={pages}
-          onChange={setPage}
-        />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onPreviousPage}
-          >
+      <div className="flex items-center justify-between px-2 py-2">
+        <Pagination isCompact showShadow color="primary" page={page} total={pages} onChange={setPage} />
+        <div className="hidden w-[30%] justify-end gap-2 sm:flex">
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
             {t("previous.title")}
           </Button>
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onNextPage}
-          >
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
             {t("next.title")}
           </Button>
         </div>
@@ -158,9 +128,7 @@ const MyReactions: FC = () => {
   return (
     <Card>
       <CardHeader className="flex flex-col items-start">
-        <h2 className="text-xl font-medium text-default-700 text-start">
-          {t("title")}
-        </h2>
+        <h2 className="text-default-700 text-start text-xl font-medium">{t("title")}</h2>
         <p className="text-default-500 text-start">{t("description")}</p>
       </CardHeader>
       <CardBody>
@@ -188,18 +156,14 @@ const MyReactions: FC = () => {
             )}
           </TableHeader>
           <TableBody
-            emptyContent={
-              <div className="flex flex-col items-center gap-3"></div>
-            }
+            emptyContent={<div className="flex flex-col items-center gap-3"></div>}
             items={items}
             loadingContent={<Spinner />}
             isLoading={loading}
           >
             {(item) => (
               <TableRow key={item.poll_id}>
-                {(columnKey) => (
-                  <TableCell>{renderCell(item, columnKey)}</TableCell>
-                )}
+                {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
               </TableRow>
             )}
           </TableBody>

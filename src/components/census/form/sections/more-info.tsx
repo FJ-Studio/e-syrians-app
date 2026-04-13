@@ -1,7 +1,7 @@
 "use client";
 
-import { Control } from "react-hook-form";
 import { RegistrationForm } from "@/lib/types/census";
+import { Control } from "react-hook-form";
 import { FormTextarea, SectionHeader } from "../fields";
 
 interface MoreInfoSectionProps {

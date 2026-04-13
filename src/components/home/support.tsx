@@ -9,7 +9,7 @@ const SupportMe: FC = () => {
   const t = useTranslations();
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="p-2 border-gray-100 border-solid border-2 rounded-lg">
+      <div className="rounded-lg border-2 border-solid border-gray-100 p-2">
         <Image src="/btc-qr.png" alt="Support me" width={150} height={150} />
       </div>
       <Snippet

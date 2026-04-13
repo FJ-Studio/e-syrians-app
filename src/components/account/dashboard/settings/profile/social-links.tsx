@@ -3,14 +3,7 @@ import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Input,
-  Skeleton,
-} from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Input, Skeleton } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -91,11 +84,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
         toast.success(t("update.success"));
       } else {
         const result = await response.json();
-        toast.error(
-          result.messages?.[0]
-            ? serverError(result.messages[0])
-            : extractErrors(result.messages)[0]
-        );
+        toast.error(result.messages?.[0] ? serverError(result.messages[0]) : extractErrors(result.messages)[0]);
       }
     } catch {
       // Network error — handled by UI state
@@ -104,7 +93,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-lg text-default-700 font-medium">{t("title")}</h3>
+        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(save)} className="space-y-4">
@@ -132,12 +121,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
               )}
             />
           ))}
-          <Button
-            type="submit"
-            color="primary"
-            isLoading={isSubmitting}
-            isDisabled={!isDirty}
-          >
+          <Button type="submit" color="primary" isLoading={isSubmitting} isDisabled={!isDirty}>
             {t("save")}
           </Button>
         </form>

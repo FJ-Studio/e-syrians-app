@@ -1,15 +1,11 @@
 "use client";
 
-import { SectionProps } from "../types";
-import { FormInput, FormSelect, FormAutocomplete, SectionHeader } from "../fields";
 import useEducationLevels from "@/components/hooks/localization/education";
 import useSpokenLanguages from "@/components/hooks/localization/languages";
+import { FormAutocomplete, FormInput, FormSelect, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function EducationSection({
-  control,
-  getValues,
-  t,
-}: Omit<SectionProps, "setValue">) {
+export default function EducationSection({ control, getValues, t }: Omit<SectionProps, "setValue">) {
   const educationLevels = useEducationLevels();
   const spokenLanguages = useSpokenLanguages();
 
@@ -29,17 +25,9 @@ export default function EducationSection({
         label={t("fields.spoken_languages.label")}
         options={spokenLanguages}
         selectionMode="multiple"
-        defaultSelectedKeys={
-          getValues("languages")
-            ? getValues("languages").split(",")
-            : undefined
-        }
+        defaultSelectedKeys={getValues("languages") ? getValues("languages").split(",") : undefined}
       />
-      <FormInput
-        name="skills"
-        control={control}
-        label={t("fields.skills.label")}
-      />
+      <FormInput name="skills" control={control} label={t("fields.skills.label")} />
     </>
   );
 }

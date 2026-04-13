@@ -1,6 +1,5 @@
 "use client";
 
-import { Controller, Control, FieldPath, FieldValues } from "react-hook-form";
 import {
   Autocomplete,
   AutocompleteItem,
@@ -13,6 +12,7 @@ import {
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { ReactElement, ReactNode } from "react";
+import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 // ---------------------------------------------------------------------------
 // Shared props
@@ -123,11 +123,7 @@ export function FormSelect<T extends FieldValues>({
           onSelectionChange={onSelectionChange}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? (
-              renderItem(key, options[key])
-            ) : (
-              <SelectItem key={key}>{options[key]}</SelectItem>
-            )
+            renderItem ? renderItem(key, options[key]) : <SelectItem key={key}>{options[key]}</SelectItem>,
           )}
         </Select>
       )}
@@ -186,11 +182,7 @@ export function FormAutocomplete<T extends FieldValues>({
           classNames={{ clearButton: "hidden" }}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? (
-              renderItem(key, options[key])
-            ) : (
-              <AutocompleteItem key={key}>{options[key]}</AutocompleteItem>
-            )
+            renderItem ? renderItem(key, options[key]) : <AutocompleteItem key={key}>{options[key]}</AutocompleteItem>,
           )}
         </Autocomplete>
       )}
@@ -263,9 +255,7 @@ export function FormDatePicker<T extends FieldValues>({
           inert={true}
           value={currentValue ? parseDate(currentValue) : null}
           defaultValue={currentValue ? parseDate(currentValue) : null}
-          onChange={(date) =>
-            date ? setValue(name, date.toString()) : null
-          }
+          onChange={(date) => (date ? setValue(name, date.toString()) : null)}
           isRequired={isRequired}
           label={label}
           errorMessage={error?.message}
@@ -284,19 +274,12 @@ interface FormTextareaProps<T extends FieldValues> extends BaseFieldProps<T> {
   placeholder?: string;
 }
 
-export function FormTextarea<T extends FieldValues>({
-  name,
-  control,
-  label,
-  placeholder,
-}: FormTextareaProps<T>) {
+export function FormTextarea<T extends FieldValues>({ name, control, label, placeholder }: FormTextareaProps<T>) {
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
-        <Textarea {...field} label={label} placeholder={placeholder} />
-      )}
+      render={({ field }) => <Textarea {...field} label={label} placeholder={placeholder} />}
     />
   );
 }
@@ -305,18 +288,10 @@ export function FormTextarea<T extends FieldValues>({
 // SectionHeader
 // ---------------------------------------------------------------------------
 
-export function SectionHeader({
-  number,
-  title,
-  description,
-}: {
-  number: number;
-  title: string;
-  description?: string;
-}) {
+export function SectionHeader({ number, title, description }: { number: number; title: string; description?: string }) {
   return (
     <div>
-      <h3 className="font-semibold text-lg">
+      <h3 className="text-lg font-semibold">
         {number}. {title}
       </h3>
       {description && <p>{description}</p>}

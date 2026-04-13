@@ -12,13 +12,13 @@ const FirstRegistrants: FC<Props> = ({ users }) => {
 
   return (
     <>
-      <h1 className="font-bold text-3xl text-gray-700 mb-2">{t("title")}</h1>
+      <h1 className="mb-2 text-3xl font-bold text-gray-700">{t("title")}</h1>
       <p>
         {t("description", {
           count: users.length,
         })}
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-col-6 gap-4 my-4">
+      <div className="xl:grid-col-6 my-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {users.map((user) => (
           <ShortUserSummary user={user} key={user.uuid} />
         ))}

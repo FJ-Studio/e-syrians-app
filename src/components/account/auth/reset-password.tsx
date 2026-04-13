@@ -58,33 +58,17 @@ const ResetPassword: FC = () => {
       <Controller
         name="email"
         control={control}
-        render={({ field }) => (
-          <Input {...field} type="email" isRequired label={t("email")} />
-        )}
+        render={({ field }) => <Input {...field} type="email" isRequired label={t("email")} />}
       />
       <Controller
         name="password"
         control={control}
-        render={({ field }) => (
-          <Input
-            {...field}
-            type="password"
-            isRequired
-            label={t("newPassword")}
-          />
-        )}
+        render={({ field }) => <Input {...field} type="password" isRequired label={t("newPassword")} />}
       />
       <Controller
         name="password_confirmation"
         control={control}
-        render={({ field }) => (
-          <Input
-            {...field}
-            type="password"
-            isRequired
-            label={t("newPasswordConfirmation")}
-          />
-        )}
+        render={({ field }) => <Input {...field} type="password" isRequired label={t("newPasswordConfirmation")} />}
       />
       <Button fullWidth color="primary" isLoading={isSubmitting} type="submit">
         {t("resetPassword")}

@@ -9,10 +9,7 @@ const API_URL = process.env.API_URL;
  * Wraps a server-side fetch in try-catch with consistent error shape.
  * Returns null on network/parse errors so callers can handle gracefully.
  */
-async function safeFetch<T>(
-  url: string,
-  options?: RequestInit
-): Promise<ApiResponse<T> | null> {
+async function safeFetch<T>(url: string, options?: RequestInit): Promise<ApiResponse<T> | null> {
   try {
     const res = await fetch(url, options);
     if (!res.ok && res.status >= 500) {
@@ -26,9 +23,7 @@ async function safeFetch<T>(
   }
 }
 
-export const getPoll = async (
-  id: string
-): Promise<ApiResponse<Poll> | null> => {
+export const getPoll = async (id: string): Promise<ApiResponse<Poll> | null> => {
   const session = await auth();
   return safeFetch<Poll>(`${API_URL}/polls/${id}`, {
     headers: {
@@ -42,7 +37,7 @@ export const getPoll = async (
 export const getPolls = async (
   page: string,
   year: string = "",
-  month: string = ""
+  month: string = "",
 ): Promise<ApiResponse<{
   polls: Array<Poll>;
   current_page: number;
@@ -59,9 +54,7 @@ export const getPolls = async (
   });
 };
 
-export const getFirstRegistrants = async (): Promise<ApiResponse<
-  Array<ESUser>
-> | null> => {
+export const getFirstRegistrants = async (): Promise<ApiResponse<Array<ESUser>> | null> => {
   return safeFetch<Array<ESUser>>(`${API_URL}/users/first`, {
     headers: {
       Accept: "application/json",
@@ -73,9 +66,7 @@ export const getFirstRegistrants = async (): Promise<ApiResponse<
   });
 };
 
-export const getUser = async (
-  uuid: string
-): Promise<ApiResponse<ESUser> | null> => {
+export const getUser = async (uuid: string): Promise<ApiResponse<ESUser> | null> => {
   return safeFetch<ESUser>(`${API_URL}/users/verify/${uuid}`, {
     next: {
       revalidate: 3600,
@@ -88,7 +79,7 @@ export const verifyEmail = async (
   id: string,
   expires: string | undefined,
   hash: string | undefined,
-  signature: string | undefined
+  signature: string | undefined,
 ): Promise<boolean> => {
   const params = new URLSearchParams();
   if (expires) params.set("expires", expires);
@@ -98,16 +89,13 @@ export const verifyEmail = async (
   if (signature) params.set("signature", signature);
 
   try {
-    const res = await fetch(
-      `${API_URL}/verify-email?${params.toString()}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await fetch(`${API_URL}/verify-email?${params.toString()}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.status === 200;
   } catch {
     return false;

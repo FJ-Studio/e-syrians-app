@@ -1,10 +1,4 @@
-import {
-  CountryCode,
-  Ethnicity,
-  Gender,
-  Province,
-  ReligiousAffiliation,
-} from "./misc";
+import { CountryCode, Ethnicity, Gender, Province, ReligiousAffiliation } from "./misc";
 
 export type ESUser = {
   id: string;

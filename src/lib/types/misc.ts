@@ -25,23 +25,12 @@ export type ReligiousAffiliation = (typeof RELIGIOUS_AFFILIATIONS)[number];
 
 export type MaritalStatus = (typeof MARITAL_STATUSES)[number];
 
-export type EducationLevel =
-  | "none"
-  | "primary"
-  | "secondary"
-  | "high-school"
-  | "university-degree"
-  | "postgraduate";
+export type EducationLevel = "none" | "primary" | "secondary" | "high-school" | "university-degree" | "postgraduate";
 
-export type SourceOfIncome =
-  | "stable-job"
-  | "freelance"
-  | "aid-support"
-  | "no-income"
-  | "other";
+export type SourceOfIncome = "stable-job" | "freelance" | "aid-support" | "no-income" | "other";
 
-  export type ApiResponse<T> = {
-    success: boolean;
-    data: T;
-    messages: Array<string> | Record<string, Array<string>>;
-  }
+export type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+  messages: Array<string> | Record<string, Array<string>>;
+};

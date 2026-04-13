@@ -53,9 +53,7 @@ const ForgotPassword: FC = () => {
       <Controller
         name="email"
         control={control}
-        render={({ field }) => (
-          <Input {...field} isRequired label={t("email")} type="email" />
-        )}
+        render={({ field }) => <Input {...field} isRequired label={t("email")} type="email" />}
       />
       <p className="flex items-center gap-2">
         <ArrowLongLeftIcon className="size-5 rtl:rotate-180" />

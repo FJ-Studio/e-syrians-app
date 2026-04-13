@@ -1,16 +1,7 @@
 "use client";
 
 import { PollVoter, PollVotersResponse } from "@/lib/types/polls";
-import {
-  Avatar,
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Spinner,
-} from "@heroui/react";
+import { Avatar, Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useCallback, useEffect, useState } from "react";
 
@@ -21,12 +12,7 @@ interface VotersModalProps {
   optionText: string;
 }
 
-const VotersModal: FC<VotersModalProps> = ({
-  isOpen,
-  onOpenChange,
-  optionId,
-  optionText,
-}) => {
+const VotersModal: FC<VotersModalProps> = ({ isOpen, onOpenChange, optionId, optionText }) => {
   const t = useTranslations("polls");
   const [voters, setVoters] = useState<PollVoter[]>([]);
   const [page, setPage] = useState(1);
@@ -41,15 +27,11 @@ const VotersModal: FC<VotersModalProps> = ({
 
       setLoading(true);
       try {
-        const res = await fetch(
-          `/api/polls/voters?poll_option_id=${optionId}&page=${pageNum}`
-        );
+        const res = await fetch(`/api/polls/voters?poll_option_id=${optionId}&page=${pageNum}`);
         if (res.ok) {
           const json: PollVotersResponse = await res.json();
           const payload = json.data;
-          setVoters((prev) =>
-            append ? [...prev, ...payload.data] : payload.data
-          );
+          setVoters((prev) => (append ? [...prev, ...payload.data] : payload.data));
           setPage(payload.current_page);
           setLastPage(payload.last_page);
           setTotal(payload.total);
@@ -59,7 +41,7 @@ const VotersModal: FC<VotersModalProps> = ({
         setInitialLoading(false);
       }
     },
-    [optionId]
+    [optionId],
   );
 
   // Reset and fetch when modal opens with a new option
@@ -87,13 +69,9 @@ const VotersModal: FC<VotersModalProps> = ({
           <>
             <ModalHeader className="flex flex-col gap-1">
               <h3 className="text-lg font-medium">{t("voters.title")}</h3>
-              <p className="text-sm text-default-500 font-normal">
-                {optionText}
-              </p>
+              <p className="text-default-500 text-sm font-normal">{optionText}</p>
               {!initialLoading && (
-                <p className="text-xs text-default-400 font-normal">
-                  {t("voters.total", { count: total })}
-                </p>
+                <p className="text-default-400 text-xs font-normal">{t("voters.total", { count: total })}</p>
               )}
             </ModalHeader>
             <ModalBody>
@@ -102,21 +80,15 @@ const VotersModal: FC<VotersModalProps> = ({
                   <Spinner />
                 </div>
               ) : voters.length === 0 ? (
-                <p className="text-center text-default-500 py-4">
-                  {t("voters.noVoters")}
-                </p>
+                <p className="text-default-500 py-4 text-center">{t("voters.noVoters")}</p>
               ) : (
                 <div className="space-y-3">
                   {voters.map((voter) => (
                     <div
                       key={voter.id}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-default-100 transition-colors"
+                      className="hover:bg-default-100 flex items-center gap-3 rounded-lg p-2 transition-colors"
                     >
-                      <Avatar
-                        src={voter.avatar || undefined}
-                        name={`${voter.name} ${voter.surname}`}
-                        size="sm"
-                      />
+                      <Avatar src={voter.avatar || undefined} name={`${voter.name} ${voter.surname}`} size="sm" />
                       <span className="text-sm font-medium">
                         {voter.name} {voter.surname}
                       </span>
@@ -124,12 +96,7 @@ const VotersModal: FC<VotersModalProps> = ({
                   ))}
                   {page < lastPage && (
                     <div className="flex justify-center pt-2">
-                      <Button
-                        size="sm"
-                        variant="flat"
-                        onPress={loadMore}
-                        isLoading={loading}
-                      >
+                      <Button size="sm" variant="flat" onPress={loadMore} isLoading={loading}>
                         {t("voters.loadMore")}
                       </Button>
                     </div>

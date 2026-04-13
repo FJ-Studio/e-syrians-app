@@ -11,9 +11,7 @@ const useReligiousAffiliation = (): Record<ReligiousAffiliation, string> => {
     ismailis: t("religious_affiliation.ismailis"),
     "armenian-catholic": t("religious_affiliation.armenian-catholic"),
     "armenian-orthodox": t("religious_affiliation.armenian-orthodox"),
-    "assyrian-church-of-the-east": t(
-      "religious_affiliation.assyrian-chaldean-syriac"
-    ),
+    "assyrian-church-of-the-east": t("religious_affiliation.assyrian-chaldean-syriac"),
     "greek-catholic": t("religious_affiliation.greek-catholic"),
     "greek-orthodox": t("religious_affiliation.greek-orthodox"),
     protestant: t("religious_affiliation.protestant"),
