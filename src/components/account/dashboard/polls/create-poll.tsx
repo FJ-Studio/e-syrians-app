@@ -27,7 +27,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
 const CreatePoll: FC = () => {
@@ -46,7 +46,6 @@ const CreatePoll: FC = () => {
     control,
     getValues,
     setValue,
-    watch,
     register,
     formState: { isSubmitting },
   } = useForm<CreatePollFields>({
@@ -73,6 +72,11 @@ const CreatePoll: FC = () => {
       voters_are_visible: "0",
     },
   });
+
+  // Subscription-based watchers. Using `useWatch` instead of the form's
+  // `watch()` keeps these values compatible with React Compiler memoization.
+  const allowedVotersValue = useWatch({ control, name: "audience.allowed_voters" });
+  const countryValue = useWatch({ control, name: "audience.country" });
 
   const removeOption = (index: number) => {
     setOptions((prev) => prev.filter((_, i) => i !== index));
@@ -362,7 +366,7 @@ const CreatePoll: FC = () => {
           )}
         />
         <div
-          className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${(watch("audience.allowed_voters") ?? "").trim().length > 0 ? "pointer-events-none opacity-50" : ""}`}
+          className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${(allowedVotersValue ?? "").trim().length > 0 ? "pointer-events-none opacity-50" : ""}`}
         >
           <Controller
             name="audience.gender"
@@ -465,7 +469,7 @@ const CreatePoll: FC = () => {
               </Select>
             )}
           />
-          {(watch("audience.country") ?? []).includes("SY") && (
+          {(countryValue ?? []).includes("SY") && (
             <Controller
               name="audience.city_inside_syria"
               control={control}
