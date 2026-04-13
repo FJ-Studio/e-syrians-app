@@ -9,8 +9,10 @@ module.exports = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     "type-enum": [2, "always", ["feat", "fix", "refactor", "chore", "style", "docs", "test"]],
-    // Matches the e-syrians-api repo convention (lowercase subject, no
-    // trailing period). The body line limit defaults to 100 characters.
-    "subject-case": [2, "always", "lower-case"],
+    // Subject case is intentionally unrestricted — commit subjects frequently
+    // reference code identifiers (passWithNoTests, useWatch, NEXTAUTH_SECRET,
+    // etc.) whose casing is meaningful. First-character-lowercase is still
+    // enforced at the GitHub ruleset layer via `commit_message_pattern`.
+    "subject-case": [0],
   },
 };
