@@ -25,9 +25,7 @@ const NotificationsSettings: FC = () => {
     formState: { isSubmitting, isDirty },
   } = useForm<NotificationSettings>({
     defaultValues: {
-      received_verification_email: Boolean(
-        data?.user?.received_verification_email,
-      ),
+      received_verification_email: Boolean(data?.user?.received_verification_email),
       account_verified_email: Boolean(data?.user?.account_verified_email),
     },
   });
@@ -51,14 +49,9 @@ const NotificationsSettings: FC = () => {
 
   return (
     <Card>
-      <CardHeader className="text-default-700 font-medium">
-        {t("title")}
-      </CardHeader>
+      <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
       <CardBody>
-        <form
-          className="space-y-3"
-          onSubmit={handleSubmit(updateNotificationsSettings)}
-        >
+        <form className="space-y-3" onSubmit={handleSubmit(updateNotificationsSettings)}>
           <div className="flex justify-between gap-3">
             <p>{t("received_verification_email")}</p>
             <Controller
@@ -89,12 +82,7 @@ const NotificationsSettings: FC = () => {
               )}
             />
           </div>
-          <Button
-            color="primary"
-            type="submit"
-            isDisabled={!isDirty || isSubmitting}
-            isLoading={isSubmitting}
-          >
+          <Button color="primary" type="submit" isDisabled={!isDirty || isSubmitting} isLoading={isSubmitting}>
             {t("update")}
           </Button>
         </form>

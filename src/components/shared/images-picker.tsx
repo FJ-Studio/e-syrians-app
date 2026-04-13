@@ -3,14 +3,7 @@ import { PhotoIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import React, {
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react";
 
 type Props = PropsWithChildren<{
   setSelectedImages: (images: File[]) => void;
@@ -45,8 +38,8 @@ const ImagesPicker: FC<Props> = ({
               reader.onloadend = () => resolve(reader.result as string);
               reader.onerror = reject;
               reader.readAsDataURL(file);
-            })
-        )
+            }),
+        ),
       );
       setImagePreviews(previews);
     };
@@ -74,9 +67,7 @@ const ImagesPicker: FC<Props> = ({
       });
     });
 
-    Promise.all(newPreviews).then((previews) =>
-      setImagePreviews((prev) => [...prev, ...previews])
-    );
+    Promise.all(newPreviews).then((previews) => setImagePreviews((prev) => [...prev, ...previews]));
   };
 
   const removeImage = (index: number) => {
@@ -89,18 +80,15 @@ const ImagesPicker: FC<Props> = ({
   return (
     <>
       {preview && (
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="mb-3 flex flex-wrap gap-2">
           {imagePreviews.map((preview, index) => (
-            <div
-              key={index}
-              className="relative flex items-center justify-center w-24 h-24 bg-gray-200 rounded-lg"
-            >
+            <div key={index} className="relative flex h-24 w-24 items-center justify-center rounded-lg bg-gray-200">
               <Image
                 src={preview}
                 alt={`Image preview ${index}`}
                 width={96}
                 height={96}
-                className="w-full h-full object-cover rounded-lg border border-solid border-gray-300"
+                className="h-full w-full rounded-lg border border-solid border-gray-300 object-cover"
               />
               <Button
                 color="danger"
@@ -115,14 +103,7 @@ const ImagesPicker: FC<Props> = ({
           ))}
         </div>
       )}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleImageUpload}
-        className="hidden"
-        accept="image/*"
-        multiple
-      />
+      <input type="file" ref={fileInputRef} onChange={handleImageUpload} className="hidden" accept="image/*" multiple />
 
       <Button
         color="default"

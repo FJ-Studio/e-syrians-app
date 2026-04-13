@@ -1,4 +1,14 @@
 "use client";
+import useCountries from "@/components/hooks/localization/country";
+import useEthnicity from "@/components/hooks/localization/ethnicity";
+import useGender from "@/components/hooks/localization/gender";
+import usePollResultsReveal from "@/components/hooks/localization/poll-results-reveal";
+import useProvinces from "@/components/hooks/localization/provinces";
+import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
+import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
+import { generateToken } from "@/lib/recaptcha";
+import { CreatePollFields } from "@/lib/types/polls";
+import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import {
   Alert,
   Avatar,
@@ -12,23 +22,13 @@ import {
   SliderValue,
   Textarea,
 } from "@heroui/react";
+import { parseDate } from "@internationalized/date";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { parseDate } from "@internationalized/date";
-import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
-import { CreatePollFields, PollAudience } from "@/lib/types/polls";
-import useGender from "@/components/hooks/localization/gender";
-import useProvinces from "@/components/hooks/localization/provinces";
-import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
-import useEthnicity from "@/components/hooks/localization/ethnicity";
-import useCountries from "@/components/hooks/localization/country";
 import { toast } from "sonner";
-import { generateToken } from "@/lib/recaptcha";
-import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
-import usePollResultsReveal from "@/components/hooks/localization/poll-results-reveal";
 
 const CreatePoll: FC = () => {
   const genderOptions = useGender();
@@ -56,15 +56,15 @@ const CreatePoll: FC = () => {
       duration: "1",
       audience: {
         age_range: {
-          max: MAX_AUDIENCE_AGE.toString(),
-          min: MIN_AUDIENCE_AGE.toString(),
+          max: MAX_AUDIENCE_AGE,
+          min: MIN_AUDIENCE_AGE,
         },
-        country: "",
-        ethnicity: "",
-        gender: "",
-        hometown: "",
-        religious_affiliation: "",
-        city_inside_syria: "",
+        country: [],
+        ethnicity: [],
+        gender: [],
+        hometown: [],
+        religious_affiliation: [],
+        city_inside_syria: [],
         allowed_voters: "",
       },
       max_selections: "1",
@@ -103,24 +103,21 @@ const CreatePoll: FC = () => {
         formData.append("allowed_voters[]", voter);
       });
     } else {
-      formData.append("min_age", data.audience.age_range?.min ?? "");
-      formData.append("max_age", data.audience.age_range?.max ?? "");
-      [
+      formData.append("min_age", String(data.audience.age_range?.min ?? MIN_AUDIENCE_AGE));
+      formData.append("max_age", String(data.audience.age_range?.max ?? MAX_AUDIENCE_AGE));
+      const arrayCriteria = [
         "gender",
         "hometown",
         "country",
         "religious_affiliation",
         "ethnicity",
         "city_inside_syria",
-      ].forEach((key) => {
-        if (data.audience[key as keyof PollAudience]) {
-          const opts = String(
-            data.audience[key as keyof PollAudience] ?? ""
-          ).split(",");
-          opts.forEach((opt: string) => {
-            formData.append(`${key}[]`, opt);
-          });
-        }
+      ] as const;
+      arrayCriteria.forEach((key) => {
+        const values = data.audience[key] ?? [];
+        values.forEach((value) => {
+          formData.append(`${key}[]`, value);
+        });
       });
     }
     try {
@@ -148,14 +145,14 @@ const CreatePoll: FC = () => {
   };
   return (
     <div className="w-full">
-      <h2 className="text-xl font-medium text-default-700">{t("title")}</h2>
+      <h2 className="text-default-700 text-xl font-medium">{t("title")}</h2>
       <p className="text-default-500 mb-6">{t("description")}</p>
       {userIsNotVerified && (
         <Alert color="danger" className="mb-6">
           {t("accountUnverifiedAlert")}
         </Alert>
       )}
-      <form onSubmit={handleSubmit(store)} className="space-y-4 mb-6">
+      <form onSubmit={handleSubmit(store)} className="mb-6 space-y-4">
         <Controller
           name="question"
           control={control}
@@ -176,7 +173,7 @@ const CreatePoll: FC = () => {
             />
           )}
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Controller
             name="start_date"
             control={control}
@@ -184,19 +181,9 @@ const CreatePoll: FC = () => {
             render={({ field, fieldState: { error, invalid } }) => (
               <DatePicker
                 {...field}
-                value={
-                  getValues("start_date")
-                    ? parseDate(getValues("start_date"))
-                    : undefined
-                }
-                defaultValue={
-                  getValues("start_date")
-                    ? parseDate(getValues("start_date"))
-                    : undefined
-                }
-                onChange={(date) =>
-                  date ? setValue("start_date", date?.toString()) : null
-                }
+                value={getValues("start_date") ? parseDate(getValues("start_date")) : undefined}
+                defaultValue={getValues("start_date") ? parseDate(getValues("start_date")) : undefined}
+                onChange={(date) => (date ? setValue("start_date", date?.toString()) : null)}
                 isRequired
                 label={t("start_date.label")}
                 minValue={parseDate(new Date().toISOString().split("T")[0])}
@@ -230,7 +217,7 @@ const CreatePoll: FC = () => {
             )}
           />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Controller
             name="max_selections"
             control={control}
@@ -264,17 +251,13 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>
-                  {t("audience_can_add_options.no.label")}
-                </SelectItem>
-                <SelectItem key={"1"}>
-                  {t("audience_can_add_options.yes.label")}
-                </SelectItem>
+                <SelectItem key={"0"}>{t("audience_can_add_options.no.label")}</SelectItem>
+                <SelectItem key={"1"}>{t("audience_can_add_options.yes.label")}</SelectItem>
               </Select>
             )}
           />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Controller
             name="reveal_results"
             control={control}
@@ -287,13 +270,15 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
               >
                 {Object.keys(revealResultsOptions).map((key) => (
-                  <SelectItem key={key} textValue={revealResultsOptions[key as keyof typeof revealResultsOptions]
-                    .title}>
+                  <SelectItem
+                    key={key}
+                    textValue={revealResultsOptions[key as keyof typeof revealResultsOptions].title}
+                  >
                     <div className="">
-                      <p>{revealResultsOptions[key as keyof typeof revealResultsOptions]
-                      .title}</p>
-                      <p className="text-tiny text-default-500">{revealResultsOptions[key as keyof typeof revealResultsOptions]
-                      .description}</p>
+                      <p>{revealResultsOptions[key as keyof typeof revealResultsOptions].title}</p>
+                      <p className="text-tiny text-default-500">
+                        {revealResultsOptions[key as keyof typeof revealResultsOptions].description}
+                      </p>
                     </div>
                   </SelectItem>
                 ))}
@@ -310,20 +295,14 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>
-                  {t("voters_are_visible.no.label")}
-                </SelectItem>
-                <SelectItem key={"1"}>
-                  {t("voters_are_visible.yes.label")}
-                </SelectItem>
+                <SelectItem key={"0"}>{t("voters_are_visible.no.label")}</SelectItem>
+                <SelectItem key={"1"}>{t("voters_are_visible.yes.label")}</SelectItem>
               </Select>
             )}
           />
         </div>
 
-        <h3 className="font-semibold text-lg text-default-700">
-          {t("options.title")}
-        </h3>
+        <h3 className="text-default-700 text-lg font-semibold">{t("options.title")}</h3>
 
         {options.map((opt, index) => (
           <div key={index} className="flex items-center space-x-2">
@@ -338,12 +317,7 @@ const CreatePoll: FC = () => {
                 setOptions(newOptions);
               }}
               endContent={
-                <Button
-                  isIconOnly
-                  color="danger"
-                  onPress={() => removeOption(index)}
-                  isDisabled={options.length === 2}
-                >
+                <Button isIconOnly color="danger" onPress={() => removeOption(index)} isDisabled={options.length === 2}>
                   <MinusCircleIcon className="size-6" />
                 </Button>
               }
@@ -353,20 +327,14 @@ const CreatePoll: FC = () => {
 
         <Button
           type="button"
-          isDisabled={
-            isSubmitting || userIsNotVerified || options.length >= 100
-          }
-          onPress={() =>
-            options.length < 100 && setOptions((prev) => [...prev, ""])
-          }
+          isDisabled={isSubmitting || userIsNotVerified || options.length >= 100}
+          onPress={() => options.length < 100 && setOptions((prev) => [...prev, ""])}
           color="primary"
           startContent={<PlusCircleIcon className="size-6" />}
         >
           {t("options.add")}
         </Button>
-        <h3 className="font-semibold text-lg text-default-700">
-          {t("audience.title")}
-        </h3>
+        <h3 className="text-default-700 text-lg font-semibold">{t("audience.title")}</h3>
         <Controller
           name="audience.allowed_voters"
           control={control}
@@ -380,37 +348,37 @@ const CreatePoll: FC = () => {
               onValueChange={(value) => {
                 field.onChange(value);
                 if (value.trim().length > 0) {
-                  setValue("audience.gender", "");
-                  setValue("audience.hometown", "");
-                  setValue("audience.country", "");
-                  setValue("audience.religious_affiliation", "");
-                  setValue("audience.ethnicity", "");
-                  setValue("audience.city_inside_syria", "");
-                  setValue("audience.age_range.min", MIN_AUDIENCE_AGE.toString());
-                  setValue("audience.age_range.max", MAX_AUDIENCE_AGE.toString());
+                  setValue("audience.gender", []);
+                  setValue("audience.hometown", []);
+                  setValue("audience.country", []);
+                  setValue("audience.religious_affiliation", []);
+                  setValue("audience.ethnicity", []);
+                  setValue("audience.city_inside_syria", []);
+                  setValue("audience.age_range.min", MIN_AUDIENCE_AGE);
+                  setValue("audience.age_range.max", MAX_AUDIENCE_AGE);
                 }
               }}
             />
           )}
         />
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ${(watch("audience.allowed_voters") ?? "").trim().length > 0 ? "opacity-50 pointer-events-none" : ""}`}>
+        <div
+          className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${(watch("audience.allowed_voters") ?? "").trim().length > 0 ? "pointer-events-none opacity-50" : ""}`}
+        >
           <Controller
             name="audience.gender"
             control={control}
             render={({ field, fieldState: { error, invalid } }) => (
               <Select
-                {...field}
                 label={t("gender.label")}
                 description={t("gender.description")}
                 isInvalid={invalid}
                 errorMessage={error?.message}
                 selectionMode="multiple"
-                value={field.value || []}
+                selectedKeys={field.value ?? []}
+                onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(genderOptions).map((key) => (
-                  <SelectItem key={key}>
-                    {genderOptions[key as keyof typeof genderOptions]}
-                  </SelectItem>
+                  <SelectItem key={key}>{genderOptions[key as keyof typeof genderOptions]}</SelectItem>
                 ))}
               </Select>
             )}
@@ -420,18 +388,16 @@ const CreatePoll: FC = () => {
             control={control}
             render={({ field, fieldState: { error, invalid } }) => (
               <Select
-                {...field}
                 label={t("hometown.label")}
                 description={t("hometown.description")}
                 isInvalid={invalid}
                 errorMessage={error?.message}
                 selectionMode="multiple"
-                value={field.value || []}
+                selectedKeys={field.value ?? []}
+                onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(provinces).map((key) => (
-                  <SelectItem key={key}>
-                    {provinces[key as keyof typeof provinces]}
-                  </SelectItem>
+                  <SelectItem key={key}>{provinces[key as keyof typeof provinces]}</SelectItem>
                 ))}
               </Select>
             )}
@@ -441,18 +407,16 @@ const CreatePoll: FC = () => {
             control={control}
             render={({ field, fieldState: { error, invalid } }) => (
               <Select
-                {...field}
                 label={t("ethnicity.label")}
                 description={t("ethnicity.description")}
                 isInvalid={invalid}
                 errorMessage={error?.message}
                 selectionMode="multiple"
-                value={field.value || []}
+                selectedKeys={field.value ?? []}
+                onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(ethnicities).map((key) => (
-                  <SelectItem key={key}>
-                    {ethnicities[key as keyof typeof ethnicities]}
-                  </SelectItem>
+                  <SelectItem key={key}>{ethnicities[key as keyof typeof ethnicities]}</SelectItem>
                 ))}
               </Select>
             )}
@@ -465,22 +429,16 @@ const CreatePoll: FC = () => {
                 scrollShadowProps={{
                   isEnabled: false,
                 }}
-                {...field}
                 label={t("country.label")}
                 selectionMode="multiple"
                 description={t("country.description")}
-                value={field.value || []}
+                selectedKeys={field.value ?? []}
+                onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(countries).map((key) => (
                   <SelectItem
                     key={key}
-                    startContent={
-                      <Avatar
-                        src={`/flags/${key.toLowerCase()}.svg`}
-                        className="w-6 h-6"
-                        size="sm"
-                      />
-                    }
+                    startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
                   >
                     {countries[key as keyof typeof countries]}
                   </SelectItem>
@@ -493,38 +451,34 @@ const CreatePoll: FC = () => {
             control={control}
             render={({ field, fieldState: { error, invalid } }) => (
               <Select
-                {...field}
                 label={t("religious_affiliation.label")}
                 description={t("religious_affiliation.description")}
                 isInvalid={invalid}
                 errorMessage={error?.message}
                 selectionMode="multiple"
-                value={field.value || []}
+                selectedKeys={field.value ?? []}
+                onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(religions).map((key) => (
-                  <SelectItem key={key}>
-                    {religions[key as keyof typeof religions]}
-                  </SelectItem>
+                  <SelectItem key={key}>{religions[key as keyof typeof religions]}</SelectItem>
                 ))}
               </Select>
             )}
           />
-          {watch("audience.country") === "SY" && (
+          {(watch("audience.country") ?? []).includes("SY") && (
             <Controller
               name="audience.city_inside_syria"
               control={control}
               render={({ field }) => (
                 <Select
-                  {...field}
                   label={t("city_inside_syria.label")}
                   description={t("city_inside_syria.description")}
                   selectionMode="multiple"
-                  value={field.value || []}
+                  selectedKeys={field.value ?? []}
+                  onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
                 >
                   {Object.keys(provinces).map((key) => (
-                    <SelectItem key={key}>
-                      {provinces[key as keyof typeof provinces]}
-                    </SelectItem>
+                    <SelectItem key={key}>{provinces[key as keyof typeof provinces]}</SelectItem>
                   ))}
                 </Select>
               )}
@@ -547,11 +501,11 @@ const CreatePoll: FC = () => {
             label={t("age_range.label")}
             onChange={(value: SliderValue) => {
               if (Array.isArray(value)) {
-                setValue("audience.age_range.min", value?.[0].toString());
-                setValue("audience.age_range.max", value?.[1].toString());
+                setValue("audience.age_range.min", value[0]);
+                setValue("audience.age_range.max", value[1]);
               } else if (!isNaN(value)) {
-                setValue("audience.age_range.min", value.toString());
-                setValue("audience.age_range.max", value.toString());
+                setValue("audience.age_range.min", value);
+                setValue("audience.age_range.max", value);
               }
             }}
           />

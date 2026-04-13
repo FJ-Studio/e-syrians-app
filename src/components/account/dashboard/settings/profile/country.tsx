@@ -5,16 +5,7 @@ import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { CountryCode } from "@/lib/types/misc";
-import {
-  Autocomplete,
-  AutocompleteItem,
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Skeleton,
-} from "@heroui/react";
+import { Autocomplete, AutocompleteItem, Avatar, Button, Card, CardBody, CardHeader, Skeleton } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -71,11 +62,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
     if (response.status === 200) {
       toast.success(t("update.success"));
     } else {
-      toast.error(
-        result.messages?.[0]
-          ? serverError(result.messages[0])
-          : extractErrors(result.messages)[0]
-      );
+      toast.error(result.messages?.[0] ? serverError(result.messages[0]) : extractErrors(result.messages)[0]);
     }
   };
 
@@ -114,11 +101,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                     <AutocompleteItem
                       key={country}
                       startContent={
-                        <Avatar
-                          src={`/flags/${country.toLowerCase()}.svg`}
-                          className="w-6 h-6"
-                          size="sm"
-                        />
+                        <Avatar src={`/flags/${country.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />
                       }
                     >
                       {countries[country as keyof typeof countries]}
@@ -146,21 +129,14 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                     classNames={{ clearButton: "hidden" }}
                   >
                     {Object.keys(provinces).map((key) => (
-                      <AutocompleteItem key={key}>
-                        {provinces[key as keyof typeof provinces]}
-                      </AutocompleteItem>
+                      <AutocompleteItem key={key}>{provinces[key as keyof typeof provinces]}</AutocompleteItem>
                     ))}
                   </Autocomplete>
                 )}
               />
             )}
           </Skeleton>
-          <Button
-            color="primary"
-            type="submit"
-            isLoading={isSubmitting}
-            isDisabled={!isDirty || isSubmitting}
-          >
+          <Button color="primary" type="submit" isLoading={isSubmitting} isDisabled={!isDirty || isSubmitting}>
             {t("save")}
           </Button>
         </form>

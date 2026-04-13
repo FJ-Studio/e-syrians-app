@@ -56,7 +56,7 @@ export default function usePollTable<T extends Record<string, unknown>>({
         setLoading(false);
       }
     },
-    [fetchUrl]
+    [fetchUrl],
   );
 
   useEffect(() => {
@@ -67,9 +67,7 @@ export default function usePollTable<T extends Record<string, unknown>>({
 
   const filteredItems = useMemo(() => {
     if (!hasSearchFilter) return [...items];
-    return [...items].filter((item) =>
-      searchField(item).toLowerCase().includes(filterValue.toLowerCase())
-    );
+    return [...items].filter((item) => searchField(item).toLowerCase().includes(filterValue.toLowerCase()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, filterValue]);
 

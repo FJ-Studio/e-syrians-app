@@ -1,36 +1,19 @@
 "use client";
 
-import { SectionProps } from "../types";
-import {
-  FormInput,
-  FormSelect,
-  FormAutocomplete,
-  FormCheckbox,
-  SectionHeader,
-} from "../fields";
 import useCountries from "@/components/hooks/localization/country";
 import useProvinces from "@/components/hooks/localization/provinces";
 import { AutocompleteItem, Avatar, SelectItem } from "@heroui/react";
+import { FormAutocomplete, FormCheckbox, FormInput, FormSelect, SectionHeader } from "../fields";
+import { SectionProps } from "../types";
 
-export default function CountryLocationSection({
-  control,
-  getValues,
-  setValue,
-  t,
-}: SectionProps) {
+export default function CountryLocationSection({ control, getValues, setValue, t }: SectionProps) {
   const countries = useCountries();
   const provinces = useProvinces();
 
   const countryAutocompleteRenderItem = (key: string, label: string) => (
     <AutocompleteItem
       key={key}
-      startContent={
-        <Avatar
-          src={`/flags/${key.toLowerCase()}.svg`}
-          className="w-6 h-6"
-          size="sm"
-        />
-      }
+      startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
     >
       {label}
     </AutocompleteItem>
@@ -39,13 +22,7 @@ export default function CountryLocationSection({
   const countrySelectRenderItem = (key: string, label: string) => (
     <SelectItem
       key={key}
-      startContent={
-        <Avatar
-          src={`/flags/${key.toLowerCase()}.svg`}
-          className="w-6 h-6"
-          size="sm"
-        />
-      }
+      startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
     >
       {label}
     </SelectItem>
@@ -109,14 +86,8 @@ export default function CountryLocationSection({
         label={t("fields.other_nationalities.label")}
         description={t("fields.other_nationalities.description")}
         selectionMode="multiple"
-        options={Object.fromEntries(
-          Object.entries(countries).filter(([c]) => c !== "SY")
-        )}
-        defaultSelectedKeys={
-          getValues("other_nationalities")
-            ? getValues("other_nationalities").split(",")
-            : undefined
-        }
+        options={Object.fromEntries(Object.entries(countries).filter(([c]) => c !== "SY"))}
+        defaultSelectedKeys={getValues("other_nationalities") ? getValues("other_nationalities").split(",") : undefined}
         scrollShadowProps={{ isEnabled: false }}
         renderItem={countrySelectRenderItem}
       />

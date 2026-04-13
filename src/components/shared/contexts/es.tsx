@@ -2,16 +2,7 @@
 import { CensusStats } from "@/lib/types/census";
 import { useSession } from "next-auth/react";
 import { useLocale } from "next-intl";
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useMemo, useState } from "react";
 
 export type ESContextType = {
   openCensusForm: Dispatch<SetStateAction<boolean>>;
@@ -30,17 +21,15 @@ export const EsContext = createContext<ESContextType>({
 export const useEsyrian = (): ESContextType => useContext(EsContext);
 
 const EsyrianProvider = ({ children }: { children: ReactNode }) => {
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
   const locale = useLocale();
   const [censusFormIsOpened, openCensusForm] = useState(false);
-  const [censusStats, setCensusStats] = useState<undefined | CensusStats>(
-    undefined
-  );
+  const [censusStats, setCensusStats] = useState<undefined | CensusStats>(undefined);
 
   // Update user language preference on language change
   useEffect(() => {
     const updateLanguage = async () => {
-      if (status !== 'authenticated' || locale === session?.user?.language) {
+      if (status !== "authenticated" || locale === session?.user?.language) {
         return;
       }
       fetch(`/api/account/profile/update/language`, {
@@ -49,9 +38,9 @@ const EsyrianProvider = ({ children }: { children: ReactNode }) => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ language: locale, }),
+        body: JSON.stringify({ language: locale }),
       });
-    }
+    };
     void updateLanguage();
   }, [locale, session?.user, status]);
 
@@ -76,11 +65,9 @@ const EsyrianProvider = ({ children }: { children: ReactNode }) => {
       censusStats,
       updateCensusStats,
     }),
-    [censusFormIsOpened, censusStats]
+    [censusFormIsOpened, censusStats],
   );
-  return <EsContext.Provider value={esyrian}>
-    {children}
-  </EsContext.Provider>;
+  return <EsContext.Provider value={esyrian}>{children}</EsContext.Provider>;
 };
 
 export default EsyrianProvider;

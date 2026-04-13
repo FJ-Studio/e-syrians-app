@@ -9,10 +9,7 @@ export const hasEnoughVerifications = (user: ESUser): boolean => {
 };
 
 const isVerified = (user: ESUser): boolean => {
-  return (
-    user.verified_at !== null &&
-    (isFirstRegistrant(user) || hasEnoughVerifications(user))
-  );
+  return user.verified_at !== null && (isFirstRegistrant(user) || hasEnoughVerifications(user));
 };
 
 export default isVerified;

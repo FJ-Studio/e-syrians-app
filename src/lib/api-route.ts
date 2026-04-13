@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Session } from "next-auth";
-import { auth } from "../../auth";
 import recaptchaIsValid from "@/lib/recaptcha";
+import { Session } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "../../auth";
 
 // ---------------------------------------------------------------------------
 // Shared types
@@ -32,15 +32,8 @@ type FormDataRouteHandler = (params: {
 /**
  * Wraps a JSON-body API route with auth, recaptcha, and error handling.
  */
-export function withApiRoute(
-  handler: RouteHandler,
-  options: ApiRouteOptions = {},
-) {
-  const {
-    requireAuth = true,
-    requireRecaptcha = false,
-    errorMessage = "An error occurred",
-  } = options;
+export function withApiRoute(handler: RouteHandler, options: ApiRouteOptions = {}) {
+  const { requireAuth = true, requireRecaptcha = false, errorMessage = "An error occurred" } = options;
 
   return async (req: NextRequest) => {
     try {
@@ -49,10 +42,7 @@ export function withApiRoute(
       if (requireRecaptcha) {
         const isHuman = await recaptchaIsValid(body.recaptcha_token);
         if (!isHuman) {
-          return NextResponse.json(
-            { success: false, messages: ["invalid_recaptcha_token"] },
-            { status: 400 },
-          );
+          return NextResponse.json({ success: false, messages: ["invalid_recaptcha_token"] }, { status: 400 });
         }
       }
 
@@ -60,19 +50,13 @@ export function withApiRoute(
       if (requireAuth) {
         session = await auth();
         if (!session?.user.accessToken) {
-          return NextResponse.json(
-            { success: false, messages: ["Unauthorized"] },
-            { status: 401 },
-          );
+          return NextResponse.json({ success: false, messages: ["Unauthorized"] }, { status: 401 });
         }
       }
 
       return await handler({ req, session, body });
     } catch {
-      return NextResponse.json(
-        { success: false, messages: [errorMessage] },
-        { status: 500 },
-      );
+      return NextResponse.json({ success: false, messages: [errorMessage] }, { status: 500 });
     }
   };
 }
@@ -80,15 +64,8 @@ export function withApiRoute(
 /**
  * Wraps a FormData-body API route with auth, recaptcha, and error handling.
  */
-export function withFormDataApiRoute(
-  handler: FormDataRouteHandler,
-  options: ApiRouteOptions = {},
-) {
-  const {
-    requireAuth = true,
-    requireRecaptcha = false,
-    errorMessage = "An error occurred",
-  } = options;
+export function withFormDataApiRoute(handler: FormDataRouteHandler, options: ApiRouteOptions = {}) {
+  const { requireAuth = true, requireRecaptcha = false, errorMessage = "An error occurred" } = options;
 
   return async (req: NextRequest) => {
     try {
@@ -96,33 +73,22 @@ export function withFormDataApiRoute(
       if (requireAuth) {
         session = await auth();
         if (!session?.user.accessToken) {
-          return NextResponse.json(
-            { success: false, messages: ["Unauthorized"] },
-            { status: 401 },
-          );
+          return NextResponse.json({ success: false, messages: ["Unauthorized"] }, { status: 401 });
         }
       }
 
       const body = await req.formData();
 
       if (requireRecaptcha) {
-        const isHuman = await recaptchaIsValid(
-          (body.get("recaptcha_token") as string) ?? "",
-        );
+        const isHuman = await recaptchaIsValid((body.get("recaptcha_token") as string) ?? "");
         if (!isHuman) {
-          return NextResponse.json(
-            { success: false, messages: ["invalid_recaptcha_token"] },
-            { status: 400 },
-          );
+          return NextResponse.json({ success: false, messages: ["invalid_recaptcha_token"] }, { status: 400 });
         }
       }
 
       return await handler({ req, session, body });
     } catch {
-      return NextResponse.json(
-        { success: false, messages: [errorMessage] },
-        { status: 500 },
-      );
+      return NextResponse.json({ success: false, messages: [errorMessage] }, { status: 500 });
     }
   };
 }
@@ -131,27 +97,18 @@ export function withFormDataApiRoute(
  * Wraps a GET route with auth and error handling.
  */
 export function withAuthGet(
-  handler: (params: {
-    req: NextRequest;
-    session: Session;
-  }) => Promise<NextResponse>,
+  handler: (params: { req: NextRequest; session: Session }) => Promise<NextResponse>,
   errorMessage = "An error occurred",
 ) {
   return async (req: NextRequest) => {
     try {
       const session = await auth();
       if (!session?.user.accessToken) {
-        return NextResponse.json(
-          { success: false, messages: ["Unauthorized"] },
-          { status: 401 },
-        );
+        return NextResponse.json({ success: false, messages: ["Unauthorized"] }, { status: 401 });
       }
       return await handler({ req, session });
     } catch {
-      return NextResponse.json(
-        { success: false, messages: [errorMessage] },
-        { status: 500 },
-      );
+      return NextResponse.json({ success: false, messages: [errorMessage] }, { status: 500 });
     }
   };
 }
@@ -183,13 +140,7 @@ interface ProxyJsonPostOptions {
  *   export const POST = proxyJsonPost({ endpoint: "/users/update/address", requireRecaptcha: true });
  */
 export function proxyJsonPost(options: ProxyJsonPostOptions) {
-  const {
-    endpoint,
-    requireRecaptcha = true,
-    errorMessage = "An error occurred",
-    transformBody,
-    onSuccess,
-  } = options;
+  const { endpoint, requireRecaptcha = true, errorMessage = "An error occurred", transformBody, onSuccess } = options;
 
   return withApiRoute(
     async ({ body, session }) => {
@@ -206,11 +157,7 @@ export function proxyJsonPost(options: ProxyJsonPostOptions) {
       const response = await request.json();
 
       if (onSuccess && response.success) {
-        const customResponse = await onSuccess(
-          response,
-          session!,
-          request.status,
-        );
+        const customResponse = await onSuccess(response, session!, request.status);
         if (customResponse) return customResponse;
       }
 
@@ -340,11 +287,7 @@ interface ProxyGetOptions {
  *   export const GET = proxyGet({ endpoint: "/users/my-polls", forwardParams: ["page"] });
  */
 export function proxyGet(options: ProxyGetOptions) {
-  const {
-    endpoint,
-    forwardParams = [],
-    errorMessage = "An error occurred",
-  } = options;
+  const { endpoint, forwardParams = [], errorMessage = "An error occurred" } = options;
 
   return withAuthGet(async ({ req, session }) => {
     const params = new URLSearchParams();

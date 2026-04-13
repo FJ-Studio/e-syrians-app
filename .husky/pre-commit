@@ -1,0 +1,4 @@
+npx --no-install lint-staged
+npx --no-install tsc --noEmit
+npm run --silent check-translations
+npm run --silent check-debug-statements

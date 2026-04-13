@@ -680,6 +680,17 @@
       "resetPassword": "Veguhastina şîfreya nû",
       "email": "E-name",
       "success": "Şîfreya we bi serfirazî veguhast"
+    },
+    "twoFactor": {
+      "title": "Piştrastkirina du-qonaxî",
+      "description": "Koda 6-reqemî ya ji bernameya piştrastkirinê binivîse ji bo berdewamî li ketinê.",
+      "code": "Koda piştrastkirinê",
+      "verify": "Piştrast bike",
+      "useRecoveryCode": "Koda vegerandinê bi kar bîne",
+      "useAuthenticatorCode": "Koda piştrastkirinê bi kar bîne",
+      "invalidCode": "Koda nederbasdar e, ji kerema xwe dîsa biceribîne",
+      "challengeExpired": "Rûniştin biqediya, ji kerema xwe dîsa têkeve",
+      "backToLogin": "Vegere ketinê"
     }
   },
   "account": {
@@ -980,6 +991,51 @@
           "verificationLinkSent": "Girêdana verastkirinê şandin",
           "success": "Navnîşana e-nameyê rast guhert",
           "description": "Ji kerema xwe navnîşana e-nameya xwe ya nû bi baldarî binivîse, gava ku hûn e-nameya xwe nûve bikin, hûn ê ji nû ve têkevinê"
+        },
+        "twoFactor": {
+          "title": "Piştrastkirina du-qonaxî",
+          "description": "Tebeqeyeke ewlehiyê ya zêde li hesabê xwe zêde bike, bi xwestina koda piştrastkirinê ji bernameyeke piştrastkirinê dema tu têkevî.",
+          "enabled": "Piştrastkirina du-qonaxî çalak e",
+          "disabled": "Piştrastkirina du-qonaxî ne çalak e",
+          "enable": "Piştrastkirina du-qonaxî çalak bike",
+          "disable": "Piştrastkirina du-qonaxî neçalak bike",
+          "setup": {
+            "title": "Piştrastkirina du-qonaxî saz bike",
+            "step1": "Bernameyeke piştrastkirinê wek Google Authenticator an Authy li ser telefona xwe saz bike.",
+            "step2": "Koda QR ya li jêr bi bernameya piştrastkirinê veke.",
+            "step3": "Koda 6-reqemî ya piştrastkirinê ji bernameyê binivîse ji bo pejirandina sazkirinê.",
+            "secretKey": "An jî vê kilîta veşartî bi destan binivîse:",
+            "verificationCode": "Koda piştrastkirinê",
+            "confirm": "Pejirîne û çalak bike",
+            "cancel": "Betal bike"
+          },
+          "disableModal": {
+            "title": "Piştrastkirina du-qonaxî neçalak bike",
+            "description": "Koda piştrastkirinê an koda vegerandinê binivîse ji bo neçalakirina piştrastkirina du-qonaxî.",
+            "code": "Kod",
+            "useRecoveryCode": "Li şûna wê koda vegerandinê bi kar bîne",
+            "useAuthenticatorCode": "Li şûna wê koda piştrastkirinê bi kar bîne",
+            "confirm": "Piştrastkirina du-qonaxî neçalak bike"
+          },
+          "recoveryCodes": {
+            "title": "Kodên vegerandinê",
+            "description": "Van kodên vegerandinê li ciyekî ewle veşêre. Tu dikarî wan bi kar bînî ji bo gihîştina hesabê xwe heke tu amûra piştrastkirinê winda bikî.",
+            "regenerate": "Kodan ji nû ve çêbike",
+            "regenerateConfirm": "Tu piştrast î? Ev ê kodên vegerandinê yên heyî betal bike.",
+            "copied": "Kodên vegerandinê li panoyê hatin kopîkirin",
+            "copy": "Kodan kopî bike",
+            "close": "Bigire"
+          },
+          "errors": {
+            "setupFailed": "Sazkirina piştrastkirina du-qonaxî têk çû",
+            "confirmFailed": "Koda piştrastkirinê nederbasdar e",
+            "disableFailed": "Neçalakirina piştrastkirina du-qonaxî têk çû",
+            "invalidCode": "Koda nederbasdar"
+          },
+          "success": {
+            "enabled": "Piştrastkirina du-qonaxî hatî çalakkirin",
+            "disabled": "Piştrastkirina du-qonaxî hatî neçalakkirin"
+          }
         }
       },
       "notifications": {
@@ -1026,8 +1082,7 @@
           "inactive": "ناچالاک",
           "votes": "دەنگ"
         },
-        "comingSoon": {
-        }
+        "comingSoon": {}
       }
     },
     "settings": {

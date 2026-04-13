@@ -9,9 +9,7 @@ const NotificationsHistory: FC = () => {
 
   return (
     <Card>
-      <CardHeader className="text-default-700 font-medium">
-        {t("history.title")}
-      </CardHeader>
+      <CardHeader className="text-default-700 font-medium">{t("history.title")}</CardHeader>
       <CardBody>
         <p className="text-default-500">{t("history.empty")}</p>
       </CardBody>

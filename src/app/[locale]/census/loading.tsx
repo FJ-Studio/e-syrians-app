@@ -3,7 +3,7 @@ import { Spinner } from "@heroui/react";
 
 export default function CensusLoading() {
   return (
-    <div className="flex items-center justify-center min-h-[50vh]">
+    <div className="flex min-h-[50vh] items-center justify-center">
       <Spinner size="lg" color="primary" />
     </div>
   );

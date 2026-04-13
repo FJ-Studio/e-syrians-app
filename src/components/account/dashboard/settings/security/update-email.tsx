@@ -72,12 +72,10 @@ const UpdateEmailAddress: FC = () => {
   };
   return (
     <Card>
-      <CardHeader className="font-medium text-default-700">
-        {t("title")}
-      </CardHeader>
+      <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
       <CardBody>
         <form className="space-y-4" onSubmit={handleSubmit(updateEmailAddress)}>
-          <p className="text-sm text-start">{t("description")}</p>
+          <p className="text-start text-sm">{t("description")}</p>
           <Controller
             name="email"
             control={control}
@@ -89,9 +87,7 @@ const UpdateEmailAddress: FC = () => {
                 description={
                   <div className="flex items-center justify-between">
                     {t("emailVerificationStatus", {
-                      status: data?.user.email_verified_at
-                        ? t("verified")
-                        : t("notVerified"),
+                      status: data?.user.email_verified_at ? t("verified") : t("notVerified"),
                     })}
                     {!data?.user.email_verified_at && (
                       <button
@@ -108,12 +104,7 @@ const UpdateEmailAddress: FC = () => {
               />
             )}
           />
-          <Button
-            isDisabled={!isDirty || isSubmitting}
-            isLoading={isSubmitting}
-            color="primary"
-            type="submit"
-          >
+          <Button isDisabled={!isDirty || isSubmitting} isLoading={isSubmitting} color="primary" type="submit">
             {t("change")}
           </Button>
         </form>

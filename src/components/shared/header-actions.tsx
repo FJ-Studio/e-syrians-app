@@ -9,13 +9,7 @@ const HeaderActions: FC = () => {
   const t = useTranslations();
   return (
     <>
-      <Button
-        variant="flat"
-        as={Link}
-        href="/account"
-        aria-label={t("common.login")}
-        isIconOnly
-      >
+      <Button variant="flat" as={Link} href="/account" aria-label={t("common.login")} isIconOnly>
         <UserIcon className="size-6" />
       </Button>
     </>

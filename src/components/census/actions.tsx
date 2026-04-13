@@ -14,10 +14,13 @@ const CensusActions: FC = () => {
       <Button color="primary" onPress={() => esyrian.openCensusForm(true)}>
         {t("register")}
       </Button>
-      <Button isIconOnly color="primary" variant="flat" 
-      onPress={() => window.open("https://www.e-syrians.com/e-syrians-presentation.pdf", "_blank")}>
-      
-        <InformationCircleIcon className="size-6 text-primary" />
+      <Button
+        isIconOnly
+        color="primary"
+        variant="flat"
+        onPress={() => window.open("https://www.e-syrians.com/e-syrians-presentation.pdf", "_blank")}
+      >
+        <InformationCircleIcon className="text-primary size-6" />
       </Button>
     </div>
   );

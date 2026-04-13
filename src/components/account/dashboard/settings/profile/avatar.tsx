@@ -5,14 +5,7 @@ import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { UserIcon } from "@heroicons/react/24/outline";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-  Skeleton,
-} from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Image, Skeleton } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -79,9 +72,7 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
         const messages = result.messages;
         if (messages) {
           // messages can be string[] or Record<string, string[]>
-          const errors = Array.isArray(messages)
-            ? messages
-            : extractErrors(messages);
+          const errors = Array.isArray(messages) ? messages : extractErrors(messages);
           const translated = errors.map((msg: string) => serverError(msg));
           toast.error(translated.join(". "));
         } else {
@@ -95,27 +86,18 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col gap-2 items-start">
-        <h2 className="text-lg text-default-700 font-medium">
-          {t("avatar.title")}
-        </h2>
+      <CardHeader className="flex flex-col items-start gap-2">
+        <h2 className="text-default-700 text-lg font-medium">{t("avatar.title")}</h2>
         <p>{t("avatar.instructions")}</p>
       </CardHeader>
       <CardBody>
-        <form
-          onSubmit={handleSubmit(save)}
-          className="flex flex-col gap-4 items-center"
-        >
+        <form onSubmit={handleSubmit(save)} className="flex flex-col items-center gap-4">
           <Skeleton isLoaded={!!user} className="rounded-full">
-            <div className="border-2 border-gray-200 min-w-16 min-h-16 flex items-center justify-center rounded-full overflow-hidden p-0.5">
+            <div className="flex min-h-16 min-w-16 items-center justify-center overflow-hidden rounded-full border-2 border-gray-200 p-0.5">
               {preview ? (
-                <Image
-                  src={preview}
-                  alt={user?.name}
-                  className="w-16 h-16 rounded-full overflow-hidden"
-                />
+                <Image src={preview} alt={user?.name} className="h-16 w-16 overflow-hidden rounded-full" />
               ) : (
-                <UserIcon className="w-8 h-8 text-gray-700" />
+                <UserIcon className="h-8 w-8 text-gray-700" />
               )}
             </div>
           </Skeleton>
@@ -127,12 +109,7 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
               buttonText={t("avatar.upload")}
               preview={false}
             />
-            <Button
-              color="primary"
-              type="submit"
-              isDisabled={isSubmitting || !changes.avatar}
-              isLoading={isSubmitting}
-            >
+            <Button color="primary" type="submit" isDisabled={isSubmitting || !changes.avatar} isLoading={isSubmitting}>
               {t("avatar.save")}
             </Button>
           </div>

@@ -7,17 +7,14 @@ import { NextResponse } from "next/server";
  */
 export const POST = withApiRoute(
   async ({ body }) => {
-    const request = await fetch(
-      `${process.env.API_URL}/users/2fa/verify`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(body),
+    const request = await fetch(`${process.env.API_URL}/users/2fa/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-    );
+      body: JSON.stringify(body),
+    });
     const response = await request.json();
     return NextResponse.json(response, { status: request.status });
   },

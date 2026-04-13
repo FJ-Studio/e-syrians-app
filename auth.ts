@@ -87,9 +87,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         // If 2FA is required, throw a special error with the challenge token
         if (data?.data?.requires_2fa) {
-          throw new Error(
-            `2FA_REQUIRED:${data.data.challenge_token}:${data.data.expires_at}`,
-          );
+          throw new Error(`2FA_REQUIRED:${data.data.challenge_token}:${data.data.expires_at}`);
         }
 
         if (data?.data?.token) {
@@ -137,20 +135,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       try {
         if (account?.provider && providers.includes(account.provider)) {
           // Social login request
-          const response = await fetch(
-            `${process.env.API_URL}/users/login/social`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify({
-                provider: account.provider,
-                token: account.access_token,
-              }),
-            }
-          );
+          const response = await fetch(`${process.env.API_URL}/users/login/social`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              provider: account.provider,
+              token: account.access_token,
+            }),
+          });
 
           if (!response.ok) {
             // Social login failed — force re-authentication

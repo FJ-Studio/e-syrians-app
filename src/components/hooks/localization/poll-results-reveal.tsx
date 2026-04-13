@@ -1,10 +1,7 @@
 import { PollReveal } from "@/lib/types/polls";
 import { useTranslations } from "next-intl";
 
-const usePollResultsReveal = (): Record<
-  PollReveal,
-  { title: string; description: string }
-> => {
+const usePollResultsReveal = (): Record<PollReveal, { title: string; description: string }> => {
   const t = useTranslations();
   return {
     "before-voting": {

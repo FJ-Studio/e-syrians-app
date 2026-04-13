@@ -1,7 +1,4 @@
-const strToArray = (
-  input: string | Array<string>,
-  del: string = ","
-): string[] => {
+const strToArray = (input: string | Array<string>, del: string = ","): string[] => {
   if (Array.isArray(input)) {
     return input;
   }

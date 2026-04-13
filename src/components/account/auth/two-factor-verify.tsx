@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
 import { Button, Input } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 interface TwoFactorVerifyProps {
   challengeToken: string;
@@ -12,11 +12,7 @@ interface TwoFactorVerifyProps {
   onBack: () => void;
 }
 
-export default function TwoFactorVerify({
-  challengeToken,
-  expiresAt,
-  onBack,
-}: TwoFactorVerifyProps) {
+export default function TwoFactorVerify({ challengeToken, expiresAt, onBack }: TwoFactorVerifyProps) {
   const t = useTranslations("auth.twoFactor");
   const [code, setCode] = useState("");
   const [isRecoveryCode, setIsRecoveryCode] = useState(false);
@@ -57,14 +53,8 @@ export default function TwoFactorVerify({
   if (isExpired) {
     return (
       <div className="flex w-full flex-col items-center gap-4 p-4">
-        <Icon
-          icon="solar:clock-circle-bold"
-          width={48}
-          className="text-danger"
-        />
-        <p className="text-center text-default-600">
-          {t("challengeExpired")}
-        </p>
+        <Icon icon="solar:clock-circle-bold" width={48} className="text-danger" />
+        <p className="text-default-600 text-center">{t("challengeExpired")}</p>
         <Button color="primary" variant="flat" onPress={onBack}>
           {t("backToLogin")}
         </Button>
@@ -74,15 +64,9 @@ export default function TwoFactorVerify({
 
   return (
     <div className="flex w-full flex-col items-center gap-4 p-4">
-      <Icon
-        icon="solar:shield-keyhole-bold"
-        width={48}
-        className="text-primary"
-      />
-      <p className="font-medium w-full text-center">{t("title")}</p>
-      <p className="text-sm text-default-500 text-center">
-        {t("description")}
-      </p>
+      <Icon icon="solar:shield-keyhole-bold" width={48} className="text-primary" />
+      <p className="w-full text-center font-medium">{t("title")}</p>
+      <p className="text-default-500 text-center text-sm">{t("description")}</p>
 
       <div className="flex w-full flex-col gap-3">
         <Input
@@ -104,12 +88,7 @@ export default function TwoFactorVerify({
           }}
         />
 
-        <Button
-          color="primary"
-          onPress={handleVerify}
-          isLoading={isSubmitting}
-          isDisabled={!code}
-        >
+        <Button color="primary" onPress={handleVerify} isLoading={isSubmitting} isDisabled={!code}>
           {t("verify")}
         </Button>
 

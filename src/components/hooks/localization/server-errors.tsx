@@ -16,9 +16,7 @@ const useServerError = (): ((errorCode: string) => string) => {
       current_password_incorrect: t("current_password_incorrect"),
       password_updated: t("password_updated"),
       reset_link_sent: t("reset_link_sent"),
-      failed_to_send_password_reset_email: t(
-        "failed_to_send_password_reset_email"
-      ),
+      failed_to_send_password_reset_email: t("failed_to_send_password_reset_email"),
       failed_to_reset_password: t("failed_to_reset_password"),
       password_reset_successfully: t("password_reset_successfully"),
 
@@ -33,20 +31,12 @@ const useServerError = (): ((errorCode: string) => string) => {
       // Verification
       your_account_is_banned: t("your_account_is_banned"),
       you_are_not_verified: t("you_are_not_verified"),
-      you_do_not_have_enough_verifications: t(
-        "you_do_not_have_enough_verifications"
-      ),
-      you_have_reached_the_maximum_verifications: t(
-        "you_have_reached_the_maximum_verifications"
-      ),
-      you_have_made_a_lot_of_verifications: t(
-        "you_have_made_a_lot_of_verifications"
-      ),
+      you_do_not_have_enough_verifications: t("you_do_not_have_enough_verifications"),
+      you_have_reached_the_maximum_verifications: t("you_have_reached_the_maximum_verifications"),
+      you_have_made_a_lot_of_verifications: t("you_have_made_a_lot_of_verifications"),
       you_cannot_verify_yourself: t("you_cannot_verify_yourself"),
       circular_verification_not_allowed: t("circular_verification_not_allowed"),
-      you_have_already_verified_this_user: t(
-        "you_have_already_verified_this_user"
-      ),
+      you_have_already_verified_this_user: t("you_have_already_verified_this_user"),
       target_user_data_not_filled: t("target_user_data_not_filled"),
       user_not_found: t("user_not_found"),
       target_user_not_found: t("target_user_not_found"),
@@ -57,9 +47,7 @@ const useServerError = (): ((errorCode: string) => string) => {
       poll_has_expired: t("poll_has_expired"),
       you_have_already_voted: t("you_have_already_voted"),
       user_is_not_in_poll_audience: t("user_is_not_in_poll_audience"),
-      user_has_reached_the_max_selections: t(
-        "user_has_reached_the_max_selections"
-      ),
+      user_has_reached_the_max_selections: t("user_has_reached_the_max_selections"),
       invalid_options: t("invalid_options"),
       voters_not_visible: t("voters_not_visible"),
 

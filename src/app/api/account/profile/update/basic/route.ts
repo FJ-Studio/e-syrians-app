@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import { proxyJsonPost } from "@/lib/api-route";
 import revalidateLocalePath from "@/lib/revalidate";
+import { NextResponse } from "next/server";
 
 export const POST = proxyJsonPost({
   endpoint: "/users/update/basic-info",

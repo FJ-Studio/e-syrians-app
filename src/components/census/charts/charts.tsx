@@ -1,9 +1,9 @@
 "use client";
-import { FC, useEffect } from "react";
 import BarChartCard from "@/components/charts/bar-chart";
-import { useTranslations } from "next-intl";
-import { Select, SelectItem } from "@heroui/react";
 import { useEsyrian } from "@/components/shared/contexts/es";
+import { Select, SelectItem } from "@heroui/react";
+import { useTranslations } from "next-intl";
+import { FC, useEffect } from "react";
 
 const CensusCharts: FC = () => {
   const t = useTranslations("census.charts");
@@ -21,19 +21,14 @@ const CensusCharts: FC = () => {
         description={t("dailyRegistrations.description")}
         color="primary"
         categories={["registered", "verified"]}
-        categoriesLabels={[
-          t("labels.registered.title"),
-          t("labels.verification.title"),
-        ]}
-        chartData={Object.entries(charts?.daily_users ?? {}).map(
-          ([month, value]) => {
-            return {
-              month,
-              registered: value.registered,
-              verified: value.verified,
-            };
-          }
-        )}
+        categoriesLabels={[t("labels.registered.title"), t("labels.verification.title")]}
+        chartData={Object.entries(charts?.daily_users ?? {}).map(([month, value]) => {
+          return {
+            month,
+            registered: value.registered,
+            verified: value.verified,
+          };
+        })}
         actions={
           <div className="flex items-center justify-end gap-x-2">
             <Select
@@ -55,9 +50,7 @@ const CensusCharts: FC = () => {
               disabledKeys={["per-month"]}
             >
               <SelectItem key="per-day">{t("charts.filter.perday")}</SelectItem>
-              <SelectItem key="per-month">
-                {t("charts.filter.permonth")}
-              </SelectItem>
+              <SelectItem key="per-month">{t("charts.filter.permonth")}</SelectItem>
             </Select>
           </div>
         }
@@ -68,10 +61,7 @@ const CensusCharts: FC = () => {
         description={t("age.description")}
         color="primary"
         categories={["verified", "unverified"]}
-        categoriesLabels={[
-          t("labels.verified.title"),
-          t("labels.unverified.title"),
-        ]}
+        categoriesLabels={[t("labels.verified.title"), t("labels.unverified.title")]}
         chartData={Object.entries(charts?.age ?? {}).map(([month, value]) => {
           return {
             month,
@@ -86,19 +76,14 @@ const CensusCharts: FC = () => {
         description={t("hometown.description")}
         color="primary"
         categories={["verified", "unverified"]}
-        categoriesLabels={[
-          t("labels.verified.title"),
-          t("labels.unverified.title"),
-        ]}
-        chartData={Object.entries(charts?.hometown ?? {}).map(
-          ([month, value]) => {
-            return {
-              month,
-              unverified: value.unverified,
-              verified: value.verified,
-            };
-          }
-        )}
+        categoriesLabels={[t("labels.verified.title"), t("labels.unverified.title")]}
+        chartData={Object.entries(charts?.hometown ?? {}).map(([month, value]) => {
+          return {
+            month,
+            unverified: value.unverified,
+            verified: value.verified,
+          };
+        })}
       />
       <BarChartCard
         translateLabels
@@ -106,19 +91,14 @@ const CensusCharts: FC = () => {
         description={t("religion.description")}
         color="primary"
         categories={["verified", "unverified"]}
-        categoriesLabels={[
-          t("labels.verified.title"),
-          t("labels.unverified.title"),
-        ]}
-        chartData={Object.entries(charts?.religion ?? {}).map(
-          ([month, value]) => {
-            return {
-              month,
-              unverified: value.unverified,
-              verified: value.verified,
-            };
-          }
-        )}
+        categoriesLabels={[t("labels.verified.title"), t("labels.unverified.title")]}
+        chartData={Object.entries(charts?.religion ?? {}).map(([month, value]) => {
+          return {
+            month,
+            unverified: value.unverified,
+            verified: value.verified,
+          };
+        })}
       />
 
       <BarChartCard
@@ -127,19 +107,14 @@ const CensusCharts: FC = () => {
         description={t("country.description")}
         color="primary"
         categories={["verified", "unverified"]}
-        categoriesLabels={[
-          t("labels.verified.title"),
-          t("labels.unverified.title"),
-        ]}
-        chartData={Object.entries(charts?.country ?? {}).map(
-          ([month, value]) => {
-            return {
-              month,
-              unverified: value.unverified,
-              verified: value.verified,
-            };
-          }
-        )}
+        categoriesLabels={[t("labels.verified.title"), t("labels.unverified.title")]}
+        chartData={Object.entries(charts?.country ?? {}).map(([month, value]) => {
+          return {
+            month,
+            unverified: value.unverified,
+            verified: value.verified,
+          };
+        })}
       />
 
       <BarChartCard
@@ -148,41 +123,31 @@ const CensusCharts: FC = () => {
         description={t("ethnicity.description")}
         color="primary"
         categories={["verified", "unverified"]}
-        categoriesLabels={[
-          t("labels.verified.title"),
-          t("labels.unverified.title"),
-        ]}
-        chartData={Object.entries(charts?.ethnicity ?? {}).map(
-          ([month, value]) => {
-            return {
-              month,
-              unverified: value.unverified,
-              verified: value.verified,
-            };
-          }
-        )}
+        categoriesLabels={[t("labels.verified.title"), t("labels.unverified.title")]}
+        chartData={Object.entries(charts?.ethnicity ?? {}).map(([month, value]) => {
+          return {
+            month,
+            unverified: value.unverified,
+            verified: value.verified,
+          };
+        })}
       />
       <div className="col-span-1">
-      <BarChartCard
-        translateLabels
-        title={t("gender.title")}
-        description={t("gender.description")}
-        color="primary"
-        categories={["verified", "unverified"]}
-        categoriesLabels={[
-          t("labels.verified.title"),
-          t("labels.unverified.title"),
-        ]}
-        chartData={Object.entries(charts?.gender ?? {}).map(
-          ([month, value]) => {
+        <BarChartCard
+          translateLabels
+          title={t("gender.title")}
+          description={t("gender.description")}
+          color="primary"
+          categories={["verified", "unverified"]}
+          categoriesLabels={[t("labels.verified.title"), t("labels.unverified.title")]}
+          chartData={Object.entries(charts?.gender ?? {}).map(([month, value]) => {
             return {
               month,
               unverified: value.unverified,
               verified: value.verified,
             };
-          }
-        )}
-      />
+          })}
+        />
       </div>
     </div>
   );

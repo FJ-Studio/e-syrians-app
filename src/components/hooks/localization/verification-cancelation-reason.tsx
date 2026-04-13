@@ -1,8 +1,6 @@
 import { useTranslations } from "next-intl";
 
-const useVerificationCancelationReason = (): ((
-  reasonCode: string
-) => string) => {
+const useVerificationCancelationReason = (): ((reasonCode: string) => string) => {
   const t = useTranslations("verificationCancelationReasons");
   return (reasonCode: string) => {
     const reasons = {

@@ -29,28 +29,25 @@ const PollOptionRow: FC<Props> = ({
             "inline-flex max-w-xl bg-gray-100 w-full m-0 transition-all",
             "hover:bg-gray-200 items-center justify-start",
             "cursor-pointer rounded-lg gap-1 p-2 border-1.5 border-transparent",
-            "data-[selected=true]:border-primary overflow-hidden relative z-20"
+            "data-[selected=true]:border-primary overflow-hidden relative z-20",
           ),
           label: "w-full static",
         }}
         value={value}
       >
         <div
-          className="h-[calc(100%+16px)] bg-blue-100 absolute -top-2 inset-e-0 -z-10"
+          className="absolute inset-e-0 -top-2 -z-10 h-[calc(100%+16px)] bg-blue-100"
           style={{
             width: `${percentage ?? 0}%`,
           }}
         ></div>
-        <div className="w-full flex flex-row items-center gap-2 relative z-20 pe-10">
-          <div
-            className="flex-1 min-w-0 line-clamp-2"
-            title={option}
-          >
+        <div className="relative z-20 flex w-full flex-row items-center gap-2 pe-10">
+          <div className="line-clamp-2 min-w-0 flex-1" title={option}>
             {option}
           </div>
           {votersAreVisible && votersPreview && votersPreview.length > 0 && (
             <div
-              className="flex items-center gap-1 cursor-pointer shrink-0"
+              className="flex shrink-0 cursor-pointer items-center gap-1"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -62,11 +59,7 @@ const PollOptionRow: FC<Props> = ({
                 max={3}
                 total={votesCount ?? votersPreview.length}
                 renderCount={(count) =>
-                  count > 3 ? (
-                    <span className="text-tiny text-default-500 ms-1">
-                      +{count - 3}
-                    </span>
-                  ) : null
+                  count > 3 ? <span className="text-tiny text-default-500 ms-1">+{count - 3}</span> : null
                 }
               >
                 {votersPreview.slice(0, 3).map((voter) => (
@@ -74,7 +67,7 @@ const PollOptionRow: FC<Props> = ({
                     key={voter.id}
                     src={voter.avatar || undefined}
                     name={`${voter.name} ${voter.surname}`}
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                   />
                 ))}
               </AvatarGroup>
@@ -82,9 +75,7 @@ const PollOptionRow: FC<Props> = ({
           )}
         </div>
         {percentage && percentage > 0 ? (
-          <div className="absolute text-xs inset-e-2 top-1/2 -translate-y-1/2 z-30">
-            {percentage}%
-          </div>
+          <div className="absolute inset-e-2 top-1/2 z-30 -translate-y-1/2 text-xs">{percentage}%</div>
         ) : (
           ""
         )}
