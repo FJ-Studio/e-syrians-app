@@ -41,7 +41,7 @@ const ForgotPassword: FC = () => {
     if (response?.success) {
       reset();
       toast.success(t("success"));
-      window.setTimeout(() => push("/auth/signin"), 2000);
+      window.setTimeout(() => push("/auth/sign-in"), 2000);
     } else {
       toast.error(serverErrors(extractErrors(response.messages)[0]));
     }
@@ -58,7 +58,7 @@ const ForgotPassword: FC = () => {
       />
       <p className="flex items-center gap-2">
         <Icon icon={arrowLongLeftSolid} width={20} height={20} className="size-5 rtl:rotate-180" />
-        <Link href="/auth/signin" title={t("backToLogin")} className="text-sm">
+        <Link href="/auth/sign-in" title={t("backToLogin")} className="text-sm">
           {t("backToLogin")}
         </Link>
       </p>

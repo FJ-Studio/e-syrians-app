@@ -192,7 +192,7 @@ Root layout wraps everything in this order (see `src/app/[locale]/layout.tsx`):
 
 - `/api/auth/*` — passes through (NextAuth handlers)
 - `/auth/*` when logged in → redirects to `/account`
-- `/account/*` when not logged in → redirects to `/auth/signin?redirect=...`
+- `/account/*` when not logged in → redirects to `/auth/sign-in?redirect=...`
 - Everything else — runs intl middleware for locale detection/prefixing
 
 Route matcher excludes `api`, `_next`, and static files.

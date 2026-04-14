@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, CardBody } from "@heroui/react";
+import lockKeyholeIcon from "@iconify-icons/solar/lock-keyhole-bold";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
@@ -15,7 +16,7 @@ const PrivacySettings: FC = () => {
       <div className="mt-4">
         <Card>
           <CardBody className="flex flex-row items-center gap-3 py-8">
-            <Icon icon="solar:lock-keyhole-bold" width={32} className="text-default-300" />
+            <Icon icon={lockKeyholeIcon} width={32} height={32} className="text-default-300" />
             <p className="text-default-400">{t("comingSoon")}</p>
           </CardBody>
         </Card>

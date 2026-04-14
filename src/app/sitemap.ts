@@ -47,13 +47,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
-      url: "https://www.e-syrians.com/auth/signin",
+      url: "https://www.e-syrians.com/auth/sign-in",
       lastModified: new Date(),
       alternates: {
         languages: {
-          ar: "https://www.e-syrians.com/ar/auth/signin",
-          en: "https://www.e-syrians.com/en/auth/signin",
-          ku: "https://www.e-syrians.com/ku/auth/signin",
+          ar: "https://www.e-syrians.com/ar/auth/sign-in",
+          en: "https://www.e-syrians.com/en/auth/sign-in",
+          ku: "https://www.e-syrians.com/ku/auth/sign-in",
         },
       },
     },

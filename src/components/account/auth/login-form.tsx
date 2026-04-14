@@ -2,6 +2,9 @@
 
 import { useEsyrian } from "@/components/shared/contexts/es";
 import { Button, Checkbox, Divider, Input } from "@heroui/react";
+import googleIcon from "@iconify-icons/flat-color-icons/google";
+import eyeOpenIcon from "@iconify-icons/solar/eye-bold";
+import eyeClosedIcon from "@iconify-icons/solar/eye-closed-linear";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -85,7 +88,7 @@ export default function LoginForm() {
       <p className="w-full font-medium">{t("loginToYourAccount")}</p>
       <div className="flex w-full flex-col gap-2">
         <Button
-          startContent={<Icon icon="flat-color-icons:google" width={24} />}
+          startContent={<Icon icon={googleIcon} width={24} height={24} />}
           variant="bordered"
           className="w-full"
           onPress={() =>
@@ -120,9 +123,9 @@ export default function LoginForm() {
               endContent={
                 <button type="button" onClick={toggleVisibility}>
                   {isVisible ? (
-                    <Icon className="text-default-400 pointer-events-none text-2xl" icon="solar:eye-closed-linear" />
+                    <Icon className="text-default-400 pointer-events-none text-2xl" icon={eyeClosedIcon} />
                   ) : (
-                    <Icon className="text-default-400 pointer-events-none text-2xl" icon="solar:eye-bold" />
+                    <Icon className="text-default-400 pointer-events-none text-2xl" icon={eyeOpenIcon} />
                   )}
                 </button>
               }
