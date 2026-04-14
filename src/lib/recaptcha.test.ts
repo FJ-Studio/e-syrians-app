@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { generateToken } from "./recaptcha";
 
 describe("generateToken", () => {
-  const hadWindow = "window" in globalThis;
+  const hasWindow = "window" in globalThis;
   const originalWindow = (globalThis as { window?: Window }).window;
   const originalSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA;
   const setMockWindow = (grecaptcha: Window["grecaptcha"]) => {
@@ -18,12 +18,10 @@ describe("generateToken", () => {
     vi.restoreAllMocks();
     process.env.NEXT_PUBLIC_RECAPTCHA = originalSiteKey;
 
-    if (originalWindow === undefined) {
-      if (!hadWindow) {
-        Reflect.deleteProperty(globalThis, "window");
-      }
-    } else {
+    if (hasWindow && originalWindow !== undefined) {
       (globalThis as { window: Window }).window = originalWindow;
+    } else {
+      Reflect.deleteProperty(globalThis, "window");
     }
   });
 
