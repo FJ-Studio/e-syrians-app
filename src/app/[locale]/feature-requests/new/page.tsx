@@ -7,9 +7,7 @@ import { auth } from "../../../../../auth";
 export default async function NewFeatureRequestPage() {
   const session = await auth();
   if (!session?.user?.accessToken) {
-    redirect(
-      `/auth/sign-in?redirect=${encodeURIComponent("/feature-requests/new")}`,
-    );
+    redirect(`/auth/sign-in?redirect=${encodeURIComponent("/feature-requests/new")}`);
   }
   return (
     <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 pb-10 lg:grid-cols-3 lg:gap-8 lg:pb-14">
