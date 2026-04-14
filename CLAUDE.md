@@ -211,7 +211,7 @@ Route matcher excludes `api`, `_next`, and static files.
 
 **HeroUI v2** — primary component library. Used for: Avatar, AvatarGroup, Button, Input, Select, Modal, Spinner, DatePicker, NumberInput, Slider, Alert, Tabs, etc.
 
-**Icons:** `@heroicons/react` (24px outline/solid) and `@iconify/react`.
+**Icons:** `@iconify/react` for the `<Icon>` component, with icon data imported statically from `@iconify-icons/heroicons` (and other `@iconify-icons/*` collections as needed). Example: `import plusIcon from "@iconify-icons/heroicons/plus"` then `<Icon icon={plusIcon} className="size-5" />`. Static imports avoid the runtime fetch to `api.iconify.design` which would be blocked by our CSP's `connect-src`.
 
 **Forms:** `react-hook-form` with `Controller` pattern for HeroUI components. Zod for schema validation on public routes (via `proxyPublicJsonPost`'s `bodySchema`).
 

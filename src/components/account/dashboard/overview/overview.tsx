@@ -2,13 +2,6 @@
 
 import { ESUser } from "@/lib/types/account";
 import {
-  ChartBarIcon,
-  CheckBadgeIcon,
-  ClipboardDocumentCheckIcon,
-  Cog6ToothIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/24/outline";
-import {
   Avatar,
   Button,
   Card,
@@ -20,6 +13,12 @@ import {
   Divider,
   Spinner,
 } from "@heroui/react";
+import chartBarIcon from "@iconify-icons/heroicons/chart-bar";
+import checkBadgeIcon from "@iconify-icons/heroicons/check-badge";
+import clipboardDocumentCheckIcon from "@iconify-icons/heroicons/clipboard-document-check";
+import cog6ToothIcon from "@iconify-icons/heroicons/cog-6-tooth";
+import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
+import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -134,7 +133,7 @@ const AccountOverview: FC = () => {
                 <h2 className="text-xl font-semibold">
                   {profile?.name} {profile?.surname}
                 </h2>
-                {isVerified && <CheckBadgeIcon className="text-success size-5" />}
+                {isVerified && <Icon icon={checkBadgeIcon} className="text-success size-5" />}
               </div>
               <p className="text-default-500 text-sm">{profile?.email}</p>
               <Chip size="sm" variant="flat" color={isVerified ? "success" : "warning"} className="mt-1">
@@ -170,7 +169,7 @@ const AccountOverview: FC = () => {
             href="/account/settings"
             size="sm"
             variant="flat"
-            startContent={<Cog6ToothIcon className="size-4" />}
+            startContent={<Icon icon={cog6ToothIcon} className="size-4" />}
           >
             {t("editProfile")}
           </Button>
@@ -180,25 +179,25 @@ const AccountOverview: FC = () => {
       {/* ---- Quick stats ---- */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatCard
-          icon={<ChartBarIcon className="text-primary size-5" />}
+          icon={<Icon icon={chartBarIcon} className="text-primary size-5" />}
           label={t("stats.polls")}
           value={polls.total}
           href="/account/polls"
         />
         <StatCard
-          icon={<ClipboardDocumentCheckIcon className="text-success size-5" />}
+          icon={<Icon icon={clipboardDocumentCheckIcon} className="text-success size-5" />}
           label={t("stats.verificationsReceived")}
           value={verifications.received}
           href="/account/verifications"
         />
         <StatCard
-          icon={<CheckBadgeIcon className="text-secondary size-5" />}
+          icon={<Icon icon={checkBadgeIcon} className="text-secondary size-5" />}
           label={t("stats.verificationsGiven")}
           value={verifications.given}
           href="/account/verifications"
         />
         <StatCard
-          icon={<PlusCircleIcon className="text-warning size-5" />}
+          icon={<Icon icon={plusCircleIcon} className="text-warning size-5" />}
           label={t("stats.createPoll")}
           value="+"
           href="/account/polls/create"
@@ -223,7 +222,7 @@ const AccountOverview: FC = () => {
                 href="/account/polls/create"
                 color="primary"
                 size="sm"
-                startContent={<PlusCircleIcon className="size-4" />}
+                startContent={<Icon icon={plusCircleIcon} className="size-4" />}
               >
                 {t("recentPolls.create")}
               </Button>

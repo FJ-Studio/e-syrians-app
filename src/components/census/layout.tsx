@@ -4,11 +4,9 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, Fragment, PropsWithChildren } from "react";
 import Container from "../shared/container";
-import { useEsyrian } from "../shared/contexts/es";
 
 const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
   const t = useTranslations();
-  const { openCensusForm } = useEsyrian();
   return (
     <div className="relative min-h-[calc(100dvh-128px)] pt-20">
       <div className="bg-primary flex h-12 items-center">
@@ -23,9 +21,6 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
               </Fragment>
             ))}
           </div>
-          <button onClick={() => openCensusForm(true)} className="hidden border-0 bg-transparent text-white md:block">
-            {t("census.actions.register")}
-          </button>
         </Container>
       </div>
       <Container className="pt-8">{children}</Container>

@@ -4,8 +4,9 @@ import ImagesPicker from "@/components/shared/images-picker";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
-import { UserIcon } from "@heroicons/react/24/outline";
 import { Button, Card, CardBody, CardHeader, Image, Skeleton } from "@heroui/react";
+import userIcon from "@iconify-icons/heroicons/user";
+import { Icon } from "@iconify/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -109,7 +110,7 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
               {preview ? (
                 <Image src={preview} alt={user?.name} className="h-16 w-16 overflow-hidden rounded-full" />
               ) : (
-                <UserIcon className="h-8 w-8 text-gray-700" />
+                <Icon icon={userIcon} className="h-8 w-8 text-gray-700" />
               )}
             </div>
           </Skeleton>

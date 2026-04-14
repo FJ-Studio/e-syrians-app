@@ -1,7 +1,8 @@
 "use client";
 import { ESUser } from "@/lib/types/account";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
+import ellipsisVerticalIcon from "@iconify-icons/heroicons/ellipsis-vertical";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 
@@ -65,7 +66,7 @@ const UserCardLinksDropdown: FC<Props> = ({ user }) => {
     <Dropdown>
       <DropdownTrigger>
         <Button isIconOnly variant="light" size="sm">
-          <EllipsisVerticalIcon className="size-6" />
+          <Icon icon={ellipsisVerticalIcon} className="size-6" />
         </Button>
       </DropdownTrigger>
       <DropdownMenu>

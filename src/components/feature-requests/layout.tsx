@@ -4,14 +4,14 @@ import Link from "next/link";
 import { FC, PropsWithChildren } from "react";
 import Container from "../shared/container";
 
-const PollsLayout: FC<PropsWithChildren> = ({ children }) => {
-  const t = useTranslations();
+const FeatureRequestsLayout: FC<PropsWithChildren> = ({ children }) => {
+  const t = useTranslations("feature_requests");
   return (
     <div className="relative min-h-[calc(100dvh-128px)] space-y-8 pt-20">
       <div className="bg-primary flex h-12 items-center justify-between">
         <Container className="flex items-center justify-between text-white">
-          <Link href="/polls" title={t("polls.categories.all")}>
-            {t("polls.categories.all")}
+          <Link href="/feature-requests" title={t("title")}>
+            {t("title")}
           </Link>
         </Container>
       </div>
@@ -20,4 +20,4 @@ const PollsLayout: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default PollsLayout;
+export default FeatureRequestsLayout;

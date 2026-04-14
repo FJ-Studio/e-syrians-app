@@ -4,13 +4,6 @@ import capitalize from "@/lib/capitalize";
 import { generateToken } from "@/lib/recaptcha";
 import { Poll } from "@/lib/types/polls";
 import {
-  ArrowTopRightOnSquareIcon,
-  ChevronDownIcon,
-  EllipsisVerticalIcon,
-  MagnifyingGlassIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/24/outline";
-import {
   Button,
   Card,
   CardBody,
@@ -30,6 +23,12 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/react";
+import arrowTopRightOnSquareIcon from "@iconify-icons/heroicons/arrow-top-right-on-square";
+import chevronDownIcon from "@iconify-icons/heroicons/chevron-down";
+import ellipsisVerticalIcon from "@iconify-icons/heroicons/ellipsis-vertical";
+import magnifyingGlassIcon from "@iconify-icons/heroicons/magnifying-glass";
+import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, Key, useCallback, useMemo, useState } from "react";
@@ -153,7 +152,7 @@ const MyPolls: FC = () => {
               <Dropdown>
                 <DropdownTrigger>
                   <Button isIconOnly size="sm" variant="light">
-                    <EllipsisVerticalIcon className="text-default-300 size-6" />
+                    <Icon icon={ellipsisVerticalIcon} className="text-default-300 size-6" />
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu disabledKeys={deleting ? ["deactivate", "activate"] : []}>
@@ -173,7 +172,7 @@ const MyPolls: FC = () => {
                       >
                         <div className="flex items-center justify-between">
                           <span>{t("table.actions.visit")}</span>
-                          <ArrowTopRightOnSquareIcon className="size-4" />
+                          <Icon icon={arrowTopRightOnSquareIcon} className="size-4" />
                         </div>
                       </DropdownItem>
                       <DropdownItem key={"deactivate"} onPress={() => switchPollStatus(poll.id, "0")}>
@@ -201,7 +200,7 @@ const MyPolls: FC = () => {
             isClearable
             className="w-full sm:max-w-[44%]"
             placeholder={t("search.title")}
-            startContent={<MagnifyingGlassIcon className="size-4" />}
+            startContent={<Icon icon={magnifyingGlassIcon} className="size-4" />}
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}
@@ -209,7 +208,7 @@ const MyPolls: FC = () => {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small size-4" />} variant="flat">
+                <Button endContent={<Icon icon={chevronDownIcon} className="text-small size-4" />} variant="flat">
                   {t("table.status.title")}
                 </Button>
               </DropdownTrigger>
@@ -230,7 +229,7 @@ const MyPolls: FC = () => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small size-4" />} variant="flat">
+                <Button endContent={<Icon icon={chevronDownIcon} className="text-small size-4" />} variant="flat">
                   {t("table.columns.title")}
                 </Button>
               </DropdownTrigger>
@@ -286,7 +285,7 @@ const MyPolls: FC = () => {
             color="primary"
             as={Link}
             href="/account/polls/create"
-            startContent={<PlusCircleIcon className="size-5" />}
+            startContent={<Icon icon={plusCircleIcon} className="size-5" />}
           >
             {t("emptyContent.add")}
           </Button>
@@ -323,7 +322,7 @@ const MyPolls: FC = () => {
                   color="primary"
                   as={Link}
                   href="/account/polls/create"
-                  startContent={<PlusCircleIcon className="size-5" />}
+                  startContent={<Icon icon={plusCircleIcon} className="size-5" />}
                 >
                   {t("emptyContent.add")}
                 </Button>

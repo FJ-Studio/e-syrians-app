@@ -6,14 +6,6 @@ import { ibm } from "@/lib/fonts/fonts";
 import { generateToken } from "@/lib/recaptcha";
 import { AudienceFailure, Poll } from "@/lib/types/polls";
 import {
-  CalendarDaysIcon,
-  EllipsisVerticalIcon,
-  HandThumbDownIcon,
-  HandThumbUpIcon,
-  ShareIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
-import {
   Avatar,
   Button,
   Card,
@@ -36,6 +28,13 @@ import {
   Snippet,
   useDisclosure,
 } from "@heroui/react";
+import calendarDaysIcon from "@iconify-icons/heroicons/calendar-days";
+import ellipsisVerticalIcon from "@iconify-icons/heroicons/ellipsis-vertical";
+import handThumbDownIcon from "@iconify-icons/heroicons/hand-thumb-down";
+import handThumbUpIcon from "@iconify-icons/heroicons/hand-thumb-up";
+import shareIcon from "@iconify-icons/heroicons/share";
+import userIcon from "@iconify-icons/heroicons/user";
+import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -232,26 +231,26 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           </Link>
           <Dropdown>
             <DropdownTrigger>
-              <EllipsisVerticalIcon className="h-6 w-6 cursor-pointer text-gray-700" />
+              <Icon icon={ellipsisVerticalIcon} className="h-6 w-6 cursor-pointer text-gray-700" />
             </DropdownTrigger>
             <DropdownMenu>
               <DropdownItem
                 key="author"
-                startContent={<UserIcon className="size-5" />}
+                startContent={<Icon icon={userIcon} className="size-5" />}
                 onPress={() => setModalSection("author")}
               >
                 {t("actions.author")}
               </DropdownItem>
               <DropdownItem
                 key="timeline"
-                startContent={<CalendarDaysIcon className="size-5" />}
+                startContent={<Icon icon={calendarDaysIcon} className="size-5" />}
                 onPress={() => setModalSection("timeline")}
               >
                 {t("actions.timeline")}
               </DropdownItem>
               <DropdownItem
                 key="share"
-                startContent={<ShareIcon className="size-5" />}
+                startContent={<Icon icon={shareIcon} className="size-5" />}
                 onPress={() => setModalSection("share")}
               >
                 {t("actions.share")}
@@ -295,7 +294,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           <div className="flex items-center gap-1">
             <Button
               size="sm"
-              startContent={<HandThumbUpIcon className="h-6 w-6" />}
+              startContent={<Icon icon={handThumbUpIcon} className="h-6 w-6" />}
               isDisabled={status !== "authenticated" || loading}
               onPress={() => reactToPoll("up")}
               color={localPoll.has_upvoted ? "primary" : "default"}
@@ -304,7 +303,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             </Button>
             <Button
               size="sm"
-              startContent={<HandThumbDownIcon className="h-6 w-6" />}
+              startContent={<Icon icon={handThumbDownIcon} className="h-6 w-6" />}
               isDisabled={status !== "authenticated" || loading}
               onPress={() => reactToPoll("down")}
               color={localPoll.has_downvoted ? "primary" : "default"}

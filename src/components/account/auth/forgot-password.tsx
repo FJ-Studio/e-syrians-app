@@ -2,8 +2,9 @@
 import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
-import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 import { Button, Input } from "@heroui/react";
+import arrowLongLeftSolid from "@iconify-icons/heroicons/arrow-long-left-solid";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -56,7 +57,7 @@ const ForgotPassword: FC = () => {
         render={({ field }) => <Input {...field} isRequired label={t("email")} type="email" />}
       />
       <p className="flex items-center gap-2">
-        <ArrowLongLeftIcon className="size-5 rtl:rotate-180" />
+        <Icon icon={arrowLongLeftSolid} width={20} height={20} className="size-5 rtl:rotate-180" />
         <Link href="/auth/signin" title={t("backToLogin")} className="text-sm">
           {t("backToLogin")}
         </Link>
