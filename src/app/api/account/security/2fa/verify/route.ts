@@ -18,5 +18,5 @@ export const POST = withApiRoute(
     const response = await request.json();
     return NextResponse.json(response, { status: request.status });
   },
-  { requireAuth: false, requireRecaptcha: false, errorMessage: "2FA verification failed" },
+  { requireAuth: false, errorMessage: "2FA verification failed" },
 );

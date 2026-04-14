@@ -7,5 +7,6 @@ export const POST = proxyJsonPost({
     current_password: body.currentPassword,
     new_password: body.newPassword,
     new_password_confirmation: body.confirmPassword,
+    recaptcha_token: body.recaptcha_token,
   }),
 });

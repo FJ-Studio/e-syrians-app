@@ -17,5 +17,5 @@ export const POST = withApiRoute(
     const response = await request.json();
     return NextResponse.json(response, { status: request.status });
   },
-  { requireAuth: true, requireRecaptcha: true },
+  { requireAuth: true },
 );
