@@ -1,5 +1,18 @@
 # e-Syrians Web App
 
+[![Frontend Quality](https://github.com/FJ-Studio/e-syrians-app/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/FJ-Studio/e-syrians-app/actions/workflows/quality.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/FJ-Studio/e-syrians-app/blob/main/LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-149eca)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6)](https://www.typescriptlang.org/)
+[![Tests](https://img.shields.io/badge/tests-Vitest-6E9F18)](https://vitest.dev/)
+[![Coverage](https://img.shields.io/badge/coverage-3.31%25-red)](https://github.com/FJ-Studio/e-syrians-app/actions/workflows/quality.yml)
+[![i18n](https://img.shields.io/badge/i18n-AR%20%7C%20EN%20%7C%20KU-orange)](https://github.com/FJ-Studio/e-syrians-app#features)
+[![RTL](https://img.shields.io/badge/layout-RTL%20support-7c3aed)](https://github.com/FJ-Studio/e-syrians-app#features)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/FJ-Studio/e-syrians-app/blob/main/CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-enforced-ff69b4.svg)](https://github.com/FJ-Studio/e-syrians-app/blob/main/CODE_OF_CONDUCT.md)
+[![Security Policy](https://img.shields.io/badge/security-policy-blue.svg)](https://github.com/FJ-Studio/e-syrians-app/blob/main/SECURITY.md)
+
 The Next.js web app for e-Syrians, a community platform and census tool for Syrian citizens. It consumes the [e-Syrians API](https://github.com/FJ-Studio/e-syrians-api) and provides user-facing interfaces for authentication, peer-to-peer identity verification, demographic polling, violation reporting, and census statistics.
 
 ## Tech Stack
