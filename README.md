@@ -6,6 +6,7 @@
 [![React](https://img.shields.io/badge/React-19-149eca)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6)](https://www.typescriptlang.org/)
 [![Tests](https://img.shields.io/badge/tests-Vitest-6E9F18)](https://vitest.dev/)
+[![Coverage](https://img.shields.io/badge/coverage-3.31%25-red)](https://github.com/FJ-Studio/e-syrians-app/actions/workflows/quality.yml)
 [![i18n](https://img.shields.io/badge/i18n-AR%20%7C%20EN%20%7C%20KU-orange)](https://github.com/FJ-Studio/e-syrians-app#features)
 [![RTL](https://img.shields.io/badge/layout-RTL%20support-7c3aed)](https://github.com/FJ-Studio/e-syrians-app#features)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/FJ-Studio/e-syrians-app/blob/main/CONTRIBUTING.md)
