@@ -27,7 +27,6 @@
     ]
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "@heroui/react": "^2.8.10",
     "@heroui/theme": "^2.4.26",
     "@iconify/react": "^6.0.2",
@@ -47,6 +46,9 @@
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
+    "@iconify-icons/flat-color-icons": "^1.2.5",
+    "@iconify-icons/heroicons": "^1.2.9",
+    "@iconify-icons/solar": "^1.2.3",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^25.5.0",

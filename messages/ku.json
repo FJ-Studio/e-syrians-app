@@ -44,6 +44,10 @@
       "title": "Polls",
       "description": "Platformek ji bo pêkanîna anket û anketan ji bo nirxandina raya giştî li ser mijarên cûda."
     },
+    "feature_requests": {
+      "title": "Taybetmendiyekê pêşniyar bike",
+      "description": "Çêtirkirinan pêşniyar bike û dengê xwe bide ramanên ku riya pêşerojê ya platformê diyar dikin."
+    },
     "violations": {
       "description": "Lêpirsînek civakî ji bo binêre û belgekirina têkoşînên li dijî ciwanên Sûrî.",
       "title": "Tewandînan"
@@ -1792,5 +1796,107 @@
     "title": "Tiştek çewt derket",
     "description": "Çewtiyeke nediyar çêbû. Ji kerema xwe dîsa biceribîne.",
     "retry": "Dîsa biceribîne"
+  },
+  "feature_requests": {
+    "title": "Daxwazên taybetmendiyan",
+    "description": "Pêşniyar bike em çi bikin paşê, an deng bide li ser fikrên civakê.",
+    "back_to_list": "Vegere bo lîsteya daxwazan",
+    "score": "Puan: {score}",
+    "empty": {
+      "title": "Hêj daxwazek tune",
+      "description": "Yekem kes be ku fikrekê pêşkêş bike."
+    },
+    "statuses": {
+      "idea": "Fikir",
+      "in_development": "Di pêşxistinê de",
+      "in_testing": "Di testê de",
+      "shipped": "Hatiye berdan"
+    },
+    "sort": {
+      "newest": "Nûtirîn",
+      "popular": "Herî populer",
+      "shipped": "Hatine berdan"
+    },
+    "filters": {
+      "sort": "Rêzkirin",
+      "status": "Rewş",
+      "all_statuses": "Hemû rewş"
+    },
+    "timeline": {
+      "heading": "Demnasî",
+      "not_yet": "Hêj ne",
+      "created_at": "Şandin",
+      "coded_at": "Kodkirin",
+      "tested_at": "Testkirin",
+      "deployed_at": "Berdan"
+    },
+    "notes": {
+      "title": "Nîşeyên pêşveçûnê",
+      "edited": "guherandin",
+      "count": "{count, plural, =0 {Nîşe tune} =1 {# nîşe} other {# nîşe}}"
+    },
+    "vote": {
+      "upvote": "Dengê erê",
+      "downvote": "Dengê na",
+      "sign_in": "Ji bo dengdanê li ser daxwazên taybetmendiyan têkeve.",
+      "error": "Dengê we tomar nebû. Ji kerema xwe dîsa biceribîne."
+    },
+    "contributors": {
+      "title": "Bi beşdaran re nas bike",
+      "subtitle": "Mirovên ku koda wan vê platformê dimeşîne. Spas ji her kesê ku alîkarî kiriye.",
+      "backend": "Paşerû",
+      "frontend": "Pêşerû",
+      "view_repo": "Li repoyê binêre",
+      "empty": "Beşdar nehatin dîtin.",
+      "contributions": "{count, plural, =1 {# commit} other {# commit}}"
+    },
+    "what_happens_next": {
+      "title": "Piştre çi diqewime?",
+      "subtitle": "Ji ramanekê heta taybetmendiyeke berdayî — rêya pêşniyara we ev e.",
+      "steps": {
+        "submit": {
+          "title": "Ramana xwe bişîne",
+          "body": "Pêşniyarek zelal û bi hedef parve bike. Ew ji bo tevahiya civakê xuya dibe."
+        },
+        "vote": {
+          "title": "Civak deng dide",
+          "body": "Endam dengê erê yan na didin. Bi vî awayî em fêm dikin bê çi girîngtir e."
+        },
+        "pick_up": {
+          "title": "Rêvebir destê xwe davêjin",
+          "body": "Ramanên ku piştgirî distînin, ji aliyê rêvebirekî ve dibin planek teknîkî."
+        },
+        "ship": {
+          "title": "Em çêdikin û belav dikin",
+          "body": "Rêzika demê ya her ramanê bişopîne: Kodkirin, Testkirin, Belavkirin — ji bo her kesî xuya ye."
+        }
+      }
+    },
+    "create": {
+      "cta": "Taybetmendiyekê pêşniyar bike",
+      "title": "Taybetmendiyeke nû pêşniyar bike",
+      "description": "Ji me re bêje bê em çi çêbikin. Ramanên zelal û bi hedef zêdetir girîngiyê distînin.",
+      "account_unverified_alert": "Ji bo şandina daxwaza taybetmendiyê hesabê xwe piştrast bike.",
+      "submit": "Bişîne",
+      "success": "Spas — raman hate şandin.",
+      "error": "Daxwaza we nehate şandin. Ji kerema xwe dîsa biceribîne.",
+      "fields": {
+        "title": {
+          "label": "Sernav",
+          "placeholder": "Kurteyeke kurt û zelal",
+          "required": "Ji kerema xwe sernavek li ramana xwe bike.",
+          "min": "Sernav divê ji 5 tîpan kêmtir nebe.",
+          "max": "Sernav divê ji 160 tîpan zêdetir nebe."
+        },
+        "description": {
+          "label": "Şirove",
+          "placeholder": "Ev kîjan kêşeyê çareser dike? Kê jê sûd werdigire?",
+          "help": "Di navbera 20 û 4000 tîpan de.",
+          "required": "Ji kerema xwe taybetmendiyê şirove bike.",
+          "min": "Şirove divê ji 20 tîpan kêmtir nebe.",
+          "max": "Şirove divê ji 4000 tîpan zêdetir nebe."
+        }
+      }
+    }
   }
 }

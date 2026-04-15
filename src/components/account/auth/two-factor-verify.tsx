@@ -1,6 +1,8 @@
 "use client";
 
 import { Button, Input } from "@heroui/react";
+import clockCircleIcon from "@iconify-icons/solar/clock-circle-bold";
+import shieldKeyholeIcon from "@iconify-icons/solar/shield-keyhole-bold";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -53,7 +55,7 @@ export default function TwoFactorVerify({ challengeToken, expiresAt, onBack }: T
   if (isExpired) {
     return (
       <div className="flex w-full flex-col items-center gap-4 p-4">
-        <Icon icon="solar:clock-circle-bold" width={48} className="text-danger" />
+        <Icon icon={clockCircleIcon} width={48} height={48} className="text-danger" />
         <p className="text-default-600 text-center">{t("challengeExpired")}</p>
         <Button color="primary" variant="flat" onPress={onBack}>
           {t("backToLogin")}
@@ -64,7 +66,7 @@ export default function TwoFactorVerify({ challengeToken, expiresAt, onBack }: T
 
   return (
     <div className="flex w-full flex-col items-center gap-4 p-4">
-      <Icon icon="solar:shield-keyhole-bold" width={48} className="text-primary" />
+      <Icon icon={shieldKeyholeIcon} width={48} height={48} className="text-primary" />
       <p className="w-full text-center font-medium">{t("title")}</p>
       <p className="text-default-500 text-center text-sm">{t("description")}</p>
 

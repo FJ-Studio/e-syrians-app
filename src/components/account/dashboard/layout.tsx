@@ -1,16 +1,6 @@
 "use client";
 import Container from "@/components/shared/container";
 import {
-  ArrowRightStartOnRectangleIcon,
-  BellIcon,
-  ChartBarIcon,
-  ClipboardDocumentCheckIcon,
-  Cog6ToothIcon,
-  CurrencyDollarIcon,
-  EllipsisHorizontalIcon,
-  HomeIcon,
-} from "@heroicons/react/24/outline";
-import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -19,6 +9,15 @@ import {
   Listbox,
   ListboxItem,
 } from "@heroui/react";
+import arrowRightOnRectangleIcon from "@iconify-icons/heroicons/arrow-right-on-rectangle";
+import bellIcon from "@iconify-icons/heroicons/bell";
+import chartBarIcon from "@iconify-icons/heroicons/chart-bar";
+import clipboardDocumentCheckIcon from "@iconify-icons/heroicons/clipboard-document-check";
+import cog6ToothIcon from "@iconify-icons/heroicons/cog-6-tooth";
+import currencyDollarIcon from "@iconify-icons/heroicons/currency-dollar";
+import ellipsisHorizontalIcon from "@iconify-icons/heroicons/ellipsis-horizontal";
+import homeIcon from "@iconify-icons/heroicons/home";
+import { Icon } from "@iconify/react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -48,43 +47,43 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         key: "overview",
         title: t("nav.overview"),
         link: "/account",
-        icon: <HomeIcon className="size-5" />,
+        icon: <Icon icon={homeIcon} className="size-5" />,
       },
       {
         key: "polls",
         title: t("nav.polls"),
         link: "/account/polls",
-        icon: <ChartBarIcon className="size-5" />,
+        icon: <Icon icon={chartBarIcon} className="size-5" />,
       },
       {
         key: "settings",
         title: t("nav.settings"),
         link: "/account/settings",
-        icon: <Cog6ToothIcon className="size-5" />,
+        icon: <Icon icon={cog6ToothIcon} className="size-5" />,
       },
       {
         key: "notifications",
         title: t("nav.notifications"),
         link: "/account/notifications",
-        icon: <BellIcon className="size-5" />,
+        icon: <Icon icon={bellIcon} className="size-5" />,
       },
       {
         key: "verifications",
         title: t("nav.verifications"),
         link: "/account/verifications",
-        icon: <ClipboardDocumentCheckIcon className="size-5" />,
+        icon: <Icon icon={clipboardDocumentCheckIcon} className="size-5" />,
       },
       {
         key: "donate",
         title: t("nav.donate"),
         link: "/account/donate",
-        icon: <CurrencyDollarIcon className="size-5" />,
+        icon: <Icon icon={currencyDollarIcon} className="size-5" />,
       },
       {
         key: "signout",
         title: t("nav.signout"),
         link: undefined,
-        icon: <ArrowRightStartOnRectangleIcon className="size-5" />,
+        icon: <Icon icon={arrowRightOnRectangleIcon} className="size-5" />,
         onPress: () => signOut(),
       },
     ],
@@ -120,7 +119,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
             })}
           </span>
           <button className="cursor-pointer border-0 bg-transparent" onClick={() => signOut()}>
-            <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-white rtl:rotate-180" />
+            <Icon icon={arrowRightOnRectangleIcon} className="h-6 w-6 text-white rtl:rotate-180" />
           </button>
         </Container>
       </div>
@@ -191,7 +190,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                 }`}
               >
                 <span className="flex flex-col items-center gap-0.5">
-                  <EllipsisHorizontalIcon className="size-5" />
+                  <Icon icon={ellipsisHorizontalIcon} className="size-5" />
                   <span className="text-[10px] leading-tight">{t("nav.more")}</span>
                 </span>
               </button>
@@ -225,7 +224,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                   key="signout"
                   color="danger"
                   className="text-danger"
-                  startContent={<ArrowRightStartOnRectangleIcon className="size-5" />}
+                  startContent={<Icon icon={arrowRightOnRectangleIcon} className="size-5" />}
                 >
                   {t("nav.signout")}
                 </DropdownItem>

@@ -1,5 +1,6 @@
 import { auth } from "../../../auth";
 import { ESUser } from "../types/account";
+import { FeatureRequest, FeatureSort, FeatureStatus } from "../types/feature-requests";
 import { ApiResponse } from "../types/misc";
 import { Poll } from "../types/polls";
 
@@ -46,6 +47,45 @@ export const getPolls = async (
   const session = await auth();
   const params = new URLSearchParams({ page, year, month });
   return safeFetch(`${API_URL}/polls?${params.toString()}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+    cache: "no-cache",
+  });
+};
+
+/**
+ * Fetch a paginated list of feature requests. Mirrors `getPolls` — passes the
+ * session bearer when available so the API can populate `has_upvoted` /
+ * `has_downvoted` on each row. Guests get those fields as false.
+ */
+export const getFeatureRequests = async (
+  page: string,
+  sort: FeatureSort = "newest",
+  status?: FeatureStatus,
+): Promise<ApiResponse<{
+  feature_requests: Array<FeatureRequest>;
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+}> | null> => {
+  const session = await auth();
+  const params = new URLSearchParams({ page, sort });
+  if (status) params.set("status", status);
+  return safeFetch(`${API_URL}/feature-requests?${params.toString()}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+    cache: "no-cache",
+  });
+};
+
+export const getFeatureRequest = async (id: string): Promise<ApiResponse<FeatureRequest> | null> => {
+  const session = await auth();
+  return safeFetch<FeatureRequest>(`${API_URL}/feature-requests/${id}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,

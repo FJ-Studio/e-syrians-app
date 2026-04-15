@@ -18,8 +18,8 @@ const cspDirectives = [
   // Styles: self + inline (Tailwind, HeroUI)
   `style-src 'self' 'unsafe-inline'`,
 
-  // Images: self + OG images + analytics + S3 avatars
-  `img-src 'self' data: blob: https://www.e-syrians.com https://e-syrians.s3.eu-north-1.amazonaws.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google.com https://*.gstatic.com`,
+  // Images: self + OG images + analytics + S3 avatars + GitHub contributor avatars
+  `img-src 'self' data: blob: https://www.e-syrians.com https://e-syrians.s3.eu-north-1.amazonaws.com https://avatars.githubusercontent.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google.com https://*.gstatic.com`,
 
   // Fonts: local only (IBM Plex Sans Arabic loaded from /public)
   `font-src 'self' data:`,
@@ -55,6 +55,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "e-syrians.s3.eu-north-1.amazonaws.com",
         pathname: "/avatars/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
       },
     ],
   },

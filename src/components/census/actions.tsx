@@ -1,7 +1,8 @@
 "use client";
 
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/react";
+import informationCircleIcon from "@iconify-icons/heroicons/information-circle";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import { useEsyrian } from "../shared/contexts/es";
@@ -20,7 +21,7 @@ const CensusActions: FC = () => {
         variant="flat"
         onPress={() => window.open("https://www.e-syrians.com/e-syrians-presentation.pdf", "_blank")}
       >
-        <InformationCircleIcon className="text-primary size-6" />
+        <Icon icon={informationCircleIcon} className="text-primary size-6" />
       </Button>
     </div>
   );

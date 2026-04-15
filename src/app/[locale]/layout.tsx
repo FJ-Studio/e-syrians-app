@@ -49,12 +49,19 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <GoogleTagManager gtmId="GTM-MSXHDMVL" />
-      <Script
-        async
-        defer
-        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA}`}
-      ></Script>
       <body className={`${ibm.className} antialiased`}>
+        {/*
+         * reCAPTCHA v3 loader. Kept inside <body> so Next.js' Script manager
+         * can reliably place it; earlier versions put this as a bare sibling
+         * of <body> where React 19 hoisting occasionally loaded it late,
+         * causing `generateToken` to run against an uninitialised stub and
+         * return an empty token (rejected by the backend as invalid).
+         */}
+        <Script
+          id="recaptcha-v3"
+          strategy="afterInteractive"
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA}`}
+        />
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>
             <Providers>

@@ -45,7 +45,7 @@ const ResetPassword: FC = () => {
     if (response?.success) {
       reset();
       toast.success(t("success"));
-      window.setTimeout(() => push("/auth/signin"), 2000);
+      window.setTimeout(() => push("/auth/sign-in"), 2000);
     } else {
       toast.error(serverErrors(extractErrors(response.messages)[0]));
     }

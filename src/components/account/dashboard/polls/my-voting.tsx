@@ -1,7 +1,6 @@
 "use client";
 import usePollTable from "@/components/hooks/use-poll-table";
 import { VoteLog } from "@/lib/types/polls";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Button,
   Card,
@@ -17,6 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/react";
+import magnifyingGlassIcon from "@iconify-icons/heroicons/magnifying-glass";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, Key, useCallback, useMemo } from "react";
@@ -92,7 +93,7 @@ const MyVoting: FC = () => {
             isClearable
             className="w-full sm:max-w-[44%]"
             placeholder={t("search.title")}
-            startContent={<MagnifyingGlassIcon className="size-4" />}
+            startContent={<Icon icon={magnifyingGlassIcon} className="size-4" />}
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}
