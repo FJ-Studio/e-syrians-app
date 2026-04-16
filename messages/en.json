@@ -901,6 +901,16 @@
               "label": "Public, poll participants are visible"
             }
           },
+          "audience_only": {
+            "label": "Poll visibility",
+            "description": "Public polls are visible to everyone. Audience-only polls are only visible to users matching the audience criteria.",
+            "public": {
+              "label": "Public"
+            },
+            "audience": {
+              "label": "Audience only"
+            }
+          },
           "error": "An error occurred while creating the poll"
         }
       },
@@ -1100,6 +1110,14 @@
         "privacy": {
           "title": "Privacy"
         }
+      },
+      "sections": {
+        "nav": "Jump to section",
+        "avatar": "Profile picture",
+        "basic": "Basic information",
+        "address": "Country & location",
+        "links": "Social links",
+        "census": "National census"
       },
       "error": {
         "tryAgain": "Failed to load profile data, please try again later!"
@@ -1800,6 +1818,7 @@
   "feature_requests": {
     "title": "Feature requests",
     "description": "Suggest what we should build next, or vote on ideas from the community.",
+    "suggest": "Suggest a feature",
     "back_to_list": "Back to feature requests",
     "score": "Score: {score}",
     "empty": {

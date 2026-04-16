@@ -72,6 +72,7 @@ const CreatePoll: FC = () => {
       audience_can_add_options: "0",
       reveal_results: "before-voting",
       voters_are_visible: "0",
+      audience_only: "0",
     },
   });
 
@@ -95,6 +96,7 @@ const CreatePoll: FC = () => {
     formData.append("audience_can_add_options", "0");
     formData.append("reveal_results", data.reveal_results);
     formData.append("voters_are_visible", data.voters_are_visible);
+    formData.append("audience_only", data.audience_only);
     options.forEach((option) => {
       formData.append("options[]", option);
     });
@@ -263,7 +265,7 @@ const CreatePoll: FC = () => {
             )}
           />
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Controller
             name="reveal_results"
             control={control}
@@ -303,6 +305,22 @@ const CreatePoll: FC = () => {
               >
                 <SelectItem key={"0"}>{t("voters_are_visible.no.label")}</SelectItem>
                 <SelectItem key={"1"}>{t("voters_are_visible.yes.label")}</SelectItem>
+              </Select>
+            )}
+          />
+          <Controller
+            name="audience_only"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                label={t("audience_only.label")}
+                description={t("audience_only.description")}
+                isDisabled={userIsNotVerified}
+                defaultSelectedKeys={["0"]}
+              >
+                <SelectItem key={"0"}>{t("audience_only.public.label")}</SelectItem>
+                <SelectItem key={"1"}>{t("audience_only.audience.label")}</SelectItem>
               </Select>
             )}
           />
