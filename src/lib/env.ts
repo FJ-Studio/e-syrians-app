@@ -19,6 +19,7 @@ function required(name: string): string {
 export const NEXT_PUBLIC_RECAPTCHA = process.env.NEXT_PUBLIC_RECAPTCHA ?? "";
 export const NEXT_PUBLIC_DOMAIN_NAME = process.env.NEXT_PUBLIC_DOMAIN_NAME ?? "";
 export const NEXT_PUBLIC_DOMAIN_URL = process.env.NEXT_PUBLIC_DOMAIN_URL ?? "";
+export const NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "";
 
 // ---------------------------------------------------------------------------
 // Server-only — lazily validated so client bundles don't crash
@@ -34,3 +35,11 @@ export function getApiUrl(): string {
 // reCAPTCHA verification now lives on the Laravel side — the secret is kept
 // there, not in the Next.js runtime. Only `NEXT_PUBLIC_RECAPTCHA` (site key)
 // is needed on the frontend.
+
+let _stripeSecretKey: string | undefined;
+export function getStripeSecretKey(): string {
+  if (!_stripeSecretKey) {
+    _stripeSecretKey = required("STRIPE_SECRET_KEY");
+  }
+  return _stripeSecretKey;
+}

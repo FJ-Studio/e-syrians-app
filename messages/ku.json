@@ -67,6 +67,45 @@
       "copy_btc_address": "Nivîsîna BTC kopî bike"
     }
   },
+  "donate": {
+    "title": "Piştgiriya E-Syrians",
+    "subtitle": "Comerdiya te alîkariya me dike ku platformek çêtir ji bo civaka Sûrî ava bikin.",
+    "status": {
+      "success": {
+        "title": "Spas ji bo bexşa te!",
+        "description": "Comerdiya te ji bo civaka Sûrî cudahiyek rastîn çêdike."
+      },
+      "cancelled": {
+        "title": "Bexş hate betalkirin",
+        "description": "Ti drav nehat standin. Tu dikarî dîsa biceribînî dema ku tu amade bî."
+      }
+    },
+    "stripe": {
+      "title": "Bi kartê bexş bike",
+      "description": "Carekê bexşek bi karta kredî an debîtê bike.",
+      "custom": "Mîqdara din",
+      "amountPlaceholder": "Mîqdar",
+      "donate": "Bexş bike",
+      "donateAmount": "Bexşa {amount}",
+      "error": "Tiştek çewt bû. Ji kerema xwe dîsa biceribîne."
+    },
+    "crypto": {
+      "title": "Bi diravên dîjîtal bexş bike",
+      "description": "Diravên dîjîtal rasterast bişîne yek ji navnîşanên berîka jêrîn.",
+      "btc": {
+        "label": "Bitcoin (BTC)",
+        "copy": "Navnîşana BTC kopî bike"
+      },
+      "eth": {
+        "label": "Ethereum (ETH)",
+        "copy": "Navnîşana ETH kopî bike"
+      },
+      "usdt": {
+        "label": "Tether (USDT)",
+        "copy": "Navnîşana USDT kopî bike"
+      }
+    }
+  },
   "footer": {
     "privacy_policy": "Siyaseta Tenduristiyê",
     "terms": "Şertên",
