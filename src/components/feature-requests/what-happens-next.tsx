@@ -40,20 +40,20 @@ const WhatHappensNext: FC = () => {
       <div className="relative">
         <span aria-hidden="true" className="bg-default-200 absolute start-4 top-4 bottom-4 w-px" />
         <ol className="relative space-y-5">
-        {steps.map(({ key, icon }, index) => (
-          <li key={key} className="relative flex gap-3">
-            <span className="bg-primary/10 text-primary relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold">
-              {index + 1}
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <Icon icon={icon} className="text-primary h-4 w-4 shrink-0" />
-                <p className="text-default-900 font-medium">{t(`steps.${key}.title`)}</p>
+          {steps.map(({ key, icon }, index) => (
+            <li key={key} className="relative flex gap-3">
+              <span className="bg-primary/10 text-primary relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold">
+                {index + 1}
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <Icon icon={icon} className="text-primary h-4 w-4 shrink-0" />
+                  <p className="text-default-900 font-medium">{t(`steps.${key}.title`)}</p>
+                </div>
+                <p className="text-default-600 mt-1 text-sm">{t(`steps.${key}.body`)}</p>
               </div>
-              <p className="text-default-600 mt-1 text-sm">{t(`steps.${key}.body`)}</p>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
         </ol>
       </div>
     </section>
