@@ -112,6 +112,7 @@ export interface CreatePollFields {
   audience_can_add_options: "0" | "1";
   reveal_results: PollReveal;
   voters_are_visible: "0" | "1";
+  audience_only: "0" | "1";
 }
 
 export type PollVoter = {

@@ -901,6 +901,16 @@
               "label": "Public, poll participants are visible"
             }
           },
+          "audience_only": {
+            "label": "Poll visibility",
+            "description": "Public polls are visible to everyone. Audience-only polls are only visible to users matching the audience criteria.",
+            "public": {
+              "label": "Public"
+            },
+            "audience": {
+              "label": "Audience only"
+            }
+          },
           "error": "An error occurred while creating the poll"
         }
       },

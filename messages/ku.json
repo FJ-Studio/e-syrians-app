@@ -901,6 +901,16 @@
               "label": "Giştî, beşdarên lêkolînê xuya ne"
             }
           },
+          "audience_only": {
+            "label": "Dîtina lêkolînê",
+            "description": "Lêkolînên giştî ji hemû kesan re xuya ne. Lêkolînên tenê ji bo temaşevanan tenê ji bo bikarhênerên ku bi pîvanên temaşevanan re li hev dikin xuya ne.",
+            "public": {
+              "label": "Giştî"
+            },
+            "audience": {
+              "label": "Tenê ji bo temaşevanan"
+            }
+          },
           "error": "هەڵەیەک ڕوویدا لە کاتی دروستکردنی ڕاپرسییەکە"
         }
       },
