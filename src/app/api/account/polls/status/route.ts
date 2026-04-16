@@ -10,10 +10,13 @@ export const PATCH = withApiRoute(
         Accept: "application/json",
         Authorization: `Bearer ${session!.user.accessToken}`,
       },
-      body: JSON.stringify({ status: body.status }),
+      body: JSON.stringify({
+        status: body.status,
+        recaptcha_token: body.recaptcha_token,
+      }),
     });
     const data = await request.json();
     return NextResponse.json(data, { status: request.status });
   },
-  { requireAuth: true, requireRecaptcha: true },
+  { requireAuth: true },
 );
