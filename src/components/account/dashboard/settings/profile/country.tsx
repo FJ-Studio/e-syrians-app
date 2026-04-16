@@ -8,7 +8,7 @@ import { CountryCode } from "@/lib/types/misc";
 import { Autocomplete, AutocompleteItem, Avatar, Button, Card, CardBody, CardHeader, Skeleton } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
 type UpdateAddressProps = {
@@ -38,6 +38,8 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
       city_inside_syria: user?.city_inside_syria ?? undefined,
     },
   });
+
+  const countryValue = useWatch({ control, name: "country" });
 
   useEffect(() => {
     if (user) {
@@ -110,7 +112,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                 </Autocomplete>
               )}
             />
-            {getValues("country") === "SY" && (
+            {countryValue === "SY" && (
               <Controller
                 name="city_inside_syria"
                 control={control}
