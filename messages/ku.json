@@ -1111,6 +1111,14 @@
           "title": "تایبەتمەندی"
         }
       },
+      "sections": {
+        "nav": "Biçe beşê",
+        "avatar": "Wêneyê profîlê",
+        "basic": "Agahdariya bingehîn",
+        "address": "Welat û cîh",
+        "links": "Girêdanên civakî",
+        "census": "Serjimêriya niştimanî"
+      },
       "error": {
         "tryAgain": "Dîsa hewl bidin!"
       },

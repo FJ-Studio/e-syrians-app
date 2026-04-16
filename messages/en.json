@@ -1111,6 +1111,14 @@
           "title": "Privacy"
         }
       },
+      "sections": {
+        "nav": "Jump to section",
+        "avatar": "Profile picture",
+        "basic": "Basic information",
+        "address": "Country & location",
+        "links": "Social links",
+        "census": "National census"
+      },
       "error": {
         "tryAgain": "Failed to load profile data, please try again later!"
       },

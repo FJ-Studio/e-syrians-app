@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@heroui/react";
+import { Button, Chip } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useCallback, useEffect, useState } from "react";
 import AccountAvatar from "./avatar";
@@ -7,6 +7,10 @@ import AccountCensus from "./census";
 import AccountAddress from "./country";
 import AccountSocialLinks from "./social-links";
 import UpdateBasicProfileData from "./update-basic";
+
+type SectionId = "avatar" | "basic" | "address" | "links" | "census";
+
+const sectionIds: SectionId[] = ["avatar", "basic", "address", "links", "census"];
 
 const AccountProfile: FC = () => {
   const t = useTranslations("account.settings");
@@ -32,6 +36,10 @@ const AccountProfile: FC = () => {
     getProfile();
   }, [getProfile]);
 
+  const scrollTo = (id: SectionId) => {
+    document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <>
       {!loading && !profile && (
@@ -40,16 +48,49 @@ const AccountProfile: FC = () => {
         </Button>
       )}
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="space-y-4">
-          <AccountSocialLinks user={profile} />
-          <UpdateBasicProfileData user={profile} />
-        </div>
-        <div className="space-y-4">
+      {/* Section jump nav */}
+      <nav className="mb-6 flex flex-wrap gap-2" aria-label={t("sections.nav")}>
+        {sectionIds.map((id) => (
+          <Chip
+            key={id}
+            as="button"
+            variant="flat"
+            className="cursor-pointer transition-colors hover:bg-primary-100"
+            onClick={() => scrollTo(id)}
+          >
+            {t(`sections.${id}`)}
+          </Chip>
+        ))}
+      </nav>
+
+      <div className="space-y-8">
+        {/* Personal info */}
+        <section id="section-avatar" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.avatar")}</h3>
           <AccountAvatar user={profile} onUpdated={getProfile} />
+        </section>
+
+        <section id="section-basic" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.basic")}</h3>
+          <UpdateBasicProfileData user={profile} />
+        </section>
+
+        <section id="section-address" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.address")}</h3>
           <AccountAddress user={profile} />
+        </section>
+
+        {/* Social */}
+        <section id="section-links" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.links")}</h3>
+          <AccountSocialLinks user={profile} />
+        </section>
+
+        {/* Census */}
+        <section id="section-census" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.census")}</h3>
           <AccountCensus user={profile} />
-        </div>
+        </section>
       </div>
     </>
   );
