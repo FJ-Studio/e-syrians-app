@@ -1818,6 +1818,7 @@
   "feature_requests": {
     "title": "Feature requests",
     "description": "Suggest what we should build next, or vote on ideas from the community.",
+    "suggest": "Suggest a feature",
     "back_to_list": "Back to feature requests",
     "score": "Score: {score}",
     "empty": {

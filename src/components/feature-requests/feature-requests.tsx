@@ -1,6 +1,9 @@
 import { FeatureRequest, FeatureSort, FeatureStatus } from "@/lib/types/feature-requests";
-import { Spacer } from "@heroui/react";
+import { Button, Spacer } from "@heroui/react";
+import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { FC } from "react";
 import FeatureCard from "./cards/feature-card";
 import FeatureRequestsEmptyState from "./empty-state";
@@ -24,7 +27,17 @@ const FeatureRequests: FC<Props> = ({ features, current_page, last_page, sort, s
           <h1 className="text-3xl font-bold text-gray-700">{t("title")}</h1>
           <p className="mt-1 max-w-prose">{t("description")}</p>
         </div>
-        <Filters sort={sort} status={status} />
+        <div className="flex flex-wrap items-center gap-3">
+          <Filters sort={sort} status={status} />
+          <Button
+            as={Link}
+            href="/feature-requests/new"
+            color="primary"
+            startContent={<Icon icon={plusCircleIcon} className="size-5" />}
+          >
+            {t("suggest")}
+          </Button>
+        </div>
       </div>
       <div className="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((feature) => (
