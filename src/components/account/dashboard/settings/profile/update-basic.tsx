@@ -5,7 +5,6 @@ import useProvinces from "@/components/hooks/localization/provinces";
 import useServerError from "@/components/hooks/localization/server-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import {
   Autocomplete,
   AutocompleteItem,
@@ -21,6 +20,8 @@ import {
   SharedSelection,
   Skeleton,
 } from "@heroui/react";
+import pencilSquareIcon from "@iconify-icons/heroicons/pencil-square";
+import { Icon } from "@iconify/react";
 import { parseDate } from "@internationalized/date";
 import { useTranslations } from "next-intl";
 import { FC, useEffect, useState } from "react";
@@ -113,7 +114,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
             <Skeleton isLoaded={!!user} className="rounded-lg">
               <Button
                 onPress={() => setMode("edit")}
-                startContent={<PencilSquareIcon className="size-4" />}
+                startContent={<Icon icon={pencilSquareIcon} className="size-4" />}
                 size="sm"
                 variant="flat"
               >

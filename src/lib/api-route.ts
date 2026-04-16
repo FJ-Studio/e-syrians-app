@@ -1,4 +1,3 @@
-import recaptchaIsValid from "@/lib/recaptcha";
 import { Session } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "../../auth";
@@ -6,10 +5,15 @@ import { auth } from "../../auth";
 // ---------------------------------------------------------------------------
 // Shared types
 // ---------------------------------------------------------------------------
+//
+// reCAPTCHA verification now lives on the Laravel side: the backend protects
+// any route that accepts human-submitted data with its own `recaptcha`
+// middleware. The Next.js proxy layer is therefore just a thin forwarder — it
+// authenticates the session, passes the body through (including
+// `recaptcha_token` when present), and forwards whatever the backend returns.
 
 interface ApiRouteOptions {
   requireAuth?: boolean;
-  requireRecaptcha?: boolean;
   errorMessage?: string;
 }
 
@@ -30,21 +34,14 @@ type FormDataRouteHandler = (params: {
 // ---------------------------------------------------------------------------
 
 /**
- * Wraps a JSON-body API route with auth, recaptcha, and error handling.
+ * Wraps a JSON-body API route with auth and error handling.
  */
 export function withApiRoute(handler: RouteHandler, options: ApiRouteOptions = {}) {
-  const { requireAuth = true, requireRecaptcha = false, errorMessage = "An error occurred" } = options;
+  const { requireAuth = true, errorMessage = "An error occurred" } = options;
 
   return async (req: NextRequest) => {
     try {
       const body = await req.json();
-
-      if (requireRecaptcha) {
-        const isHuman = await recaptchaIsValid(body.recaptcha_token);
-        if (!isHuman) {
-          return NextResponse.json({ success: false, messages: ["invalid_recaptcha_token"] }, { status: 400 });
-        }
-      }
 
       let session: Session | null = null;
       if (requireAuth) {
@@ -62,10 +59,10 @@ export function withApiRoute(handler: RouteHandler, options: ApiRouteOptions = {
 }
 
 /**
- * Wraps a FormData-body API route with auth, recaptcha, and error handling.
+ * Wraps a FormData-body API route with auth and error handling.
  */
 export function withFormDataApiRoute(handler: FormDataRouteHandler, options: ApiRouteOptions = {}) {
-  const { requireAuth = true, requireRecaptcha = false, errorMessage = "An error occurred" } = options;
+  const { requireAuth = true, errorMessage = "An error occurred" } = options;
 
   return async (req: NextRequest) => {
     try {
@@ -78,13 +75,6 @@ export function withFormDataApiRoute(handler: FormDataRouteHandler, options: Api
       }
 
       const body = await req.formData();
-
-      if (requireRecaptcha) {
-        const isHuman = await recaptchaIsValid((body.get("recaptcha_token") as string) ?? "");
-        if (!isHuman) {
-          return NextResponse.json({ success: false, messages: ["invalid_recaptcha_token"] }, { status: 400 });
-        }
-      }
 
       return await handler({ req, session, body });
     } catch {
@@ -120,9 +110,14 @@ export function withAuthGet(
 interface ProxyJsonPostOptions {
   /** Backend endpoint path, e.g. "/users/update/address" */
   endpoint: string;
-  requireRecaptcha?: boolean;
   errorMessage?: string;
-  /** Optional transform of the incoming body before sending to backend */
+  /**
+   * Optional transform of the incoming body before sending to backend.
+   *
+   * IMPORTANT: if the backend endpoint is protected by the `recaptcha`
+   * middleware, the transform MUST preserve `recaptcha_token`, otherwise the
+   * backend will reject the request with `recaptcha_token_required`.
+   */
   transformBody?: (body: Record<string, unknown>) => Record<string, unknown>;
   /** Optional callback after a successful backend response */
   onSuccess?: (
@@ -134,13 +129,13 @@ interface ProxyJsonPostOptions {
 
 /**
  * Creates a POST route that proxies JSON to the backend.
- * Handles auth, recaptcha, error wrapping, and JSON forwarding in one call.
+ * Handles auth, error wrapping, and JSON forwarding in one call.
  *
  * Usage:
- *   export const POST = proxyJsonPost({ endpoint: "/users/update/address", requireRecaptcha: true });
+ *   export const POST = proxyJsonPost({ endpoint: "/users/update/address" });
  */
 export function proxyJsonPost(options: ProxyJsonPostOptions) {
-  const { endpoint, requireRecaptcha = true, errorMessage = "An error occurred", transformBody, onSuccess } = options;
+  const { endpoint, errorMessage = "An error occurred", transformBody, onSuccess } = options;
 
   return withApiRoute(
     async ({ body, session }) => {
@@ -163,7 +158,7 @@ export function proxyJsonPost(options: ProxyJsonPostOptions) {
 
       return NextResponse.json(response, { status: request.status });
     },
-    { requireAuth: true, requireRecaptcha, errorMessage },
+    { requireAuth: true, errorMessage },
   );
 }
 
@@ -182,7 +177,8 @@ interface ProxyPublicJsonPostOptions {
 
 /**
  * Creates a POST route for public (unauthenticated) endpoints.
- * Handles recaptcha, optional body validation, and error wrapping.
+ * Handles optional body validation and error wrapping. The backend enforces
+ * reCAPTCHA verification for any endpoint that needs it.
  *
  * Usage:
  *   export const POST = proxyPublicJsonPost({ endpoint: "/users/forgot-password", bodySchema: ForgotPasswordSchema });
@@ -216,14 +212,13 @@ export function proxyPublicJsonPost(options: ProxyPublicJsonPostOptions) {
       const response = await request.json();
       return NextResponse.json(response, { status: request.status });
     },
-    { requireAuth: false, requireRecaptcha: true, errorMessage },
+    { requireAuth: false, errorMessage },
   );
 }
 
 interface ProxyFormDataPostOptions {
   /** Backend endpoint path, e.g. "/users/update/avatar" */
   endpoint: string;
-  requireRecaptcha?: boolean;
   requireAuth?: boolean;
   errorMessage?: string;
   /** Extra headers to forward from the incoming request (e.g. ["Accept-Language"]) */
@@ -232,19 +227,15 @@ interface ProxyFormDataPostOptions {
 
 /**
  * Creates a POST route that proxies FormData to the backend.
- * Handles auth, recaptcha, error wrapping, and FormData forwarding.
+ * Handles auth, error wrapping, and FormData forwarding. The `recaptcha_token`
+ * field — if present in the FormData — is forwarded as-is so the backend
+ * middleware can verify it.
  *
  * Usage:
  *   export const POST = proxyFormDataPost({ endpoint: "/users/update/avatar", forwardHeaders: ["Accept-Language"] });
  */
 export function proxyFormDataPost(options: ProxyFormDataPostOptions) {
-  const {
-    endpoint,
-    requireRecaptcha = true,
-    requireAuth = true,
-    errorMessage = "An error occurred",
-    forwardHeaders = [],
-  } = options;
+  const { endpoint, requireAuth = true, errorMessage = "An error occurred", forwardHeaders = [] } = options;
 
   return withFormDataApiRoute(
     async ({ req, session, body }) => {
@@ -267,7 +258,7 @@ export function proxyFormDataPost(options: ProxyFormDataPostOptions) {
       const response = await request.json();
       return NextResponse.json(response, { status: request.status });
     },
-    { requireAuth, requireRecaptcha, errorMessage },
+    { requireAuth, errorMessage },
   );
 }
 

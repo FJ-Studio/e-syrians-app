@@ -27,7 +27,6 @@
     ]
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "@heroui/react": "^2.8.10",
     "@heroui/theme": "^2.4.26",
     "@iconify/react": "^6.0.2",
@@ -42,7 +41,10 @@
     "react-hook-form": "^7.72.0",
     "recharts": "^3.8.1",
     "sonner": "^2.0.7",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@iconify-icons/flat-color-icons": "^1.2.5",
+    "@iconify-icons/heroicons": "^1.2.9",
+    "@iconify-icons/solar": "^1.2.3"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",

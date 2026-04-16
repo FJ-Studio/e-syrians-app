@@ -31,10 +31,6 @@ export function getApiUrl(): string {
   return _apiUrl;
 }
 
-let _recaptchaSecret: string | undefined;
-export function getRecaptchaSecret(): string {
-  if (!_recaptchaSecret) {
-    _recaptchaSecret = required("RECAPTCHA_SECRET_KEY");
-  }
-  return _recaptchaSecret;
-}
+// reCAPTCHA verification now lives on the Laravel side — the secret is kept
+// there, not in the Next.js runtime. Only `NEXT_PUBLIC_RECAPTCHA` (site key)
+// is needed on the frontend.

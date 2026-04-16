@@ -1,6 +1,5 @@
 "use client";
 import getYearsMonths from "@/lib/years-months";
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import {
   Button,
   Modal,
@@ -12,6 +11,8 @@ import {
   SelectItem,
   useDisclosure,
 } from "@heroui/react";
+import adjustmentsHorizontalIcon from "@iconify-icons/heroicons/adjustments-horizontal";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC, useState } from "react";
@@ -44,7 +45,7 @@ const PollsFilter: FC = () => {
   return (
     <>
       <Button isIconOnly color="primary" onPress={onOpen}>
-        <AdjustmentsHorizontalIcon className="size-6" />
+        <Icon icon={adjustmentsHorizontalIcon} className="size-6" />
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

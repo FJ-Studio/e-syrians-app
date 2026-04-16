@@ -8,7 +8,6 @@ import useReligiousAffiliation from "@/components/hooks/localization/religious_a
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { generateToken } from "@/lib/recaptcha";
 import { CreatePollFields } from "@/lib/types/polls";
-import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import {
   Alert,
   Avatar,
@@ -22,6 +21,9 @@ import {
   SliderValue,
   Textarea,
 } from "@heroui/react";
+import minusCircleIcon from "@iconify-icons/heroicons/minus-circle";
+import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
+import { Icon } from "@iconify/react";
 import { parseDate } from "@internationalized/date";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -322,7 +324,7 @@ const CreatePoll: FC = () => {
               }}
               endContent={
                 <Button isIconOnly color="danger" onPress={() => removeOption(index)} isDisabled={options.length === 2}>
-                  <MinusCircleIcon className="size-6" />
+                  <Icon icon={minusCircleIcon} className="size-6" />
                 </Button>
               }
             />
@@ -334,7 +336,7 @@ const CreatePoll: FC = () => {
           isDisabled={isSubmitting || userIsNotVerified || options.length >= 100}
           onPress={() => options.length < 100 && setOptions((prev) => [...prev, ""])}
           color="primary"
-          startContent={<PlusCircleIcon className="size-6" />}
+          startContent={<Icon icon={plusCircleIcon} className="size-6" />}
         >
           {t("options.add")}
         </Button>

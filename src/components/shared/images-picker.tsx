@@ -1,6 +1,8 @@
 "use client";
-import { PhotoIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/react";
+import photoIcon from "@iconify-icons/heroicons/photo";
+import trashIcon from "@iconify-icons/heroicons/trash";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { FC, PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react";
@@ -97,7 +99,7 @@ const ImagesPicker: FC<Props> = ({
                 isIconOnly
                 onPress={() => removeImage(index)}
               >
-                <TrashIcon />
+                <Icon icon={trashIcon} className="size-5" />
               </Button>
             </div>
           ))}
@@ -108,7 +110,7 @@ const ImagesPicker: FC<Props> = ({
       <Button
         color="default"
         variant="flat"
-        startContent={<PhotoIcon className="size-5" />}
+        startContent={<Icon icon={photoIcon} className="size-5" />}
         onPress={() => fileInputRef.current?.click()}
         type="button"
         isDisabled={selectedImages.length >= maximumFiles}

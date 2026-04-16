@@ -94,11 +94,11 @@ All client-to-backend communication goes through Next.js API routes that proxy t
 
 Five helpers, from high-level to low-level:
 
-**`proxyJsonPost({ endpoint, requireRecaptcha?, transformBody?, onSuccess? })`** — Authenticated POST with JSON body. Most common for account actions.
+**`proxyJsonPost({ endpoint, transformBody?, onSuccess? })`** — Authenticated POST with JSON body. Most common for account actions. If the backend route is protected by the `recaptcha` middleware, `transformBody` MUST preserve `recaptcha_token`.
 
-**`proxyPublicJsonPost({ endpoint, bodySchema? })`** — Unauthenticated POST with reCAPTCHA. Used for login, registration, forgot-password.
+**`proxyPublicJsonPost({ endpoint, bodySchema? })`** — Unauthenticated POST. Body is forwarded as-is (including any `recaptcha_token`). Used for login, registration, forgot-password.
 
-**`proxyFormDataPost({ endpoint, requireRecaptcha?, requireAuth?, forwardHeaders? })`** — Authenticated POST with FormData. Used for file uploads (avatar), poll creation.
+**`proxyFormDataPost({ endpoint, requireAuth?, forwardHeaders? })`** — Authenticated POST with FormData. Used for file uploads (avatar), poll creation. The FormData body is forwarded verbatim, so any `recaptcha_token` field is passed through to Laravel.
 
 **`proxyGet({ endpoint, forwardParams? })`** — Authenticated GET with query param forwarding. Used for paginated lists.
 
@@ -192,7 +192,7 @@ Root layout wraps everything in this order (see `src/app/[locale]/layout.tsx`):
 
 - `/api/auth/*` — passes through (NextAuth handlers)
 - `/auth/*` when logged in → redirects to `/account`
-- `/account/*` when not logged in → redirects to `/auth/signin?redirect=...`
+- `/account/*` when not logged in → redirects to `/auth/sign-in?redirect=...`
 - Everything else — runs intl middleware for locale detection/prefixing
 
 Route matcher excludes `api`, `_next`, and static files.
@@ -211,7 +211,7 @@ Route matcher excludes `api`, `_next`, and static files.
 
 **HeroUI v2** — primary component library. Used for: Avatar, AvatarGroup, Button, Input, Select, Modal, Spinner, DatePicker, NumberInput, Slider, Alert, Tabs, etc.
 
-**Icons:** `@heroicons/react` (24px outline/solid) and `@iconify/react`.
+**Icons:** `@iconify/react` for the `<Icon>` component, with icon data imported statically from `@iconify-icons/heroicons` (and other `@iconify-icons/*` collections as needed). Example: `import plusIcon from "@iconify-icons/heroicons/plus"` then `<Icon icon={plusIcon} className="size-5" />`. Static imports avoid the runtime fetch to `api.iconify.design` which would be blocked by our CSP's `connect-src`.
 
 **Forms:** `react-hook-form` with `Controller` pattern for HeroUI components. Zod for schema validation on public routes (via `proxyPublicJsonPost`'s `bodySchema`).
 
@@ -219,20 +219,18 @@ Route matcher excludes `api`, `_next`, and static files.
 
 ## reCAPTCHA
 
-Google reCAPTCHA v3. Two utilities in `src/lib/recaptcha.ts`:
+Google reCAPTCHA v3. Verification is enforced on the **Laravel** side by the `recaptcha` route middleware — the Next.js proxy layer simply forwards the `recaptcha_token` field to the backend.
 
-- **Client-side:** `generateToken(action)` — calls `grecaptcha.execute()`, used before form submission.
-- **Server-side:** `recaptchaIsValid(token)` — verifies token with Google API using `RECAPTCHA_SECRET_KEY`.
-
-API proxy helpers have `requireRecaptcha` option (defaults to `false` in `withApiRoute`/`withFormDataApiRoute`, `true` in `proxyPublicJsonPost`).
+- **Client-side:** `generateToken(action)` in `src/lib/recaptcha.ts` calls `grecaptcha.execute()`. Forms must include the result in the submitted body as `recaptcha_token` for any endpoint behind the `recaptcha` middleware.
+- **Server-side:** see `app/Http/Middleware/Recaptcha.php` in the API repo. It calls Google's `siteverify`, requires `success === true` and `score >= 0.7`, and returns `400 recaptcha_token_required` / `403 recaptcha_verification_failed` on failure.
+- **No secret on the Next.js side** — only the public site key (`NEXT_PUBLIC_RECAPTCHA`) is used in the browser.
 
 ## Environment Variables
 
 Key variables (set in `.env.local`):
 
 - `API_URL` — Laravel backend URL (server-side only)
-- `NEXT_PUBLIC_RECAPTCHA` — reCAPTCHA site key
-- `RECAPTCHA_SECRET_KEY` — reCAPTCHA secret (server-side only)
+- `NEXT_PUBLIC_RECAPTCHA` — reCAPTCHA site key (Laravel holds the secret)
 - `NEXT_PUBLIC_DOMAIN_NAME` — Display domain name
 - `NEXT_PUBLIC_DOMAIN_URL` — Public frontend URL
 - `AUTH_SECRET` — NextAuth secret

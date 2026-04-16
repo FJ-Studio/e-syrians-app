@@ -108,9 +108,11 @@ jobs:
   commitlint:
     name: Commit messages
     runs-on: ubuntu-latest
-    # Only check commit messages on PRs (pushes to develop/main may include
-    # merge commits that don't follow the convention).
-    if: github.event_name == 'pull_request'
+    # Only lint commits on PRs targeting develop. PRs to main (develop→main
+    # releases) contain commits that already passed lint when merged into
+    # develop, and re-checking the full range catches Copilot / bot merge
+    # commits that bypass husky hooks.
+    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'develop'
     steps:
       - uses: actions/checkout@v6
         with:

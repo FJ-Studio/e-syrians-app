@@ -24,7 +24,7 @@ export default auth((req: NextRequest & { auth: Session | null }): Response | vo
     return Response.redirect(new URL(PROTECTED, nextUrl));
   }
   if (isProtectedRoute && !isLoggedIn) {
-    return Response.redirect(new URL(`/auth/signin?redirect=${encodeURI(nextUrl.toString())}`, nextUrl));
+    return Response.redirect(new URL(`/auth/sign-in?redirect=${encodeURI(nextUrl.toString())}`, nextUrl));
   }
   return intlMiddleware(req);
 });

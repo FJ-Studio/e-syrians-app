@@ -15,6 +15,11 @@ import {
   Snippet,
   useDisclosure,
 } from "@heroui/react";
+import copyIcon from "@iconify-icons/solar/copy-bold";
+import keyMinimalisticIcon from "@iconify-icons/solar/key-minimalistic-bold";
+import refreshIcon from "@iconify-icons/solar/refresh-bold";
+import shieldCrossIcon from "@iconify-icons/solar/shield-cross-bold";
+import shieldPlusIcon from "@iconify-icons/solar/shield-plus-bold";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { FC, useCallback, useEffect, useState } from "react";
@@ -227,7 +232,7 @@ const TwoFactorAuth: FC = () => {
               variant="flat"
               onPress={handleSetup}
               isLoading={setupLoading}
-              startContent={!setupLoading && <Icon icon="solar:shield-plus-bold" width={18} />}
+              startContent={!setupLoading && <Icon icon={shieldPlusIcon} width={18} height={18} />}
             >
               {t("enable")}
             </Button>
@@ -299,7 +304,7 @@ const TwoFactorAuth: FC = () => {
                 variant="flat"
                 size="sm"
                 onPress={handleViewRecoveryCodes}
-                startContent={<Icon icon="solar:key-minimalistic-bold" width={16} />}
+                startContent={<Icon icon={keyMinimalisticIcon} width={16} height={16} />}
               >
                 {t("recoveryCodes.title")}
               </Button>
@@ -308,7 +313,7 @@ const TwoFactorAuth: FC = () => {
                 variant="flat"
                 size="sm"
                 onPress={disableModal.onOpen}
-                startContent={<Icon icon="solar:shield-cross-bold" width={16} />}
+                startContent={<Icon icon={shieldCrossIcon} width={16} height={16} />}
               >
                 {t("disable")}
               </Button>
@@ -370,7 +375,7 @@ const TwoFactorAuth: FC = () => {
               variant="flat"
               size="sm"
               onPress={copyRecoveryCodes}
-              startContent={<Icon icon="solar:copy-bold" width={16} />}
+              startContent={<Icon icon={copyIcon} width={16} height={16} />}
             >
               {t("recoveryCodes.copy")}
             </Button>
@@ -380,7 +385,7 @@ const TwoFactorAuth: FC = () => {
               color="warning"
               onPress={handleRegenerateCodes}
               isLoading={regenerateLoading}
-              startContent={!regenerateLoading && <Icon icon="solar:refresh-bold" width={16} />}
+              startContent={!regenerateLoading && <Icon icon={refreshIcon} width={16} height={16} />}
             >
               {t("recoveryCodes.regenerate")}
             </Button>

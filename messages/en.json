@@ -44,6 +44,10 @@
       "title": "Polls",
       "description": "A platform for conducting polls and surveys to gauge public opinion on various issues."
     },
+    "feature_requests": {
+      "title": "Suggest a feature",
+      "description": "Propose improvements and vote on ideas that shape where the platform goes next."
+    },
     "violations": {
       "title": "Violations",
       "description": "A community-driven board for reporting and documenting violations against Syrian citizens."
@@ -1792,5 +1796,107 @@
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try again.",
     "retry": "Try again"
+  },
+  "feature_requests": {
+    "title": "Feature requests",
+    "description": "Suggest what we should build next, or vote on ideas from the community.",
+    "back_to_list": "Back to feature requests",
+    "score": "Score: {score}",
+    "empty": {
+      "title": "No feature requests yet",
+      "description": "Be the first to suggest an idea."
+    },
+    "statuses": {
+      "idea": "Idea",
+      "in_development": "In development",
+      "in_testing": "In testing",
+      "shipped": "Shipped"
+    },
+    "sort": {
+      "newest": "Newest",
+      "popular": "Most popular",
+      "shipped": "Shipped"
+    },
+    "filters": {
+      "sort": "Sort",
+      "status": "Status",
+      "all_statuses": "All statuses"
+    },
+    "timeline": {
+      "heading": "Timeline",
+      "not_yet": "Not yet",
+      "created_at": "Submitted",
+      "coded_at": "Coded",
+      "tested_at": "Tested",
+      "deployed_at": "Shipped"
+    },
+    "notes": {
+      "title": "Progress notes",
+      "edited": "edited",
+      "count": "{count, plural, =0 {No notes} =1 {# note} other {# notes}}"
+    },
+    "vote": {
+      "upvote": "Upvote",
+      "downvote": "Downvote",
+      "sign_in": "Sign in to vote on feature requests.",
+      "error": "We couldn't record your vote. Please try again."
+    },
+    "contributors": {
+      "title": "Meet the contributors",
+      "subtitle": "The people whose code powers this platform. Thanks to everyone who's pitched in.",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "view_repo": "View repo",
+      "empty": "No contributors found.",
+      "contributions": "{count, plural, =1 {# commit} other {# commits}}"
+    },
+    "what_happens_next": {
+      "title": "What happens next?",
+      "subtitle": "From a spark of an idea to a shipped feature — here's the path your suggestion takes.",
+      "steps": {
+        "submit": {
+          "title": "Submit your idea",
+          "body": "Share a clear, focused proposal. It goes live for the whole community to see."
+        },
+        "vote": {
+          "title": "Community votes",
+          "body": "Members upvote or downvote. Traction is how we know what matters most."
+        },
+        "pick_up": {
+          "title": "Maintainers pick it up",
+          "body": "Ideas that gain traction get turned into a technical plan by one of the maintainers."
+        },
+        "ship": {
+          "title": "We build and ship",
+          "body": "Follow the timeline on each idea: Coded, Tested, Shipped — all visible to everyone."
+        }
+      }
+    },
+    "create": {
+      "cta": "Suggest a feature",
+      "title": "Suggest a feature",
+      "description": "Tell us what you want to see next. Clear, focused ideas get the most traction.",
+      "account_unverified_alert": "Verify your account to submit a feature request.",
+      "submit": "Submit",
+      "success": "Thanks — your idea has been submitted.",
+      "error": "We couldn't submit your request. Please try again.",
+      "fields": {
+        "title": {
+          "label": "Title",
+          "placeholder": "Short, descriptive summary",
+          "required": "Please give your idea a title.",
+          "min": "Title must be at least 5 characters.",
+          "max": "Title must be 160 characters or fewer."
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "What problem does this solve? Who benefits?",
+          "help": "Between 20 and 4000 characters.",
+          "required": "Please describe the feature.",
+          "min": "Description must be at least 20 characters.",
+          "max": "Description must be 4000 characters or fewer."
+        }
+      }
+    }
   }
 }

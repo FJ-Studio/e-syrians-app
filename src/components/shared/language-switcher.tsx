@@ -1,8 +1,9 @@
 "use client";
 
 import { LANGUAGES } from "@/lib/constants/misc";
-import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
+import globeAltIcon from "@iconify-icons/heroicons/globe-alt";
+import { Icon } from "@iconify/react";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
 
@@ -14,7 +15,7 @@ const LanguageSwitcher: FC = () => {
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
           <Button variant="flat" isIconOnly className="bg-primary text-white">
-            <GlobeAltIcon className="size-6" />
+            <Icon icon={globeAltIcon} className="size-6" />
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
