@@ -235,7 +235,7 @@ const AccountOverview: FC = () => {
                   href={`/polls/${poll.id}`}
                   className="rounded-medium hover:bg-default-100 flex items-center justify-between p-3 transition-colors"
                 >
-                  <div className="min-w-0 flex-1">
+                  <div className="min-w-0 flex-1 text-start">
                     <p className="truncate font-medium">{poll.question}</p>
                     <p className="text-default-400 text-xs">
                       {new Date(poll.start_date).toLocaleDateString()} – {new Date(poll.end_date).toLocaleDateString()}
@@ -280,7 +280,7 @@ function StatCard({
     <Card as={Link} href={href} isPressable className="transition-transform hover:scale-[1.02]">
       <CardBody className="flex flex-row items-center gap-3 p-4">
         {icon}
-        <div>
+        <div className="flex flex-col items-start">
           <p className="text-2xl font-bold">{value}</p>
           <p className="text-default-500 text-xs">{label}</p>
         </div>

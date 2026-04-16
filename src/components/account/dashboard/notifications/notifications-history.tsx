@@ -10,7 +10,7 @@ const NotificationsHistory: FC = () => {
   return (
     <Card>
       <CardHeader className="text-default-700 font-medium">{t("history.title")}</CardHeader>
-      <CardBody>
+      <CardBody className="flex flex-col items-start">
         <p className="text-default-500">{t("history.empty")}</p>
       </CardBody>
     </Card>

@@ -67,6 +67,45 @@
       "copy_btc_address": "Copy BTC Address"
     }
   },
+  "donate": {
+    "title": "Support E-Syrians",
+    "subtitle": "Your generosity helps us build a better platform for the Syrian community.",
+    "status": {
+      "success": {
+        "title": "Thank you for your donation!",
+        "description": "Your generosity makes a real difference for the Syrian community."
+      },
+      "cancelled": {
+        "title": "Donation cancelled",
+        "description": "No charges were made. You can try again whenever you're ready."
+      }
+    },
+    "stripe": {
+      "title": "Donate with Card",
+      "description": "Make a one-time donation via credit or debit card.",
+      "custom": "Custom",
+      "amountPlaceholder": "Amount",
+      "donate": "Donate",
+      "donateAmount": "Donate {amount}",
+      "error": "Something went wrong. Please try again."
+    },
+    "crypto": {
+      "title": "Donate with Cryptocurrency",
+      "description": "Send crypto directly to one of the wallet addresses below.",
+      "btc": {
+        "label": "Bitcoin (BTC)",
+        "copy": "Copy BTC Address"
+      },
+      "eth": {
+        "label": "Ethereum (ETH)",
+        "copy": "Copy ETH Address"
+      },
+      "usdt": {
+        "label": "Tether (USDT)",
+        "copy": "Copy USDT Address"
+      }
+    }
+  },
   "footer": {
     "privacy_policy": "Privacy Policy",
     "terms": "Terms",

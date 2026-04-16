@@ -51,8 +51,11 @@ const NotificationsSettings: FC = () => {
     <Card>
       <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
       <CardBody>
-        <form className="space-y-3" onSubmit={handleSubmit(updateNotificationsSettings)}>
-          <div className="flex justify-between gap-3">
+        <form
+          className="flex w-full flex-col items-start space-y-3"
+          onSubmit={handleSubmit(updateNotificationsSettings)}
+        >
+          <div className="flex w-full justify-between gap-3">
             <p>{t("received_verification_email")}</p>
             <Controller
               name="received_verification_email"
@@ -67,7 +70,7 @@ const NotificationsSettings: FC = () => {
               )}
             />
           </div>
-          <div className="flex justify-between gap-3">
+          <div className="flex w-full justify-between gap-3">
             <p>{t("account_verified_email")}</p>
             <Controller
               name="account_verified_email"
