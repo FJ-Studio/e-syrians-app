@@ -1113,7 +1113,8 @@
       },
       "sections": {
         "nav": "Jump to section",
-        "personal": "Personal info",
+        "avatar": "Profile picture",
+        "basic": "Basic information",
         "address": "Country & location",
         "links": "Social links",
         "census": "National census"

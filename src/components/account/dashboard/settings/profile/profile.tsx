@@ -1,5 +1,5 @@
 "use client";
-import { Button, Chip, Divider } from "@heroui/react";
+import { Button, Chip } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useCallback, useEffect, useState } from "react";
 import AccountAvatar from "./avatar";
@@ -8,9 +8,9 @@ import AccountAddress from "./country";
 import AccountSocialLinks from "./social-links";
 import UpdateBasicProfileData from "./update-basic";
 
-type SectionId = "personal" | "address" | "links" | "census";
+type SectionId = "avatar" | "basic" | "address" | "links" | "census";
 
-const sectionIds: SectionId[] = ["personal", "address", "links", "census"];
+const sectionIds: SectionId[] = ["avatar", "basic", "address", "links", "census"];
 
 const AccountProfile: FC = () => {
   const t = useTranslations("account.settings");
@@ -64,36 +64,31 @@ const AccountProfile: FC = () => {
       </nav>
 
       <div className="space-y-8">
-        {/* ── Personal info ── */}
-        <section id="section-personal" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-4 text-lg font-semibold">{t("sections.personal")}</h3>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <AccountAvatar user={profile} onUpdated={getProfile} />
-            <UpdateBasicProfileData user={profile} />
-          </div>
+        {/* Personal info */}
+        <section id="section-avatar" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.avatar")}</h3>
+          <AccountAvatar user={profile} onUpdated={getProfile} />
         </section>
 
-        <Divider />
+        <section id="section-basic" className="scroll-mt-24">
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.basic")}</h3>
+          <UpdateBasicProfileData user={profile} />
+        </section>
 
-        {/* ── Location ── */}
         <section id="section-address" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-4 text-lg font-semibold">{t("sections.address")}</h3>
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.address")}</h3>
           <AccountAddress user={profile} />
         </section>
 
-        <Divider />
-
-        {/* ── Social links ── */}
+        {/* Social */}
         <section id="section-links" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-4 text-lg font-semibold">{t("sections.links")}</h3>
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.links")}</h3>
           <AccountSocialLinks user={profile} />
         </section>
 
-        <Divider />
-
-        {/* ── Census ── */}
+        {/* Census */}
         <section id="section-census" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-4 text-lg font-semibold">{t("sections.census")}</h3>
+          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.census")}</h3>
           <AccountCensus user={profile} />
         </section>
       </div>
