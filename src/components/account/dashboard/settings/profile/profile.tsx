@@ -55,7 +55,7 @@ const AccountProfile: FC = () => {
             key={id}
             as="button"
             variant="flat"
-            className="cursor-pointer transition-colors hover:bg-primary-100"
+            className="hover:bg-primary-100 cursor-pointer transition-colors"
             onClick={() => scrollTo(id)}
           >
             {t(`sections.${id}`)}

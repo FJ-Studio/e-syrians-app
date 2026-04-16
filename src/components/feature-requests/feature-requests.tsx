@@ -1,3 +1,5 @@
+"use client";
+
 import { FeatureRequest, FeatureSort, FeatureStatus } from "@/lib/types/feature-requests";
 import { Button, Spacer } from "@heroui/react";
 import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
