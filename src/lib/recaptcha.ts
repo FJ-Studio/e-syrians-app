@@ -27,14 +27,11 @@ const waitForRecaptcha = (timeoutMs: number): Promise<void> => {
   });
 };
 
-<<<<<<< HEAD
 /**
  * Client-side helper. Verification of the resulting token is handled by the
  * Laravel `recaptcha` middleware — we never call `siteverify` from Next.js,
  * and the secret key is not exposed to this runtime.
  */
-=======
->>>>>>> 45a20e4 (feat: create feature requests by verified users (#82))
 export const generateToken = async (action: string): Promise<string> => {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA;
   if (!siteKey) {
@@ -54,34 +51,3 @@ export const generateToken = async (action: string): Promise<string> => {
   }
   return token;
 };
-<<<<<<< HEAD
-=======
-
-const recaptchaIsValid = async (token: string): Promise<boolean> => {
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
-  if (!secret) {
-    console.warn("RECAPTCHA_SECRET_KEY not configured, skipping validation");
-    return false;
-  }
-  if (!token) {
-    return false;
-  }
-  try {
-    const body = new URLSearchParams({ secret, response: token });
-    const captchaVerification = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      body,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
-    const result = await captchaVerification.json();
-    return result.success === true;
-  } catch {
-    console.warn("reCAPTCHA verification request failed");
-    return false;
-  }
-};
-
-export default recaptchaIsValid;
->>>>>>> 45a20e4 (feat: create feature requests by verified users (#82))
