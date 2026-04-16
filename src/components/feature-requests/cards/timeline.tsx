@@ -16,8 +16,8 @@ const stages: ReadonlyArray<StageKey> = ["created_at", "coded_at", "tested_at", 
 /**
  * Four-dot horizontal timeline — Idea → Coded → Tested → Shipped. Dots are
  * solid + primary-colored when their timestamp is set; empty + muted otherwise.
- * Tooltip shows the localized date. Purely a server-renderable component —
- * takes the timeline object straight from the API resource.
+ * Tooltip shows the localized date. Client component (uses HeroUI Tooltip and
+ * next-intl hooks). Takes the timeline object straight from the API resource.
  */
 const Timeline: FC<Props> = ({ timeline }) => {
   const t = useTranslations("feature_requests.timeline");

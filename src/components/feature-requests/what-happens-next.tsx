@@ -37,8 +37,9 @@ const WhatHappensNext: FC = () => {
         {t("title")}
       </h3>
       <p className="text-default-500 mt-1 mb-5 text-sm">{t("subtitle")}</p>
-      <ol className="relative space-y-5">
+      <div className="relative">
         <span aria-hidden="true" className="bg-default-200 absolute start-4 top-4 bottom-4 w-px" />
+        <ol className="relative space-y-5">
         {steps.map(({ key, icon }, index) => (
           <li key={key} className="relative flex gap-3">
             <span className="bg-primary/10 text-primary relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold">
@@ -53,7 +54,8 @@ const WhatHappensNext: FC = () => {
             </div>
           </li>
         ))}
-      </ol>
+        </ol>
+      </div>
     </section>
   );
 };

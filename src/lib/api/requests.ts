@@ -74,22 +74,24 @@ export const getFeatureRequests = async (
   const session = await auth();
   const params = new URLSearchParams({ page, sort });
   if (status) params.set("status", status);
+  const headers: Record<string, string> = { Accept: "application/json" };
+  if (session?.user.accessToken) {
+    headers.Authorization = `Bearer ${session.user.accessToken}`;
+  }
   return safeFetch(`${API_URL}/feature-requests?${params.toString()}`, {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${session?.user.accessToken}`,
-    },
+    headers,
     cache: "no-cache",
   });
 };
 
 export const getFeatureRequest = async (id: string): Promise<ApiResponse<FeatureRequest> | null> => {
   const session = await auth();
+  const headers: Record<string, string> = { Accept: "application/json" };
+  if (session?.user.accessToken) {
+    headers.Authorization = `Bearer ${session.user.accessToken}`;
+  }
   return safeFetch<FeatureRequest>(`${API_URL}/feature-requests/${id}`, {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${session?.user.accessToken}`,
-    },
+    headers,
     cache: "no-cache",
   });
 };
