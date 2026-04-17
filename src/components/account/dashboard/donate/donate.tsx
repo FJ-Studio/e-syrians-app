@@ -43,6 +43,12 @@ const CRYPTO_WALLETS = [
   },
 ] as const;
 
+const ICON_COLOR_MAP: Record<string, string> = {
+  warning: "text-warning",
+  secondary: "text-secondary",
+  success: "text-success",
+};
+
 // ---------------------------------------------------------------------------
 // Preset amounts (in USD)
 // ---------------------------------------------------------------------------
@@ -87,10 +93,11 @@ const Donate: FC = () => {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        toast.error(data.error || t("stripe.error"));
+        const code = data.errorCode;
+        toast.error(t.has(`stripe.errors.${code}`) ? t(`stripe.errors.${code}`) : t("stripe.errors.default"));
       }
     } catch {
-      toast.error(t("stripe.error"));
+      toast.error(t("stripe.errors.default"));
     } finally {
       setLoading(false);
     }
@@ -214,7 +221,7 @@ const Donate: FC = () => {
           {CRYPTO_WALLETS.map((wallet) => (
             <div key={wallet.key} className="w-full space-y-2">
               <div className="flex items-center gap-2">
-                <Icon icon={wallet.icon} className={`text-${wallet.color} size-4`} />
+                <Icon icon={wallet.icon} className={`${ICON_COLOR_MAP[wallet.color]} size-4`} />
                 <span className="text-sm font-semibold">{t(`crypto.${wallet.key}.label`)}</span>
                 {"network" in wallet && (
                   <Chip size="sm" variant="flat" color={wallet.color}>

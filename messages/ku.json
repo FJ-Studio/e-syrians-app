@@ -87,7 +87,13 @@
       "amountPlaceholder": "Mîqdar",
       "donate": "Bexş bike",
       "donateAmount": "Bexşa {amount}",
-      "error": "Tiştek çewt bû. Ji kerema xwe dîsa biceribîne."
+      "errors": {
+        "stripe_not_configured": "Dravdana bi kartê niha peyda nabe. Ji kerema xwe paşê biceribîne.",
+        "min_amount": "Herî kêm bexş 1.00 dolar e.",
+        "max_amount": "Herî zêde bexş 9,999.00 dolar e.",
+        "checkout_failed": "Bexşa we nehat pêvajokirin. Ji kerema xwe dîsa biceribîne.",
+        "default": "Tiştek çewt bû. Ji kerema xwe dîsa biceribîne."
+      }
     },
     "crypto": {
       "title": "Bi diravên dîjîtal bexş bike",

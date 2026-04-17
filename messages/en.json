@@ -87,7 +87,13 @@
       "amountPlaceholder": "Amount",
       "donate": "Donate",
       "donateAmount": "Donate {amount}",
-      "error": "Something went wrong. Please try again."
+      "errors": {
+        "stripe_not_configured": "Card payments are not available at the moment. Please try again later.",
+        "min_amount": "The minimum donation is $1.00.",
+        "max_amount": "The maximum donation is $9,999.00.",
+        "checkout_failed": "Could not process your donation. Please try again.",
+        "default": "Something went wrong. Please try again."
+      }
     },
     "crypto": {
       "title": "Donate with Cryptocurrency",
