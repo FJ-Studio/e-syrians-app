@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
             currency: "usd",
             product_data: {
               name: "Donation to E-Syrians",
-              description: "Thank you for supporting the Syrian community!",
+              description: "Thank you for supporting E-SYRIAN Network!",
             },
             unit_amount: amount,
           },
