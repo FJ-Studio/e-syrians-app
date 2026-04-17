@@ -19,7 +19,9 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const amount = Number(body.amount);
-
+    if (!Number.isInteger(amount)) {
+      return NextResponse.json({ error: "Donation amount must be a whole number of cents." }, { status: 400 });
+    }
     if (!amount || amount < 100) {
       return NextResponse.json({ errorCode: "min_amount" }, { status: 400 });
     }
@@ -30,7 +32,10 @@ export async function POST(req: NextRequest) {
 
     const stripe = new Stripe(secretKey);
 
-    const origin = req.headers.get("origin") ?? req.nextUrl.origin;
+    const baseUrl = process.env.NEXT_PUBLIC_DOMAIN_URL;
+    if (!baseUrl) {
+      return NextResponse.json({ error: "Server is misconfigured. Please try again later." }, { status: 503 });
+    }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -40,15 +45,15 @@ export async function POST(req: NextRequest) {
             currency: "usd",
             product_data: {
               name: "Donation to E-Syrians",
-              description: "Thank you for supporting the Syrian community!",
+              description: "Thank you for supporting E-SYRIAN Network!",
             },
             unit_amount: amount,
           },
           quantity: 1,
         },
       ],
-      success_url: `${origin}/account/donate?status=success`,
-      cancel_url: `${origin}/account/donate?status=cancelled`,
+      success_url: `${baseUrl}/account/donate?status=success`,
+      cancel_url: `${baseUrl}/account/donate?status=cancelled`,
     });
 
     return NextResponse.json({ url: session.url });

@@ -184,6 +184,7 @@ const Donate: FC = () => {
                   min="1"
                   max="9999"
                   step="1"
+                  aria-label={t("stripe.custom")}
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
                   placeholder={t("stripe.amountPlaceholder")}
@@ -237,7 +238,8 @@ const Donate: FC = () => {
                 }}
                 codeString={wallet.address}
               >
-                {t(`crypto.${wallet.key}.copy`)}
+                {/* {t(`crypto.${wallet.key}.copy`)} */}
+                {wallet.address}
               </Snippet>
             </div>
           ))}
