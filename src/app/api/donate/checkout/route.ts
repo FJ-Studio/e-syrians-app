@@ -17,7 +17,11 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const amount = Number(body.amount);
 
-    if (!amount || amount < 100) {
+    if (!Number.isInteger(amount)) {
+      return NextResponse.json({ error: "Donation amount must be a whole number of cents." }, { status: 400 });
+    }
+
+    if (amount < 100) {
       return NextResponse.json({ error: "Minimum donation is $1.00" }, { status: 400 });
     }
 
