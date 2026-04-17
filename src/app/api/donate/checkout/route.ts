@@ -31,7 +31,10 @@ export async function POST(req: NextRequest) {
 
     const stripe = new Stripe(secretKey);
 
-    const origin = req.headers.get("origin") ?? req.nextUrl.origin;
+    const baseUrl = process.env.NEXT_PUBLIC_DOMAIN_URL;
+    if (!baseUrl) {
+      return NextResponse.json({ error: "Server is misconfigured. Please try again later." }, { status: 503 });
+    }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -48,8 +51,8 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${origin}/account/donate?status=success`,
-      cancel_url: `${origin}/account/donate?status=cancelled`,
+      success_url: `${baseUrl}/account/donate?status=success`,
+      cancel_url: `${baseUrl}/account/donate?status=cancelled`,
     });
 
     return NextResponse.json({ url: session.url });
