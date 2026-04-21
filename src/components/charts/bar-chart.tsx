@@ -53,19 +53,22 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
     return (
       <Card
         ref={ref}
-        className={cn("dark:border-default-100 rounded-none border border-gray-50 p-3 shadow-xs", className)}
+        className={cn(
+          "border-default-200 dark:border-default-100 overflow-hidden rounded-lg border p-0 shadow-none",
+          className,
+        )}
         {...props}
       >
-        <div className="mb-4 flex flex-col gap-y-2">
+        <div className="border-b-default-200 dark:border-b-default-100 bg-default-50 border-b px-4 py-3">
           <div className="flex items-center justify-between gap-x-2">
             <dt>
-              <h3 className="text-default-700 font-medium">{title}</h3>
-              <p className="text-small text-default-500">{description}</p>
+              <h3 className="text-default-800 text-sm font-semibold">{title}</h3>
+              <p className="text-tiny text-default-500">{description}</p>
             </dt>
             {actions}
           </div>
         </div>
-        <div style={{ height: `${chartData.length * 55}px`, direction: "ltr" }}>
+        <div className="px-1 pt-4 pb-2" style={{ height: `${chartData.length * 55 + 24}px`, direction: "ltr" }}>
           <ResponsiveContainer className="[&_.recharts-surface]:outline-hidden" height="100%" width="100%">
             <BarChart
               accessibilityLayer
@@ -74,8 +77,8 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
               layout="vertical"
               margin={{
                 bottom: 0,
-                left: isRtl ? 0 : 10,
-                right: isRtl ? 10 : 0,
+                left: 0,
+                right: 0,
                 top: 0,
               }}
             >
@@ -86,10 +89,13 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                 style={{ fontSize: "12px" }}
                 tickLine={false}
                 axisLine={false}
-                width={120}
+                width={130}
                 orientation={isRtl ? "right" : "left"}
                 tickFormatter={(value: string) => translateLabel(value)}
-                tick={{ fill: "hsl(var(--heroui-default-600))" }}
+                tick={{
+                  fill: "hsl(var(--heroui-default-700))",
+                }}
+                tickMargin={8}
               />
               <XAxis
                 type="number"

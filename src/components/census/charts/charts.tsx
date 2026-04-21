@@ -1,7 +1,7 @@
 "use client";
 import BarChartCard from "@/components/charts/bar-chart";
 import { useEsyrian } from "@/components/shared/contexts/es";
-import { Select, SelectItem } from "@heroui/react";
+// import { Select, SelectItem } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
 
@@ -16,6 +16,7 @@ const CensusCharts: FC = () => {
 
   return (
     <div className="grid gap-x-6 gap-y-12 lg:grid-cols-2">
+      {/* Daily Registrations chart temporarily disabled
       <BarChartCard
         title={t("dailyRegistrations.title")}
         description={t("dailyRegistrations.description")}
@@ -55,6 +56,7 @@ const CensusCharts: FC = () => {
           </div>
         }
       />
+      */}
       <BarChartCard
         unit={t("age.unit")}
         title={t("age.title")}
