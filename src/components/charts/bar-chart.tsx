@@ -2,8 +2,9 @@
 
 import { BarChartProps } from "@/lib/types/charts";
 import { Card, CardProps, cn } from "@heroui/react";
+import { useLocale } from "next-intl";
 import { forwardRef } from "react";
-import { Bar, BarChart, LabelList, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import useCountries from "../hooks/localization/country";
 import useEthnicity from "../hooks/localization/ethnicity";
@@ -32,6 +33,9 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
     const religions = useReligiousAffiliation();
     const ethnicities = useEthnicity();
     const countries = useCountries();
+    const locale = useLocale();
+    const isRtl = locale === "ar" || locale === "ku";
+
     const allTranslations = {
       ...genderOptions,
       ...provinces,
@@ -39,6 +43,11 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
       ...ethnicities,
       ...countries,
       unknown: "N/A",
+    };
+
+    const translateLabel = (value: string) => {
+      if (!translateLabels) return value;
+      return allTranslations[value as keyof typeof allTranslations] ?? value;
     };
 
     return (
@@ -56,7 +65,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
             {actions}
           </div>
         </div>
-        <div style={{ height: `${chartData.length * 75}px`, direction: "ltr" }}>
+        <div style={{ height: `${chartData.length * 55}px`, direction: "ltr" }}>
           <ResponsiveContainer className="[&_.recharts-surface]:outline-hidden" height="100%" width="100%">
             <BarChart
               accessibilityLayer
@@ -65,18 +74,22 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
               layout="vertical"
               margin={{
                 bottom: 0,
-                left: 0,
-                right: 0,
+                left: isRtl ? 0 : 10,
+                right: isRtl ? 10 : 0,
                 top: 0,
               }}
             >
               <YAxis
                 type="category"
                 dataKey="month"
-                strokeOpacity={0.05}
-                style={{ fontSize: "var(--heroui-font-size-tiny)" }}
+                strokeOpacity={0}
+                style={{ fontSize: "12px" }}
                 tickLine={false}
-                hide
+                axisLine={false}
+                width={120}
+                orientation={isRtl ? "right" : "left"}
+                tickFormatter={(value: string) => translateLabel(value)}
+                tick={{ fill: "hsl(var(--heroui-default-600))" }}
               />
               <XAxis
                 type="number"
@@ -86,6 +99,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                 }}
                 tickLine={false}
                 allowDecimals={false}
+                mirror={isRtl}
               />
               <Tooltip
                 content={({ payload }) => {
@@ -94,9 +108,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                   return (
                     <div className="rounded-medium bg-background text-tiny shadow-small flex h-auto min-w-[120px] items-center gap-x-2 p-2">
                       <div className="flex w-full flex-col gap-y-1">
-                        <span className="text-foreground font-medium">
-                          {translateLabels ? allTranslations[month as keyof typeof allTranslations] : month}
-                        </span>
+                        <span className="text-foreground font-medium">{translateLabel(month)}</span>
                         {payload?.map((p, index) => {
                           const name = p.name;
                           const value = p.value;
@@ -154,26 +166,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                   }
                   radius={[8, 8, 8, 8]}
                   stackId="stack"
-                >
-                  {index === 0 && (
-                    <LabelList
-                      dataKey="month"
-                      position="insideLeft"
-                      className={cn(
-                        `absolute left-0 inline-flex min-w-24 -translate-y-4 items-center text-left text-xs text-nowrap`,
-                      )}
-                      formatter={(value: unknown) => {
-                        const label = String(value ?? "");
-                        return translateLabels ? allTranslations[label as keyof typeof allTranslations] : label;
-                      }}
-                      style={{
-                        textAnchor: "start",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                      }}
-                    />
-                  )}
-                </Bar>
+                />
               ))}
             </BarChart>
           </ResponsiveContainer>
