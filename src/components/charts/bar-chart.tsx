@@ -34,7 +34,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
     const ethnicities = useEthnicity();
     const countries = useCountries();
     const locale = useLocale();
-    const isRtl = locale === "ar" || locale === "ku";
+    const isRtl = locale === "ar";
 
     const allTranslations = {
       ...genderOptions,
