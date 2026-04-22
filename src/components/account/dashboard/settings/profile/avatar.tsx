@@ -1,14 +1,15 @@
 "use client";
 import useServerError from "@/components/hooks/localization/server-errors";
-import ImagesPicker from "@/components/shared/images-picker";
+import ImageCropper from "@/components/shared/image-cropper";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
-import { Button, Card, CardBody, CardHeader, Image, Skeleton } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Image } from "@heroui/react";
+import photoIcon from "@iconify-icons/heroicons/photo";
 import userIcon from "@iconify-icons/heroicons/user";
 import { Icon } from "@iconify/react";
 import { useLocale, useTranslations } from "next-intl";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -23,6 +24,9 @@ interface AvatarFields {
 
 const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
+  const [cropSrc, setCropSrc] = useState<string | null>(null);
+  const [isCropperOpen, setIsCropperOpen] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const locale = useLocale();
   const t = useTranslations("account.settings.avatar");
   const {
@@ -61,6 +65,35 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
   // Preview is derived during render: the blob URL takes precedence when a
   // new file is picked, otherwise fall back to the user's saved avatar.
   const preview = blobUrl ?? user?.avatar ?? null;
+
+  const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setCropSrc(objectUrl);
+    setIsCropperOpen(true);
+    // Reset input so the same file can be re-selected
+    e.target.value = "";
+  }, []);
+
+  const handleCropComplete = useCallback(
+    (croppedFile: File) => {
+      setValue("avatar", croppedFile);
+      if (cropSrc) {
+        URL.revokeObjectURL(cropSrc);
+        setCropSrc(null);
+      }
+    },
+    [setValue, cropSrc],
+  );
+
+  const handleCropperClose = useCallback(() => {
+    setIsCropperOpen(false);
+    if (cropSrc) {
+      URL.revokeObjectURL(cropSrc);
+      setCropSrc(null);
+    }
+  }, [cropSrc]);
 
   const save = async (data: AvatarFields) => {
     const token = await generateToken("update_avatar");
@@ -105,28 +138,39 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(save)} className="flex flex-col items-center gap-4">
-          <Skeleton isLoaded={!!user} className="rounded-full">
-            <div className="flex min-h-16 min-w-16 items-center justify-center overflow-hidden rounded-full border-2 border-gray-200 p-0.5">
-              {preview ? (
-                <Image src={preview} alt={user?.name} className="h-16 w-16 overflow-hidden rounded-full" />
-              ) : (
-                <Icon icon={userIcon} className="h-8 w-8 text-gray-700" />
-              )}
-            </div>
-          </Skeleton>
+          <div className="flex min-h-16 min-w-16 items-center justify-center overflow-hidden rounded-full border-2 border-gray-200 p-0.5">
+            {preview ? (
+              <Image src={preview} alt={user?.name} className="h-16 w-16 overflow-hidden rounded-full" />
+            ) : (
+              <Icon icon={userIcon} className="h-8 w-8 text-gray-700" />
+            )}
+          </div>
 
           <div className="flex gap-2">
-            <ImagesPicker
-              setSelectedImages={(images) => setValue("avatar", images[0])}
-              maximumFiles={1}
-              buttonText={t("avatar.upload")}
-              preview={false}
-            />
+            <input type="file" ref={fileInputRef} onChange={handleFileSelect} className="hidden" accept="image/*" />
+            <Button
+              color="default"
+              variant="flat"
+              startContent={<Icon icon={photoIcon} className="size-5" />}
+              onPress={() => fileInputRef.current?.click()}
+              type="button"
+            >
+              {t("avatar.upload")}
+            </Button>
             <Button color="primary" type="submit" isDisabled={isSubmitting || !avatar} isLoading={isSubmitting}>
               {t("avatar.save")}
             </Button>
           </div>
         </form>
+
+        {cropSrc && (
+          <ImageCropper
+            imageSrc={cropSrc}
+            isOpen={isCropperOpen}
+            onClose={handleCropperClose}
+            onCropComplete={handleCropComplete}
+          />
+        )}
       </CardBody>
     </Card>
   );

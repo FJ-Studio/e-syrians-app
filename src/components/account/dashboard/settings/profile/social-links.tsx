@@ -3,7 +3,7 @@ import useServerError from "@/components/hooks/localization/server-errors";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
-import { Button, Card, CardBody, CardHeader, Input, Skeleton } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Input } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -114,11 +114,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
               key={social}
               name={social as keyof SocialFields}
               control={control}
-              render={({ field }) => (
-                <Skeleton isLoaded={!!user} className="rounded-lg">
-                  <Input {...field} label={t(`${social}.label`)} />
-                </Skeleton>
-              )}
+              render={({ field }) => <Input {...field} label={t(`${social}.label`)} />}
             />
           ))}
           <Button type="submit" color="primary" isLoading={isSubmitting} isDisabled={!isDirty}>

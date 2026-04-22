@@ -1218,6 +1218,12 @@
           "upload": "Select new avatar",
           "save": "Upload avatar",
           "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+        },
+        "crop": {
+          "title": "Crop your photo",
+          "zoom": "Zoom",
+          "cancel": "Cancel",
+          "confirm": "Apply"
         }
       },
       "civilian": {
