@@ -1218,6 +1218,12 @@
           "upload": "Wêneya nû hilbijêre",
           "save": "Wêneya barkirin",
           "instructions": "Ji kerema xwe wêneya xweşî hilbijêre ku mezinahiya wê kêmî 500 kilobayt be û bi piştgirî 800x800 pixel ne zêdetir"
+        },
+        "crop": {
+          "title": "Wêne bibirin",
+          "zoom": "Zêdekirin",
+          "cancel": "Betal",
+          "confirm": "Bicîh bîne"
         }
       },
       "civilian": {
