@@ -171,7 +171,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 isInvalid={invalid}
                 errorMessage={error?.message}
                 value={(getValues("ethnicity") as string) ?? ""}
-                onChange={(selected) => {
+                onChange={(selected: React.Key | null) => {
                   setValue("ethnicity", selected?.toString() as keyof typeof ethnicityOptions);
                 }}
                 classNames={{ clearButton: "hidden" }}
@@ -196,7 +196,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 isInvalid={invalid}
                 errorMessage={error?.message}
                 value={(getValues("hometown") as string) ?? ""}
-                onChange={(selected) => {
+                onChange={(selected: React.Key | null) => {
                   setValue("hometown", selected?.toString() as keyof typeof hometownOptions);
                 }}
                 classNames={{ clearButton: "hidden" }}
