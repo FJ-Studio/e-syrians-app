@@ -2,8 +2,9 @@
 
 import { BarChartProps } from "@/lib/types/charts";
 import { Card, CardProps, cn } from "@heroui/react";
+import { useLocale } from "next-intl";
 import { forwardRef } from "react";
-import { Bar, BarChart, LabelList, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import useCountries from "../hooks/localization/country";
 import useEthnicity from "../hooks/localization/ethnicity";
@@ -32,6 +33,9 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
     const religions = useReligiousAffiliation();
     const ethnicities = useEthnicity();
     const countries = useCountries();
+    const locale = useLocale();
+    const isRtl = locale === "ar";
+
     const allTranslations = {
       ...genderOptions,
       ...provinces,
@@ -41,22 +45,31 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
       unknown: "N/A",
     };
 
+    const translateLabel = (value: unknown) => {
+      const normalizedValue = String(value ?? "");
+      if (!translateLabels) return normalizedValue;
+      return allTranslations[normalizedValue as keyof typeof allTranslations] ?? normalizedValue;
+    };
+
     return (
       <Card
         ref={ref}
-        className={cn("dark:border-default-100 rounded-none border border-gray-50 p-3 shadow-xs", className)}
+        className={cn(
+          "border-default-200 dark:border-default-100 overflow-hidden rounded-lg border p-0 shadow-none",
+          className,
+        )}
         {...props}
       >
-        <div className="mb-4 flex flex-col gap-y-2">
+        <div className="border-b-default-200 dark:border-b-default-100 bg-default-50 border-b px-4 py-3">
           <div className="flex items-center justify-between gap-x-2">
             <dt>
-              <h3 className="text-default-700 font-medium">{title}</h3>
-              <p className="text-small text-default-500">{description}</p>
+              <h3 className="text-default-800 text-sm font-semibold">{title}</h3>
+              <p className="text-tiny text-default-500">{description}</p>
             </dt>
             {actions}
           </div>
         </div>
-        <div style={{ height: `${chartData.length * 75}px`, direction: "ltr" }}>
+        <div className="px-1 pt-4 pb-2" style={{ height: `${chartData.length * 55 + 24}px`, direction: "ltr" }}>
           <ResponsiveContainer className="[&_.recharts-surface]:outline-hidden" height="100%" width="100%">
             <BarChart
               accessibilityLayer
@@ -73,10 +86,17 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
               <YAxis
                 type="category"
                 dataKey="month"
-                strokeOpacity={0.05}
-                style={{ fontSize: "var(--heroui-font-size-tiny)" }}
+                strokeOpacity={0}
+                style={{ fontSize: "12px" }}
                 tickLine={false}
-                hide
+                axisLine={false}
+                width={130}
+                orientation={isRtl ? "right" : "left"}
+                tickFormatter={(value: string) => translateLabel(value)}
+                tick={{
+                  fill: "hsl(var(--heroui-default-700))",
+                }}
+                tickMargin={8}
               />
               <XAxis
                 type="number"
@@ -86,6 +106,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                 }}
                 tickLine={false}
                 allowDecimals={false}
+                mirror={isRtl}
               />
               <Tooltip
                 content={({ payload }) => {
@@ -94,9 +115,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                   return (
                     <div className="rounded-medium bg-background text-tiny shadow-small flex h-auto min-w-[120px] items-center gap-x-2 p-2">
                       <div className="flex w-full flex-col gap-y-1">
-                        <span className="text-foreground font-medium">
-                          {translateLabels ? allTranslations[month as keyof typeof allTranslations] : month}
-                        </span>
+                        <span className="text-foreground font-medium">{translateLabel(month)}</span>
                         {payload?.map((p, index) => {
                           const name = p.name;
                           const value = p.value;
@@ -154,26 +173,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                   }
                   radius={[8, 8, 8, 8]}
                   stackId="stack"
-                >
-                  {index === 0 && (
-                    <LabelList
-                      dataKey="month"
-                      position="insideLeft"
-                      className={cn(
-                        `absolute left-0 inline-flex min-w-24 -translate-y-4 items-center text-left text-xs text-nowrap`,
-                      )}
-                      formatter={(value: unknown) => {
-                        const label = String(value ?? "");
-                        return translateLabels ? allTranslations[label as keyof typeof allTranslations] : label;
-                      }}
-                      style={{
-                        textAnchor: "start",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                      }}
-                    />
-                  )}
-                </Bar>
+                />
               ))}
             </BarChart>
           </ResponsiveContainer>
