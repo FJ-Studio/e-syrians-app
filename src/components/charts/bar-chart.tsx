@@ -45,9 +45,10 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
       unknown: "N/A",
     };
 
-    const translateLabel = (value: string) => {
-      if (!translateLabels) return value;
-      return allTranslations[value as keyof typeof allTranslations] ?? value;
+    const translateLabel = (value: unknown) => {
+      const normalizedValue = String(value ?? "");
+      if (!translateLabels) return normalizedValue;
+      return allTranslations[normalizedValue as keyof typeof allTranslations] ?? normalizedValue;
     };
 
     return (
