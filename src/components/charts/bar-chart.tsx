@@ -69,7 +69,10 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
             {actions}
           </div>
         </div>
-        <div className="px-1 pt-4 pb-2" style={{ height: `${chartData.length * 55 + 24}px`, direction: "ltr" }}>
+        <div
+          className="px-4 pt-4 pb-3"
+          style={{ height: `${Math.max(chartData.length * 55 + 24, 120)}px`, direction: "ltr" }}
+        >
           <ResponsiveContainer className="[&_.recharts-surface]:outline-hidden" height="100%" width="100%">
             <BarChart
               accessibilityLayer
@@ -77,7 +80,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
               stackOffset="sign"
               layout="vertical"
               margin={{
-                bottom: 0,
+                bottom: 8,
                 left: 0,
                 right: 0,
                 top: 0,
@@ -87,14 +90,13 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                 type="category"
                 dataKey="month"
                 strokeOpacity={0}
-                style={{ fontSize: "12px" }}
                 tickLine={false}
                 axisLine={false}
                 width={130}
-                orientation={isRtl ? "right" : "left"}
                 tickFormatter={(value: string) => translateLabel(value)}
                 tick={{
                   fill: "hsl(var(--heroui-default-700))",
+                  fontSize: 12,
                 }}
                 tickMargin={8}
               />
@@ -106,7 +108,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
                 }}
                 tickLine={false}
                 allowDecimals={false}
-                mirror={isRtl}
+                tickMargin={8}
               />
               <Tooltip
                 content={({ payload }) => {
