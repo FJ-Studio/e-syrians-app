@@ -22,7 +22,6 @@ import {
   Input,
   Select,
   SelectItem,
-  Skeleton,
   Textarea,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
@@ -162,256 +161,226 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       </CardHeader>
       <CardBody>
         <form className="space-y-4" onSubmit={handleSubmit(save)}>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="middle_name"
-              control={control}
-              render={({ field }) => <Input {...field} label={t("fields.middlename.label")} />}
-            />
-          </Skeleton>
+          <Controller
+            name="middle_name"
+            control={control}
+            render={({ field }) => <Input {...field} label={t("fields.middlename.label")} />}
+          />
 
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="religious_affiliation"
-              control={control}
-              rules={{ required: true }}
-              render={({ field, fieldState: { error, invalid } }) => (
-                <Autocomplete
-                  {...field}
-                  label={t("fields.religious_affiliation.label")}
-                  isRequired
-                  isInvalid={invalid}
-                  errorMessage={error?.message}
-                  selectedKey={getValues("religious_affiliation")}
-                  onSelectionChange={(selected) => {
-                    setValue("religious_affiliation", selected?.toString() as ReligiousAffiliation);
-                  }}
-                  classNames={{ clearButton: "hidden" }}
-                >
-                  {Object.keys(religions).map((key) => (
-                    <AutocompleteItem key={key}>{religions[key as keyof typeof religions]}</AutocompleteItem>
-                  ))}
-                </Autocomplete>
-              )}
-            />
-          </Skeleton>
+          <Controller
+            name="religious_affiliation"
+            control={control}
+            rules={{ required: true }}
+            render={({ field, fieldState: { error, invalid } }) => (
+              <Autocomplete
+                {...field}
+                label={t("fields.religious_affiliation.label")}
+                isRequired
+                isInvalid={invalid}
+                errorMessage={error?.message}
+                selectedKey={getValues("religious_affiliation")}
+                onSelectionChange={(selected) => {
+                  setValue("religious_affiliation", selected?.toString() as ReligiousAffiliation);
+                }}
+                classNames={{ clearButton: "hidden" }}
+              >
+                {Object.keys(religions).map((key) => (
+                  <AutocompleteItem key={key}>{religions[key as keyof typeof religions]}</AutocompleteItem>
+                ))}
+              </Autocomplete>
+            )}
+          />
 
-          <Skeleton isLoaded={!!user} className="rounded-lg">
+          <Controller
+            name="other_nationalities"
+            control={control}
+            render={({ field }) => (
+              <Select
+                scrollShadowProps={{
+                  isEnabled: false,
+                }}
+                {...field}
+                label={t("fields.other_nationalities.label")}
+                selectedKeys={
+                  getValues("other_nationalities") ? getValues("other_nationalities").split(",") : undefined
+                }
+                onSelectionChange={(selected) => {
+                  setValue("other_nationalities", Array.from(selected).join(","));
+                }}
+                selectionMode="multiple"
+              >
+                {Object.keys(countries)
+                  .filter((c) => c !== "SY")
+                  .map((key) => (
+                    <SelectItem
+                      key={key}
+                      startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
+                    >
+                      {countries[key as keyof typeof countries]}
+                    </SelectItem>
+                  ))}
+              </Select>
+            )}
+          />
+          <Controller
+            name="city"
+            control={control}
+            render={({ field }) => <Input {...field} label={t("fields.city.label")} />}
+          />
+          <Controller
+            name="address"
+            control={control}
+            render={({ field }) => <Input {...field} label={t("fields.address.label")} />}
+          />
+          <div className="flex justify-start">
             <Controller
-              name="other_nationalities"
+              name="shelter"
               control={control}
               render={({ field }) => (
-                <Select
-                  scrollShadowProps={{
-                    isEnabled: false,
-                  }}
+                <Checkbox
                   {...field}
-                  label={t("fields.other_nationalities.label")}
-                  selectedKeys={
-                    getValues("other_nationalities") ? getValues("other_nationalities").split(",") : undefined
-                  }
-                  onSelectionChange={(selected) => {
-                    setValue("other_nationalities", Array.from(selected).join(","));
-                  }}
-                  selectionMode="multiple"
+                  value={`${field.value}`}
+                  isSelected={!!getValues("shelter")}
+                  onValueChange={(selected) => setValue("shelter", selected ? "1" : "0")}
                 >
-                  {Object.keys(countries)
-                    .filter((c) => c !== "SY")
-                    .map((key) => (
-                      <SelectItem
-                        key={key}
-                        startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
-                      >
-                        {countries[key as keyof typeof countries]}
-                      </SelectItem>
-                    ))}
-                </Select>
+                  {t("fields.shelter.label")}
+                </Checkbox>
               )}
             />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
+          </div>
+          <Controller
+            name="education_level"
+            control={control}
+            render={({ field, fieldState: { error, invalid } }) => (
+              <Autocomplete
+                {...field}
+                label={t("fields.education_level.label")}
+                isInvalid={invalid}
+                errorMessage={error?.message}
+                selectedKey={getValues("education_level")}
+                onSelectionChange={(selected) => {
+                  setValue("education_level", selected?.toString() ?? "");
+                }}
+                classNames={{ clearButton: "hidden" }}
+              >
+                {Object.keys(educationLevels).map((key) => (
+                  <AutocompleteItem key={key}>{educationLevels[key as keyof typeof educationLevels]}</AutocompleteItem>
+                ))}
+              </Autocomplete>
+            )}
+          />
+          <Controller
+            name="languages"
+            control={control}
+            render={({ field, fieldState: { error, invalid } }) => (
+              <Select
+                {...field}
+                label={t("fields.spoken_languages.label")}
+                isInvalid={invalid}
+                errorMessage={error?.message}
+                selectionMode="multiple"
+                selectedKeys={getValues("languages") ? getValues("languages").split(",") : undefined}
+                onSelectionChange={(selected) => {
+                  setValue("languages", Array.from(selected).join(","));
+                }}
+              >
+                {Object.keys(spokenLanguages).map((key) => (
+                  <SelectItem key={key}>{spokenLanguages[key as keyof typeof spokenLanguages]}</SelectItem>
+                ))}
+              </Select>
+            )}
+          />
+          <Controller
+            name="skills"
+            control={control}
+            render={({ field }) => <Input {...field} label={t("fields.skills.label")} />}
+          />
+          <Controller
+            name="source_of_income"
+            control={control}
+            render={({ field }) => (
+              <Autocomplete
+                {...field}
+                label={t("fields.source_of_income.label")}
+                selectedKey={getValues("source_of_income")}
+                onSelectionChange={(selected) => {
+                  setValue("source_of_income", selected?.toString() ?? "");
+                }}
+                classNames={{ clearButton: "hidden" }}
+              >
+                {Object.keys(incomeSources).map((key) => (
+                  <AutocompleteItem key={key}>{incomeSources[key as keyof typeof incomeSources]}</AutocompleteItem>
+                ))}
+              </Autocomplete>
+            )}
+          />
+          <Controller
+            name="estimated_monthly_income"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} label={t("fields.estimated_monthly_income.label")} startContent="$" />
+            )}
+          />
+          <Controller
+            name="number_of_dependents"
+            control={control}
+            render={({ field }) => <Input {...field} label={t("fields.number_of_dependents.label")} />}
+          />
+          <Controller
+            name="health_status"
+            control={control}
+            render={({ field }) => (
+              <Autocomplete
+                {...field}
+                label={t("fields.health_status.label")}
+                selectedKey={getValues("health_status")}
+                onSelectionChange={(selected) => {
+                  setValue("health_status", selected?.toString() as HealthStatus);
+                }}
+                classNames={{ clearButton: "hidden" }}
+              >
+                {Object.keys(HealthStatuses).map((key) => (
+                  <AutocompleteItem key={key}>{HealthStatuses[key as keyof typeof HealthStatuses]}</AutocompleteItem>
+                ))}
+              </Autocomplete>
+            )}
+          />
+          <div className="flex flex-col gap-2">
             <Controller
-              name="city"
-              control={control}
-              render={({ field }) => <Input {...field} label={t("fields.city.label")} />}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="address"
-              control={control}
-              render={({ field }) => <Input {...field} label={t("fields.address.label")} />}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <div className="flex justify-start">
-              <Controller
-                name="shelter"
-                control={control}
-                render={({ field }) => (
-                  <Checkbox
-                    {...field}
-                    value={`${field.value}`}
-                    isSelected={!!getValues("shelter")}
-                    onValueChange={(selected) => setValue("shelter", selected ? "1" : "0")}
-                  >
-                    {t("fields.shelter.label")}
-                  </Checkbox>
-                )}
-              />
-            </div>
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="education_level"
-              control={control}
-              render={({ field, fieldState: { error, invalid } }) => (
-                <Autocomplete
-                  {...field}
-                  label={t("fields.education_level.label")}
-                  isInvalid={invalid}
-                  errorMessage={error?.message}
-                  selectedKey={getValues("education_level")}
-                  onSelectionChange={(selected) => {
-                    setValue("education_level", selected?.toString() ?? "");
-                  }}
-                  classNames={{ clearButton: "hidden" }}
-                >
-                  {Object.keys(educationLevels).map((key) => (
-                    <AutocompleteItem key={key}>
-                      {educationLevels[key as keyof typeof educationLevels]}
-                    </AutocompleteItem>
-                  ))}
-                </Autocomplete>
-              )}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="languages"
-              control={control}
-              render={({ field, fieldState: { error, invalid } }) => (
-                <Select
-                  {...field}
-                  label={t("fields.spoken_languages.label")}
-                  isInvalid={invalid}
-                  errorMessage={error?.message}
-                  selectionMode="multiple"
-                  selectedKeys={getValues("languages") ? getValues("languages").split(",") : undefined}
-                  onSelectionChange={(selected) => {
-                    setValue("languages", Array.from(selected).join(","));
-                  }}
-                >
-                  {Object.keys(spokenLanguages).map((key) => (
-                    <SelectItem key={key}>{spokenLanguages[key as keyof typeof spokenLanguages]}</SelectItem>
-                  ))}
-                </Select>
-              )}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="skills"
-              control={control}
-              render={({ field }) => <Input {...field} label={t("fields.skills.label")} />}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="source_of_income"
+              name="health_insurance"
               control={control}
               render={({ field }) => (
-                <Autocomplete
+                <Checkbox
                   {...field}
-                  label={t("fields.source_of_income.label")}
-                  selectedKey={getValues("source_of_income")}
-                  onSelectionChange={(selected) => {
-                    setValue("source_of_income", selected?.toString() ?? "");
-                  }}
-                  classNames={{ clearButton: "hidden" }}
+                  value={`${field.value}`}
+                  isSelected={!!getValues("health_insurance")}
+                  onValueChange={(selected) => setValue("health_insurance", selected ? "1" : "0")}
                 >
-                  {Object.keys(incomeSources).map((key) => (
-                    <AutocompleteItem key={key}>{incomeSources[key as keyof typeof incomeSources]}</AutocompleteItem>
-                  ))}
-                </Autocomplete>
+                  {t("fields.health_insurance.label")}
+                </Checkbox>
               )}
             />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="estimated_monthly_income"
-              control={control}
-              render={({ field }) => (
-                <Input {...field} label={t("fields.estimated_monthly_income.label")} startContent="$" />
-              )}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="number_of_dependents"
-              control={control}
-              render={({ field }) => <Input {...field} label={t("fields.number_of_dependents.label")} />}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <Controller
-              name="health_status"
-              control={control}
-              render={({ field }) => (
-                <Autocomplete
-                  {...field}
-                  label={t("fields.health_status.label")}
-                  selectedKey={getValues("health_status")}
-                  onSelectionChange={(selected) => {
-                    setValue("health_status", selected?.toString() as HealthStatus);
-                  }}
-                  classNames={{ clearButton: "hidden" }}
-                >
-                  {Object.keys(HealthStatuses).map((key) => (
-                    <AutocompleteItem key={key}>{HealthStatuses[key as keyof typeof HealthStatuses]}</AutocompleteItem>
-                  ))}
-                </Autocomplete>
-              )}
-            />
-          </Skeleton>
-          <Skeleton isLoaded={!!user} className="rounded-lg">
-            <div className="flex flex-col gap-2">
-              <Controller
-                name="health_insurance"
-                control={control}
-                render={({ field }) => (
-                  <Checkbox
-                    {...field}
-                    value={`${field.value}`}
-                    isSelected={!!getValues("health_insurance")}
-                    onValueChange={(selected) => setValue("health_insurance", selected ? "1" : "0")}
-                  >
-                    {t("fields.health_insurance.label")}
-                  </Checkbox>
-                )}
-              />
 
-              <Controller
-                name="easy_access_to_healthcare_services"
-                control={control}
-                render={({ field }) => (
-                  <Checkbox
-                    {...field}
-                    value={`${field.value}`}
-                    isSelected={!!getValues("easy_access_to_healthcare_services")}
-                    onValueChange={(selected) => setValue("easy_access_to_healthcare_services", selected ? "1" : "0")}
-                  >
-                    {t("fields.easy_access_to_healthcare_services.label")}
-                  </Checkbox>
-                )}
-              />
-              <Controller
-                name="more_info"
-                control={control}
-                render={({ field }) => <Textarea {...field} label={t("fields.more_info.label")} />}
-              />
-            </div>
-          </Skeleton>
+            <Controller
+              name="easy_access_to_healthcare_services"
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  {...field}
+                  value={`${field.value}`}
+                  isSelected={!!getValues("easy_access_to_healthcare_services")}
+                  onValueChange={(selected) => setValue("easy_access_to_healthcare_services", selected ? "1" : "0")}
+                >
+                  {t("fields.easy_access_to_healthcare_services.label")}
+                </Checkbox>
+              )}
+            />
+            <Controller
+              name="more_info"
+              control={control}
+              render={({ field }) => <Textarea {...field} label={t("fields.more_info.label")} />}
+            />
+          </div>
           <Button type="submit" color="primary" isLoading={isSubmitting} isDisabled={!isDirty || isSubmitting}>
             {t("save")}
           </Button>
