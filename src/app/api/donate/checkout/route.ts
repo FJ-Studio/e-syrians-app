@@ -64,8 +64,8 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Donation to E-Syrians",
-              description: "Thank you for supporting E-SYRIAN Network!",
+              name: "Donation to E-SYRIANS Network",
+              description: "Thank you for supporting E-SYRIANS Network!",
             },
             unit_amount: amount,
           },

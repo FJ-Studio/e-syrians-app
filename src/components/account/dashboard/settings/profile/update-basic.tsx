@@ -102,11 +102,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col items-start gap-3">
-        <div className="flex w-full items-center justify-between">
-          <h3 className="text-default-700 text-lg font-medium">{t("basicData.title")}</h3>
-        </div>
-        <p>{t("basicData.description")}</p>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
+        <h3 className="text-default-700 text-lg font-medium">{t("basicData.title")}</h3>
+        <p className="text-default-500 text-sm">{t("basicData.description")}</p>
       </CardHeader>
       <CardBody>
         <form className="flex w-full flex-col items-start gap-4" onSubmit={handleSubmit(save)}>

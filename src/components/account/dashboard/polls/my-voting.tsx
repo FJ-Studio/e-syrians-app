@@ -123,13 +123,14 @@ const MyVoting: FC = () => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col items-start">
-        <h2 className="text-default-700 text-start text-xl font-medium">{t("title")}</h2>
-        <p className="text-default-500 text-start">{t("description")}</p>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
+        <h2 className="text-default-700 text-lg font-medium">{t("title")}</h2>
+        <p className="text-default-500 text-sm">{t("description")}</p>
       </CardHeader>
       <CardBody>
         <Table
           isHeaderSticky
+          removeWrapper
           isStriped
           classNames={{
             wrapper: "max-h-[800px]",

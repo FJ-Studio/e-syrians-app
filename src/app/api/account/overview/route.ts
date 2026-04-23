@@ -72,29 +72,15 @@ export const GET = withAuthGet(async ({ session }) => {
   };
 
   // --- Verifications summary ---
-  type VerificationEntry = {
-    id: string;
-    created_at: string;
-    cancelled_at: string | null;
-  };
+  // Backend returns data as a plain array (verifications given) or
+  // ResourceCollection (verifications received), so count via Array.length.
+  const verificationsGiven = verificationsJson?.success ? (verificationsJson.data as unknown[]) : [];
 
-  const verificationsData = verificationsJson?.success
-    ? (verificationsJson.data as {
-        verifications: VerificationEntry[];
-        total: number;
-      })
-    : null;
-
-  const verifiersData = verifiersJson?.success
-    ? (verifiersJson.data as {
-        verifiers: VerificationEntry[];
-        total: number;
-      })
-    : null;
+  const verificationsReceived = verifiersJson?.success ? (verifiersJson.data as unknown[]) : [];
 
   const verifications = {
-    received: verificationsData?.total ?? 0,
-    given: verifiersData?.total ?? 0,
+    received: Array.isArray(verificationsReceived) ? verificationsReceived.length : 0,
+    given: Array.isArray(verificationsGiven) ? verificationsGiven.length : 0,
   };
 
   // --- Profile completeness ---

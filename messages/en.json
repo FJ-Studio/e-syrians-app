@@ -69,11 +69,11 @@
   },
   "donate": {
     "title": "Support E-Syrians",
-    "subtitle": "Your generosity helps us build a better platform for the Syrian community.",
+    "subtitle": "E-Syrians is a community-driven platform. Donations help sustain and improve the platform but do not grant any influence over its policies or decisions.",
     "status": {
       "success": {
         "title": "Thank you for your donation!",
-        "description": "Your generosity makes a real difference for the Syrian community."
+        "description": "Thank you — every contribution helps keep this platform running."
       },
       "cancelled": {
         "title": "Donation cancelled",
@@ -758,7 +758,7 @@
       "polls": {
         "my_polls": {
           "title": "My Polls",
-          "description": "Here you can view the polls you have created",
+          "description": "Manage polls you have created. You can track votes, activate or deactivate them.",
           "table": {
             "question": {
               "title": "Question"
@@ -811,7 +811,7 @@
         },
         "my_votes": {
           "title": "My Votes",
-          "description": "Here you can view the polls you have voted on",
+          "description": "A record of all polls you have participated in and the options you selected.",
           "table": {
             "question": {
               "title": "Question"
@@ -835,7 +835,7 @@
         },
         "my_reactions": {
           "title": "My Reactions",
-          "description": "Here you can view the polls you have reacted to",
+          "description": "Polls you have reacted to with feature requests or shared questions.",
           "table": {
             "question": {
               "title": "Question"
@@ -1104,14 +1104,31 @@
         },
         "history": {
           "title": "Notification history",
-          "empty": "You have no notifications yet."
+          "empty": "You have no notifications yet.",
+          "columns": {
+            "content": "Notification",
+            "actions": "Options"
+          },
+          "markAsRead": "Mark as read",
+          "markAllAsRead": "Mark all as read",
+          "delete": "Delete"
         },
         "preferences": {
           "title": "Notification preferences",
-          "received_verification_email": "I want to receive an email when someone verifies my data",
-          "account_verified_email": "I want to receive an email when my account gets verified",
-          "update": "Update notifications settings",
-          "success": "Notifications settings updated successfully"
+          "description": "Choose which notifications you want to receive and how.",
+          "received_verification_email": "Someone verifies my data",
+          "received_verification_email_description": "Sent when another community member verifies your information.",
+          "account_verified_email": "My account gets verified",
+          "account_verified_email_description": "Sent when you collect enough verifications for your account to be marked as verified.",
+          "update": "Save preferences",
+          "success": "Notifications settings updated successfully",
+          "columns": {
+            "notification": "Notification",
+            "email": "Channel"
+          },
+          "channels": {
+            "email": "Email"
+          }
         }
       },
       "privacy": {
@@ -1217,7 +1234,7 @@
           "title": "My avatar",
           "upload": "Select new avatar",
           "save": "Upload avatar",
-          "instructions": "Please select a personal image that is under 500KB in size and no larger than 800x800 pixels."
+          "instructions": "Please select a personal image to use as your profile picture."
         },
         "crop": {
           "title": "Crop your photo",
@@ -1261,10 +1278,12 @@
         "update": {
           "success": "your data were updated successfully"
         },
-        "title": "Country"
+        "title": "Country & location",
+        "description": "Let us know where you currently live. This helps us better understand the distribution of our community."
       },
       "census": {
         "title": "National census",
+        "description": "Help us build a comprehensive national database by sharing additional personal details. All sensitive information is encrypted.",
         "fields": {
           "middlename": {
             "label": "Middle name"
@@ -1322,7 +1341,8 @@
       }
     },
     "socialLinks": {
-      "title": "My links",
+      "title": "Social links",
+      "description": "Add your social media profiles so other community members can connect with you.",
       "facebook_link": {
         "label": "Facebook"
       },
