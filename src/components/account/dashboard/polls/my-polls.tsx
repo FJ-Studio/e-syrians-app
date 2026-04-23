@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardBody,
+  CardHeader,
   Chip,
   Dropdown,
   DropdownItem,
@@ -274,24 +275,26 @@ const MyPolls: FC = () => {
 
   return (
     <Card>
-      <CardBody>
-        <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row">
-          <div>
-            <h2 className="text-default-700 text-start text-xl font-medium">{t("title")}</h2>
-            <p className="text-default-500 text-start">{t("description")}</p>
-          </div>
-          <Button
-            variant="solid"
-            color="primary"
-            as={Link}
-            href="/account/polls/create"
-            startContent={<Icon icon={plusCircleIcon} className="size-5" />}
-          >
-            {t("emptyContent.add")}
-          </Button>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex items-center justify-between border-b">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-default-700 text-lg font-medium">{t("title")}</h2>
+          <p className="text-default-500 text-sm">{t("description")}</p>
         </div>
+        <Button
+          variant="solid"
+          color="primary"
+          as={Link}
+          href="/account/polls/create"
+          size="sm"
+          startContent={<Icon icon={plusCircleIcon} className="size-5" />}
+        >
+          {t("emptyContent.add")}
+        </Button>
+      </CardHeader>
+      <CardBody>
         <Table
           isHeaderSticky
+          removeWrapper
           isStriped
           classNames={{
             wrapper: "max-h-[800px]",

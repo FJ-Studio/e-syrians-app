@@ -121,6 +121,7 @@ const VerificationsTable: FC = () => {
       <CardBody>
         <Table
           isHeaderSticky
+          removeWrapper
           isStriped
           classNames={{
             wrapper: "max-h-[800px]",

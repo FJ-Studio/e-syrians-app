@@ -156,8 +156,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
 
   return (
     <Card>
-      <CardHeader>
-        <h3 className="text-lg font-medium">{t("title")}</h3>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
+        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
+        <p className="text-default-500 text-sm">{t("description")}</p>
       </CardHeader>
       <CardBody>
         <form className="space-y-4" onSubmit={handleSubmit(save)}>
