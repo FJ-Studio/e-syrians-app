@@ -72,15 +72,24 @@ export const GET = withAuthGet(async ({ session }) => {
   };
 
   // --- Verifications summary ---
-  // Backend returns data as a plain array (verifications given) or
-  // ResourceCollection (verifications received), so count via Array.length.
-  const verificationsGiven = verificationsJson?.success ? (verificationsJson.data as unknown[]) : [];
-
-  const verificationsReceived = verifiersJson?.success ? (verifiersJson.data as unknown[]) : [];
+  // Backend may return data as a plain array or as { data: [...], total: N }.
+  // Handle both shapes safely.
+  const countItems = (json: Record<string, unknown> | null): number => {
+    if (!json?.success) return 0;
+    const d = json.data;
+    if (Array.isArray(d)) return d.length;
+    if (d && typeof d === "object") {
+      const obj = d as Record<string, unknown>;
+      if (typeof obj.total === "number") return obj.total;
+      // ResourceCollection shape: { data: [...] }
+      if (Array.isArray(obj.data)) return (obj.data as unknown[]).length;
+    }
+    return 0;
+  };
 
   const verifications = {
-    received: Array.isArray(verificationsReceived) ? verificationsReceived.length : 0,
-    given: Array.isArray(verificationsGiven) ? verificationsGiven.length : 0,
+    received: countItems(verifiersJson),
+    given: countItems(verificationsJson),
   };
 
   // --- Profile completeness ---

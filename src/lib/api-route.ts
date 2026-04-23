@@ -87,16 +87,21 @@ export function withFormDataApiRoute(handler: FormDataRouteHandler, options: Api
  * Wraps a GET route with auth and error handling.
  */
 export function withAuthGet(
-  handler: (params: { req: NextRequest; session: Session }) => Promise<NextResponse>,
+  handler: (params: {
+    req: NextRequest;
+    session: Session;
+    routeParams?: Record<string, string | string[]>;
+  }) => Promise<NextResponse>,
   errorMessage = "An error occurred",
 ) {
-  return async (req: NextRequest) => {
+  return async (req: NextRequest, context?: { params?: Promise<Record<string, string | string[]>> }) => {
     try {
       const session = await auth();
       if (!session?.user.accessToken) {
         return NextResponse.json({ success: false, messages: ["Unauthorized"] }, { status: 401 });
       }
-      return await handler({ req, session });
+      const routeParams = context?.params ? await context.params : undefined;
+      return await handler({ req, session, routeParams });
     } catch {
       return NextResponse.json({ success: false, messages: [errorMessage] }, { status: 500 });
     }
