@@ -21,7 +21,7 @@ import envelopeIcon from "@iconify-icons/heroicons/envelope";
 import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -37,13 +37,23 @@ const NotificationsSettings: FC = () => {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { isSubmitting, isDirty },
   } = useForm<NotificationSettings>({
     defaultValues: {
-      received_verification_email: Boolean(data?.user?.received_verification_email),
-      account_verified_email: Boolean(data?.user?.account_verified_email),
+      received_verification_email: false,
+      account_verified_email: false,
     },
   });
+
+  useEffect(() => {
+    if (data?.user) {
+      reset({
+        received_verification_email: Boolean(data.user.received_verification_email),
+        account_verified_email: Boolean(data.user.account_verified_email),
+      });
+    }
+  }, [data?.user, reset]);
 
   const updateNotificationsSettings = async (data: NotificationSettings) => {
     const token = await generateToken("update_notifications_settings");
@@ -110,9 +120,8 @@ const NotificationsSettings: FC = () => {
                         control={control}
                         render={({ field }) => (
                           <Switch
-                            {...field}
-                            value={String(field.value)}
-                            defaultSelected={Boolean(data?.user?.[row.key as keyof typeof data.user])}
+                            isSelected={field.value}
+                            onValueChange={field.onChange}
                             aria-label={row.label}
                             size="sm"
                           />
