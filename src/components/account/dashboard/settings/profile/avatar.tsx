@@ -132,9 +132,9 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col items-start gap-2">
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
         <h2 className="text-default-700 text-lg font-medium">{t("avatar.title")}</h2>
-        <p>{t("avatar.instructions")}</p>
+        <p className="text-default-500 text-sm">{t("avatar.instructions")}</p>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(save)} className="flex flex-col items-center gap-4">

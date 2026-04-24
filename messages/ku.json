@@ -69,11 +69,11 @@
   },
   "donate": {
     "title": "Piştgiriya E-Syrians",
-    "subtitle": "Comerdiya te alîkariya me dike ku platformek çêtir ji bo civaka Sûrî ava bikin.",
+    "subtitle": "E-Syrians platformek civakî ye. Bexş alîkariya domandina û baştirkirina platformê dikin lê ti bandorek li ser siyaset an biryarên wê nadin.",
     "status": {
       "success": {
         "title": "Spas ji bo bexşa te!",
-        "description": "Comerdiya te ji bo civaka Sûrî cudahiyek rastîn çêdike."
+        "description": "Spas ji te re — her beşdariyekê alîkariya domandina vê platformê dike."
       },
       "cancelled": {
         "title": "Bexş hate betalkirin",
@@ -758,7 +758,7 @@
       "polls": {
         "my_polls": {
           "title": "Anketên min",
-          "description": "Li vir hûn dikarin anketên ku hûn çêkirin bibînin",
+          "description": "Anketên ku te afirandine birêve bibe. Tu dikarî dengan bişopînî û wan çalak an neçalak bikî.",
           "table": {
             "question": {
               "title": "Pirs"
@@ -811,7 +811,7 @@
         },
         "my_votes": {
           "title": "Dengên min",
-          "description": "Li vir hûn dikarin anketên ku hûn beşdar bûn bibînin",
+          "description": "Tomarkirina hemû anketên ku hûn beşdarî wan bûne û bersivên ku we hilbijartine.",
           "table": {
             "question": {
               "title": "Nîvîsa anketê"
@@ -835,7 +835,7 @@
         },
         "my_reactions": {
           "title": "Tevgera min",
-          "description": "Li vir hûn dikarin anketên ku hûn bi wan re reaxî kirin bibînin",
+          "description": "Anketên ku hûn li ser wan bertekên xwe diyar kirine.",
           "table": {
             "question": {
               "title": "Nîvîsa anketê"
@@ -1104,14 +1104,31 @@
         },
         "history": {
           "title": "مێژووی ئاگاداریەکان",
-          "empty": "هێشتا هیچ ئاگادارییەکت نییە."
+          "empty": "هێشتا هیچ ئاگادارییەکت نییە.",
+          "columns": {
+            "content": "ئاگاداری",
+            "actions": "بژاردەکان"
+          },
+          "markAsRead": "وەک خوێندراو نیشانە بکە",
+          "markAllAsRead": "هەمووی وەک خوێندراو نیشانە بکە",
+          "delete": "سڕینەوە"
         },
         "preferences": {
-          "title": "ئاگاداریەکان",
-          "received_verification_email": "Dema ku kesek daneyên min piştrast dike ez dixwazim e-nameyek bistînim",
-          "account_verified_email": "Dema ku hesabê min were piştrast kirin ez dixwazim e-nameyek bistînim",
-          "update": "Mîhengên ragihandinê nûve bikin",
-          "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin"
+          "title": "ئارەزووەکانی ئاگاداری",
+          "description": "هەڵبژێرە کام ئاگادارییەکان وەربگریت و بە چ ڕێگەیەک.",
+          "received_verification_email": "کاتێک کەسێک زانیارییەکانم پشتڕاست دەکاتەوە",
+          "received_verification_email_description": "دەنێردرێت کاتێک ئەندامێکی تری کۆمەڵگە زانیارییەکانت پشتڕاست دەکاتەوە.",
+          "account_verified_email": "کاتێک هەژمارەکەم پشتڕاست دەکرێتەوە",
+          "account_verified_email_description": "دەنێردرێت کاتێک پشتڕاستکردنی پێویست کۆدەکەیتەوە بۆ ئەوەی هەژمارەکەت وەک پشتڕاستکراو نیشان بدرێت.",
+          "update": "پاشەکەوتکردنی ئارەزووەکان",
+          "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin",
+          "columns": {
+            "notification": "ئاگاداری",
+            "email": "کەناڵ"
+          },
+          "channels": {
+            "email": "ئیمەیل"
+          }
         }
       },
       "privacy": {
@@ -1217,7 +1234,7 @@
           "title": "Wêneyê xweşî",
           "upload": "Wêneya nû hilbijêre",
           "save": "Wêneya barkirin",
-          "instructions": "Ji kerema xwe wêneya xweşî hilbijêre ku mezinahiya wê kêmî 500 kilobayt be û bi piştgirî 800x800 pixel ne zêdetir"
+          "instructions": "Ji kerema xwe wêneyek kesane hilbijêre bo wêneya profîla xwe."
         },
         "crop": {
           "title": "Wêne bibirin",
@@ -1261,10 +1278,12 @@
         "update": {
           "success": "Agahdariyên we bi serfirazî hatine nûve kirin"
         },
-        "title": "Welatê radestkirinê"
+        "title": "Welat û cîh",
+        "description": "Ji me re bêje tu niha li ku dijî. Ev ji me re dibe alîkar ku dabeşbûna civaka xwe baştir fam bikin."
       },
       "census": {
-        "title": "Têkiliyê giştî",
+        "title": "Serjimêriya niştimanî",
+        "description": "Bi parvekirina hin agahdariyên zêde ji me re bibin alîkar ku danegehek niştimanî ya berfireh ava bikin. Hemû agahdariyên hesas şîfrekirî ne.",
         "fields": {
           "middlename": {
             "label": "Navê navenda"
@@ -1322,7 +1341,8 @@
       }
     },
     "socialLinks": {
-      "title": "Girêdanên xwe",
+      "title": "Girêdanên civakî",
+      "description": "Hesabên xwe yên medyaya civakî lê zêde bike da ku endamên din ên civakê bikaribin bi te re têkilî daynin.",
       "facebook_link": {
         "label": "Rûpela min li Facebook"
       },

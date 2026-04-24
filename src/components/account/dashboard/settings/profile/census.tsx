@@ -156,8 +156,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
 
   return (
     <Card>
-      <CardHeader>
-        <h3 className="text-lg font-medium">{t("title")}</h3>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
+        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
+        <p className="text-default-500 text-sm">{t("description")}</p>
       </CardHeader>
       <CardBody>
         <form className="space-y-4" onSubmit={handleSubmit(save)}>
@@ -240,7 +241,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 <Checkbox
                   {...field}
                   value={`${field.value}`}
-                  isSelected={!!getValues("shelter")}
+                  isSelected={getValues("shelter") === "1"}
                   onValueChange={(selected) => setValue("shelter", selected ? "1" : "0")}
                 >
                   {t("fields.shelter.label")}
@@ -353,7 +354,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 <Checkbox
                   {...field}
                   value={`${field.value}`}
-                  isSelected={!!getValues("health_insurance")}
+                  isSelected={getValues("health_insurance") === "1"}
                   onValueChange={(selected) => setValue("health_insurance", selected ? "1" : "0")}
                 >
                   {t("fields.health_insurance.label")}
@@ -368,7 +369,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 <Checkbox
                   {...field}
                   value={`${field.value}`}
-                  isSelected={!!getValues("easy_access_to_healthcare_services")}
+                  isSelected={getValues("easy_access_to_healthcare_services") === "1"}
                   onValueChange={(selected) => setValue("easy_access_to_healthcare_services", selected ? "1" : "0")}
                 >
                   {t("fields.easy_access_to_healthcare_services.label")}

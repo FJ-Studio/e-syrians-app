@@ -64,31 +64,23 @@ const AccountProfile: FC = () => {
       </nav>
 
       <div className="space-y-8">
-        {/* Personal info */}
         <section id="section-avatar" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.avatar")}</h3>
           <AccountAvatar user={profile} onUpdated={getProfile} />
         </section>
 
         <section id="section-basic" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.basic")}</h3>
           <UpdateBasicProfileData user={profile} />
         </section>
 
         <section id="section-address" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.address")}</h3>
           <AccountAddress user={profile} />
         </section>
 
-        {/* Social */}
         <section id="section-links" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.links")}</h3>
           <AccountSocialLinks user={profile} />
         </section>
 
-        {/* Census */}
         <section id="section-census" className="scroll-mt-24">
-          <h3 className="text-default-700 mb-3 text-lg font-semibold">{t("sections.census")}</h3>
           <AccountCensus user={profile} />
         </section>
       </div>

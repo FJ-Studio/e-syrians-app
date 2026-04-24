@@ -70,8 +70,9 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
 
   return (
     <Card>
-      <CardHeader>
-        <h2 className="text-lg font-medium">{t("title")}</h2>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
+        <h2 className="text-default-700 text-lg font-medium">{t("title")}</h2>
+        <p className="text-default-500 text-sm">{t("description")}</p>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(save)} className="space-y-4">

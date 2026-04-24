@@ -61,6 +61,18 @@ export type ESUser = {
   city_inside_syria: string;
 };
 
+export type AppNotification = {
+  id: string;
+  type: string;
+  data: {
+    title?: string;
+    message: string;
+    [key: string]: unknown;
+  };
+  read_at: string | null;
+  created_at: string;
+};
+
 export type Verification = {
   id: string;
   created_at: string;
