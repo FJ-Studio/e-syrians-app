@@ -50,7 +50,7 @@ const AccountNotification: FC = () => {
     <Card>
       <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
       <CardBody>
-        <form className="space-y-3" onSubmit={handleSubmit(updateNotificationsSettings)}>
+        <form noValidate className="space-y-3" onSubmit={handleSubmit(updateNotificationsSettings)}>
           <div className="flex justify-between gap-3">
             <p>{t("received_verification_email")}</p>
             <Controller
@@ -58,9 +58,10 @@ const AccountNotification: FC = () => {
               control={control}
               render={({ field }) => (
                 <Switch
-                  {...field}
-                  value={String(field.value)}
-                  defaultSelected={data?.user.received_verification_email}
+                  name={field.name}
+                  onBlur={field.onBlur}
+                  isSelected={field.value}
+                  onValueChange={field.onChange}
                   aria-label={t("received_verification_email")}
                 />
               )}
@@ -73,9 +74,10 @@ const AccountNotification: FC = () => {
               control={control}
               render={({ field }) => (
                 <Switch
-                  {...field}
-                  value={String(field.value)}
-                  defaultSelected={data?.user.account_verified_email}
+                  name={field.name}
+                  onBlur={field.onBlur}
+                  isSelected={field.value}
+                  onValueChange={field.onChange}
                   aria-label={t("account_verified_email")}
                 />
               )}

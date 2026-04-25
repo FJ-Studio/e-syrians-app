@@ -1034,9 +1034,29 @@
           "passwordsDoNotMatch": "Şîfre li hev nayên",
           "tooManyTries": "Gelek hewldan"
         },
+        "validation": {
+          "required": "Ev qad pêwîst e",
+          "confirmationRequired": "Divê hûn pejirînin ku hûn encaman fam dikin",
+          "emailInvalid": "Ji kerema xwe navnîşana e-nameyek derbasdar binivîsin",
+          "passwordMinLength": "Şîfre divê herî kêm 8 tîp be",
+          "passwordPattern": "Şîfre divê herî kêm tîpek mezin, tîpek biçûk û hejmarek hebe",
+          "otpLength": "Koda piştrastkirinê divê 6 hejmar be"
+        },
         "success": "Şîfre bi serkeftî guherî",
         "password": {
-          "title": "Şîfreya hesabê nûve bikin"
+          "title": "Şîfreya hesabê nûve bikin",
+          "description": "Şîfreyeke bihêz bi herî kêm 8 tîpan bikar bînin, ku tîpên mezin, biçûk û hejmaran bihewîne."
+        },
+        "setPassword": {
+          "title": "Şîfreyê diyar bike",
+          "description": "Hesabê te hêj şîfreyek tune ye. Yek diyar bike da ku bi e-name û şîfreyê bikevî.",
+          "sendOtpInfo": "Ji bo diyarkirina şîfreyê, em ê kodeke piştrastkirinê ya 6 hejmarî ji e-nameya te re bişînin.",
+          "sendOtp": "Koda piştrastkirinê bişîne",
+          "otpSent": "Koda piştrastkirinê ji e-nameya te re hat şandin",
+          "otpLabel": "Koda piştrastkirinê",
+          "submit": "Şîfreyê diyar bike",
+          "resendOtp": "Kodê dîsa bişîne",
+          "success": "Şîfre bi serkeftî hat diyarkirin. Ji kerema xwe bi şîfreya xwe ya nû têkevê."
         },
         "email": {
           "title": "Navnîşana e-nameya xwe nûve bikin",
@@ -1183,6 +1203,10 @@
       },
       "error": {
         "tryAgain": "Dîsa hewl bidin!"
+      },
+      "validation": {
+        "required": "Ev qad pêwîst e",
+        "confirmationRequired": "Divê hûn pejirînin ku hûn encaman fam dikin"
       },
       "name": {
         "label": "Nav"

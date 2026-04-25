@@ -6,8 +6,8 @@ import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { CountryCode } from "@/lib/types/misc";
 import { Autocomplete, AutocompleteItem, Avatar, Button, Card, CardBody, CardHeader } from "@heroui/react";
-import { useTranslations } from "next-intl";
-import { FC, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { FC, Key, useEffect } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -21,7 +21,9 @@ interface AddressFields {
 }
 
 const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
+  const locale = useLocale();
   const t = useTranslations("account.settings.address");
+  const tSettings = useTranslations("account.settings");
   const provinces = useProvinces();
   const serverError = useServerError();
   const countries = useCountries();
@@ -29,7 +31,6 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
     handleSubmit,
     control,
     reset,
-    getValues,
     setValue,
     formState: { isSubmitting, isDirty },
   } = useForm<AddressFields>({
@@ -57,6 +58,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept-Language": locale,
       },
       body: JSON.stringify({ ...data, recaptcha_token: token }),
     });
@@ -75,14 +77,13 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
         <p className="text-default-500 text-sm">{t("description")}</p>
       </CardHeader>
       <CardBody>
-        <form onSubmit={handleSubmit(save)} className="space-y-4">
+        <form noValidate onSubmit={handleSubmit(save)} className="flex flex-col items-start space-y-4">
           <Controller
             name="country"
             control={control}
-            rules={{ required: true }}
+            rules={{ required: tSettings("validation.required") }}
             render={({ field, fieldState: { error, invalid } }) => (
               <Autocomplete
-                {...field}
                 label={t("fields.country.label")}
                 isRequired
                 classNames={{
@@ -93,11 +94,16 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                 }}
                 isInvalid={invalid}
                 errorMessage={error?.message}
-                selectedKey={getValues("country")}
-                onSelectionChange={(selected) => {
-                  setValue("country", selected?.toString() as CountryCode);
+                value={field.value ?? null}
+                onBlur={field.onBlur}
+                onChange={(selected: Key | null) => {
+                  setValue("country", (selected?.toString() ?? "") as CountryCode, {
+                    shouldDirty: true,
+                    shouldTouch: true,
+                    shouldValidate: true,
+                  });
                 }}
-                description={t("fields.country.description")}
+                description={<p className="text-start">{t("fields.country.description")}</p>}
               >
                 {Object.keys(countries).map((country) => (
                   <AutocompleteItem
@@ -114,17 +120,21 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
             <Controller
               name="city_inside_syria"
               control={control}
-              rules={{ required: true }}
+              rules={{ required: tSettings("validation.required") }}
               render={({ field, fieldState: { error, invalid } }) => (
                 <Autocomplete
-                  {...field}
                   label={t("fields.city_inside_syria.label")}
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKey={getValues("city_inside_syria")}
+                  selectedKey={field.value ?? null}
+                  onBlur={field.onBlur}
                   onSelectionChange={(selected) => {
-                    setValue("city_inside_syria", selected?.toString() ?? "");
+                    setValue("city_inside_syria", selected?.toString() ?? "", {
+                      shouldDirty: true,
+                      shouldTouch: true,
+                      shouldValidate: true,
+                    });
                   }}
                   classNames={{ clearButton: "hidden" }}
                 >

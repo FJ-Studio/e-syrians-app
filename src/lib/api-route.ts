@@ -116,6 +116,8 @@ interface ProxyJsonPostOptions {
   /** Backend endpoint path, e.g. "/users/update/address" */
   endpoint: string;
   errorMessage?: string;
+  /** Extra headers to forward from the incoming request (e.g. ["Accept-Language"]) */
+  forwardHeaders?: string[];
   /**
    * Optional transform of the incoming body before sending to backend.
    *
@@ -140,18 +142,23 @@ interface ProxyJsonPostOptions {
  *   export const POST = proxyJsonPost({ endpoint: "/users/update/address" });
  */
 export function proxyJsonPost(options: ProxyJsonPostOptions) {
-  const { endpoint, errorMessage = "An error occurred", transformBody, onSuccess } = options;
+  const { endpoint, errorMessage = "An error occurred", forwardHeaders = [], transformBody, onSuccess } = options;
 
   return withApiRoute(
-    async ({ body, session }) => {
+    async ({ req, body, session }) => {
       const payload = transformBody ? transformBody(body) : body;
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${session!.user.accessToken}`,
+      };
+      for (const header of forwardHeaders) {
+        const value = req.headers.get(header);
+        if (value) headers[header] = value;
+      }
       const request = await fetch(`${process.env.API_URL}${endpoint}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${session!.user.accessToken}`,
-        },
+        headers,
         body: JSON.stringify(payload),
       });
       const response = await request.json();

@@ -115,6 +115,7 @@ export function FormSelect<T extends FieldValues>({
           {...field}
           label={label}
           isRequired={isRequired}
+          disallowEmptySelection={isRequired}
           isInvalid={invalid}
           errorMessage={error?.message}
           description={description}
@@ -194,28 +195,19 @@ export function FormAutocomplete<T extends FieldValues>({
 // FormCheckbox
 // ---------------------------------------------------------------------------
 
-interface FormCheckboxProps<T extends FieldValues> extends BaseFieldProps<T> {
-  getValues: UseFormGetValuesAny;
-  setValue: UseFormSetValueAny;
-}
+type FormCheckboxProps<T extends FieldValues> = BaseFieldProps<T>;
 
-export function FormCheckbox<T extends FieldValues>({
-  name,
-  control,
-  label,
-  getValues,
-  setValue,
-}: FormCheckboxProps<T>) {
+export function FormCheckbox<T extends FieldValues>({ name, control, label }: FormCheckboxProps<T>) {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => (
         <Checkbox
-          {...field}
-          value={`${field.value}`}
-          isSelected={!!getValues(name)}
-          onValueChange={(selected) => setValue(name, selected)}
+          name={field.name}
+          onBlur={field.onBlur}
+          isSelected={field.value === true}
+          onValueChange={field.onChange}
         >
           {label}
         </Checkbox>

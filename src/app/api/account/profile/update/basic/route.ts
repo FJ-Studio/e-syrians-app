@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export const POST = proxyJsonPost({
   endpoint: "/users/update/basic-info",
+  forwardHeaders: ["Accept-Language"],
   onSuccess: async (_response, session) => {
     revalidateLocalePath(`/census/v/${session.user.uuid}`);
     return NextResponse.json({}, { status: 200 });

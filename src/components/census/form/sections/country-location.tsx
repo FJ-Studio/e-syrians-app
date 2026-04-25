@@ -110,13 +110,7 @@ export default function CountryLocationSection({ control, getValues, setValue, t
         label={t("fields.address.label")}
         description={t("fields.address.description")}
       />
-      <FormCheckbox
-        name="shelter"
-        control={control}
-        label={t("fields.shelter.label")}
-        getValues={getValues}
-        setValue={setValue}
-      />
+      <FormCheckbox name="shelter" control={control} label={t("fields.shelter.label")} />
     </>
   );
 }

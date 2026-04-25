@@ -59,6 +59,7 @@ export type ESUser = {
 
   language: string;
   city_inside_syria: string;
+  has_password?: boolean;
 };
 
 export type AppNotification = {

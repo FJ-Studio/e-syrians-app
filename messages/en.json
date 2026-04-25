@@ -1034,9 +1034,29 @@
           "passwordsDoNotMatch": "Passwords do not match",
           "tooManyTries": "Too many attempts"
         },
+        "validation": {
+          "required": "This field is required",
+          "confirmationRequired": "You must confirm that you understand the consequences",
+          "emailInvalid": "Please enter a valid email address",
+          "passwordMinLength": "Password must be at least 8 characters",
+          "passwordPattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+          "otpLength": "Verification code must be 6 digits"
+        },
         "success": "Password changed successfully",
         "password": {
-          "title": "Update account password"
+          "title": "Update account password",
+          "description": "Use a strong password with at least 8 characters, including uppercase, lowercase, and numbers."
+        },
+        "setPassword": {
+          "title": "Set a password",
+          "description": "Your account does not have a password yet. Set one to enable login with your email and password.",
+          "sendOtpInfo": "To set a password, we will send a 6-digit verification code to your email address.",
+          "sendOtp": "Send verification code",
+          "otpSent": "Verification code sent to your email",
+          "otpLabel": "Verification code",
+          "submit": "Set password",
+          "resendOtp": "Resend code",
+          "success": "Password set successfully. Please log in with your new password."
         },
         "email": {
           "title": "Update your email address",
@@ -1183,6 +1203,10 @@
       },
       "error": {
         "tryAgain": "Failed to load profile data, please try again later!"
+      },
+      "validation": {
+        "required": "This field is required",
+        "confirmationRequired": "You must confirm that you understand the consequences"
       },
       "name": {
         "label": "First name"

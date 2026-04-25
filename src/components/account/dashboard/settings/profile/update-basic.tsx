@@ -3,6 +3,7 @@ import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
 import useServerError from "@/components/hooks/localization/server-errors";
+import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import {
@@ -20,8 +21,8 @@ import {
   SharedSelection,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { useTranslations } from "next-intl";
-import { FC, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -37,6 +38,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
   const genderOptions = useGender();
   const hometownOptions = useProvinces();
   const ethnicityOptions = useEthnicity();
+  const locale = useLocale();
   const t = useTranslations("account.settings");
   const serverError = useServerError();
   const {
@@ -79,13 +81,22 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  const [confirmed, setConfirmed] = useState(false);
+  const [confirmationError, setConfirmationError] = useState<string | null>(null);
+
   const save = async (data: BasicDataFields) => {
+    if (!confirmed) {
+      setConfirmationError(t("validation.confirmationRequired"));
+      return;
+    }
+    setConfirmationError(null);
     try {
       const token = await generateToken("update_basic");
       const response = await fetch("/api/account/profile/update/basic", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept-Language": locale,
         },
         body: JSON.stringify({ ...data, recaptcha_token: token }),
       });
@@ -93,7 +104,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
         toast.success(t("update.success"));
       } else {
         const result = await response.json();
-        toast.error(serverError(result.messages?.[0] ?? ""));
+        toast.error(serverError(extractErrors(result.messages)[0]));
       }
     } catch {
       toast.error(t(serverError("unknown_error")));
@@ -107,7 +118,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
         <p className="text-default-500 text-sm">{t("basicData.description")}</p>
       </CardHeader>
       <CardBody>
-        <form className="flex w-full flex-col items-start gap-4" onSubmit={handleSubmit(save)}>
+        <form noValidate className="flex w-full flex-col items-start gap-4" onSubmit={handleSubmit(save)}>
           <Controller
             name="name"
             control={control}
@@ -138,17 +149,22 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
           <Controller
             name="gender"
             control={control}
-            rules={{ required: true }}
+            rules={{ required: t("validation.required") }}
             render={({ field, fieldState: { error, invalid } }) => (
               <Select
-                {...field}
                 label={t("fields.gender.label")}
                 isRequired
+                disallowEmptySelection
                 isInvalid={invalid}
                 errorMessage={error?.message}
-                selectedKeys={getValues("gender") ? [getValues("gender") as string] : []}
+                selectedKeys={field.value ? [field.value as string] : []}
+                onBlur={field.onBlur}
                 onSelectionChange={(selectedKeys: SharedSelection) => {
-                  setValue("gender", selectedKeys.anchorKey as keyof typeof genderOptions);
+                  setValue("gender", (selectedKeys.anchorKey?.toString() ?? "") as keyof typeof genderOptions, {
+                    shouldDirty: true,
+                    shouldTouch: true,
+                    shouldValidate: true,
+                  });
                 }}
               >
                 {Object.keys(genderOptions).map((key) => (
@@ -160,17 +176,21 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
           <Controller
             name="ethnicity"
             control={control}
-            rules={{ required: true }}
+            rules={{ required: t("validation.required") }}
             render={({ field, fieldState: { error, invalid } }) => (
               <Autocomplete
-                {...field}
                 label={t("fields.ethnicity.label")}
                 isRequired
                 isInvalid={invalid}
                 errorMessage={error?.message}
-                value={(getValues("ethnicity") as string) ?? ""}
-                onChange={(selected: React.Key | null) => {
-                  setValue("ethnicity", selected?.toString() as keyof typeof ethnicityOptions);
+                selectedKey={field.value ?? null}
+                onBlur={field.onBlur}
+                onSelectionChange={(selected) => {
+                  setValue("ethnicity", (selected?.toString() ?? "") as keyof typeof ethnicityOptions, {
+                    shouldDirty: true,
+                    shouldTouch: true,
+                    shouldValidate: true,
+                  });
                 }}
                 classNames={{ clearButton: "hidden" }}
               >
@@ -185,17 +205,21 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
           <Controller
             name="hometown"
             control={control}
-            rules={{ required: true }}
+            rules={{ required: t("validation.required") }}
             render={({ field, fieldState: { error, invalid } }) => (
               <Autocomplete
-                {...field}
                 label={t("fields.hometown.label")}
                 isRequired
                 isInvalid={invalid}
                 errorMessage={error?.message}
-                value={(getValues("hometown") as string) ?? ""}
-                onChange={(selected: React.Key | null) => {
-                  setValue("hometown", selected?.toString() as keyof typeof hometownOptions);
+                selectedKey={field.value ?? null}
+                onBlur={field.onBlur}
+                onSelectionChange={(selected) => {
+                  setValue("hometown", (selected?.toString() ?? "") as keyof typeof hometownOptions, {
+                    shouldDirty: true,
+                    shouldTouch: true,
+                    shouldValidate: true,
+                  });
                 }}
                 classNames={{ clearButton: "hidden" }}
               >
@@ -225,16 +249,24 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
             render={({ field }) => <Input {...field} label={t("record_id.label")} />}
           />
           <div className="flex flex-col items-start gap-4 pt-2">
-            <Controller
-              name="confirmation"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Checkbox {...field} isRequired value={"1"} classNames={{ label: "text-sm" }}>
-                  {t("profile.confirmation")}
-                </Checkbox>
-              )}
-            />
+            <div className="flex flex-col gap-1">
+              <Checkbox
+                isRequired
+                isSelected={confirmed}
+                onValueChange={(checked) => {
+                  setConfirmed(checked);
+                  if (checked) setConfirmationError(null);
+                }}
+                isInvalid={!!confirmationError}
+                color={confirmationError ? "danger" : "primary"}
+                classNames={{
+                  label: `text-sm ${confirmationError ? "text-danger" : ""}`,
+                }}
+              >
+                {t("profile.confirmation")}
+              </Checkbox>
+              {confirmationError && <p className="text-danger text-tiny ps-7 text-start">{confirmationError}</p>}
+            </div>
             <Button color="primary" type="submit" isDisabled={isSubmitting} isLoading={isSubmitting}>
               {t("profile.save")}
             </Button>
