@@ -14,7 +14,6 @@ import bellIcon from "@iconify-icons/heroicons/bell";
 import chartBarIcon from "@iconify-icons/heroicons/chart-bar";
 import clipboardDocumentCheckIcon from "@iconify-icons/heroicons/clipboard-document-check";
 import cog6ToothIcon from "@iconify-icons/heroicons/cog-6-tooth";
-import currencyDollarIcon from "@iconify-icons/heroicons/currency-dollar";
 import ellipsisHorizontalIcon from "@iconify-icons/heroicons/ellipsis-horizontal";
 import homeIcon from "@iconify-icons/heroicons/home";
 import { Icon } from "@iconify/react";
@@ -72,12 +71,6 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         title: t("nav.verifications"),
         link: "/account/verifications",
         icon: <Icon icon={clipboardDocumentCheckIcon} className="size-5" />,
-      },
-      {
-        key: "donate",
-        title: t("nav.donate"),
-        link: "/account/donate",
-        icon: <Icon icon={currencyDollarIcon} className="size-5" />,
       },
       {
         key: "signout",

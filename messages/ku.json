@@ -1,23 +1,23 @@
 {
   "common": {
     "search": "Lêgerîn",
-    "login": "Tîpa",
+    "login": "Têkeve",
     "logout": "Derkeve",
-    "email": "Ename",
-    "typeEmail": "Enameke xwe binivîse",
+    "email": "E-name",
+    "typeEmail": "E-nameya xwe binivîse",
     "password": "Şîfre",
     "typePassword": "Şîfreke xwe binivîse",
-    "rememberMe": "Min bi xwe veşêre",
+    "rememberMe": "Min bi bîr bîne",
     "continueWithGoogle": "Bi Google ve berdewam bike",
     "continueWithPasskey": "Bi Pass key ve berdewam bike",
     "or": "an",
     "read_more": "Zêdetir bixwîne",
     "preparing": "Di demek nêz de amade dibe",
     "account": "Hesabê min",
-    "close": "Nêzîkî",
-    "submit": "Agahdariyên xwe bidin",
-    "sending_data": "Agahdariyên dixwazin ...",
-    "selectImage": "Select images",
+    "close": "Bigire",
+    "submit": "Daneyan bişîne",
+    "sending_data": "Dane tên şandin ...",
+    "selectImage": "Wêneyan hilbijêre",
     "comingSoon": "Em bi dijwarî dixebitin ku di demek nêzîk de vê taybetmendiyê bînin"
   },
   "slogan": {
@@ -54,12 +54,12 @@
     }
   },
   "hero": {
-    "title": "Hûn bila bi guhdarîya me bimînin ku dixwazin bibînin",
+    "title": "Bila em bên ew guherîna ku em dixwazin bibînin",
     "description": "Ji kerema xwe li ser teşebbûsên me binêre, û ger we hevgirtinê bi me bikin, ji bo guhertinê piştgirî bidin."
   },
   "home": {
     "about": {
-      "title": "Di nav de min",
+      "title": "Der barê min de",
       "description": "Ez Feras im, neteweya Sûriyê, bi hêvîya ku Sûriyê ya nû di pêşerojê de rojekirî be. Ez ji salê 2010-an ve inşînerê nermalîyê me. Hêjî ku min karê şehîdî heye, ji bo masterê di Zanistên Daneyî de xwendinê dikim û ev jî pêwendiyanên din heye, di demên fêrbûna xwe de ez bi koda xwe bo komkujîna Sûrîyê dixwazim 💚. Heke hûn bawerî bikin ku karê min gîhîştinî û bêbextî ye, alîkariya we dikare min dê zêde wext danîn ku fûnksiyonên nû çêbikin û pêşve bibin.",
       "esyrians": "Ez domêna e-syrians.com ji bo yekî din jî girtiye ku bi fikra din a ji bo ku ez dîsa li ser wê karê bikim. Dibe ku ez di demek nêz de li ser wê karê bikim."
     },
@@ -113,13 +113,14 @@
     }
   },
   "footer": {
-    "privacy_policy": "Siyaseta Tenduristiyê",
-    "terms": "Şertên",
-    "all_rights_reserved": "Gelê hemû mafên parastin",
+    "privacy_policy": "Siyaseta Nepenîtiyê",
+    "terms": "Şert û merc",
+    "all_rights_reserved": "Hemû maf parastî ne",
     "initiatives": "Teşebbûs",
-    "links": "Lêgerîn",
+    "links": "Girêdan",
     "faq": "FAQ",
-    "contact": "Paqij bûn",
+    "donate": "Bexş bike",
+    "contact": "Bi me re têkilî daynin",
     "copy_right": "Hemû maf parastî ne"
   },
   "census": {
@@ -281,17 +282,17 @@
       "alreadySignedInDescription": "Niha hûn dikarin bi taybetmendiyên platformê veqetînin. Heke hûn amûrê giştîyê bikar tînin, bîra xwe bikin ku berî ku derkevin têketinê bixwazin."
     },
     "nav": {
-      "stats": "Seretayî",
-      "first_batch": "Têkildarên Yên Yêkê",
-      "fraudsters": "Şexsên xelatê"
+      "stats": "Sereke",
+      "first_batch": "Qeydkiriyên Yekem",
+      "fraudsters": "Hesabên sexte"
     },
     "first": {
       "description": "Ev liste di nav de têkildarên yên yekemîn  {count} kesan dikeve ku di pergala de qeyd bûn û ji hêla kesên din re were pejirandin. Ji ber ku ne heye têkildarên berê ku dikaribin pejirandin, parvekirina wan ji bo hemû kesan vekirîye da ku aştiyê berdewam bike. Em piştrast in ku wan kesên rast in—tu dikarî serhêlên wan bixwînî û girêdanên wan li ser medya sosialê kontrol bikî.",
       "title": "Têkildarên Yên Yêkê"
     },
     "fraudsters": {
-      "title": "Şexsên xelatê",
-      "description": "Ev rûpel têkildarên ku hûn pejirandina teknikî yên wan wekî xelat hatine hilbijartin. Dema ku têne piştrastkirin ku hesabê xelat e, hesabê dê ragihîne û her kes ku pejirandina wan kir."
+      "title": "Hesabên Sexte",
+      "description": "Ev rûpel hesabên ku li ser bingeha delîlên teknîkî wekî sexte hatine nas kirin nîşan dide. Ji bo parastina bawerî û rastiyê di pergalê de, her hesabê ku sexte were îsbat kirin dê bi piştrastkarên wê re were rawestandin."
     },
     "charts": {
       "dailyRegistrations": {
@@ -299,8 +300,8 @@
         "description": "Hejmara hesabên ku hatine afirandin/pejirandin"
       },
       "categories": {
-        "registered": "Têkildar",
-        "verified": "Pejirandin",
+        "registered": "Qeydkirî",
+        "verified": "Piştrastkirî",
         "1-10": "1-10",
         "11-20": "11-20",
         "21-30": "21-30",
@@ -346,50 +347,50 @@
       },
       "labels": {
         "registered": {
-          "title": "Proseya Têkildarî"
+          "title": "Qeydkirin"
         },
         "verification": {
-          "title": "Proseya Pejirandina"
+          "title": "Piştrastkirin"
         },
         "verified": {
-          "title": "Pejirandin"
+          "title": "Piştrastkirî"
         },
         "unverified": {
-          "title": "Nepejirandin"
+          "title": "Nepiştrastkirî"
         }
       }
     }
   },
   "gender": {
-    "f": "Female",
-    "m": "Male"
+    "f": "Jin",
+    "m": "Mêr"
   },
   "province": {
-    "deir-ezzor": "Deir-ezzor",
-    "damascus": "Damascus",
-    "hama": "Hama",
-    "homs": "Homs",
+    "deir-ezzor": "Dêrezor",
+    "damascus": "Şam",
+    "hama": "Hema",
+    "homs": "Hims",
     "idlib": "Idlib",
-    "latakia": "Latakia",
-    "aleppo": "Aleppo",
-    "suwayda": "Assuwayda",
-    "rif-dimashq": "Rif Dimashq",
-    "daraa": "Daraa",
-    "hasakah": "Hasakah",
-    "quneitra": "Quneitra",
-    "raqqa": "Raqqa",
-    "tartus": "Tartus"
+    "latakia": "Lazkiye",
+    "aleppo": "Heleb",
+    "suwayda": "Siwêda",
+    "rif-dimashq": "Hawirdora Şamê",
+    "daraa": "Dera",
+    "hasakah": "Hesekê",
+    "quneitra": "Quneytira",
+    "raqqa": "Reqa",
+    "tartus": "Tartûs"
   },
   "ethnicity": {
-    "arab": "Arab",
+    "arab": "Ereb",
     "kurd": "Kurd",
-    "turkmen": "Turkmen",
-    "armenian": "Armenian",
-    "greek": "Greek",
-    "assyrian": "Assyrian",
-    "chechen": "Chechen",
-    "circassian": "Circassian",
-    "other": "Other"
+    "turkmen": "Tirkmen",
+    "armenian": "Ermenî",
+    "greek": "Yewnanî",
+    "assyrian": "Asûrî",
+    "chechen": "Çeçen",
+    "circassian": "Çerkez",
+    "other": "Yên din"
   },
   "religious_affiliation": {
     "sunni": "Sunnî",
@@ -664,44 +665,44 @@
     "ZW": "Zimbabwe"
   },
   "education": {
-    "none": "Nehêvî",
+    "none": "Tune",
     "primary": "Dibistana Seretayî",
     "secondary": "Dibistana Navîn",
     "high-school": "Lise",
     "university-degree": "Diploma Zankoyê",
-    "postgraduate": "Master an Jiyana Akademîk"
+    "postgraduate": "Masterê an Doktora"
   },
   "spoken-language": {
-    "arabic": "Arabic",
-    "chinese": "Chinese",
-    "english": "English",
-    "french": "French",
-    "german": "German",
-    "kurdish": "Kurdish",
-    "hindi": "Hindi",
-    "italian": "Italian",
-    "dutch": "Dutch",
-    "japanese": "Japanese",
-    "korean": "Korean",
-    "other": "Other",
-    "persian": "Persian",
-    "portuguese": "Portuguese",
-    "russian": "Russian",
-    "spanish": "Spanish",
-    "turkish": "Turkish",
-    "urdu": "Urdu"
+    "arabic": "Erebî",
+    "chinese": "Çînî",
+    "english": "Îngilîzî",
+    "french": "Fransî",
+    "german": "Elmanî",
+    "kurdish": "Kurdî",
+    "hindi": "Hindî",
+    "italian": "Îtalî",
+    "dutch": "Holendî",
+    "japanese": "Japonî",
+    "korean": "Koreyî",
+    "other": "Yên din",
+    "persian": "Farisî",
+    "portuguese": "Portekîzî",
+    "russian": "Rûsî",
+    "spanish": "Spanî",
+    "turkish": "Tirkî",
+    "urdu": "Urdû"
   },
   "source-of-income": {
-    "stable-job": "Stable job",
-    "freelance": "I am a freelancer",
-    "no-income": "No income",
-    "aid-support": "Aid support",
-    "other": "Other"
+    "stable-job": "Karê domdar",
+    "freelance": "Ez serbixwe dixebitim",
+    "no-income": "Dahatê tune",
+    "aid-support": "Alîkariya piştevanî",
+    "other": "Yên din"
   },
   "health_status": {
-    "good": "Good",
-    "chronic-illness": "I have a chronic illness",
-    "disabled-special-needs": "I have a disability"
+    "good": "Baş",
+    "chronic-illness": "Nexweşiyek kronîk heye",
+    "disabled-special-needs": "Astengdariyekê heye"
   },
   "auth": {
     "login": {
@@ -744,11 +745,11 @@
         "polls": "Anketên",
         "verifications": "Pejirandin",
         "settings": "Mîhengên",
-        "donate": "Bikarhêner",
+        "donate": "Bexş bike",
         "signout": "Derketin",
-        "notifications": "ئاگاداریەکان",
+        "notifications": "Agahdarî",
         "more": "Zêdetir",
-        "overview": "پوختە"
+        "overview": "Berçav"
       },
       "polls": {
         "my_polls": {
@@ -951,69 +952,69 @@
               "label": "Tenê ji bo temaşevanan"
             }
           },
-          "error": "هەڵەیەک ڕوویدا لە کاتی دروستکردنی ڕاپرسییەکە"
+          "error": "Di dema afirandina anketê de çewtiyek derket"
         }
       },
       "verifications": {
         "my-verifications": {
-          "title": "Verifications I made"
+          "title": "Piştrastkirinên ku min kirin"
         },
         "my-verifiers": {
-          "title": "Verifications I received"
+          "title": "Piştrastkirinên ku min wergirtin"
         },
         "verifiers-table": {
-          "title": "People who have verified my data",
+          "title": "Kesên ku daneyên min piştrast kirine",
           "name": {
-            "title": "Name"
+            "title": "Nav"
           },
           "date": {
-            "title": "Date"
+            "title": "Dîrok"
           },
           "table": {
             "status": {
-              "title": "Status"
+              "title": "Rewş"
             },
             "notes": {
-              "title": "Notes"
+              "title": "Têbînî"
             }
           },
           "status": {
             "cancelled": {
-              "title": "Cancelled"
+              "title": "Hatî betalkirin"
             },
             "active": {
-              "title": "Active"
+              "title": "Çalak"
             }
           },
-          "noVerifiers": "You have received 0 verifications. You can share your profile URL with your network",
-          "copyProfileUrl": "Copy profile URL",
-          "description": "url profîla te"
+          "noVerifiers": "Tu 0 piştrastkirin wergirtiye. Tu dikarî URL-ya profîla xwe bi tora xwe re parve bikî",
+          "copyProfileUrl": "URL-ya profîlê kopî bike",
+          "description": "URL-ya profîla te"
         },
         "verifications-table": {
           "name": {
-            "title": "Name"
+            "title": "Nav"
           },
           "date": {
-            "title": "Date"
+            "title": "Dîrok"
           },
           "table": {
             "status": {
-              "title": "Status"
+              "title": "Rewş"
             },
             "notes": {
-              "title": "Notes"
+              "title": "Têbînî"
             }
           },
           "status": {
             "cancelled": {
-              "title": "Cancelled"
+              "title": "Hatî betalkirin"
             },
             "active": {
-              "title": "Active"
+              "title": "Çalak"
             }
           },
-          "title": "Verifications I sent",
-          "noVerifications": "You have made 0 verifications"
+          "title": "Piştrastkirinên ku min şandin",
+          "noVerifications": "Te 0 piştrastkirin kirine"
         }
       },
       "security": {
@@ -1058,8 +1059,8 @@
           "change": "E-nameyê biguherînin",
           "email": "Navnîşana emailê",
           "emailVerificationStatus": "Navnîşana e-nameya we ya niha {status} e",
-          "verified": "verified",
-          "notVerified": "not verified",
+          "verified": "piştrastkirî",
+          "notVerified": "nepiştrastkirî",
           "resendVerification": "Naha verast bikin",
           "sending": "şandin...",
           "verificationLinkSent": "Girêdana verastkirinê şandin",
@@ -1114,64 +1115,64 @@
       },
       "notifications": {
         "tabs": {
-          "history": "مێژوو",
-          "settings": "ڕێکخستنەکان"
+          "history": "Dîrok",
+          "settings": "Mîheng"
         },
         "history": {
-          "title": "مێژووی ئاگاداریەکان",
-          "empty": "هێشتا هیچ ئاگادارییەکت نییە.",
+          "title": "Dîroka agahdarîyan",
+          "empty": "Hêj tu agahdariyeke te tune ye.",
           "columns": {
-            "content": "ئاگاداری",
-            "actions": "بژاردەکان"
+            "content": "Agahdarî",
+            "actions": "Vebijark"
           },
-          "markAsRead": "وەک خوێندراو نیشانە بکە",
-          "markAllAsRead": "هەمووی وەک خوێندراو نیشانە بکە",
-          "delete": "سڕینەوە"
+          "markAsRead": "Wekî xwendî nîşan bike",
+          "markAllAsRead": "Hemûyan wekî xwendî nîşan bike",
+          "delete": "Jêbirin"
         },
         "preferences": {
-          "title": "ئارەزووەکانی ئاگاداری",
-          "description": "هەڵبژێرە کام ئاگادارییەکان وەربگریت و بە چ ڕێگەیەک.",
-          "received_verification_email": "کاتێک کەسێک زانیارییەکانم پشتڕاست دەکاتەوە",
-          "received_verification_email_description": "دەنێردرێت کاتێک ئەندامێکی تری کۆمەڵگە زانیارییەکانت پشتڕاست دەکاتەوە.",
-          "account_verified_email": "کاتێک هەژمارەکەم پشتڕاست دەکرێتەوە",
-          "account_verified_email_description": "دەنێردرێت کاتێک پشتڕاستکردنی پێویست کۆدەکەیتەوە بۆ ئەوەی هەژمارەکەت وەک پشتڕاستکراو نیشان بدرێت.",
-          "update": "پاشەکەوتکردنی ئارەزووەکان",
-          "success": "Mîhengên ragihandinê bi serkeftî hatin nûve kirin",
+          "title": "Tercîhên agahdarîyan",
+          "description": "Hilbijêre kîjan agahdarîyan werdigirî û bi kîjan rêyê.",
+          "received_verification_email": "Dema ku kesek daneyên min piştrast dike",
+          "received_verification_email_description": "Dema ku endamekî din ê civakê daneyên te piştrast dike tê şandin.",
+          "account_verified_email": "Dema ku hesabê min tê piştrastkirin",
+          "account_verified_email_description": "Dema ku piştrastkirinên pêwîst têne temamkirin ji bo ku hesabê te wekî piştrastkirî were nîşandan tê şandin.",
+          "update": "Tercîhan nûve bike",
+          "success": "Mîhengên agahdarîyan bi serkeftî hatin nûve kirin",
           "columns": {
-            "notification": "ئاگاداری",
-            "email": "کەناڵ"
+            "notification": "Agahdarî",
+            "email": "Kanal"
           },
           "channels": {
-            "email": "ئیمەیل"
+            "email": "E-name"
           }
         }
       },
       "privacy": {
-        "title": "تایبەتمەندی",
-        "description": "ڕێکخستنەکانی تایبەتمەندی و چۆنیەتی بەکارهێنانی داتاکانت بەڕێوە ببە.",
-        "comingSoon": "ڕێکخستنەکانی تایبەتمەندی بەم زووانە دێت."
+        "title": "Nepenîtî",
+        "description": "Mîhengên nepenîtiyê û awayê bikaranîna daneyên xwe birêve bibe.",
+        "comingSoon": "Mîhengên nepenîtiyê di demek nêzîk de tên."
       },
       "overview": {
-        "error": "بارکردنی پوختە سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە.",
-        "retry": "دووبارە هەوڵ بدەوە",
-        "verified": "پشتڕاستکراوەتەوە",
-        "unverified": "پشتڕاست نەکراوەتەوە",
-        "profileComplete": "تەواوبوونی پڕۆفایل",
-        "editProfile": "دەستکاری پڕۆفایل",
+        "error": "Barkirina berçavê serneket. Ji kerema xwe dîsa biceribîne.",
+        "retry": "Dîsa biceribîne",
+        "verified": "Piştrastkirî",
+        "unverified": "Nepiştrastkirî",
+        "profileComplete": "Temamkirina profîlê",
+        "editProfile": "Profîlê biguherîne",
         "stats": {
-          "polls": "ڕاپرسییە دروستکراوەکان",
-          "verificationsReceived": "پشتڕاستکردنەوەی وەرگیراو",
-          "verificationsGiven": "پشتڕاستکردنەوەی پێشکەشکراو",
-          "createPoll": "دروستکردنی ڕاپرسی"
+          "polls": "Anketên hatine afirandin",
+          "verificationsReceived": "Piştrastkirinên hatine wergirtin",
+          "verificationsGiven": "Piştrastkirinên hatine dayîn",
+          "createPoll": "Anketek çêke"
         },
         "recentPolls": {
-          "title": "دوایین ڕاپرسییەکان",
-          "viewAll": "بینینی هەموو",
-          "empty": "تا ئێستا هیچ ڕاپرسییەکت دروست نەکردووە.",
-          "create": "یەکەم ڕاپرسییەکەت دروست بکە",
-          "active": "چالاک",
-          "inactive": "ناچالاک",
-          "votes": "دەنگ"
+          "title": "Anketên dawî",
+          "viewAll": "Hemûyan bibîne",
+          "empty": "Hêj te tu anket çênekirin.",
+          "create": "Anketa xwe ya yekem çêke",
+          "active": "Çalak",
+          "inactive": "Neçalak",
+          "votes": "Deng"
         },
         "comingSoon": {}
       }
@@ -1185,7 +1186,7 @@
           "title": "Sazkirina ewlehî"
         },
         "privacy": {
-          "title": "تایبەتمەندی"
+          "title": "Nepenîtî"
         }
       },
       "sections": {
@@ -1247,7 +1248,7 @@
         "save": "Wêneya barkirin",
         "update": {
           "success": "Wêneyê guhertibû!",
-          "error": "نوێکردنەوەی وێنەی پڕۆفایل سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەوە."
+          "error": "Nûvekirina wêneya profîlê serneket. Ji kerema xwe dîsa biceribîne."
         },
         "avatar": {
           "title": "Wêneyê xweşî",
@@ -1400,8 +1401,8 @@
   },
   "header": {
     "nav": {
-      "census": "Serbixwe",
-      "polls": "Lêkolîn"
+      "census": "Serjimêrî",
+      "polls": "Anket"
     }
   },
   "server_errors": {
@@ -1431,25 +1432,25 @@
     "target_user_data_not_filled": "Pêdivî ye ku bikarhêner daneyên wî yên bingehîn dagirtî be da ku were verast kirin",
     "unauthorized": "Hûn ne destûr in ku hûn vê çalakiyê bikin",
     "unauthenticated": "Hûn nerastkirî ne, ji kerema xwe pêşî têkevinê",
-    "logged_out": "بە سەرکەوتوویی چوویتە دەرەوە",
-    "user_already_verified": "ئیمەیڵەکەت پێشتر پشتڕاست کراوەتەوە",
-    "verification_email_sent": "نامەی پشتڕاستکردنەوە نێردرا",
-    "email_verified": "ئیمەیڵ بە سەرکەوتوویی پشتڕاست کرایەوە",
-    "password_updated": "وشەی نهێنی بە سەرکەوتوویی نوێ کرایەوە",
-    "reset_link_sent": "لینکی ڕیسێتکردنی وشەی نهێنی نێردرا",
-    "password_reset_successfully": "وشەی نهێنی بە سەرکەوتوویی ڕیسێت کرا",
-    "email_changed": "ئیمەیڵ بە سەرکەوتوویی گۆڕدرا",
-    "notifications_changed": "ڕێکخستنەکانی ئاگادارکردنەوە نوێ کرایەوە",
-    "language_updated": "زمان بە سەرکەوتوویی نوێ کرایەوە",
-    "invalid_file_type": "جۆری فایل نادروستە",
-    "user_not_found": "بەکارهێنەر نەدۆزرایەوە",
-    "target_user_not_found": "بەکارهێنەری ئامانج نەدۆزرایەوە",
-    "user_is_banned": "ئەم بەکارهێنەرە قەدەغەکراوە",
-    "you_have_made_a_lot_of_verifications": "ژمارەیەکی زۆر پشتڕاستکردنەوەت ئەنجام داوە",
-    "not_implemented": "ئەم تایبەتمەندییە هێشتا بەردەست نییە",
-    "recaptcha_token_required": "پشتڕاستکردنەوەی ئەمنی پێویستە",
-    "recaptcha_verification_failed": "پشتڕاستکردنەوەی ئەمنی سەرنەکەوت، تکایە دووبارە هەوڵبدەرەوە",
-    "voters_not_visible": "دەنگدەران بۆ ئەم ڕاپرسییە نابینرێن",
+    "logged_out": "Bi serkeftî derketî",
+    "user_already_verified": "E-nameya te berê hatiye piştrastkirin",
+    "verification_email_sent": "Nameya piştrastkirinê hat şandin",
+    "email_verified": "E-name bi serkeftî hat piştrastkirin",
+    "password_updated": "Şîfre bi serkeftî hat nûvekirin",
+    "reset_link_sent": "Girêdana veguhertina şîfreyê hat şandin",
+    "password_reset_successfully": "Şîfre bi serkeftî hat veguheztin",
+    "email_changed": "E-name bi serkeftî hat guhertin",
+    "notifications_changed": "Mîhengên agahdarîyan hatin nûvekirin",
+    "language_updated": "Ziman bi serkeft�� hat nûvekirin",
+    "invalid_file_type": "Cureyê dosyayê nederbasdar e",
+    "user_not_found": "Bikarhêner nehate dîtin",
+    "target_user_not_found": "Bikarhênerê armancê nehate dîtin",
+    "user_is_banned": "Ev bikarhêner hatiye qedexekirin",
+    "you_have_made_a_lot_of_verifications": "Te gelek piştrastkirin kirine",
+    "not_implemented": "Ev taybetmendî hêj amade nîne",
+    "recaptcha_token_required": "Piştrastkirina ewlehiyê pêwîst e",
+    "recaptcha_verification_failed": "Piştrastkirina ewlehiyê serneket, ji kerema xwe dîsa biceribîne",
+    "voters_not_visible": "Dengdêr ji bo vê anketê nayên dîtin",
     "audience_birth_date_missing": "Dîroka jidayikbûna te ji bo beşdarîbûna vê lêkolînê pêwîst e",
     "audience_age_min": "Temenê te ji bo vê lêkolînê piçûk e",
     "audience_age_max": "Temenê te ji bo vê lêkolînê mezin e",
@@ -1463,10 +1464,10 @@
     "audience_gender": "Zayenda te bi temaşevanên lêkolînê re nagunce",
     "audience_ethnicity_missing": "Etnîsîteya te ji bo beşdarîbûna vê lêkolînê pêwîst e",
     "audience_ethnicity": "Etnîsîteya te bi temaşevanên lêkolînê re nagunce",
-    "user_already_has_password": "تۆ پێشتر وشەی نهێنی دانابوو",
-    "otp_sent": "کۆدی پشتڕاستکردنەوە نێردرا بۆ ئیمەیڵەکەت",
-    "invalid_or_expired_otp": "کۆدی پشتڕاستکردنەوە نادروست یان بەسەرچوو",
-    "password_set_successfully": "وشەی نهێنی بە سەرکەوتوویی دانرا"
+    "user_already_has_password": "Te berê şîfre danîbû",
+    "otp_sent": "Koda piştrastkirinê ji e-nameya te re hat şandin",
+    "invalid_or_expired_otp": "Koda piştrastkirinê nederbasdar e an jî qediya",
+    "password_set_successfully": "Şîfre bi serkeftî hat danîn"
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1549,7 +1550,7 @@
       "all": "Hemû kategorî"
     },
     "voters_count": "{count} kes di vê anketê de daxwaz kirin",
-    "close": "Nêzîkî",
+    "close": "Bigire",
     "share": {
       "x": "Parve bikin li ser X (Twitter)",
       "facebook": "Parve bikin li ser Facebook",
@@ -1562,10 +1563,10 @@
     "votingPeriod": "Dema dengdanê",
     "noOptionSelected": "Ji kerema xwe vebijarkek hilbijêre",
     "voters": {
-      "title": "دەنگدەران",
-      "total": "{count} دەنگدەر",
-      "noVoters": "هێشتا دەنگدەرێک نییە",
-      "loadMore": "زیاتر ببینە"
+      "title": "Dengdêr",
+      "total": "{count} dengdêr",
+      "noVoters": "Hêj dengdêrek tune ye",
+      "loadMore": "Zêdetir bibîne"
     }
   },
   "actions": {
@@ -1604,7 +1605,7 @@
     "website": "Malpera Kesane"
   },
   "privacyPolicy": {
-    "title": "Siyaseta Kesayetî",
+    "title": "Siyaseta Nepenîtiyê",
     "intro": "Li e-syrians de, em pêşî kesayetiyê te dikin û em têkildar in ku danegehên te ya kesayî biparêzin.",
     "dataCollection": {
       "title": "Berhevkirina Danegehê",
