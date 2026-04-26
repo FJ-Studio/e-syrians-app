@@ -299,68 +299,43 @@ describe("No hardcoded theme-breaking colors in components", () => {
 
   const tsxFiles = getAllTsxFiles(srcDir);
 
-  it("no active text-white classes remain (should use text-primary-foreground)", () => {
-    const violations: string[] = [];
-    for (const file of tsxFiles) {
-      const content = fs.readFileSync(file, "utf-8");
-      // Skip commented lines
-      const lines = content.split("\n");
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (line.startsWith("//") || line.startsWith("*")) continue;
-        if (/\btext-white\b/.test(line) && !line.startsWith("//")) {
-          violations.push(`${path.relative(srcDir, file)}:${i + 1}`);
-        }
+  // Read every file once and check all patterns in a single pass
+  const rules = [
+    { name: "text-white", pattern: /\btext-white\b/ },
+    { name: "bg-gray-*", pattern: /\bbg-gray-\d+\b/ },
+    { name: "text-black", pattern: /\btext-black\b/ },
+    { name: "dark:text-default-[1-3]00", pattern: /\bdark:text-default-[123]00\b/ },
+  ] as const;
+
+  const violationsByRule: Record<string, string[]> = {};
+  for (const r of rules) violationsByRule[r.name] = [];
+
+  for (const file of tsxFiles) {
+    const content = fs.readFileSync(file, "utf-8");
+    const lines = content.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith("//") || line.startsWith("*")) continue;
+      const loc = `${path.relative(srcDir, file)}:${i + 1}`;
+      for (const r of rules) {
+        if (r.pattern.test(line)) violationsByRule[r.name].push(loc);
       }
     }
-    expect(violations).toEqual([]);
+  }
+
+  it("no active text-white classes remain (should use text-primary-foreground)", () => {
+    expect(violationsByRule["text-white"]).toEqual([]);
   });
 
   it("no bg-gray-* classes remain (should use bg-default-*)", () => {
-    const violations: string[] = [];
-    for (const file of tsxFiles) {
-      const content = fs.readFileSync(file, "utf-8");
-      const lines = content.split("\n");
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (line.startsWith("//") || line.startsWith("*")) continue;
-        if (/\bbg-gray-\d+\b/.test(line)) {
-          violations.push(`${path.relative(srcDir, file)}:${i + 1}`);
-        }
-      }
-    }
-    expect(violations).toEqual([]);
+    expect(violationsByRule["bg-gray-*"]).toEqual([]);
   });
 
   it("no text-black classes remain (should use text-foreground)", () => {
-    const violations: string[] = [];
-    for (const file of tsxFiles) {
-      const content = fs.readFileSync(file, "utf-8");
-      const lines = content.split("\n");
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (line.startsWith("//") || line.startsWith("*")) continue;
-        if (/\btext-black\b/.test(line)) {
-          violations.push(`${path.relative(srcDir, file)}:${i + 1}`);
-        }
-      }
-    }
-    expect(violations).toEqual([]);
+    expect(violationsByRule["text-black"]).toEqual([]);
   });
 
   it("no counterproductive dark:text-default-[1-3]00 overrides (HeroUI inverts scale)", () => {
-    const violations: string[] = [];
-    for (const file of tsxFiles) {
-      const content = fs.readFileSync(file, "utf-8");
-      const lines = content.split("\n");
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (line.startsWith("//") || line.startsWith("*")) continue;
-        if (/\bdark:text-default-[123]00\b/.test(line)) {
-          violations.push(`${path.relative(srcDir, file)}:${i + 1}`);
-        }
-      }
-    }
-    expect(violations).toEqual([]);
+    expect(violationsByRule["dark:text-default-[1-3]00"]).toEqual([]);
   });
 });
