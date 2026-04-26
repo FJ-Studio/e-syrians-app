@@ -120,7 +120,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <Container className="mt-4 mb-6">
         <div className="flex items-start gap-x-4">
           {/* Desktop sidebar — visible at xl and above */}
-          <aside className="border-small rounded-small border-default-200 bg-default-50 sticky top-32 hidden w-full px-1 py-2 xl:flex xl:max-w-65">
+          <aside className="border-small rounded-small border-default-200 bg-default-50 sticky top-32 hidden w-full px-1 py-2 xl:flex xl:max-w-64">
             <Listbox aria-label="Account navigation">
               {links.map((link) => (
                 <ListboxItem
