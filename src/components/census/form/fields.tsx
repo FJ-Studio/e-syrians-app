@@ -11,7 +11,7 @@ import {
   Textarea,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { ReactElement, ReactNode } from "react";
+import { Key, ReactElement, ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 // ---------------------------------------------------------------------------
@@ -140,10 +140,10 @@ interface FormAutocompleteProps<T extends FieldValues> extends BaseFieldProps<T>
   options: Record<string, string>;
   isRequired?: boolean;
   description?: string;
-  defaultSelectedKey?: string;
+  defaultValue?: string;
   scrollShadowProps?: Record<string, unknown>;
   renderItem?: (key: string, label: string) => ReactElement;
-  onSelectionChange?: (key: string | null) => void;
+  onChange?: (key: string | null) => void;
 }
 
 export function FormAutocomplete<T extends FieldValues>({
@@ -153,10 +153,10 @@ export function FormAutocomplete<T extends FieldValues>({
   options,
   isRequired,
   description,
-  defaultSelectedKey,
+  defaultValue,
   scrollShadowProps,
   renderItem,
-  onSelectionChange,
+  onChange: onChangeProp,
   rules,
 }: FormAutocompleteProps<T>) {
   return (
@@ -167,18 +167,18 @@ export function FormAutocomplete<T extends FieldValues>({
       render={({ field, fieldState: { error, invalid } }) => (
         <Autocomplete
           scrollShadowProps={scrollShadowProps}
-          {...field}
           label={label}
           isRequired={isRequired}
           isInvalid={invalid}
           errorMessage={error?.message}
           description={description}
-          defaultSelectedKey={defaultSelectedKey}
-          selectedKey={field.value}
-          onSelectionChange={(key) => {
+          defaultValue={defaultValue}
+          value={field.value ?? null}
+          onBlur={field.onBlur}
+          onChange={(key: Key | null) => {
             const val = key?.toString() ?? null;
             field.onChange(val);
-            onSelectionChange?.(val);
+            onChangeProp?.(val);
           }}
           classNames={{ clearButton: "hidden" }}
         >

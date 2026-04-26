@@ -102,7 +102,7 @@ export const GET = withAuthGet(async ({ session }) => {
     "ethnicity",
     "religious_affiliation",
     "country",
-    "city",
+    "province",
     "avatar",
     "national_id",
     "education_level",

@@ -17,7 +17,7 @@ export default function EducationSection({ control, getValues, t }: Omit<Section
         control={control}
         label={t("fields.education_level.label")}
         options={educationLevels}
-        defaultSelectedKey={getValues("education_level")}
+        defaultValue={getValues("education_level")}
       />
       <FormSelect
         name="languages"

@@ -212,11 +212,6 @@
           "label": "Country",
           "description": "Please select the country you currently live in."
         },
-        "city": {
-          "label": "City",
-          "placeholder": "Please enter your current city",
-          "description": "In which city do you live?"
-        },
         "address": {
           "label": "Current detailed address",
           "description": "Your address will be encrypted"
@@ -263,7 +258,7 @@
           "label": "Password confirmation",
           "placeholder": "Please enter your password again"
         },
-        "city_inside_syria": {
+        "province": {
           "label": "Where do you live in Syria"
         }
       },
@@ -920,7 +915,7 @@
             "label": "Religious affiliation",
             "description": "A blank value indicates that users from all religious affiliations are eligible to vote."
           },
-          "city_inside_syria": {
+          "province": {
             "label": "City in Syria",
             "description": "Only shown when country is set to Syria only. A blank value indicates that users from all cities in Syria are eligible to vote."
           },
@@ -1294,7 +1289,7 @@
             "label": "Country",
             "description": "Changing your country impacts poll audience targeting and is therefore restricted to a few times per year."
           },
-          "city_inside_syria": {
+          "province": {
             "label": "Where do you live in Syria"
           }
         },
@@ -1317,9 +1312,6 @@
           },
           "other_nationalities": {
             "label": "Other nationalities"
-          },
-          "city": {
-            "label": "City"
           },
           "address": {
             "label": "Address"
@@ -1470,7 +1462,11 @@
     "audience_gender_missing": "Your gender is required to participate in this poll",
     "audience_gender": "Your gender does not match the poll audience",
     "audience_ethnicity_missing": "Your ethnicity is required to participate in this poll",
-    "audience_ethnicity": "Your ethnicity does not match the poll audience"
+    "audience_ethnicity": "Your ethnicity does not match the poll audience",
+    "user_already_has_password": "You already have a password set up",
+    "otp_sent": "A verification code has been sent to your email",
+    "invalid_or_expired_otp": "Invalid or expired verification code",
+    "password_set_successfully": "Password set successfully"
   },
   "publicVerify": {
     "title": "Verify user information",
@@ -1581,7 +1577,7 @@
     "ethnicity": "the ethnicity you belong to in is not in the list of this poll audience",
     "gender": "Your gender in is not in the list of this poll audience",
     "hometown": "The hometown you belong to in is not in the list of this poll audience",
-    "city_inside_syria": "The city you live in within Syria is not in the list of this poll audience",
+    "province": "The city you live in within Syria is not in the list of this poll audience",
     "not_in_allowed_voters": "You are not in the list of people allowed to vote on this poll",
     "religious_affiliation": "The sect you belong to in is not in the list of this poll audience",
     "unauthorized": "You are not signed in",

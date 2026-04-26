@@ -64,10 +64,9 @@ export type RegistrationForm = {
   password_confirmation: string;
   // location
   country: CountryCode;
-  city: string;
   address: string;
   shelter: boolean;
-  city_inside_syria: string;
+  province: string;
   // education
   education_level: string;
   skills: string;

@@ -65,7 +65,7 @@ const CreatePoll: FC = () => {
         gender: [],
         hometown: [],
         religious_affiliation: [],
-        city_inside_syria: [],
+        province: [],
         allowed_voters: "",
       },
       max_selections: "1",
@@ -119,7 +119,7 @@ const CreatePoll: FC = () => {
         "country",
         "religious_affiliation",
         "ethnicity",
-        "city_inside_syria",
+        "province",
       ] as const;
       arrayCriteria.forEach((key) => {
         const values = data.audience[key] ?? [];
@@ -377,7 +377,7 @@ const CreatePoll: FC = () => {
                   setValue("audience.country", []);
                   setValue("audience.religious_affiliation", []);
                   setValue("audience.ethnicity", []);
-                  setValue("audience.city_inside_syria", []);
+                  setValue("audience.province", []);
                   setValue("audience.age_range.min", MIN_AUDIENCE_AGE);
                   setValue("audience.age_range.max", MAX_AUDIENCE_AGE);
                 }
@@ -491,12 +491,12 @@ const CreatePoll: FC = () => {
           />
           {(countryValue ?? []).includes("SY") && (
             <Controller
-              name="audience.city_inside_syria"
+              name="audience.province"
               control={control}
               render={({ field }) => (
                 <Select
-                  label={t("city_inside_syria.label")}
-                  description={t("city_inside_syria.description")}
+                  label={t("province.label")}
+                  description={t("province.description")}
                   selectionMode="multiple"
                   selectedKeys={field.value ?? []}
                   onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}

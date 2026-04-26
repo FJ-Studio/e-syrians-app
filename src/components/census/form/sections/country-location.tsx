@@ -39,25 +39,20 @@ export default function CountryLocationSection({ control, getValues, setValue, t
         label={t("fields.country.label")}
         description={t("fields.country.description")}
         options={countries}
-        defaultSelectedKey={getValues("country")}
+        defaultValue={getValues("country")}
         scrollShadowProps={{ isEnabled: false }}
         renderItem={countryAutocompleteRenderItem}
       />
 
       {getValues("country") === "SY" && (
         <FormAutocomplete
-          name="city_inside_syria"
+          name="province"
           control={control}
           rules={{ required: true }}
           isRequired
-          label={t("fields.city_inside_syria.label")}
+          label={t("fields.province.label")}
           options={provinces}
-          defaultSelectedKey={getValues("city_inside_syria")}
-          onSelectionChange={(key) => {
-            if (key) {
-              setValue("city", provinces[key as keyof typeof provinces]);
-            }
-          }}
+          defaultValue={getValues("province")}
         />
       )}
 
@@ -97,12 +92,6 @@ export default function CountryLocationSection({ control, getValues, setValue, t
         number={4}
         title={t("sections.locationData.title")}
         description={t("sections.locationData.description")}
-      />
-      <FormInput
-        name="city"
-        control={control}
-        label={t("fields.city.label")}
-        description={t("fields.city.description")}
       />
       <FormInput
         name="address"

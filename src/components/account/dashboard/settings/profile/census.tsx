@@ -37,7 +37,6 @@ interface CensusFields {
   middle_name: string;
   religious_affiliation: ReligiousAffiliation;
   other_nationalities: string;
-  city: string;
   address: string;
   shelter: boolean | string;
   education_level: string;
@@ -77,7 +76,6 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
       middle_name: user?.middle_name ?? undefined,
       religious_affiliation: user?.religious_affiliation ?? undefined,
       other_nationalities: user?.other_nationalities ?? undefined,
-      city: user?.city ?? undefined,
       address: user?.address ?? undefined,
       shelter: user?.shelter ?? undefined,
       education_level: user?.education_level ?? undefined,
@@ -97,7 +95,6 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
     if (user) {
       reset({
         address: user.address ?? undefined,
-        city: user.city ?? undefined,
         education_level: user.education_level ?? undefined,
         estimated_monthly_income: user.estimated_monthly_income ?? undefined,
         health_insurance: user.health_insurance ?? undefined,
@@ -238,11 +235,6 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             )}
           />
           <Controller
-            name="city"
-            control={control}
-            render={({ field }) => <Input {...field} label={t("fields.city.label")} />}
-          />
-          <Controller
             name="address"
             control={control}
             render={({ field }) => <Input {...field} label={t("fields.address.label")} />}
@@ -273,11 +265,11 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             control={control}
             render={({ field }) => (
               <Autocomplete
-                {...field}
                 label={t("fields.education_level.label")}
                 isInvalid={!!errors.education_level}
                 errorMessage={errors.education_level?.message}
-                value={getValues("education_level")}
+                value={field.value ?? null}
+                onBlur={field.onBlur}
                 onChange={(selected: Key | null) => {
                   setValue("education_level", selected?.toString() ?? "");
                 }}
@@ -320,10 +312,10 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             control={control}
             render={({ field }) => (
               <Autocomplete
-                {...field}
                 label={t("fields.source_of_income.label")}
-                selectedKey={getValues("source_of_income")}
-                onSelectionChange={(selected) => {
+                value={field.value ?? null}
+                onBlur={field.onBlur}
+                onChange={(selected: Key | null) => {
                   setValue("source_of_income", selected?.toString() ?? "");
                 }}
                 classNames={{ clearButton: "hidden" }}
@@ -351,10 +343,10 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
             control={control}
             render={({ field }) => (
               <Autocomplete
-                {...field}
                 label={t("fields.health_status.label")}
-                selectedKey={getValues("health_status")}
-                onSelectionChange={(selected) => {
+                value={field.value ?? null}
+                onBlur={field.onBlur}
+                onChange={(selected: Key | null) => {
                   setValue("health_status", selected?.toString() as HealthStatus);
                 }}
                 classNames={{ clearButton: "hidden" }}

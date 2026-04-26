@@ -9,7 +9,7 @@ const useCannotVoteReasons = () => {
     gender: t("gender"),
     hometown: t("hometown"),
     religious_affiliation: t("religious_affiliation"),
-    city_inside_syria: t("city_inside_syria"),
+    province: t("province"),
     not_in_allowed_voters: t("not_in_allowed_voters"),
     unauthorized: t("unauthorized"),
     not_in_audience: t("not_in_audience"),

@@ -22,7 +22,7 @@ import {
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { useLocale, useTranslations } from "next-intl";
-import { FC, useEffect, useState } from "react";
+import { FC, Key, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -183,9 +183,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 isRequired
                 isInvalid={invalid}
                 errorMessage={error?.message}
-                selectedKey={field.value ?? null}
+                value={field.value ?? null}
                 onBlur={field.onBlur}
-                onSelectionChange={(selected) => {
+                onChange={(selected: Key | null) => {
                   setValue("ethnicity", (selected?.toString() ?? "") as keyof typeof ethnicityOptions, {
                     shouldDirty: true,
                     shouldTouch: true,
@@ -212,9 +212,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 isRequired
                 isInvalid={invalid}
                 errorMessage={error?.message}
-                selectedKey={field.value ?? null}
+                value={field.value ?? null}
                 onBlur={field.onBlur}
-                onSelectionChange={(selected) => {
+                onChange={(selected: Key | null) => {
                   setValue("hometown", (selected?.toString() ?? "") as keyof typeof hometownOptions, {
                     shouldDirty: true,
                     shouldTouch: true,

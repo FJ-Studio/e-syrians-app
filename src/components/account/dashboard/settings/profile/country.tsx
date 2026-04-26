@@ -17,7 +17,7 @@ type UpdateAddressProps = {
 
 interface AddressFields {
   country: CountryCode;
-  city_inside_syria: string;
+  province: string;
 }
 
 const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
@@ -36,7 +36,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
   } = useForm<AddressFields>({
     defaultValues: {
       country: user?.country ?? undefined,
-      city_inside_syria: user?.city_inside_syria ?? undefined,
+      province: user?.province ?? undefined,
     },
   });
 
@@ -46,7 +46,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
     if (user) {
       reset({
         country: user?.country ?? undefined,
-        city_inside_syria: user?.city_inside_syria ?? undefined,
+        province: user?.province ?? undefined,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,19 +118,19 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
           />
           {countryValue === "SY" && (
             <Controller
-              name="city_inside_syria"
+              name="province"
               control={control}
               rules={{ required: tSettings("validation.required") }}
               render={({ field, fieldState: { error, invalid } }) => (
                 <Autocomplete
-                  label={t("fields.city_inside_syria.label")}
+                  label={t("fields.province.label")}
                   isRequired
                   isInvalid={invalid}
                   errorMessage={error?.message}
-                  selectedKey={field.value ?? null}
+                  value={field.value ?? null}
                   onBlur={field.onBlur}
-                  onSelectionChange={(selected) => {
-                    setValue("city_inside_syria", selected?.toString() ?? "", {
+                  onChange={(selected: Key | null) => {
+                    setValue("province", selected?.toString() ?? "", {
                       shouldDirty: true,
                       shouldTouch: true,
                       shouldValidate: true,

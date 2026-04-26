@@ -15,7 +15,7 @@ export default function HealthSection({ control, getValues, t }: SectionProps) {
         control={control}
         label={t("fields.health_status.label")}
         options={healthStatuses}
-        defaultSelectedKey={getValues("health_status")}
+        defaultValue={getValues("health_status")}
       />
       <div className="flex flex-col gap-2">
         <FormCheckbox name="health_insurance" control={control} label={t("fields.health_insurance.label")} />

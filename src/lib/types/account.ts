@@ -24,7 +24,6 @@ export type ESUser = {
   middle_name?: string;
   religious_affiliation?: ReligiousAffiliation;
   other_nationalities?: string;
-  city?: string;
   address?: string;
   shelter?: string;
   education_level?: string;
@@ -58,7 +57,7 @@ export type ESUser = {
   account_verified_email: boolean;
 
   language: string;
-  city_inside_syria: string;
+  province: string;
   has_password?: boolean;
 };
 
