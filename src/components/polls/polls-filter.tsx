@@ -63,7 +63,9 @@ const PollsFilter: FC = () => {
                   }}
                 >
                   {Object.keys(times).map((year) => (
-                    <SelectItem key={year}>{year}</SelectItem>
+                    <SelectItem key={year} textValue={year}>
+                      {year}
+                    </SelectItem>
                   ))}
                 </Select>
                 <Select
@@ -74,7 +76,9 @@ const PollsFilter: FC = () => {
                   }}
                 >
                   {(times[selectedYear] ?? []).map((month) => (
-                    <SelectItem key={month.index}>{month.name}</SelectItem>
+                    <SelectItem key={month.index} textValue={month.name}>
+                      {month.name}
+                    </SelectItem>
                   ))}
                 </Select>
               </ModalBody>

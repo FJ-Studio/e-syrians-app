@@ -8,8 +8,8 @@ export type ESUser = {
   email: string;
   phone?: string;
   accessToken: string;
-  verified_at: string;
-  verification_reason: string;
+  verified_at?: string;
+  verification_reason?: string;
   roles: Array<string>;
   permissions: Array<string>;
   gender?: Gender;
@@ -24,7 +24,6 @@ export type ESUser = {
   middle_name?: string;
   religious_affiliation?: ReligiousAffiliation;
   other_nationalities?: string;
-  city?: string;
   address?: string;
   shelter?: string;
   education_level?: string;
@@ -54,11 +53,12 @@ export type ESUser = {
   email_verified_at?: string;
   phone_verified_at?: string;
 
-  received_verification_email: boolean;
-  account_verified_email: boolean;
+  received_verification_email?: boolean;
+  account_verified_email?: boolean;
 
-  language: string;
-  city_inside_syria: string;
+  language?: string;
+  province?: string;
+  has_password?: boolean;
 };
 
 export type AppNotification = {
@@ -73,19 +73,19 @@ export type AppNotification = {
   created_at: string;
 };
 
+export type VerificationUser = {
+  uuid?: string;
+  name?: string;
+  middle_name?: string;
+  surname?: string;
+  avatar?: string;
+};
+
 export type Verification = {
   id: string;
   created_at: string;
-  user: {
-    name: string;
-    surname: string;
-    avatar: string;
-  };
-  verifier: {
-    name: string;
-    surname: string;
-    avatar: string;
-  };
+  user?: VerificationUser;
+  verifier?: VerificationUser;
   cancelled_at: string;
   cancelation_payload?: {
     reason?: string;

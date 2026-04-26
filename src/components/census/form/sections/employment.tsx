@@ -15,7 +15,7 @@ export default function EmploymentSection({ control, getValues, t }: Omit<Sectio
         control={control}
         label={t("fields.source_of_income.label")}
         options={incomeSources}
-        defaultSelectedKey={getValues("source_of_income")}
+        defaultValue={getValues("source_of_income")}
       />
       <FormInput
         name="estimated_monthly_income"

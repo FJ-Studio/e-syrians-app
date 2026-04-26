@@ -19,6 +19,10 @@ const useServerError = (): ((errorCode: string) => string) => {
       failed_to_send_password_reset_email: t("failed_to_send_password_reset_email"),
       failed_to_reset_password: t("failed_to_reset_password"),
       password_reset_successfully: t("password_reset_successfully"),
+      user_already_has_password: t("user_already_has_password"),
+      otp_sent: t("otp_sent"),
+      invalid_or_expired_otp: t("invalid_or_expired_otp"),
+      password_set_successfully: t("password_set_successfully"),
 
       // Profile
       email_changed: t("email_changed"),

@@ -97,7 +97,7 @@ const AccountSocialLinks: FC<UpdateSocialLinksProps> = ({ user }) => {
         <p className="text-default-500 text-sm">{t("description")}</p>
       </CardHeader>
       <CardBody>
-        <form onSubmit={handleSubmit(save)} className="space-y-4">
+        <form noValidate onSubmit={handleSubmit(save)} className="flex flex-col items-start space-y-4">
           {[
             "facebook_link",
             "twitter_link",

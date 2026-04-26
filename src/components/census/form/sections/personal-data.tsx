@@ -63,7 +63,7 @@ export default function PersonalDataSection({ control, getValues, setValue, t }:
         label={t("fields.hometown.label")}
         description={t("fields.hometown.description")}
         options={provinces}
-        defaultSelectedKey={getValues("hometown")}
+        defaultValue={getValues("hometown")}
       />
       <FormAutocomplete
         name="ethnicity"
@@ -72,7 +72,7 @@ export default function PersonalDataSection({ control, getValues, setValue, t }:
         isRequired
         label={t("fields.ethnicity.label")}
         options={ethnicities}
-        defaultSelectedKey={getValues("ethnicity")}
+        defaultValue={getValues("ethnicity")}
       />
       <FormAutocomplete
         name="religious_affiliation"
@@ -82,7 +82,7 @@ export default function PersonalDataSection({ control, getValues, setValue, t }:
         label={t("fields.religious_affiliation.label")}
         description={t("fields.religious_affiliation.description")}
         options={religions}
-        defaultSelectedKey={getValues("religious_affiliation")}
+        defaultValue={getValues("religious_affiliation")}
       />
     </>
   );

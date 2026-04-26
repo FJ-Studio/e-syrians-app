@@ -65,7 +65,7 @@ const CreatePoll: FC = () => {
         gender: [],
         hometown: [],
         religious_affiliation: [],
-        city_inside_syria: [],
+        province: [],
         allowed_voters: "",
       },
       max_selections: "1",
@@ -119,7 +119,7 @@ const CreatePoll: FC = () => {
         "country",
         "religious_affiliation",
         "ethnicity",
-        "city_inside_syria",
+        "province",
       ] as const;
       arrayCriteria.forEach((key) => {
         const values = data.audience[key] ?? [];
@@ -259,8 +259,12 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>{t("audience_can_add_options.no.label")}</SelectItem>
-                <SelectItem key={"1"}>{t("audience_can_add_options.yes.label")}</SelectItem>
+                <SelectItem key={"0"} textValue={t("audience_can_add_options.no.label")}>
+                  {t("audience_can_add_options.no.label")}
+                </SelectItem>
+                <SelectItem key={"1"} textValue={t("audience_can_add_options.yes.label")}>
+                  {t("audience_can_add_options.yes.label")}
+                </SelectItem>
               </Select>
             )}
           />
@@ -303,8 +307,12 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>{t("voters_are_visible.no.label")}</SelectItem>
-                <SelectItem key={"1"}>{t("voters_are_visible.yes.label")}</SelectItem>
+                <SelectItem key={"0"} textValue={t("voters_are_visible.no.label")}>
+                  {t("voters_are_visible.no.label")}
+                </SelectItem>
+                <SelectItem key={"1"} textValue={t("voters_are_visible.yes.label")}>
+                  {t("voters_are_visible.yes.label")}
+                </SelectItem>
               </Select>
             )}
           />
@@ -319,8 +327,12 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>{t("audience_only.public.label")}</SelectItem>
-                <SelectItem key={"1"}>{t("audience_only.audience.label")}</SelectItem>
+                <SelectItem key={"0"} textValue={t("audience_only.public.label")}>
+                  {t("audience_only.public.label")}
+                </SelectItem>
+                <SelectItem key={"1"} textValue={t("audience_only.audience.label")}>
+                  {t("audience_only.audience.label")}
+                </SelectItem>
               </Select>
             )}
           />
@@ -377,7 +389,7 @@ const CreatePoll: FC = () => {
                   setValue("audience.country", []);
                   setValue("audience.religious_affiliation", []);
                   setValue("audience.ethnicity", []);
-                  setValue("audience.city_inside_syria", []);
+                  setValue("audience.province", []);
                   setValue("audience.age_range.min", MIN_AUDIENCE_AGE);
                   setValue("audience.age_range.max", MAX_AUDIENCE_AGE);
                 }
@@ -402,7 +414,9 @@ const CreatePoll: FC = () => {
                 onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(genderOptions).map((key) => (
-                  <SelectItem key={key}>{genderOptions[key as keyof typeof genderOptions]}</SelectItem>
+                  <SelectItem key={key} textValue={genderOptions[key as keyof typeof genderOptions]}>
+                    {genderOptions[key as keyof typeof genderOptions]}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -421,7 +435,9 @@ const CreatePoll: FC = () => {
                 onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(provinces).map((key) => (
-                  <SelectItem key={key}>{provinces[key as keyof typeof provinces]}</SelectItem>
+                  <SelectItem key={key} textValue={provinces[key as keyof typeof provinces]}>
+                    {provinces[key as keyof typeof provinces]}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -440,7 +456,9 @@ const CreatePoll: FC = () => {
                 onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(ethnicities).map((key) => (
-                  <SelectItem key={key}>{ethnicities[key as keyof typeof ethnicities]}</SelectItem>
+                  <SelectItem key={key} textValue={ethnicities[key as keyof typeof ethnicities]}>
+                    {ethnicities[key as keyof typeof ethnicities]}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -462,6 +480,7 @@ const CreatePoll: FC = () => {
                 {Object.keys(countries).map((key) => (
                   <SelectItem
                     key={key}
+                    textValue={countries[key as keyof typeof countries]}
                     startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
                   >
                     {countries[key as keyof typeof countries]}
@@ -484,25 +503,29 @@ const CreatePoll: FC = () => {
                 onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
               >
                 {Object.keys(religions).map((key) => (
-                  <SelectItem key={key}>{religions[key as keyof typeof religions]}</SelectItem>
+                  <SelectItem key={key} textValue={religions[key as keyof typeof religions]}>
+                    {religions[key as keyof typeof religions]}
+                  </SelectItem>
                 ))}
               </Select>
             )}
           />
           {(countryValue ?? []).includes("SY") && (
             <Controller
-              name="audience.city_inside_syria"
+              name="audience.province"
               control={control}
               render={({ field }) => (
                 <Select
-                  label={t("city_inside_syria.label")}
-                  description={t("city_inside_syria.description")}
+                  label={t("province.label")}
+                  description={t("province.description")}
                   selectionMode="multiple"
                   selectedKeys={field.value ?? []}
                   onSelectionChange={(keys) => field.onChange(Array.from(keys).map(String))}
                 >
                   {Object.keys(provinces).map((key) => (
-                    <SelectItem key={key}>{provinces[key as keyof typeof provinces]}</SelectItem>
+                    <SelectItem key={key} textValue={provinces[key as keyof typeof provinces]}>
+                      {provinces[key as keyof typeof provinces]}
+                    </SelectItem>
                   ))}
                 </Select>
               )}

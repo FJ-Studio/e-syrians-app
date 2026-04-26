@@ -11,7 +11,7 @@ import {
   Textarea,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { ReactElement, ReactNode } from "react";
+import { Key, ReactElement, ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 // ---------------------------------------------------------------------------
@@ -115,6 +115,7 @@ export function FormSelect<T extends FieldValues>({
           {...field}
           label={label}
           isRequired={isRequired}
+          disallowEmptySelection={isRequired}
           isInvalid={invalid}
           errorMessage={error?.message}
           description={description}
@@ -123,7 +124,13 @@ export function FormSelect<T extends FieldValues>({
           onSelectionChange={onSelectionChange}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? renderItem(key, options[key]) : <SelectItem key={key}>{options[key]}</SelectItem>,
+            renderItem ? (
+              renderItem(key, options[key])
+            ) : (
+              <SelectItem key={key} textValue={options[key]}>
+                {options[key]}
+              </SelectItem>
+            ),
           )}
         </Select>
       )}
@@ -139,10 +146,10 @@ interface FormAutocompleteProps<T extends FieldValues> extends BaseFieldProps<T>
   options: Record<string, string>;
   isRequired?: boolean;
   description?: string;
-  defaultSelectedKey?: string;
+  defaultValue?: string;
   scrollShadowProps?: Record<string, unknown>;
   renderItem?: (key: string, label: string) => ReactElement;
-  onSelectionChange?: (key: string | null) => void;
+  onChange?: (key: string | null) => void;
 }
 
 export function FormAutocomplete<T extends FieldValues>({
@@ -152,10 +159,10 @@ export function FormAutocomplete<T extends FieldValues>({
   options,
   isRequired,
   description,
-  defaultSelectedKey,
+  defaultValue,
   scrollShadowProps,
   renderItem,
-  onSelectionChange,
+  onChange: onChangeProp,
   rules,
 }: FormAutocompleteProps<T>) {
   return (
@@ -166,23 +173,29 @@ export function FormAutocomplete<T extends FieldValues>({
       render={({ field, fieldState: { error, invalid } }) => (
         <Autocomplete
           scrollShadowProps={scrollShadowProps}
-          {...field}
           label={label}
           isRequired={isRequired}
           isInvalid={invalid}
           errorMessage={error?.message}
           description={description}
-          defaultSelectedKey={defaultSelectedKey}
-          selectedKey={field.value}
-          onSelectionChange={(key) => {
+          defaultValue={defaultValue}
+          value={field.value ?? null}
+          onBlur={field.onBlur}
+          onChange={(key: Key | null) => {
             const val = key?.toString() ?? null;
             field.onChange(val);
-            onSelectionChange?.(val);
+            onChangeProp?.(val);
           }}
           classNames={{ clearButton: "hidden" }}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? renderItem(key, options[key]) : <AutocompleteItem key={key}>{options[key]}</AutocompleteItem>,
+            renderItem ? (
+              renderItem(key, options[key])
+            ) : (
+              <AutocompleteItem key={key} textValue={options[key]}>
+                {options[key]}
+              </AutocompleteItem>
+            ),
           )}
         </Autocomplete>
       )}
@@ -194,28 +207,19 @@ export function FormAutocomplete<T extends FieldValues>({
 // FormCheckbox
 // ---------------------------------------------------------------------------
 
-interface FormCheckboxProps<T extends FieldValues> extends BaseFieldProps<T> {
-  getValues: UseFormGetValuesAny;
-  setValue: UseFormSetValueAny;
-}
+type FormCheckboxProps<T extends FieldValues> = BaseFieldProps<T>;
 
-export function FormCheckbox<T extends FieldValues>({
-  name,
-  control,
-  label,
-  getValues,
-  setValue,
-}: FormCheckboxProps<T>) {
+export function FormCheckbox<T extends FieldValues>({ name, control, label }: FormCheckboxProps<T>) {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => (
         <Checkbox
-          {...field}
-          value={`${field.value}`}
-          isSelected={!!getValues(name)}
-          onValueChange={(selected) => setValue(name, selected)}
+          name={field.name}
+          onBlur={field.onBlur}
+          isSelected={field.value === true}
+          onValueChange={field.onChange}
         >
           {label}
         </Checkbox>

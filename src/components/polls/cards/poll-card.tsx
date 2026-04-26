@@ -61,7 +61,7 @@ const failureToReasonKey: Record<
   | "hometown"
   | "religious_affiliation"
   | "ethnicity"
-  | "city_inside_syria"
+  | "province"
   | "not_in_allowed_voters"
 > = {
   not_in_allowed_voters: "not_in_allowed_voters",
@@ -78,8 +78,8 @@ const failureToReasonKey: Record<
   religious_affiliation_missing: "religious_affiliation",
   ethnicity: "ethnicity",
   ethnicity_missing: "ethnicity",
-  city_inside_syria: "city_inside_syria",
-  city_inside_syria_missing: "city_inside_syria",
+  province: "province",
+  province_missing: "province",
 };
 
 const PollFullCard: FC<Props> = ({ poll }) => {

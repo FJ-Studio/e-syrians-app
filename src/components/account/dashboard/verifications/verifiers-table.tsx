@@ -63,8 +63,8 @@ const VerifiersTable: FC = () => {
         first = a.created_at;
         second = b.created_at;
       } else if (sortDescriptor.column === "name") {
-        first = `${a.verifier.name} ${a.verifier.surname}`;
-        second = `${b.verifier.name} ${b.verifier.surname}`;
+        first = `${a.verifier?.name} ${a.verifier?.surname}`;
+        second = `${b.verifier?.name} ${b.verifier?.surname}`;
       } else {
         return 0;
       }
@@ -94,10 +94,10 @@ const VerifiersTable: FC = () => {
           return (
             <User
               avatarProps={{
-                src: item.verifier.avatar,
+                src: item.verifier?.avatar,
                 className: "min-w-10 min-h-10",
               }}
-              name={`${item.verifier.name} ${item.verifier.surname}`}
+              name={`${item.verifier?.name} ${item.verifier?.surname}`}
             />
           );
         case "notes":

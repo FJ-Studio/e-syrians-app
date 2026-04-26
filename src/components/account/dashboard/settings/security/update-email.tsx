@@ -18,10 +18,11 @@ const UpdateEmailAddress: FC = () => {
   const serverErrors = useServerError();
   const { data } = useSession();
   const t = useTranslations("account.dashboard.security.email");
+  const tSecurity = useTranslations("account.dashboard.security");
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting, isDirty },
+    formState: { isSubmitting, isDirty, errors },
   } = useForm<UpdateEmailAddressForm>({
     defaultValues: {
       email: data?.user.email,
@@ -72,18 +73,25 @@ const UpdateEmailAddress: FC = () => {
   };
   return (
     <Card>
-      <CardHeader className="text-default-700 font-medium">{t("title")}</CardHeader>
+      <CardHeader className="border-b-default-200 dark:border-b-default-100 bg-default-50 flex flex-col items-start gap-1 border-b">
+        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
+        <p className="text-default-500 text-sm">{t("description")}</p>
+      </CardHeader>
       <CardBody>
-        <form className="space-y-4" onSubmit={handleSubmit(updateEmailAddress)}>
-          <p className="text-start text-sm">{t("description")}</p>
+        <form noValidate className="space-y-4" onSubmit={handleSubmit(updateEmailAddress)}>
           <Controller
             name="email"
             control={control}
-            rules={{ required: true, pattern: /^\S+@\S+$/i }}
+            rules={{
+              required: tSecurity("validation.required"),
+              pattern: { value: /^\S+@\S+$/i, message: tSecurity("validation.emailInvalid") },
+            }}
             render={({ field }) => (
               <Input
                 label={t("email")}
                 {...field}
+                isInvalid={!!errors.email}
+                errorMessage={errors.email?.message}
                 description={
                   <div className="flex items-center justify-between">
                     {t("emailVerificationStatus", {

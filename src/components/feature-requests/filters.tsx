@@ -51,7 +51,9 @@ const Filters: FC<Props> = ({ sort, status }) => {
         }}
       >
         {featureSorts.map((s) => (
-          <SelectItem key={s}>{tSort(s)}</SelectItem>
+          <SelectItem key={s} textValue={tSort(s)}>
+            {tSort(s)}
+          </SelectItem>
         ))}
       </Select>
       <Select
@@ -67,8 +69,14 @@ const Filters: FC<Props> = ({ sort, status }) => {
         }}
       >
         {[
-          <SelectItem key={ALL}>{tFilters("all_statuses")}</SelectItem>,
-          ...featureStatuses.map((s) => <SelectItem key={s}>{tStatus(s)}</SelectItem>),
+          <SelectItem key={ALL} textValue={tFilters("all_statuses")}>
+            {tFilters("all_statuses")}
+          </SelectItem>,
+          ...featureStatuses.map((s) => (
+            <SelectItem key={s} textValue={tStatus(s)}>
+              {tStatus(s)}
+            </SelectItem>
+          )),
         ]}
       </Select>
     </div>

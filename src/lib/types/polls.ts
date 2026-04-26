@@ -15,7 +15,7 @@ export type PollAudience = {
   religious_affiliation: string[];
   hometown: string[];
   ethnicity: string[];
-  city_inside_syria: string[];
+  province: string[];
   allowed_voters?: string[];
 };
 
@@ -40,8 +40,8 @@ export type AudienceFailure =
   | "religious_affiliation_missing"
   | "ethnicity"
   | "ethnicity_missing"
-  | "city_inside_syria"
-  | "city_inside_syria_missing";
+  | "province"
+  | "province_missing";
 
 export const pollResultsReveal = ["before-voting", "after-voting", "after-expiration"] as const;
 export type PollReveal = (typeof pollResultsReveal)[number];
@@ -98,7 +98,7 @@ export type CreatePollAudienceFields = {
   religious_affiliation: string[];
   hometown: string[];
   ethnicity: string[];
-  city_inside_syria: string[];
+  province: string[];
   allowed_voters: string;
 };
 
