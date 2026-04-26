@@ -17,24 +17,32 @@ const AccountProfile: FC = () => {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState();
 
-  const getProfile = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("/api/account/profile/general");
-      if (response.ok) {
-        const data = await response.json();
-        if (data?.success) setProfile(data?.data);
-      }
-    } catch {
-      // Error handled by loading/profile state — retry button shown
-    } finally {
-      setLoading(false);
-    }
+  const [fetchKey, setFetchKey] = useState(0);
+
+  const getProfile = useCallback(() => {
+    setFetchKey((k) => k + 1);
   }, []);
 
   useEffect(() => {
-    getProfile();
-  }, [getProfile]);
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("/api/account/profile/general");
+        if (response.ok && !cancelled) {
+          const data = await response.json();
+          if (data?.success && !cancelled) setProfile(data?.data);
+        }
+      } catch {
+        // Error handled by loading/profile state — retry button shown
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchKey]);
 
   const scrollTo = (id: SectionId) => {
     document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });

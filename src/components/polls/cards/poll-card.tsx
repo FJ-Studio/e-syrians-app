@@ -110,14 +110,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   const t = useTranslations("polls");
   const { status } = useSession();
 
-  useEffect(() => {
-    // If the array exceeds the limit, remove the oldest selected option
-    if (selectedOptions.length > localPoll.max_selections) {
+  const handleSelectionChange = (value: string[]) => {
+    if (value.length > localPoll.max_selections) {
       toast.warning(t("maxSelections", { max: localPoll.max_selections }));
-      setSelectedOptions((prevSelected) => prevSelected.slice(-localPoll.max_selections));
+      setSelectedOptions(value.slice(-localPoll.max_selections));
+    } else {
+      setSelectedOptions(value);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedOptions]);
+  };
 
   const vote = async () => {
     if (selectedOptions.length === 0) {
@@ -266,7 +266,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
               base: "w-full",
             }}
             value={selectedOptions}
-            onChange={setSelectedOptions}
+            onChange={handleSelectionChange}
             isReadOnly={!canVote}
           >
             {localPoll.options.map((option) => (
