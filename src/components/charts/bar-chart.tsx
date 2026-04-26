@@ -54,10 +54,7 @@ const BarChartCard = forwardRef<HTMLDivElement, Omit<CardProps, "children"> & Ba
     return (
       <Card
         ref={ref}
-        className={cn(
-          "border-default-200 dark:border-default-100 overflow-hidden rounded-lg border p-0 shadow-none",
-          className,
-        )}
+        className={cn("border-default-200 overflow-hidden rounded-lg border p-0 shadow-none", className)}
         {...props}
       >
         <div className="border-b-default-200 dark:border-b-default-100 bg-default-50 border-b px-4 py-3">

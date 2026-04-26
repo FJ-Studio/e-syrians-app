@@ -231,7 +231,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
           </Link>
           <Dropdown>
             <DropdownTrigger>
-              <Icon icon={ellipsisVerticalIcon} className="h-6 w-6 cursor-pointer text-gray-700" />
+              <Icon icon={ellipsisVerticalIcon} className="text-default-700 h-6 w-6 cursor-pointer" />
             </DropdownTrigger>
             <DropdownMenu>
               <DropdownItem

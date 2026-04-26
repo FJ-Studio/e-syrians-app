@@ -1,9 +1,11 @@
 "use client";
 
+import { Link } from "@/i18n/routing";
 import { FeatureRequest } from "@/lib/types/feature-requests";
 import { Avatar, Card, CardBody, CardFooter, CardHeader, Divider } from "@heroui/react";
+import ArrowLongLeft from "@iconify-icons/heroicons/arrow-long-left";
+import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { FC } from "react";
 import StatusBadge from "./cards/status-badge";
 import Timeline from "./cards/timeline";
@@ -18,8 +20,8 @@ const SingleFeatureRequest: FC<Props> = ({ feature }) => {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4">
-      <Link href="/feature-requests" className="text-primary text-sm hover:underline">
-        ← {t("back_to_list")}
+      <Link href="/feature-requests" className="text-primary inline-flex items-center gap-2 text-sm hover:underline">
+        <Icon icon={ArrowLongLeft} className="text-primary h-6 w-6 rtl:rotate-180" /> {t("back_to_list")}
       </Link>
 
       <Card className="p-3">
@@ -40,7 +42,7 @@ const SingleFeatureRequest: FC<Props> = ({ feature }) => {
           <StatusBadge status={feature.status} />
         </CardHeader>
         <CardBody className="items-start space-y-4 text-start">
-          <h1 className="text-2xl font-semibold text-gray-800">{feature.title}</h1>
+          <h1 className="text-default-800 text-2xl font-semibold">{feature.title}</h1>
           <p className="text-base leading-relaxed whitespace-pre-line">{feature.description}</p>
           <Divider />
           <div className="w-full space-y-2">

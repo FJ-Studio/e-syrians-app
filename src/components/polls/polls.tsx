@@ -17,7 +17,7 @@ const Polls: FC<Props> = ({ current_page, last_page, polls }) => {
   return (
     <>
       <div className="mb-3 flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-700">{t("title")}</h1>
+        <h1 className="text-default-700 text-3xl font-bold">{t("title")}</h1>
         <PollsFilter />
       </div>
       <p className="mb-4">{t("description")}</p>

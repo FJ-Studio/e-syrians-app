@@ -138,11 +138,11 @@ const AccountAvatar: FC<UpdateAvatarProps> = ({ user, onUpdated }) => {
       </CardHeader>
       <CardBody>
         <form noValidate onSubmit={handleSubmit(save)} className="flex flex-col items-center gap-4">
-          <div className="flex min-h-16 min-w-16 items-center justify-center overflow-hidden rounded-full border-2 border-gray-200 p-0.5">
+          <div className="border-default-200 flex min-h-16 min-w-16 items-center justify-center overflow-hidden rounded-full border-2 p-0.5">
             {preview ? (
               <Image src={preview} alt={user?.name} className="h-16 w-16 overflow-hidden rounded-full" />
             ) : (
-              <Icon icon={userIcon} className="h-8 w-8 text-gray-700" />
+              <Icon icon={userIcon} className="text-default-700 h-8 w-8" />
             )}
           </div>
 

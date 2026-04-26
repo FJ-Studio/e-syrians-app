@@ -13,7 +13,7 @@ const Wallet: FC = () => {
       </CardHeader>
       <CardBody>
         <p className="text-start">{t("description")}</p>
-        <div className="my-10 rounded-md border-1 border-gray-100 bg-gray-50 py-10">
+        <div className="border-default-100 bg-default-50 my-10 rounded-md border-1 py-10">
           <UnderConstruction />
         </div>
       </CardBody>

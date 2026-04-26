@@ -105,14 +105,14 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
     <div className="relative flex min-h-dvh flex-col pt-20">
       {/* Welcome bar — desktop only */}
       <div className="bg-primary hidden h-12 items-center xl:flex">
-        <Container className="flex items-center justify-between text-white">
+        <Container className="text-primary-foreground flex items-center justify-between">
           <span>
             {t("welcome", {
               name: session.data?.user?.name ?? "",
             })}
           </span>
           <button className="cursor-pointer border-0 bg-transparent" onClick={() => signOut()}>
-            <Icon icon={arrowRightOnRectangleIcon} className="h-6 w-6 text-white rtl:rotate-180" />
+            <Icon icon={arrowRightOnRectangleIcon} className="text-primary-foreground h-6 w-6 rtl:rotate-180" />
           </button>
         </Container>
       </div>
@@ -120,14 +120,14 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <Container className="mt-4 mb-6">
         <div className="flex items-start gap-x-4">
           {/* Desktop sidebar — visible at xl and above */}
-          <aside className="border-small rounded-small border-default-200 dark:border-default-100 sticky top-32 hidden w-full bg-gray-50 px-1 py-2 xl:flex xl:max-w-[260px]">
+          <aside className="border-small rounded-small border-default-200 bg-default-50 sticky top-32 hidden w-full px-1 py-2 xl:flex xl:max-w-[260px]">
             <Listbox aria-label="Account navigation">
               {links.map((link) => (
                 <ListboxItem
                   key={link.key}
                   startContent={link.icon}
                   color={link.link && isActive(link.link) ? "primary" : "default"}
-                  className={link.link && isActive(link.link) ? "bg-primary text-white" : ""}
+                  className={link.link && isActive(link.link) ? "bg-primary text-primary-foreground" : ""}
                   onPress={() => {
                     if (link?.onPress) {
                       link.onPress();
@@ -154,7 +154,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       </Container>
 
       {/* Mobile bottom tab bar — visible below xl */}
-      <nav className="border-default-200 safe-area-bottom fixed inset-x-0 bottom-0 z-50 border-t bg-white xl:hidden dark:bg-black">
+      <nav className="border-default-200 safe-area-bottom bg-background fixed inset-x-0 bottom-0 z-50 border-t xl:hidden">
         <div className="flex items-center justify-around">
           {primaryItems.map((link) => {
             const active = link.link ? isActive(link.link) : false;

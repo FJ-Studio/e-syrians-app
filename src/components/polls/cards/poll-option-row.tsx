@@ -26,8 +26,8 @@ const PollOptionRow: FC<Props> = ({
       <Checkbox
         classNames={{
           base: cn(
-            "inline-flex max-w-xl bg-gray-100 w-full m-0 transition-all",
-            "hover:bg-gray-200 items-center justify-start",
+            "inline-flex max-w-xl bg-default-100 w-full m-0 transition-all",
+            "hover:bg-default-200 items-center justify-start",
             "cursor-pointer rounded-lg gap-1 p-2 border-1.5 border-transparent",
             "data-[selected=true]:border-primary overflow-hidden relative z-20",
           ),

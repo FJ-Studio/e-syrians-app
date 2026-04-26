@@ -1,12 +1,12 @@
 "use client";
 import useServerError from "@/components/hooks/localization/server-errors";
+import { Link } from "@/i18n/routing";
 import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { Button, Input } from "@heroui/react";
 import arrowLongLeftSolid from "@iconify-icons/heroicons/arrow-long-left-solid";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { Controller, useForm } from "react-hook-form";

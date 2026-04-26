@@ -5,7 +5,7 @@ const Fraudsters: FC = () => {
   const t = useTranslations("census.fraudsters");
   return (
     <>
-      <h1 className="mb-2 text-3xl font-bold text-gray-700">{t("title")}</h1>
+      <h1 className="text-default-700 mb-2 text-3xl font-bold">{t("title")}</h1>
       <p>{t("description")}</p>
     </>
   );
