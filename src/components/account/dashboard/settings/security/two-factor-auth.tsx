@@ -57,23 +57,31 @@ const TwoFactorAuth: FC = () => {
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
   const [regenerateLoading, setRegenerateLoading] = useState(false);
 
-  const fetchStatus = useCallback(async () => {
-    try {
-      const res = await fetch("/api/account/security/2fa/status");
-      const data = await res.json();
-      if (data?.success) {
-        setStatus(data.data);
-      }
-    } catch {
-      // silently fail
-    } finally {
-      setLoading(false);
-    }
+  const [fetchKey, setFetchKey] = useState(0);
+
+  const refetchStatus = useCallback(() => {
+    setFetchKey((k) => k + 1);
   }, []);
 
   useEffect(() => {
-    fetchStatus();
-  }, [fetchStatus]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/account/security/2fa/status");
+        const data = await res.json();
+        if (data?.success && !cancelled) {
+          setStatus(data.data);
+        }
+      } catch {
+        // silently fail
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchKey]);
 
   const handleSetup = async () => {
     setSetupLoading(true);
@@ -112,7 +120,7 @@ const TwoFactorAuth: FC = () => {
         setSetupData(null);
         setSetupCode("");
         recoveryModal.onOpen();
-        fetchStatus();
+        refetchStatus();
       } else {
         toast.error(t("errors.confirmFailed"));
       }
@@ -141,7 +149,7 @@ const TwoFactorAuth: FC = () => {
         disableModal.onClose();
         setDisableCode("");
         setDisableIsRecovery(false);
-        fetchStatus();
+        refetchStatus();
       } else {
         toast.error(t("errors.disableFailed"));
       }
