@@ -72,8 +72,8 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${baseUrl}/account/donate?status=success`,
-      cancel_url: `${baseUrl}/account/donate?status=cancelled`,
+      success_url: `${baseUrl}/donate?status=success`,
+      cancel_url: `${baseUrl}/donate?status=cancelled`,
     });
 
     return NextResponse.json({ url: checkoutSession.url });

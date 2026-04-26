@@ -44,6 +44,9 @@ const Footer: FC = () => {
             <Link className="text-sm text-black" href="/terms" title={t("footer.terms")}>
               {t("footer.terms")}
             </Link>
+            <Link className="text-sm text-black" href="/donate" title={t("footer.donate")}>
+              {t("footer.donate")}
+            </Link>
             <Link className="text-sm text-black" href="mailto:info@e-syrians.com" title={t("footer.contact")}>
               {t("footer.contact")}
             </Link>

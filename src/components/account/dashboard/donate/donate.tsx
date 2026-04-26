@@ -72,7 +72,7 @@ const Donate: FC = () => {
   // Clean the URL after reading the status so refreshing doesn't re-show the banner
   useEffect(() => {
     if (status) {
-      router.replace("/account/donate", { scroll: false });
+      router.replace("/donate", { scroll: false });
     }
   }, [status, router]);
 
