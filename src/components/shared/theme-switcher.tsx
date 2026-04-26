@@ -1,5 +1,6 @@
 "use client";
 
+import useMounted from "@/components/hooks/use-mounted";
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
 import computerDesktopIcon from "@iconify-icons/heroicons/computer-desktop";
 import moonIcon from "@iconify-icons/heroicons/moon";
@@ -7,15 +8,11 @@ import sunIcon from "@iconify-icons/heroicons/sun";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { FC, useSyncExternalStore } from "react";
-
-const emptySubscribe = () => () => {};
-const getTrue = () => true;
-const getFalse = () => false;
+import { FC } from "react";
 
 const ThemeSwitcher: FC = () => {
   const { theme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(emptySubscribe, getTrue, getFalse);
+  const mounted = useMounted();
   const t = useTranslations("header.theme");
 
   if (!mounted) {

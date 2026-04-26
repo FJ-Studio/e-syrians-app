@@ -1,8 +1,9 @@
 "use client";
 
+import useMounted from "@/components/hooks/use-mounted";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { FC, useSyncExternalStore } from "react";
+import { FC } from "react";
 
 type Props = {
   width: number;
@@ -10,13 +11,9 @@ type Props = {
   className?: string;
 };
 
-const emptySubscribe = () => () => {};
-const getTrue = () => true;
-const getFalse = () => false;
-
 const ThemedLogo: FC<Props> = ({ width, height, className }) => {
   const { resolvedTheme } = useTheme();
-  const mounted = useSyncExternalStore(emptySubscribe, getTrue, getFalse);
+  const mounted = useMounted();
 
   const src = mounted && resolvedTheme === "dark" ? "/icon-dark.svg" : "/icon.svg";
 
