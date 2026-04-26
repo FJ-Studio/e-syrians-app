@@ -259,8 +259,12 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>{t("audience_can_add_options.no.label")}</SelectItem>
-                <SelectItem key={"1"}>{t("audience_can_add_options.yes.label")}</SelectItem>
+                <SelectItem key={"0"} textValue={t("audience_can_add_options.no.label")}>
+                  {t("audience_can_add_options.no.label")}
+                </SelectItem>
+                <SelectItem key={"1"} textValue={t("audience_can_add_options.yes.label")}>
+                  {t("audience_can_add_options.yes.label")}
+                </SelectItem>
               </Select>
             )}
           />
@@ -303,8 +307,12 @@ const CreatePoll: FC = () => {
                 isDisabled={userIsNotVerified}
                 defaultSelectedKeys={["0"]}
               >
-                <SelectItem key={"0"}>{t("voters_are_visible.no.label")}</SelectItem>
-                <SelectItem key={"1"}>{t("voters_are_visible.yes.label")}</SelectItem>
+                <SelectItem key={"0"} textValue={t("voters_are_visible.no.label")}>
+                  {t("voters_are_visible.no.label")}
+                </SelectItem>
+                <SelectItem key={"1"} textValue={t("voters_are_visible.yes.label")}>
+                  {t("voters_are_visible.yes.label")}
+                </SelectItem>
               </Select>
             )}
           />

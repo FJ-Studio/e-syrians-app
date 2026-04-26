@@ -168,7 +168,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 }}
               >
                 {Object.keys(genderOptions).map((key) => (
-                  <SelectItem key={key}>{genderOptions[key as keyof typeof genderOptions]}</SelectItem>
+                  <SelectItem key={key} textValue={genderOptions[key as keyof typeof genderOptions]}>
+                    {genderOptions[key as keyof typeof genderOptions]}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -195,7 +197,7 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 classNames={{ clearButton: "hidden" }}
               >
                 {Object.keys(ethnicityOptions).map((key) => (
-                  <AutocompleteItem key={key}>
+                  <AutocompleteItem key={key} textValue={ethnicityOptions[key as keyof typeof ethnicityOptions]}>
                     {ethnicityOptions[key as keyof typeof ethnicityOptions]}
                   </AutocompleteItem>
                 ))}
@@ -224,7 +226,9 @@ const UpdateBasicProfileData: FC<UpdateBasicProfileDataProps> = ({ user }) => {
                 classNames={{ clearButton: "hidden" }}
               >
                 {Object.keys(hometownOptions).map((key) => (
-                  <AutocompleteItem key={key}>{hometownOptions[key as keyof typeof hometownOptions]}</AutocompleteItem>
+                  <AutocompleteItem key={key} textValue={hometownOptions[key as keyof typeof hometownOptions]}>
+                    {hometownOptions[key as keyof typeof hometownOptions]}
+                  </AutocompleteItem>
                 ))}
               </Autocomplete>
             )}

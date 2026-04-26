@@ -197,7 +197,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 classNames={{ clearButton: "hidden" }}
               >
                 {Object.keys(religions).map((key) => (
-                  <AutocompleteItem key={key}>{religions[key as keyof typeof religions]}</AutocompleteItem>
+                  <AutocompleteItem key={key} textValue={religions[key as keyof typeof religions]}>
+                    {religions[key as keyof typeof religions]}
+                  </AutocompleteItem>
                 ))}
               </Autocomplete>
             )}
@@ -226,6 +228,7 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                   .map((key) => (
                     <SelectItem
                       key={key}
+                      textValue={countries[key as keyof typeof countries]}
                       startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
                     >
                       {countries[key as keyof typeof countries]}
@@ -276,7 +279,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 classNames={{ clearButton: "hidden" }}
               >
                 {Object.keys(educationLevels).map((key) => (
-                  <AutocompleteItem key={key}>{educationLevels[key as keyof typeof educationLevels]}</AutocompleteItem>
+                  <AutocompleteItem key={key} textValue={educationLevels[key as keyof typeof educationLevels]}>
+                    {educationLevels[key as keyof typeof educationLevels]}
+                  </AutocompleteItem>
                 ))}
               </Autocomplete>
             )}
@@ -297,7 +302,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 }}
               >
                 {Object.keys(spokenLanguages).map((key) => (
-                  <SelectItem key={key}>{spokenLanguages[key as keyof typeof spokenLanguages]}</SelectItem>
+                  <SelectItem key={key} textValue={spokenLanguages[key as keyof typeof spokenLanguages]}>
+                    {spokenLanguages[key as keyof typeof spokenLanguages]}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -321,7 +328,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 classNames={{ clearButton: "hidden" }}
               >
                 {Object.keys(incomeSources).map((key) => (
-                  <AutocompleteItem key={key}>{incomeSources[key as keyof typeof incomeSources]}</AutocompleteItem>
+                  <AutocompleteItem key={key} textValue={incomeSources[key as keyof typeof incomeSources]}>
+                    {incomeSources[key as keyof typeof incomeSources]}
+                  </AutocompleteItem>
                 ))}
               </Autocomplete>
             )}
@@ -352,7 +361,9 @@ const AccountCensus: FC<CensusProps> = ({ user }) => {
                 classNames={{ clearButton: "hidden" }}
               >
                 {Object.keys(HealthStatuses).map((key) => (
-                  <AutocompleteItem key={key}>{HealthStatuses[key as keyof typeof HealthStatuses]}</AutocompleteItem>
+                  <AutocompleteItem key={key} textValue={HealthStatuses[key as keyof typeof HealthStatuses]}>
+                    {HealthStatuses[key as keyof typeof HealthStatuses]}
+                  </AutocompleteItem>
                 ))}
               </Autocomplete>
             )}

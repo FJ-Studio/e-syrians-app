@@ -108,6 +108,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                 {Object.keys(countries).map((country) => (
                   <AutocompleteItem
                     key={country}
+                    textValue={countries[country as keyof typeof countries]}
                     startContent={<Avatar src={`/flags/${country.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
                   >
                     {countries[country as keyof typeof countries]}
@@ -139,7 +140,9 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
                   classNames={{ clearButton: "hidden" }}
                 >
                   {Object.keys(provinces).map((key) => (
-                    <AutocompleteItem key={key}>{provinces[key as keyof typeof provinces]}</AutocompleteItem>
+                    <AutocompleteItem key={key} textValue={provinces[key as keyof typeof provinces]}>
+                      {provinces[key as keyof typeof provinces]}
+                    </AutocompleteItem>
                   ))}
                 </Autocomplete>
               )}

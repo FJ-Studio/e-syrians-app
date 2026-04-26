@@ -13,6 +13,7 @@ export default function CountryLocationSection({ control, getValues, setValue, t
   const countryAutocompleteRenderItem = (key: string, label: string) => (
     <AutocompleteItem
       key={key}
+      textValue={label}
       startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
     >
       {label}
@@ -22,6 +23,7 @@ export default function CountryLocationSection({ control, getValues, setValue, t
   const countrySelectRenderItem = (key: string, label: string) => (
     <SelectItem
       key={key}
+      textValue={label}
       startContent={<Avatar src={`/flags/${key.toLowerCase()}.svg`} className="h-6 w-6" size="sm" />}
     >
       {label}

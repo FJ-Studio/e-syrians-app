@@ -124,7 +124,13 @@ export function FormSelect<T extends FieldValues>({
           onSelectionChange={onSelectionChange}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? renderItem(key, options[key]) : <SelectItem key={key}>{options[key]}</SelectItem>,
+            renderItem ? (
+              renderItem(key, options[key])
+            ) : (
+              <SelectItem key={key} textValue={options[key]}>
+                {options[key]}
+              </SelectItem>
+            ),
           )}
         </Select>
       )}
@@ -183,7 +189,13 @@ export function FormAutocomplete<T extends FieldValues>({
           classNames={{ clearButton: "hidden" }}
         >
           {Object.keys(options).map((key) =>
-            renderItem ? renderItem(key, options[key]) : <AutocompleteItem key={key}>{options[key]}</AutocompleteItem>,
+            renderItem ? (
+              renderItem(key, options[key])
+            ) : (
+              <AutocompleteItem key={key} textValue={options[key]}>
+                {options[key]}
+              </AutocompleteItem>
+            ),
           )}
         </Autocomplete>
       )}
