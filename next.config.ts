@@ -19,16 +19,18 @@ const cspDirectives = [
   `style-src 'self' 'unsafe-inline'`,
 
   // Images: self + OG images + analytics + S3 avatars + GitHub contributor avatars
-  `img-src 'self' data: blob: https://www.e-syrians.com https://e-syrians.s3.eu-north-1.amazonaws.com https://avatars.githubusercontent.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google.com https://*.gstatic.com`,
+  // google.com.tr covers Google Ads audience pixels served from country-code TLDs
+  `img-src 'self' data: blob: https://www.e-syrians.com https://e-syrians.s3.eu-north-1.amazonaws.com https://avatars.githubusercontent.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google.com https://*.google.com.tr https://*.gstatic.com https://pagead2.googlesyndication.com`,
 
   // Fonts: local only (IBM Plex Sans Arabic loaded from /public)
   `font-src 'self' data:`,
 
   // API connections: self + backend API + analytics + reCAPTCHA
-  `connect-src 'self' https://sandbox-api.e-syrians.com https://api.e-syrians.com https://www.google.com https://www.google-analytics.com https://www.googletagmanager.com`,
+  // analytics.google.com is the GA4 Measurement Protocol endpoint (/g/collect)
+  `connect-src 'self' https://sandbox-api.e-syrians.com https://api.e-syrians.com https://www.google.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com`,
 
-  // Frames: reCAPTCHA iframe + Google OAuth popup
-  `frame-src 'self' https://www.google.com https://accounts.google.com https://www.googletagmanager.com`,
+  // Frames: reCAPTCHA iframe + Google OAuth popup + status badge
+  `frame-src 'self' https://www.google.com https://accounts.google.com https://www.googletagmanager.com https://status.e-syrians.com`,
 
   // Web workers
   `worker-src 'self' blob:`,
