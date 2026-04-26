@@ -47,7 +47,7 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
       <GoogleTagManager gtmId="GTM-MSXHDMVL" />
       <body className={`${ibm.className} antialiased`}>
         {/*

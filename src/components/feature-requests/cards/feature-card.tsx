@@ -43,7 +43,7 @@ const FeatureCard: FC<Props> = ({ feature }) => {
       </CardHeader>
       <CardBody className="items-start space-y-3 text-start">
         <Link href={`/feature-requests/${feature.id}`} className="w-full">
-          <h3 className="text-lg font-semibold text-gray-800 hover:underline">{feature.title}</h3>
+          <h3 className="text-default-800 text-lg font-semibold hover:underline">{feature.title}</h3>
         </Link>
         <p className="text-default-700 text-sm">{preview}</p>
         <Timeline timeline={feature.timeline} />

@@ -1547,7 +1547,7 @@
       "description": "No polls were created within the selected time frame"
     },
     "categories": {
-      "all": "All Categories"
+      "all": "All Polls"
     },
     "voters_count": "{count} people have voted on this poll",
     "close": "Close",

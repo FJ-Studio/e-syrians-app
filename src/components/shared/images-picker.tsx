@@ -84,13 +84,13 @@ const ImagesPicker: FC<Props> = ({
       {preview && (
         <div className="mb-3 flex flex-wrap gap-2">
           {imagePreviews.map((preview, index) => (
-            <div key={index} className="relative flex h-24 w-24 items-center justify-center rounded-lg bg-gray-200">
+            <div key={index} className="bg-default-200 relative flex h-24 w-24 items-center justify-center rounded-lg">
               <Image
                 src={preview}
                 alt={`Image preview ${index}`}
                 width={96}
                 height={96}
-                className="h-full w-full rounded-lg border border-solid border-gray-300 object-cover"
+                className="border-default-300 h-full w-full rounded-lg border border-solid object-cover"
               />
               <Button
                 color="danger"
