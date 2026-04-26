@@ -35,12 +35,12 @@ const StatusBadge: FC = () => {
           src={`https://status.e-syrians.com/badge?theme=${theme}`}
           width="250"
           height="30"
-          frameBorder="0"
           scrolling="no"
           loading="lazy"
           title="Status"
           sandbox="allow-scripts allow-same-origin"
           referrerPolicy="no-referrer"
+          className="border-0"
           style={{ colorScheme: "normal" }}
         />
       )}
