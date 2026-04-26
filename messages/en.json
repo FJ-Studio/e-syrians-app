@@ -1403,6 +1403,13 @@
     "nav": {
       "census": "Census",
       "polls": "Polls"
+    },
+    "theme": {
+      "label": "Theme",
+      "selection": "Theme selection",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
     }
   },
   "server_errors": {
