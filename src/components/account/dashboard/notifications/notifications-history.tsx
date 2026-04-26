@@ -50,27 +50,29 @@ const NotificationsHistory: FC = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchNotifications = useCallback(async (p: number) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/account/notifications?page=${p}`);
-      if (response.ok) {
-        const result = await response.json();
-        if (result.success) {
-          setItems(result.data?.data ?? []);
-          setTotalPages(result.data?.last_page ?? 1);
-        }
-      }
-    } catch {
-      // handled by empty state
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchNotifications(page);
-  }, [page, fetchNotifications]);
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/account/notifications?page=${page}`);
+        if (response.ok && !cancelled) {
+          const result = await response.json();
+          if (result.success && !cancelled) {
+            setItems(result.data?.data ?? []);
+            setTotalPages(result.data?.last_page ?? 1);
+          }
+        }
+      } catch {
+        // handled by empty state
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [page]);
 
   const markAsRead = async (id: string) => {
     await fetch(`/api/account/notifications/${id}/mark-read`, { method: "POST" });

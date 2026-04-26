@@ -41,18 +41,25 @@ const VerifiersTable: FC = () => {
     { name: t("table.notes.title"), uid: "notes", sortable: false },
   ];
 
-  const getVerifiers = async () => {
-    setLoading(true);
-    const req = await fetch("/api/account/verifications/verifiers");
-    if (req.ok) {
-      const data = await req.json();
-      setItems(data.data);
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
-    getVerifiers();
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      try {
+        const req = await fetch("/api/account/verifications/verifiers");
+        if (req.ok && !cancelled) {
+          const data = await req.json();
+          setItems(data.data);
+        }
+      } catch {
+        // Error handled by loading state
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const sortedItems = useMemo(() => {
