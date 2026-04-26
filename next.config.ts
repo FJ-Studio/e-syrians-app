@@ -10,10 +10,10 @@ const withNextIntl = createNextIntlPlugin();
 // - Backend API (sandbox-api.e-syrians.com)
 // - Social sharing links (Facebook, Twitter, LinkedIn, WhatsApp)
 const cspDirectives = [
-  // Scripts: self + GTM + reCAPTCHA
+  // Scripts: self + GTM + reCAPTCHA + Vercel toolbar (preview deployments)
   // 'unsafe-inline' required for GTM and Next.js inline scripts
   // 'unsafe-eval' required for GTM custom JS variables
-  `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com`,
+  `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://vercel.live`,
 
   // Styles: self + inline (Tailwind, HeroUI)
   `style-src 'self' 'unsafe-inline'`,
@@ -27,7 +27,8 @@ const cspDirectives = [
 
   // API connections: self + backend API + analytics + reCAPTCHA
   // analytics.google.com is the GA4 Measurement Protocol endpoint (/g/collect)
-  `connect-src 'self' https://sandbox-api.e-syrians.com https://api.e-syrians.com https://www.google.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com`,
+  // stats.g.doubleclick.net is used by GTM for Google Ads conversion tracking
+  `connect-src 'self' https://sandbox-api.e-syrians.com https://api.e-syrians.com https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com`,
 
   // Frames: reCAPTCHA iframe + Google OAuth popup + status badge
   `frame-src 'self' https://www.google.com https://accounts.google.com https://www.googletagmanager.com https://status.e-syrians.com`,
