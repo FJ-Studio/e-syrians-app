@@ -50,8 +50,8 @@ const CensusCharts: FC = () => {
               size="sm"
               disabledKeys={["per-month"]}
             >
-              <SelectItem key="per-day">{t("charts.filter.perday")}</SelectItem>
-              <SelectItem key="per-month">{t("charts.filter.permonth")}</SelectItem>
+              <SelectItem key="per-day" textValue={t("charts.filter.perday")}>{t("charts.filter.perday")}</SelectItem>
+              <SelectItem key="per-month" textValue={t("charts.filter.permonth")}>{t("charts.filter.permonth")}</SelectItem>
             </Select>
           </div>
         }
