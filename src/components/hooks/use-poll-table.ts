@@ -1,6 +1,6 @@
 "use client";
 import { SortDescriptor } from "@heroui/react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 interface UsePollTableOptions<T> {
   fetchUrl: string;
@@ -33,6 +33,16 @@ export default function usePollTable<T extends Record<string, unknown>>({
     direction: defaultSortDirection,
   });
 
+  // Store extractors in refs so the fetch effect always uses the latest
+  // versions without needing them in its dependency list (callers typically
+  // pass inline arrows that change identity every render).
+  const dataExtractorRef = useRef(dataExtractor);
+  const lastPageExtractorRef = useRef(lastPageExtractor);
+  useEffect(() => {
+    dataExtractorRef.current = dataExtractor;
+    lastPageExtractorRef.current = lastPageExtractor;
+  });
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -41,8 +51,8 @@ export default function usePollTable<T extends Record<string, unknown>>({
         const req = await fetch(`${fetchUrl}?page=${page}`);
         const data = await req.json();
         if (req.status === 200 && !cancelled) {
-          setItems(dataExtractor(data));
-          setPages(lastPageExtractor(data));
+          setItems(dataExtractorRef.current(data));
+          setPages(lastPageExtractorRef.current(data));
         }
       } catch {
         // Error handled by loading state
@@ -53,9 +63,6 @@ export default function usePollTable<T extends Record<string, unknown>>({
     return () => {
       cancelled = true;
     };
-    // dataExtractor and lastPageExtractor are inline arrows that change every
-    // render — only re-fetch when fetchUrl or page actually change.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, fetchUrl, fetchKey]);
 
   const refetch = useCallback(() => {
