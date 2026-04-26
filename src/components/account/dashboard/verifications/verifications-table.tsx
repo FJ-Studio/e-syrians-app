@@ -57,8 +57,8 @@ const VerificationsTable: FC = () => {
         first = a.created_at;
         second = b.created_at;
       } else if (sortDescriptor.column === "name") {
-        first = `${a.user.name} ${a.user.surname}`;
-        second = `${b.user.name} ${b.user.surname}`;
+        first = `${a.user?.name} ${a.user?.surname}`;
+        second = `${b.user?.name} ${b.user?.surname}`;
       } else {
         return 0;
       }
