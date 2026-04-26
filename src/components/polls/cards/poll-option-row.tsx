@@ -36,7 +36,7 @@ const PollOptionRow: FC<Props> = ({
         value={value}
       >
         <div
-          className="absolute inset-e-0 -top-2 -z-10 h-[calc(100%+16px)] bg-blue-100"
+          className="absolute inset-e-0 -top-2 -z-10 h-[calc(100%+16px)] bg-blue-100 dark:bg-blue-900"
           style={{
             width: `${percentage ?? 0}%`,
           }}
