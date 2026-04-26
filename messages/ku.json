@@ -1403,6 +1403,13 @@
     "nav": {
       "census": "Serjimêrî",
       "polls": "Anket"
+    },
+    "theme": {
+      "label": "Tema",
+      "selection": "Hilbijartina temayê",
+      "light": "Ronî",
+      "dark": "Tarî",
+      "system": "Pergal"
     }
   },
   "server_errors": {

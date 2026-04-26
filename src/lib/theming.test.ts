@@ -1,6 +1,9 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                           */
@@ -67,6 +70,13 @@ function loadHeroConfig() {
     return m ? m[1] : null;
   };
 
+  /** Extract a single-level nested block like `primary: { ... }` */
+  const extractSubBlock = (block: string, key: string): string => {
+    const re = new RegExp(`\\b${key}:\\s*\\{([^}]+)\\}`);
+    const m = block.match(re);
+    return m ? m[1] : "";
+  };
+
   const lightBlock = extractThemeBlock("light");
   const darkBlock = extractThemeBlock("dark");
 
@@ -75,13 +85,13 @@ function loadHeroConfig() {
       background: extractColor(lightBlock, "background"),
       foreground: extractColor(lightBlock, "foreground"),
       primaryDefault: extractColor(lightBlock, "DEFAULT"),
-      primaryForeground: extractColor(lightBlock, "foreground"),
+      primaryForeground: extractColor(extractSubBlock(lightBlock, "primary"), "foreground"),
     },
     dark: {
       background: extractColor(darkBlock, "background"),
       foreground: extractColor(darkBlock, "foreground"),
       primaryDefault: extractColor(darkBlock, "DEFAULT"),
-      primaryForeground: extractColor(darkBlock, "foreground"),
+      primaryForeground: extractColor(extractSubBlock(darkBlock, "primary"), "foreground"),
     },
   };
 }
