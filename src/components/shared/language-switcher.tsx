@@ -14,7 +14,7 @@ const LanguageSwitcher: FC = () => {
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
-          <Button variant="flat" isIconOnly className="bg-primary text-white">
+          <Button variant="flat" isIconOnly className="bg-primary text-primary-foreground">
             <Icon icon={globeAltIcon} className="size-6" />
           </Button>
         </DropdownTrigger>

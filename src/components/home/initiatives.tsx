@@ -14,13 +14,13 @@ const Initiatives: FC = () => {
         <div className="w-full sm:w-1/2 lg:w-[calc(50%-16px)]" key={index}>
           <Card className="p-6">
             <h3 className="text-lg font-medium text-pretty">{initiative.title}</h3>
-            <p className="mt-4 text-gray-500">{initiative.description}</p>
+            <p className="text-default-500 mt-4">{initiative.description}</p>
             {initiative.link ? (
-              <Button as={Link} href={initiative.link} className="bg-primary mt-4 text-white">
+              <Button as={Link} href={initiative.link} className="bg-primary text-primary-foreground mt-4">
                 {t("common.read_more")}
               </Button>
             ) : (
-              <Button className="bg-primary mt-4 text-white/20" disabled disableAnimation disableRipple>
+              <Button className="bg-primary text-primary-foreground/20 mt-4" disabled disableAnimation disableRipple>
                 {t("common.preparing")}
               </Button>
             )}

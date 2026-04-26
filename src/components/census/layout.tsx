@@ -14,10 +14,10 @@ const CensusLayout: FC<PropsWithChildren> = ({ children }) => {
           <div className="text-sm md:text-base">
             {CENSUS_NAV.map((nav, index) => (
               <Fragment key={nav.link}>
-                <Link href={nav.link} title={t(nav.title)} className="text-white">
+                <Link href={nav.link} title={t(nav.title)} className="text-primary-foreground">
                   {t(nav.title)}
                 </Link>
-                {index < CENSUS_NAV.length - 1 && <span className="mx-2 text-gray-200">|</span>}
+                {index < CENSUS_NAV.length - 1 && <span className="text-default-300 mx-2">|</span>}
               </Fragment>
             ))}
           </div>

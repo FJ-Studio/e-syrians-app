@@ -26,7 +26,7 @@ const FeatureRequests: FC<Props> = ({ features, current_page, last_page, sort, s
     <>
       <div className="mb-3 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-700">{t("title")}</h1>
+          <h1 className="text-default-700 text-3xl font-bold">{t("title")}</h1>
           <p className="mt-1 max-w-prose">{t("description")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
