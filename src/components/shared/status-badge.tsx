@@ -39,6 +39,8 @@ const StatusBadge: FC = () => {
           scrolling="no"
           loading="lazy"
           title="Status"
+          sandbox="allow-scripts allow-same-origin"
+          referrerPolicy="no-referrer"
           style={{ colorScheme: "normal" }}
         />
       )}
