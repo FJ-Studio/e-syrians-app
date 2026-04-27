@@ -1523,8 +1523,10 @@
     "ethnicity": "Ethnicity",
     "country": "Country of residence",
     "cityInsideSyria": "City in Syria",
+    "province": "Province",
     "allowedVoters": "Specific voters",
     "allowedVotersDescription": "This poll is restricted to {count} specific people",
+    "inviteOnly": "This poll is restricted to a pre-selected list of voters",
     "noLimit": "Not limited",
     "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
     "filter": {

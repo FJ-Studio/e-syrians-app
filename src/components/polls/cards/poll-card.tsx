@@ -1,10 +1,15 @@
 "use client";
 import ShortUserSummary from "@/components/census/cards/short-summary";
 import useCannotVoteReasons from "@/components/hooks/localization/cannot-vote";
+import useCountries from "@/components/hooks/localization/country";
+import useEthnicity from "@/components/hooks/localization/ethnicity";
+import useGender from "@/components/hooks/localization/gender";
+import useProvinces from "@/components/hooks/localization/provinces";
+import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useServerError from "@/components/hooks/localization/server-errors";
 import { ibm } from "@/lib/fonts/fonts";
 import { generateToken } from "@/lib/recaptcha";
-import { AudienceFailure, Poll } from "@/lib/types/polls";
+import { AudienceFailure, Poll, PollAudience } from "@/lib/types/polls";
 import {
   Avatar,
   Button,
@@ -26,6 +31,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   Snippet,
+  Spinner,
   useDisclosure,
 } from "@heroui/react";
 import calendarDaysIcon from "@iconify-icons/heroicons/calendar-days";
@@ -34,6 +40,7 @@ import handThumbDownIcon from "@iconify-icons/heroicons/hand-thumb-down";
 import handThumbUpIcon from "@iconify-icons/heroicons/hand-thumb-up";
 import shareIcon from "@iconify-icons/heroicons/share";
 import userIcon from "@iconify-icons/heroicons/user";
+import userGroupIcon from "@iconify-icons/heroicons/user-group";
 import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -85,7 +92,7 @@ const failureToReasonKey: Record<
 const PollFullCard: FC<Props> = ({ poll }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { isOpen: isVotersOpen, onOpen: onVotersOpen, onOpenChange: onVotersOpenChange } = useDisclosure();
-  const [modalSection, setModalSection] = useState<"author" | "timeline" | "share" | null>(null);
+  const [modalSection, setModalSection] = useState<"author" | "timeline" | "audience" | "share" | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [selectedOptionText, setSelectedOptionText] = useState("");
 
@@ -93,12 +100,37 @@ const PollFullCard: FC<Props> = ({ poll }) => {
     return `${process.env.NEXT_PUBLIC_DOMAIN_URL}/polls/${poll.id}`;
   }, [poll]);
 
+  const [audience, setAudience] = useState<PollAudience | null>(null);
+  const [audienceLoading, setAudienceLoading] = useState(false);
+
   useEffect(() => {
     if (modalSection) {
       onOpen();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalSection]);
+
+  useEffect(() => {
+    if (modalSection !== "audience" || audience) return;
+    let cancelled = false;
+    (async () => {
+      setAudienceLoading(true);
+      try {
+        const res = await fetch(`/api/polls/audience?poll_id=${poll.id}`);
+        if (res.ok && !cancelled) {
+          const json = await res.json();
+          setAudience(json.data ?? json);
+        }
+      } catch {
+        // silently fail — the modal will just show a loading state
+      } finally {
+        if (!cancelled) setAudienceLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [modalSection, audience, poll.id]);
 
   const [localPoll, setLocalPoll] = useState<Poll>(poll);
   const cannotVoteReasons = useCannotVoteReasons();
@@ -109,6 +141,11 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   const { user } = localPoll;
   const t = useTranslations("polls");
   const { status } = useSession();
+  const genderLabels = useGender();
+  const countryLabels = useCountries();
+  const provinceLabels = useProvinces();
+  const ethnicityLabels = useEthnicity();
+  const religiousAffiliationLabels = useReligiousAffiliation();
 
   const handleSelectionChange = (value: string[]) => {
     if (value.length > localPoll.max_selections) {
@@ -249,6 +286,13 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 {t("actions.timeline")}
               </DropdownItem>
               <DropdownItem
+                key="audience"
+                startContent={<Icon icon={userGroupIcon} className="size-5" />}
+                onPress={() => setModalSection("audience")}
+              >
+                {t("actions.audience")}
+              </DropdownItem>
+              <DropdownItem
                 key="share"
                 startContent={<Icon icon={shareIcon} className="size-5" />}
                 onPress={() => setModalSection("share")}
@@ -367,9 +411,11 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     ? t("actions.author")
                     : modalSection === "timeline"
                       ? t("actions.timeline")
-                      : modalSection === "share"
-                        ? t("actions.share")
-                        : ""}
+                      : modalSection === "audience"
+                        ? t("actions.audience")
+                        : modalSection === "share"
+                          ? t("actions.share")
+                          : ""}
                 </h3>
               </ModalHeader>
               <ModalBody>
@@ -389,6 +435,82 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     </p>
                   </>
                 )}
+                {modalSection === "audience" &&
+                  (audienceLoading ? (
+                    <div className="flex justify-center py-4">
+                      <Spinner size="md" />
+                    </div>
+                  ) : audience ? (
+                    <div className="space-y-2">
+                      {"allowed_voters" in audience ? (
+                        <p>
+                          <span className="font-medium">{t("allowedVoters")}</span>:{" "}
+                          {audience.allowed_voters && audience.allowed_voters.length > 0
+                            ? t("allowedVotersDescription", { count: audience.allowed_voters.length })
+                            : t("inviteOnly")}
+                        </p>
+                      ) : (
+                        <>
+                          <p>
+                            <span className="font-medium">{t("ageRange")}</span>:{" "}
+                            {audience.age_range.min === 13 && audience.age_range.max === 120
+                              ? t("noLimit")
+                              : t("ageRangeBetween", {
+                                  min: audience.age_range.min,
+                                  max: audience.age_range.max,
+                                })}
+                          </p>
+                          <p>
+                            <span className="font-medium">{t("gender")}</span>:{" "}
+                            {audience.gender.length === 0
+                              ? t("noLimit")
+                              : audience.gender
+                                  .map((g) => genderLabels[g as keyof typeof genderLabels] ?? g)
+                                  .join(", ")}
+                          </p>
+                          <p>
+                            <span className="font-medium">{t("country")}</span>:{" "}
+                            {audience.country.length === 0
+                              ? t("noLimit")
+                              : audience.country
+                                  .map((c) => countryLabels[c as keyof typeof countryLabels] ?? c)
+                                  .join(", ")}
+                          </p>
+                          <p>
+                            <span className="font-medium">{t("province")}</span>:{" "}
+                            {audience.province.length === 0
+                              ? t("noLimit")
+                              : audience.province
+                                  .map((p) => provinceLabels[p as keyof typeof provinceLabels] ?? p)
+                                  .join(", ")}
+                          </p>
+                          <p>
+                            <span className="font-medium">{t("hometown")}</span>:{" "}
+                            {audience.hometown.length === 0 ? t("noLimit") : audience.hometown.join(", ")}
+                          </p>
+                          <p>
+                            <span className="font-medium">{t("ethnicity")}</span>:{" "}
+                            {audience.ethnicity.length === 0
+                              ? t("noLimit")
+                              : audience.ethnicity
+                                  .map((e) => ethnicityLabels[e as keyof typeof ethnicityLabels] ?? e)
+                                  .join(", ")}
+                          </p>
+                          <p>
+                            <span className="font-medium">{t("religinousAffiliation")}</span>:{" "}
+                            {audience.religious_affiliation.length === 0
+                              ? t("noLimit")
+                              : audience.religious_affiliation
+                                  .map(
+                                    (r) =>
+                                      religiousAffiliationLabels[r as keyof typeof religiousAffiliationLabels] ?? r,
+                                  )
+                                  .join(", ")}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  ) : null)}
                 {modalSection === "share" && (
                   <div className="grid grid-cols-2 flex-wrap gap-4">
                     <Button
