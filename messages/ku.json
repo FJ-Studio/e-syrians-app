@@ -1523,8 +1523,10 @@
     "ethnicity": "Nasname",
     "country": "Welatê nîştegerî",
     "cityInsideSyria": "Bajarê li Sûriyê",
+    "province": "Parêzgeh",
     "allowedVoters": "Dengdêrên taybet",
     "allowedVotersDescription": "Ev lêkolîn tenê ji bo {count} kesên taybet e",
+    "inviteOnly": "Ev lêkolîn tenê ji bo lîsteya dengdêrên berê hatî hilbijartin e",
     "noLimit": "Bê sînor",
     "description": "Hemû bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin li vir beşdarî lêkolînên rayê bibin. Bi gelemperî, lêkolîn hatine rêz kirin di bingeha nivîsandina ku naveroka dengên 'Erê' û 'Na' di navber de çêtir e û her wisa bi sal û mehê zêde hatine rêvekirin.",
     "filter": {
