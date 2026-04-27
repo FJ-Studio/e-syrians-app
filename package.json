@@ -27,7 +27,7 @@
     ]
   },
   "dependencies": {
-    "@heroui/react": "^2.8.10",
+    "@heroui/react": "^3.0.3",
     "@heroui/theme": "^2.4.26",
     "@iconify-icons/flat-color-icons": "^1.2.5",
     "@iconify-icons/heroicons": "^1.2.9",
