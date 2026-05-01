@@ -1,4 +1,7 @@
 {
+  "overrides": {
+    "unrs-resolver": "1.10.1"
+  },
   "name": "e-syrians-id",
   "version": "0.1.0",
   "private": true,
