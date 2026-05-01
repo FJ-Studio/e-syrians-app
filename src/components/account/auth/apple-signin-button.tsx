@@ -6,7 +6,6 @@ import appleIcon from "@iconify-icons/simple-icons/apple";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { FC, useCallback, useState } from "react";
 
 const APPLE_CLIENT_ID = process.env.NEXT_PUBLIC_APPLE_CLIENT_ID ?? "";
@@ -23,14 +22,13 @@ type AppleSignInButtonProps = {
  */
 const AppleSignInButton: FC<AppleSignInButtonProps> = ({ redirectTo = "/account" }) => {
   const t = useTranslations();
-  const router = useRouter();
   const { signInWithApple, loading: sdkLoading } = useAppleSignIn();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleAppleSignIn = useCallback(async () => {
     if (!APPLE_CLIENT_ID) {
-      setError("Apple Sign-In is not configured.");
+      setError(t("common.appleSignInNotConfigured"));
       return;
     }
 
@@ -92,7 +90,7 @@ const AppleSignInButton: FC<AppleSignInButtonProps> = ({ redirectTo = "/account"
     } finally {
       setLoading(false);
     }
-  }, [signInWithApple, redirectTo, router, t]);
+  }, [signInWithApple, redirectTo, t]);
 
   return (
     <div className="w-full">

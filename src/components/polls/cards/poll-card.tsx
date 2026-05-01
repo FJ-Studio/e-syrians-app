@@ -7,6 +7,7 @@ import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useServerError from "@/components/hooks/localization/server-errors";
+import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { ibm } from "@/lib/fonts/fonts";
 import { generateToken } from "@/lib/recaptcha";
 import { AudienceFailure, Poll, PollAudience } from "@/lib/types/polls";
@@ -102,6 +103,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
 
   const [audience, setAudience] = useState<PollAudience | null>(null);
   const [audienceLoading, setAudienceLoading] = useState(false);
+  const [audienceError, setAudienceError] = useState<string | null>(null);
 
   useEffect(() => {
     if (modalSection) {
@@ -115,14 +117,24 @@ const PollFullCard: FC<Props> = ({ poll }) => {
     let cancelled = false;
     (async () => {
       setAudienceLoading(true);
+      setAudienceError(null);
       try {
         const res = await fetch(`/api/polls/audience?poll_id=${poll.id}`);
-        if (res.ok && !cancelled) {
-          const json = await res.json();
-          setAudience(json.data ?? json);
+        if (cancelled) return;
+        if (!res.ok) {
+          setAudienceError("audienceLoadFailed");
+          return;
         }
+        const json = await res.json().catch(() => null);
+        if (cancelled) return;
+        const data = json?.data ?? json;
+        if (!data) {
+          setAudienceError("audienceLoadFailed");
+          return;
+        }
+        setAudience(data);
       } catch {
-        // silently fail — the modal will just show a loading state
+        if (!cancelled) setAudienceError("audienceLoadFailed");
       } finally {
         if (!cancelled) setAudienceLoading(false);
       }
@@ -440,20 +452,26 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     <div className="flex justify-center py-4">
                       <Spinner size="md" />
                     </div>
+                  ) : audienceError ? (
+                    <p className="text-danger-500 py-2 text-center text-sm">{t("audienceLoadFailed")}</p>
                   ) : audience ? (
                     <div className="space-y-2">
-                      {"allowed_voters" in audience ? (
+                      {/* `allowed_voters` is an optional array on PollAudience —
+                          presence alone isn't a reliable discriminator (it can
+                          be present and empty). Treat the audience as
+                          invite-only only when there are actually entries. */}
+                      {(audience.allowed_voters?.length ?? 0) > 0 ? (
                         <p>
                           <span className="font-medium">{t("allowedVoters")}</span>:{" "}
-                          {audience.allowed_voters && audience.allowed_voters.length > 0
-                            ? t("allowedVotersDescription", { count: audience.allowed_voters.length })
-                            : t("inviteOnly")}
+                          {t("allowedVotersDescription", {
+                            count: audience.allowed_voters!.length,
+                          })}
                         </p>
                       ) : (
                         <>
                           <p>
                             <span className="font-medium">{t("ageRange")}</span>:{" "}
-                            {audience.age_range.min === 13 && audience.age_range.max === 120
+                            {audience.age_range.min === MIN_AUDIENCE_AGE && audience.age_range.max === MAX_AUDIENCE_AGE
                               ? t("noLimit")
                               : t("ageRangeBetween", {
                                   min: audience.age_range.min,
@@ -497,7 +515,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                                   .join(", ")}
                           </p>
                           <p>
-                            <span className="font-medium">{t("religinousAffiliation")}</span>:{" "}
+                            <span className="font-medium">{t("religiousAffiliation")}</span>:{" "}
                             {audience.religious_affiliation.length === 0
                               ? t("noLimit")
                               : audience.religious_affiliation
