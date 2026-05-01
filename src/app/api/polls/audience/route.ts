@@ -14,6 +14,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, messages: ["poll_id is required"] }, { status: 400 });
   }
 
+  const apiUrl = process.env.API_URL;
+  if (!apiUrl) {
+    return NextResponse.json({ success: false, messages: ["API_URL_NOT_CONFIGURED"] }, { status: 500 });
+  }
+
   const headers: Record<string, string> = { Accept: "application/json" };
 
   const session = await auth();
@@ -21,8 +26,21 @@ export async function GET(req: NextRequest) {
     headers.Authorization = `Bearer ${session.user.accessToken}`;
   }
 
-  const url = `${process.env.API_URL}/polls/audience?poll_id=${encodeURIComponent(pollId)}`;
-  const request = await fetch(url, { headers });
-  const response = await request.json();
-  return NextResponse.json(response, { status: request.status });
+  const url = `${apiUrl}/polls/audience?poll_id=${encodeURIComponent(pollId)}`;
+
+  let upstream: Response;
+  try {
+    upstream = await fetch(url, { headers });
+  } catch {
+    return NextResponse.json({ success: false, messages: ["AUTH_SERVER_UNREACHABLE"] }, { status: 502 });
+  }
+
+  // Tolerate non-JSON responses (e.g. 502 with HTML error page) without
+  // crashing the route — surface a controlled error instead.
+  const body = await upstream.json().catch(() => null);
+  if (body === null) {
+    return NextResponse.json({ success: false, messages: ["INVALID_UPSTREAM_RESPONSE"] }, { status: 502 });
+  }
+
+  return NextResponse.json(body, { status: upstream.status });
 }
