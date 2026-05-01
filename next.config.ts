@@ -7,13 +7,15 @@ const withNextIntl = createNextIntlPlugin();
 // - Google Tag Manager (GTM-MSXHDMVL)
 // - Google reCAPTCHA v3
 // - Google OAuth (next-auth)
+// - Sign in with Apple JS (popup flow)
 // - Backend API (sandbox-api.e-syrians.com)
 // - Social sharing links (Facebook, Twitter, LinkedIn, WhatsApp)
 const cspDirectives = [
-  // Scripts: self + GTM + reCAPTCHA + Vercel toolbar (preview deployments)
+  // Scripts: self + GTM + reCAPTCHA + Vercel toolbar (preview deployments) +
+  // Apple Sign-In JS SDK (loaded from appleid.cdn-apple.com)
   // 'unsafe-inline' required for GTM and Next.js inline scripts
   // 'unsafe-eval' required for GTM custom JS variables
-  `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://vercel.live`,
+  `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://vercel.live https://appleid.cdn-apple.com`,
 
   // Styles: self + inline (Tailwind, HeroUI)
   `style-src 'self' 'unsafe-inline'`,
@@ -25,13 +27,14 @@ const cspDirectives = [
   // Fonts: local only (IBM Plex Sans Arabic loaded from /public)
   `font-src 'self' data:`,
 
-  // API connections: self + backend API + analytics + reCAPTCHA
+  // API connections: self + backend API + analytics + reCAPTCHA + Apple ID
   // analytics.google.com is the GA4 Measurement Protocol endpoint (/g/collect)
   // stats.g.doubleclick.net is used by GTM for Google Ads conversion tracking
-  `connect-src 'self' https://sandbox-api.e-syrians.com https://api.e-syrians.com https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com`,
+  // appleid.apple.com handles auth XHRs from the Sign-In JS SDK after popup return
+  `connect-src 'self' https://sandbox-api.e-syrians.com https://api.e-syrians.com https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://appleid.apple.com`,
 
-  // Frames: reCAPTCHA iframe + Google OAuth popup + status badge
-  `frame-src 'self' https://www.google.com https://accounts.google.com https://www.googletagmanager.com https://status.e-syrians.com`,
+  // Frames: reCAPTCHA iframe + Google OAuth popup + Apple Sign-In popup + status badge
+  `frame-src 'self' https://www.google.com https://accounts.google.com https://www.googletagmanager.com https://status.e-syrians.com https://appleid.apple.com`,
 
   // Web workers
   `worker-src 'self' blob:`,
@@ -39,8 +42,8 @@ const cspDirectives = [
   // Child/frame ancestors
   `frame-ancestors 'self'`,
 
-  // Form submissions
-  `form-action 'self'`,
+  // Form submissions: self + Apple ID (the Sign-In popup posts the auth form to apple.com)
+  `form-action 'self' https://appleid.apple.com`,
 
   // Base URI
   `base-uri 'self'`,
