@@ -24,8 +24,41 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         challenge_token: { label: "Challenge Token", type: "text" },
         twofa_code: { label: "2FA Code", type: "text" },
         is_recovery_code: { label: "Is Recovery Code", type: "text" },
+        // auth_token: bootstrapping path used after popup-based social
+        // sign-ins (e.g. Apple). The browser already exchanged the social
+        // identity token with our backend and got a Sanctum token; this path
+        // turns that into a NextAuth session by fetching /users/me.
+        auth_token: { label: "Auth Token", type: "text" },
       },
       authorize: async (credentials): Promise<ESUser | null> => {
+        // Bootstrap a session from a backend-issued token. Used by the Apple
+        // popup flow after /api/auth/social-login returns { token, user }.
+        if (credentials?.auth_token && typeof credentials.auth_token === "string") {
+          let req: Response;
+          try {
+            req = await fetch(`${process.env.API_URL}/users/me`, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${credentials.auth_token}`,
+              },
+            });
+          } catch {
+            throw new Error("Unable to reach authentication server.");
+          }
+
+          if (!req.ok) {
+            return null;
+          }
+
+          const data = await req.json();
+          if (data?.success && data?.data) {
+            return { ...data.data, accessToken: credentials.auth_token };
+          }
+          return null;
+        }
+
         // Handle 2FA verification (second step of login)
         if (credentials?.challenge_token && credentials?.twofa_code) {
           let req: Response;

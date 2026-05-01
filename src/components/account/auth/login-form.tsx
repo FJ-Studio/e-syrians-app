@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import AppleSignInButton from "./apple-signin-button";
 import TwoFactorVerify from "./two-factor-verify";
 
 export default function LoginForm() {
@@ -100,6 +101,7 @@ export default function LoginForm() {
         >
           {t("common.continueWithGoogle")}
         </Button>
+        <AppleSignInButton redirectTo="/account" />
       </div>
 
       <div className="flex w-full items-center gap-4 py-2">
