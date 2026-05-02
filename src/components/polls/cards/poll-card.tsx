@@ -119,7 +119,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
       setAudienceLoading(true);
       setAudienceError(null);
       try {
-        const res = await fetch(`/api/polls/audience?poll_id=${poll.id}`);
+        const res = await fetch(`/api/polls/audience?poll_id=${encodeURIComponent(poll.id)}`);
         if (cancelled) return;
         if (!res.ok) {
           setAudienceError("audienceLoadFailed");
