@@ -1,8 +1,15 @@
 declare global {
   interface Window {
+    // We use the Enterprise SDK exclusively (loaded as `enterprise.js`
+    // in `app/[locale]/layout.tsx`). The classic v3 namespace
+    // (`window.grecaptcha.ready/.execute` without `.enterprise`) is
+    // intentionally NOT declared — accessing it is a stale-code
+    // signal that needs migrating to the `.enterprise.*` API.
     grecaptcha: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      enterprise: {
+        ready: (callback: () => void) => void;
+        execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      };
     };
     AppleID: {
       auth: {
