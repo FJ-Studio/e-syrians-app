@@ -51,16 +51,24 @@ export default async function RootLayout({
       <GoogleTagManager gtmId="GTM-MSXHDMVL" />
       <body className={`${ibm.className} antialiased`}>
         {/*
-         * reCAPTCHA v3 loader. Kept inside <body> so Next.js' Script manager
-         * can reliably place it; earlier versions put this as a bare sibling
-         * of <body> where React 19 hoisting occasionally loaded it late,
-         * causing `generateToken` to run against an uninitialised stub and
-         * return an empty token (rejected by the backend as invalid).
+         * reCAPTCHA Enterprise loader. Kept inside <body> so Next.js' Script
+         * manager can reliably place it; earlier versions put this as a
+         * bare sibling of <body> where React 19 hoisting occasionally
+         * loaded it late, causing `generateToken` to run against an
+         * uninitialised stub and return an empty token (rejected by the
+         * backend as invalid).
+         *
+         * Loads `enterprise.js` (not the legacy `api.js`) because the
+         * Laravel backend's recaptcha middleware verifies via the
+         * Enterprise Assessments API. Sending classic-v3 tokens to that
+         * endpoint fails with `BROWSER_ERROR`. `NEXT_PUBLIC_RECAPTCHA`
+         * must be an Enterprise site key (same value as the mobile
+         * client's `EXPO_PUBLIC_RECAPTCHA_SITE_KEY`).
          */}
         <Script
-          id="recaptcha-v3"
+          id="recaptcha-enterprise"
           strategy="afterInteractive"
-          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA}`}
+          src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA}`}
         />
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>

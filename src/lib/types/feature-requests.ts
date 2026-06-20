@@ -7,7 +7,15 @@ import { ESUser } from "./account";
 export const featureStatuses = ["idea", "in_development", "in_testing", "shipped"] as const;
 export type FeatureStatus = (typeof featureStatuses)[number];
 
-export const featureSorts = ["newest", "popular", "shipped"] as const;
+// `shipped` was removed (2026-06): the backend accepts `sort=shipped`
+// but it's actually a filter+sort combo (`WHERE deployed_at IS NOT NULL`
+// + `ORDER BY deployed_at`) — semantically wrong for a sort, and the
+// `status=shipped` filter (which uses the `status` field) already
+// covers the "show me shipped items" intent. Mirrors the equivalent
+// removal in `e-syrians-mobile/app/(tabs)/feature-requests/index.tsx`.
+// The backend's `match()` arm in `FeatureRequestService::applySort` is
+// now unreachable from any first-party client.
+export const featureSorts = ["newest", "popular"] as const;
 export type FeatureSort = (typeof featureSorts)[number];
 
 export type FeatureTimeline = {

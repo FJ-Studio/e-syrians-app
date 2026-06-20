@@ -1483,6 +1483,7 @@
     "title": "Piştrastkirina Agahiyên Bikarhêner",
     "citizenFrom": "{gender, select, m {Nîştegerîya Sûrî} f {Nîştegerîya Sûrî} other {Nîştegerîya Sûrî}} ji {hometown}",
     "birthdate": "Dîroka jidayikbûnê",
+    "bornIn": "Sala jidayikbûnê",
     "verify": "Piştrastkirina {name}",
     "gender": "Cinsiyet",
     "ethnicity": "Nasname",
@@ -1938,8 +1939,7 @@
     },
     "sort": {
       "newest": "Nûtirîn",
-      "popular": "Herî populer",
-      "shipped": "Hatine berdan"
+      "popular": "Herî populer"
     },
     "filters": {
       "sort": "Rêzkirin",

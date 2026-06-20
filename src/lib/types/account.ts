@@ -13,7 +13,18 @@ export type ESUser = {
   roles: Array<string>;
   permissions: Array<string>;
   gender?: Gender;
+  /*
+   * Owner-only post-2026-06. The same ESUser type is used for both
+   * the owner's account dashboard (where they see + edit their own
+   * full birth date) AND for public-profile renders (where the
+   * field is now omitted by the backend for privacy — `birth_date`
+   * is a common identity-challenge field at banks / gov agencies).
+   * Public profile renders the derived `birth_year` (just below)
+   * instead, which has no challenge value but preserves age-cohort
+   * signal for verifiers.
+   */
   birth_date?: string;
+  birth_year?: number;
   hometown?: Province;
   ethnicity?: Ethnicity;
   basic_info_updates?: number;
