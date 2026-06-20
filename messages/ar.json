@@ -1483,6 +1483,7 @@
     "title": "تأكيد معلومات المستخدم",
     "citizenFrom": "{gender, select, m {مواطن سوري} f {مواطنة سورية} other {مواطن/ة من سوريا}} من {hometown}",
     "birthdate": "تاريخ الميلاد",
+    "bornIn": "من مواليد",
     "verify": "تأكيد {name}",
     "gender": "الجنس",
     "ethnicity": "العرق",
@@ -1938,8 +1939,7 @@
     },
     "sort": {
       "newest": "الأحدث",
-      "popular": "الأكثر تأييداً",
-      "shipped": "تم إطلاقها"
+      "popular": "الأكثر تأييداً"
     },
     "filters": {
       "sort": "الترتيب",

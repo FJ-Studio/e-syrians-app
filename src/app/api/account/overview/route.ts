@@ -92,36 +92,28 @@ export const GET = withAuthGet(async ({ session }) => {
     given: countItems(verificationsJson),
   };
 
-  // --- Profile completeness ---
-  const completenessFields = [
-    "name",
-    "surname",
-    "gender",
-    "birth_date",
-    "hometown",
-    "ethnicity",
-    "religious_affiliation",
-    "country",
-    "province",
-    "avatar",
-    "national_id",
-    "education_level",
-    "source_of_income",
-    "health_status",
-    "languages",
-  ] as const;
+  /*
+   * Profile completeness — sourced from the Laravel API.
+   *
+   * `UserResource` surfaces `profile_completeness: { filled, total,
+   * percentage }` for the owner of `/users/me`. The fields that count
+   * + the calculation live on the User model
+   * (`User::getProfileCompleteness()` / `User::PROFILE_COMPLETENESS_FIELDS`).
+   * Keeping the rule on the server means web + mobile + any future
+   * consumer all read the same numbers without each one reimplementing
+   * (and slowly drifting from) the rule.
+   *
+   * Falls back to a zeroed shape only if the API response somehow
+   * omits the field (older deployments before the field landed).
+   */
+  const apiCompleteness = profile?.profile_completeness as
+    | { filled: number; total: number; percentage: number }
+    | undefined;
 
-  let filledCount = 0;
-  if (profile) {
-    for (const field of completenessFields) {
-      if (profile[field]) filledCount++;
-    }
-  }
-
-  const profileCompleteness = {
-    filled: filledCount,
-    total: completenessFields.length,
-    percentage: Math.round((filledCount / completenessFields.length) * 100),
+  const profileCompleteness = apiCompleteness ?? {
+    filled: 0,
+    total: 0,
+    percentage: 0,
   };
 
   return NextResponse.json({

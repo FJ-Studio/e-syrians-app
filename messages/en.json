@@ -1483,6 +1483,7 @@
     "title": "Verify user information",
     "citizenFrom": "Syrian citizen from {hometown}",
     "birthdate": "Birthdate",
+    "bornIn": "Born in",
     "verify": "Verify {name}",
     "gender": "Gender",
     "ethnicity": "Ethnicity",
@@ -1938,8 +1939,7 @@
     },
     "sort": {
       "newest": "Newest",
-      "popular": "Most popular",
-      "shipped": "Shipped"
+      "popular": "Most popular"
     },
     "filters": {
       "sort": "Sort",
