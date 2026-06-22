@@ -1295,6 +1295,10 @@
           },
           "province": {
             "label": "Bajar li Sûriyê"
+          },
+          "address": {
+            "label": "Navnîşana kolanê (bijartî)",
+            "description": "Bi şîfre tê parastin û tenê ji te re xuya dibe. Tu carî bi awayekî giştî nayê nîşandan."
           }
         },
         "save": "Guherandina guhertinên",
@@ -1483,6 +1487,7 @@
     "title": "Piştrastkirina Agahiyên Bikarhêner",
     "citizenFrom": "{gender, select, m {Nîştegerîya Sûrî} f {Nîştegerîya Sûrî} other {Nîştegerîya Sûrî}} ji {hometown}",
     "birthdate": "Dîroka jidayikbûnê",
+    "bornIn": "Sala jidayikbûnê",
     "verify": "Piştrastkirina {name}",
     "gender": "Cinsiyet",
     "ethnicity": "Nasname",
@@ -1938,8 +1943,7 @@
     },
     "sort": {
       "newest": "Nûtirîn",
-      "popular": "Herî populer",
-      "shipped": "Hatine berdan"
+      "popular": "Herî populer"
     },
     "filters": {
       "sort": "Rêzkirin",

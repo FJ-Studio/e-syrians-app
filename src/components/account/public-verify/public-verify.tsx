@@ -40,9 +40,18 @@ const PublicVerify: FC<Props> = ({ user }) => {
             <UserCardLinksDropdown user={user} />
           </div>
           <div className="flex flex-wrap gap-y-2">
+            {/*
+              Birth YEAR only — the full `birth_date` was a privacy
+              leak on a public, unauthenticated, deep-linkable page
+              (it's a common identity-challenge field at banks /
+              gov agencies / etc.). Backend dropped `birth_date`
+              from the always-public block of UserResource.php on
+              2026-06 and added a derived `birth_year` field for
+              age-cohort signal that has no challenge value.
+            */}
             <div className="flex w-1/2 flex-col sm:w-1/3">
-              <p>{t("birthdate")}</p>
-              <p className="text-default-500 text-sm">{user.birth_date}</p>
+              <p>{t("bornIn")}</p>
+              <p className="text-default-500 text-sm">{user.birth_year ?? "-"}</p>
             </div>
             <div className="flex w-1/2 flex-col sm:w-1/4">
               <p>{t("gender")}</p>

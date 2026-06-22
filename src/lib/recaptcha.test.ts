@@ -5,8 +5,16 @@ describe("generateToken", () => {
   const hasWindow = "window" in globalThis;
   const originalWindow = (globalThis as { window?: Window }).window;
   const originalSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA;
-  const setMockWindow = (grecaptcha: Window["grecaptcha"]) => {
-    (globalThis as { window: Window }).window = { grecaptcha } as unknown as Window;
+
+  // The Enterprise namespace is what `recaptcha.ts` polls on; tests
+  // mock `window.grecaptcha.enterprise.{ready, execute}` exactly the
+  // way the live SDK would expose them after loading `enterprise.js`.
+  type GrecaptchaEnterprise = Window["grecaptcha"]["enterprise"];
+
+  const setMockWindow = (enterprise: GrecaptchaEnterprise) => {
+    (globalThis as { window: Window }).window = {
+      grecaptcha: { enterprise },
+    } as unknown as Window;
   };
 
   beforeEach(() => {
@@ -42,7 +50,7 @@ describe("generateToken", () => {
     const execute = vi.fn().mockResolvedValue("token-456");
     setMockWindow({
       ready: (callback) => callback(),
-      execute: undefined as unknown as Window["grecaptcha"]["execute"],
+      execute: undefined as unknown as GrecaptchaEnterprise["execute"],
     });
 
     setTimeout(() => {
@@ -64,7 +72,7 @@ describe("generateToken", () => {
 
     setMockWindow({
       ready: (callback) => callback(),
-      execute: undefined as unknown as Window["grecaptcha"]["execute"],
+      execute: undefined as unknown as GrecaptchaEnterprise["execute"],
     });
 
     const tokenPromise = generateToken("feature_request_vote");

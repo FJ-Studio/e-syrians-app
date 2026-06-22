@@ -5,7 +5,7 @@ import extractErrors from "@/lib/extract-errors";
 import { generateToken } from "@/lib/recaptcha";
 import { ESUser } from "@/lib/types/account";
 import { CountryCode } from "@/lib/types/misc";
-import { Autocomplete, AutocompleteItem, Avatar, Button, Card, CardBody, CardHeader } from "@heroui/react";
+import { Autocomplete, AutocompleteItem, Avatar, Button, Card, CardBody, CardHeader, Input } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FC, Key, useEffect } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
@@ -18,6 +18,13 @@ type UpdateAddressProps = {
 interface AddressFields {
   country: CountryCode;
   province: string;
+  /**
+   * Optional street/mailing address. Stored encrypted server-side,
+   * owner-only on UserResource. Collected at registration too —
+   * exposing it here closes the edit-parity gap so users can
+   * update it without going through the Census form.
+   */
+  address: string;
 }
 
 const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
@@ -37,6 +44,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
     defaultValues: {
       country: user?.country ?? undefined,
       province: user?.province ?? undefined,
+      address: user?.address ?? "",
     },
   });
 
@@ -47,6 +55,7 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
       reset({
         country: user?.country ?? undefined,
         province: user?.province ?? undefined,
+        address: user?.address ?? "",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,6 +157,23 @@ const AccountAddress: FC<UpdateAddressProps> = ({ user }) => {
               )}
             />
           )}
+          {/* Optional street/mailing address. Encrypted backend-side,
+           *  owner-only on UserResource. Collected at registration —
+           *  exposing it here so the address form has parity with what
+           *  the signup wizard captures. */}
+          <Controller
+            name="address"
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                label={t("fields.address.label")}
+                description={<p className="text-start">{t("fields.address.description")}</p>}
+                classNames={{ description: "flex items-start" }}
+                maxLength={255}
+              />
+            )}
+          />
           <Button color="primary" type="submit" isLoading={isSubmitting} isDisabled={!isDirty || isSubmitting}>
             {t("save")}
           </Button>
