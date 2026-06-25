@@ -1,11 +1,16 @@
 "use client";
-import useVerificationCancelationReason from "@/components/hooks/localization/verification-cancelation-reason";
 import { Verification } from "@/lib/types/account";
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
   Chip,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   SortDescriptor,
   Spinner,
   Table,
@@ -14,26 +19,73 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  useDisclosure,
   User,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, Key, useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 
+/**
+ * Sent verifications — list of people the signed-in user has
+ * verified, with an inline Cancel action per row.
+ *
+ * Symmetric with the mobile rebuild (see
+ * docs/claude-design/screens/7.6-account/7.6.4-5-verifications.html):
+ *   - Cancel is exposed only on this tab (the verifier is the only
+ *     party with cancel rights at the backend — POST
+ *     /users/verifications/{id}/cancel).
+ *   - Cancelled rows are filtered out of the list. They give the
+ *     user no remaining action and the strikethrough-plus-reason
+ *     treatment we tried before looked broken next to the design
+ *     spec. If we ever want a history view, that becomes a separate
+ *     UI surface.
+ *   - The Cancel button opens a confirmation modal first — never
+ *     single-tap destructive.
+ */
 const VerificationsTable: FC = () => {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState<Verification[]>([]);
   const t = useTranslations("account.dashboard.verifications.verifications-table");
-  const cancellationReasons = useVerificationCancelationReason();
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "date",
     direction: "descending",
   });
+
+  // Confirm-cancel modal state. We carry the full target row so
+  // the modal can show the name + avatar without an extra fetch.
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [target, setTarget] = useState<Verification | null>(null);
+  const [cancelling, setCancelling] = useState(false);
+
   const columns = [
     { name: t("name.title"), uid: "name", sortable: true },
     { name: t("date.title"), uid: "date", sortable: true },
-    { name: t("table.status.title"), uid: "status", sortable: false },
-    { name: t("table.notes.title"), uid: "notes", sortable: false },
+    { name: t("table.actions.title"), uid: "actions", sortable: false },
   ];
+
+  // Backend now returns the paginated shape:
+  //   { success, data: { verifications: [...], current_page, last_page, per_page, total } }
+  // The web table renders a single page at a time — pagination
+  // UI is deferred since Sent is capped at 25 verifications, so
+  // page 1 is always sufficient here. Received uses the same
+  // pattern but the cap is unbounded; a "Load more" button is
+  // logged as a follow-up if a user complains about not seeing
+  // historical receivers past the first page.
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    try {
+      const req = await fetch("/api/account/verifications/verifications");
+      if (req.ok) {
+        const data = await req.json();
+        setItems(data.data?.verifications ?? []);
+      }
+    } catch {
+      // Error handled by loading state
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -43,7 +95,7 @@ const VerificationsTable: FC = () => {
         const req = await fetch("/api/account/verifications/verifications");
         if (req.ok && !cancelled) {
           const data = await req.json();
-          setItems(data.data);
+          setItems(data.data?.verifications ?? []);
         }
       } catch {
         // Error handled by loading state
@@ -56,8 +108,12 @@ const VerificationsTable: FC = () => {
     };
   }, []);
 
+  // Active rows only — cancelled rows are noise on a list whose
+  // purpose is "what can I still withdraw?".
+  const activeItems = useMemo(() => items.filter((v) => !v.cancelled_at), [items]);
+
   const sortedItems = useMemo(() => {
-    return [...items].sort((a: Verification, b: Verification) => {
+    return [...activeItems].sort((a: Verification, b: Verification) => {
       let first;
       let second;
       if (sortDescriptor.column === "date") {
@@ -72,7 +128,27 @@ const VerificationsTable: FC = () => {
       const cmp = first < second ? -1 : first > second ? 1 : 0;
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
-  }, [sortDescriptor, items]);
+  }, [sortDescriptor, activeItems]);
+
+  const handleConfirmCancel = useCallback(async () => {
+    if (!target) return;
+    setCancelling(true);
+    try {
+      const req = await fetch(`/api/account/verifications/${target.id}/cancel`, { method: "POST" });
+      const body = await req.json().catch(() => ({ success: false }));
+      if (req.ok && body.success) {
+        toast.success(t("cancelToast.success"));
+        await refresh();
+        onOpenChange();
+      } else {
+        toast.error(t("cancelToast.error"));
+      }
+    } catch {
+      toast.error(t("cancelToast.error"));
+    } finally {
+      setCancelling(false);
+    }
+  }, [target, refresh, t, onOpenChange]);
 
   const renderCell = useCallback(
     (item: Verification, columnKey: Key) => {
@@ -101,70 +177,120 @@ const VerificationsTable: FC = () => {
               name={`${item.user?.name} ${item.user?.surname}`}
             />
           );
-        case "notes":
-          if (!item.cancelled_at) {
-            return <></>;
-          }
-          return <div className="min-w-36">{cancellationReasons(item.cancelation_payload?.reason ?? "")}</div>;
-        case "status":
+        case "actions":
           return (
-            <Chip variant="flat" size="sm" color={item.cancelled_at ? "danger" : "success"}>
-              {item.cancelled_at ? t("status.cancelled.title") : t("status.active.title")}
-            </Chip>
+            <Button
+              size="sm"
+              variant="flat"
+              color="danger"
+              onPress={() => {
+                setTarget(item);
+                onOpen();
+              }}
+            >
+              {t("actions.cancel")}
+            </Button>
           );
         default:
           return cellValue !== undefined && typeof cellValue !== "object" ? cellValue : String(cellValue);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items],
+    [t, onOpen],
   );
 
   return (
-    <Card>
-      <CardHeader>
-        <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
-      </CardHeader>
-      <CardBody>
-        <Table
-          isHeaderSticky
-          removeWrapper
-          isStriped
-          classNames={{
-            wrapper: "max-h-[800px]",
-          }}
-          topContentPlacement="outside"
-          sortDescriptor={sortDescriptor}
-          onSortChange={setSortDescriptor}
-        >
-          <TableHeader columns={columns}>
-            {(column) => (
-              <TableColumn
-                key={column.uid}
-                align={column.uid === "actions" ? "center" : "start"}
-                allowsSorting={column.sortable}
-              >
-                {column.name}
-              </TableColumn>
-            )}
-          </TableHeader>
-          <TableBody
-            items={sortedItems}
-            isLoading={loading}
-            loadingContent={<Spinner />}
-            emptyContent={
-              <div className="flex flex-col items-center justify-center gap-4 px-2 py-12">
-                <p>{t("noVerifications")}</p>
-              </div>
-            }
+    <>
+      <Card>
+        <CardHeader className="flex flex-col items-start gap-1">
+          <h3 className="text-default-700 text-lg font-medium">{t("title")}</h3>
+          <p className="text-default-500 text-sm">{t("description")}</p>
+        </CardHeader>
+        <CardBody>
+          <Table
+            isHeaderSticky
+            removeWrapper
+            isStriped
+            classNames={{
+              wrapper: "max-h-[800px]",
+            }}
+            topContentPlacement="outside"
+            sortDescriptor={sortDescriptor}
+            onSortChange={setSortDescriptor}
           >
-            {(item) => (
-              <TableRow key={item.id}>{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </CardBody>
-    </Card>
+            <TableHeader columns={columns}>
+              {(column) => (
+                <TableColumn
+                  key={column.uid}
+                  align={column.uid === "actions" ? "end" : "start"}
+                  allowsSorting={column.sortable}
+                >
+                  {column.name}
+                </TableColumn>
+              )}
+            </TableHeader>
+            <TableBody
+              items={sortedItems}
+              isLoading={loading}
+              loadingContent={<Spinner />}
+              emptyContent={
+                <div className="flex flex-col items-center justify-center gap-4 px-2 py-12">
+                  <p>{t("noVerifications")}</p>
+                </div>
+              }
+            >
+              {(item) => (
+                <TableRow key={item.id}>{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </CardBody>
+      </Card>
+
+      {/*
+        Confirm-cancel modal. Lives at component level so it stays
+        mounted across the table's re-renders, and reads `target`
+        for the name preview so the user can still recognise who
+        they're about to uncertify after the row scrolled offscreen.
+      */}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+        <ModalContent>
+          {(close) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">{t("cancelDialog.title")}</ModalHeader>
+              <ModalBody>
+                {target?.user ? (
+                  <div className="mb-2">
+                    <User
+                      avatarProps={{
+                        src: target.user.avatar,
+                        className: "min-w-10 min-h-10",
+                      }}
+                      name={`${target.user.name} ${target.user.surname}`}
+                    />
+                  </div>
+                ) : null}
+                <p className="text-default-600 text-sm leading-6">{t("cancelDialog.body")}</p>
+              </ModalBody>
+              <ModalFooter>
+                <Chip
+                  // Status chip kept off the row so the table can stay
+                  // narrow. Status is implicit (we only show active).
+                  className="hidden"
+                >
+                  {t("status.active.title")}
+                </Chip>
+                <Button variant="light" onPress={close} isDisabled={cancelling}>
+                  {t("cancelDialog.keep")}
+                </Button>
+                <Button color="danger" onPress={handleConfirmCancel} isLoading={cancelling}>
+                  {t("cancelDialog.confirm")}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

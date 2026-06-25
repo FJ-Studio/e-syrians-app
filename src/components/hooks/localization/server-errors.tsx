@@ -31,6 +31,7 @@ const useServerError = (): ((errorCode: string) => string) => {
       invalid_file_type: t("invalid_file_type"),
       basic_info_updates_limit_reached: t("basic_info_updates_limit_reached"),
       country_updates_limit_reached: t("country_updates_limit_reached"),
+      religion_updates_limit_reached: t("religion_updates_limit_reached"),
 
       // Verification
       your_account_is_banned: t("your_account_is_banned"),

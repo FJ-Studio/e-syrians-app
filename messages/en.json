@@ -960,10 +960,10 @@
       },
       "verifications": {
         "my-verifications": {
-          "title": "Verifications I made"
+          "title": "Sent"
         },
         "my-verifiers": {
-          "title": "Verifications I received"
+          "title": "Received"
         },
         "verifiers-table": {
           "title": "People who have verified my data",
@@ -1006,6 +1006,9 @@
             },
             "notes": {
               "title": "Notes"
+            },
+            "actions": {
+              "title": "Actions"
             }
           },
           "status": {
@@ -1016,8 +1019,22 @@
               "title": "Active"
             }
           },
-          "title": "Verifications I sent",
-          "noVerifications": "You have made 0 verifications"
+          "actions": {
+            "cancel": "Cancel"
+          },
+          "cancelDialog": {
+            "title": "Cancel this verification?",
+            "body": "Your endorsement will be removed from their profile. If they lose enough verifications they'll be marked unverified. You can't undo this — you'd need to re-verify them from scratch.",
+            "confirm": "Cancel verification",
+            "keep": "Keep it"
+          },
+          "cancelToast": {
+            "success": "Verification cancelled",
+            "error": "Could not cancel verification"
+          },
+          "title": "Verifications you've sent",
+          "description": "People you have verified. You can withdraw your endorsement from any of them — it removes one verification from their profile.",
+          "noVerifications": "You haven't verified anyone yet."
         }
       },
       "security": {
@@ -1424,6 +1441,7 @@
     "unknown_error": "Something happened on our side, please try again later",
     "unauthorized_action": "You are not allowed to perform this action",
     "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
+    "religion_updates_limit_reached": "Religion changes are limited to a few times per year. Please reach out to support if you need to change it again.",
     "your_account_is_banned": "Your account is banned!",
     "you_are_not_verified": "You cannot perform this action since your account is not verified",
     "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
