@@ -960,10 +960,10 @@
       },
       "verifications": {
         "my-verifications": {
-          "title": "Piştrastkirinên ku min kirin"
+          "title": "Şandî"
         },
         "my-verifiers": {
-          "title": "Piştrastkirinên ku min wergirtin"
+          "title": "Hatiyî"
         },
         "verifiers-table": {
           "title": "Kesên ku daneyên min piştrast kirine",
@@ -1006,6 +1006,9 @@
             },
             "notes": {
               "title": "Têbînî"
+            },
+            "actions": {
+              "title": "Tevger"
             }
           },
           "status": {
@@ -1016,8 +1019,22 @@
               "title": "Çalak"
             }
           },
-          "title": "Piştrastkirinên ku min şandin",
-          "noVerifications": "Te 0 piştrastkirin kirine"
+          "actions": {
+            "cancel": "Betal bike"
+          },
+          "cancelDialog": {
+            "title": "Vê piştrastkirinê betal bikî?",
+            "body": "Pejirandina te ji profîla wan tê rakirin. Eger têra xwe piştrastkirin winda bikin wê wek nepiştrastkirî bên nîşandan. Nayê paşvegerandin — divê tu wan ji nû ve piştrast bikî.",
+            "confirm": "Piştrastkirinê betal bike",
+            "keep": "Wê bihêle"
+          },
+          "cancelToast": {
+            "success": "Piştrastkirin hate betalkirin",
+            "error": "Piştrastkirin nehate betalkirin"
+          },
+          "title": "Piştrastkirinên ku te şandine",
+          "description": "Kesên ku te piştrast kirine. Tu dikarî pejirandina xwe ji her yekî vekişînî — wê piştrastkirinek ji profîla wan kêm bike.",
+          "noVerifications": "Te hîn kesek piştrast nekiriye."
         }
       },
       "security": {
@@ -1424,6 +1441,7 @@
     "unknown_error": "Çewtiyek derket, ji kerema xwe paşê biceribîne",
     "unauthorized_action": "Tu destnîşan nîkê bidê vê bikaranînê",
     "country_updates_limit_reached": "Guhertina navnîşan bi kêmtir carek tên destnîşan kirin, heke dixwazî dîsa biguherînî, divê tu bi tîma piştgiriya têkiliyê dayî",
+    "religion_updates_limit_reached": "Guhertina ola tomarbûyî bi çend caran di salê de bisînor e. Heke pêwîst e te dîsa biguherînî, ji kerema xwe têkiliyê bi tîma piştgiriyê re bigire.",
     "your_account_is_banned": "Hesabê te hate qedexekirin!",
     "you_are_not_verified": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",
     "you_do_not_have_enough_verifications": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",

@@ -41,6 +41,11 @@ const VerifiersTable: FC = () => {
     { name: t("table.notes.title"), uid: "notes", sortable: false },
   ];
 
+  // Backend returns the paginated shape:
+  //   { success, data: { verifiers: [...], current_page, last_page, per_page, total } }
+  // We surface page 1 only — this table doesn't paginate yet.
+  // A "Load more" / proper paginator can be added if a user's
+  // historical receivers exceed per_page (default 25).
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -49,7 +54,7 @@ const VerifiersTable: FC = () => {
         const req = await fetch("/api/account/verifications/verifiers");
         if (req.ok && !cancelled) {
           const data = await req.json();
-          setItems(data.data);
+          setItems(data.data?.verifiers ?? []);
         }
       } catch {
         // Error handled by loading state
