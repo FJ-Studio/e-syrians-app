@@ -785,7 +785,8 @@
               "delete": "Jêbirin",
               "visit": "Serdana",
               "activate": "Aktîf kirin",
-              "deactivate": "Bişûndekirin"
+              "deactivate": "Bişûndekirin",
+              "edit": "Sererast bike"
             },
             "columns": {
               "title": "Nîşandan"
@@ -860,7 +861,11 @@
         },
         "create": {
           "title": "Ankete nû çêke",
-          "description": "Dema ku hûn anketek çêkin, ji kerema xwe bi zimanekî zelal û hêsan bikar bînin. Pirsê we divê ji hêlî ve herî baş be û pêwîst e ku pirsên we bi rêvebirîkê hatin saz kirin, çimkî piştî şandina wan nikaribin guhertin.",
+          "description": "Dema ku hûn anketek çêkin, ji kerema xwe bi zimanekî zelal û hêsan bikar bînin. Pirsê we divê baş hatibe sazkirin — piştî ku yekem deng tê dayîn, anket tê kilîtkirin.",
+          "editTitle": "Anketê sererast bike",
+          "editDescription": "Guhertinên xwe li anketê bike. Sererastkirin tenê berî dengê yekem mimkun e.",
+          "editSubmit": "Guhertinan tomar bike",
+          "editSuccess": "Anket hat nûkirin",
           "question": {
             "label": "Pirs",
             "placeholder": "Pirsê xwe li vir binivîse",
@@ -1442,6 +1447,8 @@
     "unauthorized_action": "Tu destnîşan nîkê bidê vê bikaranînê",
     "country_updates_limit_reached": "Guhertina navnîşan bi kêmtir carek tên destnîşan kirin, heke dixwazî dîsa biguherînî, divê tu bi tîma piştgiriya têkiliyê dayî",
     "religion_updates_limit_reached": "Guhertina ola tomarbûyî bi çend caran di salê de bisînor e. Heke pêwîst e te dîsa biguherînî, ji kerema xwe têkiliyê bi tîma piştgiriyê re bigire.",
+    "poll_has_votes_cannot_edit": "Vê rapirsiyê deng wergirtine, lewre êdî nayê guhertin. Tu hîn dikarî ji menûyê bigire.",
+    "not_your_poll": "Tu tenê dikarî rapirsiyên ku te afirandiye biguherînî.",
     "your_account_is_banned": "Hesabê te hate qedexekirin!",
     "you_are_not_verified": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",
     "you_do_not_have_enough_verifications": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",

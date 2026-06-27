@@ -55,6 +55,8 @@ const useServerError = (): ((errorCode: string) => string) => {
       user_has_reached_the_max_selections: t("user_has_reached_the_max_selections"),
       invalid_options: t("invalid_options"),
       voters_not_visible: t("voters_not_visible"),
+      poll_has_votes_cannot_edit: t("poll_has_votes_cannot_edit"),
+      not_your_poll: t("not_your_poll"),
 
       // Verification links
       invalid_verification_signature: t("invalid_verification_signature"),
