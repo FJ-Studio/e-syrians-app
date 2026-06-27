@@ -1,5 +1,6 @@
 "use client";
 import useVerificationCancelationReason from "@/components/hooks/localization/verification-cancelation-reason";
+import { fetchAllPages } from "@/lib/api/fetch-all-pages";
 import { ibm } from "@/lib/fonts/fonts";
 import { ESUser, Verification } from "@/lib/types/account";
 import { getUrl } from "@/lib/user";
@@ -43,21 +44,24 @@ const VerifiersTable: FC = () => {
 
   // Backend returns the paginated shape:
   //   { success, data: { verifiers: [...], current_page, last_page, per_page, total } }
-  // We surface page 1 only — this table doesn't paginate yet.
-  // A "Load more" / proper paginator can be added if a user's
-  // historical receivers exceed per_page (default 25).
+  // Received is unbounded (anyone can verify anyone), so a single
+  // page-1 fetch silently truncates a popular user's history at
+  // 25 rows. We walk all pages eagerly — the volume per user is
+  // realistically small (dozens, not thousands), and the helper
+  // hard-caps at 100 pages as a safety net.
   useEffect(() => {
     let cancelled = false;
     (async () => {
       setLoading(true);
       try {
-        const req = await fetch("/api/account/verifications/verifiers");
-        if (req.ok && !cancelled) {
-          const data = await req.json();
-          setItems(data.data?.verifiers ?? []);
-        }
-      } catch {
-        // Error handled by loading state
+        const rows = await fetchAllPages<Verification>("/api/account/verifications/verifiers", "verifiers");
+        if (!cancelled) setItems(rows);
+      } catch (err) {
+        // fetchAllPages throws on mid-walk failure so we don't
+        // render a truncated history as if complete. Surface to
+        // the console for debugging; the empty state communicates
+        // the missing data to the user.
+        if (!cancelled) console.error("verifiers load failed", err);
       } finally {
         if (!cancelled) setLoading(false);
       }
