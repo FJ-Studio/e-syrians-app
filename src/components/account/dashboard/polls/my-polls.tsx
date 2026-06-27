@@ -28,11 +28,12 @@ import arrowTopRightOnSquareIcon from "@iconify-icons/heroicons/arrow-top-right-
 import chevronDownIcon from "@iconify-icons/heroicons/chevron-down";
 import ellipsisVerticalIcon from "@iconify-icons/heroicons/ellipsis-vertical";
 import magnifyingGlassIcon from "@iconify-icons/heroicons/magnifying-glass";
+import pencilSquareIcon from "@iconify-icons/heroicons/pencil-square";
 import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FC, Key, useCallback, useMemo, useState } from "react";
+import { FC, Key, ReactElement, useCallback, useMemo, useState } from "react";
 
 const MyPolls: FC = () => {
   const t = useTranslations("account.dashboard.polls.my_polls");
@@ -157,30 +158,40 @@ const MyPolls: FC = () => {
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu disabledKeys={deleting ? ["deactivate", "activate"] : []}>
-                  {poll.deleted_at ? (
-                    <>
-                      <DropdownItem key={"activate"} onPress={() => switchPollStatus(poll.id, "1")}>
-                        {t("table.actions.activate")}
-                      </DropdownItem>
-                    </>
-                  ) : (
-                    <>
-                      <DropdownItem
-                        key={"visit"}
-                        onPress={() => {
-                          window.open(`/polls/${poll.id}`, "_blank");
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span>{t("table.actions.visit")}</span>
-                          <Icon icon={arrowTopRightOnSquareIcon} className="size-4" />
-                        </div>
-                      </DropdownItem>
-                      <DropdownItem key={"deactivate"} onPress={() => switchPollStatus(poll.id, "0")}>
-                        {t("table.actions.deactivate")}
-                      </DropdownItem>
-                    </>
-                  )}
+                  {poll.deleted_at
+                    ? [
+                        <DropdownItem key="activate" onPress={() => switchPollStatus(poll.id, "1")}>
+                          {t("table.actions.activate")}
+                        </DropdownItem>,
+                      ]
+                    : [
+                        <DropdownItem
+                          key="visit"
+                          onPress={() => {
+                            window.open(`/polls/${poll.id}`, "_blank");
+                          }}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span>{t("table.actions.visit")}</span>
+                            <Icon icon={arrowTopRightOnSquareIcon} className="size-4" />
+                          </div>
+                        </DropdownItem>,
+                        // Edit is creator-only AND vote-locked: backend sets
+                        // `is_editable` to true only when the poll has zero votes.
+                        // Once anyone votes the row drops the Edit affordance,
+                        // matching the PATCH /polls/{id} 403 guard.
+                        poll.is_editable ? (
+                          <DropdownItem key="edit" href={`/account/polls/${poll.id}/edit`}>
+                            <div className="flex items-center justify-between">
+                              <span>{t("table.actions.edit")}</span>
+                              <Icon icon={pencilSquareIcon} className="size-4" />
+                            </div>
+                          </DropdownItem>
+                        ) : null,
+                        <DropdownItem key="deactivate" onPress={() => switchPollStatus(poll.id, "0")}>
+                          {t("table.actions.deactivate")}
+                        </DropdownItem>,
+                      ].filter((node): node is ReactElement => node !== null)}
                 </DropdownMenu>
               </Dropdown>
             </div>

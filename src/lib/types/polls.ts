@@ -83,6 +83,12 @@ export type Poll = {
   has_reacted?: boolean;
   selected_options?: Array<string>;
   unique_voters_count?: number;
+  /**
+   * Creator-only flag from the backend. True iff the poll has zero
+   * votes — once anyone casts a vote the poll becomes immutable and
+   * the My Polls "Edit" action should hide.
+   */
+  is_editable?: boolean;
 };
 
 /**

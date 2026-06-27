@@ -35,6 +35,29 @@ export const getPoll = async (id: string): Promise<ApiResponse<Poll> | null> => 
   });
 };
 
+/**
+ * Creator-only edit payload. Mirrors `getPoll` but hits
+ * `GET /polls/{id}/edit` — which the API guards on ownership and
+ * which returns the full `audience` block including
+ * `allowed_voters` (the public show endpoint deliberately
+ * suppresses that for every viewer to avoid leaking the guest
+ * list). Use this in the edit page; everywhere else keeps using
+ * `getPoll`.
+ *
+ * Returns null on 403 / 404 just like `getPoll` — the edit page
+ * handles the missing-data path with notFound() / a redirect.
+ */
+export const getPollForEdit = async (id: string): Promise<ApiResponse<Poll> | null> => {
+  const session = await auth();
+  return safeFetch<Poll>(`${API_URL}/polls/${id}/edit`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+    cache: "no-cache",
+  });
+};
+
 export const getPolls = async (
   page: string,
   year: string = "",

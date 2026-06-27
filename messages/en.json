@@ -785,7 +785,8 @@
               "delete": "Deactivate",
               "visit": "Visit",
               "activate": "Activate",
-              "deactivate": "Deactivate"
+              "deactivate": "Deactivate",
+              "edit": "Edit"
             },
             "columns": {
               "title": "Columns"
@@ -860,7 +861,11 @@
         },
         "create": {
           "title": "Create a new poll",
-          "description": "When creating a poll, please use clear and respectful language. Be specific and make sure your question is well-structured, as edits won’t be possible after submission.",
+          "description": "When creating a poll, please use clear and respectful language. Be specific and make sure your question is well-structured — once the first vote is cast the poll is locked.",
+          "editTitle": "Edit poll",
+          "editDescription": "Make changes to your poll. Editing is only possible until the first vote is cast.",
+          "editSubmit": "Save changes",
+          "editSuccess": "Poll updated",
           "question": {
             "label": "Question",
             "placeholder": "Type your poll question here",
@@ -1442,6 +1447,8 @@
     "unauthorized_action": "You are not allowed to perform this action",
     "country_updates_limit_reached": "You have reached the limit of address updates. Please reach out to support for further assistance.",
     "religion_updates_limit_reached": "Religion changes are limited to a few times per year. Please reach out to support if you need to change it again.",
+    "poll_has_votes_cannot_edit": "This poll already has votes, so it can no longer be edited. You can still close it from the menu.",
+    "not_your_poll": "You can only edit polls you created.",
     "your_account_is_banned": "Your account is banned!",
     "you_are_not_verified": "You cannot perform this action since your account is not verified",
     "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",

@@ -5,6 +5,7 @@ import useGender from "@/components/hooks/localization/gender";
 import usePollResultsReveal from "@/components/hooks/localization/poll-results-reveal";
 import useProvinces from "@/components/hooks/localization/provinces";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
+import useServerError from "@/components/hooks/localization/server-errors";
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { generateToken } from "@/lib/recaptcha";
 import { CreatePollFields } from "@/lib/types/polls";
@@ -32,17 +33,40 @@ import { FC, useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
-const CreatePoll: FC = () => {
+/**
+ * Props for the poll form. The same component drives both
+ * create (`mode="create"`, default) and edit (`mode="edit"`, with
+ * `pollId` + `initialValues`). Edit mode posts a PATCH to the
+ * per-poll proxy; create posts a POST to the index.
+ *
+ * Edit is only legal while the poll has zero votes (backend
+ * enforces it via UpdatePollRequest::authorize); the My Polls
+ * table already gates the Edit button on `poll.is_editable`, so
+ * this component doesn't re-check at the UI layer — if the user
+ * arrives here for a voted poll the backend's 403 surfaces in
+ * the toast.
+ */
+export interface PollFormProps {
+  mode?: "create" | "edit";
+  pollId?: string;
+  initialValues?: Partial<CreatePollFields>;
+  initialOptions?: string[];
+}
+
+const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues, initialOptions }) => {
   const genderOptions = useGender();
   const provinces = useProvinces();
   const religions = useReligiousAffiliation();
   const ethnicities = useEthnicity();
   const countries = useCountries();
   const revealResultsOptions = usePollResultsReveal();
-  const [options, setOptions] = useState<string[]>(["", ""]);
+  const [options, setOptions] = useState<string[]>(
+    initialOptions && initialOptions.length >= 2 ? initialOptions : ["", ""],
+  );
   const session = useSession();
   const router = useRouter();
   const t = useTranslations("account.dashboard.polls.create");
+  const serverError = useServerError();
   const {
     handleSubmit,
     control,
@@ -52,27 +76,27 @@ const CreatePoll: FC = () => {
     formState: { isSubmitting },
   } = useForm<CreatePollFields>({
     defaultValues: {
-      question: "",
-      start_date: new Date().toISOString().split("T")[0],
-      duration: "1",
+      question: initialValues?.question ?? "",
+      start_date: initialValues?.start_date ?? new Date().toISOString().split("T")[0],
+      duration: initialValues?.duration ?? "1",
       audience: {
         age_range: {
-          max: MAX_AUDIENCE_AGE,
-          min: MIN_AUDIENCE_AGE,
+          max: initialValues?.audience?.age_range?.max ?? MAX_AUDIENCE_AGE,
+          min: initialValues?.audience?.age_range?.min ?? MIN_AUDIENCE_AGE,
         },
-        country: [],
-        ethnicity: [],
-        gender: [],
-        hometown: [],
-        religious_affiliation: [],
-        province: [],
-        allowed_voters: "",
+        country: initialValues?.audience?.country ?? [],
+        ethnicity: initialValues?.audience?.ethnicity ?? [],
+        gender: initialValues?.audience?.gender ?? [],
+        hometown: initialValues?.audience?.hometown ?? [],
+        religious_affiliation: initialValues?.audience?.religious_affiliation ?? [],
+        province: initialValues?.audience?.province ?? [],
+        allowed_voters: initialValues?.audience?.allowed_voters ?? "",
       },
-      max_selections: "1",
-      audience_can_add_options: "0",
-      reveal_results: "before-voting",
-      voters_are_visible: "0",
-      audience_only: "0",
+      max_selections: initialValues?.max_selections ?? "1",
+      audience_can_add_options: initialValues?.audience_can_add_options ?? "0",
+      reveal_results: initialValues?.reveal_results ?? "before-voting",
+      voters_are_visible: initialValues?.voters_are_visible ?? "0",
+      audience_only: initialValues?.audience_only ?? "0",
     },
   });
 
@@ -88,12 +112,28 @@ const CreatePoll: FC = () => {
   const userIsNotVerified = !session.data?.user?.verified_at;
 
   const store = async (data: CreatePollFields) => {
+    const isEditMode = mode === "edit";
     const formData = new FormData();
     formData.append("question", data.question);
-    formData.append("start_date", data.start_date);
+    // `start_date` is only meaningful on create — for edit, the
+    // poll's existing start_date is preserved server-side (the
+    // service falls back to `$poll->start_date` when the key is
+    // absent and recomputes end_date from existing-start + new
+    // duration). Resending the original date for an already-
+    // started poll would trip the `after_or_equal:today` rule and
+    // 422 the patch, so we omit it entirely in edit mode.
+    if (!isEditMode) {
+      formData.append("start_date", data.start_date);
+    }
     formData.append("duration", data.duration);
     formData.append("max_selections", data.max_selections);
-    formData.append("audience_can_add_options", "0");
+    // Honour the loaded value — the form Select renders the
+    // current state and the user expects "Save" to persist
+    // whatever they see. Hard-coding "0" was a stale shortcut
+    // from when the create UI disabled the picker; edit must
+    // round-trip the real value or it silently disables
+    // audience-added options.
+    formData.append("audience_can_add_options", data.audience_can_add_options);
     formData.append("reveal_results", data.reveal_results);
     formData.append("voters_are_visible", data.voters_are_visible);
     formData.append("audience_only", data.audience_only);
@@ -129,20 +169,31 @@ const CreatePoll: FC = () => {
       });
     }
     try {
-      const token = await generateToken("poll_store");
+      // Recaptcha action name + endpoint diverge per mode. Create
+      // hits the FormData POST (multipart-friendly because the
+      // original create flow predates JSON bodies); edit hits the
+      // dedicated PATCH proxy, which converts the FormData to a
+      // plain object server-side so backend validators see the
+      // same shape they always have.
+      const action = mode === "edit" ? "poll_update" : "poll_store";
+      const token = await generateToken(action);
       formData.append("recaptcha_token", token);
-      const response = await fetch("/api/account/polls", {
-        method: "POST",
-        body: formData,
-      });
+
+      const url = mode === "edit" ? `/api/account/polls/${pollId}` : "/api/account/polls";
+      const method = mode === "edit" ? "PATCH" : "POST";
+
+      const response = await fetch(url, { method, body: formData });
       if (response.ok) {
-        toast.success(t("success"));
+        toast.success(mode === "edit" ? t("editSuccess", { defaultValue: "Poll updated" }) : t("success"));
         router.push("/account/polls");
       } else {
         const errorData = await response.json();
         const msg = errorData?.messages?.[0];
         if (msg) {
-          toast.error(msg);
+          // Resolve server-error keys (e.g. poll_has_votes_cannot_edit)
+          // through the same hook the rest of the dashboard uses;
+          // unknown keys fall through to their raw string.
+          toast.error(serverError(msg));
         } else {
           toast.error(t("error"));
         }
@@ -151,10 +202,19 @@ const CreatePoll: FC = () => {
       // Network error — form submission failed silently
     }
   };
+  const isEdit = mode === "edit";
   return (
     <div className="w-full">
-      <h2 className="text-default-700 text-xl font-medium">{t("title")}</h2>
-      <p className="text-default-500 mb-6">{t("description")}</p>
+      <h2 className="text-default-700 text-xl font-medium">
+        {isEdit ? t("editTitle", { defaultValue: "Edit poll" }) : t("title")}
+      </h2>
+      <p className="text-default-500 mb-6">
+        {isEdit
+          ? t("editDescription", {
+              defaultValue: "Make changes to your poll. Editing is only possible until the first vote is cast.",
+            })
+          : t("description")}
+      </p>
       {userIsNotVerified && (
         <Alert color="danger" className="mb-6">
           {t("accountUnverifiedAlert")}
@@ -252,12 +312,20 @@ const CreatePoll: FC = () => {
             name="audience_can_add_options"
             control={control}
             render={({ field }) => (
+              // Controlled. The hardcoded `defaultSelectedKeys={["0"]}`
+              // ignored the loaded poll value and visually disagreed
+              // with what the form would submit; `selectedKeys`
+              // binds the Select to react-hook-form so create
+              // defaults to "0" and edit reflects the actual poll.
               <Select
-                {...field}
                 disabledKeys={["1"]}
                 label={t("audience_can_add_options.label")}
                 isDisabled={userIsNotVerified}
-                defaultSelectedKeys={["0"]}
+                selectedKeys={field.value ? [field.value] : []}
+                onSelectionChange={(keys) => {
+                  const next = Array.from(keys)[0];
+                  if (next) field.onChange(String(next));
+                }}
               >
                 <SelectItem key={"0"} textValue={t("audience_can_add_options.no.label")}>
                   {t("audience_can_add_options.no.label")}
@@ -274,12 +342,20 @@ const CreatePoll: FC = () => {
             name="reveal_results"
             control={control}
             render={({ field }) => (
+              // Controlled — `defaultSelectedKeys={["before-voting"]}`
+              // overrode the loaded value on edit. Binding to
+              // `field.value` lets edit reflect the saved choice
+              // (after-voting / after-expiration) and create still
+              // starts at "before-voting" via the form defaults.
               <Select
-                {...field}
                 label={t("reveal_results.label")}
                 description={t("reveal_results.description")}
-                defaultSelectedKeys={["before-voting"]}
                 isDisabled={userIsNotVerified}
+                selectedKeys={field.value ? [field.value] : []}
+                onSelectionChange={(keys) => {
+                  const next = Array.from(keys)[0];
+                  if (next) field.onChange(String(next));
+                }}
               >
                 {Object.keys(revealResultsOptions).map((key) => (
                   <SelectItem
@@ -301,11 +377,15 @@ const CreatePoll: FC = () => {
             name="voters_are_visible"
             control={control}
             render={({ field }) => (
+              // Controlled — see audience_can_add_options comment.
               <Select
-                {...field}
                 label={t("voters_are_visible.label")}
                 isDisabled={userIsNotVerified}
-                defaultSelectedKeys={["0"]}
+                selectedKeys={field.value ? [field.value] : []}
+                onSelectionChange={(keys) => {
+                  const next = Array.from(keys)[0];
+                  if (next) field.onChange(String(next));
+                }}
               >
                 <SelectItem key={"0"} textValue={t("voters_are_visible.no.label")}>
                   {t("voters_are_visible.no.label")}
@@ -320,12 +400,16 @@ const CreatePoll: FC = () => {
             name="audience_only"
             control={control}
             render={({ field }) => (
+              // Controlled — see audience_can_add_options comment.
               <Select
-                {...field}
                 label={t("audience_only.label")}
                 description={t("audience_only.description")}
                 isDisabled={userIsNotVerified}
-                defaultSelectedKeys={["0"]}
+                selectedKeys={field.value ? [field.value] : []}
+                onSelectionChange={(keys) => {
+                  const next = Array.from(keys)[0];
+                  if (next) field.onChange(String(next));
+                }}
               >
                 <SelectItem key={"0"} textValue={t("audience_only.public.label")}>
                   {t("audience_only.public.label")}
@@ -531,8 +615,20 @@ const CreatePoll: FC = () => {
               )}
             />
           )}
+          {/* Bound to the form's audience.age_range so edit mode
+             reflects the saved targeting; create still falls back
+             to MIN/MAX via the form defaults. Slider is
+             uncontrolled (no `value` prop) so we use a remount
+             `key` keyed on the loaded values — without it,
+             switching from a hydrated edit form back to a new
+             one would leave the slider stuck on the previous
+             poll's range. */}
           <Slider
-            defaultValue={[MIN_AUDIENCE_AGE, MAX_AUDIENCE_AGE]}
+            key={`age-slider-${initialValues?.audience?.age_range?.min ?? MIN_AUDIENCE_AGE}-${initialValues?.audience?.age_range?.max ?? MAX_AUDIENCE_AGE}`}
+            defaultValue={[
+              initialValues?.audience?.age_range?.min ?? MIN_AUDIENCE_AGE,
+              initialValues?.audience?.age_range?.max ?? MAX_AUDIENCE_AGE,
+            ]}
             getValue={(value) => {
               if (Array.isArray(value) && value.length === 2) {
                 if (value[1] === MAX_AUDIENCE_AGE) {
@@ -564,7 +660,7 @@ const CreatePoll: FC = () => {
           isLoading={isSubmitting}
           color="primary"
         >
-          {t("submit")}
+          {isEdit ? t("editSubmit", { defaultValue: "Save changes" }) : t("submit")}
         </Button>
       </form>
     </div>
