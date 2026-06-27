@@ -1,4 +1,5 @@
 "use client";
+import { fetchAllPages } from "@/lib/api/fetch-all-pages";
 import { Verification } from "@/lib/types/account";
 import {
   Button,
@@ -64,41 +65,46 @@ const VerificationsTable: FC = () => {
     { name: t("table.actions.title"), uid: "actions", sortable: false },
   ];
 
-  // Backend now returns the paginated shape:
+  // Backend returns the paginated shape:
   //   { success, data: { verifications: [...], current_page, last_page, per_page, total } }
-  // The web table renders a single page at a time — pagination
-  // UI is deferred since Sent is capped at 25 verifications, so
-  // page 1 is always sufficient here. Received uses the same
-  // pattern but the cap is unbounded; a "Load more" button is
-  // logged as a follow-up if a user complains about not seeing
-  // historical receivers past the first page.
+  // We walk ALL pages here — the Sent list filters cancelled
+  // rows client-side, so with `per_page=25` and a user who
+  // cancelled some sends and then verified more, active rows can
+  // spill onto page 2. A page-1-only fetch silently hid them.
+  // Sent volume is capped (verification.max=25 active per user;
+  // historical including cancelled stays modest in practice), so
+  // the eager walk is cheap.
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const req = await fetch("/api/account/verifications/verifications");
-      if (req.ok) {
-        const data = await req.json();
-        setItems(data.data?.verifications ?? []);
-      }
-    } catch {
-      // Error handled by loading state
+      const rows = await fetchAllPages<Verification>("/api/account/verifications/verifications", "verifications");
+      setItems(rows);
+    } catch (err) {
+      // fetchAllPages now throws on mid-walk failures (HTTP error
+      // or invalid JSON on any page) instead of returning the
+      // accumulated partial result. Surface the failure as a toast
+      // so the user sees something happened — the table itself
+      // falls back to its empty state, which is at least
+      // honest about not having the data.
+      console.error("verifications refresh failed", err);
+      toast.error(t("cancelToast.error"));
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       setLoading(true);
       try {
-        const req = await fetch("/api/account/verifications/verifications");
-        if (req.ok && !cancelled) {
-          const data = await req.json();
-          setItems(data.data?.verifications ?? []);
+        const rows = await fetchAllPages<Verification>("/api/account/verifications/verifications", "verifications");
+        if (!cancelled) setItems(rows);
+      } catch (err) {
+        if (!cancelled) {
+          console.error("verifications load failed", err);
+          toast.error(t("cancelToast.error"));
         }
-      } catch {
-        // Error handled by loading state
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -106,7 +112,7 @@ const VerificationsTable: FC = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [t]);
 
   // Active rows only — cancelled rows are noise on a list whose
   // purpose is "what can I still withdraw?".
