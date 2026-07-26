@@ -71,10 +71,18 @@ const UpdatePassword: FC = () => {
   const sendOtp = async () => {
     setSendingOtp(true);
     try {
+      // The Laravel endpoint (`POST /users/password/send-otp`) is
+      // protected by the `recaptcha` middleware — sending an empty
+      // body was returning `recaptcha_token_required` and surfacing
+      // a "we couldn't verify your request" toast to the user with
+      // no obvious cause. Every other write on this page (setPassword,
+      // changePassword, updateEmail) already generates the token
+      // before submitting; this call was the outlier.
+      const token = await generateToken("send_password_otp");
       const request = await fetch("/api/account/security/password/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ recaptcha_token: token }),
       });
       const response = await request.json();
       if (response?.success) {
@@ -84,7 +92,9 @@ const UpdatePassword: FC = () => {
         toast.error(serverErrors(extractErrors(response.messages)[0]));
       }
     } catch {
-      // Network error
+      // Network error OR reCAPTCHA generation failure — either way
+      // there's no server response to surface; the loading state
+      // clears in the finally block below.
     } finally {
       setSendingOtp(false);
     }
