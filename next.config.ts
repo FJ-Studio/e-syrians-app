@@ -20,9 +20,17 @@ const cspDirectives = [
   // Styles: self + inline (Tailwind, HeroUI)
   `style-src 'self' 'unsafe-inline'`,
 
-  // Images: self + OG images + analytics + S3 avatars + GitHub contributor avatars
-  // google.com.tr covers Google Ads audience pixels served from country-code TLDs
-  `img-src 'self' data: blob: https://www.e-syrians.com https://e-syrians.s3.eu-north-1.amazonaws.com https://avatars.githubusercontent.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google.com https://*.google.com.tr https://*.gstatic.com https://pagead2.googlesyndication.com`,
+  // Images: self + OG images + analytics + avatars (DO Spaces primary,
+  // legacy AWS S3 retained during the migration retention window) +
+  // GitHub contributor avatars.
+  // - DO Spaces origin hostname (`<bucket>.<region>.digitaloceanspaces.com`)
+  //   is what pre-signed URLs from `Storage::disk('s3')->temporaryUrl(...)`
+  //   resolve to.
+  // - The `.cdn.` variant is only needed if avatars are loaded via the
+  //   Spaces CDN (public unsigned URLs from `Storage::url()`); pre-signed
+  //   URLs bypass CDN so both entries cover the two access paths.
+  // google.com.tr covers Google Ads audience pixels served from country-code TLDs.
+  `img-src 'self' data: blob: https://www.e-syrians.com https://e-syrians-network.fra1.digitaloceanspaces.com https://e-syrians-network.fra1.cdn.digitaloceanspaces.com https://e-syrians.s3.eu-north-1.amazonaws.com https://avatars.githubusercontent.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google.com https://*.google.com.tr https://*.gstatic.com https://pagead2.googlesyndication.com`,
 
   // Fonts: local only (IBM Plex Sans Arabic loaded from /public)
   `font-src 'self' data:`,
@@ -57,6 +65,24 @@ const csp = cspDirectives.join("; ");
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
+      // DigitalOcean Spaces — primary avatar store. Two entries
+      // because pre-signed URLs (`temporaryUrl`) resolve to the
+      // origin hostname, and public URLs (`Storage::url`) resolve
+      // through the CDN hostname when the Space has CDN enabled.
+      {
+        protocol: "https",
+        hostname: "e-syrians-network.fra1.digitaloceanspaces.com",
+        pathname: "/avatars/**",
+      },
+      {
+        protocol: "https",
+        hostname: "e-syrians-network.fra1.cdn.digitaloceanspaces.com",
+        pathname: "/avatars/**",
+      },
+      // Legacy AWS S3 — retained during the migration retention
+      // window so any avatar records still pointing at S3 continue
+      // to render. Safe to delete alongside the `aws` disk block
+      // in the API's config/filesystems.php after cutover verifies.
       {
         protocol: "https",
         hostname: "e-syrians.s3.eu-north-1.amazonaws.com",
