@@ -746,6 +746,7 @@
       "welcome": "Bi xêr hatî {name}",
       "nav": {
         "polls": "Anketên",
+        "audiences": "Lîsteyên temaşevanan",
         "verifications": "Pejirandin",
         "settings": "Mîhengên",
         "donate": "Bexş bike",
@@ -902,7 +903,23 @@
             "add": "Vebijarka zêde bike"
           },
           "audience": {
-            "title": "Civaka anketê"
+            "title": "Civaka anketê",
+            "modes": {
+              "demographics": "Pîvanên demografîk",
+              "saved_list": "Lîsteya hilanînî"
+            },
+            "saved_list": {
+              "label": "Lîsteyeke temaşevanan a hilanînî hilbijêre",
+              "description": "Yek ji lîsteyên xwe yên dubarebikaranîn hilbijêre da ku vê anketê sînor bikî.",
+              "counts": "{resolved} ji {total} pêwendî tê dîtin",
+              "createLink": "Lîsteyeke nû çêbike",
+              "empty": "Hîn tu lîsteyeke temaşevanan nîne — pêşî yek çêbike.",
+              "selectedHint": "Ev anket tenê wê dengên ji kesên nav lîsteya hilbijartî qebûl bike.",
+              "required": "Berî şandina anketê lîsteyeke temaşevanan a hilanînî hilbijêre.",
+              "loadError": "Lîsteyên te yên hilanînî nehatin barkirin.",
+              "retry": "Dîsa biceribîne",
+              "createModalTitle": "Lîsteyeke nû ya temaşevanan çêbike"
+            }
           },
           "gender": {
             "label": "Cinsiyet",
@@ -927,11 +944,6 @@
           "province": {
             "label": "Bajarê li Sûriyê",
             "description": "Tenê dema ku welat tenê Sûriye be tê nîşandan. Nivîsê vala nîşan dide ku bikarhênerên ji hemû bajarên li Sûriyê şayeste ne."
-          },
-          "allowed_voters": {
-            "label": "Dengdêrên taybet (bijarte)",
-            "placeholder": "Li her rêzekê e-nameyekê an nasnameya niştimanî binivîse",
-            "description": "Heke hatibe diyarkirin, tenê ev kesên taybet dikarin deng bidin. Ev hemû pîvanên din ên şandeya dengdanê paş dixe."
           },
           "age_range": {
             "label": "Kategorîya Temenê"
@@ -961,6 +973,147 @@
             }
           },
           "error": "Di dema afirandina anketê de çewtiyek derket"
+        }
+      },
+      "audiences": {
+        "my_audiences": {
+          "title": "Lîsteyên min ên temaşevanan",
+          "description": "Lîsteyên dubarebikaranîn ên dengdêran (e-name an nasnameya niştimanî ya Sûrî) ku tu dikarî bêyî her carê veşandinê bi anketan ve girêdî.",
+          "table": {
+            "name": { "title": "Nav" },
+            "entries": { "title": "Ketî (yên pêwendîkirî / hemû)" },
+            "createdAt": { "title": "Hatiye çêkirin" },
+            "updatedAt": { "title": "Hatiye nûkirin" },
+            "actions": {
+              "title": "Vebijark",
+              "view": "Nîşan bide",
+              "delete": "Jê bibe"
+            }
+          },
+          "emptyContent": {
+            "title": "Te hîn ti lîsteyeke temaşevanan çênekiriye.",
+            "add": "Lîsteyeke temaşevanan çêbike"
+          },
+          "delete": {
+            "title": "Vê lîsteyê jê bibim?",
+            "body": "\"{name}\" wê bi tevahî were jêbirin. Anketên ku bi vê lîsteyê ve girêdayî ne, wê hewce bikin ku berî dengdana pêş dîsa werin sazkirin.",
+            "confirm": "Lîsteyê jê bibe",
+            "cancel": "Bihêle",
+            "conflictTitle": "Ev lîste di anketeke çalak de tê bikaranîn",
+            "success": "Lîste hate jêbirin",
+            "error": "Jêbirina lîsteyê serneketî bû"
+          }
+        },
+        "form": {
+          "createTitle": "Lîsteyeke temaşevanan a nû çêbike",
+          "createDescription": "Navê lîsteyê binivîse û ketiyan lêbide. Tu dikarî paşê hê zêdetir lê zêde bikî.",
+          "editTitle": "Lîsteya temaşevanan biguherîne",
+          "editDescription": "Nav an ravekera lîsteyê nûve bike. Ji bo zêdekirin an jêbirina ketiyan, rûpela hûrgulî veke.",
+          "name": {
+            "label": "Nav",
+            "placeholder": "Mînak: Xwendekarên Dimeşqê",
+            "error": "Ji kerema xwe navekî bi kêmî 2 tîpan binivîse.",
+            "errorMax": "Nav divê ne ji 255 tîpan zêdetir be."
+          },
+          "description": {
+            "label": "Rave (bijarte)",
+            "placeholder": "Ev lîste ji bo çi ye?",
+            "help": "Ev rave tenê ji te re xuya ye. Herî zêde 1000 tîp.",
+            "errorMax": "Rave divê ne ji 1000 tîpan zêdetir be."
+          },
+          "entries": {
+            "label": "Ketî (di her rêzê de yek)",
+            "placeholder": "email@example.com\n123456789012",
+            "help": "E-name an nasnameya niştimanî ya Sûrî lêbide, di her rêzê de yek.",
+            "preview": {
+              "title": "Pêşdîtina zindî",
+              "empty": "Di her rêzekê de yek nasnav lêbide — em ê nîşan bikin çi nayê qebûlkirin.",
+              "valid": "{count} derbasdar",
+              "invalid": "{count} nederbasdar",
+              "type": {
+                "email": "E-name",
+                "national_id": "Nasnameya niştimanî",
+                "invalid": "Nederbasdar"
+              }
+            }
+          },
+          "createSubmit": "Lîsteyê çêbike",
+          "editSubmit": "Guhertinan tomar bike",
+          "cancel": "Dev jê berde",
+          "createSuccess": "Lîste hate çêkirin",
+          "editSuccess": "Lîste hate nûkirin",
+          "error": "Tomarkirin serneketî. Ji kerema xwe ji nû ve biceribîne."
+        },
+        "detail": {
+          "meta": {
+            "counts": "{resolved} ji {total} ketiyên li ser bikarhênerên tomarkirî hatin pêwendîkirin",
+            "edit": "Agahiyan biguherîne"
+          },
+          "refresh": {
+            "action": "Encama pêwendîkirinê nûve bike",
+            "success": "Encama pêwendîkirinê hat nûkirin",
+            "error": "Nûvekirina pêwendîkirinê serneketî bû",
+            "lastRun": "Herî dawî: {at}"
+          },
+          "delete": {
+            "action": "Lîsteyê jê bibe",
+            "title": "Vê lîsteyê jê bibim?",
+            "body": "\"{name}\" wê bi tevahî were jêbirin. Anketên ku bi vê lîsteyê ve girêdayî ne, wê hewce bikin ku berî dengdana pêş dîsa werin sazkirin.",
+            "confirm": "Lîsteyê jê bibe",
+            "cancel": "Bihêle",
+            "conflictTitle": "Ev lîste di anketeke çalak de tê bikaranîn",
+            "success": "Lîste hate jêbirin",
+            "error": "Jêbirina lîsteyê serneketî bû"
+          },
+          "table": {
+            "aria": "Ketiyên lîsteyê",
+            "identifier": "Nasnav",
+            "type": "Cure",
+            "resolved": "Pêwendîkirin",
+            "createdAt": "Zêde bû",
+            "actions": "Vebijark",
+            "empty": "Hîn di vê lîsteyê de ti ketî nînin."
+          },
+          "type": {
+            "email": "E-name",
+            "national_id": "Nasnameya niştimanî"
+          },
+          "resolved": {
+            "yes": "Bi bikarhênerekî tomarkirî re hat pêwendîkirin",
+            "no": "Hîn nehatiye pêwendîkirin"
+          },
+          "entry": {
+            "remove": "Ketiyê jê bibe",
+            "removeSuccess": "Ketî hate jêbirin",
+            "removeError": "Jêbirin serneketî bû"
+          },
+          "bulk": {
+            "selected": "{count} hilbijartî",
+            "remove": "{count} hilbijartî jê bibe",
+            "removeSuccess": "{count} ketî hatin jêbirin",
+            "removePartial": "{ok} hatin jêbirin, {failed} serneketî bûn"
+          },
+          "entryConfirm": {
+            "title": "{count, plural, one {Ketî jê bibe?} other {{count} ketî jê bibin?}}",
+            "body": "{count, plural, one {Ev ê ketiyê ji lîsteya te derxîne. Tu dikarî paşê wê zêde bikî.} other {Ev ê {count} ketiyan ji lîsteya te derxîne. Tu dikarî paşê wan zêde bikî.}}",
+            "confirm": "{count, plural, one {Ketiyê jê bibe} other {{count} ketiyan jê bibe}}",
+            "cancel": "Betal"
+          },
+          "addEntries": {
+            "title": "Ketiyên nû zêde bike",
+            "description": "E-name an nasnameya niştimanî ya Sûrî ya zêde lêbide, di her rêzekê de yek.",
+            "placeholder": "email@example.com\n123456789012",
+            "submit": "Ketiyan zêde bike",
+            "success": "Ketî hatin zêdekirin",
+            "error": "Zêdekirina ketiyan serneketî bû",
+            "emptyError": "Ji kerema xwe bi kêmî yek ketiyeke derbasdar lêbide.",
+            "preview": {
+              "title": "Pêşdîtina zindî",
+              "empty": "Di her rêzekê de yek nasnav lêbide — rêzên nederbasdar wê werin derbaskirin.",
+              "valid": "{count} derbasdar",
+              "invalid": "{count} nederbasdar"
+            }
+          }
         }
       },
       "verifications": {
@@ -1506,7 +1659,15 @@
     "user_already_has_password": "Te berê şîfre danîbû",
     "otp_sent": "Koda piştrastkirinê ji e-nameya te re hat şandin",
     "invalid_or_expired_otp": "Koda piştrastkirinê nederbasdar e an jî qediya",
-    "password_set_successfully": "Şîfre bi serkeftî hat danîn"
+    "password_set_successfully": "Şîfre bi serkeftî hat danîn",
+    "audience_not_found": "Lîsteya temaşevanan nehate dîtin.",
+    "audience_not_found_or_not_owned": "Lîsteya temaşevanan nehate dîtin an jî destûra te ji bo gihîştinê nîne.",
+    "audience_entry_invalid_format": "Yek ji ketiyan ne e-nameyeke derbasdar e û ne jî nasnameya niştimanî ya Sûrî ye.",
+    "audience_entry_not_found": "Ev ketî êdî tune ye.",
+    "audience_referenced_by_active_poll": "Ev lîste di anketeke ku hîn ji bo dengdanê vekirî ye de tê bikaranîn. Berî jêbirinê anketê bigire an heta ku biqede bisekine.",
+    "audience_too_many_entries_in_one_call": "Tu dikarî heta 5000 ketî di daxwazekê de zêde bikî. Ji kerema xwe lîsteyê parçe bike û dîsa biceribîne.",
+    "audience_and_demographic_criteria_are_mutually_exclusive": "Anket nikare hem lîsteyeke temaşevanan a hilanînî hem jî pîvanên demografîk bi hev re bikar bîne.",
+    "poll_uses_saved_audience_detach_before_setting_inline_criteria": "Berî ku tu pîvanên temaşevanan ên rasterast lê zêde bikî, lîsteya temaşevanan a hilanînî ji vê anketê veqetîne."
   },
   "publicVerify": {
     "title": "Piştrastkirina Agahiyên Bikarhêner",
@@ -1557,11 +1718,11 @@
     "country": "Welatê nîştegerî",
     "cityInsideSyria": "Bajarê li Sûriyê",
     "province": "Parêzgeh",
-    "allowedVoters": "Dengdêrên taybet",
-    "allowedVotersDescription": "Ev lêkolîn tenê ji bo {count} kesên taybet e",
-    "inviteOnly": "Ev lêkolîn tenê ji bo lîsteya dengdêrên berê hatî hilbijartin e",
     "noLimit": "Bê sînor",
     "audienceLoadFailed": "Pîvanên temaşevanan nehatin barkirin. Ji kerema xwe dîsa biceribîne.",
+    "audienceSavedListName": "Lîsteya tomarkirî",
+    "audienceSavedListCounts": "{resolved} ji {total} ketiyan bi bikarhênerên qeydkirî re li hev tên",
+    "audienceMissing": "Lîsteya bi vê rahêtinê ve girêdayî hate jêbirin.",
     "description": "Hemû bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin li vir beşdarî lêkolînên rayê bibin. Bi gelemperî, lêkolîn hatine rêz kirin di bingeha nivîsandina ku naveroka dengên 'Erê' û 'Na' di navber de çêtir e û her wisa bi sal û mehê zêde hatine rêvekirin.",
     "filter": {
       "description": "Nîşandana lêkolîn bi bingeha sal û mehê",

@@ -1,5 +1,6 @@
 import { auth } from "../../../auth";
 import { ESUser } from "../types/account";
+import { Audience } from "../types/audience";
 import { FeatureRequest, FeatureSort, FeatureStatus } from "../types/feature-requests";
 import { ApiResponse } from "../types/misc";
 import { Poll } from "../types/polls";
@@ -38,11 +39,8 @@ export const getPoll = async (id: string): Promise<ApiResponse<Poll> | null> => 
 /**
  * Creator-only edit payload. Mirrors `getPoll` but hits
  * `GET /polls/{id}/edit` — which the API guards on ownership and
- * which returns the full `audience` block including
- * `allowed_voters` (the public show endpoint deliberately
- * suppresses that for every viewer to avoid leaking the guest
- * list). Use this in the edit page; everywhere else keeps using
- * `getPoll`.
+ * which returns the full `audience` block needed by the edit form.
+ * Use this in the edit page; everywhere else keeps using `getPoll`.
  *
  * Returns null on 403 / 404 just like `getPoll` — the edit page
  * handles the missing-data path with notFound() / a redirect.
@@ -137,6 +135,51 @@ export const getUser = async (uuid: string): Promise<ApiResponse<ESUser> | null>
       revalidate: 3600,
     },
     cache: "force-cache",
+  });
+};
+
+/**
+ * List the signed-in user's audiences. The backend clamps `per_page` to
+ * [1, 100]; we forward whatever the caller asks for and let the API
+ * enforce the ceiling. Returns null on network / 5xx so the caller can
+ * render an empty state instead of crashing the page.
+ */
+export const getAudiences = async (
+  page: string = "1",
+  perPage: string = "20",
+): Promise<ApiResponse<{
+  audiences: Audience[];
+  pagination: {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+  };
+}> | null> => {
+  const session = await auth();
+  const params = new URLSearchParams({ page, per_page: perPage });
+  return safeFetch(`${API_URL}/users/audiences?${params.toString()}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+    cache: "no-cache",
+  });
+};
+
+/**
+ * Fetch a single audience (with entries loaded). Backend 404s for
+ * audiences that don't belong to the signed-in user — treat the null
+ * return as "not found or not yours".
+ */
+export const getAudience = async (uuid: string): Promise<ApiResponse<Audience> | null> => {
+  const session = await auth();
+  return safeFetch<Audience>(`${API_URL}/users/audiences/${uuid}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+    cache: "no-cache",
   });
 };
 

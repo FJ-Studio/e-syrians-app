@@ -82,6 +82,20 @@ const useServerError = (): ((errorCode: string) => string) => {
       ethnicity_missing: t("audience_ethnicity_missing"),
       ethnicity: t("audience_ethnicity"),
 
+      // Audiences (reusable lists)
+      audience_not_found: t("audience_not_found"),
+      audience_not_found_or_not_owned: t("audience_not_found_or_not_owned"),
+      audience_entry_invalid_format: t("audience_entry_invalid_format"),
+      audience_entry_not_found: t("audience_entry_not_found"),
+      audience_referenced_by_active_poll: t("audience_referenced_by_active_poll"),
+      audience_too_many_entries_in_one_call: t("audience_too_many_entries_in_one_call"),
+      audience_and_demographic_criteria_are_mutually_exclusive: t(
+        "audience_and_demographic_criteria_are_mutually_exclusive",
+      ),
+      poll_uses_saved_audience_detach_before_setting_inline_criteria: t(
+        "poll_uses_saved_audience_detach_before_setting_inline_criteria",
+      ),
+
       // Misc
       not_implemented: t("not_implemented"),
     };
