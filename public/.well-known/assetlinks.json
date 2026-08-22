@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.esyrians.app",
+      "sha256_cert_fingerprints": [
+        "A7:3D:D3:ED:47:B0:C5:A9:CF:15:B4:E4:04:2B:1C:13:EE:FB:30:B0:C5:76:9B:C1:8F:8E:19:31:51:BE:62:FC"
+      ]
+    }
+  }
+]
