@@ -16,6 +16,7 @@ import clipboardDocumentCheckIcon from "@iconify-icons/heroicons/clipboard-docum
 import cog6ToothIcon from "@iconify-icons/heroicons/cog-6-tooth";
 import ellipsisHorizontalIcon from "@iconify-icons/heroicons/ellipsis-horizontal";
 import homeIcon from "@iconify-icons/heroicons/home";
+import listBulletIcon from "@iconify-icons/heroicons/list-bullet";
 import { Icon } from "@iconify/react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -53,6 +54,12 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         title: t("nav.polls"),
         link: "/account/polls",
         icon: <Icon icon={chartBarIcon} className="size-5" />,
+      },
+      {
+        key: "audiences",
+        title: t("nav.audiences"),
+        link: "/account/audiences",
+        icon: <Icon icon={listBulletIcon} className="size-5" />,
       },
       {
         key: "settings",

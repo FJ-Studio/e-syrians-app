@@ -746,6 +746,7 @@
       "welcome": "Welcome {name}",
       "nav": {
         "polls": "Polls",
+        "audiences": "Audiences",
         "verifications": "Verifications",
         "notifications": "Notifications",
         "settings": "Settings",
@@ -902,7 +903,23 @@
             "add": "Add option"
           },
           "audience": {
-            "title": "Poll audience"
+            "title": "Poll audience",
+            "modes": {
+              "demographics": "Demographics",
+              "saved_list": "Saved list"
+            },
+            "saved_list": {
+              "label": "Choose a saved audience",
+              "description": "Pick one of your reusable audiences to gate this poll.",
+              "counts": "{resolved} of {total} matched",
+              "createLink": "Create new",
+              "empty": "You don't have any audiences yet — create one first.",
+              "selectedHint": "This poll will only accept votes from people in the selected audience.",
+              "required": "Choose a saved audience before submitting the poll.",
+              "loadError": "Couldn't load your saved audiences.",
+              "retry": "Try again",
+              "createModalTitle": "Create a new audience"
+            }
           },
           "gender": {
             "label": "Gender",
@@ -927,11 +944,6 @@
           "province": {
             "label": "City in Syria",
             "description": "Only shown when country is set to Syria only. A blank value indicates that users from all cities in Syria are eligible to vote."
-          },
-          "allowed_voters": {
-            "label": "Specific voters (optional)",
-            "placeholder": "Enter one email or national ID per line",
-            "description": "If provided, only these specific people will be able to vote. This overrides all other audience criteria above."
           },
           "age_range": {
             "label": "Age range"
@@ -961,6 +973,147 @@
             }
           },
           "error": "An error occurred while creating the poll"
+        }
+      },
+      "audiences": {
+        "my_audiences": {
+          "title": "My audiences",
+          "description": "Reusable lists of voters (emails or Syrian national IDs) that you can attach to polls without pasting the list every time.",
+          "table": {
+            "name": { "title": "Name" },
+            "entries": { "title": "Entries (matched / total)" },
+            "createdAt": { "title": "Created" },
+            "updatedAt": { "title": "Updated" },
+            "actions": {
+              "title": "Actions",
+              "view": "View",
+              "delete": "Delete"
+            }
+          },
+          "emptyContent": {
+            "title": "You haven't created any audience yet.",
+            "add": "Create audience"
+          },
+          "delete": {
+            "title": "Delete this audience?",
+            "body": "'{name}' will be permanently removed. Polls that reference it will need to be re-configured before their next vote.",
+            "confirm": "Delete audience",
+            "cancel": "Keep it",
+            "conflictTitle": "This audience is used by an active poll",
+            "success": "Audience deleted",
+            "error": "Could not delete the audience"
+          }
+        },
+        "form": {
+          "createTitle": "Create a new audience",
+          "createDescription": "Give your list a name and paste the entries. You can add more entries later.",
+          "editTitle": "Edit audience",
+          "editDescription": "Update the audience's name or description. To add or remove entries, open the detail page.",
+          "name": {
+            "label": "Name",
+            "placeholder": "e.g. Damascus alumni",
+            "error": "Please provide a name (at least 2 characters).",
+            "errorMax": "Name must be 255 characters or fewer."
+          },
+          "description": {
+            "label": "Description (optional)",
+            "placeholder": "What is this audience for?",
+            "help": "Only you can see this description. 1000 characters max.",
+            "errorMax": "Description must be 1000 characters or fewer."
+          },
+          "entries": {
+            "label": "Entries (one per line)",
+            "placeholder": "email@example.com\n123456789012",
+            "help": "Paste emails or Syrian national IDs, one per line.",
+            "preview": {
+              "title": "Live preview",
+              "empty": "Paste one identifier per line — we'll flag anything that won't be accepted.",
+              "valid": "{count} valid",
+              "invalid": "{count} invalid",
+              "type": {
+                "email": "Email",
+                "national_id": "National ID",
+                "invalid": "Invalid"
+              }
+            }
+          },
+          "createSubmit": "Create audience",
+          "editSubmit": "Save changes",
+          "cancel": "Cancel",
+          "createSuccess": "Audience created",
+          "editSuccess": "Audience updated",
+          "error": "Could not save. Please try again."
+        },
+        "detail": {
+          "meta": {
+            "counts": "{resolved} of {total} entries matched to registered users",
+            "edit": "Edit metadata"
+          },
+          "refresh": {
+            "action": "Refresh resolution",
+            "success": "Resolution updated",
+            "error": "Could not refresh resolution",
+            "lastRun": "Last refreshed {at}"
+          },
+          "delete": {
+            "action": "Delete audience",
+            "title": "Delete this audience?",
+            "body": "'{name}' will be permanently removed. Polls that reference it will need to be re-configured before their next vote.",
+            "confirm": "Delete audience",
+            "cancel": "Keep it",
+            "conflictTitle": "This audience is used by an active poll",
+            "success": "Audience deleted",
+            "error": "Could not delete the audience"
+          },
+          "table": {
+            "aria": "Audience entries",
+            "identifier": "Identifier",
+            "type": "Type",
+            "resolved": "Matched",
+            "createdAt": "Added",
+            "actions": "Actions",
+            "empty": "This audience has no entries yet."
+          },
+          "type": {
+            "email": "Email",
+            "national_id": "National ID"
+          },
+          "resolved": {
+            "yes": "Matched to a registered user",
+            "no": "Not yet matched"
+          },
+          "entry": {
+            "remove": "Remove entry",
+            "removeSuccess": "Entry removed",
+            "removeError": "Could not remove entry"
+          },
+          "bulk": {
+            "selected": "{count} selected",
+            "remove": "Remove {count} selected",
+            "removeSuccess": "Removed {count} entries",
+            "removePartial": "Removed {ok}, failed {failed}"
+          },
+          "entryConfirm": {
+            "title": "{count, plural, one {Remove entry?} other {Remove {count} entries?}}",
+            "body": "{count, plural, one {This will remove the entry from your list. You can add it back later.} other {This will remove {count} entries from your list. You can add them back later.}}",
+            "confirm": "{count, plural, one {Remove entry} other {Remove {count} entries}}",
+            "cancel": "Cancel"
+          },
+          "addEntries": {
+            "title": "Add entries",
+            "description": "Paste additional emails or Syrian national IDs, one per line.",
+            "placeholder": "email@example.com\n123456789012",
+            "submit": "Add entries",
+            "success": "Entries added",
+            "error": "Could not add entries",
+            "emptyError": "Please paste at least one valid entry.",
+            "preview": {
+              "title": "Live preview",
+              "empty": "Paste one identifier per line — invalid lines will be skipped.",
+              "valid": "{count} valid",
+              "invalid": "{count} invalid"
+            }
+          }
         }
       },
       "verifications": {
@@ -1506,7 +1659,15 @@
     "user_already_has_password": "You already have a password set up",
     "otp_sent": "A verification code has been sent to your email",
     "invalid_or_expired_otp": "Invalid or expired verification code",
-    "password_set_successfully": "Password set successfully"
+    "password_set_successfully": "Password set successfully",
+    "audience_not_found": "Audience not found.",
+    "audience_not_found_or_not_owned": "Audience not found or you don't have access to it.",
+    "audience_entry_invalid_format": "One of the entries isn't a valid email or Syrian national ID.",
+    "audience_entry_not_found": "This entry no longer exists.",
+    "audience_referenced_by_active_poll": "This audience is used by a poll that's still open for voting. Close the poll or wait until it ends before removing it.",
+    "audience_too_many_entries_in_one_call": "You can add up to 5000 entries per request. Split your list and try again.",
+    "audience_and_demographic_criteria_are_mutually_exclusive": "A poll can't use both a saved audience and demographic criteria.",
+    "poll_uses_saved_audience_detach_before_setting_inline_criteria": "Detach the saved audience from this poll before adding inline audience criteria."
   },
   "publicVerify": {
     "title": "Verify user information",
@@ -1557,11 +1718,11 @@
     "country": "Country of residence",
     "cityInsideSyria": "City in Syria",
     "province": "Province",
-    "allowedVoters": "Specific voters",
-    "allowedVotersDescription": "This poll is restricted to {count} specific people",
-    "inviteOnly": "This poll is restricted to a pre-selected list of voters",
     "noLimit": "Not limited",
     "audienceLoadFailed": "Couldn't load audience criteria. Please try again.",
+    "audienceSavedListName": "Saved list",
+    "audienceSavedListCounts": "{resolved} of {total} entries matched to registered users",
+    "audienceMissing": "The saved list attached to this poll has been removed.",
     "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
     "filter": {
       "description": "Display polls by year and month",
