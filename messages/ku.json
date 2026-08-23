@@ -742,6 +742,21 @@
     }
   },
   "account": {
+    "deletionPending": {
+      "title": "Hesabê te ji bo jêbirinê hatiye plankirin",
+      "subtitle": "Di dema derfetê de tu dikarî hesabê xwe ji nû ve çalak bikî an derkevî. Hemû taybetmendiyên din girtî ne heta tu biryara xwe bidî.",
+      "scheduled_for": "Hatiye plankirin ji bo {date}",
+      "days_remaining": "{count, plural, =0 {Kêmtir ji rojekê maye} one {# roj mayî} other {# roj mane}}",
+      "reactivate_cta": "Hesabê min ji nû ve çalak bike",
+      "sign_out_cta": "Derkeve",
+      "password_label": "Şîfreya xwe piştrast bike",
+      "no_password_title": "Şîfre tune ye",
+      "no_password_body": "Hesabê te bi têketina civakî hat çêkirin û şîfre tune ye. Betalkirina jêbirinê şîfreyê hewce dike. Ji kerema xwe derkeve.",
+      "reactivate_success": "Hesab ji nû ve hat çalakkirin",
+      "reactivate_error": "Ji nû ve çalakkirina hesabê te nehat kirin. Ji kerema xwe careke din biceribîne.",
+      "sign_out_confirm_title": "Derkeve?",
+      "sign_out_confirm_body": "Tu dikarî her demê berî tarîxa jêbirinê ji nû ve têkevî û wê betal bikî."
+    },
     "dashboard": {
       "welcome": "Bi xêr hatî {name}",
       "nav": {
@@ -1304,13 +1319,6 @@
           "acknowledgement": "Ez fêm dikim ku daneyên min dê piştî 15 rojên dema derfetê bi domdarî bên jêbirin.",
           "confirmCta": "Jêbirinê plan bike",
           "successToast": "Jêbirina hesabê hate plankirin",
-          "scheduledTitle": "Jêbirina hesabê hatî plankirin",
-          "scheduledDescription": "Hesabê te dê di {date} de bi domdarî bê jêbirin. Tu dikarî her demê beriya wê betal bikî.",
-          "cancelHint": "Şîfreya xwe binivîse da ku daxwaza jêbirinê betal bikî û hesabê xwe çalak bihêlî.",
-          "cancelTitle": "Jêbirina hesabê betal bikî?",
-          "cancelBody": "Şîfreya xwe binivîse da ku jêbirinê betal bikî. Hesabê te dê tavilê were vegerandin.",
-          "confirmCancelCta": "Jêbirinê betal bike",
-          "cancelSuccess": "Jêbirin hate betalkirin",
           "close": "Bigire"
         }
       },

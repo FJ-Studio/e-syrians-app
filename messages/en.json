@@ -742,6 +742,21 @@
     }
   },
   "account": {
+    "deletionPending": {
+      "title": "Your account is scheduled for deletion",
+      "subtitle": "During the grace period you can either reactivate your account or sign out. All other features are locked until you decide.",
+      "scheduled_for": "Scheduled for {date}",
+      "days_remaining": "{count, plural, =0 {Less than a day left} one {# day left} other {# days left}}",
+      "reactivate_cta": "Reactivate my account",
+      "sign_out_cta": "Sign out",
+      "password_label": "Confirm your password",
+      "no_password_title": "No password on file",
+      "no_password_body": "Your account was created with a social sign-in and has no password. Cancelling deletion requires a password. Please sign out.",
+      "reactivate_success": "Account reactivated",
+      "reactivate_error": "Couldn't reactivate your account. Try again.",
+      "sign_out_confirm_title": "Sign out?",
+      "sign_out_confirm_body": "You can sign back in at any time before the deletion date to cancel it."
+    },
     "dashboard": {
       "welcome": "Welcome {name}",
       "nav": {
@@ -1304,13 +1319,6 @@
           "acknowledgement": "I understand my data will be deleted permanently after the 15-day grace period.",
           "confirmCta": "Schedule deletion",
           "successToast": "Account deletion scheduled",
-          "scheduledTitle": "Account deletion scheduled",
-          "scheduledDescription": "Your account will be permanently deleted on {date}. Cancel any time before then.",
-          "cancelHint": "Enter your password to cancel the pending deletion and keep your account active.",
-          "cancelTitle": "Cancel account deletion?",
-          "cancelBody": "Enter your password to cancel deletion. Your account will be restored immediately.",
-          "confirmCancelCta": "Cancel deletion",
-          "cancelSuccess": "Deletion cancelled",
           "close": "Close"
         }
       },
