@@ -70,6 +70,16 @@ export type ESUser = {
   language?: string;
   province?: string;
   has_password?: boolean;
+
+  /*
+   * Two-stage account-deletion timestamps. Populated on the
+   * `/users/me` response once the user requests deletion. Web
+   * dashboard reads the pair to render a persistent banner + swap
+   * the "Delete account" button for "Cancel deletion" in the
+   * security section.
+   */
+  deletion_requested_at?: string | null;
+  deletion_scheduled_for?: string | null;
 };
 
 export type AppNotification = {

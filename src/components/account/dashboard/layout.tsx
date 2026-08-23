@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/shared/container";
+import { useRouter } from "@/i18n/routing";
 import {
   Dropdown,
   DropdownItem,
@@ -21,8 +22,34 @@ import { Icon } from "@iconify/react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { FC, PropsWithChildren, ReactNode, useCallback, useMemo } from "react";
+import { usePathname } from "next/navigation";
+import { FC, PropsWithChildren, ReactNode, useCallback, useEffect, useMemo } from "react";
+import useSWR from "swr";
+
+/**
+ * SWR fetcher for the deletion-status proxy. Kept module-local so the
+ * layout can share it with the deletion-pending screen's own fetcher
+ * (same key + same shape → SWR de-duplicates the round-trip).
+ */
+interface DashboardDeletionStatus {
+  deletion_scheduled_for: string | null;
+  is_pending: boolean;
+}
+
+const DASHBOARD_DELETION_STATUS_KEY = "/api/account/deletion/status";
+
+const fetchDashboardDeletionStatus = async (url: string): Promise<DashboardDeletionStatus> => {
+  const request = await fetch(url, { credentials: "same-origin" });
+  const response = await request.json();
+  return response?.data as DashboardDeletionStatus;
+};
+
+/**
+ * Segment that indicates the user is already on the deletion-pending
+ * screen. We match on the trailing path — the locale prefix is
+ * variable (`/en/account/…`, `/ar/account/…`, etc).
+ */
+const DELETION_PENDING_SUFFIX = "/account/deletion-pending";
 
 type NavLink = {
   key: string;
@@ -36,10 +63,83 @@ type NavLink = {
 const PRIMARY_KEYS = ["overview", "polls", "notifications", "settings"];
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
   const pathname = usePathname();
   const t = useTranslations("account.dashboard");
   const session = useSession();
+  const updateSession = session.update;
+
+  // Pending-deletion invariant: any signed-in user whose account is
+  // inside the 15-day grace period MUST be on /account/deletion-
+  // pending. Two trigger sources:
+  //   (a) fresh JWT / session flip (post sign-in on a pending account,
+  //       or an `updateSession(...)` from delete-account.tsx after
+  //       request-deletion). `session.user.deletion_scheduled_for`.
+  //   (b) cross-device / cross-tab drift — the JWT here can be stale
+  //       for up to a session refresh. SWR polls the whitelisted
+  //       `/api/account/deletion/status` proxy (which stays reachable
+  //       even under the API-side `EnsureAccountNotPendingDeletion`
+  //       middleware) and revalidates on focus.
+  //
+  // The `push`/`replace` navigations use next-intl's routing helpers,
+  // which auto-prefix the active locale so the redirect stays inside
+  // the current locale segment.
+  const isOnDeletionPending = pathname.endsWith(DELETION_PENDING_SUFFIX);
+  const sessionUser = session.data?.user;
+  const { data: deletionStatus } = useSWR<DashboardDeletionStatus>(
+    // Only poll while there's an authenticated session — the proxy
+    // requires a bearer token and would 401 otherwise.
+    sessionUser ? DASHBOARD_DELETION_STATUS_KEY : null,
+    fetchDashboardDeletionStatus,
+    {
+      revalidateOnFocus: true,
+      revalidateIfStale: true,
+      dedupingInterval: 30_000,
+      fallbackData: sessionUser
+        ? {
+            deletion_scheduled_for: sessionUser.deletion_scheduled_for ?? null,
+            is_pending: !!sessionUser.deletion_scheduled_for,
+          }
+        : undefined,
+    },
+  );
+
+  // SWR is authoritative once it has resolved — a fresh `is_pending:
+  // false` from the API means the account is no longer pending even if
+  // the JWT/session still carries a stale `deletion_scheduled_for` (the
+  // cross-device cancel case). Only fall back to the session mirror
+  // during the first paint before SWR fills.
+  const isPendingDeletion = deletionStatus ? deletionStatus.is_pending : !!sessionUser?.deletion_scheduled_for;
+
+  useEffect(() => {
+    if (!sessionUser) return;
+    if (isPendingDeletion && !isOnDeletionPending) {
+      replace("/account/deletion-pending");
+    } else if (!isPendingDeletion && isOnDeletionPending) {
+      // Symmetric release: user reactivated (deletion-pending screen
+      // cleared the timestamps + mutated the SWR cache), or the
+      // background revalidate found the deletion is no longer pending
+      // (cross-device cancel).
+      //
+      // Cross-device case: SWR flipped to `is_pending: false` but the
+      // JWT still carries the stale `deletion_scheduled_for`. If we
+      // just `replace('/account')`, the global middleware guard in
+      // `src/middleware.ts` reads that stale JWT field and redirects
+      // right back to `/account/deletion-pending`. Clear the mirror
+      // on the session before navigating so the middleware sees the
+      // fresh state.
+      if (sessionUser.deletion_scheduled_for) {
+        void updateSession({
+          deletion_requested_at: null,
+          deletion_scheduled_for: null,
+        }).then(() => {
+          replace("/account");
+        });
+      } else {
+        replace("/account");
+      }
+    }
+  }, [isPendingDeletion, isOnDeletionPending, replace, sessionUser, updateSession]);
 
   const links: NavLink[] = useMemo(
     () => [

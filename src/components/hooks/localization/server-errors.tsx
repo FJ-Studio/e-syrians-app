@@ -14,6 +14,7 @@ const useServerError = (): ((errorCode: string) => string) => {
 
       // Password
       current_password_incorrect: t("current_password_incorrect"),
+      invalid_password: t("invalid_password"),
       password_updated: t("password_updated"),
       reset_link_sent: t("reset_link_sent"),
       failed_to_send_password_reset_email: t("failed_to_send_password_reset_email"),
@@ -95,6 +96,11 @@ const useServerError = (): ((errorCode: string) => string) => {
       poll_uses_saved_audience_detach_before_setting_inline_criteria: t(
         "poll_uses_saved_audience_detach_before_setting_inline_criteria",
       ),
+
+      // Account deletion
+      you_are_pending_deletion: t("you_are_pending_deletion"),
+      account_deletion_already_pending: t("account_deletion_already_pending"),
+      account_deletion_not_pending: t("account_deletion_not_pending"),
 
       // Misc
       not_implemented: t("not_implemented"),

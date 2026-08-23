@@ -60,7 +60,11 @@ const AppleSignInButton: FC<AppleSignInButtonProps> = ({ redirectTo = "/account"
         return;
       }
 
-      // Hand the backend token to NextAuth so it can build a session.
+      // Hand the backend token to NextAuth. The Credentials provider
+      // exchanges it for a session by calling the pending-safe
+      // `/users/session-bootstrap` endpoint (see auth.ts) — no client-
+      // supplied user payload, so a browser can't forge a session
+      // shape by pairing arbitrary JSON with any string as auth_token.
       const result = await signIn("credentials", {
         auth_token: data.data.token,
         redirect: false,
