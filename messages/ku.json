@@ -1289,6 +1289,29 @@
             "enabled": "Piştrastkirina du-qonaxî hatî çalakkirin",
             "disabled": "Piştrastkirina du-qonaxî hatî neçalakkirin"
           }
+        },
+        "deleteAccount": {
+          "title": "Hesabê jê bibe",
+          "description": "Hesabê xwe yê e-syrians û hemû daneyên girêdayî bi domdarî jê bibe.",
+          "noPasswordTitle": "Berî her tiştî şîfreyekê saz bike",
+          "noPasswordDescription": "Hesabê te bi têketina civakî hate çêkirin û şîfreyek li ser tune ye.",
+          "noPasswordBody": "Berî ku tu bikaribî hesabê xwe jê bibî divê tu şîfreyekê saz bikî. Beşa \"Şîfre saz bike\" ya jorîn bikar bîne û paşê vegere vir.",
+          "body": "Piştî jêbirinê, hesabê te dê piştî dema derfetê ya 15 rojî bi domdarî bê rakirin. Di vê demê de tu tenê dikarî têkevî hesabê xwe da ku jêbirinê betal bikî.",
+          "cta": "Hesabê min jê bibe",
+          "confirmTitle": "Hesabê xwe jê bibî?",
+          "warningBody": "Ev dê profîla te, rapirsî, deng, reaksîyon, piştrastkirin, lîsteyên temaşevanan, agahdarî û wêneya profîlê jê bibe. Piştî dema 15 rojî, ev nayê vegerandin.",
+          "password": "Şîfreya xwe piştrast bike",
+          "acknowledgement": "Ez fêm dikim ku daneyên min dê piştî 15 rojên dema derfetê bi domdarî bên jêbirin.",
+          "confirmCta": "Jêbirinê plan bike",
+          "successToast": "Jêbirina hesabê hate plankirin",
+          "scheduledTitle": "Jêbirina hesabê hatî plankirin",
+          "scheduledDescription": "Hesabê te dê di {date} de bi domdarî bê jêbirin. Tu dikarî her demê beriya wê betal bikî.",
+          "cancelHint": "Şîfreya xwe binivîse da ku daxwaza jêbirinê betal bikî û hesabê xwe çalak bihêlî.",
+          "cancelTitle": "Jêbirina hesabê betal bikî?",
+          "cancelBody": "Şîfreya xwe binivîse da ku jêbirinê betal bikî. Hesabê te dê tavilê were vegerandin.",
+          "confirmCancelCta": "Jêbirinê betal bike",
+          "cancelSuccess": "Jêbirin hate betalkirin",
+          "close": "Bigire"
         }
       },
       "notifications": {
@@ -1618,6 +1641,10 @@
     "current_password_incorrect": "Şîfreya te çewt e",
     "failed_to_reset_password": "Veguhertina şîfreyê serneketî bû",
     "failed_to_send_password_reset_email": "Şîfreyê veguherandinê bi e-nameyê şandin serneketî bû",
+    "invalid_password": "Şîfreya te ne rast e",
+    "you_are_pending_deletion": "Hesabê te ji bo jêbirinê hatiye plankirin. Betal bike da ku tu berdewam bikî bi e-syrians re.",
+    "account_deletion_already_pending": "Hesabê te jixwe ji bo jêbirinê hatiye plankirin.",
+    "account_deletion_not_pending": "Ji bo hesabê te daxwazek jêbirinê ya çalak tune ye.",
     "invalid_verification_signature": "Nasnameya piştrastkirinê ne rast e",
     "verification_signature_expired": "Nasnameya piştrastkirinê qut bû",
     "invalid_verification_link": "Girêdana piştrastkirinê ne rast e",

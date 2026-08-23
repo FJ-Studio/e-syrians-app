@@ -1289,6 +1289,29 @@
             "enabled": "Two-factor authentication has been enabled",
             "disabled": "Two-factor authentication has been disabled"
           }
+        },
+        "deleteAccount": {
+          "title": "Delete account",
+          "description": "Permanently delete your e-syrians account and all associated data.",
+          "noPasswordTitle": "Set a password first",
+          "noPasswordDescription": "Your account was created through a social sign-in and has no password on file.",
+          "noPasswordBody": "You must set a password before you can delete your account. Use the \"Set password\" section above to add one, then return here.",
+          "body": "Once deleted, your account will be scheduled for permanent removal after a 15-day grace period. During that window you can log in only to cancel the deletion.",
+          "cta": "Delete my account",
+          "confirmTitle": "Delete your account?",
+          "warningBody": "This will delete your profile, polls, votes, reactions, verifications, saved audiences, notifications, and avatar. After the 15-day grace period this cannot be undone.",
+          "password": "Confirm your password",
+          "acknowledgement": "I understand my data will be deleted permanently after the 15-day grace period.",
+          "confirmCta": "Schedule deletion",
+          "successToast": "Account deletion scheduled",
+          "scheduledTitle": "Account deletion scheduled",
+          "scheduledDescription": "Your account will be permanently deleted on {date}. Cancel any time before then.",
+          "cancelHint": "Enter your password to cancel the pending deletion and keep your account active.",
+          "cancelTitle": "Cancel account deletion?",
+          "cancelBody": "Enter your password to cancel deletion. Your account will be restored immediately.",
+          "confirmCancelCta": "Cancel deletion",
+          "cancelSuccess": "Deletion cancelled",
+          "close": "Close"
         }
       },
       "notifications": {
@@ -1618,6 +1641,10 @@
     "current_password_incorrect": "Your entered password is not correct",
     "failed_to_reset_password": "Failed to reset password",
     "failed_to_send_password_reset_email": "Failed to send password reset link",
+    "invalid_password": "The password you entered is incorrect",
+    "you_are_pending_deletion": "Your account is scheduled for deletion. Cancel it to continue using e-syrians.",
+    "account_deletion_already_pending": "Your account is already scheduled for deletion.",
+    "account_deletion_not_pending": "You don't have a deletion request in progress.",
     "invalid_verification_signature": "Invalid signature, please try again later",
     "verification_signature_expired": "Expired link, please try again later",
     "invalid_verification_link": "Invalid verification link",
