@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/shared/container";
+import { Link } from "@/i18n/routing";
 import { Accordion, AccordionItem, Card, CardBody, CardHeader } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FC, PropsWithChildren } from "react";
@@ -146,12 +147,19 @@ const Faq: FC<{ home?: boolean }> = ({ home = false }) => {
             <CardBody>
               <Accordion variant="light">
                 <AccordionItem className="items-start text-start" title={t("donations.q1.title")}>
-                  {t("donations.q1.description")}
+                  {t.rich("donations.q1.description", {
+                    donate: (chunks) => (
+                      <Link href="/donate" className="text-primary underline underline-offset-2">
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
                 </AccordionItem>
                 <AccordionItem className="items-start text-start" title={t("donations.q2.title")}>
                   {t("donations.q2.description")}
                 </AccordionItem>
               </Accordion>
+              <p className="text-default-500 mt-4 text-sm">{t("donations.note")}</p>
             </CardBody>
           </Card>
         </div>

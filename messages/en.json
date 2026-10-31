@@ -2113,9 +2113,10 @@
     },
     "donations": {
       "title": "Donations & Support",
+      "note": "Donations help sustain and improve the platform but do not grant any influence over its policies or decisions.",
       "q1": {
         "title": "How can I donate to support the platform?",
-        "description": "You can donate via our Donate page, where we accept bitcoin transactions."
+        "description": "To support the platform, visit our <donate>donation page</donate>."
       },
       "q2": {
         "title": "Where does my donation go?",

@@ -2113,9 +2113,10 @@
     },
     "donations": {
       "title": "Daman û Piştgirî",
+      "note": "Bexş alîkariya domandin û pêşxistina platformê dikin, lê tu bandorê li ser siyaset an biryarên wê nadin.",
       "q1": {
         "title": "Ma ez çawa dikarim ji bo piştrastkirina platformê damanê bidim?",
-        "description": "Hûn dikarin li ser rûpela Damanê me damanê bidin, li wir em tranzaksiyonên bitcoinê qebûl dikin."
+        "description": "Ji bo piştgirîkirina platformê, serdana <donate>rûpela bexşan</donate> bikin."
       },
       "q2": {
         "title": "Damanê min di kîjan deran de digihîje?",
