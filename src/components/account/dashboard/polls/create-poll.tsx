@@ -1,4 +1,5 @@
 "use client";
+import AudienceForm from "@/components/account/dashboard/audiences/audience-form";
 import useCountries from "@/components/hooks/localization/country";
 import useEthnicity from "@/components/hooks/localization/ethnicity";
 import useGender from "@/components/hooks/localization/gender";
@@ -6,21 +7,31 @@ import usePollResultsReveal from "@/components/hooks/localization/poll-results-r
 import useProvinces from "@/components/hooks/localization/provinces";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useServerError from "@/components/hooks/localization/server-errors";
+import useMyAudiences from "@/components/hooks/use-my-audiences";
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { generateToken } from "@/lib/recaptcha";
-import { CreatePollFields } from "@/lib/types/polls";
+import { Audience } from "@/lib/types/audience";
+import { CreatePollFields, PollAudienceMode } from "@/lib/types/polls";
 import {
   Alert,
+  Autocomplete,
+  AutocompleteItem,
   Avatar,
   Button,
   DatePicker,
   Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
   NumberInput,
+  Radio,
+  RadioGroup,
   Select,
   SelectItem,
   Slider,
   SliderValue,
-  Textarea,
+  useDisclosure,
 } from "@heroui/react";
 import minusCircleIcon from "@iconify-icons/heroicons/minus-circle";
 import plusCircleIcon from "@iconify-icons/heroicons/plus-circle";
@@ -67,6 +78,8 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
   const router = useRouter();
   const t = useTranslations("account.dashboard.polls.create");
   const serverError = useServerError();
+  const initialAudienceMode = initialValues?.audience_mode ?? "demographics";
+  const initialWasSavedList = mode === "edit" && initialAudienceMode === "saved_list";
   const {
     handleSubmit,
     control,
@@ -90,8 +103,9 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
         hometown: initialValues?.audience?.hometown ?? [],
         religious_affiliation: initialValues?.audience?.religious_affiliation ?? [],
         province: initialValues?.audience?.province ?? [],
-        allowed_voters: initialValues?.audience?.allowed_voters ?? "",
       },
+      audience_mode: initialAudienceMode,
+      audience_uuid: initialValues?.audience_uuid ?? undefined,
       max_selections: initialValues?.max_selections ?? "1",
       audience_can_add_options: initialValues?.audience_can_add_options ?? "0",
       reveal_results: initialValues?.reveal_results ?? "before-voting",
@@ -100,10 +114,37 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
     },
   });
 
+  const myAudiences = useMyAudiences();
+
+  // "Create audience" modal opened from the saved-list picker.
+  // Rendering the audience-form inside a Modal keeps this whole
+  // poll-form mounted while the user creates a new list — the
+  // previous "Create new" Link navigated away to /account/audiences/new
+  // and threw away every in-progress field.
+  const {
+    isOpen: isAudienceModalOpen,
+    onOpen: openAudienceModal,
+    onOpenChange: onAudienceModalOpenChange,
+    onClose: closeAudienceModal,
+  } = useDisclosure();
+
+  const handleAudienceCreated = (created: Audience) => {
+    // Optimistic prepend so the Autocomplete has the new row on
+    // its next render; a background refetch reconciles with the
+    // server list. Auto-select the freshly-created audience so
+    // the user doesn't have to pick it manually after the modal
+    // closes.
+    myAudiences.pushAudience(created);
+    setValue("audience_uuid", created.uuid);
+    closeAudienceModal();
+    myAudiences.refetch();
+  };
+
   // Subscription-based watchers. Using `useWatch` instead of the form's
   // `watch()` keeps these values compatible with React Compiler memoization.
-  const allowedVotersValue = useWatch({ control, name: "audience.allowed_voters" });
   const countryValue = useWatch({ control, name: "audience.country" });
+  const audienceMode = useWatch({ control, name: "audience_mode" }) ?? "demographics";
+  const audienceUuidValue = useWatch({ control, name: "audience_uuid" });
 
   const removeOption = (index: number) => {
     setOptions((prev) => prev.filter((_, i) => i !== index));
@@ -140,17 +181,24 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
     options.forEach((option) => {
       formData.append("options[]", option);
     });
-    // If allowed_voters is specified, send that and skip criteria
-    const allowedVotersRaw = (data.audience.allowed_voters ?? "").trim();
-    if (allowedVotersRaw) {
-      const voters = allowedVotersRaw
-        .split("\n")
-        .map((v) => v.trim())
-        .filter((v) => v.length > 0);
-      voters.forEach((voter) => {
-        formData.append("allowed_voters[]", voter);
-      });
+    // Audience payload: the two modes are mutually exclusive at the
+    // backend layer, so we forward ONLY the fields the active mode
+    // needs. Mixing saved-list and demographic fields would trip
+    // StorePollRequest::withValidator.
+    const activeAudienceMode: PollAudienceMode = data.audience_mode ?? "demographics";
+    if (activeAudienceMode === "saved_list") {
+      if (!data.audience_uuid) {
+        toast.error(t("audience.saved_list.required"));
+        return;
+      }
+      formData.append("audience_uuid", data.audience_uuid);
     } else {
+      if (initialWasSavedList) {
+        // Empty string is converted to null by the edit proxy so the
+        // backend detaches an existing saved audience when the user
+        // switches back to demographics.
+        formData.append("audience_uuid", "");
+      }
       formData.append("min_age", String(data.audience.age_range?.min ?? MIN_AUDIENCE_AGE));
       formData.append("max_age", String(data.audience.age_range?.max ?? MAX_AUDIENCE_AGE));
       const arrayCriteria = [
@@ -456,18 +504,21 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
         </Button>
         <h3 className="text-default-700 text-lg font-semibold">{t("audience.title")}</h3>
         <Controller
-          name="audience.allowed_voters"
+          name="audience_mode"
           control={control}
           render={({ field }) => (
-            <Textarea
-              {...field}
-              label={t("allowed_voters.label")}
-              placeholder={t("allowed_voters.placeholder")}
-              description={t("allowed_voters.description")}
-              value={field.value ?? ""}
-              onValueChange={(value) => {
-                field.onChange(value);
-                if (value.trim().length > 0) {
+            <RadioGroup
+              orientation="horizontal"
+              value={field.value ?? "demographics"}
+              onValueChange={(next) => {
+                const nextMode = next as PollAudienceMode;
+                field.onChange(nextMode);
+                // Clear the other mode's state so the FormData
+                // builder only serialises the active mode's fields.
+                if (nextMode !== "saved_list") {
+                  setValue("audience_uuid", undefined);
+                }
+                if (nextMode !== "demographics") {
                   setValue("audience.gender", []);
                   setValue("audience.hometown", []);
                   setValue("audience.country", []);
@@ -478,11 +529,100 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
                   setValue("audience.age_range.max", MAX_AUDIENCE_AGE);
                 }
               }}
-            />
+            >
+              <Radio value="demographics">{t("audience.modes.demographics")}</Radio>
+              <Radio value="saved_list">{t("audience.modes.saved_list")}</Radio>
+            </RadioGroup>
           )}
         />
+        {audienceMode === "saved_list" ? (
+          <div className="space-y-2">
+            {myAudiences.error ? (
+              // Load failure — surface it here instead of letting
+              // the user hit Submit and see an opaque "choose a
+              // saved audience" validation error. The retry button
+              // calls the hook's refetch() so the network path is
+              // re-exercised without unmounting the form.
+              <Alert color="danger" className="mb-2">
+                <div className="flex flex-col items-start gap-2">
+                  <span>{t("audience.saved_list.loadError")}</span>
+                  <Button size="sm" variant="flat" color="danger" onPress={myAudiences.refetch}>
+                    {t("audience.saved_list.retry")}
+                  </Button>
+                </div>
+              </Alert>
+            ) : myAudiences.isEmpty ? (
+              <Alert color="warning" className="mb-2">
+                <div className="flex flex-col items-start gap-2">
+                  <span>{t("audience.saved_list.empty")}</span>
+                  <Button size="sm" variant="flat" color="primary" onPress={openAudienceModal}>
+                    {t("audience.saved_list.createLink")}
+                  </Button>
+                </div>
+              </Alert>
+            ) : (
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
+                {/*
+                  Autocomplete gets `flex-1` — NOT `w-full` — so it
+                  grows to fill the row without pushing the "Create
+                  new" button outside the container's right edge on
+                  desktop. `min-w-0` lets it shrink below its
+                  content's intrinsic width inside a flex row.
+                */}
+                <Controller
+                  name="audience_uuid"
+                  control={control}
+                  render={({ field }) => (
+                    <Autocomplete
+                      className="min-w-0 flex-1"
+                      label={t("audience.saved_list.label")}
+                      description={t("audience.saved_list.description")}
+                      isLoading={myAudiences.loading}
+                      selectedKey={field.value ?? null}
+                      defaultItems={myAudiences.audiences}
+                      onSelectionChange={(key) => field.onChange(key ? String(key) : undefined)}
+                    >
+                      {(audience) => (
+                        <AutocompleteItem
+                          key={audience.uuid}
+                          textValue={audience.name}
+                          description={t("audience.saved_list.counts", {
+                            resolved: audience.entries_resolved_count,
+                            total: audience.entries_total_count,
+                          })}
+                        >
+                          {audience.name}
+                        </AutocompleteItem>
+                      )}
+                    </Autocomplete>
+                  )}
+                />
+                {/*
+                  Iconify's <Icon> doesn't reliably inherit Tailwind
+                  `size-*` on the wrapping <svg>; setting `width` /
+                  `height` explicitly guarantees the glyph renders
+                  at 20px. `flex-shrink-0` keeps the whole button
+                  from being squeezed on narrow rows.
+                */}
+                <Button
+                  type="button"
+                  onPress={openAudienceModal}
+                  variant="flat"
+                  color="primary"
+                  className="shrink-0"
+                  startContent={<Icon icon={plusCircleIcon} width={20} height={20} />}
+                >
+                  {t("audience.saved_list.createLink")}
+                </Button>
+              </div>
+            )}
+            {audienceUuidValue ? (
+              <p className="text-default-500 text-xs">{t("audience.saved_list.selectedHint")}</p>
+            ) : null}
+          </div>
+        ) : null}
         <div
-          className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${(allowedVotersValue ?? "").trim().length > 0 ? "pointer-events-none opacity-50" : ""}`}
+          className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${audienceMode !== "demographics" ? "hidden" : ""}`}
         >
           <Controller
             name="audience.gender"
@@ -663,6 +803,28 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
           {isEdit ? t("editSubmit", { defaultValue: "Save changes" }) : t("submit")}
         </Button>
       </form>
+
+      {/*
+        Inline "Create audience" modal. Rendered here (not inside
+        the form) because forms can't legally contain other forms —
+        Modal portals its content out of the DOM tree at render
+        time so it doesn't submit the outer form when the user
+        presses Enter in the inner form. `AudienceForm` receives
+        `onCreated` + `onCancel` so it doesn't router.push() away
+        and destroy the poll draft.
+      */}
+      <Modal isOpen={isAudienceModalOpen} onOpenChange={onAudienceModalOpenChange} size="2xl" scrollBehavior="inside">
+        <ModalContent>
+          {(close) => (
+            <>
+              <ModalHeader>{t("audience.saved_list.createModalTitle")}</ModalHeader>
+              <ModalBody className="pb-6">
+                <AudienceForm mode="create" onCreated={handleAudienceCreated} onCancel={close} />
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

@@ -26,17 +26,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         is_recovery_code: { label: "Is Recovery Code", type: "text" },
         // auth_token: bootstrapping path used after popup-based social
         // sign-ins (e.g. Apple). The browser already exchanged the social
-        // identity token with our backend and got a Sanctum token; this path
-        // turns that into a NextAuth session by fetching /users/me.
+        // identity token with our backend and got a Sanctum token; this
+        // path turns that into a NextAuth session by calling the
+        // pending-safe `/users/session-bootstrap` endpoint. Deliberately
+        // NOT a client-supplied user payload — the browser is untrusted,
+        // and letting it forge session shape by pairing any string as
+        // `auth_token` with arbitrary JSON would fool the middleware
+        // gate + UI even though the API bearer eventually 401s.
         auth_token: { label: "Auth Token", type: "text" },
       },
       authorize: async (credentials): Promise<ESUser | null> => {
         // Bootstrap a session from a backend-issued token. Used by the Apple
         // popup flow after /api/auth/social-login returns { token, user }.
         if (credentials?.auth_token && typeof credentials.auth_token === "string") {
+          // `/users/session-bootstrap` is the pending-safe UserResource
+          // variant — same shape as /users/me but exempt from the
+          // `EnsureAccountNotPendingDeletion` middleware. Reaching this
+          // endpoint validates the Sanctum token AND returns the user
+          // record in one round-trip, so a pending-deletion account can
+          // still build a NextAuth session and land on the reactivate
+          // screen.
           let req: Response;
           try {
-            req = await fetch(`${process.env.API_URL}/users/me`, {
+            req = await fetch(`${process.env.API_URL}/users/session-bootstrap`, {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",

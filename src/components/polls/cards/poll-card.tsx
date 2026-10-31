@@ -10,6 +10,7 @@ import useServerError from "@/components/hooks/localization/server-errors";
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { ibm } from "@/lib/fonts/fonts";
 import { generateToken } from "@/lib/recaptcha";
+import { isMissingAudience, PollAudienceSavedListSummary } from "@/lib/types/audience";
 import { AudienceFailure, Poll, PollAudience } from "@/lib/types/polls";
 import {
   Avatar,
@@ -101,7 +102,15 @@ const PollFullCard: FC<Props> = ({ poll }) => {
     return `${process.env.NEXT_PUBLIC_DOMAIN_URL}/polls/${poll.id}`;
   }, [poll]);
 
-  const [audience, setAudience] = useState<PollAudience | null>(null);
+  // Either shape may come back from `/api/polls/audience` depending on
+  // how the poll is gated: legacy / demographic polls return the
+  // `PollAudience` block, saved-list polls return
+  // `PollAudienceSavedListSummary` (`{ audience: { uuid, name, … } }`
+  // OR `{ audience: { status: "missing" } }` when the referenced
+  // audience has since been soft-deleted). Rendering must branch on
+  // the presence of the nested `audience` key before reading
+  // demographic fields — otherwise `audience.age_range.min` throws.
+  const [audience, setAudience] = useState<PollAudience | PollAudienceSavedListSummary | null>(null);
   const [audienceLoading, setAudienceLoading] = useState(false);
   const [audienceError, setAudienceError] = useState<string | null>(null);
 
@@ -454,79 +463,87 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                     </div>
                   ) : audienceError ? (
                     <p className="text-danger-500 py-2 text-center text-sm">{t("audienceLoadFailed")}</p>
-                  ) : audience ? (
+                  ) : audience && "audience" in audience ? (
+                    // Saved-list poll: `/polls/audience` returned the
+                    // summary shape. Render name + entry counts (or a
+                    // "list was removed" note if the audience has been
+                    // soft-deleted since). Demographic fields are not
+                    // present on this shape, so DON'T fall through to
+                    // the age/gender/country block below.
                     <div className="space-y-2">
-                      {/* `allowed_voters` is an optional array on PollAudience —
-                          presence alone isn't a reliable discriminator (it can
-                          be present and empty). Treat the audience as
-                          invite-only only when there are actually entries. */}
-                      {(audience.allowed_voters?.length ?? 0) > 0 ? (
-                        <p>
-                          <span className="font-medium">{t("allowedVoters")}</span>:{" "}
-                          {t("allowedVotersDescription", {
-                            count: audience.allowed_voters!.length,
-                          })}
-                        </p>
+                      {isMissingAudience(audience.audience) ? (
+                        <p className="text-default-500 text-sm">{t("audienceMissing")}</p>
                       ) : (
                         <>
                           <p>
-                            <span className="font-medium">{t("ageRange")}</span>:{" "}
-                            {audience.age_range.min === MIN_AUDIENCE_AGE && audience.age_range.max === MAX_AUDIENCE_AGE
-                              ? t("noLimit")
-                              : t("ageRangeBetween", {
-                                  min: audience.age_range.min,
-                                  max: audience.age_range.max,
-                                })}
+                            <span className="font-medium">{t("audienceSavedListName")}</span>: {audience.audience.name}
                           </p>
-                          <p>
-                            <span className="font-medium">{t("gender")}</span>:{" "}
-                            {audience.gender.length === 0
-                              ? t("noLimit")
-                              : audience.gender
-                                  .map((g) => genderLabels[g as keyof typeof genderLabels] ?? g)
-                                  .join(", ")}
-                          </p>
-                          <p>
-                            <span className="font-medium">{t("country")}</span>:{" "}
-                            {audience.country.length === 0
-                              ? t("noLimit")
-                              : audience.country
-                                  .map((c) => countryLabels[c as keyof typeof countryLabels] ?? c)
-                                  .join(", ")}
-                          </p>
-                          <p>
-                            <span className="font-medium">{t("province")}</span>:{" "}
-                            {audience.province.length === 0
-                              ? t("noLimit")
-                              : audience.province
-                                  .map((p) => provinceLabels[p as keyof typeof provinceLabels] ?? p)
-                                  .join(", ")}
-                          </p>
-                          <p>
-                            <span className="font-medium">{t("hometown")}</span>:{" "}
-                            {audience.hometown.length === 0 ? t("noLimit") : audience.hometown.join(", ")}
-                          </p>
-                          <p>
-                            <span className="font-medium">{t("ethnicity")}</span>:{" "}
-                            {audience.ethnicity.length === 0
-                              ? t("noLimit")
-                              : audience.ethnicity
-                                  .map((e) => ethnicityLabels[e as keyof typeof ethnicityLabels] ?? e)
-                                  .join(", ")}
-                          </p>
-                          <p>
-                            <span className="font-medium">{t("religiousAffiliation")}</span>:{" "}
-                            {audience.religious_affiliation.length === 0
-                              ? t("noLimit")
-                              : audience.religious_affiliation
-                                  .map(
-                                    (r) =>
-                                      religiousAffiliationLabels[r as keyof typeof religiousAffiliationLabels] ?? r,
-                                  )
-                                  .join(", ")}
+                          <p className="text-default-500 text-sm">
+                            {t("audienceSavedListCounts", {
+                              resolved: audience.audience.entries_resolved_count,
+                              total: audience.audience.entries_total_count,
+                            })}
                           </p>
                         </>
                       )}
+                    </div>
+                  ) : audience ? (
+                    <div className="space-y-2">
+                      <>
+                        <p>
+                          <span className="font-medium">{t("ageRange")}</span>:{" "}
+                          {audience.age_range.min === MIN_AUDIENCE_AGE && audience.age_range.max === MAX_AUDIENCE_AGE
+                            ? t("noLimit")
+                            : t("ageRangeBetween", {
+                                min: audience.age_range.min,
+                                max: audience.age_range.max,
+                              })}
+                        </p>
+                        <p>
+                          <span className="font-medium">{t("gender")}</span>:{" "}
+                          {audience.gender.length === 0
+                            ? t("noLimit")
+                            : audience.gender.map((g) => genderLabels[g as keyof typeof genderLabels] ?? g).join(", ")}
+                        </p>
+                        <p>
+                          <span className="font-medium">{t("country")}</span>:{" "}
+                          {audience.country.length === 0
+                            ? t("noLimit")
+                            : audience.country
+                                .map((c) => countryLabels[c as keyof typeof countryLabels] ?? c)
+                                .join(", ")}
+                        </p>
+                        <p>
+                          <span className="font-medium">{t("province")}</span>:{" "}
+                          {audience.province.length === 0
+                            ? t("noLimit")
+                            : audience.province
+                                .map((p) => provinceLabels[p as keyof typeof provinceLabels] ?? p)
+                                .join(", ")}
+                        </p>
+                        <p>
+                          <span className="font-medium">{t("hometown")}</span>:{" "}
+                          {audience.hometown.length === 0 ? t("noLimit") : audience.hometown.join(", ")}
+                        </p>
+                        <p>
+                          <span className="font-medium">{t("ethnicity")}</span>:{" "}
+                          {audience.ethnicity.length === 0
+                            ? t("noLimit")
+                            : audience.ethnicity
+                                .map((e) => ethnicityLabels[e as keyof typeof ethnicityLabels] ?? e)
+                                .join(", ")}
+                        </p>
+                        <p>
+                          <span className="font-medium">{t("religiousAffiliation")}</span>:{" "}
+                          {audience.religious_affiliation.length === 0
+                            ? t("noLimit")
+                            : audience.religious_affiliation
+                                .map(
+                                  (r) => religiousAffiliationLabels[r as keyof typeof religiousAffiliationLabels] ?? r,
+                                )
+                                .join(", ")}
+                        </p>
+                      </>
                     </div>
                   ) : null)}
                 {modalSection === "share" && (

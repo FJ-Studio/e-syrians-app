@@ -47,6 +47,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         } else {
           payload[key] = [value];
         }
+      } else if (key === "audience_uuid" && value === "") {
+        payload[key] = null;
       } else {
         payload[key] = value;
       }

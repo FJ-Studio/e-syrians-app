@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["TZ6FAZ655Y.com.esyrians.app"],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Any path on e-syrians.com opens directly in the app when installed."
+          }
+        ]
+      }
+    ]
+  }
+}

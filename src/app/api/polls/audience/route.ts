@@ -4,11 +4,9 @@ import { auth } from "../../../../../auth";
 /**
  * GET /api/polls/audience?poll_id=...
  *
- * Returns the audience criteria for a given poll. The upstream
- * endpoint never surfaces the `allowed_voters` list — not even to
- * the creator — so we don't need to do anything special with auth
- * here; we still forward the bearer token when available in case the
- * backend uses it for rate-limiting or auditing.
+ * Returns the audience criteria for a given poll. We forward the
+ * bearer token when available in case the backend uses it for
+ * rate-limiting, auditing, or creator-specific visibility.
  */
 export async function GET(req: NextRequest) {
   const pollId = req.nextUrl.searchParams.get("poll_id");

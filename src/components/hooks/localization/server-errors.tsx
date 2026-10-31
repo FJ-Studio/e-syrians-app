@@ -14,6 +14,7 @@ const useServerError = (): ((errorCode: string) => string) => {
 
       // Password
       current_password_incorrect: t("current_password_incorrect"),
+      invalid_password: t("invalid_password"),
       password_updated: t("password_updated"),
       reset_link_sent: t("reset_link_sent"),
       failed_to_send_password_reset_email: t("failed_to_send_password_reset_email"),
@@ -81,6 +82,25 @@ const useServerError = (): ((errorCode: string) => string) => {
       gender: t("audience_gender"),
       ethnicity_missing: t("audience_ethnicity_missing"),
       ethnicity: t("audience_ethnicity"),
+
+      // Audiences (reusable lists)
+      audience_not_found: t("audience_not_found"),
+      audience_not_found_or_not_owned: t("audience_not_found_or_not_owned"),
+      audience_entry_invalid_format: t("audience_entry_invalid_format"),
+      audience_entry_not_found: t("audience_entry_not_found"),
+      audience_referenced_by_active_poll: t("audience_referenced_by_active_poll"),
+      audience_too_many_entries_in_one_call: t("audience_too_many_entries_in_one_call"),
+      audience_and_demographic_criteria_are_mutually_exclusive: t(
+        "audience_and_demographic_criteria_are_mutually_exclusive",
+      ),
+      poll_uses_saved_audience_detach_before_setting_inline_criteria: t(
+        "poll_uses_saved_audience_detach_before_setting_inline_criteria",
+      ),
+
+      // Account deletion
+      you_are_pending_deletion: t("you_are_pending_deletion"),
+      account_deletion_already_pending: t("account_deletion_already_pending"),
+      account_deletion_not_pending: t("account_deletion_not_pending"),
 
       // Misc
       not_implemented: t("not_implemented"),

@@ -1,4 +1,5 @@
 import { ESUser } from "./account";
+import { PollAudienceSavedListSummary } from "./audience";
 
 /**
  * Full audience details. Only returned by the API to the poll's creator
@@ -16,13 +17,12 @@ export type PollAudience = {
   hometown: string[];
   ethnicity: string[];
   province: string[];
-  allowed_voters?: string[];
 };
 
 /**
  * Per-criterion failure keys returned by the backend when the current user
  * is not in the audience. Matches `User::isInAudience` failure keys plus
- * `unauthenticated` for guests and `not_in_allowed_voters` for allowlist misses.
+ * `unauthenticated` for guests and `not_in_allowed_voters` for list misses.
  */
 export type AudienceFailure =
   | "unauthenticated"
@@ -59,8 +59,18 @@ export type Poll = {
   end_date: string;
   question: string;
   options: Array<PollOption>;
-  /** Only present when the authenticated user is the poll's creator. */
-  audience?: PollAudience;
+  /**
+   * Demographic audience block. When the poll is gated by a reusable
+   * saved audience the shape is `PollAudienceSavedListSummary` and
+   * `audience_is_saved_list` is true — the client should branch on that
+   * flag before reading the criteria keys.
+   */
+  audience?: PollAudience | PollAudienceSavedListSummary;
+  /**
+   * True iff the poll is gated by a reusable saved audience (backend
+   * flag). The `audience` field will then match `PollAudienceSavedListSummary`.
+   */
+  audience_is_saved_list?: boolean;
   audience_only: boolean;
   /** Whether the current viewer is eligible to vote on this poll. */
   is_in_audience: boolean;
@@ -92,10 +102,9 @@ export type Poll = {
 };
 
 /**
- * Form-shaped audience used by the create/edit poll form. Arrays for
- * multi-selects; `allowed_voters` stays as raw textarea text and gets
- * parsed into a list at submit time. Age range uses numbers for the
- * slider component.
+ * Form-shaped demographic audience used by the create/edit poll form.
+ * Arrays for multi-selects; age range uses numbers for the slider
+ * component.
  */
 export type CreatePollAudienceFields = {
   gender: string[];
@@ -105,8 +114,14 @@ export type CreatePollAudienceFields = {
   hometown: string[];
   ethnicity: string[];
   province: string[];
-  allowed_voters: string;
 };
+
+/**
+ * Which audience-selection UI the form is currently on. The two modes
+ * are mutually exclusive — the client sends ONLY the fields for the
+ * active mode, matching the backend's `StorePollRequest` gate.
+ */
+export type PollAudienceMode = "demographics" | "saved_list";
 
 export interface CreatePollFields {
   question: string;
@@ -114,6 +129,10 @@ export interface CreatePollFields {
   duration: string;
   options: string[];
   audience: CreatePollAudienceFields;
+  /** Active audience mode in the form. Defaults to `demographics`. */
+  audience_mode: PollAudienceMode;
+  /** UUID of the saved audience to attach — only meaningful when `audience_mode === "saved_list"`. */
+  audience_uuid?: string;
   max_selections: string;
   audience_can_add_options: "0" | "1";
   reveal_results: PollReveal;
