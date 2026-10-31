@@ -41,6 +41,7 @@ type AppleSignInOptions = {
 
 type AppleSignInResult = {
   identityToken: string;
+  authorizationCode: string;
   /**
    * Apple only returns the user's name on the very first sign-in (and only
    * if the popup is invoked with name in scope). On every subsequent sign-in
@@ -78,6 +79,10 @@ export function useAppleSignIn() {
       if (!idToken) {
         throw new Error("Apple Sign-In succeeded but no identity token was returned");
       }
+      const authorizationCode = response.authorization?.code;
+      if (!authorizationCode) {
+        throw new Error("Apple Sign-In succeeded but no authorization code was returned");
+      }
 
       const firstName = response.user?.name?.firstName?.trim() ?? "";
       const lastName = response.user?.name?.lastName?.trim() ?? "";
@@ -85,6 +90,7 @@ export function useAppleSignIn() {
 
       return {
         identityToken: idToken,
+        authorizationCode,
         name: fullName || undefined,
       };
     } finally {

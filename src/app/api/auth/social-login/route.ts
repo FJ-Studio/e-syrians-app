@@ -8,11 +8,11 @@ import { NextRequest, NextResponse } from "next/server";
  * The browser never talks to the API directly because we want to keep the
  * API URL out of client bundles and let the API see this server's IP/UA.
  *
- * Request body shape: { provider: "apple", token: <identity_token> }
+ * Request body shape: { provider: "apple", token, authorization_code, name? }
  * Response shape: the API's standard { success, data, message } envelope.
  */
 export async function POST(request: NextRequest) {
-  let body: { provider?: string; token?: string; name?: string };
+  let body: { provider?: string; token?: string; name?: string; authorization_code?: string };
   try {
     body = await request.json();
   } catch {
@@ -21,6 +21,9 @@ export async function POST(request: NextRequest) {
 
   if (!body?.provider || !body?.token) {
     return NextResponse.json({ success: false, message: "MISSING_PROVIDER_OR_TOKEN" }, { status: 400 });
+  }
+  if (body.provider === "apple" && (typeof body.authorization_code !== "string" || !body.authorization_code.trim())) {
+    return NextResponse.json({ success: false, message: "MISSING_AUTHORIZATION_CODE" }, { status: 400 });
   }
 
   // Apple sends the user's name only on the very first sign-in. When present,
@@ -43,6 +46,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         provider: body.provider,
         token: body.token,
+        ...(body.provider === "apple" ? { authorization_code: body.authorization_code } : {}),
         ...(name ? { name } : {}),
       }),
     });

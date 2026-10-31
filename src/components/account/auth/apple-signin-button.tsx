@@ -36,7 +36,7 @@ const AppleSignInButton: FC<AppleSignInButtonProps> = ({ redirectTo = "/account"
     setLoading(true);
 
     try {
-      const { identityToken, name } = await signInWithApple({
+      const { identityToken, name, authorizationCode } = await signInWithApple({
         clientId: APPLE_CLIENT_ID,
         redirectURI: window.location.origin,
       });
@@ -50,6 +50,7 @@ const AppleSignInButton: FC<AppleSignInButtonProps> = ({ redirectTo = "/account"
         body: JSON.stringify({
           provider: "apple",
           token: identityToken,
+          authorization_code: authorizationCode,
           ...(name ? { name } : {}),
         }),
       });

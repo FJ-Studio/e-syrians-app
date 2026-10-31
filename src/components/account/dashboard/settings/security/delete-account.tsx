@@ -152,6 +152,7 @@ const DeleteAccount: FC = () => {
           </ModalHeader>
           <ModalBody className="space-y-3">
             <p className="text-default-600 text-sm">{t("warningBody")}</p>
+            <p className="text-default-600 text-sm">{t("appleRevocationNote")}</p>
             <Input
               type="password"
               label={t("password")}

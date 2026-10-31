@@ -1315,6 +1315,7 @@
           "cta": "Delete my account",
           "confirmTitle": "Delete your account?",
           "warningBody": "This will delete your profile, polls, votes, reactions, verifications, saved audiences, notifications, and avatar. After the 15-day grace period this cannot be undone.",
+          "appleRevocationNote": "If you used Sign in with Apple, you may also need to remove E-Syrians under Sign in with Apple in your Apple Account settings after permanent deletion.",
           "password": "Confirm your password",
           "acknowledgement": "I understand my data will be deleted permanently after the 15-day grace period.",
           "confirmCta": "Schedule deletion",
