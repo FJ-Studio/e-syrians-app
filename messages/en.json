@@ -1,4 +1,46 @@
 {
+  "notificationPreferences": {
+    "emailNote": "Optional emails are available for a verification received and when your account becomes verified. Email is separate from in-app and push delivery.",
+    "title": "Notification preferences",
+    "description": "Choose in-app and push notifications separately for each category. These choices apply to your account on every device and save automatically.",
+    "pushNote": "Push preferences apply to your mobile devices. Enable notifications on each device in the mobile app. Browser push is not available.",
+    "platformNote": "Delivery also depends on which notifications and channels are available on the platform. These choices do not change sign-in codes or password-recovery emails.",
+    "explanation": "Changes affect new notifications. Existing inbox entries and Security Activity stay available. Muted notifications are not replayed when re-enabled.",
+    "loading": "Loading your preferences…",
+    "saving": "Saving…",
+    "saved": "Preference saved",
+    "loadError": "We couldn’t load your preferences. Try again before making changes.",
+    "saveError": "We couldn’t confirm your change was saved. Check your connection and reload your preferences.",
+    "retry": "Reload preferences",
+    "channels": { "in_app": "In app", "push": "Push alerts", "email": "Email" },
+    "categories": {
+      "verifications": {
+        "title": "Verifications",
+        "body": "When someone verifies your details or revokes a verification."
+      },
+      "account_status": {
+        "title": "Account verification status",
+        "body": "When your account gains or loses verified status."
+      },
+      "poll_invitations": { "title": "Poll invitations", "body": "When a poll you’re eligible to join opens." },
+      "poll_results": {
+        "title": "Poll closing and results",
+        "body": "When a poll you created or voted on closes. Result visibility rules still apply."
+      },
+      "feature_requests": {
+        "title": "Feature-request updates",
+        "body": "Stage changes on requests you created or voted on."
+      },
+      "announcements": {
+        "title": "Platform announcements",
+        "body": "Optional product news and platform updates. Each channel is off until you choose it."
+      },
+      "security": {
+        "title": "Security alerts",
+        "body": "New-device sign-ins, password changes and two-factor changes. Muting these does not remove your Security Activity history."
+      }
+    }
+  },
   "common": {
     "search": "Search",
     "login": "Login",
