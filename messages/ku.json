@@ -1,4 +1,52 @@
 {
+  "notificationPreferences": {
+    "emailNote": "E-nameyên bijartî ji bo piştrastkirineke nû û dema hesabê te piştrast dibe hene. E-name ji agahdariyên di sepanê de û push cuda ye.",
+    "title": "Bijareyên agahdariyê",
+    "description": "Hilbijêre kîjan agahdarî û bi kîjan kanalê bigihîjin te. Bijareyên te li ser hemû amûrên te bi xweber tên tomarkirin.",
+    "categoryColumn": "Cureyê agahdariyê",
+    "notAvailable": "Ji bo vê cureyê agahdariyê ne berdest e",
+    "deliveryDetails": "Derbarê şandina agahdariyan de",
+    "pushNote": "Bijareyên push ji bo amûrên te yên mobîl in. Li ser her amûrê di sepana mobîl de agahdariyan çalak bike. Push di gerokê de niha ne berdest e.",
+    "platformNote": "Şandin bi cure û kanalên ku platform peyda dike jî ve girêdayî ye. Ev bijare kodên têketinê an e-nameyên vegerandina şîfreyê naguherînin.",
+    "explanation": "Guhertin tenê ji bo agahdariyên nû ne. Peyamên berê û dîroka çalakiyên ewlehiyê dimînin. Agahdariyên hatine bêdengkirin piştî çalakkirina dîsa nayên şandin.",
+    "loading": "Bijareyên te tên barkirin…",
+    "saving": "Tê tomarkirin…",
+    "saved": "Bijare hate tomarkirin",
+    "loadError": "Bijareyên te nehatin barkirin. Berî guhertinê dîsa biceribîne.",
+    "saveError": "Me nekarî piştrast bike ku guhertin hate tomarkirin. Girêdana xwe kontrol bike û bijareyan dîsa bar bike.",
+    "retry": "Bijareyan dîsa bar bike",
+    "channels": { "in_app": "Di sepanê de", "push": "Hişyariyên push", "email": "E-name" },
+    "categories": {
+      "verifications": {
+        "title": "Piştrastkirin",
+        "body": "Dema kesek daneyên te piştrast dike an piştrastkirina xwe vedikişîne."
+      },
+      "account_status": {
+        "title": "Rewşa piştrastkirina hesabê",
+        "body": "Dema hesabê te piştrast dibe an vê rewşê winda dike."
+      },
+      "poll_invitations": {
+        "title": "Vexwendinên anketan",
+        "body": "Dema anketeke ku tu dikarî beşdar bibî dest pê dike."
+      },
+      "poll_results": {
+        "title": "Dawî û encamên anketan",
+        "body": "Dema anketeke te çêkirî an te deng dayê bi dawî dibe. Rêzikên dîtina encaman hîn derbasdar in."
+      },
+      "feature_requests": {
+        "title": "Nûvekirinên pêşniyaran",
+        "body": "Guhertinên qonaxê yên pêşniyarên te çêkirî an te deng dayê."
+      },
+      "announcements": {
+        "title": "Daxuyaniyên platformê",
+        "body": "Nûçe û nûvekirinên bijartî. Her kanal heta tu wê hilbijêrî girtî ye."
+      },
+      "security": {
+        "title": "Hişyariyên ewlehiyê",
+        "body": "Têketin ji amûrên nû, guhertinên şîfreyê û piştrastkirina du-gavî. Bêdengkirin dîroka çalakiyên ewlehiyê jê nabe."
+      }
+    }
+  },
   "common": {
     "search": "Lêgerîn",
     "login": "Têkeve",
@@ -2113,9 +2161,10 @@
     },
     "donations": {
       "title": "Daman û Piştgirî",
+      "note": "Bexş alîkariya domandin û pêşxistina platformê dikin, lê tu bandorê li ser siyaset an biryarên wê nadin.",
       "q1": {
         "title": "Ma ez çawa dikarim ji bo piştrastkirina platformê damanê bidim?",
-        "description": "Hûn dikarin li ser rûpela Damanê me damanê bidin, li wir em tranzaksiyonên bitcoinê qebûl dikin."
+        "description": "Ji bo piştgirîkirina platformê, serdana <donate>rûpela bexşan</donate> bikin."
       },
       "q2": {
         "title": "Damanê min di kîjan deran de digihîje?",

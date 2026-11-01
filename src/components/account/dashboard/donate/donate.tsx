@@ -1,53 +1,18 @@
 "use client";
 
 import { NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY } from "@/lib/env";
-import { ibm } from "@/lib/fonts/fonts";
-import { Button, Card, CardBody, CardHeader, Chip, Divider, Snippet } from "@heroui/react";
+import { CryptoDonationWallet } from "@/lib/types/donations";
+import { Button, Card, CardBody, CardHeader, Divider } from "@heroui/react";
 import checkCircleIcon from "@iconify-icons/heroicons/check-circle";
 import creditCardIcon from "@iconify-icons/heroicons/credit-card";
 import heartIcon from "@iconify-icons/heroicons/heart";
 import xCircleIcon from "@iconify-icons/heroicons/x-circle";
-import bitcoinIcon from "@iconify-icons/simple-icons/bitcoin";
-import ethereumIcon from "@iconify-icons/simple-icons/ethereum";
-import tetherIcon from "@iconify-icons/simple-icons/tether";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
-
-// ---------------------------------------------------------------------------
-// Crypto addresses
-// ---------------------------------------------------------------------------
-
-const CRYPTO_WALLETS = [
-  {
-    key: "btc",
-    icon: bitcoinIcon,
-    color: "warning" as const,
-    address: "1MA6NKkSCKAocZR8ZeETD5ewf48heC83pq",
-  },
-  {
-    key: "eth",
-    icon: ethereumIcon,
-    color: "secondary" as const,
-    address: "0x415f091bda8ba41cdf21532992198901dcf907ea",
-    network: "ERC-20",
-  },
-  {
-    key: "usdt",
-    icon: tetherIcon,
-    color: "success" as const,
-    address: "TB3yYopG4XqpviN1GKFVpBFYKuHTst2erY",
-    network: "TRC-20",
-  },
-] as const;
-
-const ICON_COLOR_MAP: Record<string, string> = {
-  warning: "text-warning",
-  secondary: "text-secondary",
-  success: "text-success",
-};
+import CryptoDonations from "./crypto-donations";
 
 // ---------------------------------------------------------------------------
 // Preset amounts (in USD)
@@ -59,7 +24,7 @@ const PRESET_AMOUNTS = [5, 10, 25, 50, 100];
 // Component
 // ---------------------------------------------------------------------------
 
-const Donate: FC = () => {
+const Donate: FC<{ cryptoWallets: CryptoDonationWallet[] }> = ({ cryptoWallets }) => {
   const t = useTranslations("donate");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -208,43 +173,7 @@ const Donate: FC = () => {
         </Card>
       )}
 
-      {/* Crypto wallets */}
-      <Card>
-        <CardHeader className="flex items-center gap-2">
-          <Icon icon={bitcoinIcon} className="text-warning size-5" />
-          <h2 className="text-lg font-semibold">{t("crypto.title")}</h2>
-        </CardHeader>
-        <Divider />
-        <CardBody className="flex flex-col items-start space-y-4">
-          <p className="text-default-500 text-sm">{t("crypto.description")}</p>
-
-          {CRYPTO_WALLETS.map((wallet) => (
-            <div key={wallet.key} className="w-full space-y-2">
-              <div className="flex items-center gap-2">
-                <Icon icon={wallet.icon} className={`${ICON_COLOR_MAP[wallet.color]} size-4`} />
-                <span className="text-sm font-semibold">{t(`crypto.${wallet.key}.label`)}</span>
-                {"network" in wallet && (
-                  <Chip size="sm" variant="flat" color={wallet.color}>
-                    {wallet.network}
-                  </Chip>
-                )}
-              </div>
-              <Snippet
-                hideSymbol
-                variant="bordered"
-                classNames={{
-                  base: "w-full",
-                  pre: `${ibm.className} text-xs`,
-                }}
-                codeString={wallet.address}
-              >
-                {/* {t(`crypto.${wallet.key}.copy`)} */}
-                {wallet.address}
-              </Snippet>
-            </div>
-          ))}
-        </CardBody>
-      </Card>
+      <CryptoDonations wallets={cryptoWallets} />
     </div>
   );
 };
