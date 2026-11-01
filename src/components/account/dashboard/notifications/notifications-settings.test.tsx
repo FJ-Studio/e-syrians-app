@@ -134,6 +134,44 @@ describe("notification settings", () => {
     expect(find(render(), "verifications", "email").props.isSelected).toBe(false);
     expect(find(render(), "verifications", "push").props.isSelected).toBe(true);
   });
+  it("keeps all channels in one aligned group without duplicating responsive switches", () => {
+    h.data = {
+      ...defaults(),
+      verifications: { in_app: true, push: true, email: false },
+      account_status: { in_app: true, push: true, email: true },
+    };
+    const tree = render();
+    const rows = all(tree, "section");
+    expect(rows).toHaveLength(NOTIFICATION_CATEGORIES.length);
+    expect(all(tree, "Switch")).toHaveLength(16);
+    for (const [index, row] of rows.entries()) {
+      const category = NOTIFICATION_CATEGORIES[index];
+      const controls = (row.props.children as Tree[])[1];
+      const cells = controls.props.children as Tree[];
+      expect(controls.props.className).toContain("grid-cols-3");
+      expect(cells).toHaveLength(3);
+      expect(all(cells[0], "Switch")[0]).toBe(find(row, category, "in_app"));
+      expect(all(cells[1], "Switch")[0]).toBe(find(row, category, "push"));
+      if (["verifications", "account_status"].includes(category)) {
+        expect(all(cells[2], "Switch")).toHaveLength(1);
+      } else {
+        expect(all(cells[2], "Switch")).toHaveLength(0);
+        expect(all(cells[2], "span").some((node) => node.props.role === "note")).toBe(true);
+      }
+    }
+  });
+  it("uses two columns and omits email guidance when the API does not support email preferences", () => {
+    const tree = render();
+    for (const row of all(tree, "section")) {
+      const controls = (row.props.children as Tree[])[1];
+      expect(controls.props.className).toContain("grid-cols-2");
+      expect(controls.props.children).toHaveLength(2);
+    }
+    const [details] = all(tree, "details");
+    expect(details.props.open).not.toBe(true);
+    expect(all(details, "summary")[0].props.children).toBe("deliveryDetails");
+    expect(all(details, "p").map((node) => node.props.children)).toEqual(["pushNote", "platformNote", "explanation"]);
+  });
   it("disables every switch while loading or when preferences could not be loaded", () => {
     h.data = undefined;
     h.loading = true;

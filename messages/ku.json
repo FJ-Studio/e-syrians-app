@@ -2,7 +2,10 @@
   "notificationPreferences": {
     "emailNote": "E-nameyên bijartî ji bo piştrastkirineke nû û dema hesabê te piştrast dibe hene. E-name ji agahdariyên di sepanê de û push cuda ye.",
     "title": "Bijareyên agahdariyê",
-    "description": "Ji bo her kategoriyê agahdariyên di sepanê de û hişyariyên push cuda hilbijêre. Guhertin bi xweber tên tomarkirin û li ser hemû amûrên te derbas dibin.",
+    "description": "Hilbijêre kîjan agahdarî û bi kîjan kanalê bigihîjin te. Bijareyên te li ser hemû amûrên te bi xweber tên tomarkirin.",
+    "categoryColumn": "Cureyê agahdariyê",
+    "notAvailable": "Ji bo vê cureyê agahdariyê ne berdest e",
+    "deliveryDetails": "Derbarê şandina agahdariyan de",
     "pushNote": "Bijareyên push ji bo amûrên te yên mobîl in. Li ser her amûrê di sepana mobîl de agahdariyan çalak bike. Push di gerokê de niha ne berdest e.",
     "platformNote": "Şandin bi cure û kanalên ku platform peyda dike jî ve girêdayî ye. Ev bijare kodên têketinê an e-nameyên vegerandina şîfreyê naguherînin.",
     "explanation": "Guhertin tenê ji bo agahdariyên nû ne. Peyamên berê û dîroka çalakiyên ewlehiyê dimînin. Agahdariyên hatine bêdengkirin piştî çalakkirina dîsa nayên şandin.",

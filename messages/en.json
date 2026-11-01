@@ -2,7 +2,10 @@
   "notificationPreferences": {
     "emailNote": "Optional emails are available for a verification received and when your account becomes verified. Email is separate from in-app and push delivery.",
     "title": "Notification preferences",
-    "description": "Choose in-app and push notifications separately for each category. These choices apply to your account on every device and save automatically.",
+    "description": "Choose which notifications you receive and where. Changes save automatically across your devices.",
+    "categoryColumn": "Notification type",
+    "notAvailable": "Not available for this notification type",
+    "deliveryDetails": "About notification delivery",
     "pushNote": "Push preferences apply to your mobile devices. Enable notifications on each device in the mobile app. Browser push is not available.",
     "platformNote": "Delivery also depends on which notifications and channels are available on the platform. These choices do not change sign-in codes or password-recovery emails.",
     "explanation": "Changes affect new notifications. Existing inbox entries and Security Activity stay available. Muted notifications are not replayed when re-enabled.",
