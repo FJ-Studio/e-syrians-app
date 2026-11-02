@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import PageLayout from "./layout";
@@ -9,6 +10,15 @@ const PrivacyPolicy: FC = () => {
       <div className="flex flex-col gap-4">
         <h1 className="text-default-800 mb-4 text-3xl font-bold">{t("title")}</h1>
         <p>{t("intro")}</p>
+        <p>
+          {t.rich("childSafety", {
+            policy: (chunks) => (
+              <Link href="/child-safety" className="text-primary underline underline-offset-4">
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
         <h3 className="text-default-800 mb-2 text-xl font-bold">1. {t("dataCollection.title")}</h3>
         <p>{t("dataCollection.description")}:</p>
         <ul className="list-inside list-disc">
@@ -45,7 +55,10 @@ const PrivacyPolicy: FC = () => {
         <h3 className="text-default-800 mb-2 text-xl font-bold">6. {t("contact.title")}</h3>
         <p>{t("contact.description")}</p>
         <p>
-          {t("lastUpdate")}: <u>2025-02-21</u>
+          {t("lastUpdate")}:{" "}
+          <time dateTime="2026-11-03" dir="ltr">
+            2026-11-03
+          </time>
         </p>
       </div>
     </PageLayout>

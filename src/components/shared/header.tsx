@@ -5,7 +5,6 @@ import Container from "./container";
 import HeaderActions from "./header-actions";
 import LanguageSwitcher from "./language-switcher";
 import Nav from "./nav";
-import ThemeSwitcher from "./theme-switcher";
 import ThemedLogo from "./themed-logo";
 
 const Header: FC = () => {
@@ -23,7 +22,6 @@ const Header: FC = () => {
         <div className="flex items-center gap-3">
           <Nav />
           <HeaderActions />
-          <ThemeSwitcher />
           <LanguageSwitcher />
         </div>
       </Container>
