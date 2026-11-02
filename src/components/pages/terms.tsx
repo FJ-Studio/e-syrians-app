@@ -1,5 +1,5 @@
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { FC } from "react";
 import PageLayout from "./layout";
 
@@ -29,6 +29,15 @@ const Terms: FC = () => {
           <li>{t("prohibited.items.item2.title")}</li>
           <li>{t("prohibited.items.item3.title")}</li>
         </ul>
+        <p>
+          {t.rich("childSafety", {
+            policy: (chunks) => (
+              <Link href="/child-safety" className="text-primary underline underline-offset-4">
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
         <h3 className="text-default-800 mb-2 text-xl font-bold">4. {t("dataUsage.title")}</h3>
         <p>
           {t.rich("dataUsage.description", {
@@ -48,7 +57,10 @@ const Terms: FC = () => {
         <h3 className="text-default-800 mb-2 text-xl font-bold">6. {t("contact.title")}</h3>
         <p>{t("contact.description")}</p>
         <p>
-          {t("lastUpdate")}: <u>2025-02-22</u>
+          {t("lastUpdate")}:{" "}
+          <time dateTime="2026-11-03" dir="ltr">
+            2026-11-03
+          </time>
         </p>
       </div>
     </PageLayout>

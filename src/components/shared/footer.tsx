@@ -1,3 +1,4 @@
+import { Link as LocalizedLink } from "@/i18n/routing";
 import { FACEBOOK_URL, INSTAGRAM_URL, X_URL } from "@/lib/constants/misc";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -5,6 +6,7 @@ import { FC } from "react";
 import useInitiatives from "../hooks/localization/initiatives";
 import Container from "./container";
 import StatusBadge from "./status-badge";
+import ThemeSwitcher from "./theme-switcher";
 import ThemedLogo from "./themed-logo";
 
 const Footer: FC = () => {
@@ -46,6 +48,9 @@ const Footer: FC = () => {
             <Link className="text-foreground text-sm" href="/terms" title={t("footer.terms")}>
               {t("footer.terms")}
             </Link>
+            <LocalizedLink className="text-foreground text-sm" href="/child-safety" title={t("footer.child_safety")}>
+              {t("footer.child_safety")}
+            </LocalizedLink>
             <Link className="text-foreground text-sm" href="/donate" title={t("footer.donate")}>
               {t("footer.donate")}
             </Link>
@@ -66,11 +71,14 @@ const Footer: FC = () => {
       <Container>
         <div className="bg-default-200 my-8 h-px" />
       </Container>
-      <Container className="flex items-start justify-between text-sm md:items-center">
+      <Container className="flex flex-col items-start justify-between gap-4 text-sm sm:flex-row sm:items-center">
         <p>&copy; {t("footer.copy_right")}</p>
-        <a href="https://fj.studio" title="BY FJ SOFTWARE STUDIO" target="_blank" rel="noopener noreferrer">
-          BY FJ SOFTWARE STUDIO
-        </a>
+        <div className="flex items-center gap-4">
+          <ThemeSwitcher />
+          <a href="https://fj.studio" title="BY FJ SOFTWARE STUDIO" target="_blank" rel="noopener noreferrer">
+            BY FJ SOFTWARE STUDIO
+          </a>
+        </div>
       </Container>
     </footer>
   );
