@@ -162,6 +162,7 @@
   },
   "footer": {
     "privacy_policy": "Privacy Policy",
+    "child_safety": "Child Safety",
     "terms": "Terms",
     "all_rights_reserved": "All rights reserved",
     "initiatives": "Initiatives",
@@ -1889,9 +1890,59 @@
     "github": "Github Account",
     "website": "Personal Website"
   },
+  "childSafety": {
+    "title": "Child Safety Standards",
+    "description": "E-Syrians standards against child sexual abuse and exploitation, how to report concerns, and our approach to child safety.",
+    "intro": "<brand>E-Syrians</brand> prohibits child sexual abuse and exploitation (CSAE). These standards apply to our website and mobile app, including profiles, photos, polls, feature requests, and any other content or activity on the platform. E-Syrians is operated by <operator>FJ SOFTWARE STUDIO LTD</operator>.",
+    "fallbackNotice": "This policy is available in English and Arabic. The English version is shown here while a reviewed Kurdish translation is pending.",
+    "lastUpdated": "Last updated",
+    "onThisPage": "On this page",
+    "scope": {
+      "title": "Who these standards protect",
+      "description": "For these standards, a child is anyone under 18. Our prohibition on abuse and exploitation protects all children, regardless of whether they have an E-Syrians account.",
+      "age": "Our Terms of Use require users to be at least 13. Community verification of a profile is not proof of age or a guarantee that someone is safe to interact with."
+    },
+    "prohibited": {
+      "title": "Prohibited content and conduct",
+      "intro": "No one may use E-Syrians to create, encourage, facilitate, or promote the sexual abuse or exploitation of a child. This includes:",
+      "material": "Creating, requesting, possessing through the platform, distributing, offering, or linking to child sexual abuse material (CSAM), including computer-generated material depicting the sexual abuse or exploitation of children.",
+      "grooming": "Grooming, sexual solicitation, sexualized communication involving children, or pressuring a child to provide sexual images or take part in sexual activity.",
+      "exploitation": "Sexual extortion, trafficking, arranging sexual access to children, or sharing a child's personal information to enable abuse."
+    },
+    "reporting": {
+      "title": "Report a child safety concern",
+      "intro": "In the mobile app, use the Report action on a profile, poll, or feature request. Sign in if prompted. You do not need to be certain that a violation occurred to raise a concern.",
+      "reason": "Select Inappropriate content or Other and explain that your report concerns child safety.",
+      "details": "Include the relevant profile or content link or identifier and a brief, non-graphic explanation. Share only the information needed to locate and assess the concern.",
+      "noCopies": "Do not download, screenshot, copy, forward, attach, or email suspected CSAM, even as evidence. Report its location instead.",
+      "alternative": "If in-app reporting is unavailable, use the email address in the <contact>contact section</contact>."
+    },
+    "response": {
+      "title": "Review, enforcement, and escalation",
+      "review": "Reports are reviewed to assess the concern and the appropriate action. Depending on the findings, action may include removing content and restricting, suspending, or closing accounts.",
+      "action": "Our policy is to remove access to CSAM when we become aware of it and to handle any necessary preservation of information in accordance with applicable law.",
+      "authorities": "Confirmed CSAM must be reported to the National Center for Missing & Exploited Children (NCMEC) or the relevant regional authority, as applicable. We cooperate with lawful requests from competent authorities."
+    },
+    "privacy": {
+      "title": "Privacy when reporting",
+      "description": "Avoid including unrelated personal information about yourself or a child. Report information is handled in accordance with our <policy>Privacy Policy</policy> and may be disclosed where required by law."
+    },
+    "emergency": {
+      "title": "Immediate danger",
+      "description": "E-Syrians is not an emergency service. If a child is in immediate danger, contact local emergency services or law enforcement without waiting for a response from us."
+    },
+    "contact": {
+      "title": "Child safety contact",
+      "description": "For child safety concerns or questions about these standards, contact E-Syrians at:",
+      "instructions": "Use the subject Child safety concern. Include a link or identifier and a short description, without graphic details or attachments containing suspected CSAM."
+    },
+    "privacyPolicy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
   "privacyPolicy": {
     "title": "Privacy Policy",
     "intro": "At e-syrians, we prioritize your privacy and are dedicated to safeguarding your personal data.",
+    "childSafety": "For our rules on protecting children and reporting abuse, read our <policy>Child Safety Standards</policy>.",
     "dataCollection": {
       "title": "Data Collection",
       "description": "We gather the following types of information",
@@ -1977,6 +2028,7 @@
   "terms": {
     "title": "Terms of use",
     "intro": "By using this service, you agree to the following terms and conditions:",
+    "childSafety": "Child sexual abuse and exploitation are prohibited. Our <policy>Child Safety Standards</policy> form part of these terms and explain how to report concerns.",
     "purpose": {
       "title": "Purpose",
       "description": "e-syrians is designed to provide a digital space for discussions, information sharing, and community engagement. Our platform enables users to:",

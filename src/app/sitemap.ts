@@ -69,6 +69,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://www.e-syrians.com/en/child-safety",
+      lastModified: "2026-11-03",
+      alternates: {
+        languages: {
+          ar: "https://www.e-syrians.com/ar/child-safety",
+          en: "https://www.e-syrians.com/en/child-safety",
+        },
+      },
+    },
+    {
       url: "https://www.e-syrians.com/privacy-policy",
       lastModified: new Date(),
       alternates: {
