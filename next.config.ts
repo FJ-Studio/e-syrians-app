@@ -63,6 +63,18 @@ const cspDirectives = [
 const csp = cspDirectives.join("; ");
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        // The apex must point to the production deployment, not use a Vercel
+        // domain redirect. Android fetches this exact file without redirects.
+        source: "/:path((?!\\.well-known/assetlinks\\.json$).*)",
+        has: [{ type: "host", value: "e-syrians.com" }],
+        destination: "https://www.e-syrians.com/:path",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       // DigitalOcean Spaces — primary avatar store. Two entries
