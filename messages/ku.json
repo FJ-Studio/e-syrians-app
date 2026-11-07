@@ -1943,6 +1943,11 @@
     "terms": "Terms of Use"
   },
   "privacyPolicy": {
+    "appleSignIn": {
+      "title": "Bi Apple re têketin",
+      "description": "Heke hûn bi Apple re têkevin, em nasnameyek ku Apple ji bo E-Syrians dide û navnîşana e-nameya ku hûn parve dikin distînin. Heke hûn vebijarka veşartina e-nameyê hilbijêrin, em li şûna navnîşana we ya kesane navnîşanek navbeynkar ji Apple distînin. Dema hûn cara yekem têdikevin, dibe ku em navê ku hûn parve dikin jî bistînin. Em van agahiyan ji bo afirandin an girêdana hesabê we yê E-Syrians û têketina we bi kar tînin. Em şîfreya hesabê we yê Apple nastînin.",
+      "revocation": "Em tokenên nûkirinê yên Apple bi awayekî şîfrekirî diparêzin, da ku dema hesabê we tê jêbirin em ji Apple bixwazin destûra gihîştina E-Syrians betal bike. Ji bo bizanin Apple daneyên we çawa bi kar tîne, li <notice>Bi Apple re têketin û nepenî</notice> binêrin."
+    },
     "title": "Siyaseta Nepenîtiyê",
     "intro": "Li e-syrians de, em pêşî kesayetiyê te dikin û em têkildar in ku danegehên te ya kesayî biparêzin.",
     "childSafety": "For our rules on protecting children and reporting abuse, read our <policy>Child Safety Standards</policy>.",

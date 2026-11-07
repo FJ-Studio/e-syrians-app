@@ -25,6 +25,24 @@ const PrivacyPolicy: FC = () => {
           <li>{t("dataCollection.items.item1.title")}</li>
           <li>{t("dataCollection.items.item2.title")}</li>
         </ul>
+        <section id="sign-in-with-apple" aria-labelledby="apple-sign-in-title" className="space-y-3">
+          <h4 id="apple-sign-in-title" className="text-default-800 font-semibold">
+            {t("appleSignIn.title")}
+          </h4>
+          <p>{t("appleSignIn.description")}</p>
+          <p>
+            {t.rich("appleSignIn.revocation", {
+              notice: (chunks) => (
+                <a
+                  href="https://www.apple.com/legal/privacy/data/en/sign-in-with-apple/"
+                  className="text-primary underline underline-offset-4"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        </section>
         <h3 className="text-default-800 mb-2 text-xl font-bold">2. {t("dataUsage.title")}</h3>
         <p>{t("dataUsage.description")}</p>
         <ul className="list-inside list-disc">

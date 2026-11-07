@@ -70,4 +70,11 @@ describe("child safety standards", () => {
       en: "https://www.e-syrians.com/en/child-safety",
     });
   });
+
+  it.each(["en", "ar", "ku"] as const)("renders the Sign in with Apple disclosure in %s", (locale) => {
+    const html = render(locale, PrivacyPolicy);
+    expect(html).toContain('id="sign-in-with-apple"');
+    expect(html).toContain(messages[locale].privacyPolicy.appleSignIn.title);
+    expect(html).toContain('href="https://www.apple.com/legal/privacy/data/en/sign-in-with-apple/"');
+  });
 });

@@ -1940,6 +1940,11 @@
     "terms": "Terms of Use"
   },
   "privacyPolicy": {
+    "appleSignIn": {
+      "title": "Sign in with Apple",
+      "description": "If you choose Sign in with Apple, we receive an identifier Apple assigns for use with E-Syrians and the email address you share. If you choose Hide My Email, we receive an Apple relay address instead of your personal email address. We may also receive the name you choose to share when you first sign in. We use this information to create or link your E-Syrians account and to sign you in. We do not receive your Apple Account password.",
+      "revocation": "We store Apple refresh tokens in encrypted form so we can ask Apple to revoke E-Syrians’ access when your account is deleted. For how Apple handles your data, see <notice>Sign in with Apple & Privacy</notice>."
+    },
     "title": "Privacy Policy",
     "intro": "At e-syrians, we prioritize your privacy and are dedicated to safeguarding your personal data.",
     "childSafety": "For our rules on protecting children and reporting abuse, read our <policy>Child Safety Standards</policy>.",
