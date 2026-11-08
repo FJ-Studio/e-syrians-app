@@ -51,6 +51,9 @@ const Footer: FC = () => {
             <LocalizedLink className="text-foreground text-sm" href="/child-safety" title={t("footer.child_safety")}>
               {t("footer.child_safety")}
             </LocalizedLink>
+            <LocalizedLink className="text-foreground text-sm" href="/delete-account">
+              {t("footer.delete_account")}
+            </LocalizedLink>
             <Link className="text-foreground text-sm" href="/donate" title={t("footer.donate")}>
               {t("footer.donate")}
             </Link>

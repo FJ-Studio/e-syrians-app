@@ -166,6 +166,7 @@
   "footer": {
     "privacy_policy": "Siyaseta Nepenîtiyê",
     "child_safety": "Child Safety",
+    "delete_account": "Delete account",
     "terms": "Şert û merc",
     "all_rights_reserved": "Hemû maf parastî ne",
     "initiatives": "Teşebbûs",
@@ -1942,7 +1943,42 @@
     "privacyPolicy": "Privacy Policy",
     "terms": "Terms of Use"
   },
+  "accountDeletionPublic": {
+    "title": "Delete your E-Syrians account",
+    "intro": "This page explains how to request deletion of your E-Syrians account and associated data. You can submit a request without reinstalling the app.",
+    "fallbackNotice": "This page is currently available in English and Arabic.",
+    "emailSubject": "E-Syrians account deletion request",
+    "request": {
+      "title": "Request deletion by email",
+      "emailInstructions": "If you cannot sign in, send us a deletion request from the email address associated with your E-Syrians account, if you still have access to it. If you do not, tell us that in your message so we can help you verify ownership.",
+      "emailAction": "Email an account deletion request",
+      "verify": "We may verify that you own the account before acting. Do not send your password, national ID, or verification codes."
+    },
+    "selfService": {
+      "title": "Delete your account from the website or app",
+      "instructions": "Sign in and open Account → Settings → Security → Delete account. If you signed up with Google or Apple and do not have a password, set one in Security first, or use the email request above.",
+      "action": "Open account security settings",
+      "grace": "For self-service requests, deletion is scheduled after a 15-day grace period. You can sign in and cancel during that period. The app is not required to complete the web process."
+    },
+    "data": {
+      "title": "What happens to your data",
+      "deleted": "The deletion process removes your account and associated profile, profile photo, saved audiences, notification registrations, and other account records, including polls and feature requests you created.",
+      "retained": "Limited records may be retained where needed for security, fraud prevention, moderation, or legal obligations. Aggregate statistics that no longer identify you may remain.",
+      "privacy": "Read the E-Syrians Privacy Policy"
+    }
+  },
   "privacyPolicy": {
+    "mobilePrivacy": {
+      "title": "Privacy in the mobile app",
+      "census": "Account and census information includes your name, email address, account identifiers, date of birth, gender, ethnicity, religious affiliation, and hometown or residence. Some fields are needed for standard registration. You can choose whether to provide additional details such as a phone number, national or civil-record identifier, street address, education, income, health information, and a profile photo.",
+      "participation": "When you participate, we process the content and actions you submit, such as polls, votes, feature requests, reports, peer verifications, and the emails or national IDs you enter into a saved audience. Saved audiences are not public contact lists.",
+      "services": "We use service providers for functions including hosting, email delivery, Google Sign-In and reCAPTCHA fraud prevention. For security and troubleshooting, requests may generate records such as IP address, device model, app version, and activity. We do not use these records for personalized ads in the Android app.",
+      "diagnostics": "If you enable crash reporting in the app’s privacy settings, Sentry can receive crash reports, diagnostic logs, and device and app information to help us fix problems. You can turn crash reporting off in the app.",
+      "notifications": "Firebase Cloud Messaging can create a Firebase installation identifier for notification delivery on Android. If you enable push notifications, Expo and Firebase process device or installation identifiers and push tokens to route messages. Turning off push stops E-Syrians’ device registration for that account; it does not necessarily disable Firebase’s own initialization.",
+      "publicProfile": "Your public profile can show your display name, profile photo, birth year, gender, ethnicity, hometown, country, verification status, and the social links you add. Other people may also see content you publish and participation where the relevant poll or feature makes it visible. Your email, national ID, full date of birth, street address, and private census responses are not intended for public display.",
+      "retention": "We retain information while it is needed to operate your account and provide the service. When account deletion is completed, we remove account records and associated data. Limited records may be retained for security, fraud prevention, moderation, or legal obligations. Aggregate statistics that no longer identify you may remain.",
+      "deletion": "To request deletion without the mobile app, go to <deleteAccount>Delete your E-Syrians account</deleteAccount>. If you submit the request through account settings, you have 15 days to cancel before deletion is scheduled to take effect."
+    },
     "appleSignIn": {
       "title": "Bi Apple re têketin",
       "description": "Heke hûn bi Apple re têkevin, em nasnameyek ku Apple ji bo E-Syrians dide û navnîşana e-nameya ku hûn parve dikin distînin. Heke hûn vebijarka veşartina e-nameyê hilbijêrin, em li şûna navnîşana we ya kesane navnîşanek navbeynkar ji Apple distînin. Dema hûn cara yekem têdikevin, dibe ku em navê ku hûn parve dikin jî bistînin. Em van agahiyan ji bo afirandin an girêdana hesabê we yê E-Syrians û têketina we bi kar tînin. Em şîfreya hesabê we yê Apple nastînin.",
@@ -1959,7 +1995,7 @@
           "title": "Agahdariya Kesayî: Ev tê de agahdariya kesayî ye ku tu di dema qeydkirinê de bidî."
         },
         "item2": {
-          "title": "Tomara Çalakiyan: Dema tu malpera me bikar tînin, em hinek agahiyan dihînin ku ji bo nirxandinê ya tecrûbeya bikaranîna bikar bînin, ewlehîya malperê bihêlin, û ewlehîya hesabê te biparêzin. Em hemû çalakiyan ku bikarhênerên malperê dikin, wekî afirandina, guherandina, an nûkirina çavkaniyan, bişopînin. Ji bo her çalakî, em derbarê demê, amûrê, û navnîşana IP ya daxwaza kirî têne tomarkirin. Ev dikare û daxwaza serneketî jî bibe, ku em dikarin bifikirin ku bikarhêneran qewet dike yan jî guherînan bibînin."
+          "title": "Tomarên çalakî û ewlehiyê: Em hin çalakiyan, wek têketin û guherandina profîlê, tomar dikin da ku hesaban biparêzin û bikaranîna xirab lêkolîn bikin. Di van tomaran de dem, amûr, navnîşana IP û hewildanên neserkeftî dikarin hebin."
         }
       }
     },
@@ -2004,7 +2040,7 @@
     },
     "dataProtection": {
       "title": "Parastina Danegehê",
-      "description": "Em bawer dikin ku emê bi rêzê şopandina teknîkî û rêveberiyê danegehê biparêzin. Lê, ji kerema xwe, bibore ku tu bi zanîn ku ti metodê şandina danegehê bi ser torê an guhertina elektroniqê ne %100 ewleh e. Danegehên te yên nexweş, wekî nasnameya neteweyî û navnîşana te ya wîrakî, têne şîfrekirin û nikarin rawestan wekî nûçe tekstî her derê.",
+      "description": "Em ji bo parastina daneyan tedbîrên teknîkî û rêxistinî bi kar tînin. Xizmet HTTPS bi kar tîne, li şûna şîfreyan nirxên hashê tomar dike û jimareyên nasnameya neteweyî û navnîşanan di databasa hesaban de şîfre dike. Tu rêbazeke veguhastin an tomarkirinê bi tevahî ewle nîne.",
       "items": {
         "item1": {
           "title": "Mafê te ya ku tu dikarî danegehên xwe bibînî û kopiya wan bixwazî"

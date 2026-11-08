@@ -89,5 +89,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://www.e-syrians.com/en/delete-account",
+      lastModified: "2026-11-08",
+      alternates: {
+        languages: {
+          ar: "https://www.e-syrians.com/ar/delete-account",
+          en: "https://www.e-syrians.com/en/delete-account",
+        },
+      },
+    },
   ];
 }
