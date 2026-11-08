@@ -163,6 +163,7 @@
   "footer": {
     "privacy_policy": "Privacy Policy",
     "child_safety": "Child Safety",
+    "delete_account": "Delete account",
     "terms": "Terms",
     "all_rights_reserved": "All rights reserved",
     "initiatives": "Initiatives",
@@ -1939,7 +1940,47 @@
     "privacyPolicy": "Privacy Policy",
     "terms": "Terms of Use"
   },
+  "accountDeletionPublic": {
+    "title": "Delete your E-Syrians account",
+    "intro": "This page explains how to request deletion of your E-Syrians account and associated data. You can submit a request without reinstalling the app.",
+    "fallbackNotice": "This page is currently available in English and Arabic.",
+    "emailSubject": "E-Syrians account deletion request",
+    "request": {
+      "title": "Request deletion by email",
+      "emailInstructions": "If you cannot sign in, send us a deletion request from the email address associated with your E-Syrians account, if you still have access to it. If you do not, tell us that in your message so we can help you verify ownership.",
+      "emailAction": "Email an account deletion request",
+      "verify": "We may verify that you own the account before acting. Do not send your password, national ID, or verification codes."
+    },
+    "selfService": {
+      "title": "Delete your account from the website or app",
+      "instructions": "Sign in and open Account → Settings → Security → Delete account. If you signed up with Google or Apple and do not have a password, set one in Security first, or use the email request above.",
+      "action": "Open account security settings",
+      "grace": "For self-service requests, deletion is scheduled after a 15-day grace period. You can sign in and cancel during that period. The app is not required to complete the web process."
+    },
+    "data": {
+      "title": "What happens to your data",
+      "deleted": "The deletion process removes your account and associated profile, profile photo, saved audiences, notification registrations, and other account records, including polls and feature requests you created.",
+      "retained": "Limited records may be retained where needed for security, fraud prevention, moderation, or legal obligations. Aggregate statistics that no longer identify you may remain.",
+      "privacy": "Read the E-Syrians Privacy Policy"
+    }
+  },
   "privacyPolicy": {
+    "mobilePrivacy": {
+      "title": "Privacy in the mobile app",
+      "census": "Account and census information includes your name, email address, account identifiers, date of birth, gender, ethnicity, religious affiliation, and hometown or residence. Some fields are needed for standard registration. You can choose whether to provide additional details such as a phone number, national or civil-record identifier, street address, education, income, health information, and a profile photo.",
+      "participation": "When you participate, we process the content and actions you submit, such as polls, votes, feature requests, reports, peer verifications, and the emails or national IDs you enter into a saved audience. Saved audiences are not public contact lists.",
+      "services": "We use service providers for functions including hosting, email delivery, Google Sign-In and reCAPTCHA fraud prevention. For security and troubleshooting, requests may generate records such as IP address, device model, app version, and activity. We do not use these records for personalized ads in the Android app.",
+      "diagnostics": "If you enable crash reporting in the app’s privacy settings, Sentry can receive crash reports, diagnostic logs, and device and app information to help us fix problems. You can turn crash reporting off in the app.",
+      "notifications": "Firebase Cloud Messaging can create a Firebase installation identifier for notification delivery on Android. If you enable push notifications, Expo and Firebase process device or installation identifiers and push tokens to route messages. Turning off push stops E-Syrians’ device registration for that account; it does not necessarily disable Firebase’s own initialization.",
+      "publicProfile": "Your public profile can show your display name, profile photo, birth year, gender, ethnicity, hometown, country, verification status, and the social links you add. Other people may also see content you publish and participation where the relevant poll or feature makes it visible. Your email, national ID, full date of birth, street address, and private census responses are not intended for public display.",
+      "retention": "We retain information while it is needed to operate your account and provide the service. When account deletion is completed, we remove account records and associated data. Limited records may be retained for security, fraud prevention, moderation, or legal obligations. Aggregate statistics that no longer identify you may remain.",
+      "deletion": "To request deletion without the mobile app, go to <deleteAccount>Delete your E-Syrians account</deleteAccount>. If you submit the request through account settings, you have 15 days to cancel before deletion is scheduled to take effect."
+    },
+    "appleSignIn": {
+      "title": "Sign in with Apple",
+      "description": "If you choose Sign in with Apple, we receive an identifier Apple assigns for use with E-Syrians and the email address you share. If you choose Hide My Email, we receive an Apple relay address instead of your personal email address. We may also receive the name you choose to share when you first sign in. We use this information to create or link your E-Syrians account and to sign you in. We do not receive your Apple Account password.",
+      "revocation": "We store Apple refresh tokens in encrypted form so we can ask Apple to revoke E-Syrians’ access when your account is deleted. For how Apple handles your data, see <notice>Sign in with Apple & Privacy</notice>."
+    },
     "title": "Privacy Policy",
     "intro": "At e-syrians, we prioritize your privacy and are dedicated to safeguarding your personal data.",
     "childSafety": "For our rules on protecting children and reporting abuse, read our <policy>Child Safety Standards</policy>.",
@@ -1951,7 +1992,7 @@
           "title": "Personal Information: This includes the personal details you provide during registration."
         },
         "item2": {
-          "title": "Activity Log: As you use our website, we collect information to help us evaluate user experience, enhance website security, and protect your account. We track all activities performed by users on the site, such as creating, modifying, or updating resources. For each action, we store details such as the time, device, and IP address from which the request originated. This also includes failed attempts, which assist us in identifying potential user difficulties or detecting fraudulent activity."
+          "title": "Activity and security records: We log certain actions, such as sign-ins and profile changes, to protect accounts and investigate abuse. These records can include the time, device, IP address, and failed attempts."
         }
       }
     },
@@ -1996,7 +2037,7 @@
     },
     "dataProtection": {
       "title": "Data Protection",
-      "description": "We promise implementing appropriate technical and organizational measures to protect the  information we collect. However, please note that no method of transmission over the internet or method of electronic storage is 100% secure. Your sensitive data like national id, password and detailed address are encrypted and never stored as plain text anywhere.",
+      "description": "We use technical and organizational measures to protect the data we collect. The service uses HTTPS, stores password hashes rather than passwords, and encrypts national IDs and street addresses in the account database. No method of transmission or storage is completely secure.",
       "items": {
         "item1": {
           "title": "The right to access and request a copy of your personal data"

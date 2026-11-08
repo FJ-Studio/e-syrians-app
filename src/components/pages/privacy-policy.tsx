@@ -24,7 +24,35 @@ const PrivacyPolicy: FC = () => {
         <ul className="list-inside list-disc">
           <li>{t("dataCollection.items.item1.title")}</li>
           <li>{t("dataCollection.items.item2.title")}</li>
+          <li>{t("mobilePrivacy.census")}</li>
+          <li>{t("mobilePrivacy.participation")}</li>
         </ul>
+        <section aria-labelledby="mobile-privacy-title" className="space-y-3">
+          <h4 id="mobile-privacy-title" className="text-default-800 font-semibold">
+            {t("mobilePrivacy.title")}
+          </h4>
+          <p>{t("mobilePrivacy.services")}</p>
+          <p>{t("mobilePrivacy.diagnostics")}</p>
+          <p>{t("mobilePrivacy.notifications")}</p>
+        </section>
+        <section id="sign-in-with-apple" aria-labelledby="apple-sign-in-title" className="space-y-3">
+          <h4 id="apple-sign-in-title" className="text-default-800 font-semibold">
+            {t("appleSignIn.title")}
+          </h4>
+          <p>{t("appleSignIn.description")}</p>
+          <p>
+            {t.rich("appleSignIn.revocation", {
+              notice: (chunks) => (
+                <a
+                  href="https://www.apple.com/legal/privacy/data/en/sign-in-with-apple/"
+                  className="text-primary underline underline-offset-4"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        </section>
         <h3 className="text-default-800 mb-2 text-xl font-bold">2. {t("dataUsage.title")}</h3>
         <p>{t("dataUsage.description")}</p>
         <ul className="list-inside list-disc">
@@ -42,6 +70,7 @@ const PrivacyPolicy: FC = () => {
           <li>{t("dataSharing.items.item2.title")}</li>
           <li>{t("dataSharing.items.item3.title")}</li>
         </ul>
+        <p>{t("mobilePrivacy.publicProfile")}</p>
         <h3 className="text-default-800 mb-2 text-xl font-bold">4. {t("dataProtection.title")}</h3>
         <p>{t("dataProtection.description")}</p>
         <h3 className="text-default-800 mb-2 text-xl font-bold">5. {t("dataProtectionRight.title")}</h3>
@@ -52,12 +81,23 @@ const PrivacyPolicy: FC = () => {
           <li>{t("dataProtection.items.item4.title")}</li>
         </ul>
         <p>{t("dataProtectionRight.description")}</p>
-        <h3 className="text-default-800 mb-2 text-xl font-bold">6. {t("contact.title")}</h3>
+        <h3 className="text-default-800 mb-2 text-xl font-bold">6. {t("dataRetention.title")}</h3>
+        <p>{t("mobilePrivacy.retention")}</p>
+        <p>
+          {t.rich("mobilePrivacy.deletion", {
+            deleteAccount: (chunks) => (
+              <Link href="/delete-account" className="text-primary underline underline-offset-4">
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
+        <h3 className="text-default-800 mb-2 text-xl font-bold">7. {t("contact.title")}</h3>
         <p>{t("contact.description")}</p>
         <p>
           {t("lastUpdate")}:{" "}
-          <time dateTime="2026-11-03" dir="ltr">
-            2026-11-03
+          <time dateTime="2026-11-08" dir="ltr">
+            2026-11-08
           </time>
         </p>
       </div>

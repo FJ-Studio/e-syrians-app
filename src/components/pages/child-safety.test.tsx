@@ -6,6 +6,7 @@ import ar from "../../../messages/ar.json";
 import en from "../../../messages/en.json";
 import ku from "../../../messages/ku.json";
 import sitemap from "../../app/sitemap";
+import AccountDeletion from "./account-deletion";
 import ChildSafety from "./child-safety";
 import PrivacyPolicy from "./privacy-policy";
 import Terms from "./terms";
@@ -17,6 +18,27 @@ vi.mock("@/i18n/routing", async () => {
     Link: ({ href, children, ...props }: { href: string; children: ReactNode; className?: string }) =>
       createElement("a", { ...props, href: `/${useLocale()}${href}` }, children),
   };
+});
+
+describe("public account deletion", () => {
+  it.each(["en", "ar", "ku"] as const)("offers both request routes in %s without a session", (locale) => {
+    const html = render(locale, AccountDeletion);
+
+    expect(html).toContain(messages[locale].accountDeletionPublic.title);
+    expect(html).toContain('href="mailto:info@e-syrians.com?subject=');
+    expect(html).toContain(`href="/${locale}/account/settings/security"`);
+    expect(html).toContain(`href="/${locale}/privacy-policy"`);
+    expect(html).toContain("15");
+    expect(render(locale, PrivacyPolicy)).toContain(`href="/${locale}/delete-account"`);
+  });
+
+  it("includes the English and Arabic public URLs in the sitemap", () => {
+    const page = sitemap().find((entry) => entry.url.endsWith("/en/delete-account"));
+    expect(page?.alternates?.languages).toEqual({
+      ar: "https://www.e-syrians.com/ar/delete-account",
+      en: "https://www.e-syrians.com/en/delete-account",
+    });
+  });
 });
 
 const messages = { ar, en, ku };
@@ -69,5 +91,12 @@ describe("child safety standards", () => {
       ar: "https://www.e-syrians.com/ar/child-safety",
       en: "https://www.e-syrians.com/en/child-safety",
     });
+  });
+
+  it.each(["en", "ar", "ku"] as const)("renders the Sign in with Apple disclosure in %s", (locale) => {
+    const html = render(locale, PrivacyPolicy);
+    expect(html).toContain('id="sign-in-with-apple"');
+    expect(html).toContain(messages[locale].privacyPolicy.appleSignIn.title);
+    expect(html).toContain('href="https://www.apple.com/legal/privacy/data/en/sign-in-with-apple/"');
   });
 });
