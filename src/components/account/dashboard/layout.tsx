@@ -195,7 +195,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       if (!href) return false;
       // Exact match for the overview page
       if (href === "/account") {
-        return pathname.endsWith("/account");
+        return pathname.endsWith("/account") || /\/account\/identity-(sandbox|verification)$/.test(pathname);
       }
       return pathname.includes(href);
     },
