@@ -1,5 +1,7 @@
 "use client";
 
+import { Link } from "@/i18n/routing";
+import { verificationEnabled, verificationPage } from "@/lib/identity-verification-mode";
 import { AppNotification } from "@/lib/types/account";
 import {
   Button,
@@ -42,6 +44,36 @@ function relativeTime(dateStr: string, locale: string): string {
   return rtf.format(Math.round(diffSeconds / 31536000), "year");
 }
 
+const creditEvents = ["identity_credit_granted", "identity_credit_gifted"] as const;
+
+export function NotificationHistoryContent({ item, onOpen }: { item: AppNotification; onOpen: () => void }) {
+  const t = useTranslations("notificationEvents");
+  const isIdentityCredit = item.data?.type === "identity-verification";
+  const event = isIdentityCredit
+    ? creditEvents.find((key) => item.data.title_key === `notificationEvents.${key}.title`)
+    : undefined;
+  const title = event ? t(`${event}.title`) : (item.data?.message ?? item.data?.title ?? "");
+  const body = event ? t(`${event}.body`) : item.data?.message ? undefined : item.data?.body;
+  const content = (
+    <>
+      <span className={item.read_at ? "text-default-700" : "font-medium"}>{title}</span>
+      {body && <span className="text-default-600 text-sm">{body}</span>}
+    </>
+  );
+  if (isIdentityCredit && verificationEnabled()) {
+    return (
+      <Link
+        href={verificationPage()}
+        onClick={onOpen}
+        className="hover:text-primary focus-visible:outline-primary flex min-w-0 flex-col gap-1 rounded-sm focus-visible:outline-2"
+      >
+        {content}
+      </Link>
+    );
+  }
+  return <div className="flex min-w-0 flex-col gap-1">{content}</div>;
+}
+
 const NotificationsHistory: FC = () => {
   const t = useTranslations("account.dashboard.notifications");
   const locale = useLocale();
@@ -74,20 +106,21 @@ const NotificationsHistory: FC = () => {
     };
   }, [page]);
 
-  const markAsRead = async (id: string) => {
-    await fetch(`/api/account/notifications/${id}/mark-read`, { method: "POST" });
+  const markAsRead = useCallback(async (id: string) => {
+    const response = await fetch(`/api/account/notifications/${id}/mark-read`, { method: "POST", keepalive: true });
+    if (!response.ok) return;
     setItems((prev) => prev.map((n) => (n.id === id ? { ...n, read_at: new Date().toISOString() } : n)));
-  };
+  }, []);
 
   const markAllAsRead = async () => {
     await fetch("/api/account/notifications", { method: "POST", body: JSON.stringify({}) });
     setItems((prev) => prev.map((n) => ({ ...n, read_at: n.read_at ?? new Date().toISOString() })));
   };
 
-  const deleteNotification = async (id: string) => {
+  const deleteNotification = useCallback(async (id: string) => {
     await fetch(`/api/account/notifications/${id}/delete`, { method: "DELETE" });
     setItems((prev) => prev.filter((n) => n.id !== id));
-  };
+  }, []);
 
   const columns = [
     { name: t("history.columns.content"), uid: "content" },
@@ -102,9 +135,16 @@ const NotificationsHistory: FC = () => {
         case "content":
           return (
             <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                {!item.read_at && <span className="bg-primary inline-block h-2 w-2 flex-shrink-0 rounded-full" />}
-                <span className={!item.read_at ? "font-medium" : "text-default-700"}>{item.data?.message ?? ""}</span>
+              <div className="flex items-start gap-2">
+                {!item.read_at && (
+                  <span className="bg-primary mt-1.5 inline-block h-2 w-2 flex-shrink-0 rounded-full" />
+                )}
+                <NotificationHistoryContent
+                  item={item}
+                  onOpen={() => {
+                    if (!item.read_at) void markAsRead(item.id).catch(() => undefined);
+                  }}
+                />
               </div>
               <span className="text-default-400 text-xs">{relativeTime(item.created_at, locale)}</span>
             </div>
@@ -150,8 +190,7 @@ const NotificationsHistory: FC = () => {
           return null;
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items, locale],
+    [deleteNotification, locale, markAsRead, t],
   );
 
   return (

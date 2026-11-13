@@ -1,4 +1,14 @@
 {
+  "notificationEvents": {
+    "identity_credit_granted": {
+      "title": "Rêveber krediyek ji bo piştrastkirina nasnameyê zêde kir",
+      "body": "Krediyek di Hesab → Piştrastkirina nasnameyê de amade ye."
+    },
+    "identity_credit_gifted": {
+      "title": "Krediyeke piştrastkirina nasnameyê wek diyariyê hat dayîn",
+      "body": "Krediyek di Hesab → Piştrastkirina nasnameyê de amade ye."
+    }
+  },
   "notificationPreferences": {
     "emailNote": "E-nameyên bijartî ji bo piştrastkirineke nû û dema hesabê te piştrast dibe hene. E-name ji agahdariyên di sepanê de û push cuda ye.",
     "title": "Bijareyên agahdariyê",
