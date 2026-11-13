@@ -1,18 +1,7 @@
 "use client";
 
 import { ESUser } from "@/lib/types/account";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Chip,
-  CircularProgress,
-  Divider,
-  Spinner,
-} from "@heroui/react";
+import { Avatar, Button, Card, CardBody, CardHeader, Chip, CircularProgress, Divider, Spinner } from "@heroui/react";
 import chartBarIcon from "@iconify-icons/heroicons/chart-bar";
 import checkBadgeIcon from "@iconify-icons/heroicons/check-badge";
 import clipboardDocumentCheckIcon from "@iconify-icons/heroicons/clipboard-document-check";
@@ -23,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
+import IdentityVerificationEntry from "./identity-verification-entry";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -118,62 +108,60 @@ const AccountOverview: FC = () => {
     <div className="space-y-6">
       {/* ---- Profile card ---- */}
       <Card>
-        <CardBody>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
-            {/* Avatar + name */}
-            <Avatar
-              src={profile?.avatar || undefined}
-              name={`${profile?.name?.[0] ?? ""} ${profile?.surname?.[0] ?? ""}`}
-              className="h-16 w-16 text-xl"
-              isBordered
-              color={isVerified ? "success" : "default"}
-            />
-            <div className="flex-1 text-center sm:text-start">
-              <div className="flex items-center justify-center gap-2 sm:justify-start">
-                <h2 className="text-xl font-semibold">
-                  {profile?.name} {profile?.surname}
-                </h2>
-                {isVerified && <Icon icon={checkBadgeIcon} className="text-success size-5" />}
+        <CardBody className="p-4 sm:p-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-4">
+              <Avatar
+                src={profile?.avatar || undefined}
+                name={`${profile?.name?.[0] ?? ""} ${profile?.surname?.[0] ?? ""}`}
+                className="size-14 shrink-0 text-xl sm:size-16"
+                isBordered
+                color={isVerified ? "success" : "default"}
+              />
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-xl font-semibold wrap-break-word">
+                    {profile?.name} {profile?.surname}
+                  </h2>
+                  {isVerified && <Icon icon={checkBadgeIcon} className="text-success size-5 shrink-0" />}
+                </div>
+                <p className="text-default-500 text-sm wrap-break-word">{profile?.email}</p>
+                <Chip size="sm" variant="flat" color={isVerified ? "success" : "warning"} className="mt-1">
+                  {isVerified ? t("verified") : t("unverified")}
+                </Chip>
               </div>
-              <p className="text-default-500 text-sm">{profile?.email}</p>
-              <Chip size="sm" variant="flat" color={isVerified ? "success" : "warning"} className="mt-1">
-                {isVerified ? t("verified") : t("unverified")}
-              </Chip>
             </div>
 
-            {/* Profile completeness ring */}
-            <div className="flex flex-col items-center gap-1">
-              <CircularProgress
-                value={profileCompleteness.percentage}
-                color={
-                  profileCompleteness.percentage >= 80
-                    ? "success"
-                    : profileCompleteness.percentage >= 50
-                      ? "warning"
-                      : "danger"
-                }
-                showValueLabel
-                size="lg"
-                classNames={{
-                  value: "text-xs font-semibold",
-                }}
-              />
-              <span className="text-default-500 text-xs">{t("profileComplete")}</span>
+            <div className="flex flex-wrap items-center justify-between gap-4 sm:shrink-0">
+              <Button
+                as={Link}
+                href="/account/settings"
+                size="sm"
+                variant="flat"
+                startContent={<Icon icon={cog6ToothIcon} className="size-4" />}
+              >
+                {t("editProfile")}
+              </Button>
+              <div className="flex items-center gap-2 sm:flex-col sm:gap-1">
+                <CircularProgress
+                  value={profileCompleteness.percentage}
+                  color={
+                    profileCompleteness.percentage >= 80
+                      ? "success"
+                      : profileCompleteness.percentage >= 50
+                        ? "warning"
+                        : "danger"
+                  }
+                  showValueLabel
+                  size="lg"
+                  classNames={{ value: "text-xs font-semibold tabular-nums" }}
+                />
+                <span className="text-default-500 text-xs">{t("profileComplete")}</span>
+              </div>
             </div>
           </div>
         </CardBody>
-        <Divider />
-        <CardFooter className="justify-center gap-2 sm:justify-start">
-          <Button
-            as={Link}
-            href="/account/settings"
-            size="sm"
-            variant="flat"
-            startContent={<Icon icon={cog6ToothIcon} className="size-4" />}
-          >
-            {t("editProfile")}
-          </Button>
-        </CardFooter>
+        <IdentityVerificationEntry userId={session?.user.uuid} />
       </Card>
 
       {/* ---- Quick stats ---- */}

@@ -1,4 +1,14 @@
 {
+  "notificationEvents": {
+    "identity_credit_granted": {
+      "title": "An admin added an ID verification credit",
+      "body": "A credit is ready in Account → ID verification."
+    },
+    "identity_credit_gifted": {
+      "title": "You received an ID verification credit as a gift",
+      "body": "A credit is ready in Account → ID verification."
+    }
+  },
   "notificationPreferences": {
     "emailNote": "Optional emails are available for a verification received and when your account becomes verified. Email is separate from in-app and push delivery.",
     "title": "Notification preferences",
