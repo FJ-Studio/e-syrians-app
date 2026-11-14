@@ -122,19 +122,13 @@ export const getFirstRegistrants = async (): Promise<ApiResponse<Array<ESUser>> 
     headers: {
       Accept: "application/json",
     },
-    next: {
-      revalidate: 3600,
-    },
-    cache: "force-cache",
+    cache: "no-store",
   });
 };
 
 export const getUser = async (uuid: string): Promise<ApiResponse<ESUser> | null> => {
   return safeFetch<ESUser>(`${API_URL}/users/verify/${uuid}`, {
-    next: {
-      revalidate: 3600,
-    },
-    cache: "force-cache",
+    cache: "no-store",
   });
 };
 

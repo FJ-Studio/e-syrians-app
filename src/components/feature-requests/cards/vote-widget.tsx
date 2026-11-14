@@ -1,6 +1,7 @@
 "use client";
 
 import useServerError from "@/components/hooks/localization/server-errors";
+import { isCommunityVerified } from "@/lib/community-verification";
 import { generateToken } from "@/lib/recaptcha";
 import { Button } from "@heroui/react";
 import handThumbDownIcon from "@iconify-icons/heroicons/hand-thumb-down";
@@ -83,7 +84,7 @@ const VoteWidget: FC<Props> = ({
 }) => {
   const t = useTranslations("feature_requests.vote");
   const serverErrors = useServerError();
-  const { status } = useSession();
+  const { data: session, status } = useSession();
 
   const [committed, setCommitted] = useState<VoteState>({
     ups_count,
@@ -100,6 +101,10 @@ const VoteWidget: FC<Props> = ({
     if (readOnly) return;
     if (status !== "authenticated") {
       toast.warning(t("sign_in"));
+      return;
+    }
+    if (!isCommunityVerified(session?.user)) {
+      toast.warning(serverErrors("you_are_not_verified"));
       return;
     }
     startTransition(async () => {

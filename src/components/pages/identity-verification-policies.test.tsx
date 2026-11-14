@@ -45,6 +45,7 @@ describe("ID verification policies", () => {
 
     expect(privacy).toContain('id="identity-verification"');
     expect(privacy).toContain(localized.privacyPolicy.identityVerification.title);
+    expect(privacy).toContain(localized.privacyPolicy.identityVerification.publicBadge);
     expect(privacy).toContain('href="https://help.didit.me/end-users/your-data"');
     expect(privacy).toContain('href="https://stripe.com/privacy"');
     expect(privacy).toContain('href="mailto:info@e-syrians.com"');
