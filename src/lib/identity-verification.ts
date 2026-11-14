@@ -249,7 +249,6 @@ export const verificationCopy = (locale: string, live = false) => {
         : "ID verification is temporarily unavailable.",
     }),
     consent: ar ? "أوافق على المتابعة إلى Didit للتحقق من هويتي." : "I agree to continue to Didit for my ID check.",
-    privacy: ar ? "سياسة الخصوصية" : "Privacy Policy",
     expired: ar ? "انتهت صلاحية الطلب" : "Check expired",
     expiredBody: ar
       ? "انتهت مهلة إكمال التحقق. تحتاج إلى رصيد آخر للمحاولة مجددًا."
