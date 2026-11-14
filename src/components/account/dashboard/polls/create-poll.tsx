@@ -8,6 +8,7 @@ import useProvinces from "@/components/hooks/localization/provinces";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useServerError from "@/components/hooks/localization/server-errors";
 import useMyAudiences from "@/components/hooks/use-my-audiences";
+import { isCommunityVerified } from "@/lib/community-verification";
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { generateToken } from "@/lib/recaptcha";
 import { Audience } from "@/lib/types/audience";
@@ -150,9 +151,10 @@ const CreatePoll: FC<PollFormProps> = ({ mode = "create", pollId, initialValues,
     setOptions((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const userIsNotVerified = !session.data?.user?.verified_at;
+  const userIsNotVerified = !isCommunityVerified(session.data?.user);
 
   const store = async (data: CreatePollFields) => {
+    if (userIsNotVerified) return;
     const isEditMode = mode === "edit";
     const formData = new FormData();
     formData.append("question", data.question);

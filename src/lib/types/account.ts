@@ -1,6 +1,8 @@
+import type { CommunityVerificationStatus } from "../community-verification";
+import type { VerificationBadgeKind } from "../verification-badge";
 import { CountryCode, Ethnicity, Gender, Province, ReligiousAffiliation } from "./misc";
 
-export type ESUser = {
+export type ESUser = CommunityVerificationStatus & {
   id: string;
   uuid: string;
   name?: string;
@@ -8,7 +10,10 @@ export type ESUser = {
   email: string;
   phone?: string;
   accessToken: string;
-  verified_at?: string;
+  /** Public presentation status on named profiles and authors. Not a permission. */
+  verification_badge?: VerificationBadgeKind | null;
+  /** Owner-only: whether a live document check was approved. Independent of community verification. */
+  id_verification_approved?: boolean;
   verification_reason?: string;
   roles: Array<string>;
   permissions: Array<string>;

@@ -2,6 +2,7 @@
 import useCountries from "@/components/hooks/localization/country";
 import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
+import { VerificationBadge } from "@/components/shared/verification-badge";
 import { ESUser } from "@/lib/types/account";
 import { Card, CardBody } from "@heroui/react";
 import { useTranslations } from "next-intl";
@@ -27,8 +28,11 @@ const PublicVerify: FC<Props> = ({ user }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <UserAvatar user={user} />
-              <div className=" ">
-                <p>{`${user?.name} ${user?.surname}`}</p>
+              <div>
+                <div className="flex items-center gap-1">
+                  <p>{`${user.name ?? ""} ${user.surname ?? ""}`.trim()}</p>
+                  <VerificationBadge kind={user.verification_badge} />
+                </div>
                 <p className="text-default-500 text-sm">
                   {t("citizenFrom", {
                     hometown: user?.hometown ? provinces[user?.hometown] : "-",

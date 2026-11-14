@@ -102,6 +102,7 @@ const PrivacyPolicy: FC = () => {
           </h3>
           <p>{t("identityVerification.documentCheck")}</p>
           <p>{t("identityVerification.records")}</p>
+          <p>{t("identityVerification.publicBadge")}</p>
           <p>
             {t.rich("identityVerification.retention", {
               didit: (chunks) => (

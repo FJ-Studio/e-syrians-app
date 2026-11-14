@@ -1,5 +1,6 @@
 "use client";
 
+import { VerificationBadge } from "@/components/shared/verification-badge";
 import { Link } from "@/i18n/routing";
 import { FeatureRequest } from "@/lib/types/feature-requests";
 import { Avatar, Card, CardBody, CardFooter, CardHeader, Divider } from "@heroui/react";
@@ -36,7 +37,10 @@ const SingleFeatureRequest: FC<Props> = ({ feature }) => {
               <span className="text-default-500 text-tiny font-normal">
                 {new Date(feature.created_at).toLocaleDateString()}
               </span>
-              <p className="font-medium">{`${feature.user.name ?? ""} ${feature.user.surname ?? ""}`}</p>
+              <div className="flex items-center gap-1">
+                <p className="font-medium">{`${feature.user.name ?? ""} ${feature.user.surname ?? ""}`.trim()}</p>
+                <VerificationBadge kind={feature.user.verification_badge} />
+              </div>
             </div>
           </div>
           <StatusBadge status={feature.status} />

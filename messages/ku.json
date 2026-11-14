@@ -822,7 +822,7 @@
       "nav": {
         "polls": "Anketên",
         "audiences": "Lîsteyên temaşevanan",
-        "verifications": "Pejirandin",
+        "verifications": "Piştrastkirina civakî",
         "settings": "Mîhengên",
         "donate": "Bexş bike",
         "signout": "Derketin",
@@ -947,7 +947,7 @@
             "placeholder": "Pirsê xwe li vir binivîse",
             "error": "Ji kerema xwe zêdetir ji 10 tîpan binivîse"
           },
-          "accountUnverifiedAlert": "Hesabê te hinasî nehatî! Ji kerema xwe girêdana profîla xwe bi civakê re parve bikin da ku diçek hewceya pejirandinê were berdan",
+          "accountUnverifiedAlert": "Ji bo weşandina rapirsînekê piştrastkirina civakî pêwîst e. Girêdana profîla xwe bi kesên ku te li E-Syrians nas dikin re parve bike.",
           "start_date": {
             "label": "Dîroka destpêkê",
             "description": "Kîjan dîroka anketê tê belavkirin?"
@@ -1427,6 +1427,11 @@
         "retry": "Dîsa biceribîne",
         "verified": "Piştrastkirî",
         "unverified": "Nepiştrastkirî",
+        "verificationBadge": {
+          "community": "Bi civakê piştrastkirî",
+          "identity": "Kontrola nasnameyê hate pejirandin",
+          "both": "Bi civakê piştrastkirî · Kontrola nasnameyê hate pejirandin"
+        },
         "profileComplete": "Temamkirina profîlê",
         "editProfile": "Profîlê biguherîne",
         "stats": {
@@ -1695,7 +1700,7 @@
     "poll_has_votes_cannot_edit": "Vê rapirsiyê deng wergirtine, lewre êdî nayê guhertin. Tu hîn dikarî ji menûyê bigire.",
     "not_your_poll": "Tu tenê dikarî rapirsiyên ku te afirandiye biguherînî.",
     "your_account_is_banned": "Hesabê te hate qedexekirin!",
-    "you_are_not_verified": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",
+    "you_are_not_verified": "Ji bo vê çalakiyê piştrastkirina civakî pêwîst e.",
     "you_do_not_have_enough_verifications": "Nikare vê xebatê bikî çawa ku hesabê te dîrok nîya",
     "you_have_reached_the_maximum_verifications": "Tu gihîşti herî zêde dîrokên ku dikarî bidê",
     "you_cannot_verify_yourself": "Nikare hesabê xwe bixwîn",
@@ -1819,7 +1824,7 @@
     "audienceSavedListName": "Lîsteya tomarkirî",
     "audienceSavedListCounts": "{resolved} ji {total} ketiyan bi bikarhênerên qeydkirî re li hev tên",
     "audienceMissing": "Lîsteya bi vê rahêtinê ve girêdayî hate jêbirin.",
-    "description": "Hemû bikarhênerên ku agahiyên wan hatine piştrastkirin dikarin li vir beşdarî lêkolînên rayê bibin. Bi gelemperî, lêkolîn hatine rêz kirin di bingeha nivîsandina ku naveroka dengên 'Erê' û 'Na' di navber de çêtir e û her wisa bi sal û mehê zêde hatine rêvekirin.",
+    "description": "Endamên ku ji aliyê civakê ve hatine piştrastkirin dikarin rapirsînan biweşînin. Rapirsîn li gorî mehê têne komkirin û li gorî ferqa dengên erê û na têne rêzkirin.",
     "filter": {
       "description": "Nîşandana lêkolîn bi bingeha sal û mehê",
       "months": {
@@ -1981,6 +1986,7 @@
     "identityVerification": {
       "title": "Taybetiya daneyên piştrastkirina nasnameyê û dayînê",
       "privacyLink": "Em bi daneyên piştrastkirina nasnameya te çi dikin?",
+      "publicBadge": "Heke kontrola nasnameya te were pejirandin, dibe ku nîşanek li kêleka navê te yê xuya li ser rûpelên giştî were nîşandan. Ev nîşan tenê dibêje ku kontrol hatiye pejirandin. Navê li ser belgeyê, belgeyên te an sedema nepejirandina kontrolê nîşan nade.",
       "documentCheck": "Piştrastkirina nasnameyê bi belgeya fermî ne mecbûrî ye û ji piştrastkirina civakî cuda ye. Gava tu dest bi kontrolê dikî, em hejmareke referansê ji Didit re dişînin. Tu wêneyên belgeya nasnameya xwe û selfiyekê rasterast pêşkêşî Didit dikî. Didit belgeyê kontrol dike û wêne û agahiyên li ser wê, wek nav, roja jidayikbûnê û hejmara belgeyê, bi kar tîne. Didit daneyên biyometrîk ên rûyê te jî bi kar tîne da ku bizane tu bi xwe li wir î û rûyê te bi wêneya li ser belgeyê re li hev tê.",
       "records": "E-Syrians encamê bi kar tîne da ku rewşa piştrastkirina nasnameya te nû bike. Em referansa danişînê, rewş û encama kontrolê, dema ku te razîbûna xwe da, û tomarên krediyên ku hatine dayîn, bikaranîn an diyarkirin diparêzin. Em kopiyên wêneyên belgeya te, selfiya te, şablonên biyometrîk an rapora tevahî ya Didit di hesabê te de hilnadin.",
       "retention": "Me Didit wisa mîheng kiriye ku danişînên piştrastkirinê herî zêde salekê biparêze, heke berê neyên jêbirin. Wêneyên belgeyê, selfie û şablonên biyometrîk ên rûyê ku bi danişînê ve girêdayî ne, bi danişînê re tên jêbirin. Gava jêbirina hesabê te temam dibe, em ji Didit dixwazin ku danişînên girêdayî wî hesabî jê bibe. Ji bo agahiyên zêdetir, <didit>ravekirina Didit li ser daneyên piştrastkirinê</didit> bixwîne.",
@@ -2398,7 +2404,7 @@
       "cta": "Taybetmendiyekê pêşniyar bike",
       "title": "Taybetmendiyeke nû pêşniyar bike",
       "description": "Ji me re bêje bê em çi çêbikin. Ramanên zelal û bi hedef zêdetir girîngiyê distînin.",
-      "account_unverified_alert": "Ji bo şandina daxwaza taybetmendiyê hesabê xwe piştrast bike.",
+      "account_unverified_alert": "Ji bo şandina daxwaza taybetmendiyê piştrastkirina civakî pêwîst e.",
       "submit": "Bişîne",
       "success": "Spas — raman hate şandin.",
       "error": "Daxwaza we nehate şandin. Ji kerema xwe dîsa biceribîne.",

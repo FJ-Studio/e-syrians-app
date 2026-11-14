@@ -1,5 +1,6 @@
 "use client";
 
+import { VerificationBadge } from "@/components/shared/verification-badge";
 import { FeatureRequest } from "@/lib/types/feature-requests";
 import { Avatar, Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
 import chatBubbleLeftEllipsisIcon from "@iconify-icons/heroicons/chat-bubble-left-ellipsis";
@@ -26,19 +27,24 @@ const FeatureCard: FC<Props> = ({ feature }) => {
   return (
     <Card className="p-3">
       <CardHeader className="flex items-center justify-between gap-2">
-        <Link className="flex items-center gap-2" href={`/feature-requests/${feature.id}`}>
-          <Avatar
-            src={feature.user.avatar}
-            className="min-h-10 min-w-10"
-            alt={`${feature.user.name ?? ""} ${feature.user.surname ?? ""}`}
-          />
-          <div className="flex flex-col">
-            <span className="text-default-500 text-tiny font-normal">
-              {new Date(feature.created_at).toLocaleDateString()}
-            </span>
-            <p className="font-medium">{`${feature.user.name ?? ""} ${feature.user.surname ?? ""}`}</p>
-          </div>
-        </Link>
+        <div className="flex min-w-0 items-end gap-1">
+          <Link className="flex min-w-0 items-center gap-2" href={`/feature-requests/${feature.id}`}>
+            <Avatar
+              src={feature.user.avatar}
+              className="min-h-10 min-w-10"
+              alt={`${feature.user.name ?? ""} ${feature.user.surname ?? ""}`}
+            />
+            <div className="flex min-w-0 flex-col">
+              <span className="text-default-500 text-tiny font-normal">
+                {new Date(feature.created_at).toLocaleDateString()}
+              </span>
+              <span className="font-medium wrap-break-word">
+                {`${feature.user.name ?? ""} ${feature.user.surname ?? ""}`.trim()}
+              </span>
+            </div>
+          </Link>
+          <VerificationBadge kind={feature.user.verification_badge} />
+        </div>
         <StatusBadge status={feature.status} />
       </CardHeader>
       <CardBody className="items-start space-y-3 text-start">
