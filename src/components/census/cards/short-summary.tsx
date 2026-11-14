@@ -1,6 +1,7 @@
 "use client";
 import UserCardLinksDropdown from "@/components/account/public-verify/dropdown-items";
 import useProvinces from "@/components/hooks/localization/provinces";
+import { VerificationBadge } from "@/components/shared/verification-badge";
 import { ESUser } from "@/lib/types/account";
 import { Avatar, Card, CardBody } from "@heroui/react";
 import { useTranslations } from "next-intl";
@@ -23,7 +24,10 @@ const ShortUserSummary: FC<Props> = ({ user }) => {
           </div>
           <UserCardLinksDropdown user={user} />
         </div>
-        <p className="mt-2">{`${user.name} ${user.surname}`}</p>
+        <div className="mt-2 flex items-center justify-center gap-1">
+          <p>{`${user.name ?? ""} ${user.surname ?? ""}`.trim()}</p>
+          <VerificationBadge kind={user.verification_badge} />
+        </div>
         <p className="text-default-500 text-sm">
           {t("publicVerify.citizenFrom", {
             hometown: user?.hometown ? provinces[user.hometown] : "-",

@@ -819,7 +819,7 @@
       "nav": {
         "polls": "Polls",
         "audiences": "Audiences",
-        "verifications": "Verifications",
+        "verifications": "Community verification",
         "notifications": "Notifications",
         "settings": "Settings",
         "donate": "Donate",
@@ -944,7 +944,7 @@
             "placeholder": "Type your poll question here",
             "error": "Please type more than 10 characters"
           },
-          "accountUnverifiedAlert": "Your account is not verified yet! Kindly share your profile link with the community to get enough verifications",
+          "accountUnverifiedAlert": "You need community verification to publish a poll. Share your profile link with people who know you on E-Syrians.",
           "start_date": {
             "label": "Start date",
             "description": "On which date the poll will be published"
@@ -1424,6 +1424,11 @@
         "retry": "Try again",
         "verified": "Verified",
         "unverified": "Not verified",
+        "verificationBadge": {
+          "community": "Community verified",
+          "identity": "ID check approved",
+          "both": "Community verified · ID check approved"
+        },
         "profileComplete": "Profile complete",
         "editProfile": "Edit profile",
         "stats": {
@@ -1692,7 +1697,7 @@
     "poll_has_votes_cannot_edit": "This poll already has votes, so it can no longer be edited. You can still close it from the menu.",
     "not_your_poll": "You can only edit polls you created.",
     "your_account_is_banned": "Your account is banned!",
-    "you_are_not_verified": "You cannot perform this action since your account is not verified",
+    "you_are_not_verified": "This action requires community verification.",
     "you_do_not_have_enough_verifications": "You did not receive enough verifications to perform this action",
     "you_have_reached_the_maximum_verifications": "You have reached the maximum verifications you can make",
     "you_cannot_verify_yourself": "You cannot verify your own account",
@@ -1816,7 +1821,7 @@
     "audienceSavedListName": "Saved list",
     "audienceSavedListCounts": "{resolved} of {total} entries matched to registered users",
     "audienceMissing": "The saved list attached to this poll has been removed.",
-    "description": "Verified users can share polls. By default, polls are sorted in descending order based on the difference between upvotes and downvotes and are categorized by month.",
+    "description": "Members with community verification can publish polls. Polls are grouped by month and ranked by net upvotes.",
     "filter": {
       "description": "Display polls by year and month",
       "months": {
@@ -1978,6 +1983,7 @@
     "identityVerification": {
       "title": "ID verification and payment privacy",
       "privacyLink": "How we handle your verification data",
+      "publicBadge": "If your ID check is approved, a badge may appear next to your display name on public pages. The badge shows that the check was approved; it does not show the name on your ID, your documents, or why a check was not approved.",
       "documentCheck": "Document-based ID verification is optional and separate from community verification. If you start a check, we send Didit a verification reference. You submit your government-issued ID and take a selfie directly with Didit. Didit checks the document and processes its images and the information on it, such as your name, date of birth and document number. Didit also processes biometric data to check that you are physically present and that your face matches the portrait on the document.",
       "records": "E-Syrians uses the verification result to update your ID verification status. We keep the session reference, status and outcome, when you agreed to start the check, and records of credits issued, used or gifted. We do not store copies of your ID images, selfie, biometric templates or the full Didit report in your E-Syrians account.",
       "retention": "Didit is configured to keep verification sessions for up to one year unless they are deleted sooner. The document images, selfie and facial templates associated with the session are deleted with it. When we complete an account deletion, we request erasure of its Didit sessions. See <didit>Didit’s information about your verification data</didit>.",
@@ -2395,7 +2401,7 @@
       "cta": "Suggest a feature",
       "title": "Suggest a feature",
       "description": "Tell us what you want to see next. Clear, focused ideas get the most traction.",
-      "account_unverified_alert": "Verify your account to submit a feature request.",
+      "account_unverified_alert": "You need community verification to submit a feature request.",
       "submit": "Submit",
       "success": "Thanks — your idea has been submitted.",
       "error": "We couldn't submit your request. Please try again.",

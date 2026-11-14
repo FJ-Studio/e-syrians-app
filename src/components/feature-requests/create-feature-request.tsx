@@ -1,4 +1,5 @@
 "use client";
+import { isCommunityVerified } from "@/lib/community-verification";
 
 import useServerError from "@/components/hooks/localization/server-errors";
 import { generateToken } from "@/lib/recaptcha";
@@ -26,7 +27,7 @@ const CreateFeatureRequest: FC = () => {
   const serverErrors = useServerError();
   const session = useSession();
   const router = useRouter();
-  const userIsNotVerified = !session.data?.user?.verified_at;
+  const userIsNotVerified = !isCommunityVerified(session.data?.user);
 
   const {
     handleSubmit,
@@ -37,6 +38,7 @@ const CreateFeatureRequest: FC = () => {
   });
 
   const submit = async (data: CreateFeatureRequestFields) => {
+    if (userIsNotVerified) return;
     try {
       const token = await generateToken("feature_request_store");
       const response = await fetch("/api/feature-requests/store", {

@@ -7,6 +7,8 @@ import useGender from "@/components/hooks/localization/gender";
 import useProvinces from "@/components/hooks/localization/provinces";
 import useReligiousAffiliation from "@/components/hooks/localization/religious_affiliation";
 import useServerError from "@/components/hooks/localization/server-errors";
+import { VerificationBadge } from "@/components/shared/verification-badge";
+import { isCommunityVerified } from "@/lib/community-verification";
 import { MAX_AUDIENCE_AGE, MIN_AUDIENCE_AGE } from "@/lib/constants/census";
 import { ibm } from "@/lib/fonts/fonts";
 import { generateToken } from "@/lib/recaptcha";
@@ -161,7 +163,8 @@ const PollFullCard: FC<Props> = ({ poll }) => {
 
   const { user } = localPoll;
   const t = useTranslations("polls");
-  const { status } = useSession();
+  const { data: session, status } = useSession();
+  const communityVerified = isCommunityVerified(session?.user);
   const genderLabels = useGender();
   const countryLabels = useCountries();
   const provinceLabels = useProvinces();
@@ -178,6 +181,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   };
 
   const vote = async () => {
+    if (!communityVerified) return;
     if (selectedOptions.length === 0) {
       toast.warning(t("noOptionSelected"));
       return;
@@ -212,6 +216,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   };
 
   const reactToPoll = async (reaction: "up" | "down") => {
+    if (!communityVerified) return;
     if ((localPoll.has_downvoted && reaction === "down") || (localPoll.has_upvoted && reaction === "up")) {
       toast.warning(t("alreadyReacted"));
       return;
@@ -268,8 +273,14 @@ const PollFullCard: FC<Props> = ({ poll }) => {
   }, [localPoll.end_date]);
 
   const canVote = useMemo(() => {
-    return status === "authenticated" && !localPoll.has_voted && localPoll.is_in_audience && !pollExpired;
-  }, [localPoll.is_in_audience, localPoll.has_voted, status, pollExpired]);
+    return (
+      status === "authenticated" &&
+      communityVerified &&
+      !localPoll.has_voted &&
+      localPoll.is_in_audience &&
+      !pollExpired
+    );
+  }, [localPoll.is_in_audience, localPoll.has_voted, status, communityVerified, pollExpired]);
 
   return (
     <>
@@ -281,12 +292,15 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             alt={`${user.name} ${user.surname}`}
             title={`${user.name} ${user.surname}`}
           />
-          <Link className="flex w-full flex-col" href={`/polls/${localPoll.id}`}>
-            <span className="text-default-500 text-tiny font-normal">
-              {new Date(localPoll.created_at).toLocaleDateString()}
-            </span>
-            <p className="font-medium">{`${localPoll.user.name} ${localPoll.user.surname}`}</p>
-          </Link>
+          <div className="flex min-w-0 flex-1 items-end gap-1">
+            <Link className="flex min-w-0 flex-col" href={`/polls/${localPoll.id}`}>
+              <span className="text-default-500 text-tiny font-normal">
+                {new Date(localPoll.created_at).toLocaleDateString()}
+              </span>
+              <span className="font-medium wrap-break-word">{`${user.name ?? ""} ${user.surname ?? ""}`.trim()}</span>
+            </Link>
+            <VerificationBadge kind={user.verification_badge} />
+          </div>
           <Dropdown>
             <DropdownTrigger>
               <Icon icon={ellipsisVerticalIcon} className="text-default-700 h-6 w-6 cursor-pointer" />
@@ -360,7 +374,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             <Button
               size="sm"
               startContent={<Icon icon={handThumbUpIcon} className="h-6 w-6" />}
-              isDisabled={status !== "authenticated" || loading}
+              isDisabled={status !== "authenticated" || !communityVerified || loading}
               onPress={() => reactToPoll("up")}
               color={localPoll.has_upvoted ? "primary" : "default"}
             >
@@ -369,7 +383,7 @@ const PollFullCard: FC<Props> = ({ poll }) => {
             <Button
               size="sm"
               startContent={<Icon icon={handThumbDownIcon} className="h-6 w-6" />}
-              isDisabled={status !== "authenticated" || loading}
+              isDisabled={status !== "authenticated" || !communityVerified || loading}
               onPress={() => reactToPoll("down")}
               color={localPoll.has_downvoted ? "primary" : "default"}
             >
@@ -398,6 +412,9 @@ const PollFullCard: FC<Props> = ({ poll }) => {
                 <span className="text-start font-medium">{t("cannotVote")}</span>
                 {status === "unauthenticated" && (
                   <p className="w-full text-start">- {cannotVoteReasons.unauthorized}</p>
+                )}
+                {status === "authenticated" && !communityVerified && (
+                  <p className="w-full text-start">- {serverErrors("you_are_not_verified")}</p>
                 )}
                 {localPoll.is_in_audience === false &&
                   status === "authenticated" &&

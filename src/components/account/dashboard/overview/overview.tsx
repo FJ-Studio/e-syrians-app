@@ -1,6 +1,9 @@
 "use client";
 
+import { VerificationBadge } from "@/components/shared/verification-badge";
+import { communityVerifiedAt, isCommunityVerified } from "@/lib/community-verification";
 import { ESUser } from "@/lib/types/account";
+import { verificationBadgeKind } from "@/lib/verification-badge";
 import { Avatar, Button, Card, CardBody, CardHeader, Chip, CircularProgress, Divider, Spinner } from "@heroui/react";
 import chartBarIcon from "@iconify-icons/heroicons/chart-bar";
 import checkBadgeIcon from "@iconify-icons/heroicons/check-badge";
@@ -60,11 +63,12 @@ const AccountOverview: FC = () => {
             // Sync session if verification status changed on the backend
             const backendProfile = json.data?.profile;
             if (backendProfile && session?.user) {
-              const sessionVerified = session.user.verified_at;
-              const backendVerified = backendProfile.verified_at;
+              const sessionVerified = communityVerifiedAt(session.user);
+              const backendVerified = communityVerifiedAt(backendProfile);
               if (sessionVerified !== backendVerified) {
                 await updateSession({
                   verified_at: backendVerified,
+                  community_verified_at: backendVerified,
                 });
               }
             }
@@ -102,7 +106,10 @@ const AccountOverview: FC = () => {
   }
 
   const { profile, polls, verifications, profileCompleteness } = data;
-  const isVerified = !!profile?.verified_at;
+  const badge =
+    profile?.verification_badge === undefined
+      ? verificationBadgeKind(isCommunityVerified(profile), profile?.id_verification_approved === true)
+      : profile.verification_badge;
 
   return (
     <div className="space-y-6">
@@ -115,20 +122,20 @@ const AccountOverview: FC = () => {
                 src={profile?.avatar || undefined}
                 name={`${profile?.name?.[0] ?? ""} ${profile?.surname?.[0] ?? ""}`}
                 className="size-14 shrink-0 text-xl sm:size-16"
-                isBordered
-                color={isVerified ? "success" : "default"}
               />
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <h2 className="text-xl font-semibold wrap-break-word">
                     {profile?.name} {profile?.surname}
                   </h2>
-                  {isVerified && <Icon icon={checkBadgeIcon} className="text-success size-5 shrink-0" />}
+                  {badge && <VerificationBadge kind={badge} />}
                 </div>
                 <p className="text-default-500 text-sm wrap-break-word">{profile?.email}</p>
-                <Chip size="sm" variant="flat" color={isVerified ? "success" : "warning"} className="mt-1">
-                  {isVerified ? t("verified") : t("unverified")}
-                </Chip>
+                {!badge && (
+                  <Chip size="sm" variant="flat" color="warning" className="mt-1">
+                    {t("unverified")}
+                  </Chip>
+                )}
               </div>
             </div>
 
