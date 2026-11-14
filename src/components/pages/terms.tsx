@@ -54,12 +54,47 @@ const Terms: FC = () => {
           <li>{t("liability.items.item1.title")}</li>
           <li>{t("liability.items.item2.title")}</li>
         </ul>
-        <h3 className="text-default-800 mb-2 text-xl font-bold">6. {t("contact.title")}</h3>
+        <section
+          id="identity-verification-purchases"
+          aria-labelledby="identity-verification-purchases-title"
+          className="scroll-mt-28 space-y-3"
+        >
+          <h3 id="identity-verification-purchases-title" className="text-default-800 text-xl font-bold">
+            6. {t("identityVerification.title")}
+          </h3>
+          <p>{t("identityVerification.purchase")}</p>
+          <p>{t("identityVerification.useAndGift")}</p>
+          <p>
+            {t.rich("identityVerification.verification", {
+              privacy: (chunks) => (
+                <Link
+                  href="/privacy-policy#identity-verification"
+                  className="text-primary underline underline-offset-4"
+                >
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
+          <h4 className="text-default-800 font-semibold">{t("identityVerification.refundTitle")}</h4>
+          <p>{t("identityVerification.refunds")}</p>
+          <p>{t("identityVerification.reversal")}</p>
+          <p>
+            {t.rich("identityVerification.request", {
+              contact: (chunks) => (
+                <a href="mailto:info@e-syrians.com" className="text-primary underline underline-offset-4" dir="ltr">
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        </section>
+        <h3 className="text-default-800 mb-2 text-xl font-bold">7. {t("contact.title")}</h3>
         <p>{t("contact.description")}</p>
         <p>
           {t("lastUpdate")}:{" "}
-          <time dateTime="2026-11-03" dir="ltr">
-            2026-11-03
+          <time dateTime="2026-11-13" dir="ltr">
+            2026-11-13
           </time>
         </p>
       </div>

@@ -27,7 +27,7 @@ import lockClosed from "@iconify-icons/heroicons/lock-closed";
 import ticket from "@iconify-icons/heroicons/ticket";
 import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import CreditHistory from "./credit-history";
 import VerificationCheckout from "./verification-checkout";
@@ -49,6 +49,7 @@ const tones = {
 
 function VerificationScreen({ userId }: { userId: string }) {
   const locale = useLocale();
+  const t = useTranslations("privacyPolicy.identityVerification");
   const live = liveVerificationEnabled();
   const copy = verificationCopy(locale, live);
   const { data, error: loadError, isLoading, mutate } = useVerificationSummary(userId);
@@ -251,8 +252,8 @@ function VerificationScreen({ userId }: { userId: string }) {
           <p className="font-semibold">{copy.test}</p>
           <p>{copy.safety}</p>
           {live && (
-            <Link href="/privacy-policy" className="underline">
-              {copy.privacy}
+            <Link href="/privacy-policy#identity-verification" className="underline">
+              {t("privacyLink")}
             </Link>
           )}
         </div>
