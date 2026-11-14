@@ -92,12 +92,53 @@ const PrivacyPolicy: FC = () => {
             ),
           })}
         </p>
-        <h3 className="text-default-800 mb-2 text-xl font-bold">7. {t("contact.title")}</h3>
+        <section
+          id="identity-verification"
+          aria-labelledby="identity-verification-privacy-title"
+          className="scroll-mt-28 space-y-3"
+        >
+          <h3 id="identity-verification-privacy-title" className="text-default-800 text-xl font-bold">
+            7. {t("identityVerification.title")}
+          </h3>
+          <p>{t("identityVerification.documentCheck")}</p>
+          <p>{t("identityVerification.records")}</p>
+          <p>
+            {t.rich("identityVerification.retention", {
+              didit: (chunks) => (
+                <a
+                  href="https://help.didit.me/end-users/your-data"
+                  className="text-primary underline underline-offset-4"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+          <p>
+            {t.rich("identityVerification.payment", {
+              stripe: (chunks) => (
+                <a href="https://stripe.com/privacy" className="text-primary underline underline-offset-4">
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+          <p>
+            {t.rich("identityVerification.rights", {
+              contact: (chunks) => (
+                <a href="mailto:info@e-syrians.com" className="text-primary underline underline-offset-4" dir="ltr">
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        </section>
+        <h3 className="text-default-800 mb-2 text-xl font-bold">8. {t("contact.title")}</h3>
         <p>{t("contact.description")}</p>
         <p>
           {t("lastUpdate")}:{" "}
-          <time dateTime="2026-11-08" dir="ltr">
-            2026-11-08
+          <time dateTime="2026-11-13" dir="ltr">
+            2026-11-13
           </time>
         </p>
       </div>

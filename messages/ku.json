@@ -1978,6 +1978,15 @@
     }
   },
   "privacyPolicy": {
+    "identityVerification": {
+      "title": "Taybetiya daneyên piştrastkirina nasnameyê û dayînê",
+      "privacyLink": "Em bi daneyên piştrastkirina nasnameya te çi dikin?",
+      "documentCheck": "Piştrastkirina nasnameyê bi belgeya fermî ne mecbûrî ye û ji piştrastkirina civakî cuda ye. Gava tu dest bi kontrolê dikî, em hejmareke referansê ji Didit re dişînin. Tu wêneyên belgeya nasnameya xwe û selfiyekê rasterast pêşkêşî Didit dikî. Didit belgeyê kontrol dike û wêne û agahiyên li ser wê, wek nav, roja jidayikbûnê û hejmara belgeyê, bi kar tîne. Didit daneyên biyometrîk ên rûyê te jî bi kar tîne da ku bizane tu bi xwe li wir î û rûyê te bi wêneya li ser belgeyê re li hev tê.",
+      "records": "E-Syrians encamê bi kar tîne da ku rewşa piştrastkirina nasnameya te nû bike. Em referansa danişînê, rewş û encama kontrolê, dema ku te razîbûna xwe da, û tomarên krediyên ku hatine dayîn, bikaranîn an diyarkirin diparêzin. Em kopiyên wêneyên belgeya te, selfiya te, şablonên biyometrîk an rapora tevahî ya Didit di hesabê te de hilnadin.",
+      "retention": "Me Didit wisa mîheng kiriye ku danişînên piştrastkirinê herî zêde salekê biparêze, heke berê neyên jêbirin. Wêneyên belgeyê, selfie û şablonên biyometrîk ên rûyê ku bi danişînê ve girêdayî ne, bi danişînê re tên jêbirin. Gava jêbirina hesabê te temam dibe, em ji Didit dixwazin ku danişînên girêdayî wî hesabî jê bibe. Ji bo agahiyên zêdetir, <didit>ravekirina Didit li ser daneyên piştrastkirinê</didit> bixwîne.",
+      "payment": "Heke tu krediyekê bikirî, agahiyên dayînê rasterast li Stripe Checkout dinivîsî. E-Syrians hejmara karta te ya tevahî û koda ewlekariyê hilnade. Em referansên siparîş û dayînan, mîqdar û cureyê pereyan, û rewşa dayîn, vegerrandin û îtirazan diparêzin da ku dayînan kontrol bikin, nakokiyan çareser bikin û erkên xwe bi cih bînin. Dibe ku hin tomarên dayînê piştî jêbirina hesabê te jî bimînin. <stripe>Siyaseta taybetiyê ya Stripe</stripe> bixwîne.",
+      "rights": "Ji bo pirsên li ser daneyên piştrastkirina nasnameyê an bikaranîna mafên xwe yên taybetiyê, ji <contact>info@e-syrians.com</contact> re binivîse. Ji kerema xwe wêneyên nasnameyê, selfiyan an agahiyên kartê bi e-nameyê neşîne."
+    },
     "mobilePrivacy": {
       "title": "Privacy in the mobile app",
       "census": "Account and census information includes your name, email address, account identifiers, date of birth, gender, ethnicity, religious affiliation, and hometown or residence. Some fields are needed for standard registration. You can choose whether to provide additional details such as a phone number, national or civil-record identifier, street address, education, income, health information, and a profile photo.",
@@ -2080,6 +2089,17 @@
     "lastUpdate": "Nûvekirina Dawî"
   },
   "terms": {
+    "identityVerification": {
+      "title": "Krediyên piştrastkirina nasnameyê: kirîn, diyarkirin û vegerrandina pereyan",
+      "purchaseLink": "Mercên kirînê û vegerrandina pereyan",
+      "purchase": "Gava kirîn vekirî be, bihayê krediyekê ji bo piştrastkirina nasnameyê 3 euro ye. Tu tenê carekê pere didî; abonetî tune ye. Tu li ser malperê bi Stripe Checkout pere didî. Dema ku em dayînê piştrast bikin, kredî tê zêdekirin li hesabê te yê E-Syrians.",
+      "useAndGift": "Her kredî ji bo yek hewla piştrastkirina nasnameyê ye. Tu dikarî krediya ku te kirî bi kar bînî an, berî ku tu dest bi kontrolê bikî, carekê wê diyarî hesabekî din ê E-Syrians bikî. Kesê ku krediyê wekî diyarî distîne nikare wê dîsa diyarî kesekî din bike. Krediyên ku bêpere tên dayîn tenê ji bo bikaranîna wergir in. Kredî bi pereyan nayên guhertin. Mafê te yê vegerrandina pereyan, heke hebe, dimîne.",
+      "verification": "Tu ji bo kontrolê pere didî, ne ji bo erêkirineke garantîkirî an piştrastkirina civakî. Pêdiviya te bi belgeyeke nasnameyê ya fermî heye ku tê pejirandin. Berî ku tu dest pê bikî, <privacy>siyaseta me ya taybetiyê</privacy> bixwîne da ku bizanî daneyên te çawa tên bikaranîn.",
+      "refundTitle": "Betalkirina kirînê û vegerrandina pereyan",
+      "refunds": "Heke pere du caran ji te hatin standin, kredî piştî piştrastkirina dayînê negihîşt hesabê te, an te nikarî krediyê bi kar bînî ji ber ku xizmet wek ku hatibû diyarkirin nexebitî, bi me re têkilî dayne. Em ê pirsgirêkê çareser bikin; li gorî rewşê dibe ku em krediyeke nû bidin an pereyan vegerînin. Redkirina piştrastkirinê bi xwe sedem nabe ku pere bixweber vegerin. Ev merc mafên te yên betalkirinê, vegerrandina pereyan an mafên din ên xerîdaran ên ku qanûn dide te, sînordar nakin.",
+      "reversal": "Pere bi heman rêbaza dayînê ji bo kiriyarê destpêkê tên vegerrandin. Heke pere bên vegerrandin an dayîn were betalkirin, dibe ku kredî were rakirin, heta heke wekî diyarî hatibe dayîn, bi şertê ku piştrastkirin hê temam nebûbe. Jêbirina hesabê ne sedem e ku pere bixweber vegerin.",
+      "request": "Ji bo betalkirina kirînekê an daxwaza vegerrandina pereyan, ji <contact>info@e-syrians.com</contact> re binivîse. Navnîşana e-nameya ku te ji bo kirînê bi kar anî û, heke hebe, hejmara siparîşê binivîse. Bêje tu dixwazî kîjan kirîn were betalkirin an ji nû ve were nirxandin. Agahiyên kartê an belgeyên nasnameyê neşîne."
+    },
     "title": "Şertên bikaranînê",
     "intro": "Bi bikaranîna vê xizmetê, hûn li gorê şert û mercên jêrîn razî dibin:",
     "childSafety": "Child sexual abuse and exploitation are prohibited. Our <policy>Child Safety Standards</policy> form part of these terms and explain how to report concerns.",

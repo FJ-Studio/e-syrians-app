@@ -1975,6 +1975,15 @@
     }
   },
   "privacyPolicy": {
+    "identityVerification": {
+      "title": "ID verification and payment privacy",
+      "privacyLink": "How we handle your verification data",
+      "documentCheck": "Document-based ID verification is optional and separate from community verification. If you start a check, we send Didit a verification reference. You submit your government-issued ID and take a selfie directly with Didit. Didit checks the document and processes its images and the information on it, such as your name, date of birth and document number. Didit also processes biometric data to check that you are physically present and that your face matches the portrait on the document.",
+      "records": "E-Syrians uses the verification result to update your ID verification status. We keep the session reference, status and outcome, when you agreed to start the check, and records of credits issued, used or gifted. We do not store copies of your ID images, selfie, biometric templates or the full Didit report in your E-Syrians account.",
+      "retention": "Didit is configured to keep verification sessions for up to one year unless they are deleted sooner. The document images, selfie and facial templates associated with the session are deleted with it. When we complete an account deletion, we request erasure of its Didit sessions. See <didit>Didit’s information about your verification data</didit>.",
+      "payment": "If you buy a credit, you enter your payment details directly in Stripe Checkout. E-Syrians does not store your full card number or security code. We keep order and payment references, the amount and currency, and payment, refund and dispute status to reconcile payments, resolve disputes and meet our obligations. Limited payment records may be kept after your account is deleted. See <stripe>Stripe’s Privacy Policy</stripe>.",
+      "rights": "To ask about your verification data or exercise your applicable privacy rights, contact <contact>info@e-syrians.com</contact>. Please do not send ID images, selfies or card details by email."
+    },
     "mobilePrivacy": {
       "title": "Privacy in the mobile app",
       "census": "Account and census information includes your name, email address, account identifiers, date of birth, gender, ethnicity, religious affiliation, and hometown or residence. Some fields are needed for standard registration. You can choose whether to provide additional details such as a phone number, national or civil-record identifier, street address, education, income, health information, and a profile photo.",
@@ -2077,6 +2086,17 @@
     "lastUpdate": "Latest update"
   },
   "terms": {
+    "identityVerification": {
+      "title": "ID verification credits: purchases, gifts and refunds",
+      "purchaseLink": "Purchase and refund terms",
+      "purchase": "When purchases are available, one ID verification credit costs €3 as a one-time payment, with no subscription. You pay on the website through Stripe Checkout. The credit is added to your E-Syrians account once we confirm payment.",
+      "useAndGift": "Each credit covers one ID verification attempt. You can use a purchased credit yourself or gift it once to another E-Syrians account before starting a check. A recipient cannot pass it on, and credits granted at no charge are for the recipient’s own use. Credits cannot be exchanged for cash. This does not affect your right to a refund where applicable.",
+      "verification": "You are paying for the check, not a guaranteed approval or a community verification. You will need a supported government-issued document. Read how the check uses your data in our <privacy>Privacy Policy</privacy> before starting.",
+      "refundTitle": "Cancellations and refunds",
+      "refunds": "Contact us if you were charged twice, did not receive your credit after payment was confirmed, or could not use it because the service did not work as promised. We will correct the issue, including issuing a replacement credit or refund where appropriate. A declined verification does not, by itself, automatically trigger a refund. These terms do not limit any cancellation, refund or other consumer rights you have under applicable law.",
+      "reversal": "Refunds are returned to the original purchaser through the original payment method. If a payment is refunded or reversed, the credit can be revoked even if it was gifted, provided the verification has not already been completed. Deleting an account does not automatically refund a purchase.",
+      "request": "To cancel a purchase or ask for a refund, email <contact>info@e-syrians.com</contact> with the purchase email address and your order reference, if available. Tell us which purchase you want to cancel or have reviewed. Do not send card details or identity documents."
+    },
     "title": "Terms of use",
     "intro": "By using this service, you agree to the following terms and conditions:",
     "childSafety": "Child sexual abuse and exploitation are prohibited. Our <policy>Child Safety Standards</policy> form part of these terms and explain how to report concerns.",

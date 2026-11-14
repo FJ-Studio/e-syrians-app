@@ -1,9 +1,10 @@
 "use client";
 
 import { requestVerification } from "@/hooks/use-identity-verification";
+import { Link } from "@/i18n/routing";
 import type { VerificationSummary, verificationCopy } from "@/lib/identity-verification";
 import { Button } from "@heroui/react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import useSWR from "swr";
@@ -22,6 +23,7 @@ export default function VerificationCheckout({
   onPaid: () => void;
 }) {
   const locale = useLocale();
+  const t = useTranslations("terms.identityVerification");
   const params = useSearchParams();
   const order = params.get("order") ?? "";
   const returnStatus = params.get("checkout");
@@ -104,6 +106,12 @@ export default function VerificationCheckout({
       {!awaiting && price && (
         <>
           <p className="text-default-600 text-sm">{copy.buyDetails}</p>
+          <Link
+            href="/terms#identity-verification-purchases"
+            className="text-primary w-fit text-sm underline underline-offset-4"
+          >
+            {t("purchaseLink")}
+          </Link>
           <Button color="primary" variant="bordered" className="w-fit" isLoading={busy} onPress={() => void buy()}>
             {copy.buy(price)}
           </Button>
