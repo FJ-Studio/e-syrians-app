@@ -96,6 +96,7 @@ export type AppNotification = {
     message?: string;
     type?: string;
     title_key?: string;
+    body_key?: string;
     [key: string]: unknown;
   };
   read_at: string | null;
