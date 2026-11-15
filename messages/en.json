@@ -7,6 +7,66 @@
     "identity_credit_gifted": {
       "title": "You received an ID verification credit as a gift",
       "body": "A credit is ready in Account → ID verification."
+    },
+    "verification_revoked": {
+      "title": "A verification was revoked",
+      "body": "A verification of your details is no longer active. Open Verifications to review your status."
+    },
+    "account_unverified": {
+      "title": "Your account is no longer verified",
+      "body": "Your account no longer meets the verification requirements. Open Verifications for details."
+    },
+    "poll_closed": {
+      "title": "A poll has closed",
+      "body": "A poll you created or voted on has closed. Open it to view the available details and results."
+    },
+    "security_new_signin": {
+      "title": "New sign-in",
+      "body": "A sign-in completed from a new or unidentified device. Review your security activity if this wasn’t you."
+    },
+    "security_password_changed": {
+      "title": "Password changed",
+      "body": "Your account password was changed or reset. Review your account security if this wasn’t you."
+    },
+    "security_password_set": {
+      "title": "Password added",
+      "body": "A password was added to your account. Review your account security if this wasn’t you."
+    },
+    "security_two_factor_enabled": {
+      "title": "Two-factor authentication enabled",
+      "body": "Two-factor authentication was enabled for your account."
+    },
+    "security_two_factor_disabled": {
+      "title": "Two-factor authentication disabled",
+      "body": "Two-factor authentication was disabled. Review your account security if this wasn’t you."
+    },
+    "verification_received": {
+      "title": "New verification",
+      "body": "Another community member has verified your account details."
+    },
+    "account_verified": {
+      "title": "Your account is verified",
+      "body": "Your account has reached verified status."
+    },
+    "poll_opened": {
+      "title": "A poll is open for you",
+      "body": "You’re eligible to participate. Open the poll to see the details."
+    },
+    "feature_idea": {
+      "title": "Feature request updated",
+      "body": "A request you created or voted on is back at the idea stage."
+    },
+    "feature_in_development": {
+      "title": "Development has started",
+      "body": "A feature request you created or voted on is now in development."
+    },
+    "feature_in_testing": {
+      "title": "A feature is being tested",
+      "body": "A feature request you created or voted on is now being tested."
+    },
+    "feature_shipped": {
+      "title": "A feature has shipped",
+      "body": "A feature request you created or voted on is now available."
     }
   },
   "notificationPreferences": {
