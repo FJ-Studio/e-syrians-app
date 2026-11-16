@@ -44,16 +44,19 @@ function relativeTime(dateStr: string, locale: string): string {
   return rtf.format(Math.round(diffSeconds / 31536000), "year");
 }
 
-const creditEvents = ["identity_credit_granted", "identity_credit_gifted"] as const;
-
 export function NotificationHistoryContent({ item, onOpen }: { item: AppNotification; onOpen: () => void }) {
   const t = useTranslations("notificationEvents");
-  const isIdentityCredit = item.data?.type === "identity-verification";
-  const event = isIdentityCredit
-    ? creditEvents.find((key) => item.data.title_key === `notificationEvents.${key}.title`)
-    : undefined;
-  const title = event ? t(`${event}.title`) : (item.data?.message ?? item.data?.title ?? "");
-  const body = event ? t(`${event}.body`) : item.data?.message ? undefined : item.data?.body;
+  const { data } = item;
+  const isIdentityCredit = data?.type === "identity-verification";
+  const translateEvent = (key: unknown, field: "title" | "body") => {
+    if (data?.type === "announcement" || typeof key !== "string") return undefined;
+    const match = /^notificationEvents\.([a-z_]+)\.(title|body)$/.exec(key);
+    if (!match || match[2] !== field) return undefined;
+    const localKey = `${match[1]}.${field}`;
+    return t.has(localKey) ? t(localKey) : undefined;
+  };
+  const title = translateEvent(data?.title_key, "title") ?? data?.message ?? data?.title ?? "";
+  const body = translateEvent(data?.body_key, "body") ?? (data?.message ? undefined : data?.body);
   const content = (
     <>
       <span className={item.read_at ? "text-default-700" : "font-medium"}>{title}</span>

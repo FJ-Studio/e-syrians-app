@@ -7,6 +7,66 @@
     "identity_credit_gifted": {
       "title": "Krediyeke piştrastkirina nasnameyê wek diyariyê hat dayîn",
       "body": "Krediyek di Hesab → Piştrastkirina nasnameyê de amade ye."
+    },
+    "verification_revoked": {
+      "title": "Piştrastkirinek hat paşvekişandin",
+      "body": "Piştrastkirineke agahiyên te êdî neçalak e. Ji bo rewşa xwe rûpela piştrastkirinê veke."
+    },
+    "account_unverified": {
+      "title": "Hesabê te êdî ne piştrastkirî ye",
+      "body": "Hesabê te êdî mercên piştrastkirinê pêk nayîne. Ji bo hûrgiliyan rûpela piştrastkirinê veke."
+    },
+    "poll_closed": {
+      "title": "Anketek bi dawî bû",
+      "body": "Anketeke ku te çêkiriye an beşdar bûyî bi dawî bû. Ji bo hûrgilî û encamên berdest wê veke."
+    },
+    "security_new_signin": {
+      "title": "Têketineke nû",
+      "body": "Ji cîhazeke nû an nenas têketinek di hesabê te de çêbû. Heke ne tu bûyî, çalakiya ewlehiyê kontrol bike."
+    },
+    "security_password_changed": {
+      "title": "Şîfre hat guherandin",
+      "body": "Şîfreya hesabê te hat guherandin an nûkirin. Heke ne tu bûyî, ewlehiya hesabê kontrol bike."
+    },
+    "security_password_set": {
+      "title": "Şîfre hat zêdekirin",
+      "body": "Şîfreyek li hesabê te hat zêdekirin. Heke ne tu bûyî, ewlehiya hesabê kontrol bike."
+    },
+    "security_two_factor_enabled": {
+      "title": "Piştrastkirina du-gavî çalak bû",
+      "body": "Piştrastkirina du-gavî ji bo hesabê te hat çalakkirin."
+    },
+    "security_two_factor_disabled": {
+      "title": "Piştrastkirina du-gavî neçalak bû",
+      "body": "Piştrastkirina du-gavî hat neçalakkirin. Heke ne tu bûyî, ewlehiya hesabê kontrol bike."
+    },
+    "verification_received": {
+      "title": "Piştrastkirineke nû",
+      "body": "Endamekî civakê agahiyên hesabê te piştrast kir."
+    },
+    "account_verified": {
+      "title": "Hesabê te hat piştrastkirin",
+      "body": "Hesabê te gihîştiye rewşa piştrastkirî."
+    },
+    "poll_opened": {
+      "title": "Anketek ji bo te vekirî ye",
+      "body": "Tu dikarî beşdar bibî. Ji bo hûrgiliyan anketê veke."
+    },
+    "feature_idea": {
+      "title": "Pêşniyar hat nûkirin",
+      "body": "Pêşniyarek ku te çêkiriye an deng daye vegeriya qonaxa ramanê."
+    },
+    "feature_in_development": {
+      "title": "Pêşdebirin dest pê kir",
+      "body": "Pêşniyarek ku te çêkiriye an deng daye niha tê pêşdebirin."
+    },
+    "feature_in_testing": {
+      "title": "Taybetmendiyek tê ceribandin",
+      "body": "Pêşniyarek ku te çêkiriye an deng daye niha tê ceribandin."
+    },
+    "feature_shipped": {
+      "title": "Taybetmendiyek hat weşandin",
+      "body": "Pêşniyarek ku te çêkiriye an deng daye niha amade ye."
     }
   },
   "notificationPreferences": {
