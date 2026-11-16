@@ -291,16 +291,24 @@ function VerificationScreen({ userId }: { userId: string }) {
       {summary && state && card && tone && (
         <>
           {live && (
-            <section aria-label={copy.accountStatus} className="border-default-200 bg-content1 grid gap-4 rounded-xl border p-5 sm:grid-cols-2 sm:p-6">
+            <section
+              aria-label={copy.accountStatus}
+              className="border-default-200 bg-content1 grid gap-4 rounded-xl border p-5 sm:grid-cols-2 sm:p-6"
+            >
               <div>
                 <h2 className="font-semibold">{copy.accountStatus}</h2>
-                <p className="text-default-600">{state.accountApproved ? copy.accountVerified : copy.accountNotVerified}</p>
+                <p className="text-default-600">
+                  {state.accountApproved ? copy.accountVerified : copy.accountNotVerified}
+                </p>
               </div>
               <div>
                 <h2 className="font-semibold">{copy.latestAttempt}</h2>
                 <p className="text-default-600">
-                  {!state.latestAttempt ? copy.noAttempt : state.latestAttempt.status === "revoked" ? copy.attemptRevoked
-                    : verificationCard({ ...summary, credits: [state.latestAttempt] }, copy).status}
+                  {!state.latestAttempt
+                    ? copy.noAttempt
+                    : state.latestAttempt.status === "revoked"
+                      ? copy.attemptRevoked
+                      : verificationCard({ ...summary, credits: [state.latestAttempt] }, copy).status}
                 </p>
               </div>
             </section>

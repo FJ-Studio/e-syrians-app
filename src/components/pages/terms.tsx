@@ -86,7 +86,10 @@ const Terms: FC = () => {
                 </a>
               ),
               google: (chunks) => (
-                <a href="https://support.google.com/googleplay/answer/2479637" className="text-primary underline underline-offset-4">
+                <a
+                  href="https://support.google.com/googleplay/answer/2479637"
+                  className="text-primary underline underline-offset-4"
+                >
                   {chunks}
                 </a>
               ),

@@ -67,9 +67,9 @@ export function verificationState({ credits, account_approved }: VerificationSum
   const available = credits.filter((credit) => credit.status === "available");
   const isActive = (credit: VerificationCredit) => ["creating", "pending", "in_review"].includes(credit.status);
   const isDecision = (credit: VerificationCredit) => ["approved", "declined", "expired"].includes(credit.status);
-  const attempts = credits.filter((credit) =>
-    isActive(credit) || isDecision(credit) || (credit.status === "revoked" && credit.attempted_at),
-  ).sort((a, b) => (Date.parse(b.attempted_at ?? "") || 0) - (Date.parse(a.attempted_at ?? "") || 0));
+  const attempts = credits
+    .filter((credit) => isActive(credit) || isDecision(credit) || (credit.status === "revoked" && credit.attempted_at))
+    .sort((a, b) => (Date.parse(b.attempted_at ?? "") || 0) - (Date.parse(a.attempted_at ?? "") || 0));
   return {
     accountApproved: account_approved ?? credits.some((credit) => credit.status === "approved"),
     latestAttempt: attempts[0],
@@ -87,7 +87,11 @@ export const verificationCopy = (locale: string, live = false) => {
   const copy = {
     accountStatus: ar ? "حالة توثيق الهوية" : ku ? "Rewşa piştrastkirina nasnameyê" : "Account ID verification",
     accountVerified: ar ? "هويتك موثّقة" : ku ? "Nasnameya te piştrast e" : "Your identity is verified",
-    accountNotVerified: ar ? "لم تُوثَّق هويتك بعد" : ku ? "Nasnameya te hîn nehat piştrastkirin" : "Your identity isn’t verified yet",
+    accountNotVerified: ar
+      ? "لم تُوثَّق هويتك بعد"
+      : ku
+        ? "Nasnameya te hîn nehat piştrastkirin"
+        : "Your identity isn’t verified yet",
     latestAttempt: ar ? "آخر محاولة" : ku ? "Hewldana dawî" : "Latest attempt",
     noAttempt: ar ? "لم تبدأ أي محاولة بعد" : ku ? "Hîn tu hewldan tune" : "No attempt yet",
     attemptRevoked: ar ? "أُلغيت المحاولة" : ku ? "Hewldan hate betalkirin" : "Attempt cancelled",

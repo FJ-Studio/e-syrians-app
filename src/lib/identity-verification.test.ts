@@ -31,7 +31,9 @@ describe("ID verification state", () => {
       ],
     };
     expect(verificationState(data)).toMatchObject({
-      accountApproved: true, latestAttempt: { uuid: "latest-attempt" }, balance: 1,
+      accountApproved: true,
+      latestAttempt: { uuid: "latest-attempt" },
+      balance: 1,
     });
     expect(verificationState({ ...data, account_approved: false }).accountApproved).toBe(false);
   });
