@@ -11,9 +11,11 @@ export type VerificationCredit = {
   uuid: string;
   status: CreditStatus;
   can_gift: boolean;
+  attempted_at?: string | null;
 };
 
 export type VerificationSummary = {
+  account_approved?: boolean;
   can_purchase?: boolean;
   price_minor?: number;
   currency?: string;
@@ -61,27 +63,38 @@ export function creditHistoryDays(items: VerificationCreditHistory["items"], loc
   return days;
 }
 
-export function verificationState({ credits }: VerificationSummary) {
+export function verificationState({ credits, account_approved }: VerificationSummary) {
   const available = credits.filter((credit) => credit.status === "available");
-  const giftable = available.find((credit) => credit.can_gift);
-  // The API orders credits newest first. An active attempt always takes
-  // precedence over unused credits and historical decisions.
-  const active = credits.find(
-    (credit) => credit.status === "creating" || credit.status === "pending" || credit.status === "in_review",
-  );
-  const decision = credits.find((credit) => ["approved", "declined", "expired"].includes(credit.status));
+  const isActive = (credit: VerificationCredit) => ["creating", "pending", "in_review"].includes(credit.status);
+  const isDecision = (credit: VerificationCredit) => ["approved", "declined", "expired"].includes(credit.status);
+  const attempts = credits
+    .filter((credit) => isActive(credit) || isDecision(credit) || (credit.status === "revoked" && credit.attempted_at))
+    .sort((a, b) => (Date.parse(b.attempted_at ?? "") || 0) - (Date.parse(a.attempted_at ?? "") || 0));
   return {
+    accountApproved: account_approved ?? credits.some((credit) => credit.status === "approved"),
+    latestAttempt: attempts[0],
     balance: available.length,
     next: available[0],
-    giftable,
-    current: active ?? decision ?? available[0],
+    giftable: available.find((credit) => credit.can_gift),
+    current: attempts.find(isActive) ?? attempts.find(isDecision) ?? available[0],
   };
 }
 
 export const verificationCopy = (locale: string, live = false) => {
   const ar = locale === "ar";
+  const ku = locale === "ku";
   const number = (count: number) => new Intl.NumberFormat(ar ? "ar" : "en").format(count);
   const copy = {
+    accountStatus: ar ? "حالة توثيق الهوية" : ku ? "Rewşa piştrastkirina nasnameyê" : "Account ID verification",
+    accountVerified: ar ? "هويتك موثّقة" : ku ? "Nasnameya te piştrast e" : "Your identity is verified",
+    accountNotVerified: ar
+      ? "لم تُوثَّق هويتك بعد"
+      : ku
+        ? "Nasnameya te hîn nehat piştrastkirin"
+        : "Your identity isn’t verified yet",
+    latestAttempt: ar ? "آخر محاولة" : ku ? "Hewldana dawî" : "Latest attempt",
+    noAttempt: ar ? "لم تبدأ أي محاولة بعد" : ku ? "Hîn tu hewldan tune" : "No attempt yet",
+    attemptRevoked: ar ? "أُلغيت المحاولة" : ku ? "Hewldan hate betalkirin" : "Attempt cancelled",
     title: ar ? "التحقق من الهوية" : "ID verification",
     startAnother: ar ? "ابدأ تحققًا تجريبيًا آخر" : "Start another test",
     useOnly: ar

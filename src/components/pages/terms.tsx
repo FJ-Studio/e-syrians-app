@@ -78,6 +78,23 @@ const Terms: FC = () => {
           </p>
           <h4 className="text-default-800 font-semibold">{t("identityVerification.refundTitle")}</h4>
           <p>{t("identityVerification.refunds")}</p>
+          <p>
+            {t.rich("identityVerification.storeRefunds", {
+              apple: (chunks) => (
+                <a href="https://support.apple.com/118223" className="text-primary underline underline-offset-4">
+                  {chunks}
+                </a>
+              ),
+              google: (chunks) => (
+                <a
+                  href="https://support.google.com/googleplay/answer/2479637"
+                  className="text-primary underline underline-offset-4"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
           <p>{t("identityVerification.reversal")}</p>
           <p>
             {t.rich("identityVerification.request", {

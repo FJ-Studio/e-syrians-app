@@ -20,6 +20,24 @@ const summary = (credits: VerificationSummary["credits"] = [], can_claim = true)
 });
 
 describe("ID verification state", () => {
+  it("keeps an account approval even when a later attempt using an older credit is declined", () => {
+    const data: VerificationSummary = {
+      ...summary(),
+      account_approved: true,
+      credits: [
+        credit("unused", "available"),
+        { ...credit("earlier-attempt", "approved"), attempted_at: "2026-10-10T00:00:00Z" },
+        { ...credit("latest-attempt", "declined"), attempted_at: "2026-10-11T00:00:00Z" },
+      ],
+    };
+    expect(verificationState(data)).toMatchObject({
+      accountApproved: true,
+      latestAttempt: { uuid: "latest-attempt" },
+      balance: 1,
+    });
+    expect(verificationState({ ...data, account_approved: false }).accountApproved).toBe(false);
+  });
+
   it("offers the free claim only when the API allows it", () => {
     expect(verificationCard(summary(), copy).action).toEqual({ kind: "claim", label: copy.claim });
     expect(verificationCard(summary([], false), copy).action).toBeUndefined();
