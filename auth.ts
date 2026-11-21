@@ -188,7 +188,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             body: JSON.stringify({
               provider: account.provider,
-              token: account.access_token,
+              token: account.provider === "google" ? account.id_token : account.access_token,
             }),
           });
 
