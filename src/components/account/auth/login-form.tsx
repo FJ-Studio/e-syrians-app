@@ -93,10 +93,12 @@ export default function LoginForm() {
           variant="bordered"
           className="w-full"
           onPress={() =>
-            signIn("google", {
-              redirect: true,
-              redirectTo: "/account",
-            })
+            signIn(
+              "google",
+              { redirect: true, redirectTo: "/account" },
+              // Website logout does not end Google's browser session.
+              { prompt: "select_account" },
+            )
           }
         >
           {t("common.continueWithGoogle")}
