@@ -1,3 +1,4 @@
+import { revokeSessionApiToken } from "@/lib/auth/sign-out";
 import { ESUser } from "@/lib/types/account";
 import NextAuth from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
@@ -160,7 +161,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ account, token, user, trigger, session: updateData }) {
       // Handle session update from client (e.g. after verification status changes)
       if (trigger === "update" && updateData && token.esUser) {
-        token.esUser = { ...(token.esUser as ESUser), ...updateData };
+        const currentUser = token.esUser as ESUser;
+        token.esUser = {
+          ...currentUser,
+          ...updateData,
+          // Profile updates are client-controlled, authentication is not.
+          accessToken: currentUser.accessToken,
+          id: currentUser.id,
+          uuid: currentUser.uuid,
+        };
         return token;
       }
 
@@ -217,6 +226,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return token;
     },
+  },
+  events: {
+    signOut: revokeSessionApiToken,
   },
   jwt: {
     maxAge: MAX_AGE,
