@@ -20,7 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       type: "credentials",
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "text" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
         challenge_token: { label: "Challenge Token", type: "text" },
         twofa_code: { label: "2FA Code", type: "text" },
@@ -117,7 +117,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               Accept: "application/json",
             },
             body: JSON.stringify({
-              identifier: credentials.email,
+              identifier: typeof credentials.email === "string" ? credentials.email.trim() : "",
               password: credentials.password,
             }),
           });

@@ -37,8 +37,9 @@ export default function LoginForm() {
   }>();
 
   const onSubmit = async (data: { email: string; password: string }) => {
+    const email = data.email.trim();
     const result = await signIn("credentials", {
-      email: data.email,
+      email,
       password: data.password,
       redirect: false,
     });
@@ -61,7 +62,7 @@ export default function LoginForm() {
       }
       // Other login errors — let NextAuth handle redirect
       await signIn("credentials", {
-        email: data.email,
+        email,
         password: data.password,
         redirect: true,
         redirectTo: "/account",
@@ -115,7 +116,18 @@ export default function LoginForm() {
         <Controller
           name="email"
           control={control}
-          render={({ field }) => <Input {...field} isRequired label={t("auth.login.identifier")} />}
+          render={({ field }) => (
+            <Input
+              {...field}
+              isRequired
+              type="email"
+              inputMode="email"
+              autoComplete="username"
+              autoCapitalize="none"
+              autoCorrect="off"
+              label={t("auth.login.identifier")}
+            />
+          )}
         />
         <Controller
           name="password"

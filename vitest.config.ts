@@ -10,9 +10,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
-    // NextAuth imports extensionless Next.js modules intended for a bundler.
-    // Inline it so HTTP-handler tests use the real adapter, not a sign-out mock.
-    server: { deps: { inline: ["next-auth"] } },
+    // These packages import extensionless Next.js modules intended for a bundler.
+    // Inline them so tests exercise real auth handlers and locale-aware links.
+    server: { deps: { inline: ["next-auth", "next-intl"] } },
     // Don't fail CI when no test files exist yet — lets the test job stay
     // green while the suite is being built out. Remove once the first real
     // test is in place if you want "no tests" to be treated as a failure.

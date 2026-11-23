@@ -225,6 +225,14 @@
     }
   },
   "footer": {
+    "explore": "اكتشف المنصة",
+    "support": "المساعدة والدعم",
+    "privacy_safety": "الخصوصية والأمان",
+    "social_media": "تابعنا",
+    "apps": {
+      "google_play": "حمّل التطبيق من Google Play",
+      "ios_coming_soon": "قريبًا على iOS"
+    },
     "privacy_policy": "سياسة الخصوصية",
     "child_safety": "حماية الأطفال",
     "delete_account": "حذف الحساب",
@@ -820,7 +828,7 @@
   },
   "auth": {
     "login": {
-      "identifier": "استخدم البريد الإلكتروني، الهاتف، أو الرقم الوطني",
+      "identifier": "البريد الإلكتروني",
       "forgotPassword": "نسيت كلمة المرور"
     },
     "forgotPassword": {
@@ -1730,9 +1738,14 @@
     }
   },
   "header": {
+    "language": "اختيار اللغة",
     "nav": {
       "census": "الإحصاء الوطني",
-      "polls": "الاستطلاعات"
+      "polls": "الاستطلاعات",
+      "features": "الاقتراحات",
+      "label": "التنقل الرئيسي",
+      "openMenu": "فتح القائمة",
+      "closeMenu": "إغلاق القائمة"
     },
     "theme": {
       "label": "المظهر",
