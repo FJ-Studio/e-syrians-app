@@ -234,9 +234,17 @@
     }
   },
   "footer": {
+    "explore": "Nas bike",
+    "support": "Alîkarî û piştgirî",
+    "privacy_safety": "Nepenîtî û ewlehî",
+    "social_media": "Me bişopînin",
+    "apps": {
+      "google_play": "Ji Google Play daxîne",
+      "ios_coming_soon": "iOS — di nêzîk de"
+    },
     "privacy_policy": "Siyaseta Nepenîtiyê",
-    "child_safety": "Child Safety",
-    "delete_account": "Delete account",
+    "child_safety": "Parastina zarokan",
+    "delete_account": "Jêbirina hesabê",
     "terms": "Şert û merc",
     "all_rights_reserved": "Hemû maf parastî ne",
     "initiatives": "Teşebbûs",
@@ -829,7 +837,7 @@
   },
   "auth": {
     "login": {
-      "identifier": "Bikarhênerî e-name, telefon, an nasnameya neteweyî bikar bînin",
+      "identifier": "Navnîşana e-nameyê",
       "forgotPassword": "Şîfreya xwe wenda kirim"
     },
     "forgotPassword": {
@@ -1739,9 +1747,14 @@
     }
   },
   "header": {
+    "language": "Hilbijartina ziman",
     "nav": {
       "census": "Serjimêrî",
-      "polls": "Anket"
+      "polls": "Anket",
+      "features": "Pêşniyar",
+      "label": "Rêberiya sereke",
+      "openMenu": "Menûyê veke",
+      "closeMenu": "Menûyê bigire"
     },
     "theme": {
       "label": "Tema",

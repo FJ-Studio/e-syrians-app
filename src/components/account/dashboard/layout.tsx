@@ -1,4 +1,5 @@
 "use client";
+import { ACCOUNT_NAV_ITEMS, isAccountNavigationActive } from "@/components/shared/account-navigation";
 import Container from "@/components/shared/container";
 import { useRouter } from "@/i18n/routing";
 import {
@@ -11,13 +12,7 @@ import {
   ListboxItem,
 } from "@heroui/react";
 import arrowRightOnRectangleIcon from "@iconify-icons/heroicons/arrow-right-on-rectangle";
-import bellIcon from "@iconify-icons/heroicons/bell";
-import chartBarIcon from "@iconify-icons/heroicons/chart-bar";
-import clipboardDocumentCheckIcon from "@iconify-icons/heroicons/clipboard-document-check";
-import cog6ToothIcon from "@iconify-icons/heroicons/cog-6-tooth";
 import ellipsisHorizontalIcon from "@iconify-icons/heroicons/ellipsis-horizontal";
-import homeIcon from "@iconify-icons/heroicons/home";
-import listBulletIcon from "@iconify-icons/heroicons/list-bullet";
 import { Icon } from "@iconify/react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -143,42 +138,12 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const links: NavLink[] = useMemo(
     () => [
-      {
-        key: "overview",
-        title: t("nav.overview"),
-        link: "/account",
-        icon: <Icon icon={homeIcon} className="size-5" />,
-      },
-      {
-        key: "polls",
-        title: t("nav.polls"),
-        link: "/account/polls",
-        icon: <Icon icon={chartBarIcon} className="size-5" />,
-      },
-      {
-        key: "audiences",
-        title: t("nav.audiences"),
-        link: "/account/audiences",
-        icon: <Icon icon={listBulletIcon} className="size-5" />,
-      },
-      {
-        key: "settings",
-        title: t("nav.settings"),
-        link: "/account/settings",
-        icon: <Icon icon={cog6ToothIcon} className="size-5" />,
-      },
-      {
-        key: "notifications",
-        title: t("nav.notifications"),
-        link: "/account/notifications",
-        icon: <Icon icon={bellIcon} className="size-5" />,
-      },
-      {
-        key: "verifications",
-        title: t("nav.verifications"),
-        link: "/account/verifications",
-        icon: <Icon icon={clipboardDocumentCheckIcon} className="size-5" />,
-      },
+      ...ACCOUNT_NAV_ITEMS.map((item) => ({
+        key: item.key,
+        title: t(`nav.${item.key}`),
+        link: item.href,
+        icon: <Icon icon={item.icon} className="size-5" />,
+      })),
       {
         key: "signout",
         title: t("nav.signout"),
@@ -190,17 +155,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
     [t],
   );
 
-  const isActive = useCallback(
-    (href: string | undefined) => {
-      if (!href) return false;
-      // Exact match for the overview page
-      if (href === "/account") {
-        return pathname.endsWith("/account") || /\/account\/identity-(sandbox|verification)$/.test(pathname);
-      }
-      return pathname.includes(href);
-    },
-    [pathname],
-  );
+  const isActive = useCallback((href: string | undefined) => isAccountNavigationActive(pathname, href), [pathname]);
 
   const primaryItems = useMemo(() => links.filter((item) => PRIMARY_KEYS.includes(item.key)), [links]);
 
@@ -232,6 +187,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
               {links.map((link) => (
                 <ListboxItem
                   key={link.key}
+                  textValue={link.title}
                   startContent={link.icon}
                   color={link.link && isActive(link.link) ? "primary" : "default"}
                   className={link.link && isActive(link.link) ? "bg-primary text-primary-foreground" : ""}

@@ -80,3 +80,41 @@ describe("Google account selection", () => {
     expect(all(LoginForm(), "AppleSignInButton")[0].props).toEqual({ redirectTo: "/account" });
   });
 });
+
+describe("email-only password login", () => {
+  it("uses email validation, keyboard, and username autofill", () => {
+    const controller = all(LoginForm(), "Controller").find((node) => node.props.name === "email")!;
+    const field = { name: "email", value: "member@example.test" };
+    const input = (controller.props.render as (props: { field: typeof field }) => Tree)({ field });
+    expect(input.props).toMatchObject({
+      type: "email",
+      inputMode: "email",
+      autoComplete: "username",
+      autoCapitalize: "none",
+      autoCorrect: "off",
+      isRequired: true,
+      label: "auth.login.identifier",
+    });
+  });
+
+  it("trims the email but preserves the password exactly", async () => {
+    h.signIn.mockResolvedValueOnce({ error: "CredentialsSignin" });
+    const form = all(LoginForm(), "form")[0];
+    await (form.props.onSubmit as (values: { email: string; password: string }) => Promise<void>)({
+      email: " member@example.test ",
+      password: " password-with-spaces ",
+    });
+    for (const call of h.signIn.mock.calls) {
+      expect(call[1]).toMatchObject({ email: "member@example.test", password: " password-with-spaces " });
+    }
+  });
+
+  it.each([
+    ["en", "Email address"],
+    ["ar", "البريد الإلكتروني"],
+    ["ku", "Navnîşana e-nameyê"],
+  ])("advertises only email in %s", async (locale, label) => {
+    const messages = await import(`../../../../messages/${locale}.json`);
+    expect(messages.default.auth.login.identifier).toBe(label);
+  });
+});
