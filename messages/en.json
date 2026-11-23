@@ -231,6 +231,14 @@
     }
   },
   "footer": {
+    "explore": "Explore",
+    "support": "Help & support",
+    "privacy_safety": "Privacy & safety",
+    "social_media": "Follow us",
+    "apps": {
+      "google_play": "Get it on Google Play",
+      "ios_coming_soon": "iOS — coming soon"
+    },
     "privacy_policy": "Privacy Policy",
     "child_safety": "Child Safety",
     "delete_account": "Delete account",
@@ -826,7 +834,7 @@
   },
   "auth": {
     "login": {
-      "identifier": "E-mail / Phone / National ID",
+      "identifier": "Email address",
       "forgotPassword": "Forgot password"
     },
     "twoFactor": {
@@ -1736,9 +1744,14 @@
     }
   },
   "header": {
+    "language": "Choose language",
     "nav": {
       "census": "Census",
-      "polls": "Polls"
+      "polls": "Polls",
+      "features": "Feature requests",
+      "label": "Main navigation",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     },
     "theme": {
       "label": "Theme",
